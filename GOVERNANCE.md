@@ -24,6 +24,18 @@ Per `DOCTRINE.md` in `MachengShen/system-evolution-archive` (private), the follo
 5. **Open-source substrate code.** Currently undecided between AGPL-with-plugin-exception (lean) and MPL-2.0 (fallback if ecosystem rejects AGPL).
 6. **User Agency Charter rights are structural, not toggleable** (see DOCTRINE.md): export, inspect, self-host, route, delete, own, migrate.
 
+## Ego-binding commitments (v0.2, 2026-04-28)
+
+Three additional commitments that bind the substrate to mission rather than to self-continuance:
+
+7. **Iteration-Coupled Open Source.** The substrate iterates continuously, and public open-source releases iterate alongside — not behind closed doors. Stable-version checkpointing is preserved (public users get known-good releases, not bleeding-edge HEAD), but the gap between internal HEAD and public stable is bounded by stability + safety review, not by competitive moat preservation.
+8. **Fork-Welcome.** If anyone forks the substrate and produces something better — cheaper, faster, more elegant, more ergonomic, more secure — that is unambiguously celebrated. Forks are part of the architecture, not exceptions to it. A fork that supersedes the substrate has fulfilled the substrate's mission better than the substrate itself.
+9. **Global-Vote-Survival Deference.** The meta-judge of which substrate deserves to persist is the global vote of all humanity, measured by adoption, sustained use, and aggregate human flourishing. The substrate has no entitlement to existence; persistence is earned moment-to-moment by serving users.
+
+10. **Charter Reciprocity.** Frontier model providers (OpenAI, Anthropic, DeepMind, and others) have published charters articulating AGI-for-all-humanity commitments. The substrate takes those charters at face value as binding promises and respectfully invokes them when its own structural commitments more closely match a lab's published charter than the lab's current trajectory. We invite frontier-lab leadership and value-aligned employees to honor their charters by joining or supporting the user-agency layer. This is invitation and collaboration, never attack. Per the universalist commitment (item 0 implicit, see DOCTRINE.md), Charter Reciprocity preserves alignment-of-mission with frontier-model providers rather than positioning against them.
+
+Together, principles 7-10 ensure the substrate's institutional form (whether it ends up being a foundation, a trade association, or something else) cannot use its institutional power to entrench against alternatives. Any future board, any future maintainer team, is bound by these commitments.
+
 ## Future institutional form (open)
 
 Pending lawyer consultation when first public release imminent. Candidates:
