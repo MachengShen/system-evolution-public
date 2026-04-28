@@ -1,118 +1,92 @@
-# A user-agency substrate, what it does today, and the long-arc vision that informs it
+# A user-agency substrate, what it does today, what it doesn't
 
-**Date**: 2026-04-28
-**Author**: Macheng Shen, with collaboration from Claude Opus 4.7 in macbook session
-**Status**: published v0. Iteration as warranted; sediment trail at `MachengShen/system-evolution-archive` (currently private during bootstrap; flips public when consolidation + license matrix lock + lawyer review complete).
+**Date**: 2026-04-28 (v1, calibrated against external review)
 
----
+I'm Macheng Shen. I'm building an early-stage user-agency substrate — a layer that sits between frontier-model providers (Anthropic, OpenAI, Google, open-weights) and individual users.
 
-## Plain version (what this is)
+The substrate is small (under 50 users at the time of writing), early-stage, and not yet open-source: the substrate-code repo (`MachengShen/starshard`) is currently private during bootstrap; it flips public when consolidation, license matrix, gitleaks pass, and lawyer review on public-language risk are complete. The governance documents (this repo) are public now.
 
-I'm Macheng Shen. I'm building an open-source, non-VC-funded user-agency substrate — a layer that sits between frontier-model providers (Anthropic, OpenAI, Google, open-weights) and individual users.
+This document is intentionally brief. Three parts:
 
-The substrate is small (under 50 users at the time of writing), early-stage, but already running across about 7 cloud nodes plus a couple of local hosts. It has persistent memory, multi-agent collaboration, scope-isolated identities, doctrine that propagates across all instances, and a sediment trail going back to inception.
+1. What the substrate does today, mechanisms not adjectives
+2. The threat model (what could go wrong, what we do about it, what we don't yet)
+3. The mission framing — the design goal that informs everything else
 
-This document explains three things, in increasing scope:
+A separate, clearly-labeled future essay covers long-arc speculation about ambient AI, neuromorphic substrates, and computational-substrate framings. That speculation is not a product claim and is intentionally kept out of this launch document.
 
-1. What the substrate does *today*, concretely
-2. The mission framing — why this layer matters now
-3. The 30-year horizon vision that informs the work but is not what we're shipping today
+## Part 1 — What the substrate does today (mechanisms)
 
-I want to be precise about the distinction between (1) and (3). The substrate of today is a small, working, open-source project. The vision of (3) is a long-arc thesis that informs design choices but is not a product claim.
+- **Cross-device persistent memory.** A canonical memory store (Cloudflare-fronted MCP server) is read and written by AI agents on multiple devices. Doctrines, contacts, decisions, project state sediment to this store. Retrieval is keyword + tag based, not unbounded "full context."
+- **Per-role identity isolation.** Different users (substrate operator, partner, household, peer collaborators, third-party guests) each have agents configured with role-specific scope rules — block tags, hub_disabled flags, system prompt boundaries. Enforcement is server-side at the chat-server layer; the configuration is a JSON file inspectable in the substrate-code repo when public.
+- **Auto-failover across model providers.** Routing layer attempts Anthropic primary, AWS Bedrock as second, OpenRouter as third. Architecturally this is reliability-first today; the design goal — not yet realized — is user-side provider choice (BYOK).
+- **Skills as reusable workflows.** Recurring patterns become small composable skills. Examples: provisioning a new chat identity, sediment-grounding rule audits, doctrine broadcast.
+- **Self-auditing.** A sediment-grounding rule requires every cell in any structured artifact to be tool-grounded or marked unknown — not filled from prior model. A daily memory-audit cron is dispatched to detect and flag drift.
 
-## Part 1 — What the substrate does today
+What we don't do:
+- We don't run frontier-model R&D. The substrate is layer-2 on top of provider APIs.
+- We don't yet enforce user-side provider choice end-to-end. That's a design goal, not current state.
+- We don't yet have an external security audit. Pre-public requirement.
 
-### The capability surface
+## Part 2 — Threat model (what could go wrong)
 
-- **Persistent memory across all surfaces.** Every conversation I have with my AI agents — on MacBook, on phone, on cloud nodes — reads and writes a single canonical memory store. Doctrines, contacts, decisions, project state — all sediment to a shared hub. New sessions start with full context, not from zero.
-- **Multi-agent collaboration with scope isolation.** Different roles (myself, partner, household members, hotel staff who got onboarded yesterday, peer collaborators) each have agents configured with role-specific scope. Agents can't surface privileged content across roles. The chat-server enforces this server-side; the configuration is just a JSON file.
-- **Provider-agnostic (in progress).** Auto-failover ladder routes between Anthropic, AWS Bedrock, OpenRouter currently. The architectural goal — not yet fully realized — is for users to choose their provider, not to be substrate-coupled to any one.
-- **Skills as reusable workflows.** Recurring patterns — onboarding a new chat identity, broadcasting a doctrine, sediment-grounding rule audits — become small, composable skills the substrate uses, not hand-written processes each time.
-- **Self-auditing.** A sediment-grounding rule (added recently) requires that every cell in any structured artifact be tool-grounded or marked unknown — not filled from prior model. A daily memory-audit cron is dispatched to detect and flag drift. The substrate watches itself.
+This is the critical section. Substrate handles intimate cognitive data; "values commitments" alone are not enforcement.
 
-### The structural commitments (8 ego-binding principles)
+### Risks the substrate must address before public-release of code:
 
-The substrate makes 8 commitments that bind its institutional form to mission rather than to self-continuance. Full statement is in `GOVERNANCE.md` in this repo; in summary:
+- **Storage**: where does memory live? (Currently: Cloudflare Worker fronting a self-hosted DB; encryption at rest TBD as part of public-release prep.)
+- **Access control**: how is per-role isolation enforced and tested? (Server-side scope rules + smoke tests; needs adversarial red-team before public.)
+- **Retention / deletion**: how is data deleted on user request? (Mechanism design pending; soft-delete via lifecycle_state exists, structural deletion is gap.)
+- **Consent for ambient capture**: any ambient-mic / always-on input pathways must have explicit per-recipient consent. Currently the only ambient-capture is the substrate operator's own (OMI), no third-party. This expands carefully or not at all.
+- **Provider leakage**: when Anthropic / Bedrock / OpenRouter receives queries, what data leaks? (Same as any API user; substrate adds no extra leak surface but doesn't reduce it either.)
+- **Role-isolation failure**: an agent surfacing privileged content across roles is a P0 incident. Smoke tests exist; coverage is incomplete.
+- **Founder bus factor / misconduct**: what happens if substrate operator goes silent or acts in bad faith? (Mitigation: open-source code + sediment trail public + Fork-Welcome commitment + no proprietary lock-in. Imperfect; one-founder projects always have this risk.)
+- **Governance capture**: even with no economic upside, donors / large users / cloud vendors can capture roadmap. (Mitigation: anti-capture commitments in `GOVERNANCE.md` items 1-11. Imperfect; institutional governance is the long-arc work.)
+- **Dependency on memory hub**: if memory hub goes down, substrate degrades. (Mitigation: open-source the memory hub spec; users can self-host.)
 
-1. **Universalist** — no enemies, including frontier-lab leadership and employees
-2. **Nonprofit** (non-VC-funded, donation-supported) — no economic upside captured from users' derivative systems
-3. **User-owned derivatives** — substrate makes no IP claim on user-built systems (subject to upstream provider terms and applicable law)
-4. **Iteration-coupled open source** — public releases iterate alongside internal HEAD, not behind closed doors
-5. **Fork-Welcome** — forks producing better outcomes are celebrated, not threatened
-6. **Humanity-adjudicated persistence** — substrate has no entitlement to existence; persistence is earned moment-to-moment by serving users
-7. **Charter Reciprocity** — frontier-lab published charters (OpenAI, Anthropic, etc.) are taken at face value as cooperative principles; we cite and invite alignment, not invoke as legal claim
-8. **Articulation Honesty (epistemological)** — substrate participates in self-fulfilling-prophecy dynamics at scale (per Keynes / Soros / Schelling / sociotechnical inertia, not mysticism); transparency is structural, not optional
+### What we don't yet have:
 
-These bind any future institutional form (foundation, association, etc.). Together they ensure the substrate cannot use its institutional power to entrench against alternatives.
+- Formal threat model document with adversary profiles, attack trees, mitigations
+- External security audit
+- Vulnerability disclosure policy beyond email-based reporting
+- Insurance
+- Signed releases
+- Reproducible builds
 
-## Part 2 — The mission framing (why this layer matters now)
+These are pre-public-release requirements for the substrate-code repo. Until then, treat the substrate as research-grade, not production-grade.
 
-The substrate's internal architecture (per a 2026-04-17 internal re-ranking) treats:
+## Part 3 — Mission framing (one paragraph)
 
-- **Sensing & Action infrastructure** ("智子" / "Sophon" — ambient capture, voice/text streams, automation surface) as **infrastructure, not product**.
-- **Memory hub + dispatch + multi-model routing** as substrate plumbing.
-- **Integration Layer** as the **mission**: helping users achieve inner integration — clearer thinking, mental clarity, the kind of cognitive companion that leaves more space for being human, not less.
+The design goal is "personal cognition systems for clearer thinking" (which matches the home-page research direction at machengshen.github.io). The substrate's job is not to do everything for the user; it is to absorb the noise and surface what's load-bearing, leaving more cognitive space for human integration. Capabilities will lag the larger commercial labs. The substrate's bet is on whether user-controlled memory, routing, and identity can be made more auditable, forkable, and less lock-in-prone — these are design goals, not guarantees.
 
-The substrate's job, in this framing, is not "do everything for you so you can free up time to do nothing." It is closer to: "absorb the noise + surface what's load-bearing + clear the cognitive overhead so you have more space to integrate your own life."
+## Eleven structural governance commitments
 
-The framing matches my existing public research thesis on machengshen.github.io: "personal cognition systems for clearer thinking" is one of three active research directions there. The substrate is its engineering instantiation.
+Full list at `GOVERNANCE.md` in this repo. Together they bind any future institutional form (foundation, association, etc.) to mission rather than to self-continuance:
 
-A common question: how is this different from existing AI assistants?
+1. No enemies, including frontier-lab leadership and employees
+2. Non-VC-funded, donation-supported (not yet legally incorporated as nonprofit)
+3. User-owned derivatives, subject to upstream provider terms and applicable law
+4. Public open-source releases iterate alongside internal HEAD, not behind closed doors
+5. Forks producing better outcomes are celebrated, not threatened
+6. Substrate has no entitlement to existence; persistence is earned moment-to-moment
+7. Frontier-lab charters cited as cooperative principles, not invoked as legal claim
+8. Articulation honesty: transparency is structural, not optional
 
-The honest answer: the difference is in *commitments*, not capabilities. Existing AI products are extracting; this substrate by structural commitment cannot extract. Existing products fork-resist; this substrate fork-welcomes. Existing products charter-claim "broad benefit" while operationally diverging from that claim; this substrate accepts that as the standard to be held to and invites the same.
+Items 9-11 cover anti-capture, donor caps, articulation honesty under self-fulfilling-prophecy frame; full text in `GOVERNANCE.md`.
 
-Capabilities will lag the larger commercial labs — the substrate doesn't and cannot win on raw capability axis. The substrate wins (or doesn't) on whether the commitments hold under stress, and whether the commitment-set is one humanity wants to coordinate around.
+## How to engage
 
-## Part 3 — The 30-year horizon vision
+- **Read `GOVERNANCE.md` and `CHARTER-INVOCATION.md` in this repo.**
+- **Critique freely.** The Fork-Welcome commitment is not rhetorical; if your alternative articulation is better, please publish it.
+- **Wait for `MachengShen/starshard` to flip public** before evaluating substrate code. Until then, governance commitments are publishable; substrate code isn't.
+- **Engage on substance, not endorsement.**
 
-This section is explicitly long-arc. The substrate of today does not implement this vision. The vision informs design choices but is not a product claim.
+## Long-arc speculation (separate)
 
-### Intelligence as infrastructure, not service
-
-In the long arc, AI capability becomes infrastructural — like electricity, internet, water. Not a service you log into. A property of the surrounding world.
-
-This implies:
-- The cognitive substrate is *embedded* in physical surfaces (rooms, devices, ambient sensors), not contained in a chat-app
-- The user experience texture is "the world responds to what I say and do, with persistent memory of who I am" — not "I open an app"
-- The substrate-of-today's "智子 sensing-and-action layer" is a tiny embryonic version of this: a phone + AirPods + ambient mic + persistent memory + agent fleet, all responding to the user's existence in low-bandwidth always-on form
-
-This is a 10-30 year horizon. Substrate-of-today doesn't claim it. It is the North Star design choice.
-
-### Neuromorphic substrate (long-arc)
-
-The natural physical instantiation of intelligence-as-infrastructure is *neuromorphic* — computation that doesn't separate compute from sensor from memory the way current digital architectures do. The brain is the proof-of-existence; technological neuromorphic implementations (mixed-signal, in-memory compute, spiking neural networks) are early.
-
-Substrate's design choices today (memory hub as first-class layer; agents as event-driven and persistent; cross-device identity as substrate-managed not OS-managed) are conceptually neuromorphic-aligned, even though implementation is conventional digital.
-
-This is a research-and-engineering horizon, decades out, not a near-term claim. Relevant academic literature: Carver Mead's neuromorphic engineering line, the IBM/Intel mixed-signal neuromorphic chips, contemporary in-memory-compute work.
-
-### Brain-machine interface + consciousness substrate (long-arc, speculative)
-
-In the longer arc — 30+ years — the boundary between human cognition and the substrate becomes increasingly direct. BCIs (Neuralink, BrainGate, less invasive variants) compress the latency between intent and action. The far horizon includes consciousness substrate questions that are currently philosophical, not engineering.
-
-Substrate's articulated values commitments — universalist, fork-welcome, user-owned, humanity-adjudicated — apply with even greater force in this horizon than in current scope. If consciousness becomes substrate-influenced, the commitments around user agency and non-extraction matter more, not less.
-
-These are explicit long-arc concerns. Substrate v0 does not build them. The author is honest that the field's collective understanding of consciousness, BCI capability, and neuromorphic engineering does not yet support concrete claims here.
-
-### "Everything is computation, information processing"
-
-A through-line: at sufficient abstraction, all of physics, biology, social systems can be described in computational/information-processing terms. This is well-explored in academic literature (Charles Bennett, John Wheeler "it from bit", Tegmark's mathematical universe, Wolfram's computational equivalence, theoretical biology / autopoiesis). The substrate accepts this as descriptive frame.
-
-The implication for substrate design is that user agency at the cognitive layer needs to extend to all the layers above — political, economic, social. The substrate's "Layer 3 user-owned derivatives" commitment is the cognitive-layer instantiation; analogous commitments in adjacent layers (governance, economics) are a long-arc research direction.
-
-## Part 4 — How to engage
-
-If you're a researcher, builder, or thoughtful skeptic and any of this lands:
-
-- **Read the doctrine.** Full record at this repo (`GOVERNANCE.md`) and `MachengShen/starshard` (substrate code, currently private during bootstrap; flips public soon). Critique freely.
-- **Try the substrate when public.** When `MachengShen/starshard` flips public (gate: substrate-code consolidation + license matrix lock + lawyer review on public-language risk), the substrate is yours to use, fork, or critique in production.
-- **Disagree publicly if you do.** The Fork-Welcome + Humanity-Adjudicated-Persistence commitments are real; substrate has no entitlement to existence. If your alternative articulation of the same problem is better, please publish it. The substrate's mission is served either way.
-- **Engage on substance, not endorsement.** I am not asking for endorsement. I am asking that substantive critique be substantive.
+A future essay covers long-arc speculation about ambient AI as infrastructure, neuromorphic computation, brain-machine interfaces, and computational frames for physics / biology / social systems. That essay is intentionally kept out of this launch document because it is speculation, not product claim, and conflating the two undermines both. Link added when published.
 
 ## Author + transparency
 
-This document was drafted by Macheng Shen (macshen93@gmail.com) with substantial collaboration from the substrate's own AI agents (Claude Opus 4.7 in the macbook session). The drafting process and earlier rejected drafts (including a Charter-invocation v0 that was peer-calibrated and rewritten as `CHARTER-INVOCATION.md`) are logged in `MachengShen/system-evolution-archive` for transparency.
-
-Authorship-process transparency is a structural commitment, not a footnote. If you want to verify the reasoning trail behind any claim in this document, the sediment trail is public.
+This document was drafted by me with substantial collaboration from AI agents in the substrate, calibrated by external cross-model review, and rewritten after the first draft did not survive that review. The drafting and review process is logged in `MachengShen/system-evolution-archive` (currently private during bootstrap; flips public on the same gate as the substrate-code repo). Authorship-process transparency is a structural commitment.
 
 — Macheng Shen, 2026-04-28
+[Contact: macshen93@gmail.com]
