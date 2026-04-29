@@ -84,6 +84,10 @@ Items 9-11 cover anti-capture, donor caps, articulation honesty under self-fulfi
 
 A future essay covers long-arc speculation about ambient AI as infrastructure, neuromorphic computation, brain-machine interfaces, and computational frames for physics / biology / social systems. That essay is intentionally kept out of this launch document because it is speculation, not product claim, and conflating the two undermines both. Link added when published.
 
+## See also
+
+**[LOCALITY-AS-PROTOCOL.md](LOCALITY-AS-PROTOCOL.md)** — The broader governance-theory framing that the substrate's user-agency commitments are reaching toward. The substrate is one software-layer instance of the locality-as-protocol logic: a rule-system that individuals opt into, governed by explicit commitments, competing with alternatives on quality rather than lock-in. Published 2026-04-29, v0, pre-calibration.
+
 ## Author + transparency
 
 This document was drafted by me with substantial collaboration from AI agents in the substrate, calibrated by external cross-model review, and rewritten after the first draft did not survive that review. The drafting and review process is logged in `MachengShen/system-evolution-archive` (currently private during bootstrap; flips public on the same gate as the substrate-code repo). Authorship-process transparency is a structural commitment.
