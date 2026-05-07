@@ -30,6 +30,10 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 - **Today**: stub. Public population is gated on (a) publishability filter pipeline working end-to-end on the private archive (b) Macheng-approved review of what crosses the boundary.
 - **Timeline**: no commitment. Will not publish prematurely.
 
+## Public Essays
+
+- [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md) — how to wrap closed-source tools at their input/output boundaries instead of treating them as cognitive authorities.
+
 ## License
 
 TBD. Leaning toward dual-track: substrate code under AGPL-style copyleft (preserves user-agency property across forks); user data + derivatives unlicensed-by-substrate (always property of the individual user). Folder boundary in repo enforces this.
