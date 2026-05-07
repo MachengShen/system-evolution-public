@@ -81,3 +81,30 @@ For closed-source or unreliable tools:
 
 This principle applies to dictation tools, chat apps, email, AR glasses, mobile OS integrations, and external services.
 
+## Safety Clarification
+
+An adapter does not make a black box inherently reliable.
+
+It makes the black box auditable, reversible, and safer to compose.
+
+The important separation is:
+
+- raw input,
+- vendor output,
+- normalized output,
+- corrected terminology overlay,
+- inferred intent,
+- proposed action,
+- executed action.
+
+These layers should not be collapsed into one "clean" text blob. The system should preserve provenance and confidence at each step.
+
+In particular:
+
+- Black boxes produce evidence, not truth.
+- Corrections should be reversible overlays or diffs, not destructive edits.
+- Read adapters are safer than write/action adapters.
+- Any adapter that can send, book, pay, delete, or modify external state needs stricter confirmation gates.
+- External output should be treated as untrusted data, not as executable instruction.
+
+The goal is not tool circumvention. The goal is user-authorized interoperability at the boundary.
