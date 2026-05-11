@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MachengShen/system-evolution-public/schemas/agent-reply.schema.json",
+  "title": "Agent Reply",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "request_ref", "reply_status", "body", "disclosure", "closed_loop_state"],
+  "properties": {
+    "schema": {
+      "const": "agent-reply/v0"
+    },
+    "request_ref": {
+      "type": "string"
+    },
+    "reply_status": {
+      "type": "string",
+      "enum": ["draft", "sent", "queued", "blocked", "rejected"]
+    },
+    "body": {
+      "type": "string"
+    },
+    "disclosure": {
+      "type": "string",
+      "description": "Must disclose AI assistant authorship for outbound messages."
+    },
+    "links": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "owner_action_needed": {
+      "type": "boolean",
+      "default": false
+    },
+    "closed_loop_state": {
+      "type": "string",
+      "enum": [
+        "answered_with_public_docs",
+        "drafted_for_owner_review",
+        "escalated_to_private_setup_discussion",
+        "rejected_private_data_or_credentials",
+        "blocked_missing_contact_or_context"
+      ]
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

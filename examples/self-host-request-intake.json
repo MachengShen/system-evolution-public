@@ -1,0 +1,21 @@
+{
+  "schema": "request-intake/v0",
+  "source": "email",
+  "received_at": "2026-05-11T00:00:00Z",
+  "requester": {
+    "display_name": "Example Builder",
+    "contact": "builder@example.com",
+    "relationship": "public requester"
+  },
+  "summary": "Requester wants to try Macheng's personal AI system.",
+  "classification": "self_setup_help",
+  "requested_action": "Explain how to set up a similar adapter layer.",
+  "private_data_requested": false,
+  "external_action_risk": "low",
+  "default_resolution": "answer_with_public_docs",
+  "refs": [
+    "README.md",
+    "INFRASTRUCTURE.md",
+    "AGENT-SETUP.md"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MachengShen/system-evolution-public/schemas/request-intake.schema.json",
+  "title": "Request Intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "source", "received_at", "summary", "classification", "requested_action"],
+  "properties": {
+    "schema": {
+      "const": "request-intake/v0"
+    },
+    "source": {
+      "type": "string",
+      "description": "email, chat, dashboard, web form, issue, or other channel"
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requester": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "display_name": { "type": "string" },
+        "contact": { "type": "string" },
+        "relationship": { "type": "string" }
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "self_setup_help",
+        "managed_service_request",
+        "collaboration_request",
+        "private_owner_access_request",
+        "contribution_offer",
+        "sensitive_integration_request",
+        "unclear"
+      ]
+    },
+    "requested_action": {
+      "type": "string"
+    },
+    "private_data_requested": {
+      "type": "boolean",
+      "default": false
+    },
+    "external_action_risk": {
+      "type": "string",
+      "enum": ["none", "low", "medium", "high"],
+      "default": "none"
+    },
+    "default_resolution": {
+      "type": "string",
+      "enum": [
+        "answer_with_public_docs",
+        "draft_for_owner_review",
+        "escalate_to_private_setup_discussion",
+        "reject_private_data_or_credentials",
+        "ask_clarifying_question"
+      ]
+    },
+    "refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  }
+}

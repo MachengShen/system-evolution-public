@@ -1,0 +1,19 @@
+{
+  "schema": "agent-reply/v0",
+  "request_ref": "example:self-host-request-intake",
+  "reply_status": "draft",
+  "body": "Thanks for reaching out. Macheng's personal agent is not exposed as a shared hosted service because it contains private memory, channels, and context. The reusable part is the open adapter-layer infrastructure: request intake, routing, memory boundaries, reviewer loops, receipts, and BYOK model-provider execution. The intended setup is that you run your own instance with your own API keys and pay your own provider/cloud costs. Start with README.md, INFRASTRUCTURE.md, AGENT-SETUP.md, REQUEST-HANDLING.md, and schemas/.",
+  "disclosure": "This message was drafted by Macheng's AI assistant.",
+  "links": [
+    "README.md",
+    "INFRASTRUCTURE.md",
+    "AGENT-SETUP.md",
+    "REQUEST-HANDLING.md"
+  ],
+  "owner_action_needed": false,
+  "closed_loop_state": "answered_with_public_docs",
+  "receipt": {
+    "example": true,
+    "sent": false
+  }
+}

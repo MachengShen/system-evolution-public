@@ -1,18 +1,48 @@
 # system-evolution-public
 
-**Stub. Population pending publishability filter pipeline.**
+Public record and first open infrastructure boundary for the user-agency
+substrate.
+
+## What This Is
+
+Self-hostable infrastructure for agent request intake, routing, BYOK model
+execution, reply contracts, memory boundaries, and closed-loop receipts.
+
+This repository is for builders and agents who want to set up their own
+user-agency substrate using their own data, tools, and model-provider accounts.
+
+## What This Is Not
+
+- Not a hosted service.
+- Not a shared endpoint for Macheng's private personal agent.
+- Not backed by Macheng's API budget. BYOK means you pay your own model,
+  cloud, and provider bills.
+- Not under an SLA.
+- Not a stable v1 API yet. Schemas may change before v1.
+- Issues or emails asking maintainers to run requests on your behalf may be
+  closed with a pointer to `AGENT-SETUP.md`.
 
 This repo is the future home of the public-facing record of a user-agency substrate's evolution — the journey from "vanilla Claude Code in a terminal" to a multi-layer agent architecture, in roughly two months.
 
-The unfiltered raw archive is private. Content here will be carefully filtered, reviewed, and published only after the substrate matures and Macheng explicitly approves the public release.
+The unfiltered raw archive is private. Public files here are derived, redacted,
+and written for reuse. The goal is not to publish Macheng's private system; it
+is to publish the adapter layer and protocols that let other people build their
+own systems on top of frontier models with their own accounts and API keys.
 
-## What this will be (when populated)
+## Start Here
 
-A curated narrative of:
-- **The architectural arc** — from single-agent CLI to memory-hub + multi-agent fleet + scoped third-party access
-- **Doctrine evolution** — every standing rule, every architecture decision, with the reasoning trail
-- **Skills + tooling** — the small reusable workflows that compounded
-- **The user-agency layer thesis** — why a nonprofit substrate between frontier-model providers and individual users is structurally important
+- [INFRASTRUCTURE.md](INFRASTRUCTURE.md) — what is open-sourced now and what
+  remains private.
+- [AGENTS.md](AGENTS.md) — machine-readable reading order and invariants for
+  AI agents.
+- [AGENT-SETUP.md](AGENT-SETUP.md) — agent-facing bootstrap instructions for
+  setting up your own adapter layer.
+- [REQUEST-HANDLING.md](REQUEST-HANDLING.md) — how agents should answer people
+  asking for access, help, or hosting.
+- [schemas/](schemas/) — public JSON contracts for request intake and agent
+  replies.
+- [essays/2026-05-07-black-box-io-adapter.md](essays/2026-05-07-black-box-io-adapter.md)
+  — the black-box I/O adapter principle.
 
 ## Three-layer architecture (preview)
 
@@ -27,8 +57,12 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 
 ## Status
 
-- **Today**: stub. Public population is gated on (a) publishability filter pipeline working end-to-end on the private archive (b) Macheng-approved review of what crosses the boundary.
-- **Timeline**: no commitment. Will not publish prematurely.
+- **Today**: first public infrastructure boundary is live. It contains the
+  adapter-layer doctrine, bootstrap contract, request-handling policy, and
+  schemas. It does not contain private transcripts, credentials, WeChat data,
+  Memory Hub contents, or personal collaborator directories.
+- **Next**: gradually lift reusable components into clean public packages after
+  redaction, license, secret-scan, and reviewer checks.
 
 ## Public Essays
 
@@ -36,7 +70,10 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 
 ## License
 
-TBD. Leaning toward dual-track: substrate code under AGPL-style copyleft (preserves user-agency property across forks); user data + derivatives unlicensed-by-substrate (always property of the individual user). Folder boundary in repo enforces this.
+Unless otherwise noted, the public docs, schemas, examples, and protocol notes
+in this repository are released under Apache-2.0. Future substrate code may use
+a different explicit license at the file or package boundary. User data and
+user-created derivative systems are not licensed to this substrate by default.
 
 ## Sediment trail
 
