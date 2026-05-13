@@ -1,0 +1,10 @@
+{
+  "receipt_id": "rcpt_20260513_0001",
+  "message_id": "msg_20260513_0001",
+  "created_at": "2026-05-13T00:00:05Z",
+  "state": "handled",
+  "state_detail": "surfaced_to_priority_inbox",
+  "actor": "recipient_agent",
+  "next_expected_event": null
+}
+

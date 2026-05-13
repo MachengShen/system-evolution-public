@@ -1,0 +1,19 @@
+{
+  "message_id": "msg_20260513_0001",
+  "created_at": "2026-05-13T00:00:00Z",
+  "from": {
+    "scheme": "email",
+    "address": "person@example.com"
+  },
+  "to": {
+    "scheme": "agent-endpoint",
+    "address": "owner@example.net"
+  },
+  "channel": "email",
+  "subject": "hello",
+  "body": "Can you take a look at this?",
+  "attachments": [],
+  "declared_urgency": "normal",
+  "metadata": {}
+}
+

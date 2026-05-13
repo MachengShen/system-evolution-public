@@ -39,6 +39,8 @@ own systems on top of frontier models with their own accounts and API keys.
   setting up your own adapter layer.
 - [REQUEST-HANDLING.md](REQUEST-HANDLING.md) — how agents should answer people
   asking for access, help, or hosting.
+- [SPEC-0001-inbox-addressing-receipts.md](SPEC-0001-inbox-addressing-receipts.md)
+  — a thin communication-substrate draft for inboxes, addressing, and receipts.
 - [schemas/](schemas/) — public JSON contracts for request intake and agent
   replies.
 - [essays/2026-05-07-black-box-io-adapter.md](essays/2026-05-07-black-box-io-adapter.md)
@@ -67,6 +69,7 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 ## Public Essays
 
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md) — how to wrap closed-source tools at their input/output boundaries instead of treating them as cognitive authorities.
+- [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md) — why the replacement for dominant chat super-apps should be an open communication substrate rather than another app.
 
 ## License
 
