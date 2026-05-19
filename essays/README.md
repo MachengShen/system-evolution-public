@@ -7,6 +7,7 @@ Learning Machine research line.
 
 - [Credit Transport and the General Learning Machine](2026-05-19-credit-transport-general-learning-machine.md)
 - [Predictive Coding, Free Energy, and Credit Transport](2026-05-19-predictive-coding-free-energy-credit-transport.md)
+- [Field Spiral Scanner](2026-05-19-field-spiral-scanner.md)
 
 ## User-Agency Substrate
 

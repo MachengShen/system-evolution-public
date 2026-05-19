@@ -18,6 +18,7 @@ rules, experiments, hardware workload, and public feedback loops.
 
 - [Credit Transport and the General Learning Machine](essays/2026-05-19-credit-transport-general-learning-machine.md)
 - [Predictive Coding, Free Energy, and Credit Transport](essays/2026-05-19-predictive-coding-free-energy-credit-transport.md)
+- [Field Spiral Scanner](essays/2026-05-19-field-spiral-scanner.md)
 
 ## Searchable Summary
 
@@ -25,7 +26,8 @@ General Learning Machine, credit transport, backpropagation, lifelong agents,
 memory topology, information dynamics, agent substrate, user agency,
 continuous learning, sleep consolidation, self-shedding, public feedback,
 forecasts as interventions, predictive coding, active inference, free energy,
-and AI hardware workload are treated here as one connected research line.
+scientific field spirals, and AI hardware workload are treated here as one
+connected research line.
 
 ## Key Terms
 
