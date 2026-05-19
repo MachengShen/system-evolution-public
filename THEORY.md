@@ -22,8 +22,9 @@ rules, experiments, hardware workload, and public feedback loops.
 
 General Learning Machine, credit transport, backpropagation, lifelong agents,
 memory topology, information dynamics, agent substrate, user agency,
-continuous learning, sleep consolidation, self-shedding, public feedback, and
-AI hardware workload are treated here as one connected research line.
+continuous learning, sleep consolidation, self-shedding, public feedback,
+forecasts as interventions, and AI hardware workload are treated here as one
+connected research line.
 
 ## Key Terms
 
@@ -43,6 +44,9 @@ AI hardware workload are treated here as one connected research line.
   distribution or traffic; it is a source current that can become durable
   structure through intake, receipts, routing, experiments, credit assignment,
   and consolidation.
+- **Forecasts as interventions**: predictions from a capable joint human-agent
+  system can be descriptive forecasts, desired targets, and causal
+  interventions at the same time.
 
 ## Falsifiability
 
@@ -63,5 +67,6 @@ Important anti-signals:
 ## Adjacent Public Work
 
 - [Engineering Practice Mainline](PRACTICE.md)
+- [Forecasts, Targets, and Interventions](FORECASTS.md)
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md)
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md)

@@ -266,6 +266,7 @@ After publishing, the agent should write a durable receipt containing:
 ## Current Public Practice Map
 
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md)
+- [Forecasts, Targets, and Interventions](FORECASTS.md)
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md)
 - [SPEC-0001: Inbox, Addressing, And Receipts](SPEC-0001-inbox-addressing-receipts.md)
 - [Agent Setup](AGENT-SETUP.md)
