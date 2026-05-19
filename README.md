@@ -31,6 +31,9 @@ own systems on top of frontier models with their own accounts and API keys.
 
 ## Start Here
 
+Routing rule: `README` is the index, `THEORY.md` explains why, and
+`PRACTICE.md` describes what agents should do.
+
 - [INFRASTRUCTURE.md](INFRASTRUCTURE.md) — what is open-sourced now and what
   remains private.
 - [THEORY.md](THEORY.md) — the public entrypoint for the General Learning

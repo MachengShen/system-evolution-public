@@ -20,6 +20,16 @@ A personal AI system becomes more than chat when every channel, memory, task,
 review, publication, and repair path is part of a closed loop with receipts,
 durable state, escalation, and consolidation.
 
+## When To Use This
+
+Use this document when designing, reviewing, or publishing the practice layer of
+a user-agency substrate: agent orchestration, memory contracts, channel loops,
+adapter boundaries, reviewer workflows, and public iteration receipts.
+
+Do not use it as evidence that any private implementation is open, hosted,
+available, or safe for third-party data. Public practice notes are derived,
+redacted artifacts.
+
 ## What Is Public
 
 The public practice record should expose reusable patterns:
@@ -46,7 +56,7 @@ The public record should not expose:
 
 These are the conceptual organs being iterated.
 
-### 1. Single Visible Agent
+### P-01: Single Visible Agent
 
 The user should experience one coherent front-stage agent, not a provider graph.
 
@@ -61,7 +71,15 @@ Public practice implication:
 - keep backend choice replaceable;
 - make receipts durable enough that another agent can resume.
 
-### 2. Memory as Durable Substrate
+Trigger: a user-facing workflow would otherwise expose multiple backend agents,
+providers, or worker queues.
+
+Action: collapse the graph into one front-stage report with receipts and
+decision gates.
+
+Anti-pattern: making the user manage the backend graph.
+
+### P-02: Memory as Durable Substrate
 
 Memory is not a chat history dump. It is the system's evolving substrate.
 
@@ -80,7 +98,15 @@ Public practice implication:
 - do not publish the private memory corpus;
 - make public artifacts reconstructible from safe receipts.
 
-### 3. Closed-Loop Channels
+Trigger: a fact, preference, task, or publication decision must survive the
+current session.
+
+Action: write a durable receipt with provenance and rejected alternatives when
+relevant.
+
+Anti-pattern: relying on raw chat recall for high-stakes future action.
+
+### P-03: Closed-Loop Channels
 
 Every channel should answer: what closes the loop?
 
@@ -105,7 +131,15 @@ Public practice implication:
 - treat fire-and-forget integrations as incomplete;
 - expose enough receipt structure for other agents to audit behavior.
 
-### 4. Adapter Layer Over Black Boxes
+Trigger: a message, task, publication, reviewer call, or external input can
+enter the system without a visible completion state.
+
+Action: define receipt, routing, durable state update, timeout detection,
+repair path, and consolidation before treating the channel as complete.
+
+Anti-pattern: fire-and-forget intake with no auditable end state.
+
+### P-04: Adapter Layer Over Black Boxes
 
 Closed tools can still be useful if their boundaries are controlled.
 
@@ -126,7 +160,15 @@ Public practice implication:
 - separate vendor output, normalized output, inferred intent, proposed action,
   and executed action.
 
-### 5. Reviewer Metabolism
+Trigger: a black-box tool sits between user intent and memory, action, or
+public output.
+
+Action: separate raw input, vendor output, normalized output, inferred intent,
+proposed action, and executed action.
+
+Anti-pattern: collapsing all layers into one clean text blob.
+
+### P-05: Reviewer Metabolism
 
 Reviewers are not ceremonial. They are metabolism for high-salience changes.
 
@@ -144,7 +186,16 @@ Public practice implication:
 - do not publish private raw transcripts by default;
 - make reviewer failure modes visible enough to improve the process.
 
-### 6. Public Theory and Practice Runway
+Trigger: a decision affects public positioning, real users, privacy boundaries,
+or persistent architecture.
+
+Action: create a compact reviewer packet, continue reversible work, and record
+the integrated result.
+
+Anti-pattern: waiting for review before doing safe reversible work, or ignoring
+reviewer anti-signals after publication.
+
+### P-06: Public Theory and Practice Runway
 
 The theory and practice lines should now publish together.
 
@@ -165,6 +216,14 @@ Public practice implication:
   to it;
 - each substantial engineering update should ask what theory claim it tests;
 - publication is not distribution only; it is part of the learning loop.
+
+Trigger: a theory insight changes system behavior, or an engineering iteration
+tests a theory claim.
+
+Action: publish a redacted theory or practice artifact, link it from the stable
+index, and write a receipt.
+
+Anti-pattern: leaving reusable system knowledge only in private chat.
 
 ## Agent-Readable Publication Contract
 
@@ -211,6 +270,18 @@ After publishing, the agent should write a durable receipt containing:
 - [SPEC-0001: Inbox, Addressing, And Receipts](SPEC-0001-inbox-addressing-receipts.md)
 - [Agent Setup](AGENT-SETUP.md)
 - [Request Handling](REQUEST-HANDLING.md)
+
+## Provenance
+
+This public practice line is derived from personal system iteration and then
+redacted into reusable patterns. It is not an employer work product, not a
+hosted service description, and not a promise that private components are
+available to third parties.
+
+## Changelog
+
+- 2026-05-19: created the public practice entrypoint and linked it from
+  `README.md` and `THEORY.md`.
 
 ## Anti-Signals
 
