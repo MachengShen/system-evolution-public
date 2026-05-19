@@ -6,6 +6,7 @@ Learning Machine research line.
 ## Theory Mainline
 
 - [Credit Transport and the General Learning Machine](2026-05-19-credit-transport-general-learning-machine.md)
+- [Predictive Coding, Free Energy, and Credit Transport](2026-05-19-predictive-coding-free-energy-credit-transport.md)
 
 ## User-Agency Substrate
 

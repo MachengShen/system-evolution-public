@@ -17,14 +17,15 @@ rules, experiments, hardware workload, and public feedback loops.
 ## Start Here
 
 - [Credit Transport and the General Learning Machine](essays/2026-05-19-credit-transport-general-learning-machine.md)
+- [Predictive Coding, Free Energy, and Credit Transport](essays/2026-05-19-predictive-coding-free-energy-credit-transport.md)
 
 ## Searchable Summary
 
 General Learning Machine, credit transport, backpropagation, lifelong agents,
 memory topology, information dynamics, agent substrate, user agency,
 continuous learning, sleep consolidation, self-shedding, public feedback,
-forecasts as interventions, and AI hardware workload are treated here as one
-connected research line.
+forecasts as interventions, predictive coding, active inference, free energy,
+and AI hardware workload are treated here as one connected research line.
 
 ## Key Terms
 
@@ -40,6 +41,11 @@ connected research line.
 - **Sleep / spiral / self-shedding**: continual learning requires phase
   separation for replay, consolidation, pruning, hibernation, merging, and
   controlled re-entry into the world.
+- **Prediction-error ledger**: important actions should record expected
+  observations, confidence, actual observations, error type, likely cause,
+  update target, and post-update test.
+- **Precision / immune gating**: surprise should be weighted before it becomes
+  memory, rule, experiment, reviewer work, quarantine, or nothing.
 - **Public feedback as metabolism**: public interaction is not only
   distribution or traffic; it is a source current that can become durable
   structure through intake, receipts, routing, experiments, credit assignment,
