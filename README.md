@@ -35,6 +35,8 @@ own systems on top of frontier models with their own accounts and API keys.
   remains private.
 - [THEORY.md](THEORY.md) — the public entrypoint for the General Learning
   Machine / credit transport theory mainline.
+- [PRACTICE.md](PRACTICE.md) — the public entrypoint for the conceptual
+  engineering practice and system-iteration record.
 - [AGENTS.md](AGENTS.md) — machine-readable reading order and invariants for
   AI agents.
 - [AGENT-SETUP.md](AGENT-SETUP.md) — agent-facing bootstrap instructions for
@@ -71,6 +73,7 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 ## Public Essays
 
 - [Theory Mainline](THEORY.md) — the stable public index for General Learning Machine, credit transport, memory-as-dynamics, and public feedback as metabolism.
+- [Engineering Practice Mainline](PRACTICE.md) — the stable public index for conceptual system iteration, operational loops, and agent-readable practice contracts.
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md) — how to wrap closed-source tools at their input/output boundaries instead of treating them as cognitive authorities.
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md) — why the replacement for dominant chat super-apps should be an open communication substrate rather than another app.
 - [Credit Transport and the General Learning Machine](essays/2026-05-19-credit-transport-general-learning-machine.md) — a structured thesis on backpropagation as cross-layer credit transport, memory as plastic topology, and public feedback as metabolism.

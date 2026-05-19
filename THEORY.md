@@ -62,5 +62,6 @@ Important anti-signals:
 
 ## Adjacent Public Work
 
+- [Engineering Practice Mainline](PRACTICE.md)
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md)
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md)
