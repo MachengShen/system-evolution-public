@@ -1,0 +1,13 @@
+# Essays
+
+Public essays and thesis notes for the user-agency substrate and General
+Learning Machine research line.
+
+## Theory Mainline
+
+- [Credit Transport and the General Learning Machine](2026-05-19-credit-transport-general-learning-machine.md)
+
+## User-Agency Substrate
+
+- [The Black-Box I/O Adapter Principle](2026-05-07-black-box-io-adapter.md)
+- [What Replaces Super-App Chat In The AI-Agent Era?](2026-05-13-open-communication-substrate.md)

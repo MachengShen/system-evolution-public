@@ -1,0 +1,66 @@
+# Theory Mainline: General Learning Machine, Credit Transport, and Backpropagation
+
+This is the public entrypoint for the research thesis behind the
+user-agency substrate.
+
+The central question is:
+
+> What kind of system can continuously change its own information structure,
+> preserve user agency, and become more capable of doing the right thing later
+> with less human babysitting?
+
+The current answer is framed as a **General Learning Machine**: a situated,
+inspectable, corrigible system whose learning is not only parameter update, but
+cross-layer change in memory topology, credit assignment, tools, reviewers,
+rules, experiments, hardware workload, and public feedback loops.
+
+## Start Here
+
+- [Credit Transport and the General Learning Machine](essays/2026-05-19-credit-transport-general-learning-machine.md)
+
+## Searchable Summary
+
+General Learning Machine, credit transport, backpropagation, lifelong agents,
+memory topology, information dynamics, agent substrate, user agency,
+continuous learning, sleep consolidation, self-shedding, public feedback, and
+AI hardware workload are treated here as one connected research line.
+
+## Key Terms
+
+- **General Learning Machine**: a finite, situated system that continuously
+  evolves its own information structure to preserve, recover, and extend
+  reachable futures.
+- **Credit transport**: the process by which future error, surprise, value,
+  friction, or viability pressure moves backward through the structures that
+  caused an outcome and changes them.
+- **Memory as plastic topology**: memory is not only storage and retrieval; it
+  carries raw traces, compiled schemas, provenance, trust, routing priors,
+  eligibility traces, and rollback state.
+- **Sleep / spiral / self-shedding**: continual learning requires phase
+  separation for replay, consolidation, pruning, hibernation, merging, and
+  controlled re-entry into the world.
+- **Public feedback as metabolism**: public interaction is not only
+  distribution or traffic; it is a source current that can become durable
+  structure through intake, receipts, routing, experiments, credit assignment,
+  and consolidation.
+
+## Falsifiability
+
+This theory is useful only if it changes system behavior.
+
+Important anti-signals:
+
+1. The system writes better summaries but still needs the same human
+   babysitting.
+2. Memory grows without improving future retrieval, judgment, or action.
+3. Public feedback increases attention without improving experiments or
+   routing.
+4. Self-modification creates drift or unreviewable behavior.
+5. Sleep, replay, and consolidation sound elegant but fail to improve later
+   reachability.
+6. Hardware workload traces do not differ from ordinary inference serving.
+
+## Adjacent Public Work
+
+- [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md)
+- [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md)
