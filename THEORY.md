@@ -17,6 +17,7 @@ rules, experiments, hardware workload, and public feedback loops.
 ## Start Here
 
 - [Credit Transport and the General Learning Machine](essays/2026-05-19-credit-transport-general-learning-machine.md)
+- [太极、八卦，与"生"作为多轴生成算子](essays/2026-05-21-taiji-bagua-multi-axis-generative-operator.md) — 中文入口，同一框架的另一种语言
 - [Predictive Coding, Free Energy, and Credit Transport](essays/2026-05-19-predictive-coding-free-energy-credit-transport.md)
 - [Field Spiral Scanner](essays/2026-05-19-field-spiral-scanner.md)
 
@@ -26,8 +27,9 @@ General Learning Machine, credit transport, backpropagation, lifelong agents,
 memory topology, information dynamics, agent substrate, user agency,
 continuous learning, sleep consolidation, self-shedding, public feedback,
 forecasts as interventions, predictive coding, active inference, free energy,
-scientific field spirals, and AI hardware workload are treated here as one
-connected research line.
+scientific field spirals, AI hardware workload, multi-axis recursion, and the
+generative operator framing of 太极 / 八卦 are treated here as one connected
+research line.
 
 ## Key Terms
 
