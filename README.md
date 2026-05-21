@@ -34,6 +34,8 @@ own systems on top of frontier models with their own accounts and API keys.
 Routing rule: `README` is the index, `THEORY.md` explains why, and
 `PRACTICE.md` describes what agents should do.
 
+- [Public update board](index.html) — a human-friendly static surface for
+  seeing the latest redacted self-iteration cases at a glance.
 - [INFRASTRUCTURE.md](INFRASTRUCTURE.md) — what is open-sourced now and what
   remains private.
 - [THEORY.md](THEORY.md) — the public entrypoint for the General Learning
@@ -82,6 +84,8 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 - [Theory Mainline](THEORY.md) — the stable public index for General Learning Machine, credit transport, memory-as-dynamics, and public feedback as metabolism.
 - [Engineering Practice Mainline](PRACTICE.md) — the stable public index for conceptual system iteration, operational loops, and agent-readable practice contracts.
 - [Self-Iteration Ledger](SELF-ITERATION-LEDGER.md) — redacted cases showing how failures become reviewed repairs, validation, and anti-signals.
+- [Public Update Board](index.html) — a static, human-readable view of the
+  same redacted self-iteration cases.
 - [Forecasts, Targets, and Interventions](FORECASTS.md) — the stable public index for future-world predictions made by a joint human-agent system.
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md) — how to wrap closed-source tools at their input/output boundaries instead of treating them as cognitive authorities.
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md) — why the replacement for dominant chat super-apps should be an open communication substrate rather than another app.

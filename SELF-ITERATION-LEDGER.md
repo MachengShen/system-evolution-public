@@ -209,6 +209,8 @@ Machine-readable examples live in
 [examples/self-iteration-ledger.json](examples/self-iteration-ledger.json), and
 the public schema lives in
 [schemas/self-iteration-ledger.schema.json](schemas/self-iteration-ledger.schema.json).
+The same redacted cases are also shown as a human-readable
+[public update board](index.html).
 
 ## Private Boundary
 
@@ -226,7 +228,7 @@ payloads.
    gate rather than hand-written summaries.
 2. Add a private-to-public eligibility checker that blocks cases containing raw
    transcripts, local private paths, secrets, or unapproved third-party context.
-3. Add a public status page that can show validated cases, blocked cases, and
-   review-pending cases without exposing private artifacts.
+3. Keep the public update board generated from the redacted JSON ledger, so the
+   human-facing view and agent-readable contract do not drift.
 4. Require each future public self-iteration claim to name at least one
    anti-signal that would falsify the claimed improvement.

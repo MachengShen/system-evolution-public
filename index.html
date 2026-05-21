@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Public, redacted update board for receipt-gated self-iteration in a user-agency substrate."
+    >
+    <title>System Evolution Public Updates</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./">System Evolution</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="SELF-ITERATION-LEDGER.md">Ledger</a>
+        <a href="PRACTICE.md">Practice</a>
+        <a href="THEORY.md">Theory</a>
+        <a href="README.md">Repo</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="kicker">Public update board</p>
+          <h1 id="page-title">Receipt-gated self-iteration, shown as updates.</h1>
+          <p class="lede">
+            A redacted view of how failures become reviewed repairs, validation
+            results, and anti-signals. Private traces, contacts, local paths,
+            credentials, and internal memory records stay out of this surface.
+          </p>
+        </div>
+        <div class="status-panel" aria-label="Ledger status summary">
+          <div class="status-row">
+            <span>Public cases</span>
+            <strong id="case-count">0</strong>
+          </div>
+          <div class="status-row">
+            <span>Validated</span>
+            <strong id="validated-count">0</strong>
+          </div>
+          <div class="status-row">
+            <span>Still bounded</span>
+            <strong id="bounded-count">0</strong>
+          </div>
+          <div class="status-row">
+            <span>Last generated</span>
+            <strong id="generated-at">Unknown</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="updates-title">
+        <div class="section-heading section-heading-row">
+          <div>
+            <p class="kicker">Latest public cases</p>
+            <h2 id="updates-title">What changed</h2>
+          </div>
+          <div class="filter-group" aria-label="Case filters">
+            <button class="filter is-active" type="button" data-filter="all">All</button>
+            <button class="filter" type="button" data-filter="validated">Validated</button>
+            <button class="filter" type="button" data-filter="bounded_repair_plan">Bounded</button>
+          </div>
+        </div>
+        <div id="case-list" class="case-list" aria-live="polite"></div>
+      </section>
+
+      <section class="section" aria-labelledby="flow-title">
+        <div class="section-heading">
+          <p class="kicker">Operating loop</p>
+          <h2 id="flow-title">From signal to reusable rule</h2>
+        </div>
+        <ol class="flow" aria-label="Self-iteration loop">
+          <li><span>Detect</span></li>
+          <li><span>Review</span></li>
+          <li><span>Patch or block</span></li>
+          <li><span>Validate</span></li>
+          <li><span>Record anti-signals</span></li>
+        </ol>
+      </section>
+
+      <section class="section reference-grid" aria-labelledby="references-title">
+        <div class="section-heading">
+          <p class="kicker">Deeper receipts</p>
+          <h2 id="references-title">Agent-readable source files</h2>
+        </div>
+        <a class="reference" href="SELF-ITERATION-LEDGER.md">
+          <strong>Self-Iteration Ledger</strong>
+          <span>Full public-safe case write-up.</span>
+        </a>
+        <a class="reference" href="examples/self-iteration-ledger.json">
+          <strong>Machine-readable example</strong>
+          <span>Redacted JSON case ledger.</span>
+        </a>
+        <a class="reference" href="schemas/self-iteration-ledger.schema.json">
+          <strong>Schema</strong>
+          <span>Public contract for future cases.</span>
+        </a>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
