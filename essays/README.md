@@ -11,5 +11,6 @@ Learning Machine research line.
 
 ## User-Agency Substrate
 
+- [Self-Iteration Ledger](../SELF-ITERATION-LEDGER.md)
 - [The Black-Box I/O Adapter Principle](2026-05-07-black-box-io-adapter.md)
 - [What Replaces Super-App Chat In The AI-Agent Era?](2026-05-13-open-communication-substrate.md)

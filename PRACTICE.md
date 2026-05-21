@@ -56,6 +56,30 @@ The public record should not expose:
 
 These are the conceptual organs being iterated.
 
+### P-00: Self-Iteration Ledger
+
+The system should keep a durable record of its own repair metabolism.
+
+The public-safe entrypoint is
+[Self-Iteration Ledger](SELF-ITERATION-LEDGER.md). It presents redacted cases
+where a failure became a reviewed repair, validation result, and anti-signal.
+
+Public practice implication:
+
+- publish the shape of self-iteration, not the private substrate;
+- require every claim to have a receipt, validation, and falsifiable
+  anti-signal;
+- keep internal and public ledgers structurally aligned so public pressure
+  improves the private control loop.
+
+Trigger: a system repair demonstrates a reusable failure pattern or a real
+improvement in future reliability.
+
+Action: write a private receipt first, then derive a redacted public case if it
+does not expose private data or overclaim autonomy.
+
+Anti-pattern: marketing self-improvement without a receipt-backed repair.
+
 ### P-01: Single Visible Agent
 
 The user should experience one coherent front-stage agent, not a provider graph.

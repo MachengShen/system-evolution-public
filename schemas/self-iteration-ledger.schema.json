@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MachengShen/system-evolution-public/schemas/self-iteration-ledger.schema.json",
+  "title": "Self Iteration Ledger",
+  "type": "object",
+  "required": [
+    "schema",
+    "generated_at",
+    "privacy_boundary",
+    "cases"
+  ],
+  "properties": {
+    "schema": {
+      "const": "self-iteration-ledger/v0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "privacy_boundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "required": [
+        "case_id",
+        "status",
+        "problem_class",
+        "observer_decision",
+        "repair",
+        "human_role",
+        "validation",
+        "anti_signals",
+        "private_boundary",
+        "next_experiment"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^case-[0-9]{3}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "validated",
+            "bounded_repair_plan",
+            "blocked",
+            "review_pending",
+            "superseded"
+          ]
+        },
+        "problem_class": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observer_decision": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "prompt_adjust",
+            "pause_or_confirm",
+            "missing_receipt",
+            "scope_creep",
+            "repair_plan",
+            "handled_with_receipt",
+            "review_pending"
+          ]
+        },
+        "repair": {
+          "type": "string",
+          "minLength": 1
+        },
+        "human_role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "anti_signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "private_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "next_experiment": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "self-iteration-ledger/v0",
+  "generated_at": "2026-05-21T02:12:00Z",
+  "privacy_boundary": "Derived and redacted public projection. Private memories, local paths, raw transcripts, credentials, contacts, device state, and third-party context are excluded.",
+  "cases": [
+    {
+      "case_id": "case-001",
+      "status": "validated",
+      "problem_class": "Memory consolidation dry-run accepted an explicit source path outside the intended boundary.",
+      "observer_decision": "prompt_adjust",
+      "repair": "Constrain explicit sources to the local run directory and validate generated consolidation records before trust.",
+      "human_role": "The observer returned a bounded critique. The front-stage operator accepted it, patched the implementation, and reran validation.",
+      "validation": [
+        "Dry-run passes for default bounded discovery.",
+        "Out-of-bound explicit source fails closed.",
+        "In-bound explicit source passes.",
+        "No unattended apply or durable memory write is approved."
+      ],
+      "anti_signals": [
+        "A future consolidation path writes durable memory without a separate review.",
+        "A source-boundary failure becomes a warning rather than a hard block."
+      ],
+      "private_boundary": "Exact private receipt paths and internal memory IDs are not public.",
+      "next_experiment": "Add a private-to-public redaction gate before publishing future consolidation cases."
+    },
+    {
+      "case_id": "case-002",
+      "status": "bounded_repair_plan",
+      "problem_class": "Stale task next expected events appeared as isolated backlog noise.",
+      "observer_decision": "repair_plan",
+      "repair": "Project repair-needed events into grouped patterns and create bounded repair plans instead of mutating source tasks silently.",
+      "human_role": "This is a planning case, not an automatic mutation. A later repair receipt is required before source state changes.",
+      "validation": [
+        "Scanner writes only its own intermediate events and receipts.",
+        "Repeated scans dedupe.",
+        "Digest groups repair-needed events by repair class.",
+        "Repair plans require a later receipt before source mutation."
+      ],
+      "anti_signals": [
+        "Owner-facing notification volume rises with event volume.",
+        "Repair plans mutate source state without receipts."
+      ],
+      "private_boundary": "Raw task records and dashboard payloads remain private unless separately redacted.",
+      "next_experiment": "Add a safe public summary generator for repair-plan outcomes."
+    },
+    {
+      "case_id": "case-003",
+      "status": "validated",
+      "problem_class": "Fleet rule sync command payload exceeded a conservative remote command parameter limit.",
+      "observer_decision": "handled_with_receipt",
+      "repair": "Stage the large bridge artifact in small chunks and keep the main bootstrap command below the parameter limit.",
+      "human_role": "The front-stage operator executed the rollout, classified a network-environment blocker separately from the payload blocker, and retried the failed region.",
+      "validation": [
+        "Dry run renders every parameter file below the configured limit.",
+        "Live rollout restarts the cloud fleet poller after clearing malformed proxy environment variables for the command process.",
+        "One failed region succeeds after a scoped retry.",
+        "Duplicate backlog records close against a shared repair receipt."
+      ],
+      "anti_signals": [
+        "Future rule sync fails on parameter size again.",
+        "A network proxy failure is misdiagnosed as a payload failure.",
+        "A partial rollout is reported as complete without per-node status."
+      ],
+      "private_boundary": "Provider account identifiers, private run artifacts, and local machine paths are not public.",
+      "next_experiment": "Teach the rollout runner to sanitize network proxy variables or report proxy misconfiguration before sending commands."
+    }
+  ]
+}
