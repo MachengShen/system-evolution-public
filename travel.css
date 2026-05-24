@@ -1,0 +1,156 @@
+.travel-main {
+  width: min(1160px, calc(100% - 32px));
+}
+
+.travel-hero h1 {
+  max-width: 720px;
+}
+
+.travel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.travel-grid-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.travel-card {
+  min-height: 230px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 6px 24px rgba(23, 28, 38, 0.05);
+}
+
+.status-token {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 780;
+}
+
+.status-token.amber {
+  color: #7a4300;
+  background: #fff2da;
+}
+
+.status-token.green {
+  color: #116235;
+  background: #e6f6ec;
+}
+
+.route-card {
+  min-height: 380px;
+}
+
+.travel-card h3 {
+  margin: 14px 0 10px;
+  font-size: 22px;
+  line-height: 1.14;
+  letter-spacing: 0;
+}
+
+.travel-card p,
+.travel-card li,
+.travel-card span {
+  color: var(--muted);
+}
+
+.travel-card p {
+  margin: 0;
+}
+
+.travel-card ul {
+  margin: 14px 0 0;
+  padding-left: 18px;
+}
+
+.travel-card li + li {
+  margin-top: 6px;
+}
+
+.scout-card span {
+  display: block;
+  margin-top: 14px;
+  font-weight: 700;
+}
+
+.travel-contract div {
+  grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr);
+}
+
+.contract-list {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.contract-list div {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.34fr) minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.contract-list div:last-child {
+  border-bottom: 0;
+}
+
+.contract-list strong {
+  font-size: 15px;
+}
+
+.contract-list span {
+  color: var(--muted);
+}
+
+.travel-callout {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.travel-callout p {
+  max-width: 820px;
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.travel-callout ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.travel-callout li + li {
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .travel-grid,
+  .travel-grid-four {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .contract-list div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .route-card,
+  .travel-card {
+    min-height: auto;
+  }
+}
