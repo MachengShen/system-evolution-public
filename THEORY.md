@@ -16,6 +16,7 @@ rules, experiments, hardware workload, and public feedback loops.
 
 ## Start Here
 
+- [Agent-Readable Credit Transport Packet](essays/2026-05-26-agent-readable-credit-transport-packet.md)
 - [Credit Transport and the General Learning Machine](essays/2026-05-19-credit-transport-general-learning-machine.md)
 - [太极、八卦，与"生"作为多轴生成算子](essays/2026-05-21-taiji-bagua-multi-axis-generative-operator.md) — 中文入口，同一框架的另一种语言
 - [Predictive Coding, Free Energy, and Credit Transport](essays/2026-05-19-predictive-coding-free-energy-credit-transport.md)
