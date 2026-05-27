@@ -219,6 +219,35 @@ the integrated result.
 Anti-pattern: waiting for review before doing safe reversible work, or ignoring
 reviewer anti-signals after publication.
 
+### P-07: Conscious Interface Over A Default-Mode Substrate
+
+The owner-facing interface should not be the raw Dashboard.
+
+Dashboard state, task ledgers, receipts, reviewer artifacts, and memory
+candidates are valuable as a default-mode or subconscious substrate. A
+conscious interface should instead surface only current focus, owner gates,
+anti-signals, receipts, and interrupt paths.
+
+Public practice implication:
+
+- publish the distinction between substrate and interface;
+- keep raw worker queues and provider detail out of the owner's primary view;
+- let mobile voice/image/app surfaces become steering interfaces over the
+  substrate;
+- treat Eazo-like products as candidate conscious interfaces only when they can
+  preserve reliability, receipts, and authority boundaries.
+
+Trigger: a user-facing app begins to mediate screenshots, voice, agent
+selection, and external agent loops.
+
+Action: connect it through a low-permission, receipt-based interface contract
+before granting deeper authority.
+
+Anti-pattern: treating a pretty mobile app as the whole agent system, or
+treating a backend Dashboard as the user's lived interface.
+
+Related: [Eazo As A Candidate Conscious Interface](essays/2026-05-28-eazo-conscious-interface-ecological-niche.md).
+
 ### P-06: Public Theory and Practice Runway
 
 The theory and practice lines should now publish together.
