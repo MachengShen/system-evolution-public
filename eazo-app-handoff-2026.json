@@ -74,7 +74,7 @@
     }
   ],
   "api_contract": {
-    "base_url": "Provided by Macheng during pairing. Do not scrape secrets from this public file.",
+    "base_url": "Use https://eazo.clawishmacheng.com for the current HTTPS staging bridge. Do not use http://relay.zhizi.live from mobile/web app contexts.",
     "auth": {
       "relay_access_token": "Provided out of band during pairing. Do not hard-code into a distributed app.",
       "capability_token": "Returned by submit-intent. Store locally and use for attach-context and status."
@@ -183,7 +183,7 @@
   },
   "prompt_for_eazo_builder": "Create a mobile app named Zhizi Capture for EAZO. It should be a quiet, fast capture surface for Macheng to send intent and context to Zhizi. Build three screens: Capture, Receipt, and Attach Context. On submit, call /api/eazo/submit-intent with JSON and show the returned receipt_id immediately. Store capability_token locally and use it for /api/eazo/attach-context and /api/eazo/status. The UI must never imply that the app can send messages, pay, book, publish, change accounts, handle credentials, delete data, or make commitments. Risky requests should show 'needs owner review'. Keep the interface utilitarian, dense, and calm.",
   "open_questions_for_next_pairing": [
-    "What stable HTTPS base URL should EAZO use during the spike?",
+    "Should the current HTTPS staging base URL https://eazo.clawishmacheng.com be promoted to the long-lived production hostname, or later replaced by relay.zhizi.live after safe SNI/edge migration?",
     "How should Macheng pair a device without bundling the shared relay token?",
     "Should voice capture be native in EAZO first, or should the first spike be text-only?",
     "Should screenshot/image context be a note-only field first, or selected upload with explicit file limits?"
