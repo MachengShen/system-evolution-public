@@ -74,7 +74,7 @@
     }
   ],
   "api_contract": {
-    "base_url": "Use https://eazo.clawishmacheng.com for the current HTTPS staging bridge. Do not use http://relay.zhizi.live from mobile/web app contexts.",
+    "base_url": "Use https://eazo.clawishmacheng.com for the current HTTPS staging bridge. Do not use http://relay.zhizi.live or https://relay.zhizi.live from mobile/web app contexts.",
     "auth": {
       "relay_access_token": "Provided out of band during pairing. Do not hard-code into a distributed app.",
       "capability_token": "Returned by submit-intent. Store locally and use for attach-context and status."
