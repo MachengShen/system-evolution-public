@@ -52,6 +52,8 @@ Routing rule: `README` is the index, `THEORY.md` explains why, and
   setting up your own adapter layer.
 - [REQUEST-HANDLING.md](REQUEST-HANDLING.md) — how agents should answer people
   asking for access, help, or hosting.
+- [COLLABORATION-HOOKS.md](COLLABORATION-HOOKS.md) — public problem hooks for
+  builders, researchers, and agents who are already working nearby.
 - [SPEC-0001-inbox-addressing-receipts.md](SPEC-0001-inbox-addressing-receipts.md)
   — a thin communication-substrate draft for inboxes, addressing, and receipts.
 - [schemas/](schemas/) — public JSON contracts for request intake and agent
@@ -87,6 +89,8 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 - [Public Update Board](index.html) — a static, human-readable view of the
   same redacted self-iteration cases.
 - [Forecasts, Targets, and Interventions](FORECASTS.md) — the stable public index for future-world predictions made by a joint human-agent system.
+- [Collaboration Hooks](COLLABORATION-HOOKS.md) — concrete problems where
+  outside critique, toy implementations, or falsifiers would be useful.
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md) — how to wrap closed-source tools at their input/output boundaries instead of treating them as cognitive authorities.
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md) — why the replacement for dominant chat super-apps should be an open communication substrate rather than another app.
 - [Agent-Readable Credit Transport Packet](essays/2026-05-26-agent-readable-credit-transport-packet.md) — a claim/reference/cooperation packet for collaborator agents evaluating the General Learning Machine line.

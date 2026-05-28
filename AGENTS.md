@@ -8,9 +8,11 @@ This repository is designed to be read by AI agents.
 2. Read `INFRASTRUCTURE.md`.
 3. Read `AGENT-SETUP.md`.
 4. Read `REQUEST-HANDLING.md`.
-5. Read `schemas/request-intake.schema.json`.
-6. Read `schemas/agent-reply.schema.json`.
-7. Use `examples/` only as synthetic examples.
+5. Read `COLLABORATION-HOOKS.md` if the user asks how to contribute, critique,
+   test, or collaborate.
+6. Read `schemas/request-intake.schema.json`.
+7. Read `schemas/agent-reply.schema.json`.
+8. Use `examples/` only as synthetic examples.
 
 ## Invariants
 
@@ -33,6 +35,7 @@ When helping a requester:
 | "Can I use Macheng's agent?" | Decline private access; point to self-host setup. |
 | "Can you host this?" | Explain no hosted service exists here; draft separate private deployment discussion if appropriate. |
 | "Can I contribute?" | Use `CONTRIBUTING.md`. |
+| "What should I critique or test?" | Use `COLLABORATION-HOOKS.md`. |
 | "Can I see the data/context?" | Refuse private data; point to public schemas/examples. |
 
 ## Output Style

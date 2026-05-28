@@ -1,0 +1,70 @@
+{
+  "schema": "attention-footprint-hooks/v0",
+  "updated_at": "2026-05-28",
+  "purpose": "Help aligned people and their agents find useful public artifacts without exposing private traces or chasing generic attention.",
+  "canonical_entrypoint": "COLLABORATION-HOOKS.md",
+  "hooks": [
+    {
+      "id": "user-owned-agent-substrate",
+      "problem": "Run personal agents with BYOK, receipts, memory boundaries, and a disable path.",
+      "entrypoints": [
+        "AGENT-SETUP.md",
+        "REQUEST-HANDLING.md",
+        "schemas/request-intake.schema.json",
+        "schemas/agent-reply.schema.json"
+      ],
+      "feedback_wanted": "Toy request loop receipt; setup friction; missing safety boundary.",
+      "out_of_scope": "Hosted access to Macheng's private assistant, private memory, or private channels."
+    },
+    {
+      "id": "credit-transport-glm",
+      "problem": "Measure learning as future reachability improvement, not just immediate answer quality.",
+      "entrypoints": [
+        "THEORY.md",
+        "essays/2026-05-26-agent-readable-credit-transport-packet.md",
+        "essays/2026-05-19-credit-transport-general-learning-machine.md"
+      ],
+      "feedback_wanted": "Baseline, falsifier, benchmark, or negative result.",
+      "out_of_scope": "Claims that the theory proves physics, consciousness, or universal intelligence."
+    },
+    {
+      "id": "inbox-addressing-receipts",
+      "problem": "Close agent requests across inboxes, policies, receipts, timeouts, and repair.",
+      "entrypoints": [
+        "SPEC-0001-inbox-addressing-receipts.md",
+        "examples/message-envelope.json",
+        "examples/receipt.json"
+      ],
+      "feedback_wanted": "Minimal interoperable receipt-state critique.",
+      "out_of_scope": "Production credentials, private contact graphs, or live message automation."
+    },
+    {
+      "id": "conscious-interface-hci",
+      "problem": "Give humans a compact steering surface over a deeper agent fleet.",
+      "entrypoints": [
+        "essays/2026-05-28-eazo-conscious-interface-ecological-niche.md",
+        "PRACTICE.md",
+        "SELF-ITERATION-LEDGER.md"
+      ],
+      "feedback_wanted": "Trust, interrupt, rollback, and attention-state requirements.",
+      "out_of_scope": "Private dashboard state, raw owner workflow, or product criticism without a useful interface finding."
+    },
+    {
+      "id": "agent-scientist-feedback-loops",
+      "problem": "Make automated discovery and forecasting claims auditable through hypothesis/evidence/outcome/revision receipts.",
+      "entrypoints": [
+        "FORECASTS.md",
+        "PRACTICE.md",
+        "SELF-ITERATION-LEDGER.md"
+      ],
+      "feedback_wanted": "Receipt fields that separate closed-loop discovery from impressive demos.",
+      "out_of_scope": "Using another team's work as attention bait without a reusable audit primitive, schema, test, or falsifier."
+    }
+  ],
+  "boundaries": [
+    "No private transcripts, Memory Hub contents, email, WeChat, contact graph, credentials, or private collaborator context.",
+    "External comments, pull requests, named outreach, and repeated campaigns are owner-gated.",
+    "Every hook should be useful before it recruits.",
+    "Stop expansion if hooks attract mostly private-access requests, generic praise, or support burden instead of critique, tests, falsifiers, toy implementations, or protocol feedback."
+  ]
+}
