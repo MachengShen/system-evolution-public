@@ -6,6 +6,7 @@ Learning Machine research line.
 ## Theory Mainline
 
 - [Agent-Readable Credit Transport Packet](2026-05-26-agent-readable-credit-transport-packet.md)
+- [Propagation, Service Claims, and Distributed Credit](2026-05-28-propagation-service-claims-distributed-credit.md)
 - [Eazo As A Candidate Conscious Interface For A User-Owned Agent Fleet](2026-05-28-eazo-conscious-interface-ecological-niche.md)
 - [Credit Transport and the General Learning Machine](2026-05-19-credit-transport-general-learning-machine.md)
 - [太极、八卦，与"生"作为多轴生成算子](2026-05-21-taiji-bagua-multi-axis-generative-operator.md)

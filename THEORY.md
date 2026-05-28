@@ -17,6 +17,7 @@ rules, experiments, hardware workload, and public feedback loops.
 ## Start Here
 
 - [Agent-Readable Credit Transport Packet](essays/2026-05-26-agent-readable-credit-transport-packet.md)
+- [Propagation, Service Claims, and Distributed Credit](essays/2026-05-28-propagation-service-claims-distributed-credit.md)
 - [Eazo As A Candidate Conscious Interface For A User-Owned Agent Fleet](essays/2026-05-28-eazo-conscious-interface-ecological-niche.md)
 - [Credit Transport and the General Learning Machine](essays/2026-05-19-credit-transport-general-learning-machine.md)
 - [太极、八卦，与"生"作为多轴生成算子](essays/2026-05-21-taiji-bagua-multi-axis-generative-operator.md) — 中文入口，同一框架的另一种语言
@@ -59,6 +60,10 @@ may become the conscious interface through which a user steers the system.
   distribution or traffic; it is a source current that can become durable
   structure through intake, receipts, routing, experiments, credit assignment,
   and consolidation.
+- **Distributed service credit**: future service capacity can be represented
+  as structured claims only when issuance, redemption, delay, refusal, refund,
+  and dispute behavior feed a contextual credit layer rather than a generic
+  market-cap narrative.
 - **Forecasts as interventions**: predictions from a capable joint human-agent
   system can be descriptive forecasts, desired targets, and causal
   interventions at the same time.
