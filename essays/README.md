@@ -5,6 +5,7 @@ Learning Machine research line.
 
 ## Theory Mainline
 
+- [AI-Assisted Foundational Physics Entry](2026-05-29-ai-assisted-foundational-physics-entry.html)
 - [Agent-Readable Credit Transport Packet](2026-05-26-agent-readable-credit-transport-packet.md)
 - [Propagation, Service Claims, and Distributed Credit](2026-05-28-propagation-service-claims-distributed-credit.md)
 - [Eazo As A Candidate Conscious Interface For A User-Owned Agent Fleet](2026-05-28-eazo-conscious-interface-ecological-niche.md)

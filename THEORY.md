@@ -16,6 +16,7 @@ rules, experiments, hardware workload, and public feedback loops.
 
 ## Start Here
 
+- [AI-Assisted Foundational Physics Entry](essays/2026-05-29-ai-assisted-foundational-physics-entry.html)
 - [Agent-Readable Credit Transport Packet](essays/2026-05-26-agent-readable-credit-transport-packet.md)
 - [Propagation, Service Claims, and Distributed Credit](essays/2026-05-28-propagation-service-claims-distributed-credit.md)
 - [Eazo As A Candidate Conscious Interface For A User-Owned Agent Fleet](essays/2026-05-28-eazo-conscious-interface-ecological-niche.md)
@@ -36,6 +37,9 @@ research line. The current interface hypothesis adds a practice-facing layer:
 Dashboard/task-ledger state is a default-mode substrate, immune/task
 metabolism is an autonomic layer, and Eazo-like mobile voice/image interfaces
 may become the conscious interface through which a user steers the system.
+The newest foundational-physics entry is intentionally narrower: it asks how
+observerhood, agency, information, memory, feedback, and attractors can be
+translated into existing physics variables before any claims of novelty.
 
 ## Key Terms
 
