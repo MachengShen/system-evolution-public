@@ -5,7 +5,7 @@ Date: 2026-05-21
 Public index: [Theory Mainline](../THEORY.md)
 
 > **Cognitive state（认知状态）:** 🟡 speculative（推测）· **Confidence:** 0.55 · provenance: 编译而成的统一论述，整体未经实证检验，附有未运行的可证伪测试。
-> 格式说明: [Claim-Receipt](../CLAIM-RECEIPT.md) · Cognition Track 根节点: ["Sheng" Multi-Axis Recursive Operator](https://github.com/MachengShen/cognition-track/blob/main/root.md) `mem_dffe918dbf46`。🟡 推测 = 这是一个想法，不是已确立的结论。
+> 格式说明: [Claim-Receipt](../CLAIM-RECEIPT.md) · Cognition Track 根节点: ["Sheng" Multi-Axis Recursive Operator](https://github.com/MachengShen/cognition-track/blob/master/root.md) `mem_dffe918dbf46`。🟡 推测 = 这是一个想法，不是已确立的结论。
 
 > 一句话压缩：**"生"不是名词，是算子。八卦不是八个结论，是同一个递归二分操作沿八条因果轴同时展开后的痕迹。今天的自回归大模型，是这个算子被压扁到只剩一条轴的退化投影。**
 
