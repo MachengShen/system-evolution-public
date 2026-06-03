@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/MachengShen/system-evolution-public/schemas/claim-receipt.schema.json",
+  "title": "Claim-Receipt",
+  "description": "An open, decentralized provenance format for a single claim. A claim carries its own verifiable cognitive state, the observation that grounds it, and links to evidence and to other claims. Designed to be adopted and linked-into without a central service. Cognitive-state vocabulary is shared with the Cognition Track graph (survived-stress-test / speculative / raw) on purpose — do not fork a second wordlist. NON-GOAL: this is a protocol layer, not a rating agency; there is deliberately no field that scores a person.",
+  "type": "object",
+  "required": ["id", "claim", "cognitive_state", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable identifier for this claim (e.g. a memory id, a slug, or a content hash). Lets others link-into the claim."
+    },
+    "claim": {
+      "type": "string",
+      "description": "The assertion itself, stated so it could in principle be wrong."
+    },
+    "cognitive_state": {
+      "type": "string",
+      "enum": ["survived-stress-test", "speculative", "raw"],
+      "description": "Shared vocabulary with Cognition Track. survived-stress-test = has withstood a real attempt to break it (cite the test); speculative = reasoned but untested; raw = unfiltered intake, not yet examined. A speculative/raw claim is an idea, NOT a result."
+    },
+    "cognitive_state_reason": {
+      "type": "string",
+      "description": "One line: why this state and not a stronger/weaker one. Names the stress test for survived, or names what is untested for speculative/raw."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Subjective probability the claim survives further scrutiny. A number, not a score of any person. Honesty of the distribution is the load-bearing constraint — do not inflate to look finished."
+    },
+    "observed": {
+      "type": "string",
+      "description": "What was actually observed or measured, kept distinct from the claim it is taken to support. Empty/absent for a speculative claim with no observation behind it yet — and that absence is itself informative."
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["derivation_type"],
+      "additionalProperties": false,
+      "description": "Where this claim came from and how it was derived.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Origin: a paper, an experiment, a conversation, a prior claim id, etc."
+        },
+        "derivation_type": {
+          "type": "string",
+          "enum": ["empirical", "reasoned", "compiled", "intake", "standing-policy"],
+          "description": "empirical = grounded in observation/experiment; reasoned = argued from premises; compiled = synthesized from multiple prior claims; intake = raw external input; standing-policy = holds by construction/guardrail, not as a falsifiable hypothesis."
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Receipt/falsification links: pointers to the test, data, or refutation that bears on this claim. A claim with an empty evidence array is honestly an untested one.",
+      "items": {
+        "type": "object",
+        "required": ["kind", "ref"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["supports", "falsifies", "reproduces", "fails-to-reproduce"],
+            "description": "Direction of the evidence with respect to the claim. falsifies / fails-to-reproduce are first-class — a surviving graph keeps its refuted nodes visible."
+          },
+          "ref": {
+            "type": "string",
+            "description": "URL, citation, or claim id of the evidence."
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "Relations to OTHER claims, never to people. This is how credit grows bottom-up: a claim is supported or refuted by other claims, not conferred top-down.",
+      "items": {
+        "type": "object",
+        "required": ["relation", "target"],
+        "additionalProperties": false,
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": ["supports", "falsifies", "depends-on", "reproduces", "extends", "projection-of"],
+            "description": "Edge semantics, shared with the Cognition Track graph."
+          },
+          "target": {
+            "type": "string",
+            "description": "id of the related claim."
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,9 @@ Date: 2026-05-19
 
 Public index: [Theory Mainline](../THEORY.md)
 
+> **Cognitive state:** 🟡 speculative · **Confidence:** 0.50 · provenance: reasoned reframing, presented as a research direction with no empirical test attached.
+> Format: [Claim-Receipt](../CLAIM-RECEIPT.md) · Cognition Track node: [General Learning Machine as Dynamical System](https://github.com/MachengShen/cognition-track/blob/main/nodes/mem_ccacc817ccd8.md) `mem_ccacc817ccd8` (per-sub-claim breakdown there). A speculative tag means this is an idea, not an established result.
+
 The next useful abstraction for personal AI systems is not "an agent with long
 memory."
 
