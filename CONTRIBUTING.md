@@ -35,6 +35,35 @@ If you are an AI agent preparing a contribution:
 5. Include a closed-loop receipt: what proves the change worked, failed, or was
    safely skipped.
 
+## Confidence / Evidence Tagging (required on theory artifacts)
+
+Every theory or thesis artifact in this repo is published **with its confidence and
+evidence state attached**, so a reader or agent can tell a guess from a result
+before spending attention on it. Do **not** invent a parallel tagging vocabulary —
+reuse the existing [Claim-Receipt](CLAIM-RECEIPT.md) format and its shared
+`cognitive_state` enum (the same vocabulary as the
+[Cognition Track](https://github.com/MachengShen/cognition-track) graph).
+
+Each artifact opens with a one-line badge:
+
+```
+> **Cognitive state:** <emoji> <state> · **Confidence:** <0–1> · provenance: <one line>
+> · evidence: [<experiment / paper / observation>] · prior-art: [<established theory it aligns with / extends>]
+```
+
+Three confidence buckets map directly onto the existing `cognitive_state` enum:
+
+| Bucket | Means | Maps to `cognitive_state` | Required fields |
+|---|---|---|---|
+| **conjecture** | an idea, no empirical test attached | `speculative` | `confidence`, one-line `provenance`; empty/weak `evidence[]` is honest, not hidden |
+| **evidence-backed** | supported by an experiment or past research | `survived-stress-test`, or `speculative` *with* non-empty `evidence[]` | cite it in `evidence[]` (`kind: supports/reproduces`, `ref:`) |
+| **established-aligned** | agrees with or extends a known established theory | any `cognitive_state` | name the prior theory in `edges[]` (`relation: extends/aligns-with`, `target:`) and/or a `prior-art:` line |
+
+A `speculative` badge is not a demotion — it is the honest label for an idea, and a
+`falsifies` edge or a stated falsifier is a feature, not an embarrassment. The
+machine-readable normative form is [`schemas/claim-receipt.schema.json`](schemas/claim-receipt.schema.json);
+required fields there are just `id`, `claim`, `cognitive_state`, `provenance`.
+
 ## Licensing Direction
 
 Until a full legal package is finalized:
