@@ -14,6 +14,7 @@ Learning Machine research line.
 - [Predictive Coding, Free Energy, and Credit Transport](2026-05-19-predictive-coding-free-energy-credit-transport.md)
 - [Field Spiral Scanner](2026-05-19-field-spiral-scanner.md)
 - [Task-Orthogonal Minimal Leakage: When Can You Safely Delegate to an Untrusted Model?](2026-06-12-task-orthogonal-minimal-leakage.md)
+- [The Faithful-Simulation Gap: Where Intelligence Pays Off, and Where It Stalls](2026-06-12-faithful-simulation-vs-real-trial-and-error.md)
 
 ## User-Agency Substrate
 
