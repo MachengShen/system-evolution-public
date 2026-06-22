@@ -15,6 +15,7 @@ Learning Machine research line.
 - [Field Spiral Scanner](2026-05-19-field-spiral-scanner.md)
 - [Task-Orthogonal Minimal Leakage: When Can You Safely Delegate to an Untrusted Model?](2026-06-12-task-orthogonal-minimal-leakage.md)
 - [The Faithful-Simulation Gap: Where Intelligence Pays Off, and Where It Stalls](2026-06-12-faithful-simulation-vs-real-trial-and-error.md)
+- [Seeded, Then Left Alone: A Falsifiable Reading of Directed Panspermia, and What "Non-Interference" Can Formally Mean (EN + 中文)](2026-06-22-seeded-then-left-alone-directed-panspermia-non-interference.md)
 
 ## User-Agency Substrate
 
