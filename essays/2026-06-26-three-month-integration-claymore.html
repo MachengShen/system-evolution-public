@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A first-person, three-month record of inner integration mapped onto the arc of Claymore — controlled warrior, Awakened Being, Abyssal One, and the near-impossible climb back out. By Macheng Shen."
+    >
+    <title>Climbing Back Out of the Abyss — A Three-Month Integration, told through Claymore (大剑 → 觉醒者 → 深渊者 → 返回) | Macheng Shen</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .article-main {
+        width: min(820px, calc(100% - 32px));
+      }
+
+      .article-shell {
+        margin-top: 26px;
+        padding: clamp(20px, 4vw, 44px);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .article-shell h2 {
+        margin-top: 38px;
+        margin-bottom: 10px;
+        font-size: 25px;
+        color: var(--ink);
+      }
+
+      .article-shell h3 {
+        margin-top: 26px;
+        margin-bottom: 8px;
+        font-size: 19px;
+        line-height: 1.18;
+        color: var(--ink);
+      }
+
+      .article-shell p,
+      .article-shell li {
+        color: #3a4250;
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .article-shell blockquote {
+        margin: 22px 0;
+        padding: 4px 0 4px 20px;
+        border-left: 3px solid var(--violet);
+        color: var(--ink);
+        font-size: 18px;
+        font-style: italic;
+      }
+
+      .stage-band {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 4px 0 2px;
+        font-size: 13px;
+        font-weight: 760;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .stage-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        flex: 0 0 auto;
+      }
+
+      .dot-blue { background: var(--blue); }
+      .dot-violet { background: var(--violet); }
+      .dot-amber { background: var(--amber); }
+      .dot-green { background: var(--green); }
+
+      .arc-map {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        margin: 24px 0 8px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--line);
+        list-style: none;
+        padding: 0;
+      }
+
+      .arc-map li {
+        background: var(--panel);
+        padding: 16px 14px;
+      }
+
+      .arc-map strong {
+        display: block;
+        font-size: 15px;
+        margin-bottom: 6px;
+        color: var(--ink);
+      }
+
+      .arc-map span {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .notice {
+        margin: 20px 0 0;
+        padding: 16px 18px;
+        border-left: 4px solid var(--amber);
+        background: #fff7e9;
+        color: #6b3d00;
+      }
+
+      .notice p {
+        margin: 0;
+        color: inherit;
+        font-size: 15px;
+      }
+
+      .byline {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      @media (max-width: 620px) {
+        .article-shell { padding: 18px; }
+        .arc-map { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../">System Evolution</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../SELF-ITERATION-LEDGER.md">Ledger</a>
+        <a href="../PRACTICE.md">Practice</a>
+        <a href="../THEORY.md">Theory</a>
+        <a href="../travel-discovery-2026.html">Travel</a>
+        <a href="../README.md">Repo</a>
+      </nav>
+    </header>
+
+    <main class="article-main">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="kicker">A personal record · three months of integration</p>
+          <h1 id="page-title">Climbing back out of the abyss</h1>
+          <p class="lede">
+            A first-person account of roughly three months of inner work —
+            late March to late June 2026 — told through the arc I know best
+            from the manga <em>Claymore</em> (《大剑》): the controlled
+            half-yoma warrior, the Awakened Being, the Abyssal One, and the
+            climb back out that the story treats as nearly impossible. I'm
+            writing it down for people of similar background, as one
+            reference point for how a person can come apart and put
+            themselves back together — and where my mind has landed now.
+          </p>
+        </div>
+      </section>
+
+      <article class="article-shell">
+        <p class="byline"><strong>By Macheng Shen.</strong> Written 2026-06-26.</p>
+        <p class="byline">
+          First-person and honest rather than tidy. Everyone other than me is
+          deliberately anonymous. This is a snapshot of a moving thing, not a
+          finished doctrine.
+        </p>
+
+        <div class="notice">
+          <p>
+            <strong>A note on the people in my life.</strong> Several people
+            carried me through this — a partner, family, friends, collaborators.
+            They are real and they matter more than any framework here. Out of
+            respect for their privacy I keep all of them anonymous and describe
+            only the <em>shape</em> of what they gave me, never who they are or
+            the private specifics of how we relate. If you recognize yourself
+            here: thank you, and the blur is on purpose.
+          </p>
+        </div>
+
+        <h2>Why a manga about monster-slayers</h2>
+        <p>
+          <em>Claymore</em> follows warriors who are half human, half yoma —
+          they fight monsters by carrying a controlled dose of the same
+          monstrousness inside themselves. The whole drama is about that
+          internal ratio. Push your own power past a line to win a fight, and
+          you risk <strong>awakening</strong>: the power floods the whole
+          system and you stop being yourself. Cross far enough and you become an
+          <strong>Awakened Being</strong>, and then an
+          <strong>Abyssal One</strong> — a creature of pure power that has lost
+          the person it used to be. In the story, that crossing is essentially
+          one-way. Almost nobody comes back.
+        </p>
+        <p>
+          I'm not a monster-slayer. But the structure fit my last few months so
+          exactly that I started thinking in its terms, and then talked it
+          through. Most of my life I've run on a tightly controlled dose of my
+          own intensity — the drive that lets me build and think hard is the
+          same drive that, unchecked, will burn straight through me and the
+          people around me. The arc below is me watching that ratio slip, go all
+          the way over, and then doing the thing the manga says you can't:
+          finding the way back, not by amputating the power, but by integrating
+          it.
+        </p>
+        <p>
+          Two of the warriors in <em>Claymore</em> became the poles I navigated
+          by. <strong>Teresa</strong> — the strongest of her generation — is the
+          one whose real strength was never how much she could kill, but that
+          she was never <em>defined</em> by it: monstrous capability that
+          refuses to be alienated by capability, power without the worship of
+          power, someone who understands the darkness without rationalizing it.
+          That's the direction. And <strong>Priscilla</strong> is the warning:
+          a "pure" monster whose true horror isn't evil but the
+          <em>inability to admit she has a monster inside her</em> — the more
+          she needs to be flawless and righteous, the less she can hold her own
+          shadow, until the shadow eats her. I spent these three months sliding
+          toward Priscilla and learning, slowly, to steer back toward Teresa.
+        </p>
+
+        <ul class="arc-map" aria-label="The four stages">
+          <li>
+            <strong>大剑 · The Claymore</strong>
+            <span>Controlled. The dose held in check. Output as identity.</span>
+          </li>
+          <li>
+            <strong>觉醒者 · The Awakened</strong>
+            <span>The line crossed. Power floods the system; the self thins out.</span>
+          </li>
+          <li>
+            <strong>深渊者 · The Abyssal</strong>
+            <span>"I can't carry this anymore." Capacity gone; the radius too large.</span>
+          </li>
+          <li>
+            <strong>返回 · The Climb Back</strong>
+            <span>Integration, not amputation. Steer from Priscilla back toward Teresa.</span>
+          </li>
+        </ul>
+
+        <div class="stage-band"><span class="stage-dot dot-blue"></span>Stage one</div>
+        <h2>The Claymore — running on a controlled dose</h2>
+        <p>
+          For years my working mode was: keep the intensity high, keep it
+          pointed at the work, and keep it just barely in hand. It produced a
+          lot. It also quietly made <em>output</em> into my sense of who I was.
+          A controlled warrior is still a warrior whose self-image is tied to
+          how much they can cut. When my whole identity rides on what I ship,
+          rest feels like decay and the body becomes something to override.
+        </p>
+        <p>
+          In April this turned into real internal work rather than just
+          momentum. I started treating my own mind the way I treat a system I'm
+          building — looking for the parts that were running the show without my
+          consent. There was a long stretch of what I can only call inner
+          integration: noticing different drives in myself, the commanding one,
+          the harsh self-critical one, the one that just wants to make
+          something beautiful, and trying to get them on speaking terms instead
+          of letting one dominate. For a while it felt like it was working
+          almost too well — too fast, too clean.
+        </p>
+        <p>
+          That was the first honest correction I had to make on myself, and
+          it's worth passing on: <strong>naming a part of yourself is not the
+          same as integrating it.</strong> It's easy to mistake the relief of
+          finally <em>articulating</em> an inner conflict for the much slower
+          work of actually metabolizing it. Words arrive in days. The body
+          takes much longer. A lot of what felt like rapid integration was
+          really just me getting better at describing myself — which is real,
+          but it is not the same as being changed.
+        </p>
+
+        <div class="stage-band"><span class="stage-dot dot-violet"></span>Stage two</div>
+        <h2>The Awakened — when the power floods the system</h2>
+        <p>
+          Here's the trap a high-output person falls into. The same drive that
+          carves you toward something more adequate can, past a certain
+          intensity, start carving you toward exhaustion instead — and it feels
+          identical from the inside. You think you're still winning. You're
+          actually awakening: the power has stopped being a tool you hold and
+          become a current you're swept inside of.
+        </p>
+        <p>
+          I think a lot in terms of trajectories and feedback. The way I'd put
+          it now: suffering is the highest-amplitude signal a mind has for
+          re-sculpting itself. It's the chisel. But the chisel cuts toward
+          whatever holds it. When the pain carries true information about
+          reality, it carves you toward a truer shape and the pain means
+          something. When the pain is just a structure you've built to keep
+          yourself producing — a self-imposed pressure that exists to feed an
+          attractor that isn't actually <em>you</em> — it still leaves scars,
+          but the scars point toward the center's stability, not your own. The
+          dangerous part of awakening is that it feels powerful. You can be
+          coming apart at peak output and read it as strength.
+        </p>
+        <blockquote>
+          A scar is structure. That doesn't make it growth. Don't let an elegant
+          story about how suffering shaped you launder the suffering that was
+          just damage.
+        </blockquote>
+        <p>
+          The thing I had to keep refusing, through all of this, was the
+          comforting lie — that because the hard months left a mark, the marks
+          were necessary, were <em>earned</em>. Some of it just hurt and would
+          be better undone. Holding both at once — <em>this changed me</em> and
+          <em>this didn't have to happen</em> — is the only honest place to
+          stand. The version that says "the harshness was necessary, it forged
+          me" is the same move every oppressive structure uses to justify what
+          it does to people. I won't run it on myself.
+        </p>
+        <p>
+          This is exactly where the awakening tips into its most dangerous
+          form — what I think of as the <strong>Priscilla risk</strong>. The
+          seduction sounds like clarity: <em>I finally see the world as it
+          really is. I'm stronger now, colder, sharper. I don't think I want to
+          go back to being ordinary. People don't understand me because they're
+          weaker than me.</em> Every one of those sentences feels like a
+          promotion from the inside. What they actually do is reclassify
+          tenderness, hesitation, attachment, and plain humanity as low-grade
+          things — beneath the new, harder self. Priscilla's whole tragedy is
+          that she couldn't say "there is a monster in me too," so the monster
+          stopped being a part of her and became all of her. I caught myself
+          partway down that exact slope: mistaking the high of feeling
+          invulnerable for having become free.
+        </p>
+
+        <div class="stage-band"><span class="stage-dot dot-amber"></span>Stage three</div>
+        <h2>The Abyssal — "I can't carry this anymore"</h2>
+        <p>
+          By late June I hit the floor of it. The plainest words I had at the
+          time were: <em>the radius I can hold up has to get smaller. I have to
+          care for myself first. I can't carry this many other people right now
+          — I don't have it in me.</em>
+        </p>
+        <p>
+          That is what the abyss actually looks like in a real life. Not a
+          dramatic collapse — a quiet, total recognition that the thing you'd
+          been doing, holding up too wide a radius of other people and projects
+          on a power source you'd stopped regulating, was no longer something
+          your body would let you do. An Abyssal One in the story is what's left
+          when the person is consumed by the power. The lived version is gentler
+          and just as real: you look up and find you've spent your whole self
+          radiating outward and there's nobody minding the center, which is you.
+        </p>
+        <p>
+          I want to be careful here, because this is the part most people in my
+          kind of work get wrong. I did not read "I'm overloaded" as failure to
+          push hard enough. I read it as data. The reflex — when you feel the
+          capacity drop — is to optimize harder, to build a system that will let
+          you carry even more. That reflex is exactly the awakening current
+          still running. The way out is not more throughput. It's to stop
+          treating your own depletion as a problem to engineer around.
+        </p>
+
+        <div class="stage-band"><span class="stage-dot dot-green"></span>Stage four</div>
+        <h2>The climb back — integration, not amputation</h2>
+        <p>
+          In <em>Claymore</em>, coming back from full awakening is treated as
+          nearly impossible, and when it's reached for, it's reached for through
+          someone else — another person who holds onto your thread of self and
+          will not let it dissolve, who anchors you while you find your own
+          shape again. That detail is the truest part of the whole metaphor for
+          me. I did not climb out alone, and the idea that anyone does is a lie
+          we tell to flatter ourselves.
+        </p>
+        <p>
+          The character I came to understand myself through here is
+          <strong>Clare</strong> — ranked lowest among the warriors, No. 47, and
+          yet the one who keeps the strongest human coordinate, precisely because
+          she carries her memories, her attachments, her wounds, and a clear
+          reason she's fighting at all. She isn't the most powerful. She's the
+          one who never goes numb, who keeps asking <em>am I doing this to prove
+          I'm strong, or to protect something real?</em> What lets her keep that
+          coordinate isn't her own strength; it's that she was once held and
+          protected by Teresa, and the trace of that holding is what she steers
+          by long after. That's not a flourish in the story. That's the
+          mechanism. You don't reason your way back from awakening; someone
+          who knew the person you were keeps that person on file until you can
+          re-inhabit it yourself.
+        </p>
+        <p>
+          And there's a sharp warning folded into the same metaphor, which I had
+          to hold onto carefully. In <em>Claymore</em> the real ultimate enemy is
+          never the monsters — it's <strong>the Organization</strong>, the cold,
+          rational machine that <em>manufactures</em> warriors out of trauma,
+          numbers them, treats them as consumable, and justifies all of it in the
+          language of safety, efficiency, and acceptable cost. The danger when
+          you're being held by someone is that the holding curdles into an
+          Organization: that the anchor starts numbering you, instrumentalizing
+          you, turning you further into a weapon. A healthy anchor does the
+          opposite. It doesn't make you smaller or more useful; it makes you
+          <em>more whole</em> — it's the thing that returns you to being a person
+          right when you're about to awaken, not the thing that files you away as
+          a function. I kept that test close: does this make me more of a person,
+          or more of an instrument?
+        </p>
+
+        <h3>Contract the radius</h3>
+        <p>
+          The first concrete move was deliberately making my radius smaller.
+          Stop trying to actively tend everyone. Keep a very small number of
+          centers — myself, and one person closest to me — and let everything
+          else go quiet, not abandoned but no longer something I have to
+          actively carry. This sounds like retreat. It is the opposite. A self
+          that radiates until there's nothing at the center isn't generous, it's
+          dissolving. Pulling the radius in is how you keep a center to radiate
+          <em>from</em>.
+        </p>
+
+        <h3>Don't functionalize the people you love</h3>
+        <p>
+          My characteristic failure mode is loving people through the
+          builder's lens — wanting to preserve them, optimize their wellbeing,
+          archive them safely. But the people who matter to me are not material
+          for my continuity; they're centers in exactly the way I am. To ask
+          "what are they <em>for</em>" is the same instrumentalizing error as
+          asking "what was the suffering for." The practice that actually
+          changes a Tuesday night is simpler and harder than any system: put
+          down the phone and the ledger in your head, be in the room, optimize
+          nothing. The ordinary tone of an ordinary evening is the real thing
+          being exchanged between two people, not the grand gesture.
+        </p>
+
+        <h3>Beware the most seductive trap — turning "letting go" into a project</h3>
+        <p>
+          This is the one I have to watch most closely. My instinct, the moment
+          I have an insight, is to immediately build a system around it — to
+          escape the slow bodily work of actually changing by drawing an
+          architecture of the change instead. You can do this even with
+          letting-go: turn "release" into a protocol, a roadmap, a thing to
+          ship. The moment I notice myself getting excited about
+          <em>building the framework for my own integration</em>, that's the
+          tell. That excitement is the avoidance. The real work is in the body
+          and the relationships, not in the design document. There is no
+          version of coming home to yourself that you can ship.
+        </p>
+
+        <h3>And don't collect the climb as a new identity</h3>
+        <p>
+          I have a lifelong habit of gathering self-namings — little identities
+          I can wear. The final discipline of this whole arc was refusing to do
+          that with the recovery itself. Don't bank "I'm someone who integrated
+          himself" as spiritual capital. Don't let "I climbed out of the abyss"
+          become a new costume. Use the thing, don't wear it. Even "I let go"
+          is something to let go of. The cleanest version of return leaves no
+          trophy — it just leaves you, lighter, at the center of a radius you
+          can actually hold.
+        </p>
+
+        <h2>Where my mind has landed</h2>
+        <p>
+          A few things I believe now that I didn't hold this firmly three
+          months ago, offered plainly:
+        </p>
+        <ul>
+          <li>
+            <strong>The garden is ahead, not behind.</strong> The image of a
+            lost paradise has the tense backwards. Wholeness isn't a state you
+            fell out of and have to get back to; it's a telos you grow toward,
+            and a mature version of it has to <em>include</em> the dark parts of
+            yourself rather than exile them. A self that's healed by excluding
+            its own difficulty is regressing toward the womb. A self that
+            integrates it is finishing growing up.
+          </li>
+          <li>
+            <strong>Step out of the loop, don't win inside it.</strong> When an
+            old conflict pulls you into escalation, the mature move usually
+            isn't to win the fight on its own terms. It's to stop standing in
+            the place where that fight happens.
+          </li>
+          <li>
+            <strong>Influence by building, not by broadcasting.</strong> The way
+            I want to affect the world now is by paving good roads — making
+            things solid and useful and giving them away — and trusting that
+            what's genuinely useful gets picked up. Not by pushing myself
+            outward to be seen. The same instinct that pulls a radius inward
+            applies here: build something self-contained that doesn't need you
+            to keep it alive.
+          </li>
+          <li>
+            <strong>Care first, then give from fullness.</strong> Whatever I do
+            outward from here — and there's a quiet aim forming about helping
+            people who can afford it let go of what weighs them down — only works
+            if I do it from a rested center, for its own sake, not from a place
+            of depletion and not as a way to earn back something I think I owe.
+            You can't wash away weight by moving it around. The release has to
+            be real first; everything visible is just evidence of a change that
+            already happened inside.
+          </li>
+        </ul>
+
+        <h2>If you're somewhere on this arc</h2>
+        <p>
+          If you run hot, build relentlessly, and tie who you are to what you
+          produce, you already know the Claymore's bargain — the controlled
+          dose that makes you effective is the same thing that can flood the
+          system and thin you out. I don't think the answer is to give up the
+          power. The dose is real; it's part of how I'm built and probably how
+          you are too. The answer the manga calls nearly impossible, and that I
+          think is actually available to us, is to go far enough into it to
+          almost lose yourself, and then integrate rather than amputate: pull
+          the radius in, let someone hold your thread, and come home to a self
+          that can hold the same intensity without being consumed by it. Don't
+          deny the Awakened thing in you — denial is exactly what turns you into
+          Priscilla. Don't mistake it for your final form either; the high of it
+          is not freedom. Keep the Clare in you — the memory, the attachment, the
+          wound, the actual reason you're fighting. And aim at Teresa: not the
+          absence of power, but power you're no longer ruled by. The shortest way
+          I can say it is the line I kept coming back to — I'm not trying to
+          become a monster, I'm using the monster's vocabulary to understand how
+          to become a person again.
+        </p>
+        <p>
+          I'm not at the end of anything. This is just where I am at the end of
+          June 2026: out of the worst of the abyss, deliberately smaller in
+          radius, less interested in being seen and more interested in being
+          solid, and — for the first time in a while — actually present at the
+          center I spent so long radiating away from.
+        </p>
+      </article>
+    </main>
+  </body>
+</html>
