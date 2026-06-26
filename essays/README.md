@@ -25,4 +25,4 @@ Learning Machine research line.
 
 ## Inner Work / Integration
 
-- [Three Months of Integration, Read Through Claymore (大剑→觉醒者→深渊者→爬回来)](2026-06-26-three-month-integration-claymore.html)
+- [Three Months of Integration, Read Through Claymore (大剑→觉醒者→深渊者→爬回来)](2026-06-26-three-month-integration-claymore.html) (中文正文 · EN intro)
