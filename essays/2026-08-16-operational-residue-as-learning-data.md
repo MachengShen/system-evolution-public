@@ -256,3 +256,37 @@ owner turn
 
 Do not expand private memory access, device control, or external action authority until this chain can be replayed completely and truthfully.
 
+## Implementation Receipt: Causal Truth P0
+
+Status: `validated-canary`
+
+The first bounded implementation now connects a mobile-first owner surface to a durable, low-permission receipt lane. It does not yet claim general autonomy or private-memory integration.
+
+Implemented:
+
+- an additive causal receipt store that records owner intent before dispatch;
+- a deterministic projector that refuses orphaned, conflicting, action-before-receipt, missing-claim, and false-completion chains;
+- an expiring owner gate with one-use grants, deny, revoke, and safe expiry, while rejecting permanent authorization;
+- worker-health admission, incident coalescing, stable deduplication, and capped retry backoff;
+- a frontend that renders only persisted receipts and explicit safe boundaries instead of sample tasks or simulated permissions;
+- an authenticated owner scope that exposes a display name but not the raw owner identity to the client;
+- a low-permission backend handoff that can capture intent and return a receipt without private memory access, external messaging, or device control.
+
+Validation:
+
+- the source builds and passes static checks;
+- twenty-two contract and integration tests pass;
+- a local end-to-end canary produced both a durable client receipt and a backend receipt;
+- the health gate correctly stopped a bad route, preserved the original receipt, and recovered under the same idempotency key after the route was corrected;
+- the owner surface was published under owner-only access.
+
+Truth boundary:
+
+- “received” is not “completed”;
+- browser or transport failure is rendered as failure or recoverable waiting, never replaced by demo data;
+- memory submissions remain proposals until a separate confirmed memory-write path exists;
+- no device or external-action capability is implied by the presence of an owner gate.
+
+Next experiment:
+
+Replay production receipts through the causal projector, bind any backend-generated owner request to the gate state machine, and add a verified result receipt before allowing the interface to show a terminal `done` state.
