@@ -318,6 +318,7 @@ After publishing, the agent should write a durable receipt containing:
 
 ## Current Public Practice Map
 
+- [Operational Residue Is Learning Data](essays/2026-08-16-operational-residue-as-learning-data.md)
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md)
 - [Forecasts, Targets, and Interventions](FORECASTS.md)
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md)
@@ -334,6 +335,8 @@ available to third parties.
 
 ## Changelog
 
+- 2026-08-16: added a public-safe practice note on turning long-running task,
+  receipt, memory, correction, and failure residue into a causal learning loop.
 - 2026-05-19: created the public practice entrypoint and linked it from
   `README.md` and `THEORY.md`.
 

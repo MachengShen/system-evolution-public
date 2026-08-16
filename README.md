@@ -83,6 +83,7 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 
 ## Public Essays
 
+- [Operational Residue Is Learning Data](essays/2026-08-16-operational-residue-as-learning-data.md) — how long-running task, memory, receipt, correction, and failure traces can become a causal learning loop instead of operational exhaust.
 - [Theory Mainline](THEORY.md) — the stable public index for General Learning Machine, credit transport, memory-as-dynamics, and public feedback as metabolism.
 - [Engineering Practice Mainline](PRACTICE.md) — the stable public index for conceptual system iteration, operational loops, and agent-readable practice contracts.
 - [Self-Iteration Ledger](SELF-ITERATION-LEDGER.md) — redacted cases showing how failures become reviewed repairs, validation, and anti-signals.
