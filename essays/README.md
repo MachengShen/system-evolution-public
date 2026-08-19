@@ -17,6 +17,13 @@ Learning Machine research line.
 - [The Faithful-Simulation Gap: Where Intelligence Pays Off, and Where It Stalls](2026-06-12-faithful-simulation-vs-real-trial-and-error.md)
 - [Seeded, Then Left Alone: A Falsifiable Reading of Directed Panspermia, and What "Non-Interference" Can Formally Mean (EN + 中文)](2026-06-22-seeded-then-left-alone-directed-panspermia-non-interference.md)
 
+- [THEORY v3: Discounted Cokernel Obstruction (v1/v2 holonomy withdrawn)](2026-08-19-information-dynamics-theory-v3-cokernel-obstruction.md)
+- [Multimodal Gluing Obstruction: E1/E2 verdict](2026-08-19-multimodal-gluing-obstruction.md)
+- [Exclusion Cannot Remember: self-boundary hysteresis (+ 2026-08 addendum)](2026-07-13-exclusion-cannot-remember-self-boundary-hysteresis.md)
+- [Agency as Second-Order Persistence](2026-08-19-agency-second-order-persistence.md)
+- [mu-boundary D0–D2 + human reanalysis (attachments)](2026-08-19-mu-boundary/README.md)
+- [Boundary-Defense Experiment: pre-registration (running)](2026-08-19-boundary-defense-preregistration.md)
+
 ## User-Agency Substrate
 
 - [Self-Iteration Ledger](../SELF-ITERATION-LEDGER.md)

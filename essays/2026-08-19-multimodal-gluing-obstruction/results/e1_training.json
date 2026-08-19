@@ -1,0 +1,3134 @@
+{
+  "config": {
+    "seed": 0,
+    "steps": 3000,
+    "n_eval": 32768,
+    "union": 8,
+    "jitter": 0.15,
+    "losses": [
+      "infonce_t0.05",
+      "infonce_t0.2",
+      "infonce_t0.5",
+      "xnce_t0.05",
+      "xnce_t0.2",
+      "oracle"
+    ],
+    "emb_dim": 8,
+    "obs_dim": 16
+  },
+  "s2": {
+    "floors": {
+      "1": {
+        "residual_norm": 1.7221008065158476e-16,
+        "relative_residual": 7.642086932861497e-16
+      },
+      "2": {
+        "residual_norm": 2.4768911265000683e-16,
+        "relative_residual": 1.4627423037030943e-15
+      },
+      "3": {
+        "residual_norm": 0.026572174991066018,
+        "relative_residual": 0.1870784714509639
+      },
+      "4": {
+        "residual_norm": 0.14586261943890777,
+        "relative_residual": 0.7058411789276344
+      },
+      "5": {
+        "residual_norm": 0.3151930732088779,
+        "relative_residual": 0.8557806907663864
+      },
+      "6": {
+        "residual_norm": 0.3101903894854827,
+        "relative_residual": 0.8772825870662695
+      },
+      "7": {
+        "residual_norm": 0.5249972423911592,
+        "relative_residual": 0.9142471819261458
+      },
+      "8": {
+        "residual_norm": 0.5000503610194507,
+        "relative_residual": 0.9238985275415111
+      }
+    },
+    "infonce_t0.05": {
+      "mutual_knn": 0.21083984375,
+      "modality_gap": 0.0562404990196228,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.012169529995278852,
+            "relative_residual": 0.054004159224653805,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 219,
+            "normal_equation_defect": 7.329581449441216e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.687893519266466e-16,
+            "relative_residual": 7.490286839679941e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 3.2836675861014766e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.027755321127795787,
+            "relative_violation": 0.12316850216059108
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.012278971591896875,
+            "relative_residual": 0.07251823447522468,
+            "field_norm": 0.1693225390931421,
+            "n_edges": 432,
+            "normal_equation_defect": 6.380344469120435e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.050225109323784e-16,
+            "relative_residual": 1.8013279855097304e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 5.410286155937333e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.02768531190738532,
+            "relative_violation": 0.1634972021373035
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.013921119989024199,
+            "relative_residual": 0.10057124959177087,
+            "field_norm": 0.1384204735004434,
+            "n_edges": 628,
+            "normal_equation_defect": 8.036659251183561e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.026566669361340767,
+            "relative_residual": 0.18703970967125558,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 2.822519013041467e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.04113717764221105,
+            "relative_violation": 0.2896217684739425
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.06062690123116065,
+            "relative_residual": 0.4434210345879028,
+            "field_norm": 0.13672536145585604,
+            "n_edges": 824,
+            "normal_equation_defect": 3.775340829311564e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.1458412468086916,
+            "relative_residual": 0.7057377550170629,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.173210214139884e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.16798426069399852,
+            "relative_violation": 0.812889615349327
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.08358772434371663,
+            "relative_residual": 0.6033659760368011,
+            "field_norm": 0.1385356941946928,
+            "n_edges": 1020,
+            "normal_equation_defect": 3.8510962222686316e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.3152705408874635,
+            "relative_residual": 0.8559910232550325,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 4.580311494935334e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.35224891294683386,
+            "relative_violation": 0.9563909986168423
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.07820335350136472,
+            "relative_residual": 0.614583770705688,
+            "field_norm": 0.1272460439551938,
+            "n_edges": 1213,
+            "normal_equation_defect": 2.9526465628389856e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31022033922670533,
+            "relative_residual": 0.8773672911298134,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 5.3606007307806676e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3397780928687105,
+            "relative_violation": 0.9609627327098607
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.13982534849734343,
+            "relative_residual": 0.8044465103364806,
+            "field_norm": 0.1738155945742842,
+            "n_edges": 1409,
+            "normal_equation_defect": 3.4842211675552006e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.525077633473976,
+            "relative_residual": 0.9143871775584707,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 5.087658405953734e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5664289388988583,
+            "relative_violation": 0.9863976785688708
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.13251458168434227,
+            "relative_residual": 0.8137638418849534,
+            "field_norm": 0.1628415700768831,
+            "n_edges": 1603,
+            "normal_equation_defect": 3.432328413805119e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5000504737225286,
+            "relative_residual": 0.9238987357729533,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 7.637083085043867e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.534166572439601,
+            "relative_violation": 0.9869320136730126
+          }
+        }
+      },
+      "train_seconds": 8.6
+    },
+    "infonce_t0.2": {
+      "mutual_knn": 0.228515625,
+      "modality_gap": 0.11346840113401413,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.00719933691308216,
+            "relative_residual": 0.031949138768339394,
+            "field_norm": 0.22533743288931718,
+            "n_edges": 182,
+            "normal_equation_defect": 6.994829070757471e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.8751900971758155e-16,
+            "relative_residual": 1.2759097834449496e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 6.650121164468485e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.014502466483217813,
+            "relative_violation": 0.06435692334985314
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.006501518103501844,
+            "relative_residual": 0.038397021350142106,
+            "field_norm": 0.16932350153452155,
+            "n_edges": 362,
+            "normal_equation_defect": 4.701568255138103e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.0942393680225764e-16,
+            "relative_residual": 2.4178766119428303e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 7.435349129453013e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.019027158617105442,
+            "relative_violation": 0.11236597979918608
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.008202322209927275,
+            "relative_residual": 0.059280865474418944,
+            "field_norm": 0.13836373919788275,
+            "n_edges": 544,
+            "normal_equation_defect": 4.444011071797344e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.026567510834324827,
+            "relative_residual": 0.18704563396912272,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 3.4052855733240144e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.036824725313979664,
+            "relative_violation": 0.25926042281661765
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.04792164076080934,
+            "relative_residual": 0.3669741521397134,
+            "field_norm": 0.13058587500343824,
+            "n_edges": 726,
+            "normal_equation_defect": 4.483627511884398e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.1458714710550124,
+            "relative_residual": 0.7058840126239628,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.025604304537498e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.16888238100744465,
+            "relative_violation": 0.8172356932087554
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.07338129892442116,
+            "relative_residual": 0.5545081774791986,
+            "field_norm": 0.13233582822531764,
+            "n_edges": 908,
+            "normal_equation_defect": 3.334888294089933e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31538969112879994,
+            "relative_residual": 0.8563145280668542,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 5.985478489898167e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3522880044768988,
+            "relative_violation": 0.9564971360273554
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.06934147817366043,
+            "relative_residual": 0.5697001485684483,
+            "field_norm": 0.12171574528794282,
+            "n_edges": 1095,
+            "normal_equation_defect": 3.934084462168029e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31028807491135035,
+            "relative_residual": 0.8775588616577097,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 4.7498095084139164e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.339806827037655,
+            "relative_violation": 0.9610439988835504
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.10317594424757708,
+            "relative_residual": 0.7331093761239011,
+            "field_norm": 0.14073745011022687,
+            "n_edges": 1283,
+            "normal_equation_defect": 3.464323052661091e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5249149295571071,
+            "relative_residual": 0.91410383969405,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 6.233097054265848e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5669090673864459,
+            "relative_violation": 0.9872337898496466
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.09792228151139223,
+            "relative_residual": 0.7414336346105868,
+            "field_norm": 0.13207153943430505,
+            "n_edges": 1470,
+            "normal_equation_defect": 2.966967256048946e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5001551626556687,
+            "relative_residual": 0.9240921601932074,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 6.430141988126585e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5344968019442263,
+            "relative_violation": 0.987542149325054
+          }
+        }
+      },
+      "train_seconds": 8.4
+    },
+    "infonce_t0.5": {
+      "mutual_knn": 0.16904296875000002,
+      "modality_gap": 0.06501320004463196,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.0021764948858968604,
+            "relative_residual": 0.009659836086669817,
+            "field_norm": 0.22531385277855132,
+            "n_edges": 190,
+            "normal_equation_defect": 6.249845328321626e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.7171408665285996e-16,
+            "relative_residual": 1.2057730088898308e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 6.220584588196423e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.014553673086244305,
+            "relative_violation": 0.06458416051877167
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.003812935413542994,
+            "relative_residual": 0.022520685724660056,
+            "field_norm": 0.16930814008775255,
+            "n_edges": 381,
+            "normal_equation_defect": 4.9295986260140514e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.1747191022539143e-16,
+            "relative_residual": 1.874848629218093e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 5.722644027227423e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.01794997281909894,
+            "relative_violation": 0.10600459710119593
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.008085860689403288,
+            "relative_residual": 0.0584036966126096,
+            "field_norm": 0.13844775516585225,
+            "n_edges": 561,
+            "normal_equation_defect": 3.9365368953989657e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.02656620198759888,
+            "relative_residual": 0.18703641917790084,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 2.3632269503845468e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.037458071274815916,
+            "relative_violation": 0.2637194252992042
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.06540900282374594,
+            "relative_residual": 0.4665716247235532,
+            "field_norm": 0.1401907003292393,
+            "n_edges": 741,
+            "normal_equation_defect": 3.680021601277889e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.14588903329406763,
+            "relative_residual": 0.7059689977391831,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 9.315421594333451e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.16685844879084452,
+            "relative_violation": 0.8074417192123334
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.10944051801129671,
+            "relative_residual": 0.6851473442172757,
+            "field_norm": 0.15973282088150464,
+            "n_edges": 921,
+            "normal_equation_defect": 3.898151410759025e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31500184083813765,
+            "relative_residual": 0.8552614757701211,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 4.810847066642472e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3518977658984515,
+            "relative_violation": 0.9554375992906264
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.10281902134748452,
+            "relative_residual": 0.6988013536083191,
+            "field_norm": 0.1471362652870804,
+            "n_edges": 1096,
+            "normal_equation_defect": 3.271003801263684e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31014099715171844,
+            "relative_residual": 0.8771428953291468,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 5.525021532217837e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3394162626705634,
+            "relative_violation": 0.9599394020617521
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.1318151278826997,
+            "relative_residual": 0.7993069569087272,
+            "field_norm": 0.16491177356004377,
+            "n_edges": 1273,
+            "normal_equation_defect": 3.431528110232041e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5246119239561154,
+            "relative_residual": 0.9135761759380413,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 7.42038770772204e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5666885750149869,
+            "relative_violation": 0.9868498173009064
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.12468762355522242,
+            "relative_residual": 0.8060472390863067,
+            "field_norm": 0.15469021852436568,
+            "n_edges": 1454,
+            "normal_equation_defect": 3.5019529557640724e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.4998711721290268,
+            "relative_residual": 0.9235674561836646,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 9.817267558852635e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5342651766285827,
+            "relative_violation": 0.9871141958532713
+          }
+        }
+      },
+      "train_seconds": 8.4
+    },
+    "xnce_t0.05": {
+      "mutual_knn": 0.1380859375,
+      "modality_gap": 0.06898706406354904,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.007227666111453824,
+            "relative_residual": 0.0320786276090074,
+            "field_norm": 0.2253109515640363,
+            "n_edges": 256,
+            "normal_equation_defect": 5.492352866171252e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.4225914168186784e-16,
+            "relative_residual": 6.312967995913253e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 2.6226338218762962e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.02878688418799684,
+            "relative_violation": 0.12774622174178943
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.007964044377650617,
+            "relative_residual": 0.0470384524699806,
+            "field_norm": 0.16930923445521895,
+            "n_edges": 506,
+            "normal_equation_defect": 6.624174204473533e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.1947855613252414e-16,
+            "relative_residual": 2.4772547448153625e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 7.397974120607582e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.031072939376318023,
+            "relative_violation": 0.1835030310370033
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.01184221824504026,
+            "relative_residual": 0.08549292228823528,
+            "field_norm": 0.13851694301798212,
+            "n_edges": 737,
+            "normal_equation_defect": 4.6670435020275584e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.026567102765834554,
+            "relative_residual": 0.18704276100786035,
+            "field_norm": 0.14203758874537833,
+            "n_edges": 768,
+            "normal_equation_defect": 3.032852252527563e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.04518888208334307,
+            "relative_violation": 0.3181473473500754
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.07800464449639834,
+            "relative_residual": 0.5254731643255788,
+            "field_norm": 0.14844648555271855,
+            "n_edges": 968,
+            "normal_equation_defect": 3.466882174186662e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.14586531213280396,
+            "relative_residual": 0.7058542090942493,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.3459656133373104e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.16808853628198148,
+            "relative_violation": 0.8133942134721249
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.12522747675192852,
+            "relative_residual": 0.725776610851548,
+            "field_norm": 0.17254272854701133,
+            "n_edges": 1199,
+            "normal_equation_defect": 4.24006136098217e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31506008580024836,
+            "relative_residual": 0.8554196166626266,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 5.309212502639565e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.35284307829218087,
+            "relative_violation": 0.9580042169039509
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.11791456133122043,
+            "relative_residual": 0.740775001119804,
+            "field_norm": 0.15917729560659183,
+            "n_edges": 1429,
+            "normal_equation_defect": 3.350113817765362e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.30996970648517574,
+            "relative_residual": 0.876658449891188,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 4.961747802504374e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.34043990484900266,
+            "relative_violation": 0.9628344738917366
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.20137027933374785,
+            "relative_residual": 0.8693034360273881,
+            "field_norm": 0.23164555779738516,
+            "n_edges": 1658,
+            "normal_equation_defect": 4.323280166411611e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5243585275068499,
+            "relative_residual": 0.9131349031637386,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 1.2013308664478695e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.5678254927247783,
+            "relative_violation": 0.9888296825808164
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.1925450920971317,
+            "relative_residual": 0.8841553329236078,
+            "field_norm": 0.2177729239730411,
+            "n_edges": 1886,
+            "normal_equation_defect": 3.048710662199856e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.49950495393399386,
+            "relative_residual": 0.9228908274327924,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 5.4543725135928865e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5356599219843245,
+            "relative_violation": 0.9896911426588654
+          }
+        }
+      },
+      "train_seconds": 12.0
+    },
+    "xnce_t0.2": {
+      "mutual_knn": 0.193408203125,
+      "modality_gap": 0.05899976193904877,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.0073657554907924135,
+            "relative_residual": 0.03268667175223201,
+            "field_norm": 0.22534430995683866,
+            "n_edges": 203,
+            "normal_equation_defect": 7.621592838249828e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.4532732999239456e-16,
+            "relative_residual": 1.0886777218354588e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 5.755358208506989e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.017049135800264164,
+            "relative_violation": 0.07565815974465773
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.019056147572495283,
+            "relative_residual": 0.11254368687914373,
+            "field_norm": 0.1693222258922345,
+            "n_edges": 399,
+            "normal_equation_defect": 5.002302079046462e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.091860298951452e-16,
+            "relative_residual": 2.4164716390166755e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 7.511502034845466e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.024811376202545758,
+            "relative_violation": 0.1465250095018858
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.019052610744579205,
+            "relative_residual": 0.1376161823593703,
+            "field_norm": 0.13844745885207962,
+            "n_edges": 602,
+            "normal_equation_defect": 3.4805807101145716e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.02656695502474429,
+            "relative_residual": 0.18704172085298607,
+            "field_norm": 0.14203758874537833,
+            "n_edges": 768,
+            "normal_equation_defect": 3.874326315566767e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.03942795232992156,
+            "relative_violation": 0.27758815591133057
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.0593106636724564,
+            "relative_residual": 0.434489467989528,
+            "field_norm": 0.13650656239585973,
+            "n_edges": 805,
+            "normal_equation_defect": 4.338660917586835e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.14576268706575982,
+            "relative_residual": 0.705357597977648,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.7416688316233824e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.16781766552104627,
+            "relative_violation": 0.8120834476434912
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.08803146503881247,
+            "relative_residual": 0.6100979292143005,
+            "field_norm": 0.1442907127257121,
+            "n_edges": 1008,
+            "normal_equation_defect": 4.024286033664439e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31535681095832474,
+            "relative_residual": 0.8562252551183235,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 4.9575048009385095e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3510383605135477,
+            "relative_violation": 0.9531042277908857
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.08274778394274712,
+            "relative_residual": 0.6234046091827211,
+            "field_norm": 0.13273527773756574,
+            "n_edges": 1213,
+            "normal_equation_defect": 3.964565194440107e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.3102815598033569,
+            "relative_residual": 0.8775404355845973,
+            "field_norm": 0.3535809259850852,
+            "n_edges": 1536,
+            "normal_equation_defect": 4.8591920039221786e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3388693305648638,
+            "relative_violation": 0.9583925649291329
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.107676889415897,
+            "relative_residual": 0.7413818670772041,
+            "field_norm": 0.14523809415571262,
+            "n_edges": 1411,
+            "normal_equation_defect": 5.828145967794554e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5246761273396785,
+            "relative_residual": 0.9136879817872021,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 7.654774471011479e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5666664547011793,
+            "relative_violation": 0.9868112962708342
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.10207907624262046,
+            "relative_residual": 0.7493915987438663,
+            "field_norm": 0.13621593358362422,
+            "n_edges": 1611,
+            "normal_equation_defect": 3.454547379884584e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.4997447657372922,
+            "relative_residual": 0.9233339063488893,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 6.731488699590748e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5342883377817464,
+            "relative_violation": 0.9871569886537014
+          }
+        }
+      },
+      "train_seconds": 11.4
+    },
+    "oracle": {
+      "mutual_knn": 0.0271484375,
+      "modality_gap": 0.003964028786867857,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 3.1296625809050244e-16,
+            "relative_residual": 1.3888358581161712e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 301,
+            "normal_equation_defect": 7.702511099125278e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.6271429372435164e-16,
+            "relative_residual": 7.220696797514753e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 2.8534136922953597e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.0010856268681935669,
+            "relative_violation": 0.004817636036168397
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.03468536919786822,
+            "relative_residual": 0.2053721698748262,
+            "field_norm": 0.16889030884276512,
+            "n_edges": 606,
+            "normal_equation_defect": 6.001145203455997e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.4391286956343587e-16,
+            "relative_residual": 2.621552988427865e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 7.866537110811839e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.03879838994557966,
+            "relative_violation": 0.22912612380004257
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.045037204258281026,
+            "relative_residual": 0.3178650647015535,
+            "field_norm": 0.14168654960735266,
+            "n_edges": 901,
+            "normal_equation_defect": 3.517585970993446e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.026568833913817376,
+            "relative_residual": 0.1870549489645703,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 3.037178635533783e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.04621682382380388,
+            "relative_violation": 0.3253844579596024
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.1501906046026509,
+            "relative_residual": 0.7274211344832217,
+            "field_norm": 0.2064699490885017,
+            "n_edges": 1196,
+            "normal_equation_defect": 5.1357865039591456e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.14581331970676492,
+            "relative_residual": 0.7056026134802952,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 3.8960496189353587e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.15044617743699223,
+            "relative_violation": 0.7280213920178441
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.3005358742029709,
+            "relative_residual": 0.8571582991485713,
+            "field_norm": 0.3506188699351075,
+            "n_edges": 1491,
+            "normal_equation_defect": 6.102785028852538e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.3149567660713347,
+            "relative_residual": 0.855139093273964,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 5.2842678081376064e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.321012703675968,
+            "relative_violation": 0.8715815690357862
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.29760822602216747,
+            "relative_residual": 0.8798193580337473,
+            "field_norm": 0.33826060236645994,
+            "n_edges": 1786,
+            "normal_equation_defect": 4.963818447578403e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.31003392652893547,
+            "relative_residual": 0.8768400774594197,
+            "field_norm": 0.3535809259850852,
+            "n_edges": 1536,
+            "normal_equation_defect": 6.418215252089358e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3149339421439321,
+            "relative_violation": 0.8906983352298156
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.5072479011921319,
+            "relative_residual": 0.91551777609873,
+            "field_norm": 0.5540557643278682,
+            "n_edges": 2081,
+            "normal_equation_defect": 7.072634923828188e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5249644105145715,
+            "relative_residual": 0.9141900074341223,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 5.709675669806236e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5292906472595355,
+            "relative_violation": 0.9217238560585719
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.4834368622910413,
+            "relative_residual": 0.9252262734053345,
+            "field_norm": 0.5225066302016387,
+            "n_edges": 2376,
+            "normal_equation_defect": 6.407227362022078e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.49994861766755155,
+            "relative_residual": 0.9237105454094414,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 6.430989731817993e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.503689828688349,
+            "relative_violation": 0.9306228478949152
+          }
+        }
+      },
+      "train_seconds": 7.7
+    }
+  },
+  "s4": {
+    "floors": {
+      "1": {
+        "residual_norm": 1.5443910986217408e-16,
+        "relative_residual": 6.853472798658843e-16
+      },
+      "2": {
+        "residual_norm": 1.94515418224313e-16,
+        "relative_residual": 1.1487219923196515e-15
+      },
+      "3": {
+        "residual_norm": 3.07397046299284e-16,
+        "relative_residual": 2.164195048751038e-15
+      },
+      "4": {
+        "residual_norm": 7.1799525436678835e-16,
+        "relative_residual": 3.474437924919906e-15
+      },
+      "5": {
+        "residual_norm": 0.2849407579349594,
+        "relative_residual": 0.7736426317068218
+      },
+      "6": {
+        "residual_norm": 0.28365145694278243,
+        "relative_residual": 0.8022249960246652
+      },
+      "7": {
+        "residual_norm": 0.5115932336959648,
+        "relative_residual": 0.890905007555324
+      },
+      "8": {
+        "residual_norm": 0.48748273785003043,
+        "relative_residual": 0.9006784492332939
+      }
+    },
+    "infonce_t0.05": {
+      "mutual_knn": 0.5491210937500001,
+      "modality_gap": 0.09349090605974197,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.04821547960761784,
+            "relative_residual": 0.21573727269629425,
+            "field_norm": 0.22349165262459555,
+            "n_edges": 677,
+            "normal_equation_defect": 4.786182892292117e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.1321353282281453e-16,
+            "relative_residual": 9.461678125516124e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 3.472886326791951e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1718445894707922,
+            "relative_violation": 0.7625867700129925
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.05319300499194497,
+            "relative_residual": 0.3169784586926042,
+            "field_norm": 0.16781268106149094,
+            "n_edges": 1328,
+            "normal_equation_defect": 3.323474305099542e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.842001049285123e-16,
+            "relative_residual": 2.859471574502379e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 6.573534515672945e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.13532898092332438,
+            "relative_violation": 0.7991930819877727
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.05664319326838554,
+            "relative_residual": 0.4025974463590623,
+            "field_norm": 0.1406943679862974,
+            "n_edges": 2048,
+            "normal_equation_defect": 3.056978287299087e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 6.779363119965274e-16,
+            "relative_residual": 4.77293593889305e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 8.259352428810578e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.12752094800818758,
+            "relative_violation": 0.8977971897057907
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.09616821451155484,
+            "relative_residual": 0.4709329638114736,
+            "field_norm": 0.2042078637545819,
+            "n_edges": 2744,
+            "normal_equation_defect": 4.154330040704856e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.3800986352584213e-16,
+            "relative_residual": 2.119565654602149e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.4175616737942614e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.2030252120682168,
+            "relative_violation": 0.9824556530625281
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.11589311577825512,
+            "relative_residual": 0.5929474968902628,
+            "field_norm": 0.19545257613205427,
+            "n_edges": 3399,
+            "normal_equation_defect": 3.4733499052637197e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.2848460683945184,
+            "relative_residual": 0.7733855401422708,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 5.546859798539304e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.366842563917046,
+            "relative_violation": 0.9960142193334196
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.11183193881441561,
+            "relative_residual": 0.6226896365084105,
+            "field_norm": 0.17959498963478435,
+            "n_edges": 4054,
+            "normal_equation_defect": 2.836005247260762e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.283605735149299,
+            "relative_residual": 0.8020956853347401,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 4.4622943361389965e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.35234357950233886,
+            "relative_violation": 0.996500528190826
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.13835545337701688,
+            "relative_residual": 0.7349620740884701,
+            "field_norm": 0.18824842567367975,
+            "n_edges": 4704,
+            "normal_equation_defect": 4.9065196051623284e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5113884236657795,
+            "relative_residual": 0.8905483447430125,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 9.951275088798041e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5735452289435766,
+            "relative_violation": 0.9987902162696792
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.1324025016568697,
+            "relative_residual": 0.7499314792952312,
+            "field_norm": 0.17655279890543948,
+            "n_edges": 5366,
+            "normal_equation_defect": 2.691661954499565e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.4872613540178784,
+            "relative_residual": 0.9002694180386565,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 6.004418488649846e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5406455604802687,
+            "relative_violation": 0.9989026629862707
+          }
+        }
+      },
+      "train_seconds": 24.5
+    },
+    "infonce_t0.2": {
+      "mutual_knn": 0.61494140625,
+      "modality_gap": 0.02555350586771965,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.014694301470300476,
+            "relative_residual": 0.06523814532561335,
+            "field_norm": 0.22524094449587762,
+            "n_edges": 315,
+            "normal_equation_defect": 7.723364691141193e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 8.351835306749712e-16,
+            "relative_residual": 3.706255244851482e-15,
+            "field_norm": 0.22534430995683866,
+            "n_edges": 256,
+            "normal_equation_defect": 1.475806123370294e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.17437026943287998,
+            "relative_violation": 0.7737948629201155
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.01853669035940405,
+            "relative_residual": 0.10951816022442473,
+            "field_norm": 0.16925677277100568,
+            "n_edges": 616,
+            "normal_equation_defect": 5.441792509872009e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.04487828129606e-16,
+            "relative_residual": 2.9792818909695028e-15,
+            "field_norm": 0.1693320224778858,
+            "n_edges": 512,
+            "normal_equation_defect": 6.966594617117894e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.15810354846541977,
+            "relative_violation": 0.9336896007727514
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.019190070799515752,
+            "relative_residual": 0.13516579883094043,
+            "field_norm": 0.14197430833459482,
+            "n_edges": 933,
+            "normal_equation_defect": 6.459713833931353e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 6.264442413141826e-16,
+            "relative_residual": 4.4104116864245624e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 7.291493255367828e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.13623981921603687,
+            "relative_violation": 0.9591814421763042
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.030605794006391122,
+            "relative_residual": 0.14825538606251565,
+            "field_norm": 0.2064396769604405,
+            "n_edges": 1259,
+            "normal_equation_defect": 5.927187380467947e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.1098831305639524e-16,
+            "relative_residual": 1.5048979537377624e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 3.3939225690844624e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.18065498767542482,
+            "relative_violation": 0.8742043024490329
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.05203559852560176,
+            "relative_residual": 0.2737330596101005,
+            "field_norm": 0.19009614183876855,
+            "n_edges": 1571,
+            "normal_equation_defect": 5.0338704953642485e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.2848901148922688,
+            "relative_residual": 0.7735051307851961,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 4.911848682451386e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3573777679273904,
+            "relative_violation": 0.9703163524116339
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.05166105688790847,
+            "relative_residual": 0.2966835777350971,
+            "field_norm": 0.1741284680543916,
+            "n_edges": 1883,
+            "normal_equation_defect": 3.8067501951416076e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.28356522433532183,
+            "relative_residual": 0.8019811123727958,
+            "field_norm": 0.3535809259850852,
+            "n_edges": 1536,
+            "normal_equation_defect": 5.163027146932084e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.34427544557009643,
+            "relative_violation": 0.9736821764662119
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.0771798087444625,
+            "relative_residual": 0.44734595486474643,
+            "field_norm": 0.1725282366033634,
+            "n_edges": 2191,
+            "normal_equation_defect": 4.242386526269646e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5114985978412577,
+            "relative_residual": 0.8907402056164014,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 5.649803944417035e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5693725220788753,
+            "relative_violation": 0.9915237295455172
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.07383160880518679,
+            "relative_residual": 0.4568158754289633,
+            "field_norm": 0.16162224821074087,
+            "n_edges": 2503,
+            "normal_equation_defect": 3.530685887624981e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.48756964034559647,
+            "relative_residual": 0.900839011236548,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 6.32036073864113e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5367923986039631,
+            "relative_violation": 0.9917835188731854
+          }
+        }
+      },
+      "train_seconds": 13.9
+    },
+    "infonce_t0.5": {
+      "mutual_knn": 0.425048828125,
+      "modality_gap": 0.011542304418981075,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 3.016277724159801e-16,
+            "relative_residual": 1.3385195857563584e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 249,
+            "normal_equation_defect": 6.078111912551651e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.890228807242521e-16,
+            "relative_residual": 1.2825834421095884e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.76236946214678e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1049583704642209,
+            "relative_violation": 0.465768895981106
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 2.929404072194304e-16,
+            "relative_residual": 1.729976426979058e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 491,
+            "normal_equation_defect": 3.9616961834929615e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.0350454174622454e-16,
+            "relative_residual": 2.3829192839111158e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 5.071004104044712e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.13905778409278038,
+            "relative_violation": 0.821213743613916
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.000642393426537243,
+            "relative_residual": 0.004522700168395708,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 763,
+            "normal_equation_defect": 3.019354766412354e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.359040748049088e-16,
+            "relative_residual": 3.772973615917894e-15,
+            "field_norm": 0.14203758874537833,
+            "n_edges": 768,
+            "normal_equation_defect": 6.73100586227842e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.12740110752477515,
+            "relative_violation": 0.8969534659811697
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.000558519155549954,
+            "relative_residual": 0.0027027200027225726,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1031,
+            "normal_equation_defect": 4.8452235851525694e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.450721588224751e-16,
+            "relative_residual": 2.153740680782851e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 5.596546364633389e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1764195204570466,
+            "relative_violation": 0.8537085291917759
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.10307522070866673,
+            "relative_residual": 0.4741645506532019,
+            "field_norm": 0.2173828063837161,
+            "n_edges": 1254,
+            "normal_equation_defect": 4.5260962728224924e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.2848774125685306,
+            "relative_residual": 0.7734706427069133,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 7.610635902482639e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.356140234971534,
+            "relative_violation": 0.966956326770756
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.10037217166215376,
+            "relative_residual": 0.5000625789616068,
+            "field_norm": 0.20071922172336756,
+            "n_edges": 1477,
+            "normal_equation_defect": 4.190061387419802e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.28371696300301374,
+            "relative_residual": 0.8024102607135021,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 5.076476923591432e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.34320694472734115,
+            "relative_violation": 0.9706602350541338
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.15622620411881813,
+            "relative_residual": 0.6829858196042357,
+            "field_norm": 0.22874004061950404,
+            "n_edges": 1701,
+            "normal_equation_defect": 4.762558973709657e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5112808748136642,
+            "relative_residual": 0.8903610556926588,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 5.436260401219804e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.568262658792602,
+            "relative_violation": 0.989590977713951
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.14773755686862558,
+            "relative_residual": 0.6869955847451832,
+            "field_norm": 0.215048771999639,
+            "n_edges": 1925,
+            "normal_equation_defect": 5.0648760672789713e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.4873217011815596,
+            "relative_residual": 0.9003809161196751,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 5.417791459198976e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5356623979600579,
+            "relative_violation": 0.9896957172987668
+          }
+        }
+      },
+      "train_seconds": 13.4
+    },
+    "xnce_t0.05": {
+      "mutual_knn": 0.55615234375,
+      "modality_gap": 0.04239320382475853,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.042184961280646464,
+            "relative_residual": 0.19079154436143417,
+            "field_norm": 0.22110498356641828,
+            "n_edges": 687,
+            "normal_equation_defect": 1.2841494795347018e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.273478744666776e-16,
+            "relative_residual": 1.452656490547182e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 5.454534903536078e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.11139927598713222,
+            "relative_violation": 0.4943514038959718
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.050470055617554806,
+            "relative_residual": 0.30335710579984465,
+            "field_norm": 0.16637176005646298,
+            "n_edges": 1387,
+            "normal_equation_defect": 3.816745038592832e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.664282857899297e-16,
+            "relative_residual": 2.7545190742102175e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 5.807379396295395e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1077472695620736,
+            "relative_violation": 0.6363076988355527
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.051137970325713954,
+            "relative_residual": 0.3662248414669785,
+            "field_norm": 0.13963544941646164,
+            "n_edges": 2088,
+            "normal_equation_defect": 3.783012737133396e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.772020671409286e-16,
+            "relative_residual": 1.2475716372416557e-15,
+            "field_norm": 0.14203758874537833,
+            "n_edges": 768,
+            "normal_equation_defect": 1.9700314826790862e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.0950421687429483,
+            "relative_violation": 0.669133921396851
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.09282686595768411,
+            "relative_residual": 0.45649393736606336,
+            "field_norm": 0.20334742339249529,
+            "n_edges": 2786,
+            "normal_equation_defect": 5.191744990860568e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.706096750762573e-15,
+            "relative_residual": 8.255942108781579e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 2.580107602335395e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.1718548488517811,
+            "relative_violation": 0.8316197089054547
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.10854221551711368,
+            "relative_residual": 0.5642092083264533,
+            "field_norm": 0.19237937615210066,
+            "n_edges": 3433,
+            "normal_equation_defect": 4.0701578044991367e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.28488998246495756,
+            "relative_residual": 0.7735047712318127,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 5.0501015272408483e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.3543992649590161,
+            "relative_violation": 0.9622294192129595
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.1050789831323623,
+            "relative_residual": 0.5949306990980827,
+            "field_norm": 0.1766239047533813,
+            "n_edges": 4080,
+            "normal_equation_defect": 5.2128149090945945e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.2834865392086229,
+            "relative_residual": 0.8017585745577828,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 5.497045641890709e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.34196816021676946,
+            "relative_violation": 0.9671566962048013
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.138172973184309,
+            "relative_residual": 0.7288708729927413,
+            "field_norm": 0.1895712646836486,
+            "n_edges": 4720,
+            "normal_equation_defect": 3.60346947391752e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.511062510852372,
+            "relative_residual": 0.8899807896262384,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 6.750529965444073e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5683458018973252,
+            "relative_violation": 0.9897357658062533
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.1319355246785779,
+            "relative_residual": 0.7422347179249913,
+            "field_norm": 0.17775445083924385,
+            "n_edges": 5370,
+            "normal_equation_defect": 3.1973349606765404e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.4870155897698183,
+            "relative_residual": 0.8998153413203792,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 6.783660690042166e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5359567685320841,
+            "relative_violation": 0.9902395995939262
+          }
+        }
+      },
+      "train_seconds": 32.2
+    },
+    "xnce_t0.2": {
+      "mutual_knn": 0.606201171875,
+      "modality_gap": 0.04658021777868271,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.011729003126139398,
+            "relative_residual": 0.052059051560192054,
+            "field_norm": 0.22530189802974057,
+            "n_edges": 297,
+            "normal_equation_defect": 5.662685202551076e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.756412539430293e-16,
+            "relative_residual": 1.2232004171564142e-15,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.3622124629487483e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.12210511873981092,
+            "relative_violation": 0.5418602260833582
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.013542550483914914,
+            "relative_residual": 0.07999262751911417,
+            "field_norm": 0.1692974828296387,
+            "n_edges": 601,
+            "normal_equation_defect": 4.311756329136893e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.802995951278534e-16,
+            "relative_residual": 2.2458811367325357e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 4.855508958483402e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.12941585436779549,
+            "relative_violation": 0.7642727729463974
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.014537831974802351,
+            "relative_residual": 0.10237305612098192,
+            "field_norm": 0.14200838116644582,
+            "n_edges": 908,
+            "normal_equation_defect": 4.871736339452487e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.69062864761825e-16,
+            "relative_residual": 2.5983464519622354e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 4.486943180726271e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1167381041661251,
+            "relative_violation": 0.821881765223387
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.036653764879719504,
+            "relative_residual": 0.17740443668515177,
+            "field_norm": 0.20661132023868553,
+            "n_edges": 1217,
+            "normal_equation_defect": 5.0864806871937654e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.3253968471219074e-16,
+            "relative_residual": 2.0930950106659222e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.7461907067717937e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1910751556798659,
+            "relative_violation": 0.9246283500711808
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.05579070243384856,
+            "relative_residual": 0.29305582146577797,
+            "field_norm": 0.19037568390486181,
+            "n_edges": 1509,
+            "normal_equation_defect": 4.696408791301365e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.28488537858598556,
+            "relative_residual": 0.7734922712403416,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 6.328514178123767e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.36160698738036284,
+            "relative_violation": 0.9817991058491402
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.054382725149335134,
+            "relative_residual": 0.31197527648626777,
+            "field_norm": 0.17431741951426366,
+            "n_edges": 1801,
+            "normal_equation_defect": 5.422529805203201e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.2836644609885036,
+            "relative_residual": 0.8022617741559654,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 6.157359315307969e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.34790217894996806,
+            "relative_violation": 0.983939328686082
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.07874859326528807,
+            "relative_residual": 0.4563275717006798,
+            "field_norm": 0.17257031603810663,
+            "n_edges": 2098,
+            "normal_equation_defect": 4.422128747959953e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5114640197234505,
+            "relative_residual": 0.8906799901634257,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 5.992985739251475e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5713576476582474,
+            "relative_violation": 0.9949806914496298
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.07498007117835907,
+            "relative_residual": 0.4638415739921585,
+            "field_norm": 0.1616501740735009,
+            "n_edges": 2388,
+            "normal_equation_defect": 4.312632938144356e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.4873476967606151,
+            "relative_residual": 0.9004289458364481,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 9.486343784641063e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5386099565393083,
+            "relative_violation": 0.9951416588348552
+          }
+        }
+      },
+      "train_seconds": 20.3
+    },
+    "oracle": {
+      "mutual_knn": 0.101318359375,
+      "modality_gap": 0.0074707516469061375,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 3.7476630219111096e-16,
+            "relative_residual": 1.6630830495027451e-15,
+            "field_norm": 0.2253443099568386,
+            "n_edges": 279,
+            "normal_equation_defect": 5.4001377073561794e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.0499112289124128e-16,
+            "relative_residual": 9.096796050918894e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 3.2502845294026804e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.03891708664955833,
+            "relative_violation": 0.17270055168915655
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.02682600919577746,
+            "relative_residual": 0.15842254054032132,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 556,
+            "normal_equation_defect": 6.065992464048089e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.130726826907663e-16,
+            "relative_residual": 2.4394244906908395e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 5.146533023072551e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.04106589829961661,
+            "relative_violation": 0.24251702482901413
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.02875209803035132,
+            "relative_residual": 0.20242597951936062,
+            "field_norm": 0.14203758874537833,
+            "n_edges": 843,
+            "normal_equation_defect": 4.0781952975159187e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.627559008167583e-16,
+            "relative_residual": 2.553942966935657e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 4.377260776848246e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.0404213509171953,
+            "relative_violation": 0.2845820692553155
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.047582138073945145,
+            "relative_residual": 0.2302538687650378,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1125,
+            "normal_equation_defect": 4.839481254022042e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 6.1088252313758935e-16,
+            "relative_residual": 2.9561106332545972e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 5.831052804784579e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.04914808296601317,
+            "relative_violation": 0.23783160453452287
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.26694559756044933,
+            "relative_residual": 0.769825698970985,
+            "field_norm": 0.3467610887987654,
+            "n_edges": 1405,
+            "normal_equation_defect": 5.106039968084506e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.2848798544875499,
+            "relative_residual": 0.7734772727610698,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 8.189417960376579e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.2945163219218178,
+            "relative_violation": 0.799641244809975
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.26801327071174635,
+            "relative_residual": 0.8029936289943532,
+            "field_norm": 0.33376761786690473,
+            "n_edges": 1685,
+            "normal_equation_defect": 6.585787847973978e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.2836717209733068,
+            "relative_residual": 0.8022823068947803,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 5.11752905095576e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.2924294698738714,
+            "relative_violation": 0.8270510324027113
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.4961673939076645,
+            "relative_residual": 0.8931935925257082,
+            "field_norm": 0.5554981563455222,
+            "n_edges": 1965,
+            "normal_equation_defect": 7.122629625808896e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.5117011812560973,
+            "relative_residual": 0.8910929909287175,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 7.377157291748283e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.5173145990503938,
+            "relative_violation": 0.9008683782736779
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.47238557194396885,
+            "relative_residual": 0.9027434797136102,
+            "field_norm": 0.5232777445192185,
+            "n_edges": 2243,
+            "normal_equation_defect": 6.171852979416473e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 0.48750120204841724,
+            "relative_residual": 0.9007125638886,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 6.503258744435517e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.492472114666978,
+            "relative_violation": 0.9098968765235571
+          }
+        }
+      },
+      "train_seconds": 12.7
+    }
+  },
+  "s8": {
+    "floors": {
+      "1": {
+        "residual_norm": 5.647850449853784e-17,
+        "relative_residual": 2.50632041738065e-16
+      },
+      "2": {
+        "residual_norm": 3.6334796734172117e-16,
+        "relative_residual": 2.1457723236558707e-15
+      },
+      "3": {
+        "residual_norm": 4.574194356961446e-16,
+        "relative_residual": 3.220411158317612e-15
+      },
+      "4": {
+        "residual_norm": 8.262880238624423e-16,
+        "relative_residual": 3.998475518541797e-15
+      },
+      "5": {
+        "residual_norm": 1.3987606491903188e-15,
+        "relative_residual": 3.797774939640437e-15
+      },
+      "6": {
+        "residual_norm": 1.6643347096892928e-15,
+        "relative_residual": 4.707082841226277e-15
+      },
+      "7": {
+        "residual_norm": 1.2653400965751363e-15,
+        "relative_residual": 2.2035041788087234e-15
+      },
+      "8": {
+        "residual_norm": 3.0180223172684086e-15,
+        "relative_residual": 5.5761311107287504e-15
+      }
+    },
+    "infonce_t0.05": {
+      "mutual_knn": 0.737255859375,
+      "modality_gap": 0.06676766276359558,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.020699034176599716,
+            "relative_residual": 0.0919028519616772,
+            "field_norm": 0.22522733228378003,
+            "n_edges": 1081,
+            "normal_equation_defect": 4.626641732319544e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.3597762213673986e-17,
+            "relative_residual": 2.3784830521764605e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.697755605144624e-18
+          },
+          "linear_readout": {
+            "violation_norm": 0.09017800601091278,
+            "relative_violation": 0.40017875768944433
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.03200266791999398,
+            "relative_residual": 0.18908828986040593,
+            "field_norm": 0.1692472227847631,
+            "n_edges": 2167,
+            "normal_equation_defect": 3.9663373852682656e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.832669128484848e-16,
+            "relative_residual": 2.85396055498952e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 3.4201191794225223e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1041932734185245,
+            "relative_violation": 0.615319370157123
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.03837826978862911,
+            "relative_residual": 0.27033792917114874,
+            "field_norm": 0.14196405922874455,
+            "n_edges": 3236,
+            "normal_equation_defect": 2.991971391866574e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.757378697531959e-16,
+            "relative_residual": 3.349380075763047e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 2.874898645542678e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.09872171252422883,
+            "relative_violation": 0.6950393441358741
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.06911456993100054,
+            "relative_residual": 0.334705560454621,
+            "field_norm": 0.20649364126823644,
+            "n_edges": 4327,
+            "normal_equation_defect": 4.5230365910702924e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 6.487145833158115e-16,
+            "relative_residual": 3.139183075393495e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.2596341086795424e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.13102537999420955,
+            "relative_violation": 0.6340425603236148
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.1242599348747913,
+            "relative_residual": 0.33757320526693435,
+            "field_norm": 0.3680977427593323,
+            "n_edges": 5408,
+            "normal_equation_defect": 7.981677420797323e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.2995299780505766e-15,
+            "relative_residual": 3.528353751450478e-15,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 7.426696629881895e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.23264404403155076,
+            "relative_violation": 0.6316518274881886
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.13409380812781488,
+            "relative_residual": 0.37959510306963684,
+            "field_norm": 0.3532548419182724,
+            "n_edges": 6473,
+            "normal_equation_defect": 7.257359565341978e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.1694018428194438e-15,
+            "relative_residual": 3.3073103125160415e-15,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 6.753047265777207e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.24283452224947855,
+            "relative_violation": 0.686786261371242
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.27283747607623515,
+            "relative_residual": 0.47544101960782265,
+            "field_norm": 0.5738618773392561,
+            "n_edges": 7571,
+            "normal_equation_defect": 1.2853683225890603e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.0367791397441863e-15,
+            "relative_residual": 3.546913085173264e-15,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 1.07512889262065e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.4898164727454099,
+            "relative_violation": 0.8529822515426547
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.2847815872611047,
+            "relative_residual": 0.526516035089038,
+            "field_norm": 0.5408792292773114,
+            "n_edges": 8619,
+            "normal_equation_defect": 1.455149085600397e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.8707246841418066e-15,
+            "relative_residual": 3.4563714294507733e-15,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 1.1808675975163846e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.4936220994248956,
+            "relative_violation": 0.9120216009660497
+          }
+        }
+      },
+      "train_seconds": 94.6
+    },
+    "infonce_t0.2": {
+      "mutual_knn": 0.8601074218750001,
+      "modality_gap": 0.015207813121378422,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.0008053615782257923,
+            "relative_residual": 0.0036241165584420636,
+            "field_norm": 0.22222286872914523,
+            "n_edges": 421,
+            "normal_equation_defect": 3.865008171072157e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.191845621617218e-17,
+            "relative_residual": 2.3039612682528526e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.599241177424537e-18
+          },
+          "linear_readout": {
+            "violation_norm": 0.07271043693895496,
+            "relative_violation": 0.32266373600860637
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.021475235945589997,
+            "relative_residual": 0.12845447781669067,
+            "field_norm": 0.16718168420906246,
+            "n_edges": 857,
+            "normal_equation_defect": 3.5374192759874496e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.728403673541412e-16,
+            "relative_residual": 3.382941743514298e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 3.940116341257131e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.0767617337021814,
+            "relative_violation": 0.4533208342929124
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.02731996192777193,
+            "relative_residual": 0.19468780743293884,
+            "field_norm": 0.1403270306856911,
+            "n_edges": 1285,
+            "normal_equation_defect": 3.105077117729284e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.922945323589897e-16,
+            "relative_residual": 2.0578674626965633e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 1.7759452693959808e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.07682728306224383,
+            "relative_violation": 0.5408940248906022
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.0345515524362975,
+            "relative_residual": 0.1679114862270256,
+            "field_norm": 0.2057724174365409,
+            "n_edges": 1716,
+            "normal_equation_defect": 4.631617125700379e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 8.818233843160048e-16,
+            "relative_residual": 4.267215682714783e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 5.3370113144976186e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.09389784487054598,
+            "relative_violation": 0.4543793727079566
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.1061007800601,
+            "relative_residual": 0.2884215159159922,
+            "field_norm": 0.3678670771947669,
+            "n_edges": 2139,
+            "normal_equation_defect": 7.878899137571556e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.2805183442319136e-15,
+            "relative_residual": 3.4767352658146877e-15,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 6.687586034345926e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.2214343708195982,
+            "relative_violation": 0.6012164445436118
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.10791260354574021,
+            "relative_residual": 0.30554045159696014,
+            "field_norm": 0.35318597907974636,
+            "n_edges": 2567,
+            "normal_equation_defect": 8.689422490788738e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.188602488725104e-15,
+            "relative_residual": 3.361613710959175e-15,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 7.304174599563334e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.22024644244003666,
+            "relative_violation": 0.6229024991278151
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.18033866195862314,
+            "relative_residual": 0.3143155796763405,
+            "field_norm": 0.5737503121681811,
+            "n_edges": 2998,
+            "normal_equation_defect": 2.0765033399890437e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.7715272731439794e-15,
+            "relative_residual": 3.084994903593168e-15,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 1.1170533640915936e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.3990127308391364,
+            "relative_violation": 0.6948536778228215
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.18403074381538995,
+            "relative_residual": 0.3403041477228209,
+            "field_norm": 0.5407831348717023,
+            "n_edges": 3430,
+            "normal_equation_defect": 1.363023740689634e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.5847703149478286e-15,
+            "relative_residual": 4.7756499628252795e-15,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 1.6560938519830598e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.39491492658850585,
+            "relative_violation": 0.7296491466088401
+          }
+        }
+      },
+      "train_seconds": 36.2
+    },
+    "infonce_t0.5": {
+      "mutual_knn": 0.8780761718750001,
+      "modality_gap": 0.01494781207293272,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.0071562442134737,
+            "relative_residual": 0.03231403650951232,
+            "field_norm": 0.22145930952844928,
+            "n_edges": 433,
+            "normal_equation_defect": 5.013274116272103e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.52192160064951e-17,
+            "relative_residual": 2.450437555626389e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.901364913834209e-18
+          },
+          "linear_readout": {
+            "violation_norm": 0.08556739366681278,
+            "relative_violation": 0.37971845698345763
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.02871128915992413,
+            "relative_residual": 0.17226649713022937,
+            "field_norm": 0.1666678642581272,
+            "n_edges": 855,
+            "normal_equation_defect": 3.582438862694646e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.3844318473467945e-16,
+            "relative_residual": 2.5892514500140616e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 2.8471309354289796e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.08216025327092301,
+            "relative_violation": 0.485202102169735
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.04063225257454314,
+            "relative_residual": 0.29044893865123456,
+            "field_norm": 0.13989464985903619,
+            "n_edges": 1274,
+            "normal_equation_defect": 3.9857213939712085e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.962092116062e-16,
+            "relative_residual": 2.7894673171089853e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 2.2854338644923893e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.07831448988162111,
+            "relative_violation": 0.5513645407062663
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.05126574991297783,
+            "relative_residual": 0.249405875783768,
+            "field_norm": 0.20555149212853607,
+            "n_edges": 1691,
+            "normal_equation_defect": 4.8411776621122455e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 7.325830537239644e-16,
+            "relative_residual": 3.545029482481654e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 4.523890782087116e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.08505163769576983,
+            "relative_violation": 0.4115718506347821
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.1083507335026858,
+            "relative_residual": 0.2945769240513309,
+            "field_norm": 0.36781813053287693,
+            "n_edges": 2119,
+            "normal_equation_defect": 8.399250521384564e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.3934755500543962e-15,
+            "relative_residual": 3.783425367350467e-15,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 8.517402617209141e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1871140715365692,
+            "relative_violation": 0.5080334023887615
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.11323979890248723,
+            "relative_residual": 0.3206532038536091,
+            "field_norm": 0.353153492750335,
+            "n_edges": 2531,
+            "normal_equation_defect": 7.949586655957113e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.0264306424978183e-15,
+            "relative_residual": 2.902958183160353e-15,
+            "field_norm": 0.3535809259850852,
+            "n_edges": 1536,
+            "normal_equation_defect": 6.153479692388203e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.18539949417007456,
+            "relative_violation": 0.5243481210236297
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.14462650122962764,
+            "relative_residual": 0.2519562078719219,
+            "field_norm": 0.5740144386644616,
+            "n_edges": 2973,
+            "normal_equation_defect": 1.3227055676487043e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.8365250267877016e-15,
+            "relative_residual": 3.198184094510913e-15,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 1.1065235026341401e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.3144625065391778,
+            "relative_violation": 0.5476151819682717
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.14652598950702855,
+            "relative_residual": 0.27082802109528975,
+            "field_norm": 0.5410296501611773,
+            "n_edges": 3396,
+            "normal_equation_defect": 1.2686437752852667e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.9234970359477962e-15,
+            "relative_residual": 3.553874205029331e-15,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 1.1285199372996082e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.3160180715524927,
+            "relative_violation": 0.5838784525395015
+          }
+        }
+      },
+      "train_seconds": 36.0
+    },
+    "xnce_t0.05": {
+      "mutual_knn": 0.7669921875000001,
+      "modality_gap": 0.03358910232782364,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.017421392074864057,
+            "relative_residual": 0.07736936072829641,
+            "field_norm": 0.22517172057352294,
+            "n_edges": 863,
+            "normal_equation_defect": 4.482684247296335e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.884424044390391e-17,
+            "relative_residual": 2.1675382197695297e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.290903881655777e-18
+          },
+          "linear_readout": {
+            "violation_norm": 0.0729594292720736,
+            "relative_violation": 0.32376867774494905
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.027278363495412492,
+            "relative_residual": 0.16120587106922432,
+            "field_norm": 0.1692144542533363,
+            "n_edges": 1704,
+            "normal_equation_defect": 3.3117318335958155e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.42733223667826e-16,
+            "relative_residual": 2.6145865217291993e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 3.0462186187227134e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.08962217330745184,
+            "relative_violation": 0.529268900211454
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.031374949897499886,
+            "relative_residual": 0.22107631453457469,
+            "field_norm": 0.14191909234398367,
+            "n_edges": 2561,
+            "normal_equation_defect": 2.8122205715066387e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.435477196671048e-16,
+            "relative_residual": 2.4187098830786313e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 2.0361958609444848e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.08418036583482481,
+            "relative_violation": 0.5926625943061418
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.0552077197568822,
+            "relative_residual": 0.26792276115691094,
+            "field_norm": 0.20605834128646275,
+            "n_edges": 3414,
+            "normal_equation_defect": 4.372703524314963e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 6.536603926816847e-16,
+            "relative_residual": 3.163116252563822e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 3.752816723634852e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.12715888464034175,
+            "relative_violation": 0.6153322721813173
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.1200379830211658,
+            "relative_residual": 0.32623604148936136,
+            "field_norm": 0.3679482575657732,
+            "n_edges": 4264,
+            "normal_equation_defect": 8.1770675411564e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.020197027612761e-15,
+            "relative_residual": 2.7699368774823433e-15,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 5.941712035951297e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.25199673917473714,
+            "relative_violation": 0.6841963287020587
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.1281290764858036,
+            "relative_residual": 0.3627021439845112,
+            "field_norm": 0.3532625285260933,
+            "n_edges": 5109,
+            "normal_equation_defect": 8.091183932987531e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.843433117072392e-15,
+            "relative_residual": 5.213610185381299e-15,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 9.442782250082161e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.25106508612545186,
+            "relative_violation": 0.7100639985767848
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.237286716708959,
+            "relative_residual": 0.4134499418816454,
+            "field_norm": 0.573918853704628,
+            "n_edges": 5942,
+            "normal_equation_defect": 1.3802502371234013e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.8411830095476225e-15,
+            "relative_residual": 3.206295656378024e-15,
+            "field_norm": 0.5742399350743299,
+            "n_edges": 1792,
+            "normal_equation_defect": 1.0705581267653991e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.49275847395636113,
+            "relative_violation": 0.8581055476271919
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.24212739341414571,
+            "relative_residual": 0.4476106453267917,
+            "field_norm": 0.5409330540773294,
+            "n_edges": 6783,
+            "normal_equation_defect": 1.1830786944058026e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.39649628537944e-15,
+            "relative_residual": 6.27540376226269e-15,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 2.0532287955749124e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.47786504814979575,
+            "relative_violation": 0.8829087003338381
+          }
+        }
+      },
+      "train_seconds": 68.3
+    },
+    "xnce_t0.2": {
+      "mutual_knn": 0.8620605468750001,
+      "modality_gap": 0.03307865560054779,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 0.0035427713462628805,
+            "relative_residual": 0.0159760533401828,
+            "field_norm": 0.22175510251659838,
+            "n_edges": 461,
+            "normal_equation_defect": 4.0156843218090046e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.438092660034118e-17,
+            "relative_residual": 2.413237175181261e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.7518640442498705e-18
+          },
+          "linear_readout": {
+            "violation_norm": 0.08387121477005627,
+            "relative_violation": 0.3721914025081022
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.02226261814313169,
+            "relative_residual": 0.13340972554864203,
+            "field_norm": 0.16687402699898815,
+            "n_edges": 927,
+            "normal_equation_defect": 3.714214620963762e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.258737249324966e-16,
+            "relative_residual": 3.105577534817279e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 3.969424904878641e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.08279454736318682,
+            "relative_violation": 0.48894796242098576
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.0361755120570645,
+            "relative_residual": 0.25824179804613095,
+            "field_norm": 0.14008387616090828,
+            "n_edges": 1394,
+            "normal_equation_defect": 3.850656735485888e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.8311442669172633e-16,
+            "relative_residual": 1.99323593981342e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 1.687038531533887e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.08096564950566013,
+            "relative_violation": 0.5700297380491441
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.0511566527729225,
+            "relative_residual": 0.2494460559400907,
+            "field_norm": 0.20508102475353934,
+            "n_edges": 1863,
+            "normal_equation_defect": 4.456051402586223e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 8.839952142364402e-16,
+            "relative_residual": 4.2777253458304404e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 6.629023587633685e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.10696754692783572,
+            "relative_violation": 0.5176247329231838
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.09511568457764007,
+            "relative_residual": 0.25874216601714795,
+            "field_norm": 0.3676079784047891,
+            "n_edges": 2333,
+            "normal_equation_defect": 7.739967778703542e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.2448360723195325e-15,
+            "relative_residual": 3.379854331870257e-15,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 7.334109504630257e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.223768680336917,
+            "relative_violation": 0.6075543281489085
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.0984435525867494,
+            "relative_residual": 0.2790017381783544,
+            "field_norm": 0.35284207628777736,
+            "n_edges": 2793,
+            "normal_equation_defect": 8.12186088997405e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.0428066908344142e-15,
+            "relative_residual": 2.9492730353854037e-15,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 6.41345776254581e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.22824870513412687,
+            "relative_violation": 0.6455345533648917
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.13645088269577663,
+            "relative_residual": 0.237781336435981,
+            "field_norm": 0.5738502640324504,
+            "n_edges": 3269,
+            "normal_equation_defect": 1.5259240908950287e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.934309658053892e-15,
+            "relative_residual": 3.368469414798735e-15,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 1.0935420040517783e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.4396200164179437,
+            "relative_violation": 0.7655685186037069
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.1404254295440412,
+            "relative_residual": 0.25962932613367123,
+            "field_norm": 0.5408689058174522,
+            "n_edges": 3734,
+            "normal_equation_defect": 1.7368998315814118e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.0315379200205785e-15,
+            "relative_residual": 3.753491726563815e-15,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 1.2650343920558135e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.4308846749387039,
+            "relative_violation": 0.7961072478869513
+          }
+        }
+      },
+      "train_seconds": 45.9
+    },
+    "oracle": {
+      "mutual_knn": 0.7623046875,
+      "modality_gap": 0.012292402796447277,
+      "per_T": {
+        "1": {
+          "learned_class": {
+            "residual_norm": 5.57173479357549e-16,
+            "relative_residual": 2.494005554819675e-15,
+            "field_norm": 0.22340506751511005,
+            "n_edges": 412,
+            "normal_equation_defect": 5.19149433537576e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.364467569232811e-17,
+            "relative_residual": 2.3805649098751576e-16,
+            "field_norm": 0.22534430995683863,
+            "n_edges": 256,
+            "normal_equation_defect": 4.687460126167821e-18
+          },
+          "linear_readout": {
+            "violation_norm": 0.04968974294694254,
+            "relative_violation": 0.2205058692471972
+          }
+        },
+        "2": {
+          "learned_class": {
+            "residual_norm": 0.01492398256514034,
+            "relative_residual": 0.08881086458579386,
+            "field_norm": 0.16804230692657363,
+            "n_edges": 811,
+            "normal_equation_defect": 4.311913210693453e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 3.8409928928088633e-16,
+            "relative_residual": 2.268320449140377e-15,
+            "field_norm": 0.16933202247788579,
+            "n_edges": 512,
+            "normal_equation_defect": 2.7394298395001474e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.052036651029486326,
+            "relative_violation": 0.30730543619581546
+          }
+        },
+        "3": {
+          "learned_class": {
+            "residual_norm": 0.02599364743927842,
+            "relative_residual": 0.1844108269436647,
+            "field_norm": 0.14095510480639603,
+            "n_edges": 1210,
+            "normal_equation_defect": 3.8114485123775374e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 4.794944283009532e-16,
+            "relative_residual": 3.375827712483292e-15,
+            "field_norm": 0.14203758874537836,
+            "n_edges": 768,
+            "normal_equation_defect": 2.895287353899474e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.051032762235152206,
+            "relative_violation": 0.35929054193277904
+          }
+        },
+        "4": {
+          "learned_class": {
+            "residual_norm": 0.04814028012468654,
+            "relative_residual": 0.2335839545403803,
+            "field_norm": 0.20609412242981953,
+            "n_edges": 1617,
+            "normal_equation_defect": 4.317606346100566e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 5.231364506842202e-16,
+            "relative_residual": 2.53150019183375e-15,
+            "field_norm": 0.20665076478041836,
+            "n_edges": 1024,
+            "normal_equation_defect": 3.247791034412932e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.06246003537239,
+            "relative_violation": 0.30224923405804177
+          }
+        },
+        "5": {
+          "learned_class": {
+            "residual_norm": 0.09263130558333595,
+            "relative_residual": 0.251673810291438,
+            "field_norm": 0.3680609654062495,
+            "n_edges": 2017,
+            "normal_equation_defect": 7.671657641912733e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.0791388488606606e-15,
+            "relative_residual": 2.9299698121817966e-15,
+            "field_norm": 0.3683105690625126,
+            "n_edges": 1280,
+            "normal_equation_defect": 6.073334689624588e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.10843029918668007,
+            "relative_violation": 0.29439909764923533
+          }
+        },
+        "6": {
+          "learned_class": {
+            "residual_norm": 0.10120266508735147,
+            "relative_residual": 0.2865049280640136,
+            "field_norm": 0.3532318476027743,
+            "n_edges": 2424,
+            "normal_equation_defect": 7.838368648827642e-17
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 9.453639488958834e-16,
+            "relative_residual": 2.6736848042978444e-15,
+            "field_norm": 0.3535809259850853,
+            "n_edges": 1536,
+            "normal_equation_defect": 5.755115697786403e-17
+          },
+          "linear_readout": {
+            "violation_norm": 0.1141244355574045,
+            "relative_violation": 0.32276751139629767
+          }
+        },
+        "7": {
+          "learned_class": {
+            "residual_norm": 0.1694288255635256,
+            "relative_residual": 0.29515161025670683,
+            "field_norm": 0.5740399837770345,
+            "n_edges": 2834,
+            "normal_equation_defect": 1.4502644738445787e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 1.7628917125832043e-15,
+            "relative_residual": 3.0699566590662393e-15,
+            "field_norm": 0.57423993507433,
+            "n_edges": 1792,
+            "normal_equation_defect": 1.0097824388484897e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.185493609868119,
+            "relative_violation": 0.32302457307172233
+          }
+        },
+        "8": {
+          "learned_class": {
+            "residual_norm": 0.17194294874174518,
+            "relative_residual": 0.31779295678898295,
+            "field_norm": 0.5410533653076417,
+            "n_edges": 3231,
+            "normal_equation_defect": 1.2582590819090283e-16
+          },
+          "true_class_finite_sample": {
+            "residual_norm": 2.9263450488681526e-15,
+            "relative_residual": 5.406747184855074e-15,
+            "field_norm": 0.541239482597815,
+            "n_edges": 2048,
+            "normal_equation_defect": 1.8163709918295969e-16
+          },
+          "linear_readout": {
+            "violation_norm": 0.18542997309581302,
+            "relative_violation": 0.3426024505932111
+          }
+        }
+      },
+      "train_seconds": 49.6
+    }
+  },
+  "total_seconds": 507.4
+}

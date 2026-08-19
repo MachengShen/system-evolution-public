@@ -25,6 +25,17 @@ rules, experiments, hardware workload, and public feedback loops.
 - [Predictive Coding, Free Energy, and Credit Transport](essays/2026-05-19-predictive-coding-free-energy-credit-transport.md)
 - [Field Spiral Scanner](essays/2026-05-19-field-spiral-scanner.md)
 
+## 2026-08 Iteration: Lossy Projection ⇒ Forced Residual (experiments + verdicts)
+
+Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visible.
+
+- [THEORY v3 — discounted cokernel obstruction; v1/v2 holonomy claim withdrawn](essays/2026-08-19-information-dynamics-theory-v3-cokernel-obstruction.md) 🟢 0.9
+- [Multimodal gluing obstruction — E1 mechanism survives, real-model scale story falsified, granularity dose-response survives](essays/2026-08-19-multimodal-gluing-obstruction.md) 🟢/🔴/🟡 split · parked
+- [Exclusion Cannot Remember — self-boundary hysteresis note + 2026-08 addendum](essays/2026-07-13-exclusion-cannot-remember-self-boundary-hysteresis.md) 🟡 0.55
+- [Agency as second-order persistence — what survived the Omohundro audit and the D0–D2 experiments](essays/2026-08-19-agency-second-order-persistence.md) 🟡 0.45
+- [mu-boundary D0–D2 results + human reanalysis (attachments)](essays/2026-08-19-mu-boundary/README.md)
+- [Boundary-Defense experiment — pre-registration (running)](essays/2026-08-19-boundary-defense-preregistration.md) 🟡 pre-reg
+
 ## Searchable Summary
 
 General Learning Machine, credit transport, backpropagation, lifelong agents,
