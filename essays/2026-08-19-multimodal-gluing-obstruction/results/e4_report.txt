@@ -1,0 +1,61 @@
+## P1 (additive φ*, InfoNCE τ=0.2, λ = steps), T=8 graph; mean over seeds [95% CI]
+
+### s=2  (n_seeds=5, analytic floor rel T8 = 0.858)
+| step | r_learned_abs | field_ratio | r_learned_rel | V_lin | r_true_abs | mutual_knn |
+|---:|---:|---:|---:|---:|---:|---:|
+| 100 | 0.6113 [0.4642,0.7518] | 0.75 [0.72,0.78] | 0.791 | 0.919 [0.879,0.956] | 0.8926 | 0.043 |
+| 300 | 0.5260 [0.3886,0.6445] | 0.67 [0.61,0.72] | 0.763 | 0.929 [0.899,0.957] | 0.8928 | 0.059 |
+| 1000 | 0.2982 [0.2186,0.3752] | 0.49 [0.39,0.59] | 0.607 | 0.939 [0.919,0.965] | 0.8931 | 0.105 |
+| 3000 | 0.2016 [0.1524,0.2429] | 0.42 [0.33,0.52] | 0.495 | 0.927 [0.883,0.964] | 0.8928 | 0.236 |
+| 10000 | 0.1931 [0.1483,0.2346] | 0.42 [0.33,0.51] | 0.482 | 0.956 [0.911,0.989] | 0.8930 | 0.345 |
+| 30000 | 0.2162 [0.1641,0.2504] | 0.41 [0.33,0.51] | 0.538 | 0.998 [0.997,0.999] | 0.8926 | 0.442 |
+
+P1a: first 0.6113 prev 0.1931 last 0.2162; |last-prev|/first = 0.038 (<0.10 ⇒ saturated); near-monotone(all seeds, tol 5% of first) = False
+F1' check (per seed, per checkpoint): 0 violations of V_lin >= floor out of 30; min margin V_lin - floor = +0.052 -> OK
+
+### s=4  (n_seeds=5, analytic floor rel T8 = 0.653)
+| step | r_learned_abs | field_ratio | r_learned_rel | V_lin | r_true_abs | mutual_knn |
+|---:|---:|---:|---:|---:|---:|---:|
+| 100 | 0.4583 [0.3198,0.5920] | 0.84 [0.76,0.92] | 0.552 | 0.757 [0.625,0.884] | 0.6709 | 0.145 |
+| 300 | 0.3415 [0.2370,0.4433] | 0.77 [0.64,0.88] | 0.471 | 0.832 [0.725,0.935] | 0.6710 | 0.193 |
+| 1000 | 0.2136 [0.1532,0.2706] | 0.68 [0.49,0.85] | 0.333 | 0.905 [0.840,0.966] | 0.6709 | 0.382 |
+| 3000 | 0.1832 [0.1245,0.2228] | 0.66 [0.47,0.84] | 0.286 | 0.931 [0.876,0.975] | 0.6710 | 0.560 |
+| 10000 | 0.2148 [0.1448,0.2577] | 0.66 [0.47,0.84] | 0.329 | 0.944 [0.886,0.984] | 0.6709 | 0.667 |
+| 30000 | 0.2312 [0.1499,0.3051] | 0.66 [0.47,0.84] | 0.368 | 0.949 [0.895,0.987] | 0.6711 | 0.730 |
+
+P1a: first 0.4583 prev 0.2148 last 0.2312; |last-prev|/first = 0.036 (<0.10 ⇒ saturated); near-monotone(all seeds, tol 5% of first) = False
+F1' check (per seed, per checkpoint): 0 violations of V_lin >= floor out of 30; min margin V_lin - floor = +0.066 -> OK
+
+### s=8  (n_seeds=5, analytic floor rel T8 = 0.000)
+| step | r_learned_abs | field_ratio | r_learned_rel | V_lin | r_true_abs | mutual_knn |
+|---:|---:|---:|---:|---:|---:|---:|
+| 100 | 0.4160 [0.3012,0.5015] | 1.00 [1.00,1.00] | 0.396 | 0.723 [0.674,0.771] | 0.0000 | 0.733 |
+| 300 | 0.4129 [0.2801,0.5010] | 1.00 [0.99,1.00] | 0.386 | 0.693 [0.639,0.747] | 0.0000 | 0.797 |
+| 1000 | 0.4012 [0.2883,0.4884] | 1.00 [0.99,1.00] | 0.380 | 0.709 [0.657,0.767] | 0.0000 | 0.840 |
+| 3000 | 0.4034 [0.2773,0.5074] | 1.00 [0.99,1.00] | 0.375 | 0.743 [0.689,0.799] | 0.0000 | 0.858 |
+| 10000 | 0.3951 [0.2574,0.5065] | 1.00 [1.00,1.00] | 0.363 | 0.770 [0.711,0.822] | 0.0000 | 0.872 |
+| 30000 | 0.4400 [0.3047,0.5464] | 1.00 [1.00,1.00] | 0.412 | 0.800 [0.739,0.849] | 0.0000 | 0.883 |
+
+P1a: first 0.4160 prev 0.3951 last 0.4400; |last-prev|/first = 0.108 (<0.10 ⇒ saturated); near-monotone(all seeds, tol 5% of first) = False
+F1' check (per seed, per checkpoint): 0 violations of V_lin >= floor out of 30; min margin V_lin - floor = +0.629 -> OK
+
+P1b: s=8 reference saturated r_learned_abs = 0.4175 [0.2811,0.5262]
+      s=2: 0.2047 [0.1563,0.2419] -> BELOW reference
+      s=4: 0.2230 [0.1483,0.2778] -> BELOW reference
+
+P1c field_ratio first->last per s: s=2: 0.75->0.41; s=4: 0.84->0.66; s=8: 1.00->1.00
+
+### T=s+1 graphs (first over-determined T) — saturated r_learned_abs and V_lin vs floor
+s=2 T=3: floor 0.441; r_learned_abs@30000 0.2038 [0.1130,0.2658]; V_lin@30000 0.978; field_ratio 0.89->0.78
+s=4 T=5: floor 0.347; r_learned_abs@30000 0.2214 [0.1375,0.3112]; V_lin@30000 0.918; field_ratio 0.95->0.86
+
+## P2 (generic φ*, λ = 10000 steps); n_generic_cells=15 n_additive_cells=15
+
+P2a Spearman(score_t, v_t) all generic points (n=120): rho=0.726 p=6.86e-21  [registered pass ≥0.5; falsifier |rho|<0.2]
+    shared types only (n=60): rho=0.554 p=4.42e-06   [P2b registered ≥0.4]
+    private types only (n=60): rho=0.155 p=2.36e-01
+    s=2: rho=0.661 (n=40); score range 0.821-0.973, v_t range 0.974-1.000
+    s=4: rho=0.781 (n=40); score range 0.628-0.913, v_t range 0.945-1.000
+    s=6: rho=0.693 (n=40); score range 0.379-0.728, v_t range 0.938-1.000
+P2b shared-type median v_t: generic 0.977 vs additive 0.398; per-cell ratio median 2.46 (registered >3×) ; ratios: [13.29, 2.78, 1.22, 5.04, 5.16, 2.2, 1.78, 1.95, 1.91, 2.64, 2.53, 2.41, 2.53, 2.35, 2.46]
+V_lin vs floor (generic): s2seed0 0.995/0.957; s2seed1 0.999/0.974; s2seed2 0.995/0.953; s2seed3 0.998/0.968; s2seed4 0.997/0.961; s4seed0 0.991/0.905; s4seed1 0.998/0.919; s4seed2 0.987/0.874; s4seed3 0.998/0.926; s4seed4 0.994/0.923; s6seed0 0.993/0.759; s6seed1 0.990/0.712; s6seed2 0.991/0.676; s6seed3 0.992/0.748; s6seed4 0.989/0.741

@@ -30,7 +30,7 @@ rules, experiments, hardware workload, and public feedback loops.
 Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visible.
 
 - [THEORY v3 — discounted cokernel obstruction; v1/v2 holonomy claim withdrawn](essays/2026-08-19-information-dynamics-theory-v3-cokernel-obstruction.md) 🟢 0.9
-- [Multimodal gluing obstruction — E1 mechanism survives, real-model scale story falsified, granularity dose-response survives](essays/2026-08-19-multimodal-gluing-obstruction.md) 🟢/🔴/🟡 split · parked
+- [Multimodal gluing obstruction — E1 mechanism survives, real-model scale story falsified, granularity dose-response survives; E4: co-training *collapses* the obstructed structure rather than repairing it](essays/2026-08-19-multimodal-gluing-obstruction.md) 🟢/🔴/🟡 split · E4 added 2026-08-22
 - [Exclusion Cannot Remember — self-boundary hysteresis note + 2026-08 addendum](essays/2026-07-13-exclusion-cannot-remember-self-boundary-hysteresis.md) 🟡 0.55
 - [Agency as second-order persistence — what survived the Omohundro audit and the D0–D2 experiments](essays/2026-08-19-agency-second-order-persistence.md) 🟡 0.45
 - [mu-boundary D0–D2 results + human reanalysis (attachments)](essays/2026-08-19-mu-boundary/README.md)
