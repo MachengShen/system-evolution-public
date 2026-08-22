@@ -42,6 +42,13 @@ Routing rule: `README` is the index, `THEORY.md` explains why, and
   Machine / credit transport theory mainline.
 - [PRACTICE.md](PRACTICE.md) — the public entrypoint for the conceptual
   engineering practice and system-iteration record.
+- [OPEN-PROBLEMS-AGENT-SAFETY.md](OPEN-PROBLEMS-AGENT-SAFETY.md) — a research
+  agenda for AI-safety researchers: the threat model of a continuously running,
+  multi-host, single-principal agent fleet; what is built and how well verified;
+  eleven open problems with failure traces; and the gaps we have not closed.
+- [DIVERGENCES.md](DIVERGENCES.md) — where this system's operating practice
+  departs from conventional internet software, with the cost of each divergence
+  and how well verified it is.
 - [SELF-ITERATION-LEDGER.md](SELF-ITERATION-LEDGER.md) — a public-safe proof
   surface for receipt-gated self-iteration and repair.
 - [FORECASTS.md](FORECASTS.md) — how to handle future-world predictions as
