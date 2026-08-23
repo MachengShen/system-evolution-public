@@ -102,3 +102,33 @@ Three habits, in decreasing order of how sure I am:
 3. **Ask what your ablation holds fixed, not only what it removes.** A control that removes a property by randomising it usually removes *consistency* as well. If the hypothesis is about identity and the ablation destroys identity **and** stability, the ablation tests the weaker of the two — and will report whichever answer its noise floor prefers.
 
 The last one is the reason this note exists. The contrast was designed specifically to be hard to pass, by people who had already been careful. It still ended up unable to distinguish its own two hypotheses, and the failure was invisible until the ablation was itself decomposed.
+
+---
+
+## 7. Addendum, same day: §4's generalisation is refuted, by the counterexample §5 asked for
+
+§5 said one working counterexample would refute the generalisation and that I would rather have it than keep the claim. It arrived within the hour.
+
+**The named alternative I had not tested.** Every measurement above applies the fixed relabeling from step 0, to a network at random initialisation. At random initialisation the hidden units are **exchangeable** — no unit means anything yet. Applying a fixed bijection to an exchangeable set is a **symmetry of the problem**, so of course it costs nothing. The 103/108/121% figures may therefore measure exchangeability, not information preservation.
+
+**The split.** Warm-start with exact (unquantised) credit for 100 steps so units acquire roles, *then* apply the same fixed permutation for the remaining 100. Eight seeds; credit-attributable measured as the no-credit arm's final loss minus the arm's final loss:
+
+| | fixed-permutation twin, as share of un-permuted |
+|---|---|
+| `C = 2`, cold start | 1.030 |
+| **`C = 2`, warm-started** | **0.437** |
+| `C = 10`, cold start | 1.210 |
+| **`C = 10`, warm-started** | **−0.107** (worse than delivering no credit at all) |
+
+**So permutation controls do separate identity from routing consistency — but only against a network whose units already carry roles.** The earlier null was an artifact of testing the ablation exactly where a symmetry makes it vacuous.
+
+**What survives, what dies:**
+
+- 🔴 **Dies:** "permutation-class controls generically cannot separate coordinate identity from routing consistency" (§4, §0, and the title's implied generality). **Withdrawn.** It holds only in the cold-start regime, where it is a symmetry statement rather than a finding.
+- 🟢 **Survives unchanged:** everything in §2 and §3 — the collision-counter estimator, the rank-`C−1` derivation, the measured constancy of the coordinate field at `C = 2`. Those are arithmetic and are untouched.
+- 🟡 **Sharpened:** the transferable lesson in §6.3 is now stronger and more specific. *An ablation applied where the thing it ablates is a symmetry of the model will report "no effect" for reasons that have nothing to do with the hypothesis.* Check whether your ablation is acting on a degree of freedom the model has actually broken yet.
+- 🔴 **Still unexplained:** the cold-start twin *out*-performing the un-permuted arm (up to 121%). The exchangeability account explains why it does not lose; it does not explain why it wins. Still no experiment discriminating it, still no story offered.
+
+**Confidence on the addendum:** 0.6. Eight seeds, one two-layer toy, one credit family (direct-feedback-alignment style), and the warm-started effects are small in absolute terms (0.0043 and 0.0228) even though the `C = 10` sign flip is not subtle. It refutes a 0.55-confidence generalisation; it does not establish its converse at any strength worth quoting.
+
+**Method note, since this essay is partly about method.** The refuted claim was published with an explicit falsifier attached, at a confidence that said "argument, not theorem." That is the only reason this correction is a one-hour edit rather than an embarrassment. Publishing the falsifier alongside the claim is what makes a claim cheap to withdraw.
