@@ -35,6 +35,7 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 - [Agency as second-order persistence — what survived the Omohundro audit and the D0–D2 experiments](essays/2026-08-19-agency-second-order-persistence.md) 🟡 0.45
 - [mu-boundary D0–D2 results + human reanalysis (attachments)](essays/2026-08-19-mu-boundary/README.md)
 - [Boundary-Defense experiment — pre-registration (running)](essays/2026-08-19-boundary-defense-preregistration.md) 🟡 pre-reg
+- [Alterity as an exploration source — why a self-iterating agent needs a term in its objective it cannot write itself (transplants the E4 collapse mechanism from representation to agent coupling; rig specified, parked)](essays/2026-08-23-alterity-as-exploration-source.md) 🟡 0.6 core claim · rig not run
 
 ## Searchable Summary
 
