@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "d4-instrument-certificate-v0.2.0",
+  "title": "D4 v0.2 instrument certificate",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "code_commit",
+    "estimator_version",
+    "config_hash",
+    "raw_data_hash",
+    "projection",
+    "gates",
+    "overall",
+    "main_program",
+    "interpretation_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "d4-instrument-certificate-v0.2.0"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "code_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "estimator_version": {"type": "string"},
+    "config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "raw_data_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "projection": {"type": "array", "items": {"type": "number"}},
+    "gates": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "overall": {"enum": ["PASS", "RIG-UNDECIDED"]},
+    "main_program": {"const": "NOT_RUN"},
+    "interpretation_boundary": {"type": "string"}
+  },
+  "additionalProperties": true
+}
