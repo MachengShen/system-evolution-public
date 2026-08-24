@@ -36,6 +36,7 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 - [mu-boundary D0–D2 results + human reanalysis (attachments)](essays/2026-08-19-mu-boundary/README.md)
 - [Boundary-Defense experiment — pre-registration (running)](essays/2026-08-19-boundary-defense-preregistration.md) 🟡 pre-reg
 - [Alterity as an exploration source — why a self-iterating agent needs a term in its objective it cannot write itself (transplants the E4 collapse mechanism from representation to agent coupling; rig specified, parked)](essays/2026-08-23-alterity-as-exploration-source.md) 🟡 0.6 core claim · rig not run
+- [Capacity is not the lever either — pre-registered 91-cell capacity x credit sweep returns its KILL branch (A=P=D=false); the same run shows the assay had almost no headroom, and the cap is published with the verdict rather than after it](essays/2026-08-24-capacity-is-not-the-lever.md) 🟢 0.97 terminal / 🟡 0.45 that it transfers · structure attribution WITHHELD
 
 ## Searchable Summary
 
