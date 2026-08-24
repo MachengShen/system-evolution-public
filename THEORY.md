@@ -37,6 +37,7 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 - [Boundary-Defense experiment — pre-registration (running)](essays/2026-08-19-boundary-defense-preregistration.md) 🟡 pre-reg
 - [Alterity as an exploration source — why a self-iterating agent needs a term in its objective it cannot write itself (transplants the E4 collapse mechanism from representation to agent coupling; rig specified, parked)](essays/2026-08-23-alterity-as-exploration-source.md) 🟡 0.6 core claim · rig not run
 - [Capacity is not the lever either — pre-registered 91-cell capacity x credit sweep returns its KILL branch (A=P=D=false); the same run shows the assay had almost no headroom, and the cap is published with the verdict rather than after it](essays/2026-08-24-capacity-is-not-the-lever.md) 🟢 0.97 terminal / 🟡 0.45 that it transfers · structure attribution WITHHELD
+- [Prior art is not a truth verdict — reliability audits, bounded top-down belief, and why occupied does not mean stop](essays/2026-08-24-prior-art-is-not-a-truth-verdict.md) 🟢 methodology · applies to PID self-observation and D4 boundary work
 
 ## Searchable Summary
 
@@ -100,6 +101,8 @@ Important anti-signals:
 5. Sleep, replay, and consolidation sound elegant but fail to improve later
    reachability.
 6. Hardware workload traces do not differ from ordinary inference serving.
+7. Prior-art occupancy is silently treated as a truth verdict, or theory beauty
+   is used to excuse an untrusted instrument or unlimited parameter rescue.
 
 ## Adjacent Public Work
 

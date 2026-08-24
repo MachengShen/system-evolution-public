@@ -23,6 +23,7 @@ Learning Machine research line.
 - [Agency as Second-Order Persistence](2026-08-19-agency-second-order-persistence.md)
 - [mu-boundary D0–D2 + human reanalysis (attachments)](2026-08-19-mu-boundary/README.md)
 - [Boundary-Defense Experiment: pre-registration (running)](2026-08-19-boundary-defense-preregistration.md)
+- [Prior Art Is Not a Truth Verdict](2026-08-24-prior-art-is-not-a-truth-verdict.md)
 
 ## User-Agency Substrate
 
