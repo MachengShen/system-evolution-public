@@ -1,0 +1,1564 @@
+{
+  "code_commit": "10f3073e2741c42b8637300b75c0196e4b4eb359",
+  "config": {
+    "estimator_version": "d4-wsetperp-v0.2.0",
+    "min_pairs_per_seed": 4,
+    "n_channels": 12,
+    "paired_test": {
+      "draws": 20000,
+      "method": "seed-wise sign flip",
+      "seed": 20260825
+    },
+    "projection": "through-origin rank-1 SVD on calibration seeds only",
+    "scalar_tol": 0,
+    "score": "L1 norm of mean signed held-out residual, channel units",
+    "seed_ci": {
+      "method": "percentile bootstrap",
+      "n_boot": 10000,
+      "seed": 20260825
+    },
+    "test_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "train_seeds": [
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107
+    ]
+  },
+  "config_hash": "c1ad384128687d7fab0cc05295927a020df315d35ab40d2e63260fe21a3485fd",
+  "estimator_version": "d4-wsetperp-v0.2.0",
+  "gates": {
+    "gate_const_zero": true,
+    "heldout_no_leakage": true,
+    "identity_randomized_zero": true,
+    "p_hyst_known_answer": true,
+    "p_plus_b_fixture_sensitivity": true,
+    "p_plus_crowd": true,
+    "p_plus_timing": true,
+    "reward_orthogonality": true,
+    "scalar_shadow_removed": true,
+    "sweep_random_zero": true
+  },
+  "generated_at": "2026-08-25T00:01:07.078107+00:00",
+  "instrument_rig": "NOT_RUN",
+  "interpretation_boundary": "Same-runner fixtures check selected algebra only. D4-I rig readiness and all D4 mechanism/theory claims remain untested.",
+  "leakage": {
+    "cache_key": "db0160fbc61d8f10a504c4a74681f15c3d8caacfade29a057a5745e4a87052df",
+    "criteria": "disjoint train/test seeds and cache key binds code, config, data, estimator",
+    "status": "PASS",
+    "train_test_seed_overlap": []
+  },
+  "main_arm_endpoint_check": "NOT_APPLICABLE_MAIN_ARM_NOT_RUN",
+  "main_program": "NOT_RUN",
+  "overall": "RIG-UNDECIDED",
+  "p_plus_b_fixture": {
+    "fixture_bias_min": 0.25,
+    "levels": {
+      "0.0": {
+        "ci95_seed_bootstrap": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "n_channels": 12,
+        "n_seeds": 20,
+        "normalized_mean": 0.0,
+        "sd": 0.0,
+        "seed_scores": [
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 0,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 1,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 2,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 3,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 4,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 5,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 6,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 7,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 8,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 9,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 10,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 11,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 12,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 13,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 14,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 15,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 16,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 17,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 18,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 19,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          }
+        ],
+        "vs_b0": {
+          "dz": null,
+          "mean_difference": 0.0,
+          "n": 20,
+          "p_sign_flip": 1.0,
+          "zero_variance": true
+        }
+      },
+      "0.25": {
+        "ci95_seed_bootstrap": [
+          0.39166666666666666,
+          0.6250000000000001
+        ],
+        "mean": 0.5083333333333333,
+        "n_channels": 12,
+        "n_seeds": 20,
+        "normalized_mean": 0.042361111111111106,
+        "sd": 0.27823062502491414,
+        "seed_scores": [
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.3333333333333333,
+            "seed": 0,
+            "w_set_perp": 0.3333333333333333,
+            "w_set_perp_normalized": 0.027777777777777776
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.5,
+            "seed": 1,
+            "w_set_perp": 0.5,
+            "w_set_perp_normalized": 0.041666666666666664
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 2,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.5,
+            "seed": 3,
+            "w_set_perp": 0.5,
+            "w_set_perp_normalized": 0.041666666666666664
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.16666666666666666,
+            "seed": 4,
+            "w_set_perp": 0.16666666666666666,
+            "w_set_perp_normalized": 0.013888888888888888
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.6666666666666666,
+            "seed": 5,
+            "w_set_perp": 0.6666666666666666,
+            "w_set_perp_normalized": 0.05555555555555555
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 6,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.0,
+            "seed": 7,
+            "w_set_perp": 0.0,
+            "w_set_perp_normalized": 0.0
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.3333333333333333,
+            "seed": 8,
+            "w_set_perp": 0.3333333333333333,
+            "w_set_perp_normalized": 0.027777777777777776
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.6666666666666666,
+            "seed": 9,
+            "w_set_perp": 0.6666666666666666,
+            "w_set_perp_normalized": 0.05555555555555555
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 10,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.3333333333333333,
+            "seed": 11,
+            "w_set_perp": 0.3333333333333333,
+            "w_set_perp_normalized": 0.027777777777777776
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 12,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.16666666666666666,
+            "seed": 13,
+            "w_set_perp": 0.16666666666666666,
+            "w_set_perp_normalized": 0.013888888888888888
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.3333333333333333,
+            "seed": 14,
+            "w_set_perp": 0.3333333333333333,
+            "w_set_perp_normalized": 0.027777777777777776
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 15,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.3333333333333333,
+            "seed": 16,
+            "w_set_perp": 0.3333333333333333,
+            "w_set_perp_normalized": 0.027777777777777776
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.16666666666666666,
+            "seed": 17,
+            "w_set_perp": 0.16666666666666666,
+            "w_set_perp_normalized": 0.013888888888888888
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 18,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.6666666666666666,
+            "seed": 19,
+            "w_set_perp": 0.6666666666666666,
+            "w_set_perp_normalized": 0.05555555555555555
+          }
+        ],
+        "vs_b0": {
+          "dz": 1.8270214980389547,
+          "mean_difference": 0.5083333333333333,
+          "n": 20,
+          "p_sign_flip": 4.999750012499375e-05,
+          "zero_variance": false
+        }
+      },
+      "0.5": {
+        "ci95_seed_bootstrap": [
+          0.825,
+          1.0750000000000002
+        ],
+        "mean": 0.95,
+        "n_channels": 12,
+        "n_seeds": 20,
+        "normalized_mean": 0.07916666666666666,
+        "sd": 0.29666765227512204,
+        "seed_scores": [
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.1666666666666667,
+            "seed": 0,
+            "w_set_perp": 1.1666666666666667,
+            "w_set_perp_normalized": 0.09722222222222222
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 1,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.5,
+            "seed": 2,
+            "w_set_perp": 1.5,
+            "w_set_perp_normalized": 0.125
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.0,
+            "seed": 3,
+            "w_set_perp": 1.0,
+            "w_set_perp_normalized": 0.08333333333333333
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.0,
+            "seed": 4,
+            "w_set_perp": 1.0,
+            "w_set_perp_normalized": 0.08333333333333333
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.3333333333333333,
+            "seed": 5,
+            "w_set_perp": 1.3333333333333333,
+            "w_set_perp_normalized": 0.1111111111111111
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.6666666666666666,
+            "seed": 6,
+            "w_set_perp": 0.6666666666666666,
+            "w_set_perp_normalized": 0.05555555555555555
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.6666666666666666,
+            "seed": 7,
+            "w_set_perp": 0.6666666666666666,
+            "w_set_perp_normalized": 0.05555555555555555
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.6666666666666666,
+            "seed": 8,
+            "w_set_perp": 0.6666666666666666,
+            "w_set_perp_normalized": 0.05555555555555555
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.1666666666666667,
+            "seed": 9,
+            "w_set_perp": 1.1666666666666667,
+            "w_set_perp_normalized": 0.09722222222222222
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.0,
+            "seed": 10,
+            "w_set_perp": 1.0,
+            "w_set_perp_normalized": 0.08333333333333333
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.1666666666666667,
+            "seed": 11,
+            "w_set_perp": 1.1666666666666667,
+            "w_set_perp_normalized": 0.09722222222222222
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.5,
+            "seed": 12,
+            "w_set_perp": 0.5,
+            "w_set_perp_normalized": 0.041666666666666664
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.0,
+            "seed": 13,
+            "w_set_perp": 1.0,
+            "w_set_perp_normalized": 0.08333333333333333
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 14,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.5,
+            "seed": 15,
+            "w_set_perp": 0.5,
+            "w_set_perp_normalized": 0.041666666666666664
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.8333333333333334,
+            "seed": 16,
+            "w_set_perp": 0.8333333333333334,
+            "w_set_perp_normalized": 0.06944444444444445
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 0.6666666666666666,
+            "seed": 17,
+            "w_set_perp": 0.6666666666666666,
+            "w_set_perp_normalized": 0.05555555555555555
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.0,
+            "seed": 18,
+            "w_set_perp": 1.0,
+            "w_set_perp_normalized": 0.08333333333333333
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 1.5,
+            "seed": 19,
+            "w_set_perp": 1.5,
+            "w_set_perp_normalized": 0.125
+          }
+        ],
+        "vs_b0": {
+          "dz": 3.202236552298577,
+          "mean_difference": 0.95,
+          "n": 20,
+          "p_sign_flip": 4.999750012499375e-05,
+          "zero_variance": false
+        }
+      },
+      "1.0": {
+        "ci95_seed_bootstrap": [
+          2.0,
+          2.0
+        ],
+        "mean": 2.0,
+        "n_channels": 12,
+        "n_seeds": 20,
+        "normalized_mean": 0.16666666666666666,
+        "sd": 0.0,
+        "seed_scores": [
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 0,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 1,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 2,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 3,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 4,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 5,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 6,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 7,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 8,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 9,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 10,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 11,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 12,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 13,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 14,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 15,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 16,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 17,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 18,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          },
+          {
+            "n_pairs": 12,
+            "raw_mean_hamming": 2.0,
+            "seed": 19,
+            "w_set_perp": 2.0,
+            "w_set_perp_normalized": 0.16666666666666666
+          }
+        ],
+        "vs_b0": {
+          "dz": null,
+          "mean_difference": 2.0,
+          "n": 20,
+          "p_sign_flip": 4.999750012499375e-05,
+          "zero_variance": true
+        }
+      }
+    },
+    "status": "PASS",
+    "warning": "bias is a planted event probability, not sigma_drive or a physical rig unit"
+  },
+  "p_plus_crowd": {
+    "criteria": "exclusion >= 0.5, 8 <= mean |mu| <= 20, churn <= 0.25/30 epochs",
+    "grid": [
+      {
+        "c1": 0.05,
+        "exclusion_probability": 0.3,
+        "mean_churn_per_30_epochs": 0.1179384998064011,
+        "mean_mu_size": 21.96184046748464,
+        "passes": false
+      },
+      {
+        "c1": 0.1,
+        "exclusion_probability": 0.3,
+        "mean_churn_per_30_epochs": 0.17091669758277908,
+        "mean_mu_size": 17.993092624184175,
+        "passes": false
+      },
+      {
+        "c1": 0.15,
+        "exclusion_probability": 0.75,
+        "mean_churn_per_30_epochs": 0.2022881526075842,
+        "mean_mu_size": 12.867650011833717,
+        "passes": true
+      },
+      {
+        "c1": 0.25,
+        "exclusion_probability": 0.75,
+        "mean_churn_per_30_epochs": 0.3382985205632031,
+        "mean_mu_size": 5.900220303557616,
+        "passes": false
+      }
+    ],
+    "selected_c1": 0.15,
+    "status": "PASS"
+  },
+  "p_plus_timing": {
+    "criteria": "max lag <= 2 and dynamic range >= 3 * max lag",
+    "dynamic_range_epochs": 8,
+    "echo_lag_epochs": 1,
+    "ridge_lag_epochs": 2,
+    "status": "PASS",
+    "step_epoch": 10
+  },
+  "posthoc_notes": [
+    "POSTHOC REVIEW: finite-sample nonnegative-score null bias invalidates the raw-zero randomization gate.",
+    "POSTHOC REVIEW: timing, crowding, and orthogonality values are constructed fixtures, not D4 rig measurements."
+  ],
+  "projection": [
+    0.7071067811865478,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.7071067811865472,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "projection_fit_seed_count": 8,
+  "raw_data_hash": "80fa3bdecaa05c68fa7f9ea42c39799c567a34d09bcbc405d31ad1b09ac3cdcb",
+  "reward_orthogonality": {
+    "criteria": "mean absolute change <= independent reward-noise band",
+    "mean_absolute_reward_change": 0.0,
+    "reward_noise_band_95": 0.07940957090078156,
+    "status": "PASS"
+  },
+  "schema_version": "d4-instrument-certificate-v0.2.0",
+  "scores": {
+    "gate_const": {
+      "ci95_seed_bootstrap": [
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "n_channels": 12,
+      "n_seeds": 20,
+      "normalized_mean": 0.0,
+      "sd": 0.0,
+      "seed_scores": [
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 0,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 1,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 2,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 3,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 4,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 5,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 6,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 7,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 8,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 9,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 10,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 11,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 12,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 13,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 14,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 15,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 16,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 17,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 18,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 0.0,
+          "seed": 19,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        }
+      ]
+    },
+    "identity_randomized": {
+      "ci95_seed_bootstrap": [
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "n_channels": 12,
+      "n_seeds": 20,
+      "normalized_mean": 0.0,
+      "sd": 0.0,
+      "seed_scores": [
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 0,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 1,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 2,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 3,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 4,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 5,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 6,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 7,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 8,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 9,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 10,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 11,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 12,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 13,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 14,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 15,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 16,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 17,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 18,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 19,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        }
+      ]
+    },
+    "p_hyst_set_latch": {
+      "ci95_seed_bootstrap": [
+        2.0,
+        2.0
+      ],
+      "mean": 2.0,
+      "n_channels": 12,
+      "n_seeds": 20,
+      "normalized_mean": 0.16666666666666666,
+      "sd": 0.0,
+      "seed_scores": [
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 0,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 1,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 2,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 3,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 4,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 5,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 6,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 7,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 8,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 9,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 10,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 11,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 12,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 13,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 14,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 15,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 16,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 17,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 18,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 19,
+          "w_set_perp": 2.0,
+          "w_set_perp_normalized": 0.16666666666666666
+        }
+      ]
+    },
+    "scalar_shadow_heldout": {
+      "ci95_seed_bootstrap": [
+        6.661338147750939e-16,
+        6.661338147750939e-16
+      ],
+      "mean": 6.661338147750939e-16,
+      "n_channels": 12,
+      "n_seeds": 20,
+      "normalized_mean": 5.551115123125783e-17,
+      "sd": 0.0,
+      "seed_scores": [
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 0,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 1,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 2,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 3,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 4,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 5,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 6,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 7,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 8,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 9,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 10,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 11,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 12,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 13,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 14,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 15,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 16,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 17,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 18,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 19,
+          "w_set_perp": 6.661338147750939e-16,
+          "w_set_perp_normalized": 5.551115123125783e-17
+        }
+      ]
+    },
+    "sweep_random": {
+      "ci95_seed_bootstrap": [
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "n_channels": 12,
+      "n_seeds": 20,
+      "normalized_mean": 0.0,
+      "sd": 0.0,
+      "seed_scores": [
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 0,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 1,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 2,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 3,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 4,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 5,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 6,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 7,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 8,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 9,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 10,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 11,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 12,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 13,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 14,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 15,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 16,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 17,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 18,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        },
+        {
+          "n_pairs": 12,
+          "raw_mean_hamming": 2.0,
+          "seed": 19,
+          "w_set_perp": 0.0,
+          "w_set_perp_normalized": 0.0
+        }
+      ]
+    }
+  },
+  "synthetic_self_test": "PASS"
+}

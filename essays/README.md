@@ -24,6 +24,7 @@ Learning Machine research line.
 - [mu-boundary D0–D2 + human reanalysis (attachments)](2026-08-19-mu-boundary/README.md)
 - [Boundary-Defense Experiment: pre-registration (running)](2026-08-19-boundary-defense-preregistration.md)
 - [Prior Art Is Not a Truth Verdict](2026-08-24-prior-art-is-not-a-truth-verdict.md)
+- [D4 v0.2 Instrument Gate: Pre-rig Self-test Passed, Estimator Not Certified](2026-08-25-d4-instrument-gate-blocked.md)
 
 ## User-Agency Substrate
 

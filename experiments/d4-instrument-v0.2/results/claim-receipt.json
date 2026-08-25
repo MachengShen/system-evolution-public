@@ -1,0 +1,18 @@
+{
+  "claim": "The current D4 v0.2 estimator implementation is a candidate for D4-I rig calibration; rig readiness remains unestablished.",
+  "cognitive_state": "speculative",
+  "cognitive_state_reason": "Only same-generator synthetic fixtures and limited unit tests were exercised; no independent D4-I rig or real ridge/echo path was tested.",
+  "edges": [],
+  "evidence": [
+    {
+      "kind": "supports",
+      "ref": "certificates.json"
+    }
+  ],
+  "id": "d4-v0.2-instrument-certificates-20260825",
+  "observed": "synthetic_self_test=PASS; instrument_rig=NOT_RUN; main_program=NOT_RUN; code_commit=10f3073e2741c42b8637300b75c0196e4b4eb359",
+  "provenance": {
+    "derivation_type": "empirical",
+    "source": "experiments/d4-instrument-v0.2/results/certificates.json"
+  }
+}
