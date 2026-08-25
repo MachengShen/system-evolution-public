@@ -13,6 +13,8 @@
     "projection",
     "gates",
     "overall",
+    "synthetic_self_test",
+    "instrument_rig",
     "main_program",
     "interpretation_boundary"
   ],
@@ -25,7 +27,9 @@
     "raw_data_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "projection": {"type": "array", "items": {"type": "number"}},
     "gates": {"type": "object", "additionalProperties": {"type": "boolean"}},
-    "overall": {"enum": ["PASS", "RIG-UNDECIDED"]},
+    "overall": {"const": "RIG-UNDECIDED"},
+    "synthetic_self_test": {"enum": ["PASS", "FAIL"]},
+    "instrument_rig": {"const": "NOT_RUN"},
     "main_program": {"const": "NOT_RUN"},
     "interpretation_boundary": {"type": "string"}
   },

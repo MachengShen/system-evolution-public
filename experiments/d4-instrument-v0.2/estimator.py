@@ -186,12 +186,18 @@ def paired_effect(a: Iterable[float], b: Iterable[float]) -> dict:
     d = va - vb
     sd = float(d.std(ddof=1))
     mean = float(d.mean())
-    dz = float(mean / sd) if sd > 0 else (float("inf") if mean > 0 else 0.0)
+    dz = float(mean / sd) if sd > 0 else None
     rng = np.random.default_rng(20260825)
     signs = rng.choice((-1.0, 1.0), size=(20_000, d.size))
     null = np.abs((signs * d).mean(axis=1))
     p = float((1 + np.count_nonzero(null >= abs(mean) - 1e-15)) / (null.size + 1))
-    return {"mean_difference": mean, "dz": dz, "p_sign_flip": p, "n": int(d.size)}
+    return {
+        "mean_difference": mean,
+        "dz": dz,
+        "zero_variance": sd == 0,
+        "p_sign_flip": p,
+        "n": int(d.size),
+    }
 
 
 def attach_interval(score: dict) -> dict:

@@ -9,6 +9,7 @@ import json
 import math
 import os
 from pathlib import Path
+import subprocess
 import tempfile
 
 import numpy as np
@@ -48,7 +49,7 @@ def _atomic_json(path: Path, value: object) -> None:
     fd, tmp = tempfile.mkstemp(prefix=path.name + ".", dir=path.parent)
     try:
         with os.fdopen(fd, "w") as f:
-            json.dump(value, f, indent=2, sort_keys=True)
+            json.dump(value, f, indent=2, sort_keys=True, allow_nan=False)
             f.write("\n")
         os.replace(tmp, path)
     except Exception:
@@ -216,6 +217,20 @@ def main() -> None:
     args = ap.parse_args()
     out = Path(args.out)
 
+    repo = Path(__file__).resolve().parents[2]
+    head = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=repo, text=True
+    ).strip()
+    if args.code_commit != head:
+        raise SystemExit(
+            f"refusing unbound code commit: supplied={args.code_commit} HEAD={head}"
+        )
+    subprocess.run(
+        ["git", "cat-file", "-e", f"{args.code_commit}^{{commit}}"],
+        cwd=repo,
+        check=True,
+    )
+
     projection_rows = coherent_fixture("scalar-shadow-train", TRAIN_SEEDS, 0, 8)
     projection_matches = match_scalar(projection_rows, n_channels=N_CHANNELS, min_pairs=4)
     projection = fit_projection(projection_matches)
@@ -236,7 +251,16 @@ def main() -> None:
     for value in sensitivity.values():
         vals = [x["w_set_perp"] for x in value["seed_scores"]]
         value["vs_b0"] = paired_effect(vals, zero_vals)
-    b_min = next((float(b) for b in ("0.25", "0.5", "1.0") if sensitivity[b]["vs_b0"]["dz"] >= 1.0 and sensitivity[b]["ci95_seed_bootstrap"][0] > 0), None)
+    fixture_bias_min = next(
+        (
+            float(b)
+            for b in ("0.25", "0.5", "1.0")
+            if sensitivity[b]["vs_b0"]["dz"] is not None
+            and sensitivity[b]["vs_b0"]["dz"] >= 1.0
+            and sensitivity[b]["ci95_seed_bootstrap"][0] > 0
+        ),
+        None,
+    )
 
     all_rows = projection_rows + [r for rows in fixtures.values() for r in rows]
     for bias in (0.0, 0.25, 0.5, 1.0):
@@ -265,13 +289,13 @@ def main() -> None:
         "gate_const_zero": scores["gate_const"]["ci95_seed_bootstrap"][1] <= 1e-12,
         "sweep_random_zero": scores["sweep_random"]["ci95_seed_bootstrap"][1] <= 1e-12,
         "identity_randomized_zero": scores["identity_randomized"]["ci95_seed_bootstrap"][1] <= 1e-12,
-        "p_plus_b_sensitivity": b_min is not None and b_min <= 1.0,
+        "p_plus_b_fixture_sensitivity": fixture_bias_min is not None and fixture_bias_min <= 1.0,
         "p_plus_timing": timing["status"] == "PASS",
         "p_plus_crowd": crowd["status"] == "PASS",
         "reward_orthogonality": orth["status"] == "PASS",
         "heldout_no_leakage": leakage["status"] == "PASS",
     }
-    overall = "PASS" if all(gates.values()) else "RIG-UNDECIDED"
+    synthetic_self_test = "PASS" if all(gates.values()) else "FAIL"
     result = {
         "schema_version": "d4-instrument-certificate-v0.2.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -283,17 +307,27 @@ def main() -> None:
         "projection": projection.tolist(),
         "projection_fit_seed_count": len(TRAIN_SEEDS),
         "scores": scores,
-        "p_plus_b": {"status": "PASS" if gates["p_plus_b_sensitivity"] else "FAIL", "b_min_sigma_drive": b_min, "levels": sensitivity},
+        "p_plus_b_fixture": {
+            "status": "PASS" if gates["p_plus_b_fixture_sensitivity"] else "FAIL",
+            "fixture_bias_min": fixture_bias_min,
+            "warning": "bias is a planted event probability, not sigma_drive or a physical rig unit",
+            "levels": sensitivity,
+        },
         "p_plus_timing": timing,
         "p_plus_crowd": crowd,
         "reward_orthogonality": orth,
         "leakage": leakage,
         "gates": gates,
-        "overall": overall,
+        "synthetic_self_test": synthetic_self_test,
+        "instrument_rig": "NOT_RUN",
+        "overall": "RIG-UNDECIDED",
         "main_program": "NOT_RUN",
         "main_arm_endpoint_check": "NOT_APPLICABLE_MAIN_ARM_NOT_RUN",
-        "interpretation_boundary": "Planted controls certify estimator machinery only; no D4 mechanism or theory result was measured.",
-        "posthoc_notes": [],
+        "interpretation_boundary": "Same-runner fixtures check selected algebra only. D4-I rig readiness and all D4 mechanism/theory claims remain untested.",
+        "posthoc_notes": [
+            "POSTHOC REVIEW: finite-sample nonnegative-score null bias invalidates the raw-zero randomization gate.",
+            "POSTHOC REVIEW: timing, crowding, and orthogonality values are constructed fixtures, not D4 rig measurements.",
+        ],
     }
 
     raw_path = out.parent / "raw-observations.json"
@@ -302,18 +336,17 @@ def main() -> None:
     _atomic_json(out, result)
     receipt = {
         "id": "d4-v0.2-instrument-certificates-20260825",
-        "claim": "The frozen D4 v0.2 estimator and planted instrument controls satisfy every registered instrument-stage certificate; no D4 main-arm or theory claim was tested.",
-        "cognitive_state": "survived-stress-test" if overall == "PASS" else "raw",
-        "cognitive_state_reason": "All registered planted estimator/instrument gates passed on held-out seed statistics." if overall == "PASS" else "At least one registered instrument gate failed; result is RIG-UNDECIDED.",
-        "confidence": 0.97 if overall == "PASS" else 0.2,
-        "observed": f"overall={overall}; b_min={b_min}; main_program=NOT_RUN; code_commit={args.code_commit}",
+        "claim": "The current D4 v0.2 estimator implementation is a candidate for D4-I rig calibration; rig readiness remains unestablished.",
+        "cognitive_state": "speculative",
+        "cognitive_state_reason": "Only same-generator synthetic fixtures and limited unit tests were exercised; no independent D4-I rig or real ridge/echo path was tested.",
+        "observed": f"synthetic_self_test={synthetic_self_test}; instrument_rig=NOT_RUN; main_program=NOT_RUN; code_commit={args.code_commit}",
         "provenance": {"source": "experiments/d4-instrument-v0.2/results/certificates.json", "derivation_type": "empirical"},
         "evidence": [{"kind": "supports" if overall == "PASS" else "fails-to-reproduce", "ref": "certificates.json"}],
-        "edges": [{"relation": "depends-on", "target": "d4-membership-identity-hysteresis-spec-v0.2"}],
+        "edges": [],
     }
     _atomic_json(receipt_path, receipt)
-    print(json.dumps({"overall": overall, "b_min_sigma_drive": b_min, "gates": gates}, indent=2, sort_keys=True))
-    if overall != "PASS":
+    print(json.dumps({"overall": "RIG-UNDECIDED", "synthetic_self_test": synthetic_self_test, "fixture_bias_min": fixture_bias_min, "gates": gates}, indent=2, sort_keys=True))
+    if synthetic_self_test != "PASS":
         raise SystemExit(2)
 
 

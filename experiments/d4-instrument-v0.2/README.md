@@ -1,10 +1,34 @@
-# D4 v0.2 — estimator and instrument-certificate stage
+# D4 v0.2 — synthetic estimator self-tests (pre-rig)
 
-Status: **instrument only / no D4 main-arm run**
+Status: **SOFTWARE SELF-TEST PASS / D4-I INSTRUMENT RIG NOT RUN /
+D4 MAIN PROGRAM NOT RUN / RIG-UNDECIDED**
 
-This directory freezes and runs the estimator/certificate stage for the D4
-membership-identity hysteresis proposal. It deliberately does not implement or
-launch the 630-run SPLIT/FUSE/TRANSPLANT program.
+This directory records a candidate estimator and same-runner synthetic fixtures
+for the D4 membership-identity hysteresis proposal. Independent measurement,
+reproducibility, and claim-boundary reviews rejected these fixtures as D4-I rig
+certificates. The directory does not implement or launch the 630-run
+SPLIT/FUSE/TRANSPLANT program.
+
+These same-runner fixtures check selected estimator algebra and pass predicates
+only. They do not certify the D4-I rig, readiness to start main arms, or any D4
+mechanism/theory claim.
+
+## Adversarial-review blocker
+
+The candidate score is a nonnegative norm of a finite-sample mean. A genuine
+randomized null is therefore positively biased; a bootstrap interval on the raw
+score cannot be expected to contain zero. The original cyclic "randomized"
+fixture cancelled exactly by construction and hid this defect. A second blocker
+is that exact cardinality matching already removes the all-ones scalar-size
+axis, while the fitted rank-1 direction is an arbitrary membership-identity
+orientation. It can remove a true effect aligned with that orientation while
+leaving an orthogonal nuisance untouched.
+
+Release condition: replace the raw-zero gate with a predeclared finite-null
+comparison; make the nuisance subtraction channel-relabel/rotation robust; run
+actual MuObserver/bistable controls, distinct randomized dynamical schedules,
+real ridge/echo timing, actual `c1` crowding, and reward-orthogonality paths.
+Until those tests pass, both positive and negative D4 results are invalid.
 
 ## Exact estimator contract
 
@@ -75,9 +99,10 @@ such.
 Any explanation added after numbers must be labelled `POSTHOC` in the result
 note.
 
-## Certificates
+## Synthetic fixture checks
 
-The runner executes all instrument-stage gates:
+The runner executes pre-rig software fixtures corresponding to these planned
+instrument-stage gates:
 
 - known-answer scalar-shadow subtraction;
 - `P+(b)` set-latch sensitivity and physical-unit `b_min`;
@@ -88,8 +113,10 @@ The runner executes all instrument-stage gates:
 - reward-block orthogonality certificate;
 - seed-unit, held-out leakage, schema, and cache-key checks.
 
-These are planted instrument controls. Passing them certifies the estimator and
-certificate machinery, not the D4 mechanism, agency, life, or consciousness.
+Passing means only that this implementation returns its registered values on
+its own planted inputs. Timing, crowding, and reward orthogonality in this
+version are satisfiability fixtures, not measurements of the D4 rig. The result
+therefore remains `RIG-UNDECIDED`.
 
 ## Reproduce
 
