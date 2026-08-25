@@ -341,7 +341,12 @@ def main() -> None:
         "cognitive_state_reason": "Only same-generator synthetic fixtures and limited unit tests were exercised; no independent D4-I rig or real ridge/echo path was tested.",
         "observed": f"synthetic_self_test={synthetic_self_test}; instrument_rig=NOT_RUN; main_program=NOT_RUN; code_commit={args.code_commit}",
         "provenance": {"source": "experiments/d4-instrument-v0.2/results/certificates.json", "derivation_type": "empirical"},
-        "evidence": [{"kind": "supports" if overall == "PASS" else "fails-to-reproduce", "ref": "certificates.json"}],
+        "evidence": [
+            {
+                "kind": "supports" if synthetic_self_test == "PASS" else "fails-to-reproduce",
+                "ref": "certificates.json",
+            }
+        ],
         "edges": [],
     }
     _atomic_json(receipt_path, receipt)
