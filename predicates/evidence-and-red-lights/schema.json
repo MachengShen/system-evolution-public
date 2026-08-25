@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/evidence-and-red-lights-audit.schema.json",
+  "title": "Evidence and red-light audit manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "monitors",
+    "blockers",
+    "receipts",
+    "engineering_gates",
+    "estimators",
+    "experiments"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "monitors": { "type": "array", "items": { "$ref": "#/$defs/monitor" } },
+    "blockers": { "type": "array", "items": { "$ref": "#/$defs/blocker" } },
+    "receipts": { "type": "array", "items": { "$ref": "#/$defs/receipt" } },
+    "engineering_gates": { "type": "array", "items": { "$ref": "#/$defs/gate" } },
+    "estimators": { "type": "array", "items": { "$ref": "#/$defs/estimator" } },
+    "experiments": { "type": "array", "items": { "$ref": "#/$defs/experiment" } }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "monitor": {
+      "type": "object",
+      "required": ["id", "named_reader", "repeat_report", "reader_independent"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "named_reader": { "type": "string" },
+        "repeat_report": {
+          "type": "object",
+          "required": ["enabled"],
+          "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": true
+        },
+        "reader_independent": { "type": "boolean" },
+        "last_exit_code": { "type": "integer" },
+        "last_stderr": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "blocker": {
+      "type": "object",
+      "required": ["id", "state"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "state": { "type": "string" },
+        "verification": {
+          "type": "object",
+          "properties": {
+            "check": { "type": "string" },
+            "output_summary": { "type": "string" },
+            "checked_at": { "$ref": "#/$defs/timestamp" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "receipt": {
+      "type": "object",
+      "required": ["id", "source_kind", "observed", "interpretation", "claim_status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "source_kind": { "enum": ["first_party", "external"] },
+        "observed": { "type": "string" },
+        "interpretation": { "type": "string" },
+        "claim_status": { "enum": ["unverified", "verified"] },
+        "verification": {
+          "type": "object",
+          "properties": { "status": { "enum": ["unverified", "verified"] } },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "gate": {
+      "type": "object",
+      "required": ["id", "threshold", "comparison", "reachability"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "threshold": { "type": "number" },
+        "comparison": { "enum": ["gte", "lte"] },
+        "reachability": {
+          "type": "object",
+          "required": ["witness_id", "witness_value"],
+          "properties": {
+            "witness_id": { "type": "string" },
+            "witness_value": { "type": "number" },
+            "observed_at": { "$ref": "#/$defs/timestamp" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "estimator": {
+      "type": "object",
+      "required": ["id", "validated", "decision"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "validated": { "type": "boolean" },
+        "decision": { "enum": ["red", "green", "invalid"] },
+        "value": { "type": "number" },
+        "trivial_upper_bound": { "type": "number" }
+      },
+      "additionalProperties": true
+    },
+    "alternative": {
+      "type": "object",
+      "required": ["text", "written_at", "status"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "written_at": { "$ref": "#/$defs/timestamp" },
+        "status": { "enum": ["PREREGISTERED", "POSTHOC"] }
+      },
+      "additionalProperties": true
+    },
+    "experiment": {
+      "type": "object",
+      "required": ["id", "numbers_observed_at", "alternatives"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "numbers_observed_at": { "$ref": "#/$defs/timestamp" },
+        "alternatives": { "type": "array", "items": { "$ref": "#/$defs/alternative" } }
+      },
+      "additionalProperties": true
+    }
+  }
+}

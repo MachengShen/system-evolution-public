@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "monitors": [
+    {
+      "id": "synthetic-monitor",
+      "named_reader": "separate-health-reader",
+      "repeat_report": { "enabled": true },
+      "reader_independent": true,
+      "last_exit_code": 0,
+      "last_stderr": ""
+    }
+  ],
+  "blockers": [
+    {
+      "id": "synthetic-blocker",
+      "state": "blocked",
+      "verification": {
+        "check": "test -f required-input",
+        "output_summary": "The required synthetic input was absent.",
+        "checked_at": "2026-01-01T11:00:00Z"
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "id": "synthetic-receipt",
+      "source_kind": "external",
+      "observed": "The external check reported status unavailable.",
+      "interpretation": "A missing dependency is one possible explanation.",
+      "claim_status": "unverified",
+      "verification": { "status": "unverified" }
+    }
+  ],
+  "engineering_gates": [
+    {
+      "id": "synthetic-gate",
+      "threshold": 0.9,
+      "comparison": "gte",
+      "reachability": {
+        "witness_id": "calibration-sample",
+        "witness_value": 0.95,
+        "observed_at": "2026-01-01T10:00:00Z"
+      }
+    }
+  ],
+  "estimators": [
+    {
+      "id": "synthetic-estimator",
+      "validated": false,
+      "decision": "invalid",
+      "value": 0.4,
+      "trivial_upper_bound": 1.0
+    }
+  ],
+  "experiments": [
+    {
+      "id": "synthetic-experiment",
+      "numbers_observed_at": "2026-01-01T12:00:00Z",
+      "alternatives": [
+        {
+          "text": "A configuration difference could explain the result.",
+          "written_at": "2026-01-01T11:30:00Z",
+          "status": "PREREGISTERED"
+        },
+        {
+          "text": "A later inspection suggested a logging race.",
+          "written_at": "2026-01-01T12:05:00Z",
+          "status": "POSTHOC"
+        }
+      ]
+    }
+  ]
+}

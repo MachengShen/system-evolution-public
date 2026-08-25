@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "monitors": [
+    {
+      "id": "synthetic-monitor",
+      "named_reader": "",
+      "repeat_report": { "enabled": false },
+      "reader_independent": false,
+      "last_exit_code": 0,
+      "last_stderr": ""
+    }
+  ],
+  "blockers": [
+    {
+      "id": "synthetic-blocker",
+      "state": "waiting",
+      "verification": { "check": "", "output_summary": "", "checked_at": "" }
+    }
+  ],
+  "receipts": [
+    {
+      "id": "synthetic-receipt",
+      "source_kind": "external",
+      "observed": "",
+      "interpretation": "The service probably failed because a dependency was unavailable.",
+      "claim_status": "verified",
+      "verification": { "status": "unverified" }
+    }
+  ],
+  "engineering_gates": [
+    {
+      "id": "synthetic-gate",
+      "threshold": 0.9,
+      "comparison": "gte",
+      "reachability": { "witness_id": "calibration-sample", "witness_value": 0.4 }
+    }
+  ],
+  "estimators": [
+    {
+      "id": "synthetic-estimator",
+      "validated": false,
+      "decision": "green",
+      "value": 1.0,
+      "trivial_upper_bound": 1.0
+    }
+  ],
+  "experiments": [
+    {
+      "id": "synthetic-experiment",
+      "numbers_observed_at": "2026-01-01T12:00:00Z",
+      "alternatives": [
+        {
+          "text": "A configuration difference could explain the result.",
+          "written_at": "2026-01-01T12:05:00Z",
+          "status": "PREREGISTERED"
+        }
+      ]
+    }
+  ]
+}
