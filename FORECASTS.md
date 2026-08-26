@@ -220,6 +220,48 @@ behavior, receipts, or feedback handling.
 Reviewer improvement: ask what action changed because the prediction was
 published, and what evidence would make the system stop.
 
+## Performative Exposure (correction, 2026-08-26)
+
+Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md): mechanism 0.8, the
+specific accounting rule below 0.6.
+
+An earlier internal rule said the engine should minimize surprise on perception
+and never by action. That rule is retracted. It mistook an accounting problem
+for an ontological one.
+
+A forecast, once spoken, is already an action: whoever hears it changes what
+they do, and the system itself acts on its own forecasts. There is no wall
+between observation, prediction, and action; they are three nodes on one loop
+(performative prediction, Perdomo et al. 2020; reflexivity; self-fulfilling
+prophecy, Merton 1948; the Lucas critique). The real failure of "active
+inference" as a design is not that it unifies prediction and action. It is that
+it lets the system be scored on a surprise it can lower by acting.
+
+So the guard is not "do not act" but "record what you did":
+
+1. **Footprint on the ledger.** Every forecast carries
+   `performative_exposure: none | low | high` plus the mechanism by which
+   publishing it could move the outcome. Every dissemination (a post, a
+   message, a conversation) is itself a ledger event, not a side effect.
+2. **Skill is measured only where the system has no hand.** Calibration and
+   Brier summaries are computed over the `exposure != high` subset only.
+   High-exposure forecasts still stay in the listing and are resolved in two
+   separate columns: did it happen (automatic) and did our dissemination
+   contribute (requires independent evidence; defaults to unknown, never
+   auto-filled). Skill claims may cite only the first column.
+
+Consequence for the classification above: F-01 / F-02 / F-03 are no longer
+three exclusive classes. They are one continuous quantity (exposure) plus one
+intent marker (desired or not) on the same forecast. F-03 is not a contaminant
+to be quarantined; it is the end of the performative channel the system
+actually wants, kept in its own column. The isolation rule keeps its accounting
+meaning (columns must not be mixed) and loses its behavioral meaning (do not
+act).
+
+Anti-signals: a high-exposure entry appearing inside a calibration summary; a
+contribution column filled without independent evidence; a forecast visible in
+public output with no dissemination record.
+
 ## Relation To Theory And Practice
 
 - [THEORY.md](THEORY.md) explains the broader General Learning Machine frame.
