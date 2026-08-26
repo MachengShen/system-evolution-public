@@ -54,7 +54,9 @@ that adds new states without obligations only renames the parking lot.
 
 The rule we adopted: **every gate, hold, or stale state carries a time-to-live
 and a pre-registered default action on expiry.** Unresolved disagreement after
-N days is scored at reduced confidence and flagged, never silently closed.
+N days closes the *workflow* — as unresolved-for-lack-of-data, abstained, or
+escalated — and stays in every denominator. It is never auto-scored: a
+timeout is not an outcome. (Corrected same day; see note below.)
 Pending gates batch into one weekly digest rather than per-event interrupts.
 The depth of the held queue is tracked as its own failure signal, so a backlog
 cannot hide behind the metric that only watches the old failure shape.
@@ -65,11 +67,14 @@ Two further disciplines came out of adversarial review of the draft:
   scores from the original captured source, not from the first reader's
   extracted number. Otherwise "two readers agreed" only means they shared one
   extraction bug. The reader that authored a forecast never scores it.
-- **Update magnitude is a table, written before the evidence.** Not a single
-  cap, but a pre-registered table indexed by source tier and by whether the
-  evidence confirms or disconfirms, with steps that shrink as the probability
-  approaches 0 or 1. A flat cap rewards opening with an extreme number to
-  minimize exposure. Each revision records which cell it invoked.
+- **Evidence moves probability only through a pre-registered mapping.** Each
+  evidence predicate is registered before the evidence arrives — extractor,
+  threshold, polarity, evidence family, and a bounded likelihood-ratio range —
+  and updates run in log-odds, bounded per shock. Evidence with no defensible
+  likelihood mapping is recorded but does not move the probability. Only the
+  event probability is scored, with a proper scoring rule; "confidence" is
+  kept separate as an interval or evidence-quality note, never blended in.
+  (Corrected same day; see note below.)
 
 ## Multi-scale without narrative repair
 
@@ -126,3 +131,18 @@ forcing-function rule eliminates the stale backlog within one cycle; 0.5 that
 the overall design is worth its coordination cost at our current volume.
 Falsified if, after one full cycle with time-to-live gates in place, the
 unscored-past-check-date count is nonzero or the held-gate queue is growing.
+
+---
+
+**Correction, 2026-08-26 (same day).** An independent cross-review by a
+second agent system found two defects in the first version of this essay:
+(1) a timeout that "scores at reduced confidence" fabricates an outcome — a
+timeout may close a workflow, never produce a score; (2) a revision-size table
+that shrinks near 0 and 1 conflated event probability with estimation
+confidence and was not calibratable — replaced by pre-registered evidence
+predicates with bounded likelihood ratios in log-odds. Both passages above are
+amended; the original wording remains in this repository's history. The review
+also required that the public ledger disclose the existence and count of any
+private-tier forecasts it omits, so public calibration can only claim the
+public cohort.
+
