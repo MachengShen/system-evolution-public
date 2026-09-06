@@ -1,5 +1,25 @@
 # Exclusion Cannot Remember — why a Φ-argmax self-boundary needs a state→coupling term, and how to kill the idea
 
+> ## Correction notice — 2026-09-06
+>
+> Several claims in this note, **including its title**, are corrected by a later draft (v0.2, 2026-08-31). The note is left at this URL rather than quietly rewritten, so that what changed stays visible.
+>
+> **1. The title's strong form is false, and is retracted.** "Exclusion cannot remember," read as *exclusion-style theories cannot produce boundary hysteresis*, does not follow. §6.2 below already concedes one counterexample (multistability at fixed κ), and misses a second (point 3). What survives is weaker, and I think still worth stating: **exclusion supplies no boundary *dynamics*; any path-dependence of the boundary must be inherited from a carrier elsewhere in the system.** The corrected title is *Boundary location is not boundary dynamics*. §1 step 2 should read "exclusion contributes no memory of its own," not "it cannot produce hysteresis."
+>
+> **2. "The pharmacokinetic explanation has been experimentally excluded" (§1, step 3) is too strong.** Friedman et al. 2010's own phrasing is "without obvious confounding effects." Proekt & Kelz, *Explaining anaesthetic hysteresis with effect-site equilibration* (Br J Anaesth 2021) — same senior lab — show effect-site equilibration models are underdetermined enough that pharmacokinetic accounts can be constructed or collapsed post hoc. Corrected: **strongly disfavored, not formally excluded.**
+>
+> **3. A third carrier of the memory was missed, and it is the strongest defense of IIT.** This note contrasts self-sealing (κ = κ(s)) against multistability, and stops there. It omits the cheapest reply available to IIT: extend the grain to include slow, history-dependent variables — channel inactivation, receptor desensitization, neuromodulator tone — and the argmax reads them as part of the *current* state. Memoryless selection, hysteretic readout, **zero new terms**. This is not hypothetical: *Shaker*, the very gene Friedman implicates, is a voltage-gated K⁺ channel whose defining property is activity-dependent inactivation. So there are three carriers, not two — **(i)** hidden slow state, **(ii)** multistability at fixed coupling, **(iii)** κ = κ(s) — and **only (iii) adds a term.** Carriers (i) and (ii) are IIT-internal. Any honest version of this program has to beat both, and this note only tried to beat one.
+>
+> **4. Human evidence is contested, not supporting.** Kuizenga et al., *Test of neural inertia in humans during general anaesthesia* (Br J Anaesth 2018), find hysteresis under sevoflurane but no significant induction/emergence separation under propofol in the same cohort. The fly and mouse results stand. "Consciousness shows hysteresis" should not be stated flatly for humans, and §1 step 3 does state it flatly.
+>
+> **5. §6.2's "Not run. This note contains no computation" is out of date — and the run did not come back clean.** The in-silico gain-*g* demo was built and executed (2026-08-31). Verdict: **RIG-UNDECIDED. This is a fact about our apparatus, not about the world.** Under the sweep protocol used, each direction resets κ as a separate trajectory; only 2 of 26 positive-gain rows closed a loop at all, the rest are non-closing, and so monotonicity of loop width in *g* was never a valid measurement. Two controls that the original Test F failed to specify turn out to be mandatory before any loop width means anything: **(a) adiabaticity** — vary sweep rate over at least an order of magnitude at every *g* including *g* = 0, because finite-rate sweeping near a threshold produces dynamic bifurcation delay, i.e. apparent hysteresis with no memory carrier at all; and **(b) partialling out critical slowing** — higher closed-loop gain generically lengthens relaxation near threshold, which mimics a *g*-dependent loop for entirely boring reasons. Until both pass, a positive result is *consistent with* self-sealing rather than diagnostic of it. Reporting this rather than the loop widths is the point: the numbers exist, and they are not evidence.
+>
+> **6. What §6.1 got right, and should have been the headline.** The level-vs-extent distinction is the load-bearing one. All established hysteresis in this literature is **level** hysteresis; the boundary question is a **membership** fact; membership path-dependence has never been measured in anything. One repair to Test E: match on **argmax margin** (the Φ-gap between the winning subset and the runner-up) in addition to integration level. Level-matching subtracts "how much"; margin-matching subtracts basin depth; what survives both is "which" — the boundary itself.
+>
+> **What is unchanged.** §3 — that exclusion is a selection rule and not a dynamical law, so IIT contains boundary location without an equation of motion for the boundary — survives all of the above, which is what §6.4 predicted would happen. That remains the one sentence worth defending.
+
+---
+
 Date: 2026-07-13 (published 2026-08-19, with a 2026-08-19 addendum)
 
 Public index: [Theory Mainline](../THEORY.md) · Format: [Claim-Receipt](../CLAIM-RECEIPT.md)
