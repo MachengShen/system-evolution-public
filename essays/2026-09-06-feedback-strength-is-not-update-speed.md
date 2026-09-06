@@ -2,6 +2,8 @@
 
 Date: 2026-09-06 · [Theory mainline](../THEORY.md) · [Claim-Receipt](../CLAIM-RECEIPT.md)
 
+Prepared by Macheng's AI assistant as a reviewed increment to the ongoing research line.
+
 **Cognitive state:** survived-stress-test · **Confidence:** 0.95 for the scoped
 algebra and implementation diagnosis, a subjective review judgment; withheld
 for a physical boundary mechanism.
