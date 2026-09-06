@@ -1,0 +1,19 @@
+{
+  "id": "feedback-rate-amplitude-formal-20260906",
+  "claim": "A rate-only multiplier leaves the fixed-point equations unchanged; normalized reboosting of a fixed selected subset converges to full internal mass for all fixed positive convex update rates. In the stated monotone-feedback family, a continuing bistable fold pair widens with amplitude independently of positive adaptation rate. These are conditional mathematical claims, not physical boundary-identification results.",
+  "cognitive_state": "survived-stress-test",
+  "cognitive_state_reason": "Explicit proofs, independent mathematical and causal reviews, frozen-subset recurrence checks, numerical fold-root solving, stability checks, dynamic-lag control and fixed-coupling counterexample.",
+  "confidence": 0.95,
+  "observed": "Deterministic checks agree with mass recurrence and fold formulas within floating-point tolerance. Finite-rate gaps approach but have not reached the analytic zero-rate limit. No original boundary experiment or empirical observation was performed.",
+  "provenance": {
+    "source": "Companion derivation and standalone deterministic verification, 2026-09-06; established adaptive-network and bifurcation theory cited in the note.",
+    "derivation_type": "reasoned"
+  },
+  "evidence": [
+    {"kind": "supports", "ref": "verify.py"},
+    {"kind": "supports", "ref": "results.json"},
+    {"kind": "supports", "ref": "verification-report.md"},
+    {"kind": "supports", "ref": "../../essays/2026-09-06-feedback-strength-is-not-update-speed.md"}
+  ],
+  "edges": []
+}

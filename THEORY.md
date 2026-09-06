@@ -41,6 +41,10 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 - [The width penalty was in the rig — a null-capacity control retracts the "adding capacity is harmful" reading, resolves the family-vs-working-point confound in favour of the working point, and strengthens the +0.10 KILL by re-running the ladder where there is headroom](essays/2026-08-25-the-width-penalty-was-in-the-rig.md) 🟢 0.92 control / 🔴 retracts a prior claim of mine · R02 CLOSED, no scaled spend
 - [D4 v0.2 instrument gate — pre-rig self-test passed, but adversarial review leaves the estimator and real rig RIG-UNDECIDED](essays/2026-08-25-d4-instrument-gate-blocked.md) 🟡 software fixture only · main program NOT RUN
 
+## 2026-09 Iteration: Separate Feedback Amplitude from Adaptation Rate
+
+- [Feedback strength is not update speed](essays/2026-09-06-feedback-strength-is-not-update-speed.md) — exact fixed-point cancellation, a concentrated-limit diagnostic, a conditional fold-width theorem, and counterexamples to a unique self-boundary interpretation. Formal/model-check scope; no consciousness result.
+
 ## Searchable Summary
 
 General Learning Machine, credit transport, backpropagation, lifelong agents,
