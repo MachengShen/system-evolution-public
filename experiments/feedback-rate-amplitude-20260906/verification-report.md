@@ -76,12 +76,14 @@ Each run starts at the stable equilibrium at `u=-3`, ramps to `u=3`, holds until
 
 | `a` | `epsilon` | gap at rate .02 | gap at rate .005 | gap at rate .00125 | static width |
 |---:|---:|---:|---:|---:|---:|
-| 0.5 | 0.5 | 0.149465030 | 0.039698391 | 0.009994793 | 0 |
-| 0.5 | 2.0 | 0.098029741 | 0.024959292 | 0.006249345 | 0 |
-| 1.5 | 0.5 | 0.998441619 | 0.681722929 | 0.531868031 | 0.415092911 |
-| 1.5 | 2.0 | 0.831679769 | 0.597434228 | 0.492548063 | 0.415092911 |
+| 0.5 | 0.5 | 0.14947 | 0.039698 | 0.0099948 | 0 |
+| 0.5 | 2.0 | 0.09803 | 0.024959 | 0.0062493 | 0 |
+| 1.5 | 0.5 | 0.99844 | 0.68172 | 0.53187 | 0.41509 |
+| 1.5 | 2.0 | 0.83168 | 0.59743 | 0.49255 | 0.41509 |
 
 The gap moves monotonically toward zero for `a=0.5` and toward the nonzero static fold width for `a=1.5` as the sweep slows. The slowest finite-rate runs remain above the static limit, so this is an approach trend rather than a numerical zero-rate extrapolation. For the selected run (`a=1.5`, `epsilon=.5`, rate `.005`), halving `dt` from `.05` to `.025` changes the gap by `4.57e-7`.
+
+Independent Atlas verification (2026-09-06) reproduced every stored section, halved the step size over the full sweep grid, and compared three points using DOP853 with event-located crossings. The largest spot-check difference was about `2.3e-6`; this is not a rigorous global error bound. The readable table uses about five significant digits. More digits in the raw JSON are stored numerical output, not a claim of corresponding accuracy.
 
 ## 5. Fixed-coupling negative control
 

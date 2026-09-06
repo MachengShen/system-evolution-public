@@ -1,8 +1,8 @@
 {
   "id": "feedback-rate-amplitude-formal-20260906",
-  "claim": "A rate-only multiplier leaves the fixed-point equations unchanged; normalized reboosting of a fixed selected subset converges to full internal mass for all fixed positive convex update rates. In the stated monotone-feedback family, a continuing bistable fold pair widens with amplitude independently of positive adaptation rate. These are conditional mathematical claims, not physical boundary-identification results.",
+  "claim": "A rate-only multiplier leaves the fixed-point equations unchanged. For a nonnegative coupling matrix with fixed total mass M>0, a frozen selected subset with initial internal mass fraction q0>0, boost b>1, and fixed convex update rate eta in (0,1], normalized reboosting converges to full internal mass (q=1 is already fixed). In the stated monotone-feedback family, a continuing nondegenerate bistable fold pair widens with amplitude independently of positive adaptation rate. These are conditional mathematical claims, not physical boundary-identification results.",
   "cognitive_state": "survived-stress-test",
-  "cognitive_state_reason": "Explicit proofs, independent mathematical and causal reviews, frozen-subset recurrence checks, numerical fold-root solving, stability checks, dynamic-lag control and fixed-coupling counterexample.",
+  "cognitive_state_reason": "Explicit proofs, independent mathematical and causal reviews, frozen-subset recurrence checks, numerical fold-root solving, stability checks, dynamic-lag control and fixed-coupling counterexample. A subsequent independent Atlas review checked the original matrix update and caught missing positive-initial-mass and parameter assumptions in this standalone receipt; those assumptions are now explicit.",
   "confidence": 0.95,
   "observed": "Deterministic checks agree with mass recurrence and fold formulas within floating-point tolerance. Finite-rate gaps approach but have not reached the analytic zero-rate limit. No original boundary experiment or empirical observation was performed.",
   "provenance": {
@@ -10,10 +10,22 @@
     "derivation_type": "reasoned"
   },
   "evidence": [
-    {"kind": "supports", "ref": "verify.py"},
-    {"kind": "supports", "ref": "results.json"},
-    {"kind": "supports", "ref": "verification-report.md"},
-    {"kind": "supports", "ref": "../../essays/2026-09-06-feedback-strength-is-not-update-speed.md"}
+    {
+      "kind": "supports",
+      "ref": "verify.py"
+    },
+    {
+      "kind": "supports",
+      "ref": "results.json"
+    },
+    {
+      "kind": "supports",
+      "ref": "verification-report.md"
+    },
+    {
+      "kind": "supports",
+      "ref": "../../essays/2026-09-06-feedback-strength-is-not-update-speed.md"
+    }
   ],
   "edges": []
 }
