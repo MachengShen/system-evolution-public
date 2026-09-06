@@ -1,0 +1,117 @@
+{
+  "scope": "Conditional mathematical witnesses, not a theory or simulation of our universe.",
+  "finite_encoding_cases": 6144,
+  "bell_states": [
+    {
+      "relative_phase_sign": 1,
+      "global_purity": 0.9999999999999996,
+      "marginal_purity": 0.4999999999999998,
+      "z_measurement_probabilities": [
+        0.4999999999999999,
+        0.0,
+        0.0,
+        0.4999999999999999
+      ],
+      "z_measurement_entropy_bits": 1.0,
+      "xx_expectation": 0.9999999999999998
+    },
+    {
+      "relative_phase_sign": -1,
+      "global_purity": 0.9999999999999996,
+      "marginal_purity": 0.4999999999999998,
+      "z_measurement_probabilities": [
+        0.4999999999999999,
+        0.0,
+        0.0,
+        0.4999999999999999
+      ],
+      "z_measurement_entropy_bits": 1.0,
+      "xx_expectation": -0.9999999999999998
+    }
+  ],
+  "classical_pure_joint_marginals": [
+    {
+      "joint_point": 0,
+      "a": [
+        1,
+        0
+      ],
+      "b": [
+        1,
+        0
+      ]
+    },
+    {
+      "joint_point": 1,
+      "a": [
+        1,
+        0
+      ],
+      "b": [
+        0,
+        1
+      ]
+    },
+    {
+      "joint_point": 2,
+      "a": [
+        0,
+        1
+      ],
+      "b": [
+        1,
+        0
+      ]
+    },
+    {
+      "joint_point": 3,
+      "a": [
+        0,
+        1
+      ],
+      "b": [
+        0,
+        1
+      ]
+    }
+  ],
+  "same_state_same_mean_energy_different_dynamics": [
+    {
+      "t": 0,
+      "mean_energy_both": 0,
+      "x_under_H0": 1,
+      "x_under_Hz": 1.0
+    },
+    {
+      "t": 1.5707963267948966,
+      "mean_energy_both": 0,
+      "x_under_H0": 1,
+      "x_under_Hz": 6.123233995736766e-17
+    },
+    {
+      "t": 3.141592653589793,
+      "mean_energy_both": 0,
+      "x_under_H0": 1,
+      "x_under_Hz": -1.0
+    }
+  ],
+  "real_quantum_local_tomography_counterexample": {
+    "local_product_basis_differences": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "global_Pplus_probabilities": [
+      1.0,
+      0.0
+    ],
+    "positivity_check": "Real symmetric, trace 1, rho^2=rho/2 imply eigenvalues 0 or 1/2"
+  },
+  "status": "all assertions passed"
+}

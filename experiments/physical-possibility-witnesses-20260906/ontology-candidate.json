@@ -1,0 +1,22 @@
+{
+  "id": "physical-possibility-ontology-candidate-20260906",
+  "claim": "Comparing states, effects, probability pairings, composition and allowed transformations is a productive candidate route for the universe mainline. Whether those structures are fundamental or effective is unresolved; operational reconstruction does not establish that information is prior to matter.",
+  "cognitive_state": "speculative",
+  "cognitive_state_reason": "A research direction motivated by existing reconstructions, not an experimentally selected ontology or new physics theory.",
+  "provenance": {
+    "source": "Source-triggered research note, 2026-09-06.",
+    "derivation_type": "reasoned"
+  },
+  "evidence": [
+    {
+      "kind": "supports",
+      "ref": "../../essays/2026-09-06-from-encoding-to-physical-possibility.md"
+    }
+  ],
+  "edges": [
+    {
+      "relation": "depends-on",
+      "target": "encoding-and-physical-structure-20260906"
+    }
+  ]
+}

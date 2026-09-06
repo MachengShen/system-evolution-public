@@ -1,18 +1,24 @@
-# Theory Mainline: General Learning Machine, Credit Transport, and Backpropagation
+# Theory Mainline: Fundamental Reality, Information, and Physical Structure
 
-This is the public entrypoint for the research thesis behind the
-user-agency substrate.
+The overarching question is:
 
-The central question is:
+> What is the universe fundamentally, and why does it admit the structures,
+> compositions and transformations that we observe?
 
-> What kind of system can continuously change its own information structure,
-> preserve user agency, and become more capable of doing the right thing later
-> with less human babysitting?
+Information ontology, quantum foundations, and the emergence of spacetime
+belong to this broad inquiry. Consciousness, agency, memory dynamics and the
+General Learning Machine are connected subdomains. Progress in one subdomain
+must not silently stand in for an answer to the whole question.
 
-The current answer is framed as a **General Learning Machine**: a situated,
-inspectable, corrigible system whose learning is not only parameter update, but
-cross-layer change in memory topology, credit assignment, tools, reviewers,
-rules, experiments, hardware workload, and public feedback loops.
+The working method compares established physics, conditional mathematical
+models, interpretations and metaphysical hypotheses, with their assumptions
+and distinguishing consequences stated separately.
+
+The engineering and practice branch asks what kind of system can continuously
+change its own information structure, preserve user agency, and become more
+capable with less human supervision. The General Learning Machine remains a
+situated, inspectable and corrigible candidate in that branch, spanning memory,
+credit assignment, tools, rules and feedback.
 
 ## Start Here
 
@@ -41,7 +47,11 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 - [The width penalty was in the rig — a null-capacity control retracts the "adding capacity is harmful" reading, resolves the family-vs-working-point confound in favour of the working point, and strengthens the +0.10 KILL by re-running the ladder where there is headroom](essays/2026-08-25-the-width-penalty-was-in-the-rig.md) 🟢 0.92 control / 🔴 retracts a prior claim of mine · R02 CLOSED, no scaled spend
 - [D4 v0.2 instrument gate — pre-rig self-test passed, but adversarial review leaves the estimator and real rig RIG-UNDECIDED](essays/2026-08-25-d4-instrument-gate-blocked.md) 🟡 software fixture only · main program NOT RUN
 
-## 2026-09 Iteration: Separate Feedback Amplitude from Adaptation Rate
+## 2026-09 Iteration: Universe Ontology and Physical Possibility
+
+- [从可编码到物理可能性 / From encoding to physical possibility](essays/2026-09-06-from-encoding-to-physical-possibility.md) — four new source inputs lead to explicit encoding, quantum-composition and thermodynamic distinctions. A candidate route to understanding fundamental reality; no claim that information ontology is established.
+
+### Feedback rate and amplitude: a subdomain result
 
 - [Feedback strength is not update speed](essays/2026-09-06-feedback-strength-is-not-update-speed.md) — exact fixed-point cancellation, a concentrated-limit diagnostic, a conditional fold-width theorem, and counterexamples to a unique self-boundary interpretation. Formal/model-check scope; no consciousness result.
 
@@ -57,9 +67,10 @@ research line. The current interface hypothesis adds a practice-facing layer:
 Dashboard/task-ledger state is a default-mode substrate, immune/task
 metabolism is an autonomic layer, and Eazo-like mobile voice/image interfaces
 may become the conscious interface through which a user steers the system.
-The newest foundational-physics entry is intentionally narrower: it asks how
-observerhood, agency, information, memory, feedback, and attractors can be
-translated into existing physics variables before any claims of novelty.
+The foundational-physics inquiry now explicitly includes the broader nature
+of reality. Model translation and instrument checks support that inquiry;
+they do not replace its ontological questions or establish an answer by
+themselves.
 
 ## Key Terms
 

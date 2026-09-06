@@ -1,0 +1,26 @@
+{
+  "id": "encoding-and-physical-structure-20260906",
+  "claim": "For every finite deterministic state map F and injective finite-state encoding E, G=E F E^-1 is an equivalent map on the encoding image. This alone imposes no choice of dynamics or resource-efficient implementation. The displayed Bell states have identical entropies and computational-basis distributions but different fixed-XX measurement predictions; the specified real-quantum joint pair is invisible to real local-product effects but distinguishable globally. These are conditional mathematical distinctions, not empirical ontology selection.",
+  "cognitive_state": "survived-stress-test",
+  "cognitive_state_reason": "Explicit arguments and reproducible witnesses, independently reviewed; computability versus efficiency and local tomography versus marginal recovery corrected during review.",
+  "observed": "6,144 finite recoding checks; Bell, classical marginal, Hamiltonian and real-quantum counterexamples. No universe or consciousness experiment.",
+  "provenance": {
+    "source": "Original synthesis of four new public video inputs and cited foundational primary literature, with elementary mathematical witnesses.",
+    "derivation_type": "reasoned"
+  },
+  "evidence": [
+    {
+      "kind": "supports",
+      "ref": "verify_structure.py"
+    },
+    {
+      "kind": "supports",
+      "ref": "structure-witnesses.json"
+    },
+    {
+      "kind": "supports",
+      "ref": "../../essays/2026-09-06-from-encoding-to-physical-possibility.md"
+    }
+  ],
+  "edges": []
+}
