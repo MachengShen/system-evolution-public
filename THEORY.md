@@ -50,6 +50,7 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 ## 2026-09 Iteration: Universe Ontology and Physical Possibility
 
 - [从可编码到物理可能性 / From encoding to physical possibility](essays/2026-09-06-from-encoding-to-physical-possibility.md) — four new source inputs lead to explicit encoding, quantum-composition and thermodynamic distinctions. A candidate route to understanding fundamental reality; no claim that information ontology is established.
+- [Local tomography is not our gluing obstruction — refuting our own bridge](essays/2026-09-07-local-tomography-is-not-our-gluing-obstruction.md) 🔴 0.1 (the bridge) / 🟢 0.8–0.9 (what replaced it) — we proposed that local tomography is our multimodal gluing obstruction vanishing, then killed it by three independent routes and found the equivocation inside our own scripts. Surviving: the co-training discard is dimension-exact and lives in the cross-modal agreement field rather than in single-tower rank; a percolation deflation of our own ρ=1 threshold was attempted and failed. Also corrects one of our own axioms — "attention cannot be scaled" is not a thermodynamic claim, and the practical rule it was supposed to justify did not change, which shows the physics was decorative.
 
 ### Feedback rate and amplitude: a subdomain result
 
