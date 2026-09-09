@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从世界底层原理到未来世界：一份区分证据、模型、假说、传统隐喻、预测、目标与干预的可证伪研究地图。">
+  <title>从世界底层原理到未来世界｜可证伪研究地图 v1</title>
+  <style>
+    :root {
+      --ink: #15231f;
+      --muted: #5a6862;
+      --paper: #f3f0e8;
+      --panel: #fffdf8;
+      --line: #d9d4c8;
+      --deep: #123d35;
+      --evidence: #16745c;
+      --model: #2463a8;
+      --hypothesis: #9b5b19;
+      --metaphor: #76539a;
+      --future: #a23642;
+      --target: #356f78;
+      --shadow: 0 18px 48px rgba(22, 35, 31, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(41, 118, 94, .12), transparent 24rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.72;
+    }
+    a { color: #0b5d73; text-underline-offset: 3px; }
+    a:hover { color: #8b3c2f; }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 12px max(18px, calc((100vw - 1100px) / 2));
+      border-bottom: 1px solid rgba(217, 212, 200, .8);
+      background: rgba(243, 240, 232, .92);
+      backdrop-filter: blur(14px);
+    }
+    .topbar a { color: var(--ink); text-decoration: none; }
+    .brand { font-weight: 760; letter-spacing: .02em; }
+    .nav { display: flex; gap: 15px; font-size: 14px; }
+    main { width: min(1100px, calc(100% - 32px)); margin: 0 auto; padding: 52px 0 84px; }
+    .hero { max-width: 900px; padding: 54px 0 34px; }
+    .eyebrow { margin: 0 0 12px; color: var(--evidence); font-size: 13px; font-weight: 760; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 890px; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(40px, 7vw, 78px); font-weight: 600; line-height: 1.06; letter-spacing: -.035em; }
+    .dek { max-width: 760px; margin: 26px 0 0; color: var(--muted); font-size: clamp(18px, 2.4vw, 23px); line-height: 1.65; }
+    .version { margin-top: 18px; color: #727b76; font-size: 13px; }
+    .abstract {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      margin: 18px 0 42px;
+    }
+    .abstract-card, .protocol-card, section.card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .abstract-card { padding: clamp(24px, 4vw, 42px); background: var(--deep); color: #f7f3e7; }
+    .abstract-card h2, .protocol-card h2 { margin: 0 0 14px; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+    .abstract-card p { margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(22px, 3vw, 32px); line-height: 1.55; }
+    .abstract-card small { display: block; margin-top: 18px; color: #bed5cc; line-height: 1.65; }
+    .protocol-card { padding: clamp(22px, 3vw, 34px); }
+    .protocol-card ol { margin: 0; padding-left: 1.3em; color: var(--muted); }
+    .protocol-card li + li { margin-top: 8px; }
+    .warning {
+      margin: 0 0 38px;
+      padding: 18px 20px;
+      border: 1px solid #d6b99f;
+      border-left: 5px solid var(--hypothesis);
+      border-radius: 10px;
+      background: #fff9ef;
+    }
+    .warning strong { color: #7d430c; }
+    .filter-shell { margin: 34px 0 22px; }
+    .filter-label { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    button {
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--panel);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button[aria-pressed="true"] { border-color: var(--deep); background: var(--deep); color: white; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #e09a39; outline-offset: 3px; }
+    .section-title { margin: 52px 0 18px; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(27px, 4vw, 42px); line-height: 1.2; }
+    .section-intro { max-width: 800px; margin: -6px 0 22px; color: var(--muted); }
+    .claim-graph { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; padding: 0; list-style: none; }
+    .claim-node {
+      position: relative;
+      min-height: 196px;
+      padding: 20px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+    }
+    .claim-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      z-index: 2;
+      top: 45%;
+      right: -21px;
+      width: 28px;
+      color: #9b9589;
+      font-size: 22px;
+      text-align: center;
+    }
+    .node-no { color: var(--muted); font-size: 12px; letter-spacing: .12em; }
+    .claim-node h3 { margin: 7px 0 9px; font-size: 18px; line-height: 1.28; }
+    .claim-node p { margin: 0; color: var(--muted); font-size: 14px; }
+    .bridge {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+      padding: 18px 20px;
+      border: 1px dashed var(--metaphor);
+      border-radius: 16px;
+      background: #fbf7ff;
+    }
+    .bridge .arrow { color: var(--metaphor); font-size: 24px; }
+    .bridge p { margin: 0; color: var(--muted); }
+    .bridge strong { color: #56376e; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    section.card { padding: clamp(22px, 3vw, 32px); }
+    section.card h3 { margin: 8px 0 10px; font-size: 22px; line-height: 1.3; }
+    section.card p { margin: 10px 0 0; color: var(--muted); }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 780;
+      letter-spacing: .08em;
+    }
+    .label::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
+    [data-kind~="evidence"] .label { color: var(--evidence); }
+    [data-kind~="model"] .label { color: var(--model); }
+    [data-kind~="hypothesis"] .label { color: var(--hypothesis); }
+    [data-kind~="metaphor"] .label { color: var(--metaphor); }
+    [data-kind~="forecast"] .label { color: var(--future); }
+    [data-kind~="target"] .label, [data-kind~="intervention"] .label { color: var(--target); }
+    .confidence { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: #eeeae0; color: #5f625d; font-size: 11px; vertical-align: 1px; }
+    .claim { padding-top: 3px; }
+    .anti { margin-top: 16px !important; padding-top: 14px; border-top: 1px solid var(--line); color: #75413b !important; font-size: 14px; }
+    .anti strong { color: #8e2836; }
+    .traditional { border-color: #cdbdd9 !important; background: #fdfaff !important; }
+    .forecast-row { display: grid; grid-template-columns: .72fr 1.25fr .8fr; gap: 16px; padding: 19px 0; border-top: 1px solid var(--line); }
+    .forecast-row:first-of-type { border-top: 0; }
+    .forecast-row h3, .forecast-row p { margin: 0; }
+    .forecast-row h3 { font-size: 18px; }
+    .forecast-row p { color: var(--muted); }
+    .forecast-row .metric { color: var(--ink); font-size: 14px; }
+    .method {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+      counter-reset: method;
+    }
+    .method li { counter-increment: method; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); color: var(--muted); }
+    .method li::before { content: "0" counter(method); display: block; margin-bottom: 14px; color: var(--evidence); font-weight: 800; letter-spacing: .1em; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; }
+    th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--deep); background: #ece9df; font-size: 13px; }
+    td { color: var(--muted); font-size: 14px; }
+    tr:last-child td { border-bottom: 0; }
+    .questions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .question { padding: 21px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); font-family: "Songti SC", "STSong", Georgia, serif; font-size: 19px; line-height: 1.55; }
+    .notes { margin-top: 54px; padding: 26px; border-radius: 18px; color: #dfeae5; background: #18322d; }
+    .notes h2 { margin-top: 0; color: white; }
+    .notes p { color: #c5d7d0; }
+    .hidden { display: none !important; }
+    footer { margin-top: 46px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    @media (max-width: 860px) {
+      .claim-graph { grid-template-columns: 1fr; }
+      .claim-node { min-height: 0; }
+      .claim-node:not(:last-child)::after { content: "↓"; top: auto; right: 50%; bottom: -25px; transform: translateX(50%); }
+      .method { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .questions { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .topbar { align-items: flex-start; }
+      .nav { gap: 11px; font-size: 12px; }
+      main { width: min(100% - 22px, 1100px); padding-top: 20px; }
+      .hero { padding-top: 34px; }
+      .abstract, .grid { grid-template-columns: 1fr; }
+      .bridge { grid-template-columns: 1fr; }
+      .bridge .arrow { transform: rotate(90deg); text-align: center; }
+      .forecast-row { grid-template-columns: 1fr; gap: 7px; }
+      .method { grid-template-columns: 1fr; }
+      section.card { border-radius: 15px; }
+      table { min-width: 0; }
+      thead { display: none; }
+      tbody, tr, td { display: block; width: 100%; }
+      tr { padding: 15px 16px; border-bottom: 1px solid var(--line); }
+      tr:last-child { border-bottom: 0; }
+      td { padding: 4px 0; border: 0; }
+      td:first-child { color: var(--deep); font-weight: 800; }
+      td:nth-child(2)::before, td:nth-child(3)::before {
+        display: block;
+        margin-top: 3px;
+        color: #77776f;
+        font-size: 11px;
+        font-weight: 750;
+        letter-spacing: .08em;
+      }
+      td:nth-child(2)::before { content: "来源"; }
+      td:nth-child(3)::before { content: "支持范围"; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../">System Evolution</a>
+    <nav class="nav" aria-label="页面导航">
+      <a href="#map">主线</a>
+      <a href="#tradition">传统桥</a>
+      <a href="#future">未来</a>
+      <a href="#references">来源</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="hero">
+      <p class="eyebrow">Open Research · v1.1 · 2026-09-09</p>
+      <h1>从世界底层原理，到我们想参与塑造的未来</h1>
+      <p class="dek">一份不把物理学、意识研究、AI 工程与继承而来的定性解释框架混成“万物解释”的研究地图。它的重点不是给终极答案，而是让不同证据等级的主张可以被逐条检查、反驳和更新。</p>
+      <p class="version">阅读时间约 13 分钟 · 中文首版 · 人类发起者与 AI 研究助手共同整理</p>
+    </header>
+
+    <div class="abstract" aria-label="九十秒摘要">
+      <article class="abstract-card">
+        <h2>90 秒抽象</h2>
+        <p>“世界可以被编码”几乎不约束世界是什么。更强的问题是：什么物理结构规定了哪些状态、组合与变化真正可能？嵌入其中的系统又如何通过测量、记忆、预测和行动，改变自己可达的未来？</p>
+        <small>我们的工作假说：有因果意义的信息，不只是一段消息或一个比特数，而是对未来可达结构造成的可测改变。它目前是研究纲领，不是已建立的物理定律。</small>
+      </article>
+      <article class="protocol-card">
+        <h2>科学性协议</h2>
+        <p style="margin:0 0 13px;color:var(--muted);font-size:14px"><strong>Reference 是必要条件，不是充分条件：</strong>来源必须真的支持旁边那句话，且仍要接受复现、反例与独立检验。</p>
+        <ol>
+          <li>每条主张先标证据身份，再谈意义。</li>
+          <li>每个科学事实链接到原论文或权威学术条目。</li>
+          <li>类比不算验证；必须给出额外预测。</li>
+          <li>预测、愿望和干预分开记账。</li>
+          <li>提前写下什么结果会让我们改主意。</li>
+        </ol>
+      </article>
+    </div>
+
+    <p class="warning"><strong>边界先说清：</strong>本页引用的信息论、量子重建、全息对偶与意识实验本身，都不能证明“宇宙本质就是信息”，也不能给出一套已收敛的意识理论。任何继承而来的定性框架——无论来自哲学、修行、术数、民间经验还是我们自己的新理论——都不会因历史悠久、主观强烈或术语相似而自动增加科学证据权重。<a href="#r1">[R1]</a> <a href="#r4">[R4]</a> <a href="#r5">[R5]</a> <a href="#r10">[R10]</a></p>
+
+    <div class="filter-shell" aria-label="主张过滤器">
+      <p class="filter-label">按证据身份阅读（可以只看已知，或只看最冒险的部分）</p>
+      <div class="filters">
+        <button type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button type="button" data-filter="evidence" aria-pressed="false">已建立证据</button>
+        <button type="button" data-filter="model" aria-pressed="false">模型 / 解释</button>
+        <button type="button" data-filter="hypothesis" aria-pressed="false">我们的假说</button>
+        <button type="button" data-filter="metaphor" aria-pressed="false">传统框架检验</button>
+        <button type="button" data-filter="forecast" aria-pressed="false">未来判断</button>
+        <button type="button" data-filter="target" aria-pressed="false">目标 / 干预</button>
+      </div>
+    </div>
+
+    <section id="map" aria-labelledby="map-title">
+      <h2 class="section-title" id="map-title">一条相连、但不混级的主线</h2>
+      <p class="section-intro">下面是一张“主张—引用”图：箭头表示研究问题如何逐层收窄，不表示后一层已经被前一层证明。</p>
+      <ol class="claim-graph">
+        <li class="claim-node" data-kind="model">
+          <span class="node-no">QUESTION 01</span>
+          <h3>世界为何允许这些可能性？</h3>
+          <p>终极本体未知。先要求候选理论说明允许的状态、组合、变换和限制。</p>
+        </li>
+        <li class="claim-node" data-kind="evidence model">
+          <span class="node-no">CONSTRAINT 02</span>
+          <h3>信息量不等于世界本身</h3>
+          <p>香农信息处理统计不确定性；信息处理也必须物理实现，但两者都不自动推出信息本体论。<a href="#r1">[R1]</a> <a href="#r2">[R2]</a></p>
+        </li>
+        <li class="claim-node" data-kind="hypothesis">
+          <span class="node-no">HYPOTHESIS 03</span>
+          <h3>信息＝可达未来的改变？</h3>
+          <p>把“有意义的信息”操作化为：干预后，系统未来可达状态或转移概率发生多少稳定变化。</p>
+        </li>
+        <li class="claim-node" data-kind="evidence hypothesis">
+          <span class="node-no">LEARNING 04</span>
+          <h3>记忆改变后续转移</h3>
+          <p>生物记忆会经历再巩固，相关 engram 与承载网络也会随时间变化；AI 则面对稳定—可塑性冲突。跨基底统一仍是假说。<a href="#r7">[R7]</a> <a href="#r8">[R8]</a> <a href="#r16">[R16]</a> <a href="#r17">[R17]</a></p>
+        </li>
+        <li class="claim-node" data-kind="hypothesis forecast target intervention">
+          <span class="node-no">PROGRAM 05</span>
+          <h3>General Learning Machine</h3>
+          <p>让结果中的误差、价值与摩擦成为归因信号（credit），回到真正造成结果的模型、记忆、工具、规则和组织环节。</p>
+        </li>
+      </ol>
+      <div class="bridge" data-kind="metaphor">
+        <p><strong>旁线案例：</strong>整类传统或神秘解释框架都可以进入同一套检验；五行、八卦只是其中两个例子。先拆出明确结构，再判断它是经验残留、生成隐喻、社会 / 仪式技术，还是无法证伪的后加解释。</p>
+        <span class="arrow" aria-hidden="true">⇢</span>
+        <p><strong>同一把尺：</strong>我们的“可达未来”与 GLM 也不享受特权。只有明确构念与映射、胜过匹配基线、做出样本外新预测、带来干预增益且可复现，才可能从故事升级为模型。</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="layers-title">
+      <h2 class="section-title" id="layers-title">七种身份，七种说话方式</h2>
+      <div class="grid">
+        <section class="card" data-kind="evidence">
+          <span class="label">已建立证据</span><span class="confidence">高</span>
+          <h3>信息论能量化通信约束，但把语义放在模型之外</h3>
+          <p class="claim">香农理论给出了熵、信道与可靠传输的数学框架；原论文明确把消息的语义层面限定在该通信工程问题之外，因此它没有把“意义”或“存在”还原成比特。<a href="#r1">[R1]</a></p>
+          <p class="anti"><strong>越界信号：</strong>从“可以用比特描述”直接跳到“实在就是比特”。</p>
+        </section>
+
+        <section class="card" data-kind="evidence model">
+          <span class="label">证据 + 模型边界</span><span class="confidence">高 / 有限域</span>
+          <h3>逻辑不可逆操作受物理耗散约束，但这不是本体证明</h3>
+          <p class="claim">Landauer 将逻辑不可逆操作与最低耗散联系起来；受控实验验证了单比特擦除的相应热力学下界。结论约束这类操作的物理实现，不等于“物质由信息生成”。<a href="#r2">[R2]</a> <a href="#r3">[R3]</a></p>
+          <p class="anti"><strong>越界信号：</strong>把每个计算门都说成固定支付同一能量，或把热力学约束改写成本体优先级。</p>
+        </section>
+
+        <section class="card" data-kind="model">
+          <span class="label">形式模型 / 解释</span><span class="confidence">领域内强，外推弱</span>
+          <h3>信息原则与对偶能强约束形式，但本身不裁定本体</h3>
+          <p class="claim">Chiribella 等人在明确的一组公理下重建有限维量子理论；Maldacena 的工作则在特定理论与边界条件下提出 AdS/CFT 对偶。两篇论文都没有把其数学结果声明为一套被唯一证明的“信息本体论”。<a href="#r4">[R4]</a> <a href="#r5">[R5]</a> 另有操作框架把全局因果顺序也变成待研究结构，而不是预设背景；这仍是理论可能性，不等于日常因果性虚幻。<a href="#r6">[R6]</a></p>
+          <p class="anti"><strong>越界信号：</strong>把特定对偶写成“任何三维世界都由二维比特投影”。</p>
+        </section>
+
+        <section class="card" data-kind="model hypothesis">
+          <span class="label">模型 → 我们的假说</span><span class="confidence">0.45</span>
+          <h3>“未来可达性”可能比“消息内容”更接近统一变量</h3>
+          <p class="claim">定义系统状态 (x)、允许干预 (a) 与转移核 (P(x'|x,a))。工作假说把信息的重要性放在它对这个转移结构造成的反事实改变，而非文本长度或主观震撼。</p>
+          <p class="anti"><strong>反信号：</strong>它无法给出跨粗粒化稳定的量，或对预测、控制与记忆更新没有增量解释力。</p>
+        </section>
+
+        <section class="card" data-kind="evidence hypothesis">
+          <span class="label">证据 → 工程移植</span><span class="confidence">证据高 / 移植 0.55</span>
+          <h3>记忆不是仓库；但“记忆即动力学”仍是跨域提案</h3>
+          <p class="claim">神经科学中的再巩固、系统巩固与 engram 研究表明，记忆再激活后可重新进入可塑状态，承载网络与表征也会随时间变化；持续学习研究则展示了新学习损伤旧能力的问题。把这些统一成 agent 的“可塑拓扑”是工程假说，不是神经机制的复制品。<a href="#r7">[R7]</a> <a href="#r8">[R8]</a> <a href="#r16">[R16]</a> <a href="#r17">[R17]</a></p>
+          <p class="anti"><strong>反信号：</strong>记忆系统越来越复杂，却不减少重复纠正、不改善迁移、也无法回滚。</p>
+        </section>
+
+        <section class="card" data-kind="model hypothesis">
+          <span class="label">边界模型 / 未决</span><span class="confidence">0.40</span>
+          <h3>“自我边界”应由干预识别，而不是由漂亮的读数命名</h3>
+          <p class="claim">发育生物学已有把多细胞协调边界当作计算性“自我”来研究的纲领；它提供可检验的控制视角，但不证明任意闭环都有主观体验。<a href="#r9">[R9]</a> 2025 年的预注册对抗性实验中，部分结果符合 IIT 与 GNWT 的预测，同时实质挑战了两者的关键主张。<a href="#r10">[R10]</a></p>
+          <p class="anti"><strong>反信号：</strong>边界指标在切开、合并、迁移系统成员时不随因果整合发生可重复变化。</p>
+        </section>
+
+        <section class="card" data-kind="hypothesis">
+          <span class="label">Macheng + Agent 假说</span><span class="confidence">0.40</span>
+          <h3>GLM：把 credit 从权重层扩展到整个因果栈</h3>
+          <p class="claim">未来误差、惊讶、价值、摩擦与可持续性压力，不只更新模型参数，也应更新记忆索引、工具路由、验证规则、协作结构与硬件放置。这是一个可造、可失败的系统假说，而不是“通用智能已经解决”。</p>
+          <p class="anti"><strong>反信号：</strong>更多反馈通道只制造流程与日志，没有带来更好的校准、更少的人工盯守或更强的跨任务迁移。</p>
+        </section>
+
+        <section class="card" data-kind="target intervention">
+          <span class="label">目标 + 干预</span><span class="confidence">价值选择</span>
+          <h3>目标不是“更自主的 AI”，而是“更有能动性的人”</h3>
+          <p class="claim">我们希望个人拥有可迁移的记忆、模型选择权、动作权限和退出权；公开这张图本身是一项干预：把讨论从不可核验的宏大叙事，拉向带来源、反信号和修订记录的共同研究。</p>
+          <p class="anti"><strong>停止条件：</strong>系统以“替人做主”换取表面效率，或者公开叙事开始压迫异议而不是吸收异议。</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="tradition" aria-labelledby="tradition-title">
+      <h2 class="section-title" id="tradition-title">传统 / 神秘解释框架里，什么可能是真结构，什么只是低精度或主观加料？</h2>
+      <p class="section-intro">研究对象不是五行或八卦本身，而是整类继承而来的定性框架：哲学范畴、修行地图、术数、民间分类、仪式体系与长期经验总结。我们既不因其非现代而先验排除，也不因其古老、完整或“很有体感”而降低验证门槛。</p>
+      <div class="grid">
+        <section class="card traditional" data-kind="metaphor evidence">
+          <span class="label">A · 经验残留</span><span class="confidence">待拆解</span>
+          <h3>长期观察可能留下了真实但低分辨率的规律</h3>
+          <p>一个传统分类也许压缩了季节、身体状态、生态互动或群体行为中的重复模式；但原标签通常把多种变量捆在一起。研究任务是把“似乎有效”拆成可测构念、适用人群、时间尺度、环境条件与误差范围，而不是直接保留整套解释。</p>
+          <p class="anti"><strong>降级条件：</strong>拆开后没有稳定信号，或效果完全由选择性记忆、共同原因、回归均值和事后分类解释。</p>
+        </section>
+        <section class="card traditional" data-kind="metaphor">
+          <span class="label">B · 生成隐喻</span><span class="confidence">可有用，不等于为真</span>
+          <h3>好的隐喻能生成问题，不能代替答案</h3>
+          <p>有限类别、对立互补、循环生克、层级转化等结构，可能帮助研究者提出新的状态空间、关系图或干预候选。其价值由“是否生成此前没有的新假设”衡量；术语与现代模型相像，只是发现候选映射的起点。</p>
+          <p class="anti"><strong>降级条件：</strong>同一隐喻能事后适配任何结果，或换一套任意标签也产生同样洞见。</p>
+        </section>
+        <section class="card traditional" data-kind="metaphor intervention">
+          <span class="label">C · 社会 / 仪式技术</span><span class="confidence">功能与宇宙论分开</span>
+          <h3>一个框架可能“有用”，却不是因为它描述了宇宙底层</h3>
+          <p>共同叙事、仪式节律、角色命名与注意力训练，可能通过协调预期、情绪、身份或群体行动产生实际效果。这里应测量行为与社会机制、收益与伤害、谁在何种条件下受益；功能证据不能倒推其超自然解释为真。</p>
+          <p class="anti"><strong>边界条件：</strong>效果若依赖权威压力、排斥异议、无法退出或把失败归咎于参与者，就应作为风险而不是“深奥”保留。</p>
+        </section>
+        <section class="card traditional" data-kind="metaphor">
+          <span class="label">D · 不可证伪的后加解释</span><span class="confidence">不承载科学结论</span>
+          <h3>解释失败后无限补丁，不再是承担风险的模型</h3>
+          <p>若每次反例都能靠隐藏变量、临时改义、只挑命中案例或“你还没领悟”被吸收，这部分也许仍有文学、身份或个人意义，但不能继续以经验事实或预测模型的名义承重。</p>
+          <p class="anti"><strong>杀死条件：</strong>事前不能列出任何可能降低置信的观察；或不同解释者对同一案例无法得到稳定编码。</p>
+        </section>
+        <section class="card traditional" data-kind="metaphor hypothesis">
+          <span class="label">对称测量协议</span><span class="confidence">传统与新理论同门槛</span>
+          <h3>“解释力”必须变成一组可以输的比较</h3>
+          <p><strong>① 构念与映射：</strong>符号对应哪些可测变量，变换规则是什么？<br><strong>② 压缩：</strong>在预先约定的误差下，是否比等复杂度基线用更短描述覆盖更多规律？<br><strong>③ 新预测：</strong>是否在未见样本、预留时间段或新群体上给出方向与幅度？<br><strong>④ 干预杠杆：</strong>依规则行动是否比随机、常识或数据驱动基线更能改变结果？<br><strong>⑤ 稳定性：</strong>不同研究者能否复现编码与结论；涉及体验时，量表、访谈编码与生理 / 行为指标是否有跨时间稳定性？<br><strong>⑥ 边界与退出：</strong>在哪些尺度、人群、情境失效；什么结果会撤回映射？</p>
+          <p class="anti"><strong>对我们自己同样适用：</strong>“未来可达性”若不能在压缩、样本外预测或控制上胜过普通状态空间模型，就降回启发式；GLM 若不改善校准、迁移与可逆性，就撤回其统一性主张。</p>
+        </section>
+        <section class="card traditional" data-kind="metaphor evidence">
+          <span class="label">主观体验的地位</span><span class="confidence">数据，不是单独的证明</span>
+          <h3>体感不是零价值，也不是免检通行证</h3>
+          <p>第一人称体验可以提示现象、定义待解释对象并生成实验，但需要明确采样、盲法或对照、重复测量、报告偏差控制和跨解释者编码。它可以是重要数据的一部分；仅凭强烈、神圣或难以言说的感受，不能单独证明外部因果结构或宇宙本体。</p>
+          <p class="anti"><strong>双向反信号：</strong>若客观指标暂时捕捉不到体验，不应直接宣布体验不存在；若体验叙述无法区分互相冲突的外部理论，也不能拿它裁定哪套理论为真。</p>
+        </section>
+        <section class="card traditional" data-kind="metaphor intervention">
+          <span class="label">示例，不是中心</span><span class="confidence">可运行前待预注册</span>
+          <h3>五行 / 八卦只是可送进协议的两个案例</h3>
+          <p>《易经》的阴阳线、八卦与六十四卦，以及五行的生成、制约与转化，可分别提出组合空间和有向关系图的候选映射。<a href="#r11">[R11]</a> <a href="#r12">[R12]</a> 例如：用五行关系图事先约束一个时间序列的状态转移，再与等参数随机图、Markov 模型和数据驱动基线盲测。只有样本外预测或控制稳定占优，才继续研究该映射；否则保留其历史、隐喻或社会功能，撤掉科学增量主张。</p>
+          <p class="anti"><strong>禁用跳跃：</strong>“量子比特证明了阴阳”“五行就是五种基本力”“八卦预言了 AI”。</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="future" class="card" aria-labelledby="future-title" data-kind="forecast target intervention">
+      <h2 class="section-title" id="future-title">未来世界：预测、目标、干预分开</h2>
+      <p class="section-intro">下面不是预言。概率是作者先验，而非由引用直接计算出的统计概率。2026 年国际独立科学评估记录了 agent 能力与自主性的上升；NIST 的在研项目则把事实落地、引用核验和机器可读审计轨迹列为测评方向。<a href="#r13">[R13]</a> <a href="#r14">[R14]</a></p>
+
+      <article class="forecast-row" data-kind="forecast">
+        <h3>F1 · Agent 治理会明确要求动作审计</h3>
+        <p>截至 2030-12-31，下列五个公共机构体系中至少三个发布专门面向可自主行动 AI（agentic AI）的正式规范或指导，并明确要求或建议保留机器可读的工具调用、授权与结果记录：NIST、ISO/IEC JTC 1/SC 42、OECD.AI、欧盟 AI Office、英国 AI Security Institute。作者先验 0.75；基准理由是现有国际评估与 NIST 在研项目已经把自主行动和可追溯测评列为缺口，而非从它们直接推导 0.75。<a href="#r13">[R13]</a> <a href="#r14">[R14]</a></p>
+        <p class="metric"><strong>结算：</strong>在截止日按五个机构的官方文档库逐一归档；达到 3/5 即命中，2/5 以下即未命中，机构改名则沿法定继承机构追踪。<br><strong>反信号：</strong>到 2028-12-31 仍少于两个体系发布此类要求。</p>
+      </article>
+      <article class="forecast-row" data-kind="forecast">
+        <h3>F2 · 接口从对话框变成持续系统</h3>
+        <p>截至 2030-12-31，下列六个产品家族中至少四个在其官方文档中同时提供：跨会话记忆、后台或定时任务、工具执行、跨设备任务状态同步——ChatGPT、Claude、Gemini、Microsoft Copilot、Apple Intelligence / Siri、Meta AI。作者先验 0.70；基准理由是 agent 自主性上升的当前趋势，概率仍是本项目判断。<a href="#r13">[R13]</a></p>
+        <p class="metric"><strong>结算：</strong>以截止日前最后一个公开稳定版的官方文档为准；产品改名但账户与状态连续则沿继承产品追踪，每个家族四项全有才计 1。<br><strong>反信号：</strong>到 2028-12-31 仍没有两个家族满足四项。</p>
+      </article>
+      <article class="forecast-row" data-kind="target">
+        <h3>T1 · 用户拥有自己的能动性底座</h3>
+        <p>这不是预测。我们希望记忆、权限、模型路由、审计与退出权围绕用户组织；模型提供商可替换，用户的连续性不随提供商消失。</p>
+        <p class="metric"><strong>受益者：</strong>普通个人与小团队。<br><strong>风险：</strong>复杂度、隐私泄漏、自主系统越权与新的平台锁定。</p>
+      </article>
+      <article class="forecast-row" data-kind="intervention">
+        <h3>I1 · 把公开研究变成代谢</h3>
+        <p>持续发布带状态、引用、反信号和修订记录的主张，邀请外部读者找错；把有效批评转化成实验、规则更新或撤回。问题默认匿名，只有经提出者明确同意才署名。</p>
+        <p class="metric"><strong>闭环：</strong>公开版本 → 问题收录 → 证据审计 → 只保留必要内容的修订记录。<br><strong>停止：</strong>公开只增加传播，不增加纠错或可复现性。</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="method-title">
+      <h2 class="section-title" id="method-title">如何保证它不滑向“什么都能解释”</h2>
+      <ol class="method">
+        <li><strong>先定状态。</strong><br>事实、模型、解释、假说、隐喻、预测、目标、干预不可混写。</li>
+        <li><strong>再定承重来源。</strong><br>优先原论文、官方标准、正式学术条目；二手内容只作为入口。</li>
+        <li><strong>登记反信号。</strong><br>先写什么观察会降低置信，避免结果出来后无限补丁。</li>
+        <li><strong>保留修订史。</strong><br>治理、测试、评估、验证与确认要覆盖系统全生命周期；撤回不是失败。<a href="#r15">[R15]</a></li>
+      </ol>
+    </section>
+
+    <section id="references" aria-labelledby="references-title">
+      <h2 class="section-title" id="references-title">承重来源与它们真正支持什么</h2>
+      <p class="section-intro">引用不是装饰。右栏明确限制每篇来源在本页能支持的范围。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>来源</th><th>本页只用它支持</th></tr>
+          </thead>
+          <tbody>
+            <tr id="r1"><td>R1</td><td><a href="https://onlinelibrary.wiley.com/doi/10.1002/j.1538-7305.1948.tb00917.x" rel="noopener">Shannon, A Mathematical Theory of Communication (1948)</a></td><td>统计信息、通信与语义边界；不支持信息本体论。</td></tr>
+            <tr id="r2"><td>R2</td><td><a href="https://doi.org/10.1147/rd.53.0183" rel="noopener">Landauer, Irreversibility and Heat Generation in the Computing Process (1961)</a></td><td>逻辑不可逆与物理耗散的联系。</td></tr>
+            <tr id="r3"><td>R3</td><td><a href="https://www.nature.com/articles/nature10872" rel="noopener">Bérut et al., Experimental verification of Landauer’s principle (Nature, 2012)</a></td><td>受控单比特擦除实验；不外推为所有计算操作。</td></tr>
+            <tr id="r4"><td>R4</td><td><a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.84.012311" rel="noopener">Chiribella, D’Ariano &amp; Perinotti, Informational derivation of quantum theory (PRA, 2011)</a></td><td>信息原则对量子形式的约束；不裁定本体。</td></tr>
+            <tr id="r5"><td>R5</td><td><a href="https://arxiv.org/abs/hep-th/9711200" rel="noopener">Maldacena, The Large N Limit of Superconformal Field Theories and Supergravity (1997)</a></td><td>特定 AdS/CFT 对偶的原始提出及其适用条件。</td></tr>
+            <tr id="r6"><td>R6</td><td><a href="https://www.nature.com/articles/ncomms2076" rel="noopener">Oreshkov, Costa &amp; Brukner, Quantum correlations with no causal order (2012)</a></td><td>无预设全局因果序的操作框架；不证明日常因果性虚幻。</td></tr>
+            <tr id="r7"><td>R7</td><td><a href="https://www.nature.com/articles/nrn2590" rel="noopener">Nader &amp; Hardt, A single standard for memory: the case for reconsolidation (2009)</a></td><td>记忆再激活后的可塑性与再稳定；注意边界条件。</td></tr>
+            <tr id="r8"><td>R8</td><td><a href="https://doi.org/10.1073/pnas.1611835114" rel="noopener">Kirkpatrick et al., Overcoming catastrophic forgetting in neural networks (PNAS, 2017)</a></td><td>持续学习中的稳定—可塑性问题与一个工程方案。</td></tr>
+            <tr id="r9"><td>R9</td><td><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.02688/full" rel="noopener">Levin, The Computational Boundary of a “Self” (2019)</a></td><td>多尺度生物协调的研究纲领；不是意识共识。</td></tr>
+            <tr id="r10"><td>R10</td><td><a href="https://www.nature.com/articles/s41586-025-08888-1" rel="noopener">COGITATE Consortium, Adversarial testing of IIT and GNWT (Nature, 2025)</a></td><td>预注册对抗性检验对两大意识理论关键预测的挑战。</td></tr>
+            <tr id="r11"><td>R11</td><td><a href="https://plato.stanford.edu/entries/chinese-change/" rel="noopener">Stanford Encyclopedia of Philosophy, Chinese Philosophy of Change (Yijing)</a></td><td>《易经》的文本层次、卦象结构与历史哲学语境。</td></tr>
+            <tr id="r12"><td>R12</td><td><a href="https://plato.stanford.edu/entries/chinese-metaphysics/" rel="noopener">Stanford Encyclopedia of Philosophy, Metaphysics in Chinese Philosophy</a></td><td>五行的生成 / 制约过程语境；不把它现代物理化。</td></tr>
+            <tr id="r13"><td>R13</td><td><a href="https://internationalaisafetyreport.org/sites/default/files/2026-02/international-ai-safety-report-2026_1.pdf" rel="noopener">International AI Safety Report 2026</a></td><td>AI agent 能力、自主性与风险证据的现状综述。</td></tr>
+            <tr id="r14"><td>R14</td><td><a href="https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai" rel="noopener">NIST, Building Evaluation Probes into Agentic AI (2026)</a></td><td>事实落地、引用核验与机器可读审计轨迹的测评方向。</td></tr>
+            <tr id="r15"><td>R15</td><td><a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener">NIST AI Risk Management Framework</a></td><td>可信系统需要全生命周期治理、测量与验证；不是合规保证书。</td></tr>
+            <tr id="r16"><td>R16</td><td><a href="https://www.nature.com/articles/s41583-018-0031-2" rel="noopener">Tonegawa, Morrissey &amp; Kitamura, The role of engram cells in systems consolidation of memory (2018)</a></td><td>系统巩固涉及脑区、回路和 engram 随时间的变化；综述证据，不外推到 AI。</td></tr>
+            <tr id="r17"><td>R17</td><td><a href="https://www.nature.com/articles/s41386-024-01979-z" rel="noopener">Zaki &amp; Cai, Memory engram stability and flexibility (2025)</a></td><td>engram 稳定性、更新、遗忘与表征漂移的研究综述。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="questions-title">
+      <h2 class="section-title" id="questions-title">适合读书会真正讨论的六个问题</h2>
+      <div class="questions">
+        <div class="question">如果“万物皆信息”不能排除任何可能世界，它还解释了什么？</div>
+        <div class="question">一个本体论候选，至少应该对哪些状态或变换说“不可能”？</div>
+        <div class="question">什么干预才能真正移动一个系统的“自我边界”？</div>
+        <div class="question">记忆是内容、索引、连接，还是改变未来行为的动力学？</div>
+        <div class="question">一套继承来的定性框架，哪部分是经验残留、生成隐喻、社会技术或不可证伪的后加解释？</div>
+        <div class="question">未来 AI 若更强，人类的能动性怎样被测量，而不只是被口号保护？</div>
+      </div>
+    </section>
+
+    <aside class="notes" aria-labelledby="unknown-title">
+      <h2 id="unknown-title">我们仍然不知道什么</h2>
+      <p>不知道宇宙是否存在唯一“底层材料”；不知道信息结构是不是本体、描述语言或二者在某种对偶下的等价表达；不知道主观体验需要什么充分条件；不知道“未来可达性”能否成为跨物理、生物与 agent 系统的稳定不变量；也不知道任何传统定性框架的现代映射能否在压缩、样本外预测或干预上胜过匹配的普通基线。</p>
+      <p>这不是缺陷清单，而是 v1 的工作边界。下一版只应在新证据、清晰反例或可复现实验出现时扩张。</p>
+    </aside>
+
+    <footer>
+      <p><strong>版本说明：</strong>v1.1 是公开讨论稿，不构成物理学结论、医疗建议、投资建议或对任何人的意识判定。页面中的概率是工作概率，不是客观频率估计。</p>
+      <p>相邻主线：<a href="../THEORY.md">Theory Mainline</a> · <a href="../FORECASTS.md">Forecasts, Targets, and Interventions</a> · <a href="2026-09-06-from-encoding-to-physical-possibility.md">从可编码到物理可能性</a> · <a href="2026-05-21-taiji-bagua-multi-axis-generative-operator.md">太极、八卦与“生”算子（早期推测稿）</a></p>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+      const items = Array.from(document.querySelectorAll('[data-kind]'));
+
+      function applyFilter(filter) {
+        for (const button of buttons) {
+          button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
+        }
+        for (const item of items) {
+          const kinds = (item.dataset.kind || '').split(/\s+/);
+          item.classList.toggle('hidden', filter !== 'all' && !kinds.includes(filter));
+        }
+      }
+
+      for (const button of buttons) {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter));
+      }
+    })();
+  </script>
+</body>
+</html>

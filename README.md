@@ -90,6 +90,7 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 
 ## Public Essays
 
+- [从世界底层原理到未来世界：可证伪研究地图 v1](essays/2026-09-09-world-model-to-future-world.html) — a Chinese, mobile-first public discussion map separating evidence, models, hypotheses, inherited qualitative frameworks, forecasts, targets, and interventions.
 - [Operational Residue Is Learning Data](essays/2026-08-16-operational-residue-as-learning-data.md) — how long-running task, memory, receipt, correction, and failure traces can become a causal learning loop instead of operational exhaust.
 - [Theory Mainline](THEORY.md) — the stable public index for General Learning Machine, credit transport, memory-as-dynamics, and public feedback as metabolism.
 - [Engineering Practice Mainline](PRACTICE.md) — the stable public index for conceptual system iteration, operational loops, and agent-readable practice contracts.
