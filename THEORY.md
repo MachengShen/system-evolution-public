@@ -64,6 +64,8 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
   - Direct mathematical projection to our multi-agent fleet (Sophon / Starshard): operationalizing "容忍异质换惊喜" (temporal persistence of secondary body modes) and "有人格可驳回" (Gap-Gate $\Delta/\|\hat{\mathbf{E}}\|$ filter bounding single-agent distortion).
 - **中文精读版**：[大脑为什么靠频率和震动传递信息？——全脑类量子动力学与多智能体舰队的“最优性”极简解析](essays/2026-10-16-neural-oscillations-readable-zh.md) · [网页交互版 (HTML)](oscillations-zh.html)
 - [Spectral-Gap Decentralized Organization (SGDO): From DAO Spectral Degeneracy to Closed-Loop Verification Governance (Chinese)](essays/2026-10-16-decentralized-org-and-promotion-blueprint-zh.md) · [Interactive Guide (HTML)](decentralized-org-zh.html) 🟢 0.85
+- [From Elon Musk X-Shop / AI Commerce to Anti-Dogmatic Task Refinement: Seller-AI vs Buyer-Sovereign-Exocortex (Chinese)](essays/2026-10-16-xshop-ai-commerce-and-joint-task-refinement-zh.md) · [Interactive Guide (HTML)](xshop-and-joint-refinement-zh.html) 🟢 0.85
+- [Beyond Blockchain: Human-Legible Decentralized Organization and Non-Chain Technology Stack (Chinese)](essays/2026-10-16-human-legible-org-beyond-blockchain-zh.md) 🟢 0.85
 
 
 ## Searchable Summary
@@ -147,3 +149,5 @@ Important anti-signals:
 - [Interactive Guide: Future Internet Morphology & Strategy](future-internet-zh.html)
 - [Spectral-Gap Decentralized Organization (SGDO) & Open-Source Verification Blueprint (Chinese)](essays/2026-10-16-decentralized-org-and-promotion-blueprint-zh.md)
 - [Interactive Guide: Spectral-Gap Decentralized Organization (SGDO)](decentralized-org-zh.html)
+- [From Elon Musk X-Shop / AI Commerce to Anti-Dogmatic Task Refinement (Chinese)](essays/2026-10-16-xshop-ai-commerce-and-joint-task-refinement-zh.md)
+- [Interactive Guide: X-Shop & Anti-Dogmatic Joint Task Refinement](xshop-and-joint-refinement-zh.html)
