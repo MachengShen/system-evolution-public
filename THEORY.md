@@ -140,3 +140,5 @@ Important anti-signals:
 - [A Permutation Control Cannot Separate "Which Coordinate" From "Consistently Which Coordinate"](essays/2026-08-24-permutation-controls-cannot-separate-structure-from-routing.md)
 - [Brain-Inspired Non-Backprop AI Architecture: Historical Review and Three Strategic Pivots (Chinese)](essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md)
 - [Interactive Guide: Non-Backprop Architecture Strategic Pivot](non-backprop-pivot-zh.html)
+- [Deep Structural Mapping: Weekly AI News × Neural Oscillations & Fleet Governance (Chinese)](essays/2026-10-16-wechat-news-oscillations-and-agent-synthesis-zh.md)
+- [Interactive Guide: Weekly AI News Structural Mapping](wechat-news-synthesis-zh.html)
