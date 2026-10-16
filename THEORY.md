@@ -142,3 +142,5 @@ Important anti-signals:
 - [Interactive Guide: Non-Backprop Architecture Strategic Pivot](non-backprop-pivot-zh.html)
 - [Deep Structural Mapping: Weekly AI News × Neural Oscillations & Fleet Governance (Chinese)](essays/2026-10-16-wechat-news-oscillations-and-agent-synthesis-zh.md)
 - [Interactive Guide: Weekly AI News Structural Mapping](wechat-news-synthesis-zh.html)
+- [The New Morphology of the Future Internet and High-Asymmetry Strategy (Chinese)](essays/2026-10-16-future-internet-morphology-and-strategy-zh.md)
+- [Interactive Guide: Future Internet Morphology & Strategy](future-internet-zh.html)
