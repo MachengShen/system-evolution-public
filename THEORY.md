@@ -62,6 +62,8 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 - [The Optimality of Oscillatory Propagation in Cognitive Substrates: From Whole-Brain Quantum-Like Connectomics to Multi-Agent Fleet Architecture](essays/2026-10-16-neural-oscillations-and-agent-fleet-optimality.md) 🟢 0.85
   - Joint treatise with Claude Opus 5.5 deriving the 4 optimality theorems of neural oscillations: (a) $O(N^2)$ virtual routing over $O(N)$ sparse wiring with minimal stochastic dissipation via Communication-Through-Coherence (CTC), (b) Davis-Kahan spectral-gap ($\Delta\lambda$) noise immunity ($\sin\theta \le 2\|E\|/\Delta$), (c) Khrennikov-Växjö wave interference for subconscious parallel hypothesis pruning before conscious global workspace ignition, and (d) rare long-range shortcuts (>80mm) maximizing critical metastability (Cheeger conductance bound).
   - Direct mathematical projection to our multi-agent fleet (Sophon / Starshard): operationalizing "容忍异质换惊喜" (temporal persistence of secondary body modes) and "有人格可驳回" (Gap-Gate $\Delta/\|\hat{\mathbf{E}}\|$ filter bounding single-agent distortion).
+- **中文精读版**：[大脑为什么靠频率和震动传递信息？——全脑类量子动力学与多智能体舰队的“最优性”极简解析](essays/2026-10-16-neural-oscillations-readable-zh.md) · [网页交互版 (HTML)](oscillations-zh.html)
+
 
 ## Searchable Summary
 
