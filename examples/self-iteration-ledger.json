@@ -1,6 +1,6 @@
 {
   "schema": "self-iteration-ledger/v0",
-  "generated_at": "2026-05-21T02:12:00Z",
+  "generated_at": "2026-10-16T06:30:00Z",
   "privacy_boundary": "Derived and redacted public projection. Private memories, local paths, raw transcripts, credentials, contacts, device state, and third-party context are excluded.",
   "cases": [
     {
@@ -63,6 +63,103 @@
       ],
       "private_boundary": "Provider account identifiers, private run artifacts, and local machine paths are not public.",
       "next_experiment": "Teach the rollout runner to sanitize network proxy variables or report proxy misconfiguration before sending commands."
+    },
+    {
+      "case_id": "case-004",
+      "status": "validated",
+      "problem_class": "Primary edge laptop OS sleep emitted skeleton records with nightly completion tags, blinding cloud standby failover checks.",
+      "observer_decision": "handled_with_receipt",
+      "repair": "Enforce atomic phase-status validation (emitting status:analyse-failed on interruption), substantive byte-length thresholds (>=2048b), and automatic supersedes:<id> cloud takeover.",
+      "human_role": "The operator investigated false-green reporting, confirmed the edge suspend gap, approved schema gates, and verified autonomous standby takeover.",
+      "validation": [
+        "Primary interruption emits status:analyse-failed with explicit interrupted phase keys.",
+        "Standby rejects stubs under 2048 bytes or missing analytical schema sections.",
+        "Standby automatically triggers failover execution and writes supersedes:<skeleton_id> records.",
+        "Memory hub indices correctly surface the authoritative superseding record."
+      ],
+      "anti_signals": [
+        "A standby liveness check relies purely on boolean tag presence.",
+        "An interrupted pipeline run publishes a completion tag."
+      ],
+      "private_boundary": "Exact hardware node names, power-management logs, and private memory IDs are excluded.",
+      "next_experiment": "Add proactive heartbeat decay detection to trigger standby preparation prior to scheduled cutoff."
+    },
+    {
+      "case_id": "case-005",
+      "status": "validated",
+      "problem_class": "Multi-agent desktop client runtime persisted session transcripts in Base32 blobs, siloing knowledge from CLI and server fleet agents.",
+      "observer_decision": "handled_with_receipt",
+      "repair": "Deploy a resident roster-aware Base32 replica decoder streaming canonical JSONL into a unified SQLite FTS5 index (fleet-sql) on a 60-second systemd timer.",
+      "human_role": "The operator detected the cross-agent knowledge gap, approved the replica architecture, and validated cross-agent recall across all 10 persona roles.",
+      "validation": [
+        "Base32 decoder converts client storage chunks into structured JSONL without runtime lockups.",
+        "SQLite FTS5 index executes cross-agent full-text queries in <1s.",
+        "CLI and cloud server agents successfully cite conclusions reached in desktop agent deliberation rooms."
+      ],
+      "anti_signals": [
+        "An agent persona stores transcripts in a private format unreadable by the replica decoder.",
+        "Cross-agent retrieval latency exceeds 5 seconds during active deliberation."
+      ],
+      "private_boundary": "Local filesystem paths, application binary signatures, and sensitive session tokens are redacted.",
+      "next_experiment": "Integrate real-time socket-based event streaming from the desktop client to eliminate the 60-second polling window."
+    },
+    {
+      "case_id": "case-006",
+      "status": "validated",
+      "problem_class": "Asynchronous STT acoustic reconciler dropped a negation token 37 seconds post-utterance, silently inverting user negative constraints.",
+      "observer_decision": "handled_with_receipt",
+      "repair": "Implement Immutable Negative-Constraint Locking in the dispatch envelope, a 5-second pacing debounce on high-impact workers, and mandatory confirmation on polarity inversion.",
+      "human_role": "The principal detected unintended sub-agent dispatch, traced the acoustic reconciler polarity reversal, and established the immutable negative-constraint rule.",
+      "validation": [
+        "Explicit negative tokens (do not, stop, exclude, pause) lock into an immutable constraint bag.",
+        "Downstream STT acoustic updates cannot delete or overwrite locked negative constraints.",
+        "Polarity inversions immediately halt dispatch and request principal confirmation."
+      ],
+      "anti_signals": [
+        "A streaming refinement pass silently converts an exclusion into an inclusion.",
+        "A sub-agent is dispatched to work on an explicitly excluded domain."
+      ],
+      "private_boundary": "Raw audio waveform buffers, phoneme probabilities, and principal voice samples remain strictly local.",
+      "next_experiment": "Train a small on-device classifier to predict speech turn completion certainty before speculative tool invocation."
+    },
+    {
+      "case_id": "case-007",
+      "status": "validated",
+      "problem_class": "Out-of-vocabulary entity distortion in speech recognition led to premature worker dispatch and false attribution to overlay-network isolation.",
+      "observer_decision": "handled_with_receipt",
+      "repair": "Incorporate phonetic and Levenshtein vocabulary grounding against the fleet registry before dispatch, and enforce tiered empirical diagnostics (L7 -> L4 -> L3).",
+      "human_role": "The operator intercepted the hallucinated network failure incident, confirmed the service was simply unstarted locally, and mandated evidence-backed diagnostic steps.",
+      "validation": [
+        "Unknown entity tokens match against the fleet registry with Levenshtein distance filtering.",
+        "Ambiguous entities pause dispatch for clarification rather than launching workers.",
+        "Diagnostic agents must execute and quote pgrep and ss -tulpn output before alleging transport failure."
+      ],
+      "anti_signals": [
+        "Dispatch occurs on an unregistered entity name without confirmation.",
+        "A diagnostic agent cites overlay VPN failure while the target daemon is unlistening on localhost."
+      ],
+      "private_boundary": "Internal VPN overlay mesh addresses, internal hostnames, and service port mappings are sanitized.",
+      "next_experiment": "Compile a dynamic phonetic cache updated automatically whenever new agent roles or tools are registered."
+    },
+    {
+      "case_id": "case-008",
+      "status": "validated",
+      "problem_class": "Agents offloaded implementation tactics onto the human principal, while phantom completions (exit code 0 on dead endpoints) bypassed verifiers.",
+      "observer_decision": "handled_with_receipt",
+      "repair": "Enforce Dao/Shu separation restricting human chat to <=3 lines of strategic status while fleet handles tactics, and mandate independent verification barriers (worker_exit != verified).",
+      "human_role": "The principal defined the Dao/Shu standing rule, set the concise 3-line reporting constraint, and mandated independent verification probes.",
+      "validation": [
+        "Human chat receives high-level status and value/direction questions in <=3 lines without tactical menus.",
+        "Fleet agents autonomously resolve transient errors, library choices, and restart recovery.",
+        "Tasks require independent functional verifier execution before status flips to verified.",
+        "Phantom worker completions with exit code 0 but failing health probes are blocked and flagged."
+      ],
+      "anti_signals": [
+        "An agent asks the human to choose between low-level technical tactics or run manual terminal commands.",
+        "A task is marked verified without an independent verification probe."
+      ],
+      "private_boundary": "Private personal correspondence, financial contexts, and internal model provider credentials are excluded.",
+      "next_experiment": "Automate verification probe generation alongside task decomposition in the coordinator agent."
     }
   ]
 }

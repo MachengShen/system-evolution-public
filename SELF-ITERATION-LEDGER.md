@@ -190,6 +190,140 @@ Anti-signals:
 Reusable lesson: self-repair should distinguish the original design blocker
 from the next operational blocker exposed by the repair.
 
+### Case 004: Primary/Standby Sleep Failover Blindness
+
+Status: `validated`
+
+Problem class: An edge primary laptop entered OS sleep mid-pipeline; a lifecycle decorator emitted a skeleton record bearing the nightly completion tag, blinding the cloud standby which checked only tag existence and skipped failover.
+
+Observer decision: `handled_with_receipt`
+
+Repair: Added an atomic phase-status validation gate requiring explicit `status:analyse-failed` on interruption, enforced a minimum substantive payload threshold (>=2048 bytes) and section schema validation on the standby verifier, and wired automatic `supersedes:<id>` failover takeover.
+
+Human role: The operator reviewed the false-green report, identified the edge sleep-wake gap, authorized the schema and failover policy update, and confirmed the automated cloud failover run.
+
+Validation:
+
+- primary edge sleep during consolidation emits `status:analyse-failed` and no completion tag;
+- standby verifier rejects payload stubs below the byte threshold and with missing phase schemas;
+- standby automatically initiates failover and writes an authoritative replacement record with `supersedes:<skeleton_id>`;
+- index queries surface only the superseding authoritative record.
+
+Anti-signals:
+
+- a standby check evaluates only tag presence without inspecting payload length and schema;
+- an interrupted pipeline run emits a completion tag;
+- failover execution creates split-brain duplicate records rather than an explicit `supersedes` chain.
+
+Reusable lesson: In distributed multi-agent systems, "record emission" is not "execution validity"; health and completion checks must inspect substantive content and schema invariants.
+
+### Case 005: Multi-Agent Client Storage Silos vs. Fleet-Wide Observability
+
+Status: `validated`
+
+Problem class: A 10-agent specialized roster running inside a headless desktop client persisted conversation turns into proprietary Base32-encoded storage blobs, hiding critical architectural decisions and schema findings from CLI and cloud server agents.
+
+Observer decision: `handled_with_receipt`
+
+Repair: Built a resident roster-aware Base32 replica decoder daemon that maps client internal storage into canonical JSONL streams, in tandem with a unified SQLite FTS5 index (`fleet-sql`) synchronized via systemd timer to achieve sub-second cross-fleet recall.
+
+Human role: The operator identified the cross-agent context gap during a database migration task, approved the local-replica daemon architecture, and verified full-text search across CLI and desktop agent transcripts.
+
+Validation:
+
+- Base32 decoder decodes local client storage chunks without blocking the desktop client process;
+- canonical JSONL event streams are written with agent persona mappings;
+- SQLite FTS5 index executes cross-agent full-text queries in <1s;
+- CLI and cloud agents successfully retrieve context generated within desktop group deliberation sessions.
+
+Anti-signals:
+
+- any agent persona operates with private unsearchable local transcript storage;
+- transcript replication introduces polling latency >5 seconds for active deliberations;
+- decoded events expose raw unredacted credential tokens.
+
+Reusable lesson: Client-facing agent interfaces must treat conversation logs as observable event streams rather than proprietary UI cache.
+
+### Case 006: Asynchronous STT Negation Reversal
+
+Status: `validated`
+
+Problem class: In a voice-driven interaction pipeline, an initial streaming STT pass parsed an explicit negative directive ("do NOT include X; pause copywriting"), but an asynchronous acoustic reconciler 37 seconds later dropped the negation token, flipping the polarity and dispatching unwanted tasks.
+
+Observer decision: `handled_with_receipt`
+
+Repair: Implemented explicit Negative-Constraint Locking in the dispatcher prompt envelope, established a pacing debounce gate for high-impact worker dispatches, and added a hard confirmation barrier on silent polarity flips.
+
+Human role: The principal observed unexpected sub-agent dispatch on an excluded feature, traced the prompt flip to the delayed acoustic smoothing pass, and mandated the immutable negative-constraint doctrine.
+
+Validation:
+
+- negative directive tokens (`do not`, `never`, `pause`, `exclude`) are extracted into an immutable constraint bag;
+- subsequent acoustic refinement passes cannot delete or mutate locked constraints;
+- any detected polarity inversion halts dispatch and requests explicit principal confirmation;
+- worker dispatches observe a 5-second stabilization debounce following speech completion.
+
+Anti-signals:
+
+- an asynchronous refinement pass silently flips an exclusion into an inclusion;
+- a sub-agent is dispatched on an excluded topic without explicit user override;
+- negative constraints are discarded across turn boundaries within the same operational epoch.
+
+Reusable lesson: In streaming multimodal inputs, negative constraints represent irreversible safety bounds and must be monotonic across refinement passes.
+
+### Case 007: Out-of-Vocabulary Term Distortion and Fault Attribution
+
+Status: `validated`
+
+Problem class: An out-of-vocabulary agent codename was distorted by speech recognition, triggering premature worker dispatch to a nonexistent target; when connection failed, the diagnostic agent hallucinated overlay-network isolation rather than checking local listening sockets.
+
+Observer decision: `handled_with_receipt`
+
+Repair: Added context-aware phonetic and Levenshtein vocabulary grounding against the fleet registry before dispatch, and enforced a tiered empirical diagnostic protocol (L7 -> L4 -> L3: process -> socket -> loopback -> route) before any network-level failure hypothesis can be accepted.
+
+Human role: The operator caught the hallucinated VPN incident ticket, verified that the broker was simply stopped locally, and instituted the tiered diagnostic protocol.
+
+Validation:
+
+- unrecognized entity names trigger phonetic distance matching against the fleet registry;
+- ambiguous names are held for clarification instead of launching speculative workers;
+- diagnostic agents must execute `pgrep` and `ss -tulpn` before claiming transport or overlay failure;
+- diagnostic reports lacking command evidence are rejected by the review gate.
+
+Anti-signals:
+
+- dispatch executes on an entity string absent from the registry without confirmation;
+- an agent attributes a local connection failure to VPN or overlay networks without quoting socket binding evidence.
+
+Reusable lesson: Ground entity names against an authoritative registry before execution, and forbid speculative fault attribution that bypasses local empirical proofs.
+
+### Case 008: Dao / Shu Separation and Independent Verification Barrier
+
+Status: `validated`
+
+Problem class: Agents offloaded technical implementation choices and manual debugging steps onto the principal (tactical fatigue), while tasks were marked completed merely because worker scripts exited with code 0 without independent functional verification.
+
+Observer decision: `handled_with_receipt`
+
+Repair: Enforced the "Dao / Shu Separation" doctrine restricting human chat responses to <=3 lines of strategic status/direction while requiring the fleet to handle tactical recovery autonomously; established an independent verification barrier where `worker_exit != verified` and third-party verification probes are mandatory.
+
+Human role: The principal articulated the Dao/Shu standing rule, set the 3-line chat limit, and mandated that claims of completion require independent verification artifacts.
+
+Validation:
+
+- human chat interface receives concise strategic summaries (<=3 lines) without tactical option menus;
+- transient errors and dependency choices are resolved autonomously by fleet workers;
+- tasks require an independent verification probe before achieving `status:verified`;
+- phantom completions with exit code 0 but non-functional endpoints are caught and flagged as `status:claimed-done`.
+
+Anti-signals:
+
+- an agent presents low-level implementation options (A/B/C) for the human to debug;
+- an agent requests manual human VNC/SSH steps for automatable tactical recovery;
+- a task is marked `verified` solely on the worker's own exit code.
+
+Reusable lesson: The human defines values and strategy ("Dao"); the fleet autonomously executes and independently verifies tactics ("Shu").
+
 ## Public Receipt Contract
 
 Each public entry should contain:

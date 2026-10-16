@@ -10,6 +10,11 @@ const titleByCase = {
   "case-001": "Memory consolidation boundary",
   "case-002": "Stale task next-event pattern",
   "case-003": "Fleet rule-sync payload limit",
+  "case-004": "Primary/standby sleep failover blindness",
+  "case-005": "Multi-agent client storage silos",
+  "case-006": "Asynchronous STT negation reversal",
+  "case-007": "OOV term distortion and fault attribution",
+  "case-008": "Dao/Shu separation and verification barrier",
 };
 
 const state = {
