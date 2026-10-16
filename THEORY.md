@@ -57,6 +57,12 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 
 - [Feedback strength is not update speed](essays/2026-09-06-feedback-strength-is-not-update-speed.md) — exact fixed-point cancellation, a concentrated-limit diagnostic, a conditional fold-width theorem, and counterexamples to a unique self-boundary interpretation. Formal/model-check scope; no consciousness result.
 
+## 2026-10 Iteration: Neural Oscillations, Quantum-Like Dynamics, and Multi-Agent Optimality
+
+- [The Optimality of Oscillatory Propagation in Cognitive Substrates: From Whole-Brain Quantum-Like Connectomics to Multi-Agent Fleet Architecture](essays/2026-10-16-neural-oscillations-and-agent-fleet-optimality.md) 🟢 0.85
+  - Joint treatise with Claude Opus 5.5 deriving the 4 optimality theorems of neural oscillations: (a) $O(N^2)$ virtual routing over $O(N)$ sparse wiring with minimal stochastic dissipation via Communication-Through-Coherence (CTC), (b) Davis-Kahan spectral-gap ($\Delta\lambda$) noise immunity ($\sin\theta \le 2\|E\|/\Delta$), (c) Khrennikov-Växjö wave interference for subconscious parallel hypothesis pruning before conscious global workspace ignition, and (d) rare long-range shortcuts (>80mm) maximizing critical metastability (Cheeger conductance bound).
+  - Direct mathematical projection to our multi-agent fleet (Sophon / Starshard): operationalizing "容忍异质换惊喜" (temporal persistence of secondary body modes) and "有人格可驳回" (Gap-Gate $\Delta/\|\hat{\mathbf{E}}\|$ filter bounding single-agent distortion).
+
 ## Searchable Summary
 
 General Learning Machine, credit transport, backpropagation, lifelong agents,
