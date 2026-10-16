@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="脑启发非反向传播（Non-Backprop）AI 架构：历史复盘、理论重构与三大战略转向（Gemini 4 Argon × Claude Opus 5.5 联合审定）。">
+  <title>非反向传播（Non-Backprop）AI 架构：历史复盘与战略转向</title>
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --accent-glow: rgba(30, 86, 160, 0.08);
+      --highlight: #b85c18;
+      --green: #15803d;
+      --red: #b91c1c;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 30rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px max(20px, calc((100vw - 980px) / 2));
+      border-bottom: 1px solid rgba(227, 222, 214, 0.85);
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(14px);
+    }
+    .topbar a { color: var(--ink); text-decoration: none; }
+    .brand { font-weight: 750; font-size: 15px; letter-spacing: 0.02em; }
+    .nav { display: flex; gap: 16px; font-size: 14px; }
+    main { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 48px 0 84px; }
+    
+    .hero { padding: 32px 0 36px; border-bottom: 1px solid var(--line); }
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 14px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0;
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 46rem;
+    }
+    
+    .panel {
+      margin: 40px 0;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .panel-title {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 20px;
+      font-weight: 750;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .audit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 20px 0;
+    }
+    @media (max-width: 720px) {
+      .audit-grid { grid-template-columns: 1fr; }
+    }
+    .audit-card {
+      padding: 18px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--card-bg);
+    }
+    .audit-card.dead {
+      border-left: 4px solid var(--red);
+    }
+    .audit-card.alive {
+      border-left: 4px solid var(--green);
+    }
+    .card-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .card-label.dead { color: var(--red); }
+    .card-label.alive { color: var(--green); }
+    
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 15px;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      text-align: left;
+    }
+    .matrix-table th {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .matrix-table tr:nth-child(even) td {
+      background: rgba(250, 248, 245, 0.5);
+    }
+    
+    .math-block {
+      background: #f4f2ee;
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-family: "SF Mono", Menlo, Consolas, Monaco, monospace;
+      font-size: 14.5px;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-left: 3px solid var(--accent);
+    }
+    
+    .flow-step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: flex-start;
+    }
+    .step-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .pill-green { background: #dcfce7; color: var(--green); }
+    .pill-red { background: #fee2e2; color: var(--red); }
+    .pill-blue { background: #dbeafe; color: var(--accent); }
+    
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">System Evolution</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="./">Home</a>
+      <a href="THEORY.md">Theory</a>
+      <a href="oscillations-zh.html">Oscillations</a>
+      <a href="essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md">Markdown Essay</a>
+      <a href="README.md">Repo</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Gemini 4 Argon × Claude Opus 5.5 联合深度审定</div>
+      <h1>脑启发非反向传播（Non-Backprop）AI 架构：历史复盘、理论重构与三大战略转向</h1>
+      <p class="lede">回答系统 Owner 核心关切：基于全脑动力学与 121 万条真实车队事件，曾经陷入僵局的“非 BP 学习”能否重开？何处是死胡同，何处是真正的新大陆？</p>
+    </section>
+
+    <!-- 核心裁决 -->
+    <section class="panel">
+      <h2 class="panel-title">⚖️ 核心战略裁决：能否重开？</h2>
+      <p><strong>结论：可以重开，但必须完成一次彻底的“战场转移与物理重构”。</strong></p>
+      
+      <div class="audit-grid">
+        <div class="audit-card dead">
+          <div class="card-label dead">❌ 已经死亡的旧路线（不可重启）</div>
+          <p><strong>在稠密连续权重矩阵（Layer-0/GPU GEMM）上替代反向传播。</strong></p>
+          <p style="font-size:14px; color:var(--muted);">
+            试图用局部法则（DFA、Forward-Forward、经典三因子）在微观层硬刚 BP + AdamW，已被证明是数学死局：梯度估计方差随参数量成正比放大（$Var[\hat{g}] \propto N_{eff}$），信噪比直接归零，且与 GPU 脉动阵列硬件相悖。
+          </p>
+        </div>
+
+        <div class="audit-card alive">
+          <div class="card-label alive">✅ 真正成立的新路线（全面启动）</div>
+          <p><strong>在介观/宏观不可微的异构模块与智能体网络（10¹~10³ 节点）上自组织。</strong></p>
+          <p style="font-size:14px; color:var(--muted);">
+            在跨模型、跨工具、状态持久化与延迟奖励的宏观层，反向传播在数学上根本不可微。脑科学的真正启示在于：通过振荡相位门控降低维度、利用谱隙阻隔噪音，并在睡眠期实现双相稳态固化。
+          </p>
+        </div>
+      </div>
+      
+      <div style="background:var(--accent-soft); padding:14px 18px; border-radius:8px; font-size:14.5px;">
+        💡 <strong>关键混合架构洞见</strong>：我们<strong>不需要消灭反向传播</strong>！模块内部与离线蒸馏继续依赖高效的 BP（GEMM 最优解）；模块间路由拓扑、资格迹绑定与宏观自演化彻底交由脑启发非 BP 振荡动力学接管。
+      </div>
+    </section>
+
+    <!-- 科学审计与真相 -->
+    <section class="panel">
+      <h2 class="panel-title">🔍 科学证据审计：剔除修辞，直面物理真相</h2>
+      <p>保持彻底的学术诚实，对近期车队“实证支柱”与理论映射进行源码级解剖：</p>
+      
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>概念/说法</th>
+            <th>工程代码中的实际机制</th>
+            <th>科学层面的真实物理能效</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Växjö 波相消干涉</strong></td>
+            <td>否定词与极性突变匹配启发式</td>
+            <td>提供了一个<strong>带负号的第三因子（Anti-Hebbian LTD）</strong>，直接惩罚违反确定性硬约束的通路。</td>
+          </tr>
+          <tr>
+            <td><strong>Davis-Kahan 谱隙抗噪门</strong></td>
+            <td>无测试验证凭据的任务拦截规则</td>
+            <td>充当<strong>低秩信用通道与“学或不学”的阻尼门</strong>。谱隙 $\Delta\lambda$ 足够大才更新，防止局部学习漂移进噪声。</td>
+          </tr>
+          <tr>
+            <td><strong>CTC 相位对齐</strong></td>
+            <td>系统定时器错开 +90 秒无惊群运行</td>
+            <td>在数学上<strong>将有效维度 $N_{eff}$ 压缩几个数量级</strong>（只有相位共振通路积累资格迹），大幅拉升信噪比。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 三大战略转向矩阵 -->
+    <section class="panel">
+      <h2 class="panel-title">🧭 三大战略转向矩阵（Strategic Pivot Matrix）</h2>
+      <p>从 2026 年 5 月 Backprop Lab 的受挫经验，跃迁至 2026 年 10 月全脑振荡动力学的新架构：</p>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="width:18%;">转向维度</th>
+            <th style="width:26%;">转向前（Old Non-Backprop，死局）</th>
+            <th style="width:34%;">转向后（New Oscillatory-Spectral Non-BP）</th>
+            <th style="width:22%;">证伪与止损红线</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pivot 1: 尺度与底座<br><span class="pill pill-blue">Scale</span></strong></td>
+            <td>$10^5 \sim 10^9$ 稠密微观突触权重，在 GPU 上硬刚 BP</td>
+            <td><strong>$10^1 \sim 10^3$ 个离散脑区/智能体模块/路由拓扑</strong>（BP 根本不可微的介观宏观场景）</td>
+            <td>门控三因子在长链延迟奖励任务上，若未显著优于标量 REINFORCE 基线，立即止损。</td>
+          </tr>
+          <tr>
+            <td><strong>Pivot 2: 信用分配<br><span class="pill pill-green">Credit</span></strong></td>
+            <td>全局转置梯度回传（依赖 $W^T$ 对称性）或无门控标量调质</td>
+            <td><strong>CTC 门控资格迹 + 谱隙门控低秩投影 + 独立验证器带符号第三因子</strong></td>
+            <td>低秩 $k$ 维信用未能击败纯标量基线，或单调保真度（$\rho$）依然不成立，立即止损。</td>
+          </tr>
+          <tr>
+            <td><strong>Pivot 3: 昼夜双相<br><span class="pill pill-red">Wake-Sleep</span></strong></td>
+            <td>在线端到端即时连续 SGD 更新（灾难性遗忘与高能耗）</td>
+            <td><strong>清醒期纯前向波记录资格迹，睡眠期（<code>fleet-sleep</code>）批量回放、稳态缩放与离线蒸馏</strong></td>
+            <td>引入睡眠期后，跨任务灾难性遗忘率及最差任务表现未能显著改善，立即止损。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Pivot 2 核心数学更新法则</h3>
+      <div class="math-block">
+e_ij(t) = ∫₀ᵗ κ(t - s) · g_ij(s) · pre_i(s) · post_j(s) ds  [CTC门控衰减资格迹]
+Δθ_ij   = η · 𝕀[Δλ_k > γ] · (P_k M)_ij · e_ij               [谱隙阻尼与多维第三因子点火]
+      </div>
+      <p style="font-size:14.5px; color:var(--muted);">
+        其中 $\mathbb{I}[\Delta\lambda_k > \gamma]$ 为基于谱隙的阻尼门（只有宏观模式清晰才更新）；$P_k$ 为低秩正交投影；$M$ 为独立验证器生成的综合奖惩向量，杜绝执行者自报完成。
+      </p>
+    </section>
+
+    <!-- 昼夜双相工作流 -->
+    <section class="panel">
+      <h2 class="panel-title">🌙 昼夜双相协议（Wake-Sleep Protocol）</h2>
+      <div class="flow-step">
+        <div class="step-badge">1</div>
+        <div>
+          <strong>清醒期（Wake Phase，高带宽低功耗）</strong>
+          <p style="margin:4px 0 0; font-size:14.5px; color:var(--muted);">
+            保持网络结构和模型参数冻结；纯前向波传播；仅在轻量记忆日志中追加 CTC 相位相干的资格迹 $e_{ij}(t)$。
+          </p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-badge">2</div>
+        <div>
+          <strong>睡眠期：离线回放与独立核验（Sleep Phase）</strong>
+          <p style="margin:4px 0 0; font-size:14.5px; color:var(--muted);">
+            关闭高频外部交互；根据新颖度与潜在价值重播日间轨迹；由独立验证器（Verifier）提供确定性结果结算。
+          </p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-badge">3</div>
+        <div>
+          <strong>睡眠期：突触稳态缩放与结构剪枝（Homeostatic Scaling）</strong>
+          <p style="margin:4px 0 0; font-size:14.5px; color:var(--muted);">
+            全局执行突触衰减 $\theta \leftarrow \theta \cdot (1 - \rho)$ 防止饱和过热；物理剪除长期负干涉或未激活的无效通路。
+          </p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-badge">4</div>
+        <div>
+          <strong>睡眠期：BP 局部离线蒸馏（Distillation）</strong>
+          <p style="margin:4px 0 0; font-size:14.5px; color:var(--muted);">
+            将经过验证的宏观确定性逻辑，通过标准反向传播（BP）蒸馏固化进局部的轻量模型 Adapter 中，实现宏观拓扑向微观突触的无缝沉淀。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 落地路线 -->
+    <section class="panel">
+      <h2 class="panel-title">🚀 实施路线图（Roadmap）</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px;">
+        <div style="background:var(--paper); padding:14px; border-radius:8px; border:1px solid var(--line);">
+          <div style="font-weight:750; color:var(--accent);">P0: 指标去伪</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">剔除写死常数，实测精准率、召回率与锁方差。</div>
+        </div>
+        <div style="background:var(--paper); padding:14px; border-radius:8px; border:1px solid var(--line);">
+          <div style="font-weight:750; color:var(--accent);">P1: v3 基准</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">建立模块化延迟信用基准，检验 Oracle 上限。</div>
+        </div>
+        <div style="background:var(--paper); padding:14px; border-radius:8px; border:1px solid var(--line);">
+          <div style="font-weight:750; color:var(--accent);">P2: Shadow 车队</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">在分布式车队路由上运行预注册的 Shadow 学习。</div>
+        </div>
+        <div style="background:var(--paper); padding:14px; border-radius:8px; border:1px solid var(--line);">
+          <div style="font-weight:750; color:var(--accent);">P3: 昼夜自愈</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">上线夜间自动回放、剪枝与 Adapter 蒸馏。</div>
+        </div>
+        <div style="background:var(--paper); padding:14px; border-radius:8px; border:1px solid var(--line);">
+          <div style="font-weight:750; color:var(--accent);">P4: 物理硬件</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">若软件指标显著为正，启动光子与神经形态映射。</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>System Evolution Public Record · 2026</div>
+      <div>
+        <a href="THEORY.md">理论主线</a> · 
+        <a href="essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md">完整论文版</a> · 
+        <a href="./">首页</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

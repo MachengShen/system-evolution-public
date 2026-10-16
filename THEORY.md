@@ -138,3 +138,5 @@ Important anti-signals:
 - [The Black-Box I/O Adapter Principle](essays/2026-05-07-black-box-io-adapter.md)
 - [What Replaces Super-App Chat In The AI-Agent Era?](essays/2026-05-13-open-communication-substrate.md)
 - [A Permutation Control Cannot Separate "Which Coordinate" From "Consistently Which Coordinate"](essays/2026-08-24-permutation-controls-cannot-separate-structure-from-routing.md)
+- [Brain-Inspired Non-Backprop AI Architecture: Historical Review and Three Strategic Pivots (Chinese)](essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md)
+- [Interactive Guide: Non-Backprop Architecture Strategic Pivot](non-backprop-pivot-zh.html)
