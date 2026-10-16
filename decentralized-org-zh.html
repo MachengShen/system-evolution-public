@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="谱隙自组织（SGDO）：从传统 DAO 谱简并病灶到开源闭环验证治理——架构定义、数学基石与第一阶段推广落地蓝图（Gemini 4 Argon × Claude Opus 5.5 联合制定）。">
+  <title>谱隙自组织（SGDO）与开源闭环验证治理</title>
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --purple: #6d28d9;
+      --purple-soft: #f5f3ff;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 30rem),
+        radial-gradient(circle at 90% 20%, rgba(184, 92, 24, 0.04), transparent 28rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px max(20px, calc((100vw - 980px) / 2));
+      border-bottom: 1px solid rgba(227, 222, 214, 0.85);
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(14px);
+    }
+    .topbar a { color: var(--ink); text-decoration: none; }
+    .brand { font-weight: 750; font-size: 15px; letter-spacing: 0.02em; }
+    .nav { display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
+    main { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 48px 0 84px; }
+    
+    .hero { padding: 32px 0 36px; border-bottom: 1px solid var(--line); }
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 14px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0;
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 48rem;
+    }
+    
+    .panel {
+      margin: 40px 0;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .panel-title {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 20px;
+      font-weight: 750;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 24px 0;
+    }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card-bg);
+    }
+    .card h3 { margin-top: 0; font-size: 17px; }
+    .card p { margin-bottom: 0; font-size: 15px; color: var(--muted); }
+    
+    .formula-box {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 20px 24px;
+      border-radius: 12px;
+      margin: 20px 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+    .formula-box .highlight { color: #38bdf8; font-weight: 700; }
+    .formula-box .comment { color: #94a3b8; }
+    
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .badge-green { background: var(--green-soft); color: var(--green); }
+    .badge-red { background: var(--red-soft); color: var(--red); }
+    .badge-blue { background: var(--accent-soft); color: var(--accent); }
+    .badge-purple { background: var(--purple-soft); color: var(--purple); }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14.5px;
+    }
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      text-align: left;
+    }
+    th {
+      background: #f7f5f0;
+      font-weight: 700;
+    }
+    
+    .cell-tab-container {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .cell-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .cell-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      margin: 24px 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--line);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--paper);
+    }
+    .timeline-date {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+    .timeline-body {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .interactive-simulator {
+      background: #fdfdfd;
+      border: 1px solid var(--line);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    .slider-group {
+      margin-bottom: 16px;
+    }
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    input[type=range] {
+      width: 100%;
+    }
+    .sim-result {
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">System Evolution</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="THEORY.md">理论主线</a>
+      <a href="oscillations-zh.html">全脑动力学</a>
+      <a href="non-backprop-pivot-zh.html">非反向传播</a>
+      <a href="future-internet-zh.html">未来互联网</a>
+      <a href="essays/2026-10-16-decentralized-org-and-promotion-blueprint-zh.md">论文全文 (Markdown)</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="eyebrow">去中心化组织架构重构 · 理论与工程实施</span>
+      <h1>谱隙自组织（SGDO）：从传统 DAO 谱简并病灶到开源闭环验证治理</h1>
+      <p class="lede">
+        基于 Davis-Kahan 谱隙抗噪定理，诊断传统 DAO 为何在无向投票中必然退化；提出以“四类特化自治胞元 + 独立确定性凭据（R_verified）+ CTC 相位相干协同 + 人类价值吸引子”为核心的 SGDO 体系与四周开源推广蓝图。
+      </p>
+    </section>
+
+    <!-- 0. 诚实前置 -->
+    <div class="panel" style="border-left: 4px solid var(--highlight);">
+      <h2 class="panel-title" style="color: var(--highlight);">
+        <span>0. 诚实前置声明（Epistemic Hygiene First）</span>
+      </h2>
+      <p style="margin: 0; font-size: 15px; color: var(--muted);">
+        在控制面现网早期版本中，曾存在静态预设的谱隙常数。在 SGDO 正式架构中，<strong>完全废止硬编码占位符</strong>。谱隙 Δλ 必须由真实运行窗口内的已验证收据矩阵动态计算（Bootstrap 估算）。未能提供实测统计分布前，一律标注为工程经验规则，严禁将数学隐喻包装为免死金牌。
+      </p>
+    </div>
+
+    <!-- 1. 传统 DAO 的谱简并病灶 -->
+    <div class="panel">
+      <h2 class="panel-title">1. 传统 DAO 为何必然退化：谱简并（Spectral Degeneracy）诊断</h2>
+      <p>
+        将一个包含 N 个参与者与 M 个议题的协作组织视为信息聚合算子矩阵 <strong>A = S + E</strong>。其中 S 为真实协同结构，E 为扰动与投票噪声。
+      </p>
+
+      <div class="formula-box">
+<span class="comment">// 戴维斯-卡汉（Davis-Kahan）谱扰动定理</span>
+<span class="highlight">sin θ(v₁, v̂₁) ≤ 2 ‖E‖ / Δλ</span>   (其中 Δλ = λ₁ - λ₂)
+
+<span class="comment">// 战略方向不漂移的充要物理条件：</span>
+<span class="highlight">Δλ ≫ ‖E‖</span> (主次谱隙显著压倒噪声模长)
+      </div>
+
+      <div class="grid-2">
+        <div class="card" style="border-left: 4px solid var(--red);">
+          <h3><span class="badge badge-red">病灶 1</span> 全局无向投票噪音</h3>
+          <p>提案维度 M 无限膨胀，特征值重叠挤压，导致 Δλ → 0；同时无门槛投票使噪声模长按 ‖E‖ ∝ √N 剧烈发散，系统必然陷入随机布朗运动。</p>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--red);">
+          <h3><span class="badge badge-red">病灶 2</span> 确定性验证闭环缺失</h3>
+          <p>提案通过 ≠ 工程真实交付。缺乏自动化回放测试与证据留存，系统没有“恢复力算子”，错误方向永远无法被环境反冲消除。</p>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--red);">
+          <h3><span class="badge badge-red">病灶 3</span> 治理寻租与闪电贷劫持</h3>
+          <p>治理代币可借贷、可投机。翻转组织方向的攻击成本正比于 Δλ。当谱简并发生时，巨鲸可以用极低成本闪电贷操纵提案。</p>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--red);">
+          <h3><span class="badge badge-red">病灶 4</span> 团队道德风险与零问责</h3>
+          <p>报酬发放与可客观检验的结果脱钩（Holmström 团队道德风险），缺乏有效的信用分配回传，劣币驱逐良币。</p>
+        </div>
+      </div>
+
+      <!-- 动态模拟器 -->
+      <div class="interactive-simulator">
+        <h4 style="margin: 0 0 12px; font-size: 16px;">🔬 Davis-Kahan 谱隙抗噪边界实时测算</h4>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span>噪声扰动强度 ‖E‖ (受投票噪音与对抗操纵驱动)</span>
+            <span id="noise-val">0.15</span>
+          </div>
+          <input type="range" id="noise-slider" min="0.05" max="0.80" step="0.01" value="0.15">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span>主次谱隙 Δλ = λ₁ - λ₂ (受局域自治与凭据稀疏耦合保障)</span>
+            <span id="gap-val">0.60</span>
+          </div>
+          <input type="range" id="gap-slider" min="0.05" max="1.00" step="0.01" value="0.60">
+        </div>
+        <div class="sim-result" id="sim-result-box" style="background: var(--green-soft); color: var(--green);">
+          <span id="sim-verdict">状态：强相干定向演进 (sin θ = 0.50 ≤ 0.70)</span>
+          <span id="sim-action">允许自适应路由权值更新</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SGDO 架构体系 -->
+    <div class="panel">
+      <h2 class="panel-title">2. 谱隙自组织（SGDO）架构体系</h2>
+      <p>
+        SGDO 通过架构拓扑设计强行撑开谱隙 Δλ 并压缩噪声 ‖E‖：
+        <strong>局域自治胞元 ＋ 仅以 R_verified 独立凭据稀疏耦合 ＋ CTC 相位集成 ＋ 人类价值吸引子</strong>。
+      </p>
+
+      <div class="cell-tab-container">
+        <button class="cell-btn active" onclick="switchCell('c-eng')">C-Eng 工程核心胞元</button>
+        <button class="cell-btn" onclick="switchCell('c-pred')">C-Pred 可证伪预测胞元</button>
+        <button class="cell-btn" onclick="switchCell('c-res')">C-Res 社区与生态共鸣胞元</button>
+        <button class="cell-btn" onclick="switchCell('c-gate')">C-Gate 独立验证闸门</button>
+      </div>
+
+      <div id="cell-detail-card" class="card" style="border-left: 4px solid var(--accent);">
+        <h3 id="cell-title">C-Eng 工程与控制核心（Engineering & Control Plane）</h3>
+        <p id="cell-duty" style="color: var(--ink); margin-bottom: 8px;"><strong>核心职责</strong>：负责控制层底层代码、参考实现、自动化脚手架与基础原语。</p>
+        <p id="cell-io" style="margin-bottom: 8px;"><strong>输入 / 输出</strong>：需求凭据、缺陷工单 ➔ 代码 Artifact + 自动化测试回执。</p>
+        <p id="cell-scope" style="color: var(--muted);"><strong>自治边界（术）</strong>：技术栈选型、重构优化由内部闭环决定；对外正式发布必须过 C-Gate 独立审计。</p>
+      </div>
+
+      <h3 style="margin-top: 32px; font-size: 18px;">确定性独立凭据规范：$R_{\mathrm{verified}}$</h3>
+      <div class="formula-box" style="font-size: 13.5px;">
+{
+  "receipt_id": "rv_9c8f2b1a7d6e4a3c",
+  "claim": "已通过干净容器下的全量自动化集成测试",
+  "producer_cell": "C-Eng",
+  "artifact": { "uri": "git:system-evolution@870f047", "sha256": "e3b0c442..." },
+  "verifier": {
+    "cell": "C-Gate",
+    "principal": "gatekeeper_node_04",
+    "provider": "claude-opus-5.5"  <span class="comment">// 严禁与生产方同族，跨模型家族/人机隔离</span>
+  },
+  "method": "clean-environment-replay",
+  "verdict": "<span style="color:#4ade80;">pass</span>",
+  "scope": "<span style="color:#fde047;">已验证单测覆盖与功能正确；未覆盖大规模生产高并发延时</span>",
+  "issued_at": "2026-10-16T10:00:00Z",
+  "signature": "ed25519:6a1f89..."
+}
+      </div>
+
+      <h3 style="margin-top: 28px; font-size: 18px;">“道与术”的分离：不可购买的人类价值吸引子</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>治理权力</th>
+            <th>行权主体</th>
+            <th>硬约束与防火墙</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>价值取向与终极品位（道）</strong></td>
+            <td>核心发起人 ＋ 极少数特邀学者</td>
+            <td>不可转让、无治理代币；每一次定向必须留公开意图单据，供事后复盘检验。</td>
+          </tr>
+          <tr>
+            <td><strong>单票绝对否决权</strong></td>
+            <td>同上（具名人格式）</td>
+            <td>否决必须具名附带一句话明确理由；不可被代币投票推翻。</td>
+          </tr>
+          <tr>
+            <td><strong>高危外发与凭证操作</strong></td>
+            <td>仅核心发起人</td>
+            <td>严格遵守 PCSE 自动化防火墙通道；杜绝任何智能体越权假冒身份外发。</td>
+          </tr>
+          <tr>
+            <td><strong>物理不可逆停机（Owner-Stop）</strong></td>
+            <td>核心发起人</td>
+            <td>一旦进入吸收态（Absorbing State），任何重试逻辑或定时器均不可自行复活。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3. 第一阶段落地蓝图 -->
+    <div class="panel">
+      <h2 class="panel-title">3. 第一阶段推广落地蓝图（4 周路线图）</h2>
+      <p>
+        遵循“先内部自驱运转两周（Eat Your Own Dogfood），验证闭环，再公开发布”的务实原则。
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">第 1 周 (10-16 ~ 10-23) · 控制面基础就绪</div>
+          <div class="timeline-title">Gap-Gate v2 去硬编码 ＋ 独立 Verifier CLI</div>
+          <p class="timeline-body">
+            从数据驱动的凭据矩阵中计算真实 Δλ 与噪声范数；发布 Verifier CLI，强制检查“跨胞元 ＋ 跨模型家族/人机”独立性，无独立验证者一律 fail-closed。
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">第 2 周 (10-23 ~ 10-30) · 组织自举试运行</div>
+          <div class="timeline-title">物理吸收态停机演练 ＋ 四胞元首期预测结算</div>
+          <p class="timeline-body">
+            在现有车队全面运行四胞元分工；执行金丝雀停止测试，确保吸收态无法被重试绕过；产出首份到期预测结算与周相位相干报告。
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">第 3 周 (10-30 ~ 11-06) · 开发者套件开源</div>
+          <div class="timeline-title">发布 starshard-core-min 开发者验证原语</div>
+          <p class="timeline-body">
+            单命令 60 秒 Demo：模拟“智能体自审作弊拦截 ➔ 吸收态断路器秒级停机 ➔ 谱隙过窄自动进入静默态”，直击多智能体工程化核心痛点。
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">第 4 周 (11-06 ~ 11-13) · 学术与公约网络拓展</div>
+          <div class="timeline-title">《现代制度公约 × AI 智能体治理》网络试点</div>
+          <p class="timeline-body">
+            试点基于已验证履历（Track-Record Attestation）的信誉互认；落实承诺凭证（Covenant Certificate）严格容量硬顶，拒绝信用通胀。
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const cellData = {
+      'c-eng': {
+        title: 'C-Eng 工程与控制核心（Engineering & Control Plane）',
+        duty: '核心职责：负责控制层底层代码、参考实现、自动化脚手架与基础原语。',
+        io: '输入 / 输出：需求凭据、缺陷工单 ➔ 代码 Artifact + 自动化测试回执。',
+        scope: '自治边界（术）：技术栈选型、重构优化由内部闭环决定；对外正式发布必须过 C-Gate 独立审计。'
+      },
+      'c-pred': {
+        title: 'C-Pred 可证伪预测账本（Falsifiable Prediction Ledger）',
+        duty: '核心职责：将系统理论推演转化为带明确截止日期、客观指标、不可篡改的事前预测。',
+        io: '输入 / 输出：运营观测数据、文献 ➔ 预测登记项（声明、指标口径、阈值、到期日）。',
+        scope: '自治边界（术）：模型算法与数据取样自由；严禁在事后修改任何阈值或判定条件。'
+      },
+      'c-res': {
+        title: 'C-Res 生态与学术共鸣（Community & Academic Resonance）',
+        duty: '核心职责：生态共建者联络、学术合作网络构建、高质量理论材料蒸馏与传播。',
+        io: '输入 / 输出：必须是已过 C-Gate 的成果 ➔ 外联草案、学术合作协议回执、社区反馈。',
+        scope: '自治边界（术）：传播形式与叙事自治；对外正式发布必须严格经过授权保护通道。'
+      },
+      'c-gate': {
+        title: 'C-Gate 独立验证闸门（Independent Verification Gate）',
+        duty: '核心职责：对所有跨胞元流通的成果、以及拟对外发布的主张出具独立第三方审计。',
+        io: '输入 / 输出：任何胞元提交的 Claim 与工件 ➔ 带加密签名的 R_verified 收据或驳回理由。',
+        scope: '自治边界（术）：严禁自审自验；缺少合格独立验证者时，默认实行安全停机（fail-closed）。'
+      }
+    };
+
+    function switchCell(key) {
+      document.querySelectorAll('.cell-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      const d = cellData[key];
+      document.getElementById('cell-title').textContent = d.title;
+      document.getElementById('cell-duty').innerHTML = `<strong>${d.duty.split('：')[0]}：</strong>${d.duty.split('：')[1]}`;
+      document.getElementById('cell-io').innerHTML = `<strong>${d.io.split('：')[0]}：</strong>${d.io.split('：')[1]}`;
+      document.getElementById('cell-scope').innerHTML = `<strong>${d.scope.split('：')[0]}：</strong>${d.scope.split('：')[1]}`;
+    }
+
+    const noiseSlider = document.getElementById('noise-slider');
+    const gapSlider = document.getElementById('gap-slider');
+    const noiseVal = document.getElementById('noise-val');
+    const gapVal = document.getElementById('gap-val');
+    const simBox = document.getElementById('sim-result-box');
+    const simVerdict = document.getElementById('sim-verdict');
+    const simAction = document.getElementById('sim-action');
+
+    function updateSim() {
+      const e = parseFloat(noiseSlider.value);
+      const gap = parseFloat(gapSlider.value);
+      noiseVal.textContent = e.toFixed(2);
+      gapVal.textContent = gap.toFixed(2);
+
+      const ratio = (2 * e) / gap;
+      const sinTheta = Math.min(1.0, ratio).toFixed(2);
+
+      if (ratio <= 0.70) {
+        simBox.style.background = 'var(--green-soft)';
+        simBox.style.color = 'var(--green)';
+        simVerdict.textContent = `状态：强相干定向演进 (sin θ ≈ ${sinTheta} ≤ 0.70)`;
+        simAction.textContent = '允许自适应路由权值更新';
+      } else if (ratio <= 1.0) {
+        simBox.style.background = 'var(--accent-soft)';
+        simBox.style.color = 'var(--accent)';
+        simVerdict.textContent = `状态：亚稳态扰动 (sin θ ≈ ${sinTheta})`;
+        simAction.textContent = '冻结路由权值更新，仅收集凭证';
+      } else {
+        simBox.style.background = 'var(--red-soft)';
+        simBox.style.color = 'var(--red)';
+        simVerdict.textContent = `状态：谱简并 / 治理瘫痪 (2‖E‖ > Δλ, 信号崩溃)`;
+        simAction.textContent = '触发 Learn-or-Abstain 静默熔断';
+      }
+    }
+
+    noiseSlider.addEventListener('input', updateSim);
+    gapSlider.addEventListener('input', updateSim);
+  </script>
+</body>
+</html>
