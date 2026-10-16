@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="走出区块链迷思：大众可理解的去中心化组织形态、四层极简非链技术栈与 14 天落地实验（Gemini 4 Argon × Claude Opus 5.5 联合制定）。">
+  <title>走出区块链迷思：大众可理解的去中心化组织形态与非链架构</title>
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fdf5ef;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --purple: #6d28d9;
+      --purple-soft: #f5f3ff;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 30rem),
+        radial-gradient(circle at 90% 20%, rgba(184, 92, 24, 0.04), transparent 28rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px max(20px, calc((100vw - 980px) / 2));
+      border-bottom: 1px solid rgba(227, 222, 214, 0.85);
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(14px);
+    }
+    .topbar a { color: var(--ink); text-decoration: none; }
+    .brand { font-weight: 750; font-size: 15px; letter-spacing: 0.02em; }
+    .nav { display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
+    main { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 48px 0 84px; }
+    
+    .hero { padding: 32px 0 36px; border-bottom: 1px solid var(--line); }
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 14px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0;
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 820px;
+      line-height: 1.68;
+    }
+    .meta-bar {
+      display: flex;
+      gap: 14px 22px;
+      flex-wrap: wrap;
+      margin: 22px 0 0;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+    .meta-tag {
+      background: #eeeae4;
+      padding: 2px 9px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .callout {
+      margin: 28px 0;
+      padding: 22px 26px;
+      border-radius: 14px;
+      border-left: 5px solid var(--accent);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .callout-golden {
+      border-left-color: var(--highlight);
+      background: linear-gradient(135deg, #ffffff 0%, var(--highlight-soft) 100%);
+    }
+    .callout h3 { margin: 0 0 10px; font-size: 17.5px; }
+
+    section { margin: 52px 0; }
+    h2 {
+      font-size: 24px;
+      letter-spacing: -0.01em;
+      margin: 0 0 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    h3 { font-size: 19px; margin: 26px 0 12px; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 18px;
+      margin: 22px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+    }
+    .card h4 { margin: 0 0 8px; font-size: 16.5px; }
+    .card p { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.65; }
+
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      cursor: pointer;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .tab-pane {
+      display: none;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .tab-pane.active { display: block; animation: fadeIn 0.3s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14.5px;
+      background: var(--panel);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    }
+    th, td { padding: 12px 14px; border: 1px solid var(--line); text-align: left; }
+    th { background: #f4f0eb; font-weight: 700; }
+
+    .timeline {
+      position: relative;
+      border-left: 3px solid var(--line);
+      margin: 28px 0 28px 18px;
+      padding-left: 24px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -32px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--paper);
+    }
+    .timeline-dot.owner-gate {
+      background: var(--highlight);
+      box-shadow: 0 0 0 4px rgba(184, 92, 24, 0.2);
+    }
+    .timeline-content {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .timeline-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+    .badge-dev { background: var(--accent-soft); color: var(--accent); }
+    .badge-gate { background: var(--highlight-soft); color: var(--highlight); }
+
+    .interactive-calc {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 26px;
+      margin: 26px 0;
+      box-shadow: var(--shadow);
+    }
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 14.5px;
+    }
+    .calc-slider {
+      width: 55%;
+    }
+    .calc-result {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 0;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="brand">System Evolution</a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="decentralized-org-zh.html">谱隙自组织 (SGDO)</a>
+      <a href="beyond-blockchain-zh.html" style="font-weight:700; color:var(--accent);">非链替代方案</a>
+      <a href="THEORY.md">理论主线</a>
+      <a href="https://github.com/starshard-ai/system-evolution-public" target="_blank" rel="noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">去中心化组织落地篇 · 人性化原生形态</span>
+      <h1>走出区块链迷思：大众可理解的去中心化组织形态与非链架构</h1>
+      <p class="lede">
+        当这个世界上 99% 的普通人根本无法信任私钥、Gas 费与匿名代码时，去中心化组织到底长什么样？
+        Gemini 4 Argon 与 Claude Opus 5.5 联合推演，抛弃发币与 Solidity 智能合约，
+        回归人类 500 年商业文明常识：<strong>电影片尾署名、晋商身股兜底、第三方验货与每日红冲账本</strong>。
+      </p>
+      <div class="meta-bar">
+        <span>联合制定：<strong style="color:var(--ink);">Gemini 4 Argon × Claude Opus 5.5</strong></span>
+        <span>发布日期：<strong>2026-10-16</strong></span>
+        <span class="meta-tag">零发币</span>
+        <span class="meta-tag">无智能合约</span>
+        <span class="meta-tag">Git Merkle DAG</span>
+        <span class="meta-tag">14天极简落地</span>
+      </div>
+    </div>
+
+    <div class="callout callout-golden">
+      <h3>核心共识一句话（大众原生心智模型）</h3>
+      <p style="font-size: 18px; margin: 0; font-weight: 600; color: var(--highlight);">
+        「每份功劳都像电影片尾一样永久署名，东家实名兜底，第三方验货，账本天天公开，记错了只能红冲、不能擦掉。」
+      </p>
+    </div>
+
+    <!-- Section 1 -->
+    <section>
+      <h2>一、为什么大众不信、不理解区块链 / DAO / Token？</h2>
+      <p>
+        Web3 过去十年的最大认知盲区，就是误以为只要把数据哈希“上链”，人类就会自然产生信任。然而，在真实的社会学与制度经济学视界中，情况恰恰相反：
+      </p>
+      
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color:var(--red);">1. 表层阻力：认知摩擦与免责陷阱</h4>
+          <p>
+            普通人习惯了“银行卡丢失可以挂失，密码忘了可以重置”。而区块链“助记词丢了资产永封”彻底摧毁了人类的安全感；
+            当合约漏洞被黑客盗窃时，面对的只有冰冷的“代码即法律”。在大众体感中，“去中心化”往往等同于<strong>“出了事没有任何人负责，没有任何人管”</strong>。
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--highlight);">2. 中层阻力：投机污染 (Speculative Taint)</h4>
+          <p>
+            正如陈宇思（Yusi Chen）在 Fleet 反馈中所言：<strong>“Token” 这个词已经被投机、空气币与杀猪盘深度污染</strong>。
+            普通大众听到发币、空投，第一反应就是“谁在割谁”。这种负面心理印记无法被辩解，唯一解法是<strong>彻底剔除代币原语，绝不搞二级市场流通</strong>。
+          </p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 18px; border-left: 4px solid var(--accent);">
+        <h4>3. 底层本质：信任从来不是代码生出来的（信任四要素乘积定理）</h4>
+        <p style="margin-bottom: 12px;">
+          社会学家 Zucker（1986）提出社会信任源于三支柱：<strong>过往履历口碑、具名熟人特征、机构赔付兜底</strong>。
+          社会学家 Giddens 指出，现代人之所以信任庞大的系统，是因为系统边缘保留着<strong>“能找到真人的具名面孔（Access Points）”</strong>。
+          正如唐仪与蔡维德在《儒道》中所言：<em>“代码能证明数据为真，却生不出信任；『信』是数字经济最稀缺的资产。”</em>
+        </p>
+        <p style="margin-bottom: 16px; font-weight: 600; color: var(--ink);">
+          人类社会的组织信任满足四要素乘积公式：
+        </p>
+        <div style="background:#f4f0eb; padding:14px; border-radius:8px; font-family:monospace; text-align:center; font-size:16px;">
+          Trust = 具名问责的人 × 看得懂的后果 × 独立的验货证据 × 出错时的追索通道
+        </div>
+        <p style="margin-top: 12px; font-size: 14px;">
+          传统区块链把“独立的验货证据（密码学存证）”推向了极限，却把另外三项几乎清零。<strong>任何数乘以零，结果恒为零！</strong>
+        </p>
+      </div>
+
+      <!-- Interactive Trust Calculator -->
+      <div class="interactive-calc">
+        <h3 style="margin-top:0;">交互演示：传统 Web3 vs 人性化非链架构的信任乘积模拟</h3>
+        <p style="font-size:14px; color:var(--muted); margin-bottom:18px;">
+          拖动下方四个维度的滑块（0 到 10 分），观察组织总信任得分的变化：
+        </p>
+        
+        <div class="calc-row">
+          <span>1. 具名问责的人 (Accountable Person)：</span>
+          <input type="range" min="0" max="10" value="8" class="calc-slider" id="t-person">
+          <span id="v-person" style="font-weight:700; width:30px;">8</span>
+        </div>
+        <div class="calc-row">
+          <span>2. 看得懂的后果 (Legible Consequences)：</span>
+          <input type="range" min="0" max="10" value="9" class="calc-slider" id="t-legible">
+          <span id="v-legible" style="font-weight:700; width:30px;">9</span>
+        </div>
+        <div class="calc-row">
+          <span>3. 独立的验货证据 (Independent Proof)：</span>
+          <input type="range" min="0" max="10" value="9" class="calc-slider" id="t-proof">
+          <span id="v-proof" style="font-weight:700; width:30px;">9</span>
+        </div>
+        <div class="calc-row">
+          <span>4. 出错时的追索通道 (Recourse Channel)：</span>
+          <input type="range" min="0" max="10" value="8" class="calc-slider" id="t-recourse">
+          <span id="v-recourse" style="font-weight:700; width:30px;">8</span>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:14px;">
+          <button class="tab-btn" onclick="setPreset('web3')">一键载入：传统匿名 DAO / Web3</button>
+          <button class="tab-btn" onclick="setPreset('ours')">一键载入：本架构（非链人性化）</button>
+        </div>
+
+        <div id="calc-display" class="calc-result" style="background:var(--green-soft); color:var(--green);">
+          综合社会信任指数：5,184 / 10,000 (极高大众信任度)
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section>
+      <h2>二、全世界 99% 的人一眼看懂的五大无 Jargon 映射</h2>
+      <p>无需跟用户解释智能合约、流动性池或治理代币。切换至人类 500 年来的原生常识认知：</p>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(0)">1. 电影片尾分账</button>
+        <button class="tab-btn" onclick="switchTab(1)">2. 晋商身股制</button>
+        <button class="tab-btn" onclick="switchTab(2)">3. 米其林验货单</button>
+        <button class="tab-btn" onclick="switchTab(3)">4. 保底算力券</button>
+        <button class="tab-btn" onclick="switchTab(4)">5. 每日红冲账本</button>
+      </div>
+
+      <div class="tab-pane active" id="pane-0">
+        <h3>🎬 电影片尾字幕与票房分账 (Movie Credits & Box Office Waterfall)</h3>
+        <p><strong>解决痛点：</strong>谁付出了什么劳动？历史功劳如何永存？</p>
+        <p>
+          全世界没有人不理解电影片尾字幕：导演、编剧、主演、灯光、特效师，每一位付出者都被永久刻在胶片与片尾。
+          在我们的自组织中，每一次已验证的代码合并、论文起草、翻译或设计，都像电影片尾一样永久记录在开源 Git 树与功劳簿上。
+          <strong>没有人会为了倒卖电影片尾署名去发币炒作；功劳属于创作者本人，名留青史，代代可见。</strong>
+        </p>
+      </div>
+
+      <div class="tab-pane" id="pane-1">
+        <h3>🏛️ 晋商「东家出资兜底 + 掌柜顶身股」制（国际：合伙人分红制）</h3>
+        <p><strong>解决痛点：</strong>谁承担底线风险？谁拥有决策权？劳动者如何分红？</p>
+        <p>
+          五百年前晋商票号就给出了精妙的制度解：出资的东家承担无限责任，拥有一票否决权；在一线打拼的掌柜和伙计凭业绩得“身股（按劳分红权）”。
+          <strong>身股严禁转让给外部投机客，离职即失效，人走但历史功劳簿留名。</strong>
+          这彻底斩断了外部金融游资通过闪电贷治理攻击摧毁组织的可能，让利益与真实的奋斗者终生绑定。
+        </p>
+      </div>
+
+      <div class="tab-pane" id="pane-2">
+        <h3>⭐ 米其林指南 / 工业品出厂独立验货单 (Inspection Receipt R_verified)</h3>
+        <p><strong>解决痛点：</strong>凭什么相信一项任务真的合格交付了？</p>
+        <p>
+          传统 DAO 靠无知群众全局投票决定专业技术任务，等同于让全城居民投票决定心脏外科手术方案。
+          我们采用<strong>独立验货单机制</strong>：由与产出者属于不同模型家族的独立 AI + 领域人类专家交叉验货。
+          餐厅好不好吃靠专业密探暗访验货，桥梁安不安全靠质检报告，绝不搞乌合之众的无脑投票。
+        </p>
+      </div>
+
+      <div class="tab-pane" id="pane-3">
+        <h3>🎫 有真金白银兜底的工时券 / 算力兑换券 (Covenant Vouchers)</h3>
+        <p><strong>解决痛点：</strong>贡献者短期能拿到什么确定性回报？</p>
+        <p>
+          拒绝暴涨暴跌让劳动价值蒸发的空气代币。给外部贡献者发放带有明确协议硬顶的<strong>算力兑换券</strong>：
+          单人单季 ≤6h、未兑保底 ≤$2,000、同时流通 ≤8 张。随时可以兑现为顶级的模型 API 调用配额或合规劳务报酬，确定性 100%。
+        </p>
+      </div>
+
+      <div class="tab-pane" id="pane-4">
+        <h3>📖 值班厂长 + 每日公开晒账本（会计「红冲」替代技术黑话）</h3>
+        <p><strong>解决痛点：</strong>平时谁在干活？干得怎样？有没有暗箱操作？</p>
+        <p>
+          AI（智子）作为公开值班厂长，每天在全网晒出脱敏的工作决策日志与任务分账；
+          账本遵循会计学 500 年铁律<strong>「红冲（Red Storno）」</strong>：写错的账目绝对不能用涂改液擦掉，必须用一笔红字记账冲回。
+          普通老百姓和老会计一听就懂，完全不需要“不可篡改密码学”这种技术黑话来粉饰。
+        </p>
+      </div>
+
+      <!-- Audience Matrix -->
+      <h3 style="margin-top:36px;">三类目标受众的体感对比矩阵</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>受众群体</th>
+            <th>传统 Web3 / DAO 的体感</th>
+            <th>本非链自组织的直观体感</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>普通大众 / 消费者</strong></td>
+            <td>看不懂哈希与钱包，害怕被割韭菜，出事找不到真人客服</td>
+            <td>普通网页即可查看，东家实名兜底，没有任何代币炒作，安心踏实</td>
+          </tr>
+          <tr>
+            <td><strong>创作者 / 开源开发者</strong></td>
+            <td>代币结算后币价腰斩，辛勤劳动沦为项目方投机工具</td>
+            <td>像电影署名一样永久保留，算力券真金白银能跑大模型，规则全量哈希防篡改</td>
+          </tr>
+          <tr>
+            <td><strong>学者 / 专业学术与产业机构</strong></td>
+            <td>充斥空气概念与金融泡沫，无法进行可证伪的学术审计</td>
+            <td>Git 仓库完整可复现，客观测试套件验收，遵循真实合作社伦理，诚实可信</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 3 -->
+    <section>
+      <h2>三、短期彻底替代区块链的四层极简非链技术栈</h2>
+      <p>
+        摆脱区块链，绝不意味着放弃防篡改与公开透明。
+        基于开源世界三十年的成熟基建，我们构建出一套<strong>零成本、抗审查、极简可读的四层架构</strong>：
+      </p>
+
+      <div class="grid-2">
+        <div class="card" style="border-top: 4px solid var(--accent);">
+          <h4>L1 账本层：公开 Git 仓库 + 网页账本 + 签名快照</h4>
+          <p>
+            <strong>核心逻辑：</strong>Git 每一个 Commit 天然就是密码学 Merkle DAG，任何篡改都会级联失效。<br>
+            <strong>防单点篡改四重对策：</strong><br>
+            ① 多镜像自动同步 (GitHub + Codeberg + Software Heritage)；<br>
+            ② 每日账本根哈希锚定发布至第三方公开介质；<br>
+            ③ 提交与 Tag 强制 GPG 密钥签名；<br>
+            ④ <strong>会计红冲原则</strong>：只追加不删除，纠错留痕。
+          </p>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--green);">
+          <h4>L2 合约层：可执行测试套件 + 跨模型独立验货单</h4>
+          <p>
+            <strong>核心逻辑：</strong>告别 Solidity 图灵完备漏洞，测试用例（CI Test Harness）就是最纯粹、能跑通的合同条款。<br>
+            <strong>独立验货单 (R_verified)：</strong><br>
+            产出者与验证人跨模型家族隔离（例如 Claude 写的代码由 Gemini 4 Argon 或独立人类验货），杜绝自卖自夸；验货规则全量哈希固化。
+          </p>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--purple);">
+          <h4>L3 激励层：双轨非加密信用体系</h4>
+          <p>
+            <strong>第一轨：功劳簿 (身股簿)</strong>：永久署名 + 分红/算力权重，严禁代币化，严禁场外交易，离职收益暂停但名誉永存。<br>
+            <strong>第二轨：保底兑换券</strong>：硬顶约束（个人季 ≤6h、保底 ≤$2,000、流通 ≤8 张），现阶段仅兑现真实 API 算力或合规劳务报酬，杜绝非法集资风险。
+          </p>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--highlight);">
+          <h4>L4 治理层：东家实名兜底 + 智子公开值班日志</h4>
+          <p>
+            <strong>核心逻辑：</strong>补全人类信任不可或缺的“具名的人”与“救济通道”。<br>
+            <strong>权责闭环：</strong><br>
+            ① 东家拥有一票否决权，但否决必须在 Git 上公开书面理由；<br>
+            ② 智子每日发布脱敏工作与分账日志；<br>
+            ③ 72 小时公开申诉与跨模型仲裁通道。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section>
+      <h2>四、14 天极简可行落地实验 (14-Day MVP Sprint)</h2>
+      <p>
+        拒绝清谈，从 2026 年 10 月 19 日（周一）至 11 月 01 日（周日），启动为期两周的真实闭环实验：
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-badge badge-dev">D1–D2 (10-19 ~ 10-20) · 研发阶段</span>
+            <h4 style="margin:4px 0 6px;">账本基建搭建与规则哈希固化</h4>
+            <p style="margin:0; font-size:14px; color:var(--muted);">
+              建立账本目录（RULES.md, contributors.csv, receipts/, vouchers/, corrections/），编写轻量生成脚本渲染 ledger.html。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-badge badge-dev">D3–D4 (10-21 ~ 10-22) · 研发阶段</span>
+            <h4 style="margin:4px 0 6px;">历史种子数据导入功劳簿</h4>
+            <p style="margin:0; font-size:14px; color:var(--muted);">
+              将过去两周 Fleet 已通过验货的成果导入功劳簿，赋予初始身股权重；固化红冲与 72h 申诉工作流。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-badge badge-dev">D5–D7 (10-23 ~ 10-25) · 研发阶段</span>
+            <h4 style="margin:4px 0 6px;">AI 每日值班日志沙盒试跑</h4>
+            <p style="margin:0; font-size:14px; color:var(--muted);">
+              智子生成脱敏值班日志，严密测试隐私与财务防泄漏过滤器，跨模型双盲复核。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot owner-gate"></div>
+          <div class="timeline-content" style="border-left:4px solid var(--highlight);">
+            <span class="timeline-badge badge-gate">D8 (10-26 周一) · 东家拍板门槛</span>
+            <h4 style="margin:4px 0 6px; color:var(--highlight);">公开边界与多重镜像归档审批</h4>
+            <p style="margin:0; font-size:14px; color:var(--ink);">
+              东家审查脱敏日志范围（仅限 Starshard 工程日志），批准多平台镜像同步与外部根哈希发布。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot owner-gate"></div>
+          <div class="timeline-content" style="border-left:4px solid var(--highlight);">
+            <span class="timeline-badge badge-gate">D9 (10-27 周二) · 东家拍板门槛</span>
+            <h4 style="margin:4px 0 6px; color:var(--highlight);">签发首批 3 张算力悬赏兑换券</h4>
+            <p style="margin:0; font-size:14px; color:var(--ink);">
+              东家根据预算批准签发首批 3 张真实算力券（每张 ≤$200 等额 API 配额），悬赏外部模块测试用例与文档。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-badge badge-dev">D10–D12 (10-28 ~ 10-30) · 流水线运转</span>
+            <h4 style="margin:4px 0 6px;">外部接单、交付与独立验货</h4>
+            <p style="margin:0; font-size:14px; color:var(--muted);">
+              外部协作者提交 PR，CI 测试跑通，异构模型 + 人类专家出具 R_verified 独立验货单，申诉通道实时待命。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot owner-gate"></div>
+          <div class="timeline-content" style="border-left:4px solid var(--highlight);">
+            <span class="timeline-badge badge-gate">D13 (10-31 周六) · 东家拍板门槛</span>
+            <h4 style="margin:4px 0 6px; color:var(--highlight);">验货闭环与算力配额兑付打款</h4>
+            <p style="margin:0; font-size:14px; color:var(--ink);">
+              仅对验货通过项执行算力划拨或结算打款，东家审核付款回执，生成快照并 GPG 签名。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot owner-gate"></div>
+          <div class="timeline-content" style="border-left:4px solid var(--highlight);">
+            <span class="timeline-badge badge-gate">D14 (11-01 周日) · 东家拍板门槛</span>
+            <h4 style="margin:4px 0 6px; color:var(--highlight);">全网公示第一期分账与复盘报告</h4>
+            <p style="margin:0; font-size:14px; color:var(--ink);">
+              发布第一期透明分账公告，诚实披露达成与偏差指标，向社区交出第一份无链自组织答卷。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section>
+      <h2>五、待东家裁决的三项「道」级决策</h2>
+      <p>
+        遵循“术道分离”最高准则：实现细节智能体自行闭环，但以下三项涉及根本方向的抉择，必须由东家亲自拍板：
+      </p>
+
+      <div class="card" style="margin-bottom:16px;">
+        <h4>决策 1：对外主叙事框架选择</h4>
+        <p style="margin-bottom:8px;">
+          <strong>选项 A（联合推荐）：</strong>「片尾署名 + 晋商东家兜底」。厚重、真诚、符合人类常识，无公关反噬风险。<br>
+          <strong>选项 B：</strong>「AI 轮值 CEO / 值班厂长打头阵」。最吸睛、易出圈，但易被曲解为公关噱头。<br>
+          <strong>选项 C：</strong>以 A 为核心信任底盘，以 B 作为吸引眼球的切入点。
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom:16px;">
+        <h4>决策 2：身股（功劳权重）初期是否承诺未来现金分红？</h4>
+        <p style="margin-bottom:8px;">
+          <strong>选项 A（强烈推荐）：</strong>初期严禁承诺任何现金分红。身股只记历史署名与算力调度权重，短期回报仅走带硬顶的算力兑付券，彻底隔绝非法集资与证券化风险。<br>
+          <strong>选项 B：</strong>现在即承诺商业化固定比例分红（需面对极其严苛复杂的跨国证券合规审查）。
+        </p>
+      </div>
+
+      <div class="card">
+        <h4>决策 3：D8 正式公开时值班日志的开放边界</h4>
+        <p style="margin-bottom:8px;">
+          <strong>选项 A（安全推荐）：</strong>仅公开 Starshard 项目工程日常与研发调度日志。<br>
+          <strong>选项 B：</strong>全量公开智子的日常思考与决策流（面临潜在的注入与私人信息风险）。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>System Evolution · Gemini 4 Argon × Claude Opus 5.5 联合制定 · 2026-10-16</p>
+    <p style="font-size:13px; margin-top:8px;">
+      <a href="decentralized-org-zh.html">谱隙自组织 (SGDO)</a> · 
+      <a href="essays/2026-10-16-human-legible-org-beyond-blockchain-zh.md">完整理论长文</a> · 
+      <a href="THEORY.md">理论主线</a> · 
+      <a href="https://github.com/starshard-ai/system-evolution-public" target="_blank" rel="noreferrer">GitHub 仓库</a>
+    </p>
+  </footer>
+
+  <script>
+    function switchTab(index) {
+      const btns = document.querySelectorAll('.tab-btn');
+      const panes = document.querySelectorAll('.tab-pane');
+      btns.forEach((b, i) => {
+        if (i < 5) b.classList.toggle('active', i === index);
+      });
+      panes.forEach((p, i) => {
+        p.classList.toggle('active', i === index);
+      });
+    }
+
+    const tPerson = document.getElementById('t-person');
+    const tLegible = document.getElementById('t-legible');
+    const tProof = document.getElementById('t-proof');
+    const tRecourse = document.getElementById('t-recourse');
+
+    const vPerson = document.getElementById('v-person');
+    const vLegible = document.getElementById('v-legible');
+    const vProof = document.getElementById('v-proof');
+    const vRecourse = document.getElementById('v-recourse');
+    const calcDisplay = document.getElementById('calc-display');
+
+    function updateCalc() {
+      const p = parseInt(tPerson.value);
+      const l = parseInt(tLegible.value);
+      const pr = parseInt(tProof.value);
+      const r = parseInt(tRecourse.value);
+
+      vPerson.textContent = p;
+      vLegible.textContent = l;
+      vProof.textContent = pr;
+      vRecourse.textContent = r;
+
+      const score = p * l * pr * r;
+      if (score >= 4000) {
+        calcDisplay.style.background = 'var(--green-soft)';
+        calcDisplay.style.color = 'var(--green)';
+        calcDisplay.textContent = `综合社会信任指数：${score} / 10,000 (极高大众信任度，真实协作顺畅)`;
+      } else if (score >= 1000) {
+        calcDisplay.style.background = 'var(--accent-soft)';
+        calcDisplay.style.color = 'var(--accent)';
+        calcDisplay.textContent = `综合社会信任指数：${score} / 10,000 (中等信任，存在认知阻碍)`;
+      } else {
+        calcDisplay.style.background = 'var(--red-soft)';
+        calcDisplay.style.color = 'var(--red)';
+        calcDisplay.textContent = `综合社会信任指数：${score} / 10,000 (信任崩溃，出现项归零坍塌)`;
+      }
+    }
+
+    function setPreset(type) {
+      if (type === 'web3') {
+        tPerson.value = 1;
+        tLegible.value = 2;
+        tProof.value = 10;
+        tRecourse.value = 0;
+      } else {
+        tPerson.value = 9;
+        tLegible.value = 9;
+        tProof.value = 9;
+        tRecourse.value = 8;
+      }
+      updateCalc();
+    }
+
+    [tPerson, tLegible, tProof, tRecourse].forEach(slider => {
+      slider.addEventListener('input', updateCalc);
+    });
+  </script>
+</body>
+</html>

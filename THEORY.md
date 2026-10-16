@@ -151,3 +151,5 @@ Important anti-signals:
 - [Interactive Guide: Spectral-Gap Decentralized Organization (SGDO)](decentralized-org-zh.html)
 - [From Elon Musk X-Shop / AI Commerce to Anti-Dogmatic Task Refinement (Chinese)](essays/2026-10-16-xshop-ai-commerce-and-joint-task-refinement-zh.md)
 - [Interactive Guide: X-Shop & Anti-Dogmatic Joint Task Refinement](xshop-and-joint-refinement-zh.html)
+- [Human-Legible Decentralized Organization Beyond Blockchain: Four-Layer Non-Crypto Stack & 14-Day MVP Sprint (Chinese)](essays/2026-10-16-human-legible-org-beyond-blockchain-zh.md)
+- [Interactive Guide: Human-Legible Organization Beyond Blockchain](beyond-blockchain-zh.html)
