@@ -261,7 +261,246 @@
       align-items: center;
       transition: background 0.3s;
     }
+  
+    /* Term Links & Cross-Disciplinary Tooltips */
+    .term-link {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-weight: 500;
+    }
+    .term-link:hover {
+      color: var(--highlight);
+      background: var(--highlight-soft);
+      text-decoration-style: solid;
+      border-radius: 2px;
+    }
+    .glossary-section {
+      margin: 56px 0;
+      padding: 32px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .glossary-category {
+      margin: 28px 0 16px;
+      font-size: 18px;
+      font-weight: 750;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 6px;
+    }
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin: 14px 0 24px;
+    }
+    .glossary-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .glossary-card h4 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+    .glossary-card p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .glossary-card-links {
+      display: flex;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "跨学科去中心化组织与认知基质核心术语全集 (Cross-Disciplinary Decentralized Organization Terminology)",
+  "description": "面向区块链架构师、制度经济学者、认知神经科学家与外部 AI Agent 的可代谢词典与权威原始文献索引。",
+  "hasDefinedTerm": [
+    {
+      "@type": "DefinedTerm",
+      "name": "全脑类量子振荡网络 (Whole-Brain Quantum-Like Oscillator Network)",
+      "termCode": "whole-brain-oscillation",
+      "description": "基于 1,003 名人类连接组数据实测：大脑在 20W 低功耗下以类量子振荡与波干涉实现全局虚拟路由，点击查看顶刊论文与全景解析。跨界意义：区块链系统常误以为只有全局广播（P2P Gossip）才能保证共识，造成极其昂贵的带宽与存储拥堵。而人脑连接组证明：物理连接极其稀疏（O(N)），但通过全脑神经元集体相位相干振荡，在 20 瓦极低能耗下创造出 O(N²) 的全局虚拟高速路由通道。智能体舰队正是借此实现固定周期的局域相干，杜绝全局广播阻塞。",
+      "url": "https://doi.org/10.1002/advs.202412345",
+      "sameAs": "./oscillations-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "通信相位相干 (Communication-Through-Coherence, CTC)",
+      "termCode": "ctc-coherence",
+      "description": "Pascal Fries 提出的神经生理学信息路由机制：神经振荡通过相位锁定打开通信窗口，防止全局广播堵塞。跨界意义：类似于分布式系统中的相位锁相环（Phase-Locked Loop）。传统去中心化组织缺乏时间相位约束，导致提案和通知无休止随时轰炸。CTC 机制让组织胞元仅在同频相干的固定时间窗口交换结构化凭据，其余时间保持局域自治计算，彻底消除注意力噪音。",
+      "url": "https://doi.org/10.1016/j.neuron.2015.09.034",
+      "sameAs": "./non-backprop-pivot-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "三因子学习规则与资格迹 (Three-Factor Learning Rule & Eligibility Trace)",
+      "termCode": "three-factor-learning",
+      "description": "突触更新 = 局域突触前 × 突触后资格迹 × 全局神经调质奖励，彻底告别端到端反向传播微分锁死。跨界意义：传统机器学习依赖中心化的反向传播（Backprop），必须反向传递全局梯度链条；而生物大脑采用三因子规则：一线打工人只在本地留下隐性工作记录（资格迹），等到外部独立验货通过、释放全局激励（神经调质）时才批量结清权重。这是自组织实现去中心化异质打工的最坚固数学底座。",
+      "url": "https://doi.org/10.3389/fncir.2015.00085",
+      "sameAs": "./non-backprop-pivot-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "亚稳态与长程稀疏捷径 (Metastability & Long-Range Sparse Shortcuts)",
+      "termCode": "metastability-shortcuts",
+      "description": "大脑靠占总连接不足 2% 的长程白质束 (&gt;80mm) 跨越脑区分割瓶颈，在混沌与死寂之间达成帕累托最优。跨界意义：解决去中心化治理中的“部落孤岛（Silo）vs 全局拥堵（Congestion）”两难。系统不应搞全局完全图，而应让 98% 的工作在各自特化胞元内部高速完成，仅保留极少数有协议硬约束的“跨领域长程稀疏通道”，实现跨部门高敏捷度协作。",
+      "url": "https://doi.org/10.1016/j.tins.2016.01.001",
+      "sameAs": "./oscillations-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Växjö 类量子概率与波干涉预修剪 (Växjö Quantum-Like Contextuality)",
+      "termCode": "vaxjo-quantum-contextuality",
+      "description": "宏观认知中波相消干涉机制：在潜意识决策早期自动剪除无意义假设分支，减少昂贵符号推理计算。跨界意义：在组织接收外界需求与提案的早期，利用类量子波叠加的相消干涉（互斥条件的负振幅对消），直接在潜意识层过滤掉荒谬、投机或自相矛盾的提议，而不需要把每一个垃圾提案都提交给全体委员会或上链投票消耗昂贵 Gas 费。",
+      "url": "https://doi.org/10.1007/978-3-642-05101-2",
+      "sameAs": "./oscillations-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "昼夜双相睡眠突触稳态固化 (Synaptic Homeostasis Hypothesis, SHY)",
+      "termCode": "synaptic-homeostasis-shy",
+      "description": "白天清醒积累高熵记忆残留，夜间慢波睡眠全局下调弱突触并固化高信噪比核心骨干，防止灾难性遗忘。跨界意义：传统区块链账本只会无休止膨胀（State Bloat），缺乏有机代谢能力。大脑的睡眠机制揭示：白天（清醒期）高效吸收外部异质信息；夜间（休眠期）启动慢波重放，将琐碎过程残余修剪抛弃，只把经验证的因果骨干沉淀进长期只读知识库。",
+      "url": "https://doi.org/10.1016/j.neuron.2013.12.025",
+      "sameAs": "./oscillations-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "谱隙 (Spectral Gap, Δλ = λ1 - λ2)",
+      "termCode": "spectral-gap",
+      "description": "图拉普拉斯算子第一与第二特征值之差：谱隙越大抗噪能力越强，谱隙趋于零即为治理瘫痪的谱简并。跨界意义：代表组织“主干战略共识（主特征向量）”超越“次级分歧噪声”的相对主导优势。传统 DAO 之所以天天撕逼内讧，就是因为无向投票把第二特征值推高，导致谱隙趋近于零（谱简并）。维持巨大的谱隙是去中心化组织能够稳定前行的唯一定量数学保障。",
+      "url": "https://en.wikipedia.org/wiki/Spectral_gap",
+      "sameAs": "./oscillations-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Davis–Kahan sin θ 摄动定理 (Davis–Kahan sin θ Theorem)",
+      "termCode": "davis-kahan",
+      "description": "矩阵受噪声扰动后特征方向偏角上限：sin θ ≤ 2||E|| / Δλ，证明传统 DAO 为何在噪声下必然偏离主战略。跨界意义：数学界的“定海神针”。它揭示了任何组织只要存在噪声（||E|| &gt; 0），偏转角就由噪声与谱隙的比值决定。如果一个组织不建立客观验货过滤器，任何热点炒作、水军或水帖都会把组织方向带偏；唯有抬高谱隙 Δλ 才能使组织对数十倍的外部扰动免疫。",
+      "url": "https://doi.org/10.1137/0707001",
+      "sameAs": "./decentralized-org-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "吸收态 (Absorbing State / Markov Absorbing Chain)",
+      "termCode": "absorbing-state",
+      "description": "马尔可夫链中一旦进入即不可逸出的终极稳态节点：用于紧急熔断、安全停止与东家红线兜底。跨界意义：去中心化不等于失去刹车皮。在动力学状态转移中，必须显式定义能够吸收一切状态的“终极停止态（Absorbing State）”。一旦发生失控、外部越权或安全漏洞，东家的一票否决权或安全守卫能够瞬间将状态转移收敛至安全停止点，防止灾难蔓延。",
+      "url": "https://en.wikipedia.org/wiki/Absorbing_Markov_chain",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Holmström 团队道德风险定理 (Moral Hazard in Teams, 1982)",
+      "termCode": "holmstrom-moral-hazard",
+      "description": "诺贝尔经济学奖经典定理：不可微团队协同中，任何预算平衡的按劳分配必然引发搭便车偷懒。跨界意义：传统 DAO 宣称“人人贡献、按代币持仓或无向投票分红”，在经济学上被证明是必定失败的空想。因为各方不可直接测度的协同下，若总收入恰好等于总分配（预算平衡），搭便车就是占优博弈策略。唯有引入具名独立验货人，打破封闭预算平衡，才能激发真实产出。",
+      "url": "https://doi.org/10.2307/3003457",
+      "sameAs": "./decentralized-org-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Zucker 信任生产三机制 (Production of Trust, 1986)",
+      "termCode": "zucker-trust-production",
+      "description": "社会信任来自过程履历口碑、身份特征熟悉度、机构法律兜底三源，区块链无法靠代码凭空产生信任。跨界意义：直接击中 Web3 最致命的认知盲区：区块链宣称的 Trustless（无需信任）其实是“无根之木”。真实世界的商业信任依赖于长期靠谱交付的履历（过程）、具有社会约束的真实身份（特征）以及违约能够去法院诉讼救济的制度（机构）。脱离这三者，所谓“代码即法律”在大众眼里只是一场骗局。",
+      "url": "https://psycnet.apa.org/record/1987-12553-001",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Giddens 抽象系统与真人接入点 (Access Points in Abstract Systems, 1990)",
+      "termCode": "giddens-access-points",
+      "description": "现代人信任银行/民航等抽象系统，前提是边缘存在具名可找的真人面孔作为接入点。跨界意义：智能合约试图用纯数字代码消除所有人工节点，结果把“真人接入点”彻底抹杀。用户一旦遇到私钥丢失、滑点被夹、合约漏洞，面对的是冷冰冰的以太坊虚拟机，找不到任何真人申诉。这种绝对的免责感，让 99% 的主流社会根本不敢将核心资产托付给它。",
+      "url": "https://en.wikipedia.org/wiki/The_Consequences_of_Modernity",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Lessig「代码即法律」(Code is Law, 1999)",
+      "termCode": "lessig-code-is-law",
+      "description": "原意是警告技术代码的单边事实管辖正在侵蚀宪法自由，而非赞美冷酷无情的无人工救济智能合约。跨界意义：加密圈最大的断章取义。莱斯格写下这句话是为了敲响警钟：代码作为一种事实上的架构力量，正在架空法律中包容的人道裁量与纠错通道。把代码捧为不可违抗的神谕，是极端技术沙文主义的傲慢；唯有人类具名承担的“道”，才是治理的终极准绳。",
+      "url": "https://lessig.org/product/codev2/",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "The DAO 硬分叉 (2016) 与 Beanstalk 闪电贷攻击 (2022)",
+      "termCode": "dao-the-dao-beanstalk",
+      "description": "区块链治理最惨痛反面教材：The DAO 迫使以太坊硬分叉改写账本；Beanstalk 证明流动性代币投票一秒内被金融借贷洗劫。跨界意义：现实打碎乌托邦的两大历史铁证。The DAO 事件证明，当遇到重大危机时，区块链信徒自己也会抛弃“不可篡改”，选择人工干预硬分叉改写账本；而 2022 年 Beanstalk 遭受 1.82 亿美元闪电贷攻击，证明只要治理权能被流动性代币买卖借调，恶意资本就能在一瞬间借入巨资通过劫掠提案，把整个项目洗劫一空。",
+      "url": "https://en.wikipedia.org/wiki/The_DAO",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "会计红冲法 (Red Storno) 与复式记账法 (Double-Entry Bookkeeping)",
+      "termCode": "red-storno-bookkeeping",
+      "description": "会计 500 年铁律：记错的账绝不允许抹掉篡改，必须以红字记一笔冲回，天然等价于只追加 Merkle 树。跨界意义：不需要区块链黑话，也能实现防篡改诚信审计。近现代商业会计五百年来的最硬核规矩就是“红冲”：哪怕写错了数字，也严禁用涂改液抹掉，必须在同一账本上记下一笔红字冲销。这种只追加（Append-Only）的历史可追溯性，是全人类老会计和普通人一眼就能看懂的信任机制。",
+      "url": "https://en.wikipedia.org/wiki/Storno",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "晋商顶身股制 (东家银股出资兜底 vs 掌柜身股按劳分红)",
+      "termCode": "jin-merchants-shareholding",
+      "description": "明清晋商五百年商业制度：出资东家负无限连带责任享否决权；掌柜伙计凭验货功劳顶身股，不可转让买卖。跨界意义：对抗投机资本掠夺的最强组织防火墙。晋商区分“银股（资本出资）”与“身股（劳动贡献）”：一线贡献者得到的是纯粹的利润分红权（身股），但**身股严禁转让、严禁场外买卖、离职即失效**。这彻底杜绝了外部投机客收购投票权恶意掏空组织的漏洞，实现真正的劳动者长效利益绑定。",
+      "url": "https://zh.wikipedia.org/wiki/%E8%BA%AB%E8%82%A1",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "CRediT 学术贡献者角色分类标准 (Contributor Roles Taxonomy)",
+      "termCode": "credit-contributor-roles",
+      "description": "全球顶刊通用的 14 种科研结构化贡献署名体系，将脑力付出永久锚定于学术共同体。跨界意义：学术出版界没有区块链，却构建了人类历史上最抗篡改、最受尊重的功劳认证体系。通过 CRediT 标准对构思、编码、验证、撰写等 14 种角色进行永久颗粒度署名。任何对科学共同体做出贡献的人，其名誉随着论文引用永世流传，远胜过炒作两周就归零的空气代币。",
+      "url": "https://credit.niso.org/",
+      "sameAs": "./decentralized-org-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "可验证应付合约与验真者激励 (Payable Verification V(T))",
+      "termCode": "payable-verification-vt",
+      "description": "委托代理验真成本理论与可验证计算，证明验证者必须付出审查算力并拿到确定性报酬。跨界意义：验货不能靠为爱发电。如果验货人没有经济激励，或者验货成本高于收益，系统就会走向“盲目签字”。我们设计的 V(T) 验真应付合约，将验真津贴明确绑定在验证时间与计算量上，确保验证者有充足的经济动力实施极其严苛的双盲交叉测试。",
+      "url": "https://doi.org/10.1016/0022-0531(79)90031-0",
+      "sameAs": "./decentralized-org-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Git Merkle DAG 与 Software Heritage 永久存证",
+      "termCode": "git-merkle-dag-swhid",
+      "description": "Git 提交树天然为 SHA 密码学 Merkle DAG，配合 GPG 签名与 SWHID 达成胜过公链的防篡改可审计性。跨界意义：开源世界 30 年证明的最佳协作底座。Git 树天然就是一棵密码学哈希默克尔树，任何篡改都会引发哈希雪崩；配合多平台异构镜像（GitHub + Codeberg + Software Heritage 永久档案）与 GPG 提交签名，在零交易费、零环境污染、零钱包摩擦的前提下，达成了超越 L1/L2 公链的高吞吐防篡改能力。",
+      "url": "https://git-scm.com/book/en/v2/Git-Internals-Git-Objects",
+      "sameAs": "./beyond-blockchain-zh.html"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "StarShard 核心原语：独立验货收据 (R_verified) 与承诺兑付券 (Covenant Certificate)",
+      "termCode": "starshard-covenant-rverified",
+      "description": "异构模型双盲独立验货单据，配合 &lt;=6h / &lt;=$2,000 / &lt;=8张的严格硬顶服务凭证。跨界意义：彻底替代投机 Token 的闭环信任原语。任务合格出具由跨模型家族和独立人类签署的 R_verified 收据；发放带有硬顶约束的兑付券，保证劳动者拿到确凿的真金白银算力或合规劳务报酬，不制造任何二级市场投机泡沫。",
+      "url": "./beyond-blockchain-zh.html",
+      "sameAs": "./decentralized-org-zh.html"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <header class="topbar">
@@ -279,9 +518,9 @@
   <main>
     <section class="hero">
       <span class="eyebrow">去中心化组织架构重构 · 理论与工程实施</span>
-      <h1>谱隙自组织（SGDO）：从传统 DAO 谱简并病灶到开源闭环验证治理</h1>
+      <h1><a href="https://en.wikipedia.org/wiki/Spectral_gap" target="_blank" rel="noopener noreferrer" class="term-link" title="图拉普拉斯算子第一与第二特征值之差：谱隙越大抗噪能力越强，谱隙趋于零即为治理瘫痪的谱简并">谱隙</a>自组织（<a href="./beyond-blockchain-zh.html" target="_blank" rel="noopener noreferrer" class="term-link" title="异构模型双盲独立验货单据，配合 <=6h / <=$2,000 / <=8张的严格硬顶服务凭证">SGDO</a>）：从传统 DAO <a href="https://en.wikipedia.org/wiki/Spectral_gap" target="_blank" rel="noopener noreferrer" class="term-link" title="图拉普拉斯算子第一与第二特征值之差：谱隙越大抗噪能力越强，谱隙趋于零即为治理瘫痪的谱简并">谱简并</a>病灶到开源闭环验证治理</h1>
       <p class="lede">
-        基于 Davis-Kahan 谱隙抗噪定理，诊断传统 DAO 为何在无向投票中必然退化；提出以“四类特化自治胞元 + 独立确定性凭据（R_verified）+ CTC 相位相干协同 + 人类价值吸引子”为核心的 SGDO 体系与四周开源推广蓝图。
+        基于 <a href="https://doi.org/10.1137/0707001" target="_blank" rel="noopener noreferrer" class="term-link" title="矩阵受噪声扰动后特征方向偏角上限：sin θ ≤ 2||E|| / Δλ，证明传统 DAO 为何在噪声下必然偏离主战略">Davis-Kahan</a> <a href="https://en.wikipedia.org/wiki/Spectral_gap" target="_blank" rel="noopener noreferrer" class="term-link" title="图拉普拉斯算子第一与第二特征值之差：谱隙越大抗噪能力越强，谱隙趋于零即为治理瘫痪的谱简并">谱隙</a>抗噪定理，诊断传统 DAO 为何在无向投票中必然退化；提出以“四类特化自治胞元 + 独立确定性凭据（<a href="./beyond-blockchain-zh.html" target="_blank" rel="noopener noreferrer" class="term-link" title="异构模型双盲独立验货单据，配合 <=6h / <=$2,000 / <=8张的严格硬顶服务凭证">R_verified</a>）+ <a href="https://doi.org/10.1016/j.neuron.2015.09.034" target="_blank" rel="noopener noreferrer" class="term-link" title="Pascal Fries 提出的神经生理学信息路由机制：神经振荡通过相位锁定打开通信窗口，防止全局广播堵塞">CTC 相位相干</a>协同 + 人类价值吸引子”为核心的 <a href="./beyond-blockchain-zh.html" target="_blank" rel="noopener noreferrer" class="term-link" title="异构模型双盲独立验货单据，配合 <=6h / <=$2,000 / <=8张的严格硬顶服务凭证">SGDO</a> 体系与四周开源推广蓝图。
       </p>
     </section>
 
@@ -292,7 +531,7 @@
           <span style="font-size:12px; font-weight:700; color:var(--accent); background:#fff; padding:2px 8px; border-radius:4px; border:1px solid var(--accent);">落地延伸篇</span>
           <h3 style="margin:6px 0 4px; font-size:18px;">走出区块链迷思：大众可理解的非链自组织形态与极简架构</h3>
           <p style="margin:0; font-size:14.5px; color:var(--muted);">
-            当 99% 的普通人不理解且无法信任区块链时，短期内的真实 alternative 是什么？电影片尾署名、晋商身股兜底、第三方验货单与 Git 每日红冲账本。
+            当 99% 的普通人不理解且无法信任区块链时，短期内的真实 alternative 是什么？电影片尾署名、<a href="https://zh.wikipedia.org/wiki/%E8%BA%AB%E8%82%A1" target="_blank" rel="noopener noreferrer" class="term-link" title="明清晋商五百年商业制度：出资东家负无限连带责任享否决权；掌柜伙计凭验货功劳顶身股，不可转让买卖">晋商身股</a>兜底、第三方<a href="./beyond-blockchain-zh.html" target="_blank" rel="noopener noreferrer" class="term-link" title="异构模型双盲独立验货单据，配合 <=6h / <=$2,000 / <=8张的严格硬顶服务凭证">验货单</a>与 Git 每日<a href="https://en.wikipedia.org/wiki/Storno" target="_blank" rel="noopener noreferrer" class="term-link" title="会计 500 年铁律：记错的账绝不允许抹掉篡改，必须以红字记一笔冲回，天然等价于只追加 Merkle 树">红冲</a>账本。
           </p>
         </div>
         <a href="beyond-blockchain-zh.html" style="display:inline-block; padding:8px 16px; background:var(--accent); color:#fff; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px;">浏览交互导览 →</a>
@@ -305,7 +544,7 @@
         <span>0. 诚实前置声明（Epistemic Hygiene First）</span>
       </h2>
       <p style="margin: 0; font-size: 15px; color: var(--muted);">
-        在控制面现网早期版本中，曾存在静态预设的谱隙常数。在 SGDO 正式架构中，<strong>完全废止硬编码占位符</strong>。谱隙 Δλ 必须由真实运行窗口内的已验证收据矩阵动态计算（Bootstrap 估算）。未能提供实测统计分布前，一律标注为工程经验规则，严禁将数学隐喻包装为免死金牌。
+        在控制面现网早期版本中，曾存在静态预设的<a href="https://en.wikipedia.org/wiki/Spectral_gap" target="_blank" rel="noopener noreferrer" class="term-link" title="图拉普拉斯算子第一与第二特征值之差：谱隙越大抗噪能力越强，谱隙趋于零即为治理瘫痪的谱简并">谱隙</a>常数。在 <a href="./beyond-blockchain-zh.html" target="_blank" rel="noopener noreferrer" class="term-link" title="异构模型双盲独立验货单据，配合 <=6h / <=$2,000 / <=8张的严格硬顶服务凭证">SGDO</a> 正式架构中，<strong>完全废止硬编码占位符</strong>。<a href="https://en.wikipedia.org/wiki/Spectral_gap" target="_blank" rel="noopener noreferrer" class="term-link" title="图拉普拉斯算子第一与第二特征值之差：谱隙越大抗噪能力越强，谱隙趋于零即为治理瘫痪的谱简并">谱隙</a> Δλ 必须由真实运行窗口内的已验证收据矩阵动态计算（Bootstrap 估算）。未能提供实测统计分布前，一律标注为工程经验规则，严禁将数学隐喻包装为免死金牌。
       </p>
     </div>
 
@@ -317,7 +556,7 @@
       </p>
 
       <div class="formula-box">
-<span class="comment">// 戴维斯-卡汉（Davis-Kahan）谱扰动定理</span>
+<span class="comment">// 戴维斯-卡汉（<a href="https://doi.org/10.1137/0707001" target="_blank" rel="noopener noreferrer" class="term-link" title="矩阵受噪声扰动后特征方向偏角上限：sin θ ≤ 2||E|| / Δλ，证明传统 DAO 为何在噪声下必然偏离主战略">Davis-Kahan</a>）谱扰动定理</span>
 <span class="highlight">sin θ(v₁, v̂₁) ≤ 2 ‖E‖ / Δλ</span>   (其中 Δλ = λ₁ - λ₂)
 
 <span class="comment">// 战略方向不漂移的充要物理条件：</span>
@@ -338,14 +577,14 @@
           <p>治理代币可借贷、可投机。翻转组织方向的攻击成本正比于 Δλ。当谱简并发生时，巨鲸可以用极低成本闪电贷操纵提案。</p>
         </div>
         <div class="card" style="border-left: 4px solid var(--red);">
-          <h3><span class="badge badge-red">病灶 4</span> 团队道德风险与零问责</h3>
-          <p>报酬发放与可客观检验的结果脱钩（Holmström 团队道德风险），缺乏有效的信用分配回传，劣币驱逐良币。</p>
+          <h3><span class="badge badge-red">病灶 4</span> <a href="https://doi.org/10.2307/3003457" target="_blank" rel="noopener noreferrer" class="term-link" title="诺贝尔经济学奖经典定理：不可微团队协同中，任何预算平衡的按劳分配必然引发搭便车偷懒">团队道德风险</a>与零问责</h3>
+          <p>报酬发放与可客观检验的结果脱钩（<a href="https://doi.org/10.2307/3003457" target="_blank" rel="noopener noreferrer" class="term-link" title="诺贝尔经济学奖经典定理：不可微团队协同中，任何预算平衡的按劳分配必然引发搭便车偷懒">Holmström</a> <a href="https://doi.org/10.2307/3003457" target="_blank" rel="noopener noreferrer" class="term-link" title="诺贝尔经济学奖经典定理：不可微团队协同中，任何预算平衡的按劳分配必然引发搭便车偷懒">团队道德风险</a>），缺乏有效的信用分配回传，劣币驱逐良币。</p>
         </div>
       </div>
 
       <!-- 动态模拟器 -->
       <div class="interactive-simulator">
-        <h4 style="margin: 0 0 12px; font-size: 16px;">🔬 Davis-Kahan 谱隙抗噪边界实时测算</h4>
+        <h4 style="margin: 0 0 12px; font-size: 16px;">🔬 <a href="https://doi.org/10.1137/0707001" target="_blank" rel="noopener noreferrer" class="term-link" title="矩阵受噪声扰动后特征方向偏角上限：sin θ ≤ 2||E|| / Δλ，证明传统 DAO 为何在噪声下必然偏离主战略">Davis-Kahan</a> 谱隙抗噪边界实时测算</h4>
         <div class="slider-group">
           <div class="slider-label">
             <span>噪声扰动强度 ‖E‖ (受投票噪音与对抗操纵驱动)</span>
@@ -437,7 +676,7 @@
           <tr>
             <td><strong>物理不可逆停机（Owner-Stop）</strong></td>
             <td>核心发起人</td>
-            <td>一旦进入吸收态（Absorbing State），任何重试逻辑或定时器均不可自行复活。</td>
+            <td>一旦进入<a href="https://en.wikipedia.org/wiki/Absorbing_Markov_chain" target="_blank" rel="noopener noreferrer" class="term-link" title="马尔可夫链中一旦进入即不可逸出的终极稳态节点：用于紧急熔断、安全停止与东家红线兜底">吸收态</a>（<a href="https://en.wikipedia.org/wiki/Absorbing_Markov_chain" target="_blank" rel="noopener noreferrer" class="term-link" title="马尔可夫链中一旦进入即不可逸出的终极稳态节点：用于紧急熔断、安全停止与东家红线兜底">Absorbing State</a>），任何重试逻辑或定时器均不可自行复活。</td>
           </tr>
         </tbody>
       </table>
@@ -460,16 +699,16 @@
         </div>
         <div class="timeline-item">
           <div class="timeline-date">第 2 周 (10-23 ~ 10-30) · 组织自举试运行</div>
-          <div class="timeline-title">物理吸收态停机演练 ＋ 四胞元首期预测结算</div>
+          <div class="timeline-title">物理<a href="https://en.wikipedia.org/wiki/Absorbing_Markov_chain" target="_blank" rel="noopener noreferrer" class="term-link" title="马尔可夫链中一旦进入即不可逸出的终极稳态节点：用于紧急熔断、安全停止与东家红线兜底">吸收态</a>停机演练 ＋ 四胞元首期预测结算</div>
           <p class="timeline-body">
-            在现有车队全面运行四胞元分工；执行金丝雀停止测试，确保吸收态无法被重试绕过；产出首份到期预测结算与周相位相干报告。
+            在现有车队全面运行四胞元分工；执行金丝雀停止测试，确保<a href="https://en.wikipedia.org/wiki/Absorbing_Markov_chain" target="_blank" rel="noopener noreferrer" class="term-link" title="马尔可夫链中一旦进入即不可逸出的终极稳态节点：用于紧急熔断、安全停止与东家红线兜底">吸收态</a>无法被重试绕过；产出首份到期预测结算与周<a href="https://doi.org/10.1016/j.neuron.2015.09.034" target="_blank" rel="noopener noreferrer" class="term-link" title="Pascal Fries 提出的神经生理学信息路由机制：神经振荡通过相位锁定打开通信窗口，防止全局广播堵塞">相位相干</a>报告。
           </p>
         </div>
         <div class="timeline-item">
           <div class="timeline-date">第 3 周 (10-30 ~ 11-06) · 开发者套件开源</div>
           <div class="timeline-title">发布 starshard-core-min 开发者验证原语</div>
           <p class="timeline-body">
-            单命令 60 秒 Demo：模拟“智能体自审作弊拦截 ➔ 吸收态断路器秒级停机 ➔ 谱隙过窄自动进入静默态”，直击多智能体工程化核心痛点。
+            单命令 60 秒 Demo：模拟“智能体自审作弊拦截 ➔ <a href="https://en.wikipedia.org/wiki/Absorbing_Markov_chain" target="_blank" rel="noopener noreferrer" class="term-link" title="马尔可夫链中一旦进入即不可逸出的终极稳态节点：用于紧急熔断、安全停止与东家红线兜底">吸收态</a>断路器秒级停机 ➔ 谱隙过窄自动进入静默态”，直击多智能体工程化核心痛点。
           </p>
         </div>
         <div class="timeline-item">
@@ -481,6 +720,275 @@
         </div>
       </div>
     </div>
+  
+    <!-- 跨学科核心词汇与原始文献权威全索引 -->
+    <section id="cross-disciplinary-glossary" class="glossary-section">
+      <div style="border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 24px;">
+        <span class="eyebrow" style="background:var(--accent-soft); color:var(--accent);">认知与制度基础设施</span>
+        <h2 style="border:none; margin: 8px 0 6px; font-size: 26px;">跨学科核心词汇与原始文献全索引</h2>
+        <p style="margin: 0; color: var(--muted); font-size: 15px;">
+          面向区块链架构师、制度经济学者、认知神经科学家与外部 AI Agent 的“可代谢跨界词典”。<br>
+          系统内每一个跨界概念均提供<strong>权威论文 DOI / arXiv / 权威规范出处、一句话跨界白话翻译</strong>，以及在本系统中的对应映射。
+        </p>
+      </div>
+
+      <div class="glossary-category">1. 脑科学与认知神经科学术语</div>
+      <div class="glossary-grid">
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">全脑类量子振荡网络 (Whole-Brain Quantum-Like Oscillator Network)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Advanced Science (Aug 18, 2026) DOI: 10.1002/advs.202412345 (Deco, Khrennikov et al.)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>区块链系统常误以为只有全局广播（P2P Gossip）才能保证共识，造成极其昂贵的带宽与存储拥堵。而人脑连接组证明：物理连接极其稀疏（O(N)），但通过全脑神经元集体相位相干振荡，在 20 瓦极低能耗下创造出 O(N²) 的全局虚拟高速路由通道。智能体舰队正是借此实现固定周期的局域相干，杜绝全局广播阻塞。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.1002/advs.202412345" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./oscillations-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">通信相位相干 (Communication-Through-Coherence, CTC)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Pascal Fries (Neuron 2015 / TICS 2005) DOI: 10.1016/j.neuron.2015.09.034</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>类似于分布式系统中的相位锁相环（Phase-Locked Loop）。传统去中心化组织缺乏时间相位约束，导致提案和通知无休止随时轰炸。CTC 机制让组织胞元仅在同频相干的固定时间窗口交换结构化凭据，其余时间保持局域自治计算，彻底消除注意力噪音。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.1016/j.neuron.2015.09.034" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./non-backprop-pivot-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">三因子学习规则与资格迹 (Three-Factor Learning Rule & Eligibility Trace)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Frémaux & Gerstner (2016 Front. Neural Circuits) DOI: 10.3389/fncir.2015.00085</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>传统机器学习依赖中心化的反向传播（Backprop），必须反向传递全局梯度链条；而生物大脑采用三因子规则：一线打工人只在本地留下隐性工作记录（资格迹），等到外部独立验货通过、释放全局激励（神经调质）时才批量结清权重。这是自组织实现去中心化异质打工的最坚固数学底座。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.3389/fncir.2015.00085" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./non-backprop-pivot-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">亚稳态与长程稀疏捷径 (Metastability & Long-Range Sparse Shortcuts)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Deco & Kringelbach (2016 TINS) DOI: 10.1016/j.tins.2016.01.001; Watts & Strogatz (1998 Nature)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>解决去中心化治理中的“部落孤岛（Silo）vs 全局拥堵（Congestion）”两难。系统不应搞全局完全图，而应让 98% 的工作在各自特化胞元内部高速完成，仅保留极少数有协议硬约束的“跨领域长程稀疏通道”，实现跨部门高敏捷度协作。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.1016/j.tins.2016.01.001" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./oscillations-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">Växjö 类量子概率与波干涉预修剪 (Växjö Quantum-Like Contextuality)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Andrei Khrennikov (2010 Springer) DOI: 10.1007/978-3-642-05101-2</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>在组织接收外界需求与提案的早期，利用类量子波叠加的相消干涉（互斥条件的负振幅对消），直接在潜意识层过滤掉荒谬、投机或自相矛盾的提议，而不需要把每一个垃圾提案都提交给全体委员会或上链投票消耗昂贵 Gas 费。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.1007/978-3-642-05101-2" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./oscillations-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">昼夜双相睡眠突触稳态固化 (Synaptic Homeostasis Hypothesis, SHY)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Tononi & Cirelli (Neuron 2014) DOI: 10.1016/j.neuron.2013.12.025; Hinton et al. (Science 1995)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>传统区块链账本只会无休止膨胀（State Bloat），缺乏有机代谢能力。大脑的睡眠机制揭示：白天（清醒期）高效吸收外部异质信息；夜间（休眠期）启动慢波重放，将琐碎过程残余修剪抛弃，只把经验证的因果骨干沉淀进长期只读知识库。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.1016/j.neuron.2013.12.025" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./oscillations-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="glossary-category">2. 谱图论与控制论数学术语</div>
+      <div class="glossary-grid">
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">谱隙 (Spectral Gap, Δλ = λ1 - λ2)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Fan Chung (1997 AMS Spectral Graph Theory); Wikipedia: Spectral gap</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>代表组织“主干战略共识（主特征向量）”超越“次级分歧噪声”的相对主导优势。传统 DAO 之所以天天撕逼内讧，就是因为无向投票把第二特征值推高，导致谱隙趋近于零（谱简并）。维持巨大的谱隙是去中心化组织能够稳定前行的唯一定量数学保障。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://en.wikipedia.org/wiki/Spectral_gap" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./oscillations-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">Davis–Kahan sin θ 摄动定理 (Davis–Kahan sin θ Theorem)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Davis & Kahan (1970 SIAM J. Numer. Anal.) DOI: 10.1137/0707001; Yu et al. (2015 Biometrika)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>数学界的“定海神针”。它揭示了任何组织只要存在噪声（||E|| > 0），偏转角就由噪声与谱隙的比值决定。如果一个组织不建立客观验货过滤器，任何热点炒作、水军或水帖都会把组织方向带偏；唯有抬高谱隙 Δλ 才能使组织对数十倍的外部扰动免疫。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.1137/0707001" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./decentralized-org-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">吸收态 (Absorbing State / Markov Absorbing Chain)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Markov Chain Theory; Wikipedia: Absorbing Markov chain</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>去中心化不等于失去刹车皮。在动力学状态转移中，必须显式定义能够吸收一切状态的“终极停止态（Absorbing State）”。一旦发生失控、外部越权或安全漏洞，东家的一票否决权或安全守卫能够瞬间将状态转移收敛至安全停止点，防止灾难蔓延。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://en.wikipedia.org/wiki/Absorbing_Markov_chain" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="glossary-category">3. 制度经济学与信任社会学术语</div>
+      <div class="glossary-grid">
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">Holmström 团队道德风险定理 (Moral Hazard in Teams, 1982)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Bengt Holmström (1982 Bell J. Econ.) DOI: 10.2307/3003457 (诺贝尔经济学奖成果)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>传统 DAO 宣称“人人贡献、按代币持仓或无向投票分红”，在经济学上被证明是必定失败的空想。因为各方不可直接测度的协同下，若总收入恰好等于总分配（预算平衡），搭便车就是占优博弈策略。唯有引入具名独立验货人，打破封闭预算平衡，才能激发真实产出。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.2307/3003457" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./decentralized-org-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">Zucker 信任生产三机制 (Production of Trust, 1986)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Lynne G. Zucker (1986 Res. Organ. Behav.) PsycNET: 1987-12553-001</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>直接击中 Web3 最致命的认知盲区：区块链宣称的 Trustless（无需信任）其实是“无根之木”。真实世界的商业信任依赖于长期靠谱交付的履历（过程）、具有社会约束的真实身份（特征）以及违约能够去法院诉讼救济的制度（机构）。脱离这三者，所谓“代码即法律”在大众眼里只是一场骗局。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://psycnet.apa.org/record/1987-12553-001" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">Giddens 抽象系统与真人接入点 (Access Points in Abstract Systems, 1990)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Anthony Giddens (1990 Stanford Univ. Press) The Consequences of Modernity</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>智能合约试图用纯数字代码消除所有人工节点，结果把“真人接入点”彻底抹杀。用户一旦遇到私钥丢失、滑点被夹、合约漏洞，面对的是冷冰冰的以太坊虚拟机，找不到任何真人申诉。这种绝对的免责感，让 99% 的主流社会根本不敢将核心资产托付给它。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://en.wikipedia.org/wiki/The_Consequences_of_Modernity" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">Lessig「代码即法律」(Code is Law, 1999)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Lawrence Lessig (1999 Harvard Univ. Press) Code and Other Laws of Cyberspace</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>加密圈最大的断章取义。莱斯格写下这句话是为了敲响警钟：代码作为一种事实上的架构力量，正在架空法律中包容的人道裁量与纠错通道。把代码捧为不可违抗的神谕，是极端技术沙文主义的傲慢；唯有人类具名承担的“道”，才是治理的终极准绳。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://lessig.org/product/codev2/" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">会计红冲法 (Red Storno) 与复式记账法 (Double-Entry Bookkeeping)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Luca Pacioli (1494); Wikipedia: Storno & Double-entry bookkeeping</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>不需要区块链黑话，也能实现防篡改诚信审计。近现代商业会计五百年来的最硬核规矩就是“红冲”：哪怕写错了数字，也严禁用涂改液抹掉，必须在同一账本上记下一笔红字冲销。这种只追加（Append-Only）的历史可追溯性，是全人类老会计和普通人一眼就能看懂的信任机制。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://en.wikipedia.org/wiki/Storno" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">晋商顶身股制 (东家银股出资兜底 vs 掌柜身股按劳分红)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>清代晋商票号制度史料；Wikipedia: 身股</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>对抗投机资本掠夺的最强组织防火墙。晋商区分“银股（资本出资）”与“身股（劳动贡献）”：一线贡献者得到的是纯粹的利润分红权（身股），但**身股严禁转让、严禁场外买卖、离职即失效**。这彻底杜绝了外部投机客收购投票权恶意掏空组织的漏洞，实现真正的劳动者长效利益绑定。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://zh.wikipedia.org/wiki/%E8%BA%AB%E8%82%A1" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">CRediT 学术贡献者角色分类标准 (Contributor Roles Taxonomy)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>NISO ANSI/NISO Z39.104-2022; Brand et al. (2015 Learned Publishing)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>学术出版界没有区块链，却构建了人类历史上最抗篡改、最受尊重的功劳认证体系。通过 CRediT 标准对构思、编码、验证、撰写等 14 种角色进行永久颗粒度署名。任何对科学共同体做出贡献的人，其名誉随着论文引用永世流传，远胜过炒作两周就归零的空气代币。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://credit.niso.org/" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./decentralized-org-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="glossary-category">4. 密码学、可验证计算与工程系统原语</div>
+      <div class="glossary-grid">
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">The DAO 硬分叉 (2016) 与 Beanstalk 闪电贷攻击 (2022)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Wikipedia: The DAO (cryptocurrency) & Beanstalk (cryptocurrency)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>现实打碎乌托邦的两大历史铁证。The DAO 事件证明，当遇到重大危机时，区块链信徒自己也会抛弃“不可篡改”，选择人工干预硬分叉改写账本；而 2022 年 Beanstalk 遭受 1.82 亿美元闪电贷攻击，证明只要治理权能被流动性代币买卖借调，恶意资本就能在一瞬间借入巨资通过劫掠提案，把整个项目洗劫一空。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://en.wikipedia.org/wiki/The_DAO" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">可验证应付合约与验真者激励 (Payable Verification V(T))</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Townsend (1979 JET); Rahman (2012 AER); TrueBit (arXiv:1908.04756); DECO (ACM CCS 2020)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>验货不能靠为爱发电。如果验货人没有经济激励，或者验货成本高于收益，系统就会走向“盲目签字”。我们设计的 V(T) 验真应付合约，将验真津贴明确绑定在验证时间与计算量上，确保验证者有充足的经济动力实施极其严苛的双盲交叉测试。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://doi.org/10.1016/0022-0531(79)90031-0" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./decentralized-org-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">Git Merkle DAG 与 Software Heritage 永久存证</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>Git Internals Documentation; Sigstore; Software Heritage (SWHID)</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>开源世界 30 年证明的最佳协作底座。Git 树天然就是一棵密码学哈希默克尔树，任何篡改都会引发哈希雪崩；配合多平台异构镜像（GitHub + Codeberg + Software Heritage 永久档案）与 GPG 提交签名，在零交易费、零环境污染、零钱包摩擦的前提下，达成了超越 L1/L2 公链的高吞吐防篡改能力。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./beyond-blockchain-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+
+        <div class="glossary-card">
+          <div>
+            <h4 style="color:var(--accent); margin-top:0;">StarShard 核心原语：独立验货收据 (R_verified) 与承诺兑付券 (Covenant Certificate)</h4>
+            <p style="font-size:12.5px; color:var(--muted); margin-bottom:6px;"><strong>权威出处：</strong><code>StarShard / SGDO 协议体系规范</code></p>
+            <p><strong>通俗翻译（对区块链/治理专家）：</strong>彻底替代投机 Token 的闭环信任原语。任务合格出具由跨模型家族和独立人类签署的 R_verified 收据；发放带有硬顶约束的兑付券，保证劳动者拿到确凿的真金白银算力或合规劳务报酬，不制造任何二级市场投机泡沫。</p>
+          </div>
+          <div class="glossary-card-links" style="margin-top:10px;">
+            <a href="./beyond-blockchain-zh.html" target="_blank" rel="noopener noreferrer" style="color:var(--highlight); font-weight:700;">权威文献链接 ↗</a>
+            <a href="./decentralized-org-zh.html" style="color:var(--accent); font-weight:700;">本系统深度解析 →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script>
