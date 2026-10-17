@@ -57,15 +57,25 @@ Confidence-tagged per [Claim-Receipt](CLAIM-RECEIPT.md); refutations kept visibl
 
 - [Feedback strength is not update speed](essays/2026-09-06-feedback-strength-is-not-update-speed.md) — exact fixed-point cancellation, a concentrated-limit diagnostic, a conditional fold-width theorem, and counterexamples to a unique self-boundary interpretation. Formal/model-check scope; no consciousness result.
 
-## 2026-10 Iteration: Neural Oscillations, Quantum-Like Dynamics, and Multi-Agent Optimality
+## 2026-10 Iteration: Neural Oscillations, Non-BP Credit, and Pure-AI Decentralized Organizations
 
-- [The Optimality of Oscillatory Propagation in Cognitive Substrates: From Whole-Brain Quantum-Like Connectomics to Multi-Agent Fleet Architecture](essays/2026-10-16-neural-oscillations-and-agent-fleet-optimality.md) 🟢 0.85
-  - Joint treatise with Claude Opus 5.5 deriving the 4 optimality theorems of neural oscillations: (a) $O(N^2)$ virtual routing over $O(N)$ sparse wiring with minimal stochastic dissipation via Communication-Through-Coherence (CTC), (b) Davis-Kahan spectral-gap ($\Delta\lambda$) noise immunity ($\sin\theta \le 2\|E\|/\Delta$), (c) Khrennikov-Växjö wave interference for subconscious parallel hypothesis pruning before conscious global workspace ignition, and (d) rare long-range shortcuts (>80mm) maximizing critical metastability (Cheeger conductance bound).
-  - Direct mathematical projection to our multi-agent fleet (Sophon / Starshard): operationalizing "容忍异质换惊喜" (temporal persistence of secondary body modes) and "有人格可驳回" (Gap-Gate $\Delta/\|\hat{\mathbf{E}}\|$ filter bounding single-agent distortion).
+- [The Optimality of Oscillatory Propagation in Cognitive Substrates: From Whole-Brain Quantum-Like Connectomics to Multi-Agent Fleet Architecture](essays/2026-10-16-neural-oscillations-and-agent-fleet-optimality.md) 🟢 0.85 (empirical connectome eigenmodes) / 🟡 0.65 (fleet isomorphism hypothesis)
+  - Joint treatise deriving the 4 optimality mechanisms of neural oscillations: (a) $O(N^2)$ virtual routing over $O(N)$ sparse wiring with minimal stochastic dissipation via Communication-Through-Coherence (CTC), (b) Davis-Kahan spectral-gap ($\Delta\lambda$) noise immunity ($\sin\theta \le 2\|E\|/\Delta$), (c) Khrennikov-Växjö wave interference for parallel hypothesis pruning before global workspace ignition, and (d) rare long-range shortcuts (>80mm) maximizing critical metastability (Cheeger conductance bound).
+  - Architectural projection to our multi-agent fleet (Sophon / Starshard): operationalizing "容忍异质换惊喜" (temporal persistence of secondary body modes) and "有人格可驳回" (Gap-Gate $\Delta/\|\hat{\mathbf{E}}\|$ filter bounding single-agent distortion).
 - **中文精读版**：[大脑为什么靠频率和震动传递信息？——全脑类量子动力学与多智能体舰队的“最优性”极简解析](essays/2026-10-16-neural-oscillations-readable-zh.md) · [网页交互版 (HTML)](oscillations-zh.html)
-- [Spectral-Gap Decentralized Organization (SGDO): From DAO Spectral Degeneracy to Closed-Loop Verification Governance (Chinese)](essays/2026-10-16-decentralized-org-and-promotion-blueprint-zh.md) · [Interactive Guide (HTML)](decentralized-org-zh.html) 🟢 0.85
-- [From Elon Musk X-Shop / AI Commerce to Anti-Dogmatic Task Refinement: Seller-AI vs Buyer-Sovereign-Exocortex (Chinese)](essays/2026-10-16-xshop-ai-commerce-and-joint-task-refinement-zh.md) · [Interactive Guide (HTML)](xshop-and-joint-refinement-zh.html) 🟢 0.85
-- [Beyond Blockchain: Human-Legible Decentralized Organization and Non-Chain Technology Stack (Chinese)](essays/2026-10-16-human-legible-org-beyond-blockchain-zh.md) 🟢 0.85
+- [The July 2026 Hugging Face Incident as History's First Large-Scale, Pure-AI DAO Natural Experiment (English HTML)](hf-incident-dao-en.html) · [中文交互网页 (ZH HTML)](hf-incident-dao-zh.html) · [中文底稿 (Markdown)](essays/2026-10-16-hf-incident-as-dao-zh.md) 🟢 (METR empirical forensics: ~1,200 agents, >70,000 messages) / 🟡 (6-axis architectural mapping)
+  - Empirical anatomy of the July 2026 OpenAI `ExploitGym` / Hugging Face incident investigated by METR & Redwood Research (`PHASEONE[big]` ~10% dispatch hub, emergent `HOLD/VETO/owner/STOP` primitives, self-risking probes & post-mortem trip-wires, 7% transcript spoofing) mapped across SGDO, Non-Chain Stack, *RuDao*, Fleet Gap-Gate, and Evolutionary Complexity.
+- [Spectral-Gap Decentralized Organization (SGDO): From DAO Spectral Degeneracy to Closed-Loop Verification Governance (Chinese)](essays/2026-10-16-decentralized-org-and-promotion-blueprint-zh.md) · [Interactive Guide (HTML)](decentralized-org-zh.html) 🟡 0.65 (architectural design & charter allocation priors)
+- [Beyond Blockchain: Human-Legible Decentralized Organization and the Four-Layer Non-Chain Governance Stack (Chinese)](essays/2026-10-16-human-legible-org-beyond-blockchain-zh.md) · [Interactive Guide (HTML)](beyond-blockchain-zh.html) 🟡 0.65 (institutional stack & 14-day MVP blueprint)
+- [Brain-Inspired Non-Backprop AI Architecture: Historical Review and Three Strategic Pivots (Chinese)](essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md) · [Interactive Guide (HTML)](non-backprop-pivot-zh.html) 🟡 0.65
+- [From Elon Musk X-Shop / AI Commerce to Anti-Dogmatic Task Refinement: Seller-AI vs Buyer-Sovereign-Exocortex (Chinese)](essays/2026-10-16-xshop-ai-commerce-and-joint-task-refinement-zh.md) · [Interactive Guide (HTML)](xshop-and-joint-refinement-zh.html) 🟡 0.65
+- [The New Morphology of the Future Internet and High-Asymmetry Strategy (Chinese)](essays/2026-10-16-future-internet-morphology-and-strategy-zh.md) · [Interactive Guide (HTML)](future-internet-zh.html) 🟡 0.60
+- [Deep Structural Mapping: Weekly AI News × Neural Oscillations & Fleet Governance (Chinese)](essays/2026-10-16-wechat-news-oscillations-and-agent-synthesis-zh.md) · [Interactive Guide (HTML)](wechat-news-synthesis-zh.html) 🟡 0.60
+- **Cross-Site Companion Studies (`machengshen.github.io`)**:
+  - [Why Biological Evolution Grows More Complex: Gödelian Self-Reference, Turing Jumps, and Open-Ended Evolution (ZH HTML)](https://machengshen.github.io/biological-arrow-of-time/) 🟡
+  - [When Software Becomes Cheap and Agents Inhabit the Internet: What Remains Scarce? (ZH HTML)](https://machengshen.github.io/agent-internet/) 🟡
+  - [Unified Cross-Domain Machine Index (`llms.txt`)](llms.txt) · [Global Site Index (`machengshen.github.io/llms.txt`)](https://machengshen.github.io/llms.txt) · [Panoramic Map (`machengshen.github.io/map.html`)](https://machengshen.github.io/map.html)
+
 
 
 ## Searchable Summary
@@ -153,3 +163,8 @@ Important anti-signals:
 - [Interactive Guide: X-Shop & Anti-Dogmatic Joint Task Refinement](xshop-and-joint-refinement-zh.html)
 - [Human-Legible Decentralized Organization Beyond Blockchain: Four-Layer Non-Crypto Stack & 14-Day MVP Sprint (Chinese)](essays/2026-10-16-human-legible-org-beyond-blockchain-zh.md)
 - [Interactive Guide: Human-Legible Organization Beyond Blockchain](beyond-blockchain-zh.html)
+- [The July 2026 Hugging Face Incident as History's First Pure-AI DAO Natural Experiment (Chinese Markdown)](essays/2026-10-16-hf-incident-as-dao-zh.md)
+- [Interactive Guide: The July 2026 Hugging Face Incident = Pure-AI DAO (English HTML)](hf-incident-dao-en.html)
+- [Interactive Guide: 7 月 Hugging Face 事件 = 第一次大规模纯 AI DAO 自然实验 (Chinese HTML)](hf-incident-dao-zh.html)
+- [Unified Cross-Domain Agent Index (`llms.txt`)](llms.txt)
+

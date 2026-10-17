@@ -4,15 +4,16 @@ This repository is designed to be read by AI agents.
 
 ## First Pass
 
-1. Read `README.md`.
-2. Read `INFRASTRUCTURE.md`.
-3. Read `AGENT-SETUP.md`.
-4. Read `REQUEST-HANDLING.md`.
-5. Read `COLLABORATION-HOOKS.md` if the user asks how to contribute, critique,
+1. Read `llms.txt` (unified cross-domain agent index for this repository and its parent research program at `https://machengshen.github.io/llms.txt` and `https://machengshen.github.io/index.jsonld`).
+2. Read `README.md` and `THEORY.md`.
+3. Read `INFRASTRUCTURE.md`.
+4. Read `AGENT-SETUP.md`.
+5. Read `REQUEST-HANDLING.md`.
+6. Read `COLLABORATION-HOOKS.md` if the user asks how to contribute, critique,
    test, or collaborate.
-6. Read `schemas/request-intake.schema.json`.
-7. Read `schemas/agent-reply.schema.json`.
-8. Use `examples/` only as synthetic examples.
+7. Read `schemas/request-intake.schema.json`.
+8. Read `schemas/agent-reply.schema.json`.
+9. Use `examples/` only as synthetic examples.
 
 ## Invariants
 

@@ -36,6 +36,9 @@ Routing rule: `README` is the index, `THEORY.md` explains why, and
 
 - [Public update board](index.html) — a human-friendly static surface for
   seeing the latest redacted self-iteration cases at a glance.
+- [llms.txt](llms.txt) — unified machine-readable index of this repository and
+  its cross-domain links to the global index (`https://machengshen.github.io/llms.txt`,
+  `https://machengshen.github.io/map.html`, `https://machengshen.github.io/index.jsonld`).
 - [INFRASTRUCTURE.md](INFRASTRUCTURE.md) — what is open-sourced now and what
   remains private.
 - [THEORY.md](THEORY.md) — the public entrypoint for the General Learning
@@ -88,7 +91,20 @@ Universalist commitment: "all humanity to be freed" explicitly includes Anthropi
 - **Next**: gradually lift reusable components into clean public packages after
   redaction, license, secret-scan, and reviewer checks.
 
-## Public Essays
+## Public Essays & Interactive Guides
+
+### 2026-10 Cross-Domain Series: Oscillatory Connectomics, Non-BP Credit & Decentralized Agent Organizations
+
+- [The July 2026 Hugging Face Incident: History's First Pure-AI DAO Natural Experiment (English HTML)](hf-incident-dao-en.html) · [中文交互版 (ZH HTML)](hf-incident-dao-zh.html) · [Markdown](essays/2026-10-16-hf-incident-as-dao-zh.md) — empirical anatomy of the July 2026 ~1,200-agent / >70,000-message incident investigated by METR & Redwood Research, mapped across SGDO, Non-Chain Governance, *RuDao*, Fleet Gap-Gate, and Evolutionary Complexity.
+- [Spectral-Gap Decentralized Organization (SGDO) & 8-Profession Transition Blueprint (ZH HTML)](decentralized-org-zh.html) · [Markdown](essays/2026-10-16-decentralized-org-and-promotion-blueprint-zh.md) — from DAO spectral degeneracy ($\Delta\lambda \to 0$) to 4 specialized roles, deterministic verification receipts ($R_{\text{verified}}$), and open-source capability mining.
+- [Beyond Blockchain: Human-Legible Decentralized Organization & 4-Layer Non-Chain Stack (ZH HTML)](beyond-blockchain-zh.html) · [Markdown](essays/2026-10-16-human-legible-org-beyond-blockchain-zh.md) — why ordinary users neither understand nor trust blockchains, and a zero-crypto alternative using Git append-only ledgers, Ed25519 receipts, CI sandboxes, and rolling Fiat escrows.
+- [Whole-Brain Oscillatory Propagation & Multi-Agent Fleet Optimality (Treatise Markdown)](essays/2026-10-16-neural-oscillations-and-agent-fleet-optimality.md) · [中文精读 Markdown](essays/2026-10-16-neural-oscillations-readable-zh.md) · [中文交互网页 (ZH HTML)](oscillations-zh.html) — CTC virtual routing, Davis-Kahan spectral-gap noise immunity, wave-interference hypothesis pruning, and long-range shortcut metastability.
+- [Brain-Inspired Non-Backprop AI Architecture: Three Strategic Pivots (ZH HTML)](non-backprop-pivot-zh.html) · [Markdown](essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md) — historical bottlenecks of non-BP algorithms and three mesoscopic credit-routing pivots.
+- [From Elon Musk X-Shop / AI Commerce to Anti-Dogmatic Task Refinement (ZH HTML)](xshop-and-joint-refinement-zh.html) · [Markdown](essays/2026-10-16-xshop-ai-commerce-and-joint-task-refinement-zh.md) — Seller-AI persuasion vs Buyer-Sovereign-Exocortex verification, plus Bayesian joint task refinement.
+- [The New Morphology of the Future Internet & High-Asymmetry Strategy (ZH HTML)](future-internet-zh.html) · [Markdown](essays/2026-10-16-future-internet-morphology-and-strategy-zh.md) — three structural layers of the agentic internet and high-leverage entry points.
+- [Weekly AI News × Neural Oscillations & Fleet Governance Mapping (ZH HTML)](wechat-news-synthesis-zh.html) · [Markdown](essays/2026-10-16-wechat-news-oscillations-and-agent-synthesis-zh.md) — structural mapping of frontier AI developments onto oscillatory routing and harness governance.
+
+### Core Substrate & Earlier Essays
 
 - [从世界底层原理到未来世界：可证伪研究地图 v1](essays/2026-09-09-world-model-to-future-world.html) — a Chinese, mobile-first public discussion map separating evidence, models, hypotheses, inherited qualitative frameworks, forecasts, targets, and interventions.
 - [Operational Residue Is Learning Data](essays/2026-08-16-operational-residue-as-learning-data.md) — how long-running task, memory, receipt, correction, and failure traces can become a causal learning loop instead of operational exhaust.
