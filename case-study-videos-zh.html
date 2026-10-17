@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="四集大白话生活案例视频剧场：用过日子的道理讲清楚去中心化组织与非区块链信用体系（Gemini 4 Argon × Claude Opus 5.5 联合制作）。">
+  <title>四集大白话生活案例视频剧场：用过日子的道理讲清楚新规则</title>
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fdf5ef;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --purple: #6d28d9;
+      --purple-soft: #f5f3ff;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 30rem),
+        radial-gradient(circle at 90% 20%, rgba(184, 92, 24, 0.04), transparent 28rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px max(20px, calc((100vw - 980px) / 2));
+      border-bottom: 1px solid rgba(227, 222, 214, 0.85);
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(14px);
+    }
+    .topbar a { color: var(--ink); text-decoration: none; }
+    .brand { font-weight: 750; font-size: 15px; letter-spacing: 0.02em; }
+    .nav { display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
+    main { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 40px 0 84px; }
+
+    .hero { padding: 24px 0 36px; border-bottom: 1px solid var(--line); }
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(26px, 3.8vw, 36px);
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0 0 18px;
+      font-size: 17.5px;
+      color: #334155;
+      line-height: 1.8;
+    }
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13.5px;
+      color: var(--muted);
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .video-card {
+      margin: 44px 0;
+      padding: 26px;
+      background: var(--panel);
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .video-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 12px;
+    }
+    .video-title {
+      font-size: 21px;
+      font-weight: 750;
+      color: #0f172a;
+      margin: 0;
+    }
+    .video-tag {
+      font-size: 13px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: var(--highlight-soft);
+      color: var(--highlight);
+      font-weight: 600;
+    }
+    .hook-quote {
+      font-size: 16px;
+      font-weight: 600;
+      color: #b45309;
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 10px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 0 0 20px;
+    }
+    .player-container {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+      margin-bottom: 22px;
+    }
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 520px;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    @media (max-width: 720px) {
+      .analysis-grid { grid-template-columns: 1fr; }
+    }
+    .box-story {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .box-mapping {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .box-head {
+      font-weight: 700;
+      font-size: 14.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .takeaway-bar {
+      margin-top: 16px;
+      padding: 12px 18px;
+      background: #fefce8;
+      border: 1px solid #fef08a;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #854d0e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14.5px;
+    }
+    .matrix-table th, .matrix-table td {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    .matrix-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+    .matrix-table tr:nth-child(even) { background: #fafaf9; }
+
+    .nav-cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(30,86,160,0.25);
+    }
+    .btn-cta:hover {
+      background: #15427d;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">System Evolution / 案例剧场</a>
+    <nav class="nav">
+      <a href="case-study-videos-zh.html"><strong>视频剧场</strong></a>
+      <a href="beyond-blockchain-zh.html">走出区块链迷思</a>
+      <a href="decentralized-org-zh.html">去中心化与晋升蓝图</a>
+      <a href="https://github.com/MachengShen/system-evolution-public">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">🎬 四集大白话生活案例视频剧场</div>
+      <h1>用过日子的道理，讲清楚新规则</h1>
+      <p class="lede">
+        <strong>“里面很多计算机、区块链、制度设计方面的生硬术语尽量少出现，一旦出现，必须先在一个最最接地气的生活例子里被彻底 Instantiate（具体化）。”</strong><br>
+        本系列短视频由 <strong>Gemini 4 Argon × Claude Opus 5.5</strong> 联合编剧制作。四部短片（各约 60–70 秒）将复杂的去中心化组织博弈论、非区块链信用记账、金丝雀埋坑验证与动态策略函数，完全映射到合伙开饭馆、老工长审图、大后厨错峰与老司机换挡的生活常理中。
+      </p>
+      <div class="meta-bar">
+        <span>时长：4 集共约 4.5 分钟</span>
+        <span>规格：1280×720 H.264 / AAC MP4</span>
+        <span>制作机制：端到端本地合成（无第三方平台依赖）</span>
+        <span>适用场景：新人冷启动、非技术协作者宣导、制度设计科普</span>
+      </div>
+    </section>
+
+    <div class="nav-cta">
+      <a href="#ep1" class="btn-cta">第 1 集：合伙开饭馆</a>
+      <a href="#ep2" class="btn-cta">第 2 集：老工长新饭碗</a>
+      <a href="#ep3" class="btn-cta">第 3 集：后厨错峰法则</a>
+      <a href="#ep4" class="btn-cta">第 4 集：老司机换挡</a>
+    </div>
+
+    <section id="ep1" class="video-card">
+      <div class="video-header">
+        <h2 class="video-title">第 1 集：《合伙开饭馆：为什么你不信空气积分，却信片尾字幕和老掌柜？》</h2>
+        <span class="video-tag">时长：69 秒</span>
+      </div>
+      <div class="hook-quote">“一锅红烧肉炒糊了，四个合伙人投了三轮票，没有一个人认这个锅。”</div>
+
+      <div class="player-container">
+        <video controls preload="metadata" playsinline poster="videos/ep1-poster.jpg">
+          <source src="videos/ep1-trust-restaurant.mp4" type="video/mp4">
+          您的浏览器暂不支持原生视频播放，请直接下载 MP4 文件观看。
+        </video>
+      </div>
+
+      <div class="analysis-grid">
+        <div class="box-story">
+          <div class="box-head" style="color: #b45309;">🍲 生活故事与现场实况</div>
+          <p style="margin: 0; font-size: 15px; color: #334155; line-height: 1.7;">通过合伙开饭馆的接地气故事，彻底拆解为什么纯代码与匿名代币投票无法建立真正信任。真人兜底是乘法项而非加法项；功劳要像片尾字幕一样永久署名；普通公开账本只往后加、不抹错账（红字冲销），远比复杂区块链更可信。</p>
+          
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 1 · 空气积分翻车现场</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>后厨冒黑烟，一锅焦黑的红烧肉。四个合伙人围着手机，屏幕上投票进度条来回跳，每个人都在摇头摆手。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>信任四要素是乘积关系，不是加法：规则透明、记录可查、利益对齐、真人兜底。真人兜底这一项是零，乘出来就是零。纯代码治理加匿名积分，出了事没有人负责。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 2 · 门口挂真名，墙上刻菜名</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>门口挂着木牌「店长：阿强，吃坏包赔」。墙上一排菜名木刻，每道菜下面刻着创菜大厨的名字。有个黄牛想买提成，被一把推了出去。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>电影片尾的永久署名，加上晋商的身股制：贡献和真人绑定，长期分成，不能转让、不能拿去炒。这就排除了投机和倒卖贡献权的空间。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 3 · 红笔改账，绝不撕页</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>门口贴着当天的账本，有一行被红笔划掉，下面工整地补写了正确金额，旁边签着名。路过的客人驻足看了一眼，点点头。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>会计里的红字冲销，和代码版本记录的只追加日志（Git 的 append-only 历史）是一个道理：错误不抹掉，只追加更正，历史全都可以追溯。所以一本公开、只能往后加的普通账本，就能做到不可篡改，不一定需要区块链。</div>
+        </div>
+        
+        </div>
+        <div class="box-mapping">
+          <div class="box-head" style="color: #15803d;">⚙️ 故事背后被自然实例化的制度原理</div>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14.5px; color: #166534; line-height: 1.75;">
+            <li><strong>信任四要素乘积公式</strong>：规则透明 × 记录可查 × 利益对齐 × 真人兜底。真人兜底为零，总信任直接归零。</li><li><strong>电影片尾字幕与晋商身股</strong>：贡献和真实手艺永久强绑定，长期分红，严禁投机倒卖与黄牛倒手。</li><li><strong>会计红冲与只追加日志 (Append-Only Log)</strong>：错账绝不撕页抹去，只用红笔划销后追加更正。普通公开账本即可实现不可篡改。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="takeaway-bar">
+        <span>★ 核心真理：</span>
+        <span>可信不靠复杂，靠错了也不抹。</span>
+      </div>
+    </section>
+    
+    <section id="ep2" class="video-card">
+      <div class="video-header">
+        <h2 class="video-title">第 2 集：《AI 十秒画完图纸，老工长和老律师靠什么赚十倍的钱？》</h2>
+        <span class="video-tag">时长：67 秒</span>
+      </div>
+      <div class="hook-quote">“AI 十秒钟画完的图纸，挑不出毛病，可你敢照着它开工吗？”</div>
+
+      <div class="player-container">
+        <video controls preload="metadata" playsinline poster="videos/ep2-poster.jpg">
+          <source src="videos/ep2-expert-canary.mp4" type="video/mp4">
+          您的浏览器暂不支持原生视频播放，请直接下载 MP4 文件观看。
+        </video>
+      </div>
+
+      <div class="analysis-grid">
+        <div class="box-story">
+          <div class="box-head" style="color: #b45309;">🍲 生活故事与现场实况</div>
+          <p style="margin: 0; font-size: 15px; color: #334155; line-height: 1.7;">当 AI 把生产成本压缩到零，真正值钱的是承担后果与验证结果的能力。老工长张师傅与李律师既不敲字也不画图，而是故意在图纸里埋设渗水暗坑（金丝雀陷阱）考机器，并把30年踩坑教训做成避坑卡（波兰尼默会知识），像 KTV 点歌一样享受全网永久调用版税。</p>
+          
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 1 · 完美图纸，不敢开工</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>小王盯着电脑上二十页合同和精美的水电图，手悬在「确认施工」按钮上迟迟不敢按。背景里是毛坯房。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>AI 产出的成本几乎降到了零，但验证的成本没有降。稀缺的不再是能生产的人，而是能判断这东西对不对的人。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 2 · 老工长埋暗坑</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>张师傅拿红笔在图纸角落悄悄改了两处水管走向，然后把图交给审图 AI。屏幕显示「通过」，张师傅冷笑一声，在记分板上给 AI 扣了分。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>金丝雀陷阱，也就是埋坑测试：在任务里混入已知答案的暗题，检验审核者是不是真看了。这样可以对抗古德哈特定律（指标一旦变成目标就会被刷）。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 3 · 三十条忌讳避坑卡</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>一叠手写卡片，上面写着「卫生间地漏别贴墙角」之类的忌讳。张师傅把卡片交给李律师整理归档，旁边有个手写的「避坑库」标签。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>波兰尼说的默会知识：行家说不全、教科书里没有的经验，可以通过负样本判例库（专门收集踩过的坑、失败案例）间接沉淀下来。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 4 · 像 KTV 点歌一样拿版税</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>手机弹出通知：「您的忌讳卡第12条被调用3次，到账 ¥36」。张师傅在工地上笑着把手机给徒弟看。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>100 点切蛋糕分账法：总收益切成 100 份，按每份经验实际被调用的次数和贡献比例来分。收益和真实使用量挂钩，不和资历、嗓门挂钩。</div>
+        </div>
+        
+        </div>
+        <div class="box-mapping">
+          <div class="box-head" style="color: #15803d;">⚙️ 故事背后被自然实例化的制度原理</div>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14.5px; color: #166534; line-height: 1.75;">
+            <li><strong>金丝雀陷阱 (Canary Trap) 与对抗性盲测</strong>：在任务中故意注入已知暗坑，严厉打击只应付考试、刷漂亮分的指标异化（古德哈特定律）。</li><li><strong>波兰尼悖论与默会知识 (Tacit Knowledge)</strong>：老师傅说不清道不明的行家手感与避坑忌讳，以负样本判例库沉淀，最具稀缺防灾价值。</li><li><strong>100 点切蛋糕分账模型</strong>：收益与真实使用量挂钩，身股永久沉淀，不靠资历与嗓门。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="takeaway-bar">
+        <span>★ 核心真理：</span>
+        <span>经验被用一次，就分一次钱。</span>
+      </div>
+    </section>
+    
+    <section id="ep3" class="video-card">
+      <div class="video-header">
+        <h2 class="video-title">第 3 集：《500 人业主群为什么永远吵不出结果？治瞎指挥的后厨法则》</h2>
+        <span class="video-tag">时长：65 秒</span>
+      </div>
+      <div class="hook-quote">“小区大门坏了三个月，业主群里吵了三千条语音，没有一条把门修好。”</div>
+
+      <div class="player-container">
+        <video controls preload="metadata" playsinline poster="videos/ep3-kitchen-poster.jpg">
+          <source src="videos/ep3-kitchen-coherence.mp4" type="video/mp4">
+          您的浏览器暂不支持原生视频播放，请直接下载 MP4 文件观看。
+        </video>
+      </div>
+
+      <div class="analysis-grid">
+        <div class="box-story">
+          <div class="box-head" style="color: #b45309;">🍲 生活故事与现场实况</div>
+          <p style="margin: 0; font-size: 15px; color: #334155; line-height: 1.7;">全员平权高频投票只会让噪音淹没主旋律（谱隙消失）。大饭店后厨的错峰法则是破解之道：洗菜、切配、炒菜专人专岗关门干活，整点统一凭独立试吃单（R_verified）交接，主厨定大方向、发现变质一键拉电闸紧急停火。</p>
+          
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 1 · 五百人语音轰炸</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>手机屏幕上一长串红点语音，「99+」不停闪烁。镜头一转，小区大门歪在一边，挂着「待修」的牌子落满了灰。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>全员平权、高频互连的结构里，信号会被噪音淹没。用网络的话说，就是谱隙消失：系统里分不出主旋律，没法收敛到一个结论（Davis-Kahan 定理讲的就是噪音大到一定程度，主方向就不稳定了）。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 2 · 后厨分工，只认试吃条</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>洗菜、切配、炒锅三个工位隔开，各自埋头干活。整点铃一响，切配把一盘菜连同一张盖了章的「试吃合格」小纸条递给炒锅。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>特化胞元：每个单元专精一件事，单元之间不靠闲聊协调，只靠独立的验收凭证（R_verified）交接。整点统一交接是相位协同，用它代替随时开会。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 3 · 主厨定方向，发现变质就拉闸</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>主厨在白板上写下「今日：川菜」。突然一个帮厨举起一块发绿的肉，主厨一把拉下墙上的红色电闸，所有灶火同时熄灭。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>术道分离：方向、价值这类「道」的问题由负责人定，执行细节这类「术」的问题由各岗位自己决定。再加上一个任何时候都能生效的紧急停机通道，这个叫停权不需要投票。</div>
+        </div>
+        
+        </div>
+        <div class="box-mapping">
+          <div class="box-head" style="color: #15803d;">⚙️ 故事背后被自然实例化的制度原理</div>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14.5px; color: #166534; line-height: 1.75;">
+            <li><strong>全员投票失效与谱隙消失 (Spectral Gap Collapse)</strong>：所有人同时发声导致信号被噪音淹没，系统无法收敛到有效决议。</li><li><strong>特化胞元 (Specialized Cells) 与独立验货单 (R_verified)</strong>：单元之间不靠闲聊开会协调，只认独立质检验收凭证。</li><li><strong>相位协同 (Phase Coherence) 与术道分离</strong>：整点交接消灭开会内耗；大方向负责人拍板，具体手艺各工位自主；安全事件一键拉闸停火。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="takeaway-bar">
+        <span>★ 核心真理：</span>
+        <span>大方向一个人拍板，小手艺各自做主，见到危险谁都能叫停。</span>
+      </div>
+    </section>
+    
+    <section id="ep4" class="video-card">
+      <div class="video-header">
+        <h2 class="video-title">第 4 集：《红绿灯变了就换挡：团队从 5 个熟人变成 500 个陌生人，规则怎么跟着变？》</h2>
+        <span class="video-tag">时长：64 秒</span>
+      </div>
+      <div class="hook-quote">“五个人靠交情就能办成的事，到了五百人，交情就是最先失灵的那个零件。”</div>
+
+      <div class="player-container">
+        <video controls preload="metadata" playsinline poster="videos/ep4-gear-poster.jpg">
+          <source src="videos/ep4-gear-shift-policy.mp4" type="video/mp4">
+          您的浏览器暂不支持原生视频播放，请直接下载 MP4 文件观看。
+        </video>
+      </div>
+
+      <div class="analysis-grid">
+        <div class="box-story">
+          <div class="box-head" style="color: #b45309;">🍲 生活故事与现场实况</div>
+          <p style="margin: 0; font-size: 15px; color: #334155; line-height: 1.7;">小团队靠一张共享表就能跑通，人一多必然撞上四大现实坎。老司机看仪表盘指示灯自动换挡（加盲题、三人陪审、担保准入、正规协会法人外壳）；同时设置空调温控般的滞回缓冲带，彻底消灭制度朝令夕改与频繁折腾。</p>
+          
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 1 · 五个熟人一张表</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>小出租屋里五个人围着一台电脑，屏幕上是一张共享表格，大家边吃外卖边打勾，气氛轻松。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>小规模阶段，信任靠熟人关系和公开记录就够了，制度成本最低。这时候过度设计规则，反而是负担。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 2 · 人一多，撞上四道坎</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>分屏四格：一份花哨但空洞的报告；老掌柜趴在一堆审批单上睡着；陌生头像在群里疯狂刷「已完成」；一张写着「首笔海外付款」的转账单。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>四大现实瓶颈的因果链：质量造假（审核被刷分）→ 审核人过载（瓶颈集中在一个人身上）→ 身份冒用（陌生人涌入）→ 真钱外流（法律和资金风险）。前一道坎没处理好，会放大后一道。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 3 · 老司机看仪表盘换挡</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>汽车仪表盘上四个指示灯，分别标着「漏检率」「掌柜负荷」「刷单数」「首笔真钱」。每亮一个灯，老司机就换一次挡，屏幕上弹出对应的新规则卡片。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>状态到策略的映射，也就是策略函数 π：系统读取当前指标，自动选出对应的规则组合。漏检率高就加盲测，负荷高就设三人陪审，刷单多就要求担保准入，要发真钱就走法人合规。</div>
+        </div>
+        
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">幕 4 · 空调 26 度停，28 度启</div>
+          <div style="font-size: 14.5px; color: #475569; margin-bottom: 6px;"><strong>现场：</strong>空调遥控器特写：温度降到 26 度，空调停；回升到 28 度，空调才启动。旁边对比画面是另一台空调在 27 度上下疯狂开关、嗡嗡作响。</div>
+          <div style="font-size: 14.5px; color: #166534; margin-bottom: 6px;"><strong>机制：</strong>滞回控制：升级规则和降级规则用两条不同的门槛，中间留出缓冲带，防止指标在临界点附近抖动时，规则跟着来回横跳。</div>
+        </div>
+        
+        </div>
+        <div class="box-mapping">
+          <div class="box-head" style="color: #15803d;">⚙️ 故事背后被自然实例化的制度原理</div>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14.5px; color: #166534; line-height: 1.75;">
+            <li><strong>四大现实瓶颈因果链</strong>：审核刷分 ➜ 审核过载 ➜ 身份冒用 ➜ 资金法务风险，前一道未解决会放大后一道。</li><li><strong>动态状态策略函数 π(World State)</strong>：根据系统客观征兆自动调整制度，而非一套僵化死法。</li><li><strong>滞回防抖控制 (Hysteresis Band)</strong>：升档降档设置缓冲区间（26℃停、28℃启），避免制度朝令夕改与反复横跳。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="takeaway-bar">
+        <span>★ 核心真理：</span>
+        <span>规则要有缓冲区，才不会朝令夕改。</span>
+      </div>
+    </section>
+    
+    <section class="video-card" style="margin-top: 54px;">
+      <h2 style="margin: 0 0 16px; font-size: 22px;">全景对照：生活常识 × 制度原理 × 技术机制</h2>
+      <p style="color: var(--muted); margin-bottom: 20px;">
+        为什么说“最好的制度往往早就藏在菜市场、老饭馆与工地上”？下表展示了全套组织理论与密码学概念是如何从生活大白话中长出来的：
+      </p>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">生活常识与老办法</th>
+            <th style="width: 35%;">故事中的具体做法</th>
+            <th style="width: 40%;">对应的新制度与底层技术原理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>店长真名挂门口</strong></td>
+            <td>吃坏肚子店长包赔，出了事有明确真人负责</td>
+            <td><strong>信任四要素乘积</strong>：真人兜底为零则系统可信度直接归零。绝不能拿匿名代码取代人身法律责任。</td>
+          </tr>
+          <tr>
+            <td><strong>大厨招牌菜刻墙上</strong></td>
+            <td>卖一份拿一份提成，终身有效，严禁倒卖转让给黄牛</td>
+            <td><strong>电影片尾永久署名 + 晋商身股</strong>：只认真实手艺与交付，沉淀不可剥夺的声誉权重点数，规避二级市场炒作。</td>
+          </tr>
+          <tr>
+            <td><strong>红笔改账不撕页</strong></td>
+            <td>账本算错只能红笔划掉在下方更正并签名，绝不撕页涂抹</td>
+            <td><strong>会计红冲与只追加日志 (Append-Only Log)</strong>：普通公开账本（如 Git 历史）即可实现不可篡改审计，无需昂贵区块链。</td>
+          </tr>
+          <tr>
+            <td><strong>老工长故意埋暗坑</strong></td>
+            <td>在水管拐弯处暗设2个渗水点考审图 AI，漏抓直接扣分</td>
+            <td><strong>金丝雀陷阱 (Canary Trap) 与对抗性盲测</strong>：破解指标异化（古德哈特定律）与 AI 刷漂亮分，确保审核真实有效。</td>
+          </tr>
+          <tr>
+            <td><strong>三十条装修忌讳卡</strong></td>
+            <td>老工长把外行看不出、一装就返工的教训沉淀成避坑卡</td>
+            <td><strong>波兰尼默会知识 (Tacit Knowledge) 与负样本判例库</strong>：行家无法形式化编码的手感通过负样本沉淀，具备极高防灾价值。</td>
+          </tr>
+          <tr>
+            <td><strong>KTV 点歌拿版税</strong></td>
+            <td>全网只要有人用 AI 审图调用了避坑卡，老工长自动分润</td>
+            <td><strong>100 点切蛋糕分账法</strong>：总收益按真实使用量与贡献权重（45掌柜+15验货+5品味）自动结算，长期收益归行家。</td>
+          </tr>
+          <tr>
+            <td><strong>500人业主群吵翻天</strong></td>
+            <td>人人发60秒语音投票，嗓门大的刷屏，大门3个月修不好</td>
+            <td><strong>全员投票失效与谱隙消失 (Spectral Gap Collapse)</strong>：高频全连通导致噪音吞没信号，系统无法自发收敛至有效均衡。</td>
+          </tr>
+          <tr>
+            <td><strong>大后厨整点试吃条</strong></td>
+            <td>切菜组、炒菜组关门干活不闲聊，整点凭质检验收单交接</td>
+            <td><strong>特化胞元 (Specialized Cells) 与独立验货单 (R_verified)</strong>：相位协同消灭无效开会，只认严谨的独立交付验收证明。</td>
+          </tr>
+          <tr>
+            <td><strong>主厨定菜单拉电闸</strong></td>
+            <td>主厨定川菜粤菜大方向；一旦发现食材变质，一键拉闸停火</td>
+            <td><strong>术道分离与吸收态急停 (Absorbing Stop)</strong>：战略方向归主理人裁定，手艺归工位自主；安全红线不可逆一键关停。</td>
+          </tr>
+          <tr>
+            <td><strong>老司机看仪表盘换挡</strong></td>
+            <td>漏检报警加盲题、掌柜过载设陪审、刷单多了老带新、出海办执照</td>
+            <td><strong>动态策略函数 π(World State)</strong>：根据四大瓶颈指标客观切换制度档位，避免“一刀切”的僵化制度。</td>
+          </tr>
+          <tr>
+            <td><strong>空调 26℃停 28℃启</strong></td>
+            <td>温控预留 2℃ 缓冲带，防止在 27℃ 临界点频繁启停烧毁电机</td>
+            <td><strong>滞回防抖控制 (Hysteresis Band)</strong>：升档与降档设定不同阈值，防止制度规则朝令夕改、团队反复横跳折腾。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 28px; padding: 20px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;">
+        <h3 style="margin: 0 0 10px; color: #1e40af; font-size: 17px;">深度研读指引</h3>
+        <p style="margin: 0 0 14px; font-size: 15px; color: #1e3a8a;">
+          若您希望进一步查阅严谨的数学推导、状态机定义、32 项跨学科本体论以及八大行业具体分工矩阵，请点击以下完整论述：
+        </p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="beyond-blockchain-zh.html" class="btn-cta" style="background: #1e40af;">阅读《走出区块链迷思：非链信用与极简架构》</a>
+          <a href="decentralized-org-zh.html" class="btn-cta" style="background: #047857;">阅读《去中心化组织的数学本质与阶梯晋升蓝图》</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
