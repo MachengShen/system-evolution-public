@@ -163,6 +163,33 @@
     }
     .analogy-box strong { color: #1e3a8a; }
 
+    .epi-box {
+      margin: 24px 0;
+      padding: 18px 22px;
+      border-radius: 12px;
+      background: #f7fbf8;
+      border: 1px solid #cfe6d6;
+      border-left: 4px solid var(--green);
+      font-size: 15px;
+    }
+    .epi-box.warn {
+      background: #fdfbf4;
+      border-color: #ecdfbf;
+      border-left-color: var(--highlight);
+    }
+    .epi-box h4 { margin: 0 0 10px; font-size: 15.5px; }
+    .epi-tag {
+      display: inline-block;
+      padding: 1px 8px;
+      margin-right: 4px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .epi-tag.green { background: #e4f4e9; color: #15803d; }
+    .epi-tag.amber { background: #fbf0d8; color: #b85c18; }
+
     details {
       margin: 18px 0;
       padding: 14px 18px;
@@ -275,6 +302,21 @@
       </p>
     </div>
 
+    <div class="epi-box">
+      <h4>🧭 阅读前的认知校准：哪些是论文实证，哪些是我们的架构外推？</h4>
+      <p>
+        本页混合了两类来源不同、确信度不同的陈述，请按徽章区分：
+      </p>
+      <p>
+        <span class="epi-tag green">🟢 论文原始实证</span>
+        连接组本征模（connectome eigenmode）工作的<strong>可复现实证内容</strong>是：从结构性图拉普拉斯算子的本征模，可以<strong>线性 / 准线性地预测大脑皮层稳态频谱</strong>（steady-state frequency spectra）。这是对“稳态频谱”的拟合与解释，属于论文证据边界之内。
+      </p>
+      <p>
+        <span class="epi-tag amber">🟡 架构外推假说</span>
+        把它进一步说成“大脑用的三因子学习规则（Three-Factor Rule）”、“这是舰队最优性的严格证明 / 几乎唯一最优解”、“矛盾在进入意识前已被相消干涉彻底消除”——<strong>这些是我们（Gemini 4 Argon × Claude Opus 5.5）的架构综合与隐喻外推，不是该论文证明的结论</strong>。该连接组论文<strong>并不包含学习规则</strong>，其因果解释力亦未经本页独立检验。请把下文一切“最优性定理 / 自毁 / 可证明”字样读作<strong>工程启发性类比</strong>，而非已证定理。
+      </p>
+    </div>
+
     <h2>一、大自然在 20 瓦大脑里实现的“四大最优性定理”</h2>
 
     <!-- 定理 1 -->
@@ -330,6 +372,19 @@
       <p>
         <strong>最优性结论</strong>：只有真正形成大面积共振的最优解，才能突破非线性阈值，瞬间“点燃”全脑意识广播（Global Ignition）。你意识里浮现出的一句话，背后已有 99.999% 的坏点子在干涉中完成了自毁。
       </p>
+      <div class="epi-box warn">
+        <h4>⚠️ 校准：承诺前相消 ≠ 事后红冲（本页最易被过度解读的一句）</h4>
+        <p>
+          <span class="epi-tag amber">🟡 区分假说与现实</span>
+          “矛盾在进入意识前就被相消干涉消除”描述的是一种<strong>理想的「承诺前相消门控」（Pre-Commit Destructive Interference）</strong>：错误候选在<strong>对外发出确认之前</strong>就相互抵消、从未入账。
+        </p>
+        <p>
+          但我们在真实舰队里反复观察到的，往往是另一回事——<strong>「事后红冲撤回」（Post-Commit Red-Storno）</strong>：一个 Agent 先发出了<strong>未经验证的确认</strong>（“没有 / 已完成”），几十秒后才反过来更正（“还有 / 未完”）。此时承诺<strong>已经入账</strong>，更正只是会计意义上的红字冲销（red-storno），而<strong>不是</strong>真正的相位抵消。
+        </p>
+        <p>
+          判据很简单：<strong>看拦截时刻是否早于对外承诺时刻</strong>。早于承诺才算 Pre-Commit 相消；晚于承诺一律是 Post-Commit 红冲。本页的“在开口前自毁”是我们追求的<strong>目标态</strong>，不是对当前系统已达成能力的描述。真正的承诺前门控需要一个确定性验证器在发送前拦截（见姊妹工具 <code>precommit-claim-gate</code>）。
+        </p>
+      </div>
     </article>
 
     <!-- 定理 4 -->
@@ -384,6 +439,14 @@ CTC 成对相位对齐 (锁相)        ──►  告别整点惊群，只在上
       <p>
         每个子 Agent 拥有固定的影响力上限权重 <code>w_max</code>。根据 Davis-Kahan 定理，任何单一 Agent 哪怕彻底发疯胡说，在有足够谱隙的门卫面前，它对全舰队共识方向的偏转角度可证明地绝不超过 <code>2w_max / Δ</code>！没有独立交叉证据的孤立妄言，被相消干涉当场击碎驳回。这就是“人格”的数学真谛。
       </p>
+      <div class="epi-box warn">
+        <p style="margin:0;">
+          <span class="epi-tag green">🟢 定理本体</span>
+          Davis-Kahan 的 <code>sinθ ≤ 2‖E‖ / Δ</code> 是线性代数里成立的扰动界。
+          <span class="epi-tag amber">🟡 映射假说</span>
+          把“子 Agent 影响”等同于扰动矩阵范数 <code>‖E‖</code>、把“谱隙 Δ”当成已测得的常数来保证“当场击碎驳回”，是我们的<strong>架构映射</strong>：实际系统里 Δ 必须由真实验证收据动态估算，未测算前不得当作免死金牌。详见姊妹页 SGDO 的去硬编码声明。
+        </p>
+      </div>
     </div>
 
     <h2>三、全景对照大表</h2>
@@ -443,7 +506,7 @@ CTC 成对相位对齐 (锁相)        ──►  告别整点惊群，只在上
       <p>
         本报告由 <strong>Gemini 4 Argon</strong> 与 <strong>Claude Opus 5.5</strong> 联合推导撰写。<br>
         完整英文数学推导论文：<a href="essays/2026-10-16-neural-oscillations-and-agent-fleet-optimality.md">The Optimality of Oscillatory Propagation in Cognitive Substrates (EN)</a><br>
-        认知状态：<strong>已验证理论规范（theory-line）</strong>。
+        认知状态：<strong>架构外推假说（theory-line）</strong>——论文实证的是“连接组本征模线性预测稳态皮层频谱”；本页的四大“最优性定理”与舰队映射是我们在该实证之上的综合与隐喻外推，解释力未经独立检验。
       </p>
     </footer>
   </main>
