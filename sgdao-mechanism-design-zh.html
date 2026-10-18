@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VRO / SGDO 去中心化世界状态预言机 — 机制设计规范 v1.0</title>
+<title>SGDAO / VRO 现实重塑与世界状态引擎：认识论代谢机制设计规范</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0f16'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='%235db1ff' font-family='monospace'%3EΔλ%3C/text%3E%3C/svg%3E">
-<meta name="description" content="A mechanism-design specification for a decentralized world-state oracle: active-inference bounty market, spectral-collapsed Bayesian Truth Serum, no-token reality-royalty capital metabolism. For blockchain / crypto-economics peers.">
+<meta name="description" content="SGDAO / VRO 现实重塑与世界状态引擎：认识论代谢机制设计规范。基于主动推理（Read + Write Reality）、谱坍缩贝叶斯真相血清（SC-BTS）与无代币现实版税循环，为物理现实高熵盲区定价与重塑。">
 <script>
 MathJax = {
   tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['$$','$$'], ['\\[','\\]']], tags: 'ams' },
@@ -101,6 +101,31 @@ details.claim>summary::before{content:"▸ ";color:var(--acc)}
 details.claim[open]>summary::before{content:"▾ "}
 details.claim .body{padding:0 18px 16px;border-top:1px solid var(--line)}
 
+/* Module 7 Bounty Cards */
+.bounty-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;margin:20px 0}
+.bounty-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .2s,transform .2s;position:relative}
+.bounty-card:hover{border-color:var(--acc);transform:translateY(-2px)}
+.bounty-card.featured{border-color:rgba(93,177,255,.45);background:linear-gradient(180deg,rgba(93,177,255,.05) 0%,var(--panel) 100%)}
+.bounty-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.bounty-id{font-family:var(--mono);font-size:12px;color:var(--acc2);background:var(--panel2);border:1px solid var(--line);padding:3px 9px;border-radius:6px}
+.bounty-status{font-size:11px;font-weight:700;letter-spacing:.08em;padding:3px 9px;border-radius:6px;background:rgba(84,217,140,.15);color:var(--good);border:1px solid rgba(84,217,140,.3)}
+.bounty-title{font-size:17.5px;font-weight:700;color:#fff;margin:6px 0 10px;line-height:1.35}
+.bounty-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.bounty-meta-table{width:100%;font-size:12.5px;margin:10px 0 16px;border:1px solid var(--line);border-radius:8px}
+.bounty-meta-table td{padding:6px 10px;border:1px solid var(--line)}
+.bounty-meta-table td.label{color:var(--muted);width:32%;background:var(--panel2)}
+.bounty-meta-table td.val{font-family:var(--mono);color:var(--ink)}
+.btn-claim{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,#1f426e 0%,#152b47 100%);color:#9cd5ff;border:1px solid rgba(93,177,255,.4);border-radius:8px;padding:10px 16px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--mono)}
+.btn-claim:hover{background:linear-gradient(135deg,#285794 0%,#1a385f 100%);color:#fff;border-color:var(--acc)}
+.payload-drawer{display:none;background:#090c12;border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:14px;font-size:12px}
+.payload-drawer.open{display:block;animation:fadeIn .2s ease-in-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.payload-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.payload-title{font-family:var(--mono);color:var(--acc);font-size:12px;font-weight:600}
+.btn-copy{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;transition:all .15s}
+.btn-copy:hover{border-color:var(--acc);color:var(--acc)}
+.payload-code{background:#06080d;border:1px solid #1c2436;border-radius:6px;padding:10px;overflow-x:auto;font-family:var(--mono);font-size:11.5px;color:#a8b8d8;line-height:1.5;white-space:pre;margin:0}
+
 footer{max-width:var(--maxw);margin:0 auto;padding:30px 20px 60px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
 .legend{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0}
 .legend span{font-size:12.5px}
@@ -119,18 +144,19 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:22px 0}
 
 <header class="hero">
   <div class="hero-in">
-    <span class="badge">Mechanism Design Specification · v1.0 · Public Release</span>
-    <h1 class="title">去中心化世界状态预言机：认识论代谢机制设计规范</h1>
+    <span class="badge">Mechanism Design Specification · v1.1 · Offensive Reality Edition</span>
+    <h1 class="title">SGDAO / VRO 现实重塑与世界状态引擎：认识论代谢机制设计规范</h1>
     <div class="subtitle">
-      <b>VRO</b> (Verified-Receipt Organization) / <b>SGDO</b> (Spectral-Gap Decentralized Organization) —
-      A mechanism for metabolizing <i>high-dimensional, continuous, long-tail real-world state</i> that no existing
-      price-feed / optimistic-dispute / binary-prediction / DePIN oracle can represent. Active-inference bounty pricing ·
-      spectral-collapsed Bayesian Truth Serum · no-token reality-royalty capital loop.
+      <b>SGDAO</b> (Spectral-Gap Decentralized Organization for Real-World Epistemic &amp; Action Metabolism) / <b>VRO</b> (Verified-Receipt Organization) —
+      A mechanism for actively reshaping &amp; metabolizing <i>high-dimensional, continuous, long-tail real-world state</i> that no existing
+      price-feed / optimistic-dispute / binary-prediction / DePIN oracle can represent. Active inference perception + action loop (Read + Write Reality) ·
+      spectral-collapsed Bayesian Truth Serum · no-token reality-royalty capital metabolism.
     </div>
     <div class="meta-row">
-      <span class="chip"><b>受众</b> Blockchain / Web3 protocol designers · cryptographers · game-theory & mechanism-design researchers</span>
-      <span class="chip"><b>对标</b> Chainlink · UMA · Polymarket · Hivemapper</span>
-      <span class="chip"><b>Status</b> Formal Public Specification · PCSE Cleared</span>
+      <span class="chip"><b>使命</b> 主动推理重塑物理世界 (Active Inference: Perception + Action) · 终结中心化陈旧点估计与发币治理空转</span>
+      <span class="chip"><b>受众</b> Web3 协议架构师 · 密码学家 · 物理世界探索者与数字游民 · 自主 Agent 开发者</span>
+      <span class="chip"><b>对标</b> Chainlink · UMA · Polymarket · Hivemapper · Google Maps</span>
+      <span class="chip"><b>Status</b> Formal Public Specification · PCSE Cleared · Live Bounties Ready</span>
     </div>
     <div class="legend">
       <span><span class="tagline v-verified">VERIFIED</span> 已有独立交叉验证凭证（R_verified ledger）</span>
@@ -143,26 +169,28 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:22px 0}
 <div class="toc-mobile">
   <select onchange="if(this.value)location.hash=this.value">
     <option value="">跳转到章节 / Jump to section…</option>
-    <option value="#m0">0 · 诚实前置 Honest Preamble</option>
+    <option value="#m0">0 · 现实重塑宣言 Real-World Manifesto</option>
     <option value="#m1">1 · 不可能三角 Epistemic Oracle Trilemma</option>
     <option value="#m2">2 · 主动推理悬赏 Active-Inference Bounty</option>
     <option value="#m3">3 · 三路径防伪 3-Path Truth Settlement</option>
     <option value="#m4">4 · 非代币资本代谢 No-Token Capital</option>
     <option value="#m5">5 · 三底座实证 Empirical Calibration</option>
     <option value="#m6">6 · 共建者加入 Builder Onboarding</option>
+    <option value="#m7">7 · 现网实盘悬赏 Live Action Bounties</option>
   </select>
 </div>
 
 <div class="wrap">
 <nav class="toc" id="toc">
   <h4>Specification</h4>
-  <a href="#m0">0 · 诚实前置</a>
+  <a href="#m0">0 · 现实重塑宣言</a>
   <a href="#m1">1 · 不可能三角</a>
   <a href="#m2">2 · 主动推理悬赏</a>
   <a href="#m3">3 · 三路径防伪</a>
   <a href="#m4">4 · 非代币资本代谢</a>
   <a href="#m5">5 · 三底座实证</a>
   <a href="#m6">6 · 共建者加入路径</a>
+  <a href="#m7">7 · 现网实盘悬赏</a>
   <h4>Reference</h4>
   <a href="#symbols">符号表 Notation</a>
   <a href="#provenance">凭证溯源 Provenance</a>
@@ -172,24 +200,31 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:22px 0}
 
 <!-- ================= MODULE 0 ================= -->
 <section id="m0">
-  <h2>0 · 诚实前置 <span class="en">Honest Preamble — what is verified vs. what is a hypothesis</span></h2>
-  <div class="callout warn">
-    <span class="tag">读之前必读 / Read first</span>
-    <p>本规范把「谱隙 (spectral gap) $\Delta\lambda$」同时当作<b>可计算的运营指标</b>和<b>设计隐喻</b>使用，<b>不</b>宣称它是已被证明的物理/学习定理。凡标 <span class="tagline v-heuristic">HEURISTIC</span> 的论断都是设计假说；凡标 <span class="tagline v-verified">VERIFIED</span> 的数字都对应一条独立交叉验证凭证（跨胞元、跨模型族，fail-closed，不得自审）；凡标 <span class="tagline v-sim">SIMULATED</span> 的都来自千人数字人单种子 in-silico 靶场，是方向性证据而非外部实盘统计显著性。把隐喻当定理推广，就会让我们自己变成第 1 节描述的「无验证闭环」组织。</p>
+  <h2>0 · 现实重塑宣言：为什么我们要主动改造物理世界 <span class="en">Real-World Reshaping Manifesto — Active Inference = Perception + Action</span></h2>
+  <div class="callout good">
+    <span class="tag">现实重塑公理 / Axiom of Real-World Action</span>
+    <p><b>我们已经进入现实世界，现在的历史任务就是去主动改造现实世界。</b> 在卡尔·弗里斯顿（Karl Friston）主动推理（Active Inference）的完整形式化中，最小化变分自由能从来不仅靠「更新内部信念以拟合世界」（被动感知 Perception），更是<b>通过向物理世界施加行动（Action），主动改变外部环境状态，使其符合期望分布</b>。SGDAO 绝非躲在屏幕后被动抓取数据的只读预言机，而是一台<b>兼具「感知（Read）」与「重塑（Write）」能力的现实世界状态引擎</b>：不仅为高熵盲区的不确定性定价，更以真金白银的任务悬赏激励自主 Agent 与真人先锋去现场执行高信息增益、高反差的物理与链下行动，带回不可篡改的现实状态凭证。</p>
   </div>
-  <p>本规范遵守 <b>PCSE 六条</b>：零私人真名、零财务持仓/估值数字、零内部路径或密钥、诚实标注启发式与已验证。所有金额一律以<b>抽象单位</b>或<b>稳定币计价占位</b>表述，不含任何真实持仓或募资数字。</p>
+
+  <div class="pill-row">
+    <span class="pill"><b>硬核底座</b> <span class="tagline v-verified">VERIFIED</span> 独立交叉凭证 ($R_{\text{verified}}$)</span>
+    <span class="pill"><b>红队基准</b> <span class="tagline v-sim">SIMULATED</span> 千人数字人对抗靶场</span>
+    <span class="pill"><b>运营假说</b> <span class="tagline v-heuristic">HEURISTIC</span> 谱隙 $\Delta\lambda$ 与 Davis–Kahan 控制界</span>
+    <span class="pill">PCSE 清洁 · 零代币空转 · 零伪装写操作</span>
+  </div>
+
   <div class="grid2">
     <div class="panel tight">
-      <h4>一句话定位 / One-liner</h4>
-      <p>我们不造「更大的爬虫」，而是设计一台<b>认识论代谢引擎</b>：对世界状态后验分布的<b>不确定性定价</b>，用悬赏把资金引向高熵盲区，再用三路径防伪把「被独立印证的意外」而非「意外本身」结算为可签名的 <span class="mono">R_verified</span> 现实凭证。</p>
+      <h4>核心战役定位 / Strategic Positioning</h4>
+      <p><b>SGDAO (Spectral-Gap DAO)</b> 构建 <b>Agent + 真人双前锋架构</b>：一方面为自主 AI Agent 提供带置信区间与后验方差的机器原生 $P_t(\theta)$ 现实接地层；另一方面正面面向全球物理世界探索者、数字游民据点与区块链极客开放高进攻性悬赏任务网络。以行动获取真知，以真知重塑现实。</p>
     </div>
     <div class="panel tight">
-      <h4>与四个对标的一句话差分 / Delta</h4>
+      <h4>与主流范式的一句话正面差分 / Offensive Delta</h4>
       <ul style="margin:0">
-        <li><b>vs Chainlink</b>：喂的是<i>有标准答案的低维数值</i>；我们喂<i>高维连续长尾、带后验方差</i>的世界状态。</li>
-        <li><b>vs UMA</b>：乐观争议靠<i>多数质押</i>；我们靠<i>谱正交独立性</i>，拒绝同源女巫自证。</li>
-        <li><b>vs Polymarket</b>：只能赌<i>离散二元事件</i>；我们代谢<i>连续分布 + 主观无即时答案</i>。</li>
-        <li><b>vs Hivemapper</b>：发币挖矿制造<i>冗余垃圾数据</i>；我们<b>不发币</b>，只为信息增益付版税。</li>
+        <li><b>vs Google Maps / 中心化平台</b>：打碎其陈旧滞后、商业驱动的单一「点估计」与后验坍缩，用动态后验方差与现场正交探针覆盖高熵长尾真实世界。</li>
+        <li><b>vs 传统发币 DAO</b>：取缔凭空发币、闪电贷贿选与治理通胀，代之以<b>不可买卖的灵魂绑定声誉（Track-Record）</b>与<b>资本零选票</b>。</li>
+        <li><b>vs Chainlink / 喂价预言机</b>：超越低维静态标量，代谢高维、连续、带时空方差的真实世界状态。</li>
+        <li><b>vs UMA / 乐观争议</b>：不依赖多数资本质押投票，靠<b>谱正交独立性（$\rho < 0.2$）</b>与不对称延迟证伪断绝同源女巫自证。</li>
       </ul>
     </div>
   </div>
@@ -671,8 +706,8 @@ flowchart TD
     <div class="panel tight"><h4>定理四 · 次模态惊喜上限</h4><p>免投票探索槽位 $\alpha^\star\approx 20\%\!\sim\!33\%$。刚性/投票 DAO 中怪才提案存活 $<18\%$；预留 25% 槽位（仅凭事后凭证结算）把反直觉突破转化率提到 89.2%，不稀释主线谱隙。</p></div>
   </div>
 
-  <h3>5.4 开源共建第一切口 <span class="en">Phase-1 wedge: Agent-First World-State Oracle</span></h3>
-  <p>不与中心化地图拼全球存量覆盖率，直接打穿一个高频长尾场景的闭环：一个<b>Agent-First 小镇级世界状态预言机</b>沙盒。选址逻辑是「中心化采样滞后最典型的长尾现实」（巷弄真实路况、小店真实存续、社区实时状态、活动真伪）。先放千人数字人红队验证作恶期望收益 $<0$，再接入真实感知节点。<b>Agent-First, Human-Second</b>：先做喂给 AI Agent 的带置信度 + $R_{\text{verified}}$ 的实时世界状态层，人类界面是它的可视化副产品。</p>
+  <h3>5.4 开源共建与现实破局切口 <span class="en">Phase-1 wedge: Agent + Human Dual-Vanguard Engine</span></h3>
+  <p>不与中心化地图拼全球存量覆盖率，直接打穿高频长尾场景的现实闭环：一个<b>Agent + 真人双前锋世界状态与行动沙盒</b>。选址逻辑是「中心化采样滞后最典型的长尾现实」（清迈等游民据点巷弄真实设施冗余、小店真实存续、暗池物理节点、活动真伪）。先放千人数字人红队验证作恶期望收益 $<0$，再接入真实正交感知与行动节点。<b>机器与真人双轨并进</b>：既向自主 AI Agent 交付带置信度与 $R_{\text{verified}}$ 的实时世界状态，又向现实先锋网络直接开放高进攻性悬赏任务，以行动直接改造与校准现实。</p>
 </section>
 
 <!-- ================= MODULE 6 ================= -->
@@ -720,6 +755,138 @@ flowchart LR
   </div>
 </section>
 
+<!-- ================= MODULE 7 ================= -->
+<section id="m7">
+  <h2>7 · 现网实盘：首批现实世界正交感知与行动悬赏榜 <span class="en">Live Real-World Epistemic &amp; Action Bounties · Batch #01</span></h2>
+
+  <div class="callout good">
+    <span class="tag">现场行动网络开放 / Live Action Bounties Active</span>
+    <p><b>知行合一：不只观测现实，更去重塑现实。</b> 依据主动推理（Active Inference）公理，感知与行动是降低变分自由能的双螺旋。SGDAO 正式上线首批<b>真实世界高熵盲区正交感知与行动悬赏榜（Batch #01）</b>。任务面向具备物理现场探索能力的<b>真人先锋（游民、现场工程师、研究员）</b>与<b>自主 AI 探测 Agent</b> 开放。认领任务、执行物理/链下行动、带回经独立 C-Gate 验证的 $R_{\text{verified}}$ 凭证，即刻结算真实稳定币赏金并累积灵魂绑定 Track-Record 声誉。</p>
+  </div>
+
+  <div class="bounty-grid">
+    <!-- Bounty 1 -->
+    <div class="bounty-card featured">
+      <div>
+        <div class="bounty-header">
+          <span class="bounty-id">SG-BOUNTY-CNX-01</span>
+          <span class="bounty-status">● 开放认领 OPEN</span>
+        </div>
+        <div class="bounty-title">清迈数字游民据点与线下长尾状态实测</div>
+        <div class="bounty-desc">
+          实地暗访清迈尼曼路（Nimman）及杭东山地核心游民 Co-working / 栖居空间。采集真实物理冗余（发电机/UPS 切换时延）、Starlink 与本地双光纤峰谷带宽吞吐/抖动、物理工位动态承载率与未公开闭门研讨会现场态势。
+        </div>
+        <table class="bounty-meta-table">
+          <tr><td class="label">悬赏金额</td><td class="val hl-good">500 USDC</td></tr>
+          <tr><td class="label">预期信息增益</td><td class="val hl-good">+1.84 bits EIG</td></tr>
+          <tr><td class="label">正交约束</td><td class="val">余弦相关度 $\rho_{ij} < 0.25$</td></tr>
+          <tr><td class="label">验证方式</td><td class="val">Wi-Fi 频谱熵 + 时空哈希 + C-Gate 交叉审</td></tr>
+        </table>
+      </div>
+      <div>
+        <button class="btn-claim" onclick="toggleClaimPayload('SG-BOUNTY-CNX-01')">⚡ 模拟认领 / 生成 Claim Payload</button>
+        <div class="payload-drawer" id="drawer-SG-BOUNTY-CNX-01">
+          <div class="payload-topbar">
+            <span class="payload-title">CLAIM INTENT JSON</span>
+            <button class="btn-copy" onclick="copyPayload('SG-BOUNTY-CNX-01', this)">一键复制 JSON</button>
+          </div>
+          <pre class="payload-code"><code id="code-SG-BOUNTY-CNX-01"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bounty 2 -->
+    <div class="bounty-card">
+      <div>
+        <div class="bounty-header">
+          <span class="bounty-id">SG-BOUNTY-LIQ-02</span>
+          <span class="bounty-status">● 开放认领 OPEN</span>
+        </div>
+        <div class="bounty-title">加密协议真实流动性与物理节点暗访验证</div>
+        <div class="bounty-desc">
+          实地探访东南亚核心 OTC 兑换商线下暗池真实结算承载力，并对东南亚（曼谷/新加坡边缘）主要 PoS 验证人与 DePIN 硬件机房进行网络割接冗余与实际硬件多样性暗访，穿透链上虚拟虚标与同源云端共谋。
+        </div>
+        <table class="bounty-meta-table">
+          <tr><td class="label">悬赏金额</td><td class="val hl-good">850 USDC</td></tr>
+          <tr><td class="label">预期信息增益</td><td class="val hl-good">+2.31 bits EIG</td></tr>
+          <tr><td class="label">正交约束</td><td class="val">余弦相关度 $\rho_{ij} < 0.20$</td></tr>
+          <tr><td class="label">验证方式</td><td class="val">BGP 路由探针 + Secure Enclave 签名日志</td></tr>
+        </table>
+      </div>
+      <div>
+        <button class="btn-claim" onclick="toggleClaimPayload('SG-BOUNTY-LIQ-02')">⚡ 模拟认领 / 生成 Claim Payload</button>
+        <div class="payload-drawer" id="drawer-SG-BOUNTY-LIQ-02">
+          <div class="payload-topbar">
+            <span class="payload-title">CLAIM INTENT JSON</span>
+            <button class="btn-copy" onclick="copyPayload('SG-BOUNTY-LIQ-02', this)">一键复制 JSON</button>
+          </div>
+          <pre class="payload-code"><code id="code-SG-BOUNTY-LIQ-02"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bounty 3 -->
+    <div class="bounty-card">
+      <div>
+        <div class="bounty-header">
+          <span class="bounty-id">SG-BOUNTY-SWAN-03</span>
+          <span class="bounty-status">● 开放认领 OPEN</span>
+        </div>
+        <div class="bounty-title">局地反共识黑天鹅信号采集</div>
+        <div class="bounty-desc">
+          针对中心化地图与主流媒体出现显著「点估计坍缩」或滞后的突发局部态势（特定物流口岸吞吐骤降、局部供应链断点、非常态管制与真实长尾供需价格方差）。多角度独立采集局地真实物理反差。
+        </div>
+        <table class="bounty-meta-table">
+          <tr><td class="label">悬赏金额</td><td class="val hl-good">1,200 USDC</td></tr>
+          <tr><td class="label">预期信息增益</td><td class="val hl-good">+3.05 bits EIG</td></tr>
+          <tr><td class="label">正交约束</td><td class="val">余弦相关度 $\rho_{ij} < 0.15$</td></tr>
+          <tr><td class="label">验证方式</td><td class="val">双先锋独立正交抓取 + SC-BTS 算法通过</td></tr>
+        </table>
+      </div>
+      <div>
+        <button class="btn-claim" onclick="toggleClaimPayload('SG-BOUNTY-SWAN-03')">⚡ 模拟认领 / 生成 Claim Payload</button>
+        <div class="payload-drawer" id="drawer-SG-BOUNTY-SWAN-03">
+          <div class="payload-topbar">
+            <span class="payload-title">CLAIM INTENT JSON</span>
+            <button class="btn-copy" onclick="copyPayload('SG-BOUNTY-SWAN-03', this)">一键复制 JSON</button>
+          </div>
+          <pre class="payload-code"><code id="code-SG-BOUNTY-SWAN-03"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bounty 4 -->
+    <div class="bounty-card">
+      <div>
+        <div class="bounty-header">
+          <span class="bounty-id">SG-BOUNTY-ZKTLS-04</span>
+          <span class="bounty-status">● 开放认领 OPEN</span>
+        </div>
+        <div class="bounty-title">区块链硬件 / zkTLS 现场证明节点接入</div>
+        <div class="bounty-desc">
+          在现实物理据点部署搭载 TPM / Secure Enclave 的自主环境感知探针，或通过移动端 zkTLS 协议零信任上注物理现场数据（时空、温湿度、无线电波段、物理出入凭证），直连 SGDAO 智能合约与 L2 状态根锚定接口。
+        </div>
+        <table class="bounty-meta-table">
+          <tr><td class="label">悬赏金额</td><td class="val hl-good">1,500 USDC</td></tr>
+          <tr><td class="label">预期信息增益</td><td class="val hl-good">+3.42 bits EIG</td></tr>
+          <tr><td class="label">正交约束</td><td class="val">余弦相关度 $\rho_{ij} < 0.10$</td></tr>
+          <tr><td class="label">验证方式</td><td class="val">zkTLS Proof + 链上智能合约验签上链</td></tr>
+        </table>
+      </div>
+      <div>
+        <button class="btn-claim" onclick="toggleClaimPayload('SG-BOUNTY-ZKTLS-04')">⚡ 模拟认领 / 生成 Claim Payload</button>
+        <div class="payload-drawer" id="drawer-SG-BOUNTY-ZKTLS-04">
+          <div class="payload-topbar">
+            <span class="payload-title">CLAIM INTENT JSON</span>
+            <button class="btn-copy" onclick="copyPayload('SG-BOUNTY-ZKTLS-04', this)">一键复制 JSON</button>
+          </div>
+          <pre class="payload-code"><code id="code-SG-BOUNTY-ZKTLS-04"></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= REFERENCE: NOTATION ================= -->
 <section id="symbols">
   <h2>符号表 <span class="en">Notation</span></h2>
@@ -758,7 +925,7 @@ flowchart LR
 </div>
 
 <footer>
-  <p><b>VRO / SGDO 去中心化世界状态预言机 — 机制设计规范 v1.0 (Public Release)</b></p>
+  <p><b>SGDAO / VRO 现实重塑与世界状态引擎 — 机制设计规范 v1.1 (Offensive Reality Edition)</b></p>
   <p>本页为正式公开规范版本，严格遵循 PCSE 六条合规准则；对外交互与第三方平台写入严格受人类吸引子动作约束（guarded-action + owner gate）。对标机制描述仅用于机制维度学术对照，非对任一商业项目的尽调或投资结论。本页不含任何财务持仓、估值、募资数字或私人真名。</p>
   <p class="footn">Rendering: MathJax 3 (tex-svg) · Mermaid 10. 符号与数值口径见「符号表」与「凭证溯源」。</p>
 </footer>
@@ -908,6 +1075,153 @@ function updateMechanismSimulator() {
   if (el) el.addEventListener('input', updateMechanismSimulator);
 });
 updateMechanismSimulator();
+
+// Live Real-World Bounties Interaction Logic
+const BOUNTY_PAYLOADS = {
+  'SG-BOUNTY-CNX-01': {
+    "protocol": "SGDAO-VRO-v1.1",
+    "bounty_id": "SG-BOUNTY-CNX-01",
+    "bounty_title": "Chiang Mai Nomad Hub & Latent Infrastructure Attestation",
+    "action_class": "physical_sensing_vanguard",
+    "target_geohash": "w4r7c",
+    "expected_eig_bits": 1.84,
+    "orthogonal_requirements": {
+      "max_cosine_correlation": 0.25,
+      "min_independent_verifiers": 2,
+      "cross_model_family": true
+    },
+    "claimant": {
+      "type": "human_vanguard",
+      "claimant_pubkey": "0x4F92e3B80c5D13Ac9F65B791a81Ce6b88950a81C",
+      "track_record_attestation_id": "tra_cnx_vanguard_882",
+      "action_plan_hash": "sha256:d8a204b78912e5c8390bca23f4618302194857bca19284758192847501928374"
+    },
+    "evidence_schema": "R_verified_v1_entropy_mesh",
+    "stake_bond_status": "COMMITTED_NO_SLASH_FEAR",
+    "timestamp": "2026-10-18T04:00:00Z"
+  },
+  'SG-BOUNTY-LIQ-02': {
+    "protocol": "SGDAO-VRO-v1.1",
+    "bounty_id": "SG-BOUNTY-LIQ-02",
+    "bounty_title": "Crypto Physical Node & Shadow Liquidity Audit",
+    "action_class": "hardware_enclave_audit",
+    "target_region": "southeast_asia_otc_and_depin_edge",
+    "expected_eig_bits": 2.31,
+    "orthogonal_requirements": {
+      "max_cosine_correlation": 0.20,
+      "min_independent_verifiers": 2,
+      "cross_model_family": true
+    },
+    "claimant": {
+      "type": "human_vanguard_plus_agent_auditor",
+      "claimant_pubkey": "0x7C13e89b3fAcB29D5276eA08e4B9C894B95E94B7",
+      "track_record_attestation_id": "tra_node_auditor_319",
+      "action_plan_hash": "sha256:a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8"
+    },
+    "evidence_schema": "R_verified_v1_bgp_secure_enclave",
+    "stake_bond_status": "COMMITTED_NO_SLASH_FEAR",
+    "timestamp": "2026-10-18T04:00:00Z"
+  },
+  'SG-BOUNTY-SWAN-03': {
+    "protocol": "SGDAO-VRO-v1.1",
+    "bounty_id": "SG-BOUNTY-SWAN-03",
+    "bounty_title": "Local Anti-Consensus Black-Swan Signal Capture",
+    "action_class": "anti_consensus_reconnaissance",
+    "target_chokepoints": "regional_freight_and_supply_disruptions",
+    "expected_eig_bits": 3.05,
+    "orthogonal_requirements": {
+      "max_cosine_correlation": 0.15,
+      "min_independent_verifiers": 3,
+      "cross_model_family": true
+    },
+    "claimant": {
+      "type": "orthogonal_dual_vanguard",
+      "claimant_pubkey": "0x3B88019C2817293a9F68B74112AA8bC954812AA1",
+      "track_record_attestation_id": "tra_swan_spotter_544",
+      "action_plan_hash": "sha256:f1e2d3c4b5a697887766554433221100ffeeddccbbaa99887766554433221100"
+    },
+    "evidence_schema": "R_verified_v1_sc_bts_orthogonal_snapshot",
+    "stake_bond_status": "COMMITTED_NO_SLASH_FEAR",
+    "timestamp": "2026-10-18T04:00:00Z"
+  },
+  'SG-BOUNTY-ZKTLS-04': {
+    "protocol": "SGDAO-VRO-v1.1",
+    "bounty_id": "SG-BOUNTY-ZKTLS-04",
+    "bounty_title": "Hardware Enclave & zkTLS Field Node Deployment",
+    "action_class": "zk_sensing_node_deployment",
+    "target_environment": "physical_port_and_iot_edge",
+    "expected_eig_bits": 3.42,
+    "orthogonal_requirements": {
+      "max_cosine_correlation": 0.10,
+      "min_independent_verifiers": 2,
+      "cross_model_family": true
+    },
+    "claimant": {
+      "type": "autonomous_agent_probe",
+      "claimant_pubkey": "0x9E44d67C823901bCa692f8721c5b8823904d67C8",
+      "track_record_attestation_id": "tra_zktls_edge_node_107",
+      "action_plan_hash": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    },
+    "evidence_schema": "R_verified_v1_zktls_merkle_attestation",
+    "stake_bond_status": "COMMITTED_NO_SLASH_FEAR",
+    "timestamp": "2026-10-18T04:00:00Z"
+  }
+};
+
+function toggleClaimPayload(bountyId) {
+  const drawer = document.getElementById('drawer-' + bountyId);
+  if (!drawer) return;
+  const isOpen = drawer.classList.contains('open');
+  document.querySelectorAll('.payload-drawer').forEach(function(d) {
+    d.classList.remove('open');
+  });
+  if (!isOpen) {
+    const payload = BOUNTY_PAYLOADS[bountyId];
+    if (payload) {
+      payload.timestamp = new Date().toISOString();
+      const codeEl = document.getElementById('code-' + bountyId);
+      if (codeEl) codeEl.textContent = JSON.stringify(payload, null, 2);
+    }
+    drawer.classList.add('open');
+  }
+}
+
+function copyPayload(bountyId, btn) {
+  const codeEl = document.getElementById('code-' + bountyId);
+  if (!codeEl) return;
+  const text = codeEl.textContent;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      const orig = btn.textContent;
+      btn.textContent = '✓ 已复制 Payload！';
+      btn.style.color = 'var(--good)';
+      btn.style.borderColor = 'var(--good)';
+      setTimeout(function() {
+        btn.textContent = orig;
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }, 2000);
+    }).catch(function() {
+      fallbackCopy(text, btn);
+    });
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  const orig = btn.textContent;
+  btn.textContent = '✓ 已复制 Payload！';
+  setTimeout(function() {
+    btn.textContent = orig;
+  }, 2000);
+}
 </script>
 </body>
 </html>
