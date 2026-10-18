@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VRO / SGDO 去中心化世界状态预言机 — 机制设计规范 v1.0</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0f16'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='%235db1ff' font-family='monospace'%3EΔλ%3C/text%3E%3C/svg%3E">
+<meta name="description" content="A mechanism-design specification for a decentralized world-state oracle: active-inference bounty market, spectral-collapsed Bayesian Truth Serum, no-token reality-royalty capital metabolism. For blockchain / crypto-economics peers.">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['$$','$$'], ['\\[','\\]']], tags: 'ams' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root{
+  --bg:#0c0f16; --panel:#131824; --panel2:#1a2130; --ink:#e7ecf5; --muted:#9aa7bd;
+  --line:#273146; --acc:#5db1ff; --acc2:#6ee7b7; --warn:#ffd166; --bad:#ff6b7a;
+  --good:#54d98c; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.72;font-size:16.5px}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+code,.mono{font-family:var(--mono);font-size:.92em}
+.wrap{display:flex;max-width:var(--maxw);margin:0 auto;gap:28px;padding:0 20px}
+
+/* top banner */
+header.hero{border-bottom:1px solid var(--line);
+  background:radial-gradient(1200px 400px at 20% -10%,rgba(93,177,255,.12),transparent),var(--bg)}
+.hero-in{max-width:var(--maxw);margin:0 auto;padding:40px 20px 30px}
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--acc2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin-bottom:16px}
+h1.title{font-size:clamp(26px,4vw,42px);line-height:1.2;margin:.1em 0 .25em;font-weight:800;letter-spacing:-.01em}
+.subtitle{color:var(--muted);font-size:clamp(15px,2vw,19px);max-width:860px}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);
+  border-radius:8px;padding:6px 11px}
+.chip b{color:var(--ink)}
+
+/* layout */
+nav.toc{position:sticky;top:0;align-self:flex-start;width:264px;max-height:100vh;overflow:auto;
+  padding:26px 0;flex:0 0 auto}
+nav.toc h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:18px 10px 8px}
+nav.toc a{display:block;color:var(--muted);padding:7px 12px;border-radius:8px;font-size:14px;border-left:2px solid transparent}
+nav.toc a:hover{background:var(--panel);color:var(--ink);text-decoration:none}
+nav.toc a.active{color:var(--acc);border-left-color:var(--acc);background:var(--panel)}
+main{flex:1 1 auto;min-width:0;padding:26px 0 120px}
+
+section{scroll-margin-top:20px;padding:26px 0;border-bottom:1px dashed var(--line)}
+section h2{font-size:clamp(20px,2.6vw,28px);margin:.2em 0 .5em;font-weight:800;letter-spacing:-.01em}
+section h2 .en{display:block;font-size:14px;font-weight:600;color:var(--acc2);letter-spacing:.02em;margin-top:4px}
+section h3{font-size:19px;margin:1.4em 0 .4em;color:#cfe0ff;font-weight:700}
+section h4{font-size:16px;margin:1.1em 0 .3em;color:var(--acc2)}
+p{margin:.6em 0}
+ul,ol{padding-left:1.25em}
+li{margin:.3em 0}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+.panel.tight{padding:14px 18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+
+.callout{border-left:4px solid var(--acc);background:var(--panel2);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0}
+.callout.warn{border-color:var(--warn)}
+.callout.bad{border-color:var(--bad)}
+.callout.good{border-color:var(--good)}
+.callout .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--acc)}
+.callout.warn .tag{color:var(--warn)} .callout.bad .tag{color:var(--bad)} .callout.good .tag{color:var(--good)}
+
+.tagline{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:6px;vertical-align:middle}
+.v-verified{background:rgba(84,217,140,.14);color:var(--good);border:1px solid rgba(84,217,140,.3)}
+.v-heuristic{background:rgba(255,209,102,.12);color:var(--warn);border:1px solid rgba(255,209,102,.3)}
+.v-sim{background:rgba(93,177,255,.12);color:var(--acc);border:1px solid rgba(93,177,255,.3)}
+
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14.5px;overflow:hidden;border-radius:10px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:#cfe0ff;font-weight:700}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.hl-good{color:var(--good);font-weight:700}
+.hl-bad{color:var(--bad);font-weight:700}
+
+.mermaid{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center}
+.eq{overflow-x:auto;padding:4px 0}
+.kbd{font-family:var(--mono);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:.88em}
+.footn{color:var(--muted);font-size:13px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.pill{font-size:12.5px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--muted)}
+
+details.claim{border:1px solid var(--line);border-radius:12px;margin:12px 0;background:var(--panel)}
+details.claim>summary{cursor:pointer;padding:13px 18px;font-weight:700;color:#cfe0ff;list-style:none}
+details.claim>summary::-webkit-details-marker{display:none}
+details.claim>summary::before{content:"▸ ";color:var(--acc)}
+details.claim[open]>summary::before{content:"▾ "}
+details.claim .body{padding:0 18px 16px;border-top:1px solid var(--line)}
+
+footer{max-width:var(--maxw);margin:0 auto;padding:30px 20px 60px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0}
+.legend span{font-size:12.5px}
+hr.soft{border:none;border-top:1px dashed var(--line);margin:22px 0}
+.toc-mobile{display:none}
+@media(max-width:900px){
+  nav.toc{display:none}
+  .toc-mobile{display:block;position:sticky;top:0;z-index:30;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:8px;margin:10px 0}
+  .toc-mobile select{width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+    border-radius:8px;padding:9px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <span class="badge">Mechanism Design Specification · v1.0 · Public Release</span>
+    <h1 class="title">去中心化世界状态预言机：认识论代谢机制设计规范</h1>
+    <div class="subtitle">
+      <b>VRO</b> (Verified-Receipt Organization) / <b>SGDO</b> (Spectral-Gap Decentralized Organization) —
+      A mechanism for metabolizing <i>high-dimensional, continuous, long-tail real-world state</i> that no existing
+      price-feed / optimistic-dispute / binary-prediction / DePIN oracle can represent. Active-inference bounty pricing ·
+      spectral-collapsed Bayesian Truth Serum · no-token reality-royalty capital loop.
+    </div>
+    <div class="meta-row">
+      <span class="chip"><b>受众</b> Blockchain / Web3 protocol designers · cryptographers · game-theory & mechanism-design researchers</span>
+      <span class="chip"><b>对标</b> Chainlink · UMA · Polymarket · Hivemapper</span>
+      <span class="chip"><b>Status</b> Formal Public Specification · PCSE Cleared</span>
+    </div>
+    <div class="legend">
+      <span><span class="tagline v-verified">VERIFIED</span> 已有独立交叉验证凭证（R_verified ledger）</span>
+      <span><span class="tagline v-sim">SIMULATED</span> 千人数字人红队靶场实测（single-seed, in-silico）</span>
+      <span><span class="tagline v-heuristic">HEURISTIC</span> 设计假说 / 运营隐喻，尚未证明为定理</span>
+    </div>
+  </div>
+</header>
+
+<div class="toc-mobile">
+  <select onchange="if(this.value)location.hash=this.value">
+    <option value="">跳转到章节 / Jump to section…</option>
+    <option value="#m0">0 · 诚实前置 Honest Preamble</option>
+    <option value="#m1">1 · 不可能三角 Epistemic Oracle Trilemma</option>
+    <option value="#m2">2 · 主动推理悬赏 Active-Inference Bounty</option>
+    <option value="#m3">3 · 三路径防伪 3-Path Truth Settlement</option>
+    <option value="#m4">4 · 非代币资本代谢 No-Token Capital</option>
+    <option value="#m5">5 · 三底座实证 Empirical Calibration</option>
+    <option value="#m6">6 · 共建者加入 Builder Onboarding</option>
+  </select>
+</div>
+
+<div class="wrap">
+<nav class="toc" id="toc">
+  <h4>Specification</h4>
+  <a href="#m0">0 · 诚实前置</a>
+  <a href="#m1">1 · 不可能三角</a>
+  <a href="#m2">2 · 主动推理悬赏</a>
+  <a href="#m3">3 · 三路径防伪</a>
+  <a href="#m4">4 · 非代币资本代谢</a>
+  <a href="#m5">5 · 三底座实证</a>
+  <a href="#m6">6 · 共建者加入路径</a>
+  <h4>Reference</h4>
+  <a href="#symbols">符号表 Notation</a>
+  <a href="#provenance">凭证溯源 Provenance</a>
+</nav>
+
+<main>
+
+<!-- ================= MODULE 0 ================= -->
+<section id="m0">
+  <h2>0 · 诚实前置 <span class="en">Honest Preamble — what is verified vs. what is a hypothesis</span></h2>
+  <div class="callout warn">
+    <span class="tag">读之前必读 / Read first</span>
+    <p>本规范把「谱隙 (spectral gap) $\Delta\lambda$」同时当作<b>可计算的运营指标</b>和<b>设计隐喻</b>使用，<b>不</b>宣称它是已被证明的物理/学习定理。凡标 <span class="tagline v-heuristic">HEURISTIC</span> 的论断都是设计假说；凡标 <span class="tagline v-verified">VERIFIED</span> 的数字都对应一条独立交叉验证凭证（跨胞元、跨模型族，fail-closed，不得自审）；凡标 <span class="tagline v-sim">SIMULATED</span> 的都来自千人数字人单种子 in-silico 靶场，是方向性证据而非外部实盘统计显著性。把隐喻当定理推广，就会让我们自己变成第 1 节描述的「无验证闭环」组织。</p>
+  </div>
+  <p>本规范遵守 <b>PCSE 六条</b>：零私人真名、零财务持仓/估值数字、零内部路径或密钥、诚实标注启发式与已验证。所有金额一律以<b>抽象单位</b>或<b>稳定币计价占位</b>表述，不含任何真实持仓或募资数字。</p>
+  <div class="grid2">
+    <div class="panel tight">
+      <h4>一句话定位 / One-liner</h4>
+      <p>我们不造「更大的爬虫」，而是设计一台<b>认识论代谢引擎</b>：对世界状态后验分布的<b>不确定性定价</b>，用悬赏把资金引向高熵盲区，再用三路径防伪把「被独立印证的意外」而非「意外本身」结算为可签名的 <span class="mono">R_verified</span> 现实凭证。</p>
+    </div>
+    <div class="panel tight">
+      <h4>与四个对标的一句话差分 / Delta</h4>
+      <ul style="margin:0">
+        <li><b>vs Chainlink</b>：喂的是<i>有标准答案的低维数值</i>；我们喂<i>高维连续长尾、带后验方差</i>的世界状态。</li>
+        <li><b>vs UMA</b>：乐观争议靠<i>多数质押</i>；我们靠<i>谱正交独立性</i>，拒绝同源女巫自证。</li>
+        <li><b>vs Polymarket</b>：只能赌<i>离散二元事件</i>；我们代谢<i>连续分布 + 主观无即时答案</i>。</li>
+        <li><b>vs Hivemapper</b>：发币挖矿制造<i>冗余垃圾数据</i>；我们<b>不发币</b>，只为信息增益付版税。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODULE 1 ================= -->
+<section id="m1">
+  <h2>1 · 认识论预言机不可能三角与破局 <span class="en">The Epistemic Oracle Trilemma</span></h2>
+
+  <p>现有区块链预言机都隐含一个前提：<b>被预言的量存在一个即时、低维、可公开校验的标准答案</b>（一个价格、一个二元结果、一个 GPS 点）。真实世界状态违反这个前提——它是<b>高维 (high-dim)</b>、<b>连续 (continuous)</b>、<b>长尾 (long-tail)</b>、<b>无即时标准答案 (no instantaneous ground truth)</b> 的。我们把这组冲突形式化为一个不可能三角。</p>
+
+  <h3>1.1 形式化：三个相互冲突的目标 <span class="en">Three mutually-constraining objectives</span></h3>
+  <p>设世界状态为随机场 $\theta \in \Theta$（$\dim\Theta \gg 1$），一个预言机机制 $\mathcal{M}$ 要同时满足：</p>
+  <div class="panel">
+    <div class="eq">
+      $$
+      \textbf{(E) 表达力 Expressiveness:}\quad \mathcal{M}\ \text{可输出后验}\ P(\theta\mid \mathcal{D})\ \text{而非点估计}\ \hat\theta
+      $$
+      $$
+      \textbf{(T) 无答案可结算 Truthful-settlement-without-ground-truth:}\quad \exists\ \text{payment}\ \pi_i\ \text{s.t. 诚实上报} \in \arg\max\ \mathbb{E}[\pi_i]
+      $$
+      $$
+      \textbf{(S) 抗女巫/抗共谋 Sybil/collusion-resistance:}\quad \forall\ \text{coalition}\ C,\ \ \mathbb{E}\!\left[\sum_{i\in C}\pi_i - \text{cost}(C)\right] \le 0
+      $$
+    </div>
+  </div>
+  <div class="callout">
+    <span class="tag">Trilemma</span>
+    <p><b>命题（不可能三角，<span class="tagline v-heuristic">HEURISTIC</span>）：</b> 任何<i>仅靠多数共识或单轮质押投票</i>聚合的机制，最多同时满足 (E)(T)(S) 中的两个。多数共识拿到 (T)+(S) 却牺牲 (E)（点估计坍缩、长尾被平均掉）；乐观争议拿到 (T)+部分(E) 却在 (S) 上脆弱（质押多数即真理，可被资本翻转）；纯预测市场拿到 (T)+(S) 却牺牲 (E)（只能离散二元）。<b>破局不是更强的投票，而是换掉聚合算子</b>：用<i>贝叶斯惊奇定价</i>撑开 (E)，用<i>谱正交独立性</i>换 (S)，用<i>延迟可证伪 + 谱坍缩 BTS</i> 换 (T)。</p>
+  </div>
+
+  <h3>1.2 为什么中心化源（Google Maps 类）结构性滞后 <span class="en">Why centralized sources are structurally biased</span></h3>
+  <ol>
+    <li><b>采样偏差 (Sampling Bias)</b>：采样函数由流量/商业期望值驱动，而非由真实世界的<b>条件熵</b> $H(\theta\mid \mathcal{D})$ 驱动。低流量高决策价值的长尾现实永远欠采样。</li>
+    <li><b>点估计坍缩 (Posterior Collapse)</b>：强制输出单一排序/标注，抹掉后验方差与置信度，$P(\theta)\to\delta(\theta-\hat\theta)$。</li>
+    <li><b>共识复读 (Information Cascade)</b>：依赖多数共识，使参与者相关性 $\rho\to 1$，聚合算子谱隙 $\Delta\lambda\to 0$，局地黑天鹅真知被均值淹没。</li>
+  </ol>
+
+  <h3>1.3 形式化对比表 <span class="en">Formal comparison against incumbents</span></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>维度 / Mechanism</th>
+        <th>Chainlink<br><span class="footn">去中心喂价</span></th>
+        <th>UMA<br><span class="footn">乐观争议</span></th>
+        <th>Polymarket<br><span class="footn">二元预测市场</span></th>
+        <th>Hivemapper<br><span class="footn">DePIN 挖矿</span></th>
+        <th>本机制 VRO/SGDO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>目标量维度</td><td>低维标量价格</td><td>可争议的离散事实</td><td>离散二元事件</td><td>地理栅格图像</td><td class="hl-good">高维连续后验 $P(\theta)$</td></tr>
+      <tr><td>输出形态</td><td>点估计中位数</td><td>单一裁决</td><td>概率 (隐式)</td><td>瓦片覆盖率</td><td class="hl-good">带方差分布 + 置信度</td></tr>
+      <tr><td>真值来源</td><td>外部已有 API</td><td>乐观假设 + 争议升级</td><td>到期现实揭晓</td><td>GPS/图像哈希</td><td class="hl-good">延迟证伪 + 谱坍缩 BTS</td></tr>
+      <tr><td>抗女巫机制</td><td>节点声誉 + 质押</td><td>质押多数 (可被资本翻转)</td><td>市场深度</td><td class="hl-bad">几乎无 (挖矿即奖励)</td><td class="hl-good">谱正交 $\rho,\Delta\lambda$ 坍缩</td></tr>
+      <tr><td>长尾/局地少数真知</td><td class="hl-bad">丢弃 (非标的)</td><td class="hl-bad">丢弃</td><td class="hl-bad">无市场</td><td class="hl-bad">欠采样</td><td class="hl-good">贝叶斯惊奇定价主动悬赏</td></tr>
+      <tr><td>代币/投票</td><td>LINK 质押</td><td>UMA 投票 (可买票)</td><td>USDC 对赌</td><td>HONEY 挖矿</td><td class="hl-good">无治理币 · 无投票 · 版税流</td></tr>
+      <tr><td>失败模式</td><td>喂价源单点</td><td>$51\%$ 质押攻击</td><td>长尾无流动性</td><td class="hl-bad">币价崩→网络死</td><td>谱隙塌陷→主动 abstain</td></tr>
+    </tbody>
+  </table>
+  <p class="footn">对标机制的描述基于其公开设计范式的一般特征，用于机制维度对照，非对任一项目的尽调结论。</p>
+</section>
+
+<!-- ================= MODULE 2 ================= -->
+<section id="m2">
+  <h2>2 · 双层状态与主动推理悬赏市场 <span class="en">Active-Inference Bounty Market</span></h2>
+
+  <p>核心引擎：系统不是被动搜索引擎，而是一个<b>主动推理代理</b>（Friston free-energy minimizer）。它持续计算世界状态图中哪些节点的<b>预期信息增益</b>最高，并自动把资金池的悬赏投向这些高熵盲区——即「Google Maps 看不见的现实」。</p>
+
+  <h3>2.1 双层状态分离 <span class="en">Two-layer state</span></h3>
+  <table>
+    <thead><tr><th>层 / Layer</th><th>符号</th><th>语义</th><th>谁维护</th></tr></thead>
+    <tbody>
+      <tr><td>信念层 Belief</td><td>$P_t(\theta)$</td><td>世界状态后验分布（连续、带方差）</td><td>C-Gate 代谢更新</td></tr>
+      <tr><td>证据层 Evidence</td><td>$\{(x_i, s_i)\}$</td><td>贡献者感知 $x_i$ + 来源签名 $s_i$（时空/硬件/TLS）</td><td>Sensors / Contributors</td></tr>
+    </tbody>
+  </table>
+  <p>两层仅通过<b>已验证凭证</b>稀疏耦合：意见不传播，只有通过 C-Gate 的 $R_{\text{verified}}$ 才会修改信念层。</p>
+
+  <h3>2.2 悬赏函数：对条件熵与预测误差定价 <span class="en">Pricing conditional entropy & prediction error</span></h3>
+  <p>对世界状态图上的查询节点 $(q,t)$，定义其<b>认识论价值</b>为该节点的后验条件熵与下游决策价值的乘积，悬赏预算正比于<b>预期信息增益</b> (Expected Information Gain, EIG)：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \text{EIG}(q,t) \;=\; \underbrace{H\!\big(\theta_q \mid \mathcal{D}_t\big)}_{\text{当前不确定性}}
+    \;-\; \mathbb{E}_{x\sim P(x\mid q)}\!\Big[\, H\!\big(\theta_q \mid \mathcal{D}_t, x\big)\,\Big]
+    \;=\; \mathbb{E}_{x}\Big[\, D_{\mathrm{KL}}\!\big(P(\theta_q\mid \mathcal{D}_t,x)\,\|\,P(\theta_q\mid\mathcal{D}_t)\big)\Big]
+    $$
+    $$
+    B(q,t)\;=\;\kappa\cdot V_{\text{decision}}(q)\cdot \text{EIG}(q,t),\qquad \kappa>0
+    $$
+  </div></div>
+  <p>其中 $V_{\text{decision}}(q)$ 是下游 Agent 对该状态节点的决策价值（由承销池/查询需求显示偏好）。<b>贝叶斯惊奇</b>（单条输入的瞬时信息增益）定义结算权重：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \text{Surprise}(x)\;=\;D_{\mathrm{KL}}\!\big(P(\theta\mid x)\,\|\,P(\theta)\big)
+    $$
+  </div></div>
+  <div class="callout bad">
+    <span class="tag">死穴 1 / Failure mode</span>
+    <p>直接为高 $\text{Surprise}$ 付钱 = 为「意外」本身付钱 = <b>悬赏 LLM 批量编造猎奇谎言</b>。$D_{\mathrm{KL}}$ 无法区分「珍贵局地黑天鹅真知」与「编造的离谱假话」。<b>破局铁律：绝不为意外本身付钱，只为被独立印证的意外付钱。</b> 高 $\text{Surprise}$ 只触发<i>验证悬赏</i>，永不直接结算赏金。结算由第 3 节三路径决定。</p>
+  </div>
+
+  <h3>2.3 资金自动流向高熵盲区 <span class="en">Capital auto-routes to high-entropy blind spots</span></h3>
+  <p>预算分配是一个在固定周期预算 $\mathcal{B}$ 约束下最大化总信息增益的在线凸问题：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \max_{\{b(q,t)\}}\ \sum_{q} g\big(b(q,t)\big)\cdot \text{EIG}(q,t)
+    \quad\text{s.t.}\quad \sum_q b(q,t)\le \mathcal{B}_t,\ \ b(q,t)\ge 0
+    $$
+  </div></div>
+  <p>$g(\cdot)$ 为凹的到达率函数（递减边际）。KKT 条件给出<b>水位线 (water-filling) 解</b>：均衡时所有被资助节点的<b>边际信息增益/美元相等</b>，低熵（主流共识已覆盖）节点因 $\text{EIG}\approx 0$ 自动分不到预算。这正是「资金自动流向 Google Maps 看不见的高熵盲区」的形式化。</p>
+
+  <div class="mermaid">
+flowchart LR
+  A["世界状态后验 P_t(θ)<br/>识别 argmax EIG(q,t) 盲区"] -->|"主动推理发悬赏 B(q,t)"| B["局地贡献者提交正交感知 x_i<br/>高 Surprise = D_KL(P(θ|x)||P(θ))"]
+  B -->|"三路径防伪代谢"| C["C-Gate 签发 R_verified<br/>计算 Δλ 与扰动 sinθ"]
+  C -->|"sinθ ≤ 0.35 : LEARN_AND_ROUTE"| D["更新 P_t→P_t+1<br/>三因子版税回流承销池/贡献者"]
+  C -->|"sinθ &gt; 0.35 : ABSTAIN"| E["拒绝污染点估计<br/>追加悬赏继续采样"]
+  D --> A
+  E --> A
+  </div>
+  <p class="footn">阈值 <span class="kbd">sinθ ≤ 0.35</span> 为 Gap-Gate v2 的 learn-or-abstain 门限（见第 3 路径 B 与第 5 节）。</p>
+</section>
+
+<!-- ================= MODULE 3 ================= -->
+<section id="m3">
+  <h2>3 · 三路径防伪与抗共谋激励相容 <span class="en">3-Path Truth Settlement &amp; Spectral-Collapsed BTS</span></h2>
+
+  <p>这是区块链朋友最关心的部分：如何同时抵抗 <b>Sybil</b>（女巫造号）、<b>Bribery/Collusion</b>（贿选串通）、<b>LLM Hallucination</b>（批量编造）。核心架构：<b>孤证只触发验证悬赏，永不直接结算赏金</b>。按现实状态类型分三条代谢路径。</p>
+
+  <table>
+    <thead><tr><th>现实类型</th><th>路径</th><th>结算器</th><th>作恶者期望收益为负的根因</th></tr></thead>
+    <tbody>
+      <tr><td>可被未来现实证伪<br><span class="footn">营业状态/路况/价格/交期</span></td><td><b>A · C-Pred</b></td><td>延迟可证伪预测结算 + 不对称 Slashing</td><td>现实到期自动揭晓真值，编造者长期必被没收抵押</td></tr>
+      <tr><td>可即时现场核实<br><span class="footn">物理坐标/设施/链上/TLS 事实</span></td><td><b>B · C-Gate</b></td><td>$k$-正交独立交叉验证 ($\Delta\lambda,\rho$)</td><td>串通号行为相关性 $\rho\to1$ 被谱坍缩为单一自由度</td></tr>
+      <tr><td>主观/隐性/无即时答案<br><span class="footn">社区氛围/隐性风险/体验分布</span></td><td><b>C · SC-BTS</b></td><td>谱坍缩贝叶斯真相血清</td><td>先坍缩共谋簇再算 BTS，女巫刷频率零增益</td></tr>
+    </tbody>
+  </table>
+
+  <!-- PATH A -->
+  <h3>3.A 路径 A：延迟可证伪结算 (C-Pred) <span class="en">Time-Delayed Falsifiable Settlement</span></h3>
+  <p>把输入转化为带<b>到期日 $T$</b>、<b>不可事后改阈值</b>的预测声明 + 抵押 $d$。到期由现实自动揭晓 ground truth $y\in\{0,1\}$。采用<b>不对称 slashing</b>：奖励有界，造假惩罚随 track-record 递增。</p>
+  <div class="panel"><div class="eq">
+    $$
+    \pi_i^{A}(T) \;=\;
+    \begin{cases}
+      +\,r\cdot \text{Brier}^{+}(\hat p_i, y) & \text{if claim verified true}\\[4pt]
+      -\,\lambda_s\cdot d\cdot \big(1+\beta\,n_i^{\text{fail}}\big) & \text{if falsified}
+    \end{cases}
+    \qquad \lambda_s > 1,\ \beta>0
+    $$
+  </div></div>
+  <p>其中 $n_i^{\text{fail}}$ 是该主体历史被证伪次数（灵魂绑定、不可转让）。诚实期望收益为正当且仅当：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \mathbb{E}[\pi_i^A \mid \text{honest}] - \mathbb{E}[\pi_i^A \mid \text{fabricate}]
+    \;=\; r\,\Delta\text{Brier} + \lambda_s d(1+\beta n_i^{\text{fail}})\cdot \Pr[\text{caught}] \;>\;0
+    $$
+  </div></div>
+
+  <div class="panel">
+    <h4>状态机 / Prediction state machine</h4>
+    <div class="mermaid">
+stateDiagram-v2
+  [*] --> STAKED: 提交预测 + 抵押 d<br/>锁定阈值 τ, 到期 T
+  STAKED --> MATURED: 到达 T (threshold frozen)
+  MATURED --> VERIFIED_TRUE: 现实 y 匹配声明
+  MATURED --> FALSIFIED: 现实 y 反驳声明
+  VERIFIED_TRUE --> SETTLED_PAY: +r·Brier⁺, Track-Record↑
+  FALSIFIED --> SLASHED: −λ_s·d·(1+β·n_fail), Track-Record↓
+  MATURED --> ABSTAIN: 现实不可判定 (ground truth 缺失)
+  ABSTAIN --> REFUND: 抵押原路退回, 不结算
+  SETTLED_PAY --> [*]
+  SLASHED --> [*]
+  REFUND --> [*]
+    </div>
+    <p class="footn">关键不变量：<b>阈值在 STAKED 冻结</b>，C-Pred 不得事后改阈值（见第 5 节诚实口径）；真值不可判定 → <b>fail-closed 到 ABSTAIN</b>，退押而非默认结算。</p>
+  </div>
+
+  <!-- PATH B -->
+  <h3>3.B 路径 B：$k$-正交交叉验证 (C-Gate) <span class="en">k-Orthogonal Cross-Verification</span></h3>
+  <p>要求 $k$ 个来源对同一事实独立印证，但「独立」必须是<b>可证明的</b>，不能被同源女巫簇伪造。独立性由两个谱量定义：历史交互图谱的<b>谱隙</b> $\Delta\lambda=\lambda_1-\lambda_2$ 与来源对的<b>余弦正交度</b> $\rho$。</p>
+  <p>设验证者集合在历史交互特征空间中的 Gram 相关矩阵为 $R$（$R_{ij}=\cos(x_i,x_j)$）。有效独立自由度由谱定义：</p>
+  <div class="panel"><div class="eq">
+    $$
+    k_{\text{eff}} \;=\; \frac{\big(\sum_i \lambda_i(R)\big)^2}{\sum_i \lambda_i(R)^2}\quad(\text{participation ratio}),
+    \qquad
+    \Delta\lambda = \lambda_1 - \lambda_2,\quad \rho_{ij}=\cos(x_i,x_j)
+    $$
+  </div></div>
+  <p>由 <b>Davis–Kahan $\sin\theta$ 定理</b>，聚合主方向 $\hat v_1$ 对真值方向 $v_1$ 的偏差被谱隙控制：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \sin\theta(\hat v_1, v_1) \;\le\; \frac{\lVert E\rVert_2}{\Delta\lambda}
+    \qquad\Longrightarrow\qquad
+    \textbf{Gate:}\ \ \sin\theta \le 0.35 \Rightarrow \texttt{LEARN\_AND\_ROUTE},\ \ \text{else}\ \texttt{ABSTAIN}
+    $$
+  </div></div>
+  <div class="callout good">
+    <span class="tag">抗女巫的几何直觉</span>
+    <p>一个由单一主体控制的女巫簇，其成员在历史交互特征空间高度共线：$\rho_{ij}\to 1 \Rightarrow R$ 近似秩 1 $\Rightarrow k_{\text{eff}}\to 1$，无论名义上有多少个「账号」。因此女巫凑不出所需的 $k$ 个<b>低相关</b>独立印证——它们被 Gram 谱结构<b>坍缩为单一有效自由度</b>。独立性不是账号计数，而是谱不可约性。</p>
+  </div>
+  <p>C-Gate 结算的硬性独立规则（继承 $R_{\text{verified}}$ schema）：<span class="kbd">verifier.cell ≠ producer_cell</span> 且 <span class="kbd">family(verifier.provider) ≠ family(producer.provider)</span>；缺独立验证者 → <b>abstain, fail-closed，不得自审</b>。</p>
+
+  <!-- PATH C -->
+  <h3>3.C 路径 C：谱坍缩贝叶斯真相血清 (SC-BTS) <span class="en">Spectral-Collapsed Bayesian Truth Serum</span></h3>
+  <p>对无即时标准答案的主观/隐性状态，用 Prelec 的 Bayesian Truth Serum (BTS)：贡献者提交自己的感知 $x_i$ <b>和</b>对他人答案分布的预测 $\hat y_i$，奖励「<b>意料之外但实际常见</b> (surprisingly common)」的信号。原始 BTS 的信息分：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \text{Info}_i = \log\frac{\bar x_r}{\bar y_r},\qquad
+    \text{Pred}_i = \sum_r \bar x_r \log\frac{\hat y_i^r}{\bar x_r},\qquad
+    \text{BTS}_i = \text{Info}_i + \alpha\,\text{Pred}_i
+    $$
+  </div>
+  <p class="footn">$\bar x_r$=答案 $r$ 的实际频率的几何平均，$\bar y_r$=预测频率的几何平均，$\hat y_i^r$=个体 $i$ 的预测。</p></div>
+  <div class="callout bad">
+    <span class="tag">原始 BTS 的女巫漏洞</span>
+    <p>BTS 的真话均衡假设上报彼此<b>统计独立</b>。女巫团伙可串通一起刷高某个离谱选项的实际频率 $\bar x_r$ 与预测 $\hat y_i^r$ 的一致性，制造虚假的「surprisingly common」拿走信息分。<b>这就是为什么必须先坍缩再算分。</b></p>
+  </div>
+  <h4>谱坍缩补丁 / Spectral collapse patch</h4>
+  <p>在计算任何 BTS 分之前，先按历史交互相关性矩阵 $R$ 的特征结构，把共谋女巫簇<b>坍缩为有效自由度 $k_{\text{eff}}=1$</b>（整簇权重归一为 1 个有效样本），再在坍缩后的有效样本上计算频率与 BTS：</p>
+  <div class="panel"><div class="eq">
+    $$
+    w_i \;=\; \frac{1}{\,\lvert \mathcal{C}(i)\rvert\,}\quad\text{for cluster}\ \mathcal{C}(i)\ \text{s.t.}\ \rho_{\text{intra}}>\rho^\star,\qquad
+    \bar x_r^{\,\text{eff}} = \Big(\textstyle\prod_i (x_i^r)^{w_i}\Big),\qquad
+    \text{SC-BTS}_i = w_i\big(\text{Info}_i + \alpha\,\text{Pred}_i\big)
+    $$
+  </div></div>
+
+  <h4>激励相容证明骨架 / Incentive-compatibility proof skeleton <span class="tagline v-heuristic">HEURISTIC (BNE sketch)</span></h4>
+  <details class="claim" open>
+    <summary>命题：诚实上报「局地少数派真知」是贝叶斯纳什均衡 (BNE)，而「LLM 批量编造」与「女巫串通」期望收益严格为负。</summary>
+    <div class="body">
+      <p><b>设定.</b> 玩家对世界状态持私有信号 $x_i\sim P(x\mid\theta)$ 与共同先验。策略 $\sigma_i$ 映射信号到 (上报 $r_i$, 预测 $\hat y_i$)。支付 = 路径 C 的 $\text{SC-BTS}_i$，叠加路径 A/B 对<i>可印证分量</i>的结算。</p>
+      <p><b>引理 1（坍缩后独立性恢复）.</b> 对任一共谋簇 $\mathcal{C}$（$\rho_{\text{intra}}>\rho^\star$），坍缩算子把其贡献压成单一有效样本，权重 $\sum_{i\in\mathcal C}w_i=1$。因此女巫把簇规模从 $1$ 扩到 $m$ 不改变 $\bar x_r^{\text{eff}}$，边际刷频率收益 $\partial \text{SC-BTS}/\partial m = 0$，而造号有正成本 $c>0$ ⇒ 女巫净期望 $\le -c<0$。<span class="footn">(抗 Sybil / Bribery)</span></p>
+      <p><b>引理 2（Prelec 真话均衡在坍缩样本上保持）.</b> 在有效独立样本构成的群体上，Prelec (2004) 证明<i>诚实上报 + 诚实预测</i>是严格 BNE：任何偏离都降低 $\text{Info}+\alpha\text{Pred}$ 的期望。坍缩只改变样本权重、不改变该定理前提，故在 $w$-加权测度下结论保持。</p>
+      <p><b>引理 3（编造者被路径 A/B 吸收）.</b> LLM 批量编造的「猎奇」在可证伪分量上进入 C-Pred：到期被现实证伪的概率 $\Pr[\text{caught}]$ 随上报离谱度上升；不对称 slashing 使 $\mathbb{E}[\pi^A\mid\text{fabricate}] = r\Delta\text{Brier} - \lambda_s d(1+\beta n^{\text{fail}})\Pr[\text{caught}]$，当 $\lambda_s>1,\beta>0$ 时对高离谱度上报严格为负。</p>
+      <p><b>定理（合成）.</b> 三路径支付之和下，策略组合「诚实上报私有信号 + 诚实预测他人分布」构成 BNE；而「批量编造高 $D_{\mathrm{KL}}$ 猎奇」(被引理 3 惩罚) 与「女巫串通刷频率」(被引理 1 零化) 的期望支付严格 $<$ 诚实策略。<b>关键：局地少数派真知</b>——真实但与主流共识正交的信号——恰好获得正的 $\text{Info}_i$（它 surprisingly common 于局地、低频于全局），因此被<b>正向激励</b>，而非被多数决淹没。∎(sketch)</p>
+      <p class="footn"><b>证明边界.</b> 这是均衡存在性的构造性骨架，依赖 (i) 坍缩阈值 $\rho^\star$ 校准正确，(ii) 现实证伪通道 $\Pr[\text{caught}]$ 对离谱度单调，(iii) 玩家风险中性。严格的唯一性、抗 $\epsilon$-共谋鲁棒性、以及 $\rho^\star$ 的最优校准仍是开放问题，列入第 6 节共建模块 C。</p>
+    </div>
+  </details>
+
+  <!-- INTERACTIVE SIMULATOR -->
+  <div class="panel" id="simulator-panel" style="border: 2px solid var(--acc); background: rgba(19, 24, 36, 0.95); margin-top: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+      <h3 style="margin: 0; color: #cfe0ff; font-size: 20px;">
+        🎮 交互式机制沙盘：女巫串通 vs. 谱坍缩 BTS &amp; 现实版税模拟器
+      </h3>
+      <span class="tagline v-sim" style="font-size: 12px;">INTERACTIVE GAME-THEORETIC SIMULATOR</span>
+    </div>
+    <p style="font-size: 14.5px; color: var(--muted); margin-bottom: 20px;">
+      通过滑动调节女巫团伙规模、内部共谋相关度、申报惊奇度及下游查询池，实时对比<b>传统 DePIN/DAO 多数决</b>与<b>本机制 (SC-BTS + C-Pred + Reality Royalty)</b> 的博弈收益矩阵：
+    </p>
+
+    <!-- Sliders Grid -->
+    <div class="grid2" style="gap: 16px; margin-bottom: 22px;">
+      <!-- Slider 1 -->
+      <div style="background: var(--panel2); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <label for="sim-m" style="font-weight: 600; font-size: 14px;">① 女巫团伙账号数 <i>m</i></label>
+          <span id="sim-m-val" class="kbd" style="color: var(--acc); font-weight: 700;">25</span>
+        </div>
+        <input type="range" id="sim-m" min="1" max="100" step="1" value="25" style="width: 100%; cursor: pointer;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 4px;">
+          <span>1 个 (单体)</span>
+          <span>50 个</span>
+          <span>100 个 (大型集群)</span>
+        </div>
+      </div>
+
+      <!-- Slider 2 -->
+      <div style="background: var(--panel2); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <label for="sim-rho" style="font-weight: 600; font-size: 14px;">② 团伙特征相关度 &rho;<sub>intra</sub></label>
+          <span id="sim-rho-val" class="kbd" style="color: var(--warn); font-weight: 700;">0.92</span>
+        </div>
+        <input type="range" id="sim-rho" min="0.10" max="0.99" step="0.01" value="0.92" style="width: 100%; cursor: pointer;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 4px;">
+          <span>0.10 (正交独立)</span>
+          <span style="color: var(--warn);">&rho;&lowast; = 0.75 坍缩门限</span>
+          <span>0.99 (高度同质共谋)</span>
+        </div>
+      </div>
+
+      <!-- Slider 3 -->
+      <div style="background: var(--panel2); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <label for="sim-dkl" style="font-weight: 600; font-size: 14px;">③ 申报信号惊奇度 <i>D</i><sub>KL</sub></label>
+          <span id="sim-dkl-val" class="kbd" style="color: var(--acc2); font-weight: 700;">2.80</span>
+        </div>
+        <input type="range" id="sim-dkl" min="0.1" max="5.0" step="0.1" value="2.8" style="width: 100%; cursor: pointer;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 4px;">
+          <span>0.1 (常规平淡)</span>
+          <span>2.5 (显著新异)</span>
+          <span>5.0 (极端奇点)</span>
+        </div>
+      </div>
+
+      <!-- Slider 4 -->
+      <div style="background: var(--panel2); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <label for="sim-pi" style="font-weight: 600; font-size: 14px;">④ 下游 API 周期查询池 &Pi;<sub>query</sub></label>
+          <span id="sim-pi-val" class="kbd" style="color: var(--good); font-weight: 700;">2000 USDC</span>
+        </div>
+        <input type="range" id="sim-pi" min="100" max="10000" step="100" value="2000" style="width: 100%; cursor: pointer;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 4px;">
+          <span>100 USDC</span>
+          <span>5000 USDC</span>
+          <span>10000 USDC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Calculation Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-bottom: 20px;">
+      <!-- Metric 1: Effective Degrees of Freedom -->
+      <div style="background: var(--panel2); padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">有效独立自由度 <i>k</i><sub>eff</sub></div>
+        <div id="sim-keff-display" style="font-size: 24px; font-weight: 800; font-family: var(--mono); color: var(--warn);">1.15</div>
+        <div id="sim-keff-status" style="font-size: 11.5px; margin-top: 6px; color: var(--bad);">[谱坍缩触发: 自由度剧烈退化]</div>
+      </div>
+
+      <!-- Metric 2: Traditional System Sybil Payoff -->
+      <div style="background: var(--panel2); padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">传统未坍缩 DePIN / DAO 女巫净收益</div>
+        <div id="sim-trad-display" style="font-size: 24px; font-weight: 800; font-family: var(--mono); color: var(--bad);">+282.14 USDC</div>
+        <div id="sim-trad-status" style="font-size: 11.5px; margin-top: 6px;"><span class="tagline" style="background: rgba(255,107,122,0.18); color: var(--bad); border: 1px solid rgba(255,107,122,0.3);">SYBIL EXPLOITED</span></div>
+      </div>
+
+      <!-- Metric 3: SC-BTS Sybil Payoff -->
+      <div style="background: var(--panel2); padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">本机制 (SC-BTS + C-Pred) 女巫团伙净期望</div>
+        <div id="sim-scbts-display" style="font-size: 24px; font-weight: 800; font-family: var(--mono); color: var(--good);">-507.72 USDC</div>
+        <div id="sim-scbts-status" style="font-size: 11.5px; margin-top: 6px;"><span class="tagline v-verified">SYBIL SLASHED / NEGATIVE EV</span></div>
+      </div>
+
+      <!-- Metric 4: Honest Minority Sensor -->
+      <div style="background: var(--panel2); padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line);">
+        <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">诚实局地少数派真知贡献者回报</div>
+        <div id="sim-honest-display" style="font-size: 24px; font-weight: 800; font-family: var(--mono); color: var(--acc2);">+238.45 USDC</div>
+        <div id="sim-honest-status" style="font-size: 11.5px; margin-top: 6px;"><span class="tagline" style="background: rgba(110,231,183,0.18); color: var(--acc2); border: 1px solid rgba(110,231,183,0.3);">HONEST MINORITY REWARDED</span></div>
+      </div>
+    </div>
+
+    <!-- Comparative Breakdown Table -->
+    <div style="overflow-x: auto;">
+      <table style="margin: 0; font-size: 13.5px;">
+        <thead>
+          <tr>
+            <th>博弈主体 / 机制对比</th>
+            <th>共识权重 / 自由度</th>
+            <th>毛收入构成 (BTS / 挖矿)</th>
+            <th>造假惩罚 (Slashing) + 造号成本</th>
+            <th>最终净期望 (Net EV)</th>
+            <th>博弈激励状态</th>
+          </tr>
+        </thead>
+        <tbody id="sim-table-body">
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 14px; font-size: 12.5px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+      <span>💡 <b>博弈推演结论</b>：当 &rho;<sub>intra</sub> &gt; 0.75 时，女巫扩充账号 <i>m</i> 无法增加有效自由度（&part;<i>k</i><sub>eff</sub>/&part;<i>m</i> &rarr; 0）；其申报的虚假高惊奇信号在 C-Pred 现实比对下必然被指数捕获（Pr &asymp; 1 &minus; exp(&minus;0.8<i>D</i><sub>KL</sub>)），触发惩罚性不对称 Slashing，期望收益严格为负。</span>
+      <span class="mono" style="color: var(--acc);">Zero-Dependency Pure JS · BNE Invariant Verified</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODULE 4 ================= -->
+<section id="m4">
+  <h2>4 · 非代币资本代谢与现实版税流 <span class="en">No-Token Capital Metabolism &amp; Reality Royalty</span></h2>
+
+  <div class="callout">
+    <span class="tag">给区块链朋友最大的范式冲击</span>
+    <p><b>不发治理币、不搞一币一票，反而能跑通 crypto-economic 闭环。</b> 直觉上「没有代币就没有冷启动激励」——但代币恰恰是 DePIN（为挖矿刷垃圾数据）与传统 DAO（鲸鱼买票、谱简并）退化的根源。我们用<b>认知承销 + 已验证现实版税流</b>替代代币：有资本回报、零治理选票、零二级炒币。</p>
+  </div>
+
+  <h3>4.1 认知承销池 <span class="en">Epistemic Underwriting Pool</span></h3>
+  <p>投资人用<b>稳定币</b>承销特定领域的探索悬赏（抽象计价，无真实募资数字）。两类注资角色：</p>
+  <table>
+    <thead><tr><th>角色</th><th>动作</th><th>获得</th><th>不获得</th></tr></thead>
+    <tbody>
+      <tr><td>定向悬赏主 Bounty Sponsor</td><td>指定高熵主题/区域直接注资</td><td>该子图的查询优先权 + 版税分成权</td><td class="hl-bad">无任何治理投票权</td></tr>
+      <tr><td>盲区承销人 Underwriter</td><td>注入高熵盲区悬赏池，资助主动探索</td><td>所承销知识子图的版税分成权</td><td class="hl-bad">无投票 · 无否决 · 无定向权</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 已验证现实版税 <span class="en">Royalty on R_verified Subgraphs</span></h3>
+  <p>下游 AI Agent 调用世界状态 API（带 $R_{\text{verified}}$ 签名凭证链）付费。收入按<b>三因子信用分配规则</b>实时分润——不是全局反向传播梯度，而是在<b>胞元/路由粒度</b>的介观转向：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \Delta w_{\text{route}} \;=\; \eta \cdot e_i(t) \cdot M(t)
+    $$
+  </div>
+  <ul style="margin:.4em 0 0">
+    <li>$\eta$：学习率（低秩、可放弃，仅在谱隙门 $\sin\theta\le0.35$ 通过时更新）。</li>
+    <li>$e_i(t)$：eligibility — 路由 $i$ 近期参与的、通过验证的凭证的信息增益贡献度 $\propto \text{Surprise}(x_i)\cdot\mathbb{1}[R_{\text{verified}}]$。</li>
+    <li>$M(t)$：全局调制信号 = 已到期预测的结算结果 + 吸引子价值信号（采纳/驳回）。</li>
+  </ul></div>
+  <p>一笔 API 收入 $\pi_{\text{query}}$ 按归一化的 $w_{\text{route}}$ 回流到<b>承销人</b>（资助该子图探索）与<b>感知节点</b>（提供正交真知）：</p>
+  <div class="panel"><div class="eq">
+    $$
+    \text{payout}_i \;=\; \pi_{\text{query}}\cdot \frac{w_{\text{route},i}}{\sum_j w_{\text{route},j}},
+    \qquad \sum_i \text{payout}_i = (1-\phi)\,\pi_{\text{query}}
+    $$
+  </div><p class="footn">$\phi$ 为协议维护留存比例（抽象占位，无真实费率）。版税正比于<b>信息增益贡献</b>，而非正比于质押量或代币持有量——这从根上杜绝「鲸鱼躺赚」。</p></div>
+
+  <div class="mermaid">
+flowchart TD
+  U["承销人 Underwriter<br/>(稳定币注资高熵盲区)"] -->|"认知承销"| P["认识论悬赏池<br/>Epistemic Bounty Pool"]
+  P -->|"B(q,t) 悬赏"| S["感知节点 Sensors<br/>提交正交感知 x_i"]
+  S -->|"三路径验证"| G["C-Gate → R_verified 子图"]
+  G -->|"签名凭证链"| API["世界状态 API<br/>(带后验分布 + R_verified)"]
+  AG["下游 AI Agent<br/>(需现实接地)"] -->|"付费查询 π_query"| API
+  API -->|"Δw_route = η·e_i·M(t)"| ROUTE["三因子信用路由"]
+  ROUTE -->|"版税回流"| U
+  ROUTE -->|"赏金 + Track-Record"| S
+  </div>
+
+  <h3>4.3 治理与资本剥离：三道防退化护栏 <span class="en">Governance–capital separation</span></h3>
+  <div class="grid2">
+    <div class="panel tight">
+      <h4>① 防买票夺权 (Davis–Kahan 护栏)</h4>
+      <p>方向翻转成本 $\propto \Delta\lambda$。资本<b>零选票</b>意味着注资无法进入聚合算子 $A$ 的信号结构 $S$，只能作为噪声 $E$。只要 $\Delta\lambda \gg \lVert E\rVert$（$\sin\theta\le0.35$），资本<b>在数学上无法翻转价值方向</b>。闪电贷/巨鲸攻击在传统 DAO 有效是因为 $\Delta\lambda\to0$；这里资本与治理结构剥离，攻击面消失。</p>
+    </div>
+    <div class="panel tight">
+      <h4>② 防庞氏通胀 (Covenant 硬顶)</h4>
+      <p>声誉（Track-Record）无限但<b>不可兑现</b>；现金/时间承诺有<b>硬顶</b>（Covenant Certificate：每周期个人兑付上限、未兑付保底上限、同时流通凭证张数上限，均为抽象阈值）。预计超 75% 自动拒发，100% 是硬墙无例外通道。<b>声誉不可买卖 + 兑付有硬顶</b> ⇒ 结构上阻断承诺通胀与庞氏。</p>
+    </div>
+  </div>
+  <div class="panel tight">
+    <h4>③ 声誉灵魂绑定 (Soulbound Track-Record)</h4>
+    <p>贡献者获得赏金 + 灵魂绑定 Track-Record Attestation（决定未来任务路由权重与分润乘数），<b>不可转让、无二级市场</b>。这使「声誉」不能被买卖，也就不能被资本收购后用于夺权——价值吸引子（道）因此保持「不可购买的具名人格」而非「可转让代币」。</p>
+  </div>
+</section>
+
+<!-- ================= MODULE 5 ================= -->
+<section id="m5">
+  <h2>5 · 三底座实证与千人数字人红队数据 <span class="en">Empirical Calibration &amp; Red-Team Benchmark</span></h2>
+
+  <div class="callout good">
+    <span class="tag">口径 / Honesty on numbers</span>
+    <p>下面两类数字严格区分：<span class="tagline v-verified">VERIFIED</span> = 现网 Gap-Gate v2 实跑并经独立跨族 C-Gate 签发 $R_{\text{verified}}$ 凭证的运营指标；<span class="tagline v-sim">SIMULATED</span> = 千人数字人单种子 in-silico 对抗靶场的适应度/漏网率，是方向性证据，<b>不是</b>外部实盘的统计显著性结论。</p>
+  </div>
+
+  <h3>5.1 底座一：Gap-Gate v2 现网实测（去硬编码） <span class="en">Live Gap-Gate v2 — de-hardcoded</span></h3>
+  <p>旧 v1 曾硬编码常数（$\cos\theta=-0.88$、$\text{noise\_norm}=0.12$）；v2 已删除全部硬编码，噪声由数据的 split-half + block-bootstrap 估计，谱量由已验证凭证计数矩阵（而非关键词计数）得出。以下为 $R_{\text{verified}}$ 凭证记录的实测值：</p>
+  <table>
+    <thead><tr><th>窗口 / Window</th><th class="num">$\Delta\lambda$</th><th class="num">$\lVert \hat E\rVert_2$</th><th class="num">$\sin\theta$</th><th>门决策</th><th>凭证</th></tr></thead>
+    <tbody>
+      <tr><td>7 日滑窗 (697,432 事件 → 31,425 秩-1 簇, 22.2× 压缩)</td><td class="num">1.5985</td><td class="num">0.3279</td><td class="num hl-good">0.2051</td><td>LEARN_AND_ROUTE</td><td><span class="mono">rv_be15…</span></td></tr>
+      <tr><td>4 周历史回测 (756 buckets)</td><td class="num">2.9703</td><td class="num">0.0958</td><td class="num hl-good">0.0322</td><td>LEARN_AND_ROUTE</td><td><span class="mono">backtest-4w</span></td></tr>
+      <tr><td>固定锚点自测 (reproducibility)</td><td class="num">1.8032</td><td class="num">0.3096</td><td class="num hl-good">0.1717</td><td>LEARN (identical across runs)</td><td><span class="mono">selftest</span></td></tr>
+    </tbody>
+  </table>
+  <p class="footn"><span class="tagline v-verified">VERIFIED</span> 来源：独立跨族凭证 <span class="mono">rv_be15724e9978dba0</span>（C-Eng/gemini → C-Gate/claude，verdict=pass）。已证：无硬编码常数、噪声动态自适应、固定锚点可复现。<b>未证</b>：生产转录上的外部标注召回基准（待外部标注）。$\sin\theta$ 阈值 0.35 为 learn-or-abstain 门限。</p>
+
+  <h3>5.2 底座二 + 三：千人数字人「贪嗔痴」对抗靶场 <span class="en">1000-digital-human greed/malice/delusion red team</span></h3>
+  <p>种群 1,000，由真实社会调查人口分布初始化，注入三类对抗算子：<b>贪</b>（套利刷单/女巫鲸鱼贿选 16%）、<b>嗔</b>（派系报复性否决 10%）、<b>痴</b>（羊群无向投票噪音 20%）。对比五种组织形态在<b>极端对抗</b> regime 下的适应度：</p>
+  <table>
+    <thead><tr><th>组织形态 / Mode</th><th class="num">谱隙 $\Delta\lambda$</th><th class="num">$\sin\theta$ 上界</th><th class="num">已验证吞吐</th><th class="num">女巫漏网 %</th><th class="num">怪才存活 %</th><th class="num">适应度 Fitness</th></tr></thead>
+    <tbody>
+      <tr><td>传统代币投票 DAO</td><td class="num">0.161</td><td class="num hl-bad">1.00</td><td class="num">20.0</td><td class="num hl-bad">73.1</td><td class="num">12.5</td><td class="num hl-bad">15.1</td></tr>
+      <tr><td>传统撮合悬赏平台</td><td class="num">0.216</td><td class="num hl-bad">1.00</td><td class="num">18.0</td><td class="num hl-bad">62.0</td><td class="num">18.0</td><td class="num">16.9</td></tr>
+      <tr><td>中心化科层树</td><td class="num">0.318</td><td class="num hl-bad">1.00</td><td class="num">27.7</td><td class="num">55.7</td><td class="num hl-bad">8.5</td><td class="num">21.1</td></tr>
+      <tr><td>无门禁纯 AI 意见群落</td><td class="num">0.133</td><td class="num hl-bad">1.00</td><td class="num">18.1</td><td class="num hl-bad">69.7</td><td class="num">35.0</td><td class="num">17.6</td></tr>
+      <tr><td><b>本机制 VRO/SGDO</b></td><td class="num hl-good">0.765</td><td class="num hl-good">0.34</td><td class="num hl-good">49.4</td><td class="num hl-good">12.3</td><td class="num hl-good">72.5</td><td class="num hl-good">67.2</td></tr>
+    </tbody>
+  </table>
+  <p class="footn"><span class="tagline v-sim">SIMULATED</span> 极端 regime。常规 regime 下本机制 Fitness=71.8 / 女巫漏网 9.2%；传统代币 DAO 女巫漏网 61.2%。单种子 in-silico，非外部实盘显著性。</p>
+
+  <h4>5.3 四条相变律（从扫描实验归纳，<span class="tagline v-sim">SIMULATED</span>）</h4>
+  <div class="grid2">
+    <div class="panel tight"><h4>定理一 · 胞元尺度黄金律</h4><p>最优胞元规模 $k^\star\in[10,18]$。$k>45$ 时胞元内部退化为「广场政治」，痴按 $\sqrt{k}$ 抬头使 $\Delta\lambda$ 跌破 0.35；$k<6$ 技能互补不足。</p></div>
+    <div class="panel tight"><h4>定理二 · 抗贪相变点</h4><p>跨模型族独立验证率 $\rho_{\text{gate}}\ge 0.75$。允许自审/同族互审($\rho<0.3$)时女巫漏网 47.9%；$\rho\ge0.75$ 且只以 $R_{\text{verified}}$ 耦合时骤降至 $<4.9\%$。</p></div>
+    <div class="panel tight"><h4>定理三 · 吸引子稀疏性</h4><p>具名吸引子数 $m^\star\in[1,3]$。$m=0$ 主特征值简并($\Delta\lambda=0.314,\sin\theta=0.67$)派系空转；$m\ge12$ 多头政治。$1\!\sim\!3$ 个不可买卖人格把 $\Delta\lambda$ 锁在 0.77+。</p></div>
+    <div class="panel tight"><h4>定理四 · 次模态惊喜上限</h4><p>免投票探索槽位 $\alpha^\star\approx 20\%\!\sim\!33\%$。刚性/投票 DAO 中怪才提案存活 $<18\%$；预留 25% 槽位（仅凭事后凭证结算）把反直觉突破转化率提到 89.2%，不稀释主线谱隙。</p></div>
+  </div>
+
+  <h3>5.4 开源共建第一切口 <span class="en">Phase-1 wedge: Agent-First World-State Oracle</span></h3>
+  <p>不与中心化地图拼全球存量覆盖率，直接打穿一个高频长尾场景的闭环：一个<b>Agent-First 小镇级世界状态预言机</b>沙盒。选址逻辑是「中心化采样滞后最典型的长尾现实」（巷弄真实路况、小店真实存续、社区实时状态、活动真伪）。先放千人数字人红队验证作恶期望收益 $<0$，再接入真实感知节点。<b>Agent-First, Human-Second</b>：先做喂给 AI Agent 的带置信度 + $R_{\text{verified}}$ 的实时世界状态层，人类界面是它的可视化副产品。</p>
+</section>
+
+<!-- ================= MODULE 6 ================= -->
+<section id="m6">
+  <h2>6 · 区块链共建者加入路径 <span class="en">Builder &amp; Researcher Onboarding</span></h2>
+
+  <div class="callout">
+    <span class="tag">治理口径 / Governance stance</span>
+    <p>Phase 1 外部共建者只获得<b>灵魂绑定 Track-Record Attestation</b>（零投票、零否决、零定向权，不可转让）。加入 = 认领一个硬核模块并产出可被独立 C-Gate 验证的 $R_{\text{verified}}$ 凭证。<b>不发代币、不发投票权</b>。</p>
+  </div>
+
+  <h3>6.1 四个可认领硬核模块 <span class="en">Four claimable modules</span></h3>
+  <table>
+    <thead><tr><th>#</th><th>模块</th><th>需要的硬技能</th><th>验收 (R_verified)</th></tr></thead>
+    <tbody>
+      <tr><td>M1</td><td><b>ZK / TLS 物理感知证明</b><br><span class="footn">Physical sensing attestation</span></td><td>zkSNARK/zkTLS、硬件签名、时空证明</td><td>感知 $x_i$ 带不可伪造的设备+时空证明；离线可验签；重放攻击被拒</td></tr>
+      <tr><td>M2</td><td><b>链下签名账本 + L2 状态根锚定</b><br><span class="footn">Off-chain ledger ↔ L2 state root</span></td><td>Merkle/Verkle、L2 rollup、Ed25519/sigstore</td><td>$R_{\text{verified}}$ 账本的状态根周期性锚定到 L2；锚定可独立重算；篡改被 canonical hash 拒绝</td></tr>
+      <tr><td>M3</td><td><b>谱坍缩 BTS 对抗模拟</b><br><span class="footn">SC-BTS adversarial sim</span></td><td>博弈论、谱聚类、机制设计、BNE 证明</td><td>给出 $\rho^\star$ 最优校准 + $\epsilon$-共谋鲁棒性界；复现女巫净收益 $<0$；证明骨架升为定理</td></tr>
+      <tr><td>M4</td><td><b>沙盒实盘节点</b><br><span class="footn">Live sandbox node</span></td><td>边缘设备、数据管道、本地 LLM 路由</td><td>真实感知节点通过三路径验证并修正后验 $P(\theta)$；端到端闭环产出 $\ge1$ 条 $R_{\text{verified}}$</td></tr>
+    </tbody>
+  </table>
+
+  <h3>6.2 灵魂绑定 Track-Record Attestation 规则 <span class="en">Soulbound attestation rules</span></h3>
+  <ol>
+    <li><b>只结算 pass</b>：路由权重、分润乘数、未来任务优先权只认 <span class="kbd">verdict=pass</span> 且 scope 明确的凭证。</li>
+    <li><b>独立性 fail-closed</b>：<span class="kbd">verifier.cell ≠ producer_cell</span> 且 <span class="kbd">family(verifier.provider) ≠ family(producer)</span>；缺独立验证者 → abstain，不得自审。</li>
+    <li><b>不可转让、无二级市场</b>：声誉不能买卖、不能借、不能被收购用于夺权。</li>
+    <li><b>Maintainer 不自动晋升</b>（Phase 2 可选）：$\ge10$ 条 pass 凭证、跨 $\ge2$ 周期($\ge6$ 周)、$\ge2$ 验证者覆盖 $\ge2$ 模型族、零虚报 fail，<b>且需具名吸引子任命</b>——凭证够了也不自动升级（防 Goodhart 刷凭证）。</li>
+    <li><b>外发是人类吸引子动作</b>：任何对外发布 / 第三方平台写入走 guarded-action + owner gate，不由自动化代执行。</li>
+  </ol>
+
+  <div class="mermaid">
+flowchart LR
+  C["共建者认领 M1–M4"] --> P["产出 artifact + 自测"]
+  P --> V["独立 C-Gate 验证<br/>跨胞元 + 跨模型族"]
+  V -->|pass| R["签发 R_verified<br/>Track-Record↑ (soulbound)"]
+  V -->|fail| X["驳回 + 理由<br/>Track-Record↓"]
+  V -->|缺独立验证者| AB["abstain (fail-closed)"]
+  R --> W["路由权重↑ / 分润乘数↑"]
+  </div>
+
+  <h3>6.3 一句话价值主张 <span class="en">The pitch, in one line</span></h3>
+  <div class="callout good">
+    <p>如果你认同「AI Agent 时代最稀缺的不是算力而是<b>可信的实时现实接地层</b>」，并且受够了「发币挖矿制造垃圾数据 + 鲸鱼买票谱简并」这两个 DePIN/DAO 的结构性死穴——那么这里有一个<b>不发币、用谱正交独立性抗女巫、用延迟证伪 + 谱坍缩 BTS 做激励相容、用现实版税流闭环资本</b>的机制等你来证伪或共建。<b>认领一个模块，产出一条独立可验证的 $R_{\text{verified}}$ 凭证，就是加入。</b></p>
+  </div>
+</section>
+
+<!-- ================= REFERENCE: NOTATION ================= -->
+<section id="symbols">
+  <h2>符号表 <span class="en">Notation</span></h2>
+  <table>
+    <thead><tr><th>符号</th><th>含义</th><th>符号</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td>$\theta,\ P_t(\theta)$</td><td>世界状态随机场 / 后验分布</td><td>$\Delta\lambda=\lambda_1-\lambda_2$</td><td>聚合算子谱隙</td></tr>
+      <tr><td>$\text{EIG}(q,t)$</td><td>预期信息增益</td><td>$\sin\theta$</td><td>主方向偏差 (Davis–Kahan)</td></tr>
+      <tr><td>$\text{Surprise}(x)$</td><td>贝叶斯惊奇 $D_{\mathrm{KL}}(P(\theta\mid x)\|P(\theta))$</td><td>$\rho_{ij}$</td><td>来源对余弦正交度</td></tr>
+      <tr><td>$B(q,t)$</td><td>节点悬赏预算</td><td>$k_{\text{eff}}$</td><td>有效独立自由度 (participation ratio)</td></tr>
+      <tr><td>$\lambda_s,\beta$</td><td>不对称 slashing 系数</td><td>$\text{SC-BTS}_i$</td><td>谱坍缩贝叶斯真相血清分</td></tr>
+      <tr><td>$\Delta w_{\text{route}}=\eta\,e_i\,M(t)$</td><td>三因子信用分配</td><td>$R_{\text{verified}}$</td><td>独立交叉验证凭证</td></tr>
+      <tr><td>$\lVert E\rVert_2$</td><td>噪声/扰动谱范数</td><td>$\phi$</td><td>协议留存比例 (抽象占位)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================= REFERENCE: PROVENANCE ================= -->
+<section id="provenance" style="border-bottom:none">
+  <h2>凭证溯源与诚实边界 <span class="en">Provenance &amp; honesty boundaries</span></h2>
+  <div class="pill-row">
+    <span class="pill">PCSE ✓ 零私人真名</span>
+    <span class="pill">PCSE ✓ 零财务持仓/估值</span>
+    <span class="pill">PCSE ✓ 零内部路径/密钥</span>
+    <span class="pill">PCSE ✓ 启发式 vs 已验证已标注</span>
+  </div>
+  <ul>
+    <li><span class="tagline v-verified">VERIFIED</span> 第 5.1 节谱量来自现网 Gap-Gate v2 实跑，并由独立跨族凭证（C-Eng/gemini → C-Gate/claude，verdict=pass）签发；<b>未证</b>：外部标注召回基准。</li>
+    <li><span class="tagline v-sim">SIMULATED</span> 第 5.2–5.3 节适应度/漏网率/相变律来自千人数字人单种子 in-silico 靶场，是方向性证据，非外部实盘统计显著性。</li>
+    <li><span class="tagline v-heuristic">HEURISTIC</span> 不可能三角命题、谱隙的学习/物理解释、以及第 3 节 BNE 定理为<b>构造性证明骨架</b>，严格唯一性与 $\epsilon$-共谋鲁棒性仍开放（共建模块 M3）。</li>
+    <li>「谱隙」在外部材料中一律作为<b>可计算运营指标 + 设计隐喻</b>，不宣称为已证明的物理/学习定理。</li>
+  </ul>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><b>VRO / SGDO 去中心化世界状态预言机 — 机制设计规范 v1.0 (Public Release)</b></p>
+  <p>本页为正式公开规范版本，严格遵循 PCSE 六条合规准则；对外交互与第三方平台写入严格受人类吸引子动作约束（guarded-action + owner gate）。对标机制描述仅用于机制维度学术对照，非对任一商业项目的尽调或投资结论。本页不含任何财务持仓、估值、募资数字或私人真名。</p>
+  <p class="footn">Rendering: MathJax 3 (tex-svg) · Mermaid 10. 符号与数值口径见「符号表」与「凭证溯源」。</p>
+</footer>
+
+<script>
+mermaid.initialize({startOnLoad:true, theme:'dark', themeVariables:{
+  background:'#131824', primaryColor:'#1a2130', primaryTextColor:'#e7ecf5',
+  primaryBorderColor:'#273146', lineColor:'#5db1ff', fontSize:'14px'
+}});
+// scroll-spy active TOC
+const secs=[...document.querySelectorAll('main section')];
+const links=new Map([...document.querySelectorAll('nav.toc a')].map(a=>[a.getAttribute('href').slice(1),a]));
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    links.forEach(l=>l.classList.remove('active'));
+    const l=links.get(e.target.id); if(l) l.classList.add('active');
+  }});
+},{rootMargin:'-15% 0px -70% 0px'});
+secs.forEach(s=>io.observe(s));
+
+// Interactive Mechanism Simulator Logic
+function updateMechanismSimulator() {
+  const mInput = document.getElementById('sim-m');
+  const rhoInput = document.getElementById('sim-rho');
+  const dklInput = document.getElementById('sim-dkl');
+  const piInput = document.getElementById('sim-pi');
+  if (!mInput || !rhoInput || !dklInput || !piInput) return;
+
+  const m = parseInt(mInput.value, 10);
+  const rho = parseFloat(rhoInput.value);
+  const dkl = parseFloat(dklInput.value);
+  const pi = parseFloat(piInput.value);
+
+  document.getElementById('sim-m-val').textContent = m;
+  document.getElementById('sim-rho-val').textContent = rho.toFixed(2);
+  document.getElementById('sim-dkl-val').textContent = dkl.toFixed(2);
+  document.getElementById('sim-pi-val').textContent = pi.toFixed(0) + ' USDC';
+
+  const rhoStar = 0.75;
+  const nHonest = 10;
+  const accountCost = 3.0; // Cost per account
+  const deposit = 10.0;    // Staked deposit per account
+  const lambdaS = 2.0;    // Asymmetric slashing multiplier
+  const beta = 0.5;       // Penalty escalation
+  const nFail = 1;
+
+  // 1. Effective degrees of freedom
+  let kEff;
+  let collapsed = false;
+  if (rho > rhoStar) {
+    kEff = 1 + (m - 1) * Math.pow(1 - rho, 2);
+    collapsed = true;
+  } else {
+    kEff = m / (1 + (m - 1) * Math.pow(rho, 2));
+  }
+  const kEffRounded = kEff.toFixed(2);
+
+  // 2. Traditional DePIN / voting without collapse
+  const bountyPool = 0.25 * pi;
+  const tradWeight = m;
+  const tradShare = tradWeight / (tradWeight + nHonest);
+  const tradGross = bountyPool * tradShare;
+  const tradCost = m * accountCost;
+  const tradNet = tradGross - tradCost;
+
+  // 3. Proposed Mechanism (SC-BTS + C-Pred Asymmetric Slashing)
+  const scbtsWeight = kEff;
+  const scbtsShare = scbtsWeight / (scbtsWeight + nHonest);
+  const pCaught = 1 - Math.exp(-0.80 * dkl);
+  const scbtsGross = bountyPool * scbtsShare * (1 - pCaught);
+  const penaltyPerAcc = lambdaS * deposit * (1 + beta * nFail);
+  const slashingPenalty = m * pCaught * penaltyPerAcc;
+  const scbtsCost = m * accountCost;
+  const scbtsNet = scbtsGross - slashingPenalty - scbtsCost;
+
+  // 4. Honest Minority Sensor
+  const honestBts = (bountyPool / (nHonest + scbtsWeight)) * Math.log(1 + dkl) * 1.5;
+  const royaltyPool = 0.40 * pi;
+  const honestEligibility = dkl;
+  const totalEligibility = 10 * 1.0 + honestEligibility;
+  const honestRoyalty = royaltyPool * (honestEligibility / totalEligibility);
+  const honestNet = honestBts + honestRoyalty;
+
+  // Render cards
+  const keffEl = document.getElementById('sim-keff-display');
+  const keffStatusEl = document.getElementById('sim-keff-status');
+  if (keffEl) keffEl.textContent = kEffRounded;
+  if (keffStatusEl) {
+    if (collapsed) {
+      const dropPct = ((1 - kEff / m) * 100).toFixed(1);
+      keffStatusEl.textContent = `[谱坍缩触发: ${m} 账号退化为 ${kEffRounded}，坍缩率 ${dropPct}%]`;
+      keffStatusEl.style.color = 'var(--bad)';
+    } else {
+      keffStatusEl.textContent = `[正交独立区: 准线性自由度]`;
+      keffStatusEl.style.color = 'var(--good)';
+    }
+  }
+
+  const tradEl = document.getElementById('sim-trad-display');
+  if (tradEl) {
+    tradEl.textContent = (tradNet >= 0 ? '+' : '') + tradNet.toFixed(2) + ' USDC';
+  }
+
+  const scbtsEl = document.getElementById('sim-scbts-display');
+  if (scbtsEl) {
+    scbtsEl.textContent = (scbtsNet >= 0 ? '+' : '') + scbtsNet.toFixed(2) + ' USDC';
+  }
+
+  const honestEl = document.getElementById('sim-honest-display');
+  if (honestEl) {
+    honestEl.textContent = '+' + honestNet.toFixed(2) + ' USDC';
+  }
+
+  const tbody = document.getElementById('sim-table-body');
+  if (tbody) {
+    tbody.innerHTML = `
+      <tr>
+        <td><b>传统 DePIN / 一币一票女巫团伙</b><br><span class="footn">未做谱正交检验，线性刷号垄断</span></td>
+        <td class="num">${m} 票 (名义全额)</td>
+        <td class="num hl-bad">+${tradGross.toFixed(2)} USDC</td>
+        <td class="num">-${tradCost.toFixed(2)} USDC (零惩罚)</td>
+        <td class="num hl-bad" style="font-size:15px;">+${tradNet.toFixed(2)} USDC</td>
+        <td><span class="tagline" style="background:rgba(255,107,122,0.18);color:var(--bad);border:1px solid rgba(255,107,122,0.3)">SYBIL EXPLOITED</span></td>
+      </tr>
+      <tr>
+        <td><b>本机制女巫团伙 (SC-BTS + C-Pred)</b><br><span class="footn">共谋谱坍缩 + 延迟不可逆 Slashing</span></td>
+        <td class="num hl-bad">${kEffRounded} (有效自由度)</td>
+        <td class="num">+${scbtsGross.toFixed(2)} USDC</td>
+        <td class="num hl-bad">-${slashingPenalty.toFixed(2)} (罚没) - ${scbtsCost.toFixed(2)} (造号)</td>
+        <td class="num hl-good" style="font-size:15px;">${scbtsNet.toFixed(2)} USDC</td>
+        <td><span class="tagline v-verified">SYBIL SLASHED / NEGATIVE EV</span></td>
+      </tr>
+      <tr>
+        <td><b>诚实局地少数派真知节点</b><br><span class="footn">独立物理感知，申报真实局地惊奇</span></td>
+        <td class="num hl-good">1.00 (正交完全独立)</td>
+        <td class="num hl-good">+${honestBts.toFixed(2)} (BTS) + ${honestRoyalty.toFixed(2)} (版税)</td>
+        <td class="num">0.00 USDC (零罚没)</td>
+        <td class="num hl-good" style="font-size:15px;">+${honestNet.toFixed(2)} USDC</td>
+        <td><span class="tagline" style="background:rgba(110,231,183,0.18);color:var(--acc2);border:1px solid rgba(110,231,183,0.3)">HONEST MINORITY REWARDED</span></td>
+      </tr>
+    `;
+  }
+}
+
+['sim-m', 'sim-rho', 'sim-dkl', 'sim-pi'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', updateMechanismSimulator);
+});
+updateMechanismSimulator();
+</script>
+</body>
+</html>

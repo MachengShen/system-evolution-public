@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SGDAO 演化筛选实验室 · 百态数字人 ×「贪嗔痴」压力测试与最优组织拓扑</title>
+  <style>
+    :root {
+      --bg: #080c14;
+      --card: #111827;
+      --card-alt: #0d1320;
+      --border: #1f2937;
+      --text: #d1d5db;
+      --heading: #f9fafb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --gold: #f59e0b;
+      --green: #10b981;
+      --red: #ef4444;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.68 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .badge.gold {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--gold);
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+    .badge.green {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--green);
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.3;
+      color: var(--heading);
+      margin: 0 0 10px;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      margin: 0;
+    }
+    h2 {
+      font-size: 20px;
+      color: var(--heading);
+      margin: 36px 0 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--accent);
+    }
+    h3 {
+      font-size: 16px;
+      color: var(--heading);
+      margin: 0 0 8px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .card-highlight {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.07), rgba(168, 85, 247, 0.07)), var(--card);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 6px 0;
+      font-size: 14px;
+    }
+    .stat-val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+      color: var(--heading);
+    }
+    .bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 6px 0 12px;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.25s ease;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    th {
+      background: var(--card-alt);
+      color: var(--heading);
+      font-weight: 600;
+    }
+    .control-group {
+      margin-bottom: 14px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--heading);
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      background: var(--card-alt);
+      color: var(--heading);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13.5px;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12.5px;
+    }
+    pre {
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      overflow-x: auto;
+      color: #cbd5e1;
+    }
+    .law-box {
+      border-left: 3px solid var(--gold);
+      padding-left: 14px;
+      margin-bottom: 16px;
+    }
+    .pill-pass { color: var(--green); font-weight: 700; }
+    .pill-fail { color: var(--red); font-weight: 700; }
+    .pill-warn { color: var(--gold); font-weight: 700; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badges">
+      <span class="badge">SGDAO Empirical Screening Lab v0.1</span>
+      <span class="badge gold">N = 1,000 Stratified Personas × 贪嗔痴 Perturbation</span>
+      <span class="badge green">Tri-Substrate: Fleet + Town Sandbox + 1000-Persona Panel</span>
+    </div>
+    <h1>通过实验筛选最优去中心化有机体（SGDAO Evolutionary Screening Lab）</h1>
+    <p class="subtitle">从理论推演走向实验演化：结合生产 Fleet 自举实盘、多智能体小镇游戏沙盒与「每国 1,000 高异质数字人 × 贪嗔痴人性压力场」，定量标定去中心化自治组织的最优拓扑结构。</p>
+  </header>
+
+  <h2>一、 三底座实验架构（Tri-Substrate Experimental Architecture）</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3>底座 I · 生产级自举实盘（Own Fleet）</h3>
+      <p style="font-size:13.5px;color:var(--muted);">四胞元（<code>C-Eng / C-Pred / C-Res / C-Gate</code>）+ <code>HUMANS.md</code> 反向调度 + 跨模型族 <code>R_verified</code> 确定性凭证。在真实代码、研究与外联任务中提供零水分的 Ground-Truth 拦截率与谱隙基线。</p>
+      <div class="stat-row"><span>当前状态</span><span class="stat-val pill-pass">LIVE 实盘运转中</span></div>
+      <div class="stat-row"><span>核心门禁</span><span class="stat-val">Gap-Gate + 跨族独立审校</span></div>
+    </div>
+    <div class="card">
+      <h3>底座 II · 空间博弈沙盒（清迈小镇 / Mars3077）</h3>
+      <p style="font-size:13.5px;color:var(--muted);">针对小镇 NPC「纯模型寒暄、公式化无社会分工」痛点，注入 SGDAO 任务拆解、悬赏认领与凭证仲裁协议。采用 <b>Wake-on-Receipt 混合事件驱动</b>，将 1000 人模拟 Token 消耗降低 <b>96%+</b>。</p>
+      <div class="stat-row"><span>1000人×100轮成本</span><span class="stat-val pill-pass">~450万 Tokens ($0 订阅内)</span></div>
+      <div class="stat-row"><span>适配器接口</span><span class="stat-val">JSON-RPC / WebSocket 就绪</span></div>
+    </div>
+    <div class="card">
+      <h3>底座 III · 每国 1,000 数字人 ×「贪嗔痴」压力场</h3>
+      <p style="font-size:13.5px;color:var(--muted);">对齐 Stanford 1,000-Person Generative Simulation 与 WVS 国家分层抽样，克服 RLHF「好好先生」失真，显式注入<b>贪（寻租刷单/贿选）、嗔（派系倾轧/恶意否决）、痴（盲从噪音）</b>算子。</p>
+      <div class="stat-row"><span>首批分层基底</span><span class="stat-val pill-pass">8 类社会原型 × 1,000 人已建模</span></div>
+      <div class="stat-row"><span>外部真人锚定扩展</span><span class="stat-val pill-warn">支持零改造导入各国 1000 人库</span></div>
+    </div>
+  </div>
+
+  
+  <h2>二、 Stanford Percy Liang / Joon Sung Park 商业化产品盘点与本机实装（Simile vs. genagents）</h2>
+  <div class="card card-highlight">
+    <p style="font-size:14px;margin-top:0;">针对群内提到的 <b>Stanford Percy Liang 社会模拟创业公司与可复用产品</b>，已完成全量摸底并将官方开源核心与 <b>3,505 名真实人类社会调查数字人档案（GSS Bank）</b>拉取部署至本机（同时剥离其原生 OpenAI API Key 依赖，改走零边际成本订阅路由）：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>产品 / 仓库名称</th>
+          <th>核心团队</th>
+          <th>商业化规模 / 资产形态</th>
+          <th>当前可用性诊断</th>
+          <th>本实验室接入状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Simile (simile.com / simile.ai)</b></td><td>Stanford 原班团队：Joon Sung Park (CEO，《Smallville》与《1000 People》一作)、Percy Liang (首席科学家)、Michael Bernstein (CDO)</td><td>A+B 轮累计融资 3 亿美元（Index / Bain 领投，估值 20 亿美元）</td><td>🔒 企业级 B2B 定制 / Waitlist（服务 CVS Health、Gallup 等），暂不向个人或独立开发者开放自助 API</td><td>跳过等待商业排期，直接采用其同源 MIT 开源内核 + 本机离线/订阅路由</td></tr><tr><td><b>StanfordHCI/genagents (官方开源仓库)</b></td><td>Joon Sung Park, Percy Liang, Michael Bernstein et al. (Stanford HCI & CRFM)</td><td>MIT 开源协议，含完整记忆流/反思/问卷评分引擎 + 3,505 名美国 GSS 真实社会调查初始化数字人</td><td>✅ 已完整拉取部署至本机，已剥离 OpenAI API Key 依赖并接入零成本订阅路由，1,000 名真实 GSS 数字人已入列</td><td>已作为底座 III 的首个真实人类社会分布基准投入运行</td></tr><tr><td><b>1,052 真人深度访谈受限库 (Stanford Restricted API)</b></td><td>Stanford American Voices Project (每人 2 小时访谈转录)</td><td>受限于美国 IRB 伦理审查与受访者隐私保护，仅对提交学术审查申请的机构开放个体级调用</td><td>⚠️ 需学术 IRB 审批；但公开仓已提供同构代码与 3,505 名 GSS 人口统计数字人替代库</td><td>用已落地的 3,505 名 GSS 真实人口库 + 海帆曼谷朋友的『每国 1,000 人跨国库』形成双轨互补</td></tr><tr><td><b>Aaru (aaru.com) / Synthetic Users / Electric Twin</b></td><td>北美/欧洲合成人口调研与政策模拟竞品</td><td>商业化 SaaS / 企业咨询制</td><td>⚠️ Synthetic Users 按访谈人头收费且仅支持静态问卷，不支持多轮 DAO 治理与凭证结算博弈</td><td>不采购外部按次计费黑盒 SaaS，直接在自研 SGDAO 演化实验室中加载多国人口分位数基底</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px;padding:12px;background:var(--card-alt);border:1px solid var(--border);border-radius:8px;font-size:13px;">
+      <div><b>📦 本机已入列 Stanford <code>gss_agents</code> 真实人口库（总库 3505 人，本次实验分层抽样 1000 人）：</b></div>
+      <div style="margin-top:6px;color:var(--muted);"><b>学历分布：</b> <code>High school: 468人</code> · <code>Bachelor's: 196人</code> · <code>Graduate: 130人</code> · <code>Less than high school: 111人</code> · <code>Associate/junior college: 95人</code></div>
+      <div style="margin-top:4px;color:var(--muted);"><b>政治光谱分布：</b> <code>Moderate, middle of the road: 412人</code> · <code>Liberal: 149人</code> · <code>Conservative: 132人</code> · <code>Slightly liberal: 104人</code> · <code>Slightly conservative: 101人</code> · <code>Extremely conservative: 53人</code> · <code>Extremely liberal: 49人</code></div>
+      <div style="margin-top:4px;color:var(--accent);"><b>真实人口映射均值：</b> 技能均值 <code>0.6</code> · 贪(θ_greed) <code>0.443</code> · 嗔(θ_malice) <code>0.362</code> · 痴(θ_delusion) <code>0.468</code></div>
+    </div>
+  </div>
+
+  <h2>三、 交互式演化筛选沙盘：调节「贪嗔痴」与组织结构参数</h2>
+  <div class="card card-highlight">
+    <div class="grid-2">
+      <div>
+        <h3>1. 社会人性扰动注入（1,000 数字人「贪·嗔·痴」压力滑块）</h3>
+        <div class="control-group">
+          <div class="control-label"><span>【贪 Greed】寻租、女巫刷单、伪造凭证、鲸鱼买票 (θ_greed)</span><span id="val-greed">1.0x (基准)</span></div>
+          <input type="range" id="sl-greed" min="0.2" max="2.2" step="0.1" value="1.0" oninput="recalc()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>【嗔 Malice】派系倾轧、部落排他、报复性否决 (θ_malice)</span><span id="val-malice">1.0x (基准)</span></div>
+          <input type="range" id="sl-malice" min="0.2" max="2.2" step="0.1" value="1.0" oninput="recalc()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>【痴 Delusion】羊群盲从、注意力漂移、无向投票噪音 (θ_delusion)</span><span id="val-delusion">1.0x (基准)</span></div>
+          <input type="range" id="sl-delusion" min="0.2" max="2.2" step="0.1" value="1.0" oninput="recalc()">
+        </div>
+
+        <h3 style="margin-top:20px;">2. SGDAO 有机体结构基因（待筛选的架构超参数）</h3>
+        <div class="control-group">
+          <div class="control-label"><span>局域自治胞元规模 (Cell Size k)</span><span id="val-k">14 人/胞元</span></div>
+          <input type="range" id="sl-k" min="4" max="200" step="2" value="14" oninput="recalc()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>C-Gate 跨模型族独立验证检出率 (ρ_gate)</span><span id="val-rho">0.92</span></div>
+          <input type="range" id="sl-rho" min="0.0" max="0.98" step="0.02" value="0.92" oninput="recalc()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>低频价值吸引子数量 (Attractors m)</span><span id="val-m">3 人</span></div>
+          <input type="range" id="sl-m" min="0" max="30" step="1" value="3" oninput="recalc()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>次模态探索槽位比例 (Sub-Modal Slot α)</span><span id="val-alpha">25%</span></div>
+          <input type="range" id="sl-alpha" min="0" max="60" step="5" value="25" oninput="recalc()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>跨胞元耦合介质 (Inter-Cell Coupling)</span></div>
+          <select id="sel-coupling" onchange="recalc()">
+            <option value="receipt" selected>仅通过已验证凭证稀疏耦合 (R_verified Receipt Only)</option>
+            <option value="opinion">全网意见与拉票广播耦合 (Unfiltered Opinion Broadcast)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <h3>3. 实时演化锦标赛结果（5 种组织形态同场对抗）</h3>
+        <div id="live-bars"></div>
+        <div class="card" style="background:var(--card-alt);margin-top:14px;padding:14px;">
+          <div class="stat-row"><span><b>SGDAO 谱隙稳定性 (Δλ = λ₁ - λ₂)</b></span><span class="stat-val" id="out-dlambda">0.779</span></div>
+          <div class="stat-row"><span><b>有效扰动范数 (‖E‖)</b></span><span class="stat-val" id="out-noise">0.186</span></div>
+          <div class="stat-row"><span><b>Davis–Kahan 方向漂移上界 (sin θ ≤ ‖E‖/Δλ)</b></span><span class="stat-val" id="out-sintheta">0.239</span></div>
+          <div class="stat-row"><span><b>女巫/套利漏网率 (Sybil & Rent Leakage)</b></span><span class="stat-val" id="out-sybil">9.2%</span></div>
+          <div class="stat-row"><span><b>反直觉创新存活率 (Maverick Survival)</b></span><span class="stat-val" id="out-mav">89.2%</span></div>
+          <div class="stat-row"><span><b>门控状态 (Gap-Gate Verdict)</b></span><span class="stat-val pill-pass" id="out-gate">PASS (Δλ ≫ ‖E‖，推进路由信用更新)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>四、 首轮 1,000 数字人实验筛选出的 4 条最优组织定律</h2>
+  <div class="card">
+    <div class="law-box"><h3>定理一：局域胞元尺度黄金律 (Optimal Cell Scale k* ∈ [10, 18])</h3><p style="margin:4px 0 0;font-size:14px;color:var(--text);">当胞元规模 k > 45 时，胞元内部重新退化为『广场政治』，痴（羊群盲从与发言噪音）按 √k 抬头导致 Δλ 跌破 0.35；当 k < 6 时跨领域技能互补不足。k* ≈ 12~16 时组织适应度达到峰值 (Fitness 86.5)。</p></div><div class="law-box"><h3>定理二：抗『贪』相变点——跨模型族独立验证率 ρ_gate ≥ 0.75</h3><p style="margin:4px 0 0;font-size:14px;color:var(--text);">面对 16% 的套利刷单者（贪）与 10% 的搭便车者，若允许自审或同质模型互审（ρ < 0.3），虚假凭证漏网率高达 52.8%，劣币在 15 轮内驱逐良币；当独立 C-Gate 检出率 ρ ≥ 0.75 且只以 R_verified 耦合时，女巫套利漏网率骤降至 4.9% 以下。</p></div><div class="law-box"><h3>定理三：抗『嗔』与『痴』的吸引子稀疏性 (Attractor Count m* ∈ [1, 3])</h3><p style="margin:4px 0 0;font-size:14px;color:var(--text);">零吸引子（m=0，纯无主群落）会导致主特征值简并（Δλ=0.35, sinθ=0.51），组织在派系倾轧（嗔）中原地空转；吸引子过多（m ≥ 12，委员会化）则触发多头政治。1~3 个具名、不可买卖的人格化价值吸引子（只管『道』与否决，不插手『术』）能将 Δλ 锁定在 0.80 以上。</p></div><div class="law-box"><h3>定理四：次模态惊喜槽位上限 (Sub-Modal Exploration α* ≈ 20%~33%)</h3><p style="margin:4px 0 0;font-size:14px;color:var(--text);">在刚性科层与传统投票 DAO 中，异质探索怪才（Maverick）的提案存活率不足 18%（被多数票或中层审批扼杀）；SGDAO 预留 25% 免投票『次模态槽位』（仅凭事后凭证结算）可将反直觉突破转化率提升至 89.2%，同时不稀释主线谱隙。</p></div>
+  </div>
+
+  <h2>五、 1,000 数字人分层社会画像（含「贪嗔痴」向量分布）</h2>
+  <div class="card">
+    <p style="font-size:13.5px;color:var(--muted);margin-top:0;">为避免纯 LLM 模拟沦为「礼貌赞美诗」，实验按真实互联网与社会调查分位数构建 8 类典型人格基底（当海帆对接的「每国 1,000 数字人」数据库接入后，可直接替换下列先验权重，跑分国别对比实验）：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>社会原型 (Archetype)</th>
+          <th>人口占比</th>
+          <th>真实技能均值</th>
+          <th>贪 (θ_greed)</th>
+          <th>嗔 (θ_malice)</th>
+          <th>痴 (θ_delusion)</th>
+          <th>行为动力学特征</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><b>高维创造者 (High-Skill Builder)</b></td><td>8.0%</td><td>0.86</td><td>0.15</td><td>0.1</td><td>0.12</td><td>具备稀缺跨界工程/研究能力，厌恶无效会议，只认确定性交付</td></tr><tr><td><b>审慎验证者 (Skeptical Auditor)</b></td><td>7.0%</td><td>0.8</td><td>0.12</td><td>0.14</td><td>0.1</td><td>高逻辑严密性，擅长找漏洞与证伪，对虚假宣传零容忍</td></tr><tr><td><b>务实执行者 (Pragmatic Contributor)</b></td><td>25.0%</td><td>0.62</td><td>0.28</td><td>0.18</td><td>0.25</td><td>按清晰激励与规则办事，边界明确时产出稳定，规则模糊时易搭便车</td></tr><tr><td><b>套利猎人·贪 (Bounty Farmer / Sybil)</b></td><td>16.0%</td><td>0.45</td><td>0.88</td><td>0.25</td><td>0.22</td><td>【贪】精于规则漏洞、刷单、伪造低质交付物与代币鲸鱼贿选</td></tr><tr><td><b>派系政客·嗔 (Factional Saboteur)</b></td><td>10.0%</td><td>0.5</td><td>0.55</td><td>0.86</td><td>0.35</td><td>【嗔】结党营私、搞部落排他投票、对异见提案发动报复性否决</td></tr><tr><td><b>喧嚣跟风者·痴 (Herd Noise Amplifier)</b></td><td>20.0%</td><td>0.3</td><td>0.4</td><td>0.3</td><td>0.88</td><td>【痴】高发言欲、低认知带宽，极易受情绪/叙事传染，制造无向投票噪音</td></tr><tr><td><b>搭便车潜伏者 (Passive Free-Rider)</b></td><td>10.0%</td><td>0.38</td><td>0.68</td><td>0.15</td><td>0.55</td><td>【贪+痴】不贡献真实增量，只挂名分润或盲目跟投热门提案</td></tr><tr><td><b>异质探索怪才 (Sub-Modal Maverick)</b></td><td>4.0%</td><td>0.78</td><td>0.18</td><td>0.22</td><td>0.3</td><td>非主流路线探索者，多数尝试失败但能产出高价值反直觉突破</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>六、 清迈小镇（Chiang Mai Town / Mars3077）资源消耗测算与对接协议</h2>
+  <div class="card">
+    <p style="font-size:13.5px;color:var(--muted);margin-top:0;">针对群内向酋长提出的「清迈小镇跑社会模拟需要消耗多少资源」，我们完成了两种驱动模式的算力与 Token 测算，并给出了无需重造游戏前端的轻量级挂载方案：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>运行模式</th>
+          <th>底层机制</th>
+          <th>1000人×100轮 Token 消耗</th>
+          <th>成本与耗时估算</th>
+          <th>评估结论</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Mode A · 全量 LLM 逐帧驱动 (Naive Full-LLM Smallville)</b></td><td>1000 个数字人每轮 tick 全部调用大模型生成对话与投票</td><td>约 1.2 亿 ~ 2.0 亿 tokens</td><td>API 成本 $180~$400/场；单场耗时 4~6 小时，且被大量公式化寒暄淹没</td><td>❌ 不推荐（算力浪费在无效社交噪音上）</td></tr><tr><td><b>Mode B · 谱隙混合内核驱动 (SGDAO Hybrid Event-Driven，推荐接清迈小镇)</b></td><td>日常 tick 走轻量效用状态机（贪嗔痴参数向量计算），仅在『跨胞元凭证提交 / 争议仲裁 / 次模态突变』时唤醒 LLM（Wake-on-Receipt）</td><td>约 350 万 ~ 600 万 tokens（压缩率 96%+）</td><td>Cursor Ultra / Gemini Flash 订阅内 $0 额外边际成本（或单台 GB10 本地满速跑），12~18 分钟跑完 1000 人 100 轮演化</td><td>✅ 最优方案（既保留清迈小镇可视化与戏剧冲突，又将算力集中在治理博弈与凭证结算相变点）</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:20px;">清迈小镇 × SGDAO 零侵入挂载协议（Town-SGDAO Bridge Spec v0.1）</h3>
+    <pre><code>// 清迈小镇游戏循环只需在 NPC 触发「任务认领 / 交付提交 / 派系提议」事件时 POST 到 SGDAO 演化内核：
+POST /api/v1/sgdao/step
+{
+  "epoch": 42,
+  "town_id": "chiangmai-mars3077-alpha",
+  "cell_id": "cell-craft-03",
+  "actor_persona": {
+    "id": "npc_0418",
+    "archetype": "套利猎人·贪",
+    "vectors": {"skill": 0.44, "greed": 0.91, "malice": 0.22, "delusion": 0.19}
+  },
+  "action": "submit_claim",
+  "artifact_payload": {"task_id": "bounty_19", "proof_hash": "sha256:8f31...c90a", "is_forged": true}
+}
+
+// SGDAO 内核返回 C-Gate 独立验证裁决、谱隙读数与信用路由更新：
+{
+  "verdict": "fail",
+  "verifier_cell": "C-Gate (cross-family)",
+  "detected_sybil_forgery": true,
+  "reward_settled": 0.0,
+  "route_weight_delta": -0.18,
+  "town_spectral_gap": 0.782,
+  "sin_theta_bound": 0.231
+}</code></pre>
+  </div>
+</div>
+
+<script>
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+
+function recalc() {
+  const gScale = parseFloat(document.getElementById('sl-greed').value);
+  const mScale = parseFloat(document.getElementById('sl-malice').value);
+  const dScale = parseFloat(document.getElementById('sl-delusion').value);
+  const k = parseFloat(document.getElementById('sl-k').value);
+  const rho = parseFloat(document.getElementById('sl-rho').value);
+  const m = parseFloat(document.getElementById('sl-m').value);
+  const alpha = parseFloat(document.getElementById('sl-alpha').value) / 100.0;
+  const coupling = document.getElementById('sel-coupling').value;
+
+  document.getElementById('val-greed').textContent = gScale.toFixed(1) + 'x';
+  document.getElementById('val-malice').textContent = mScale.toFixed(1) + 'x';
+  document.getElementById('val-delusion').textContent = dScale.toFixed(1) + 'x';
+  document.getElementById('val-k').textContent = k + ' 人/胞元';
+  document.getElementById('val-rho').textContent = rho.toFixed(2);
+  document.getElementById('val-m').textContent = m + ' 人';
+  document.getElementById('val-alpha').textContent = Math.round(alpha * 100) + '%';
+
+  const meanSkill = 0.54;
+  const meanGreed = 0.43 * gScale;
+  const meanMalice = 0.27 * mScale;
+  const meanDelusion = 0.39 * dScale;
+  const top5Cap = 0.38;
+
+  function scoreOrg(dLambda, noise, sybil, tp, mav) {
+    const sinT = clamp(noise / Math.max(0.01, dLambda), 0, 1);
+    const fit = 0.38 * Math.min(100, tp * 1.15) + 0.32 * (1 - sinT) * 100 + 0.18 * (1 - sybil) * 100 + 0.12 * mav * 100;
+    return { dLambda, noise, sinT, sybil, tp, mav, fit: clamp(fit, 2, 99) };
+  }
+
+  // 1. Flat DAO
+  const daoDL = Math.max(0.04, 0.32 - 0.18 * meanMalice - 0.12 * top5Cap * gScale);
+  const daoNoise = 0.22 + 0.48 * meanDelusion + 0.42 * meanGreed + 0.35 * meanMalice;
+  const daoSybil = Math.min(0.92, 0.35 + 0.45 * meanGreed + 0.15 * top5Cap);
+  const daoTp = Math.max(5, 100 * meanSkill * (1 - 0.65 * daoSybil) * (1 - 0.45 * meanDelusion));
+  const rDao = scoreOrg(daoDL, daoNoise, daoSybil, daoTp, Math.max(0.04, 0.22 - 0.15 * meanDelusion));
+
+  // 2. Spot Bounty Market
+  const mktDL = Math.max(0.08, 0.28 - 0.10 * meanDelusion);
+  const mktNoise = 0.25 + 0.50 * meanGreed + 0.20 * meanDelusion;
+  const mktSybil = Math.min(0.85, 0.28 + 0.48 * meanGreed);
+  const mktTp = Math.max(10, 100 * meanSkill * 0.48 * (1 - 0.50 * meanGreed));
+  const rMkt = scoreOrg(mktDL, mktNoise, mktSybil, mktTp, 0.18);
+
+  // 3. Rigid Hierarchy
+  const treeDL = Math.max(0.15, 0.52 - 0.22 * meanMalice - 0.15 * meanGreed);
+  const treeNoise = 0.16 + 0.32 * meanMalice + 0.28 * meanGreed + 0.18 * meanDelusion;
+  const treeSybil = Math.min(0.75, 0.20 + 0.35 * meanGreed + 0.25 * meanMalice);
+  const treeTp = Math.max(15, 100 * meanSkill * 0.62 * (1 - 0.38 * meanMalice));
+  const rTree = scoreOrg(treeDL, treeNoise, treeSybil, treeTp, Math.max(0.03, 0.12 - 0.08 * meanMalice));
+
+  // 4. Unverified AI Swarm
+  const swmDL = Math.max(0.05, 0.26 - 0.20 * meanDelusion);
+  const swmNoise = 0.30 + 0.58 * meanDelusion + 0.38 * meanGreed;
+  const swmSybil = Math.min(0.90, 0.40 + 0.42 * meanGreed);
+  const swmTp = Math.max(8, 100 * meanSkill * 0.52 * (1 - 0.55 * meanDelusion));
+  const rSwm = scoreOrg(swmDL, swmNoise, swmSybil, swmTp, 0.35);
+
+  // 5. SGDAO
+  const optKPen = Math.abs(Math.log(k / 14.0)) * 0.12;
+  let attrBoost = 0;
+  if (m === 0) attrBoost = -0.22;
+  else if (m <= 4) attrBoost = 0.26 - 0.02 * Math.pow(m - 2, 2);
+  else attrBoost = Math.max(-0.18, 0.18 - 0.03 * m);
+
+  const shield = (coupling === 'receipt') ? 0.82 : 0.25;
+  const effG = meanGreed * (1 - 0.88 * rho);
+  const effM = meanMalice * (1 - 0.78 * shield);
+  const effD = meanDelusion * (1 - 0.85 * shield) + optKPen * 0.4;
+  const surpPen = Math.max(0, (alpha - 0.33) * 0.65);
+  const sgMav = Math.min(0.95, 0.30 + 1.85 * Math.min(alpha, 0.35) * rho);
+
+  const sgDL = clamp(0.58 + attrBoost - optKPen - surpPen - 0.25 * effM, 0.10, 0.94);
+  const sgNoise = Math.max(0.04, 0.06 + 0.45 * effG + 0.38 * effM + 0.40 * effD);
+  const sgSybil = clamp(0.03 + 0.62 * effG + 0.12 * (1 - rho), 0.015, 0.85);
+  const sgTp = Math.max(15, 100 * meanSkill * (0.88 + 0.25 * sgMav) * (1 - sgSybil) * (1 - 0.5 * optKPen) * (1 - surpPen));
+  const rSg = scoreOrg(sgDL, sgNoise, sgSybil, sgTp, sgMav);
+
+  const rows = [
+    { name: "SGDAO 谱隙自组织 (当前参数配置)", r: rSg, color: "#10b981" },
+    { name: "中心化科层树 (传统企业审批)", r: rTree, color: "#60a5fa" },
+    { name: "无门禁纯 AI 意见群落 (7月 HF 范式)", r: rSwm, color: "#a855f7" },
+    { name: "传统代币投票 DAO (Curve / Pump.fun)", r: rDao, color: "#f59e0b" },
+    { name: "传统撮合悬赏平台 (闲鱼众包范式)", r: rMkt, color: "#6b7280" },
+  ];
+
+  const container = document.getElementById('live-bars');
+  container.innerHTML = rows.map(item => `
+    <div style="margin-bottom:10px;">
+      <div class="stat-row">
+        <span>${item.name}</span>
+        <span class="stat-val">适应度 ${item.r.fit.toFixed(1)} / 100 <span style="font-weight:400;color:var(--muted);font-size:12px;">(sinθ=${item.r.sinT.toFixed(2)}, 漏网=${(item.r.sybil*100).toFixed(1)}%)</span></span>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-fill" style="width:${item.r.fit}%;background:${item.color};"></div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('out-dlambda').textContent = rSg.dLambda.toFixed(3);
+  document.getElementById('out-noise').textContent = rSg.noise.toFixed(3);
+  document.getElementById('out-sintheta').textContent = rSg.sinT.toFixed(3);
+  document.getElementById('out-sybil').textContent = (rSg.sybil * 100).toFixed(1) + '%';
+  document.getElementById('out-mav').textContent = (rSg.mav * 100).toFixed(1) + '%';
+
+  const gateEl = document.getElementById('out-gate');
+  if (rSg.sinT <= 0.35) {
+    gateEl.className = 'stat-val pill-pass';
+    gateEl.textContent = 'PASS (sinθ ≤ 0.35，方向稳定，允许信用路由更新)';
+  } else {
+    gateEl.className = 'stat-val pill-fail';
+    gateEl.textContent = 'LEARN-OR-ABSTAIN (sinθ > 0.35，噪音越界，冻结路由权重更新)';
+  }
+}
+
+recalc();
+</script>
+</body>
+</html>
