@@ -434,21 +434,29 @@ flowchart LR
   G -->|"ATOMIC_SETTLEMENT"| A
   </div>
 
-  <h3>2.2 `C-Pred` 的经验贝叶斯去偏与黄牛溢价熔断 <span class="en">Empirical Bayes Score De-biasing &amp; Scalper Flag</span></h3>
-  <p>无论是在日本美食平台还是手工艺品二级市场，原始标称分数与报价都充满商业刷榜、样本稀疏偏置与黄牛哄抬。`C-Pred` 在立项前自动执行两道校准：</p>
+  <h3>2.2 `C-Pred` × Kiro 破偏置真味校准法 v1.0（五因子 Logit-Shapley 评分去偏与黄牛熔断） <span class="en">Kiro 5-Factor Logit-Shapley Score De-Biasing Engine &amp; Scalper Guard</span></h3>
+  <p>在 Tabelog 等美食与手作评测平台中，公开星级 $S_{i,\text{pub}} \in [3.00, 5.00]$ 并非纯粹的手艺函数，而是<b>手艺真值 × 采样生态位 × 社会礼仪规训 × 环境光环 × 平台先验收缩</b>的混杂观测。与 Kiro (`claude-opus-5.5`) 联合设计的<b>「破偏置真味校准法 v1.0」</b>先将有界分数映射至无界优势空间 $\eta_i = \log\frac{S_i - 2.80}{5.00 - S_i}$，通过双层结构方程与 Shapley 精确归因剥离五大系统性偏置，还原「只论火候与出品手艺」的反事实真味分 $\widehat{S}_i^{\star}$：</p>
   <div class="panel">
     <div class="eq">
       $$
-      \textbf{经验贝叶斯评分收缩 (Empirical Bayes Shrinkage):}\qquad
-      \hat{\theta}_j = \frac{\sigma_0^{-2}\mu_{c,\text{area}} + n_j \sigma^{-2}\bar{s}_j}{\sigma_0^{-2} + n_j \sigma^{-2}}
+      \widehat{S}_i^{\star} = S_{i,\text{pub}} + \underbrace{\Delta_i^{\text{sample}}}_{\substack{\text{👥 辛口评委 } z\text{-score}\\\text{与昼夜/散客采样修正}}} + \underbrace{\Delta_i^{\text{ortho}}}_{\substack{\text{😤 剥离臭脸大将/规矩严}\\\text{与昭和窄店光环惩罚}}} + \underbrace{\Delta_i^{\text{surprise}}}_{\substack{\text{🤯 评论超预期语义残差}\\(\text{期待外れ vs. 穴場/悶絶})}} + \underbrace{\Delta_i^{\text{vision}}}_{\substack{\text{🔪 多模态手艺硬指标}\\(\text{刀工角锐度/美拉德/米粒})}} - \underbrace{\Delta_i^{\text{hype}}}_{\substack{\text{🛡️ 熟客互捧/映え罠}\\\text{泡沫逆向折价}}}
       $$
+    </div>
+    <ul>
+      <li><b>1. $\Delta_i^{\text{sample}}$（采样与辛口评委归一化）</b>：利用评委历史打分均值 $\mu_u$ 与标准差 $\sigma_u$ 计算苛刻老饕标准化赞誉 $z_{iu} = (r_{iu}-\mu_u)/\sigma_u$，并分离午市廉价套餐对晚间怀石/握寿司真值的拖累。</li>
+      <li><b>2. $\Delta_i^{\text{ortho}}$（口味—服务/环境正交剥离）</b>：对日本餐饮特有的「顽固职人臭脸（無愛想・頑固大将）」「规矩严苛（私語厳禁・香水NG）」及「昭和窄小老铺」引发的非料理扣分进行 Double-ML 正交剥离（仅当美味分显著高于服务分 $r_{iu}^{\text{food}} - r_{iu}^{\text{srv}} \ge 0.4$ 时才触发补偿，防止奖励真烂店）。</li>
+      <li><b>3. $\Delta_i^{\text{surprise}}$（评论文本超预期语义残差）</b>：从一手日文食评中提取条件语义惊喜度——对「この値段でこのクオリティ / 3.3台なのが不思議 / 穴場」赋予正残差，对「百名店なのに期待外れ / 写真映えだけ」赋予负残差。</li>
+      <li><b>4. $\Delta_i^{\text{vision}}$（多模态出品手艺硬指标）</b>：不看摆盘奢华度，只计算同类料理内部的可验证物理手艺指标（刺身切口棱角锐度、备长炭美拉德焦化均匀度、舍利米粒完整度与高汤乳化光泽），严格防御金箔/干冰等「伪精致（キラキラ映え罠）」。</li>
+      <li><b>5. $-\Delta_i^{\text{hype}}$（日本式「身内褒め」熟客互捧泡沫过滤）</b>：检测评论者圈层二分图谱半径与全5.0无细节互捧密度，对熟客抱团刷分与网红跟风溢价执行逆向折价；同时严格遵守<b>连锁居酒屋克制校准纪律</b>（如 PRONTO/天狗/わん等大众连锁仅做 $\pm 0.08$ 以内的品类内分位校准，绝不虚抬冒充怀石名店）。</li>
+    </ul>
+    <div class="eq">
       $$
       \textbf{公允价值与黄牛熔断 (Fair-Value &amp; Scalper Guard):}\qquad
-      P_{\text{fair}} = g(\hat{\theta}_j, c, \text{loc}, \text{season}),\quad
+      P_{\text{fair}} = g(\widehat{S}_j^{\star}, c, \text{loc}, \text{season}),\quad
       \text{flag}_{\text{scalper}} = \mathbb{1}\!\Big[P_{\text{quote}} > P_{\text{fair}}(1+\epsilon) \;\lor\; \text{channel} \notin \text{FirstParty}\Big]
       $$
     </div>
-    <p class="footn">注：凡触发 $\text{flag}_{\text{scalper}} = 1$ 的渠道（如高价倒卖预约号的黄牛或虚标原价的代购），在 `C-Pred` 阶段直接一票否决，绝不进入下游派单。</p>
+    <p class="footn"><span class="tagline v-verified">VERIFIED</span> 完整数学推导与 16 家实测门店校准台账详见同目录下的 <a href="https://future.clawishmacheng.com/preview/tabelog-eye/kiro-debiasing-methodology.md" target="_blank" rel="noopener">《Kiro × Antigravity 破偏置真味校准法 v1.0 白皮书》</a>。</p>
   </div>
 
   <h3>2.3 最优人机混合拆单算子 $\mathcal{D}(I)$ <span class="en">Optimal Hybrid Decomposition Operator</span></h3>
@@ -488,6 +496,25 @@ flowchart LR
       $$
     </div>
     <p class="footn"><span class="tagline v-heuristic">HEURISTIC</span> <b>95% / 5% 摩擦拆分定律</b>：按子任务步数与耗时统计，机器子图 $T_{\text{agent}} = \{s: x_s=\mathsf{A}\}$ 吸收 $\ge 95\%$ 的信息搜寻、校准、轮询与文书摩擦（在包月订阅算力下边际法币成本 $c(s,\mathsf{A})=0$，仅计容量影子价格 $\mu_{\text{cap}}$）；人类子图 $T_{\text{human}} = \{s: x_s=\mathsf{H}\}$ 仅承担 $\le 5\%$ 不可约的物理最后一公里，被封装为输入输出高度标准化的 $\$5\text{–}\$25$ 微赏金单。</p>
+  </div>
+
+  <h3>2.4 私有选品与眼缘反馈资产金库 × 多租户设备指纹自动隔离 <span class="en">Proprietary Feedback Asset Vault &amp; Multi-Tenant Device Fingerprint Isolation</span></h3>
+  <p>在真实运营与朋友内测分享中，前端捕获的每一次「右滑心动 / 左滑无感」以及对具体偏置维度的微反馈（如「+🔪 刀工对味」「+😤 不怕臭脸求真味」「+🤯 超预期反差」），本质上都是<b>极具复利价值的专有品味策展数据资产（Proprietary Taste-Graph Asset）</b>。我们在架构层强制执行三大资产保护与多租户隔离机制：</p>
+  <div class="grid2">
+    <div class="panel tight">
+      <h4>🔐 1. 私有选品与眼缘反馈资产金库 (Proprietary Curation Vault)</h4>
+      <ul style="margin:0">
+        <li><b>全量反馈持久化</b>：用户的每次滑动（含停留毫秒数、预算滑块快照、五因子去偏权重向量 $\mathbf{w}_{\text{eye}}$）与一键微标签均实时追加写入本地持久化金库（支持一键导出结构化 `.jsonl` 专有训练/评测资产包）。</li>
+        <li><b>反爬虫与专有资产护城河</b>：公开预览面仅暴露最小展示字段并注入 `noai, noimageai` 反抓取声明；完整的跨模型多模态审计链路、评委 $z$-score 校准参数与个人审美轨迹均作为私有数字资产沉淀，越用越准。</li>
+      </ul>
+    </div>
+    <div class="panel tight">
+      <h4>📱 2. 按浏览器/手机特征自动甄别隔离 + 🚀 一键 Self-Host 部署</h4>
+      <ul style="margin:0">
+        <li><b>零串味 · 零串账本自动分流</b>：当链接分享给朋友审阅时，前端在加载瞬间通过 Canvas 渲染熵、WebGL 硬件签名、屏幕视口与 UA 特征自动计算确定性设备指纹（如 `#Peer-Mobile-a8f31c`），为每位审阅朋友自动分配<b>独立的偏好权重向量 $\mathbf{w}_{\text{eye}}^{(u)}$</b> 与<b>独立的 $\$100.00$ 访客沙盒体验金</b>，绝不消耗主理人真实资金池，也绝不污染主理人私有眼缘金库。</li>
+        <li><b>一键 Self-Host 自托管套装</b>：朋友若希望建立完全属于自己的私人选品库与真实履约金库，可在原型页顶栏点击 <b>「🚀 Self-Host 自建」</b>，通过一行 Docker Compose 命令或导出 `self-host-kit.json` 在 30 秒内拉起独立节点。</li>
+      </ul>
+    </div>
   </div>
 </section>
 
