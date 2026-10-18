@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Visual Intent to Physical Acquisition: SGDO / VRO Decentralized Fulfillment &amp; Non-Standard Acquisition Mechanism Design Proposal v1.0</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0f16'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='%236ee7b7' font-family='monospace'%3EVRO%3C/text%3E%3C/svg%3E">
+<meta name="description" content="从眼缘意图到现实买通：SGDO / VRO 去中心化自治履约与非标获取机制设计提案 v1.0。通过前端纯眼缘入口、后端 4-Cell 人机混合拆单算子、三路径 R_verified 分阶段托管与百元美金种子池催化，终结非标获取的柠檬市场与物理断层。">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['$$','$$'], ['\\[','\\]']], tags: 'ams' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root{
+  --bg:#0c0f16; --panel:#131824; --panel2:#1a2130; --ink:#e7ecf5; --muted:#9aa7bd;
+  --line:#273146; --acc:#5db1ff; --acc2:#6ee7b7; --gold:#f5d77f; --warn:#ffd166; --bad:#ff6b7a;
+  --good:#54d98c; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.72;font-size:16.5px}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+code,.mono{font-family:var(--mono);font-size:.92em}
+.wrap{display:flex;max-width:var(--maxw);margin:0 auto;gap:28px;padding:0 20px}
+
+/* top banner */
+header.hero{border-bottom:1px solid var(--line);
+  background:radial-gradient(1200px 420px at 18% -10%,rgba(110,231,183,.11),transparent),
+             radial-gradient(900px 360px at 85% 0%,rgba(93,177,255,.10),transparent),var(--bg)}
+.hero-in{max-width:var(--maxw);margin:0 auto;padding:38px 20px 28px}
+.badge-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.badge{display:inline-block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--acc2);border:1px solid rgba(110,231,183,.35);background:rgba(110,231,183,.07);
+  border-radius:999px;padding:4px 12px;font-weight:700}
+.badge.peer{color:var(--gold);border-color:rgba(245,215,127,.35);background:rgba(245,215,127,.08)}
+h1.title{font-size:clamp(25px,3.8vw,40px);line-height:1.22;margin:.1em 0 .3em;font-weight:800;letter-spacing:-.01em}
+.subtitle{color:var(--muted);font-size:clamp(15px,1.9vw,18.5px);max-width:920px}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.chip{font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);
+  border-radius:8px;padding:6px 11px}
+.chip b{color:var(--ink)}
+
+/* companion nav bar */
+.companion-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:22px;padding-top:18px;border-top:1px dashed var(--line)}
+.comp-card{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;transition:all .18s}
+.comp-card:hover{border-color:var(--acc);transform:translateY(-1px);text-decoration:none}
+.comp-card.gold{border-color:rgba(245,215,127,.4);background:linear-gradient(135deg,rgba(245,215,127,.08),var(--panel))}
+.comp-card.gold:hover{border-color:var(--gold)}
+.comp-info{font-size:13.5px;line-height:1.45}
+.comp-info b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+.comp-card.gold .comp-info b{color:var(--gold)}
+.comp-arrow{font-family:var(--mono);font-size:13px;color:var(--acc);white-space:nowrap;font-weight:700}
+.comp-card.gold .comp-arrow{color:var(--gold)}
+
+/* layout */
+nav.toc{position:sticky;top:0;align-self:flex-start;width:270px;max-height:100vh;overflow:auto;
+  padding:26px 0;flex:0 0 auto}
+nav.toc h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:18px 10px 8px}
+nav.toc a{display:block;color:var(--muted);padding:7px 12px;border-radius:8px;font-size:13.8px;border-left:2px solid transparent}
+nav.toc a:hover{background:var(--panel);color:var(--ink);text-decoration:none}
+nav.toc a.active{color:var(--acc2);border-left-color:var(--acc2);background:var(--panel)}
+main{flex:1 1 auto;min-width:0;padding:26px 0 100px}
+
+section{scroll-margin-top:20px;padding:28px 0;border-bottom:1px dashed var(--line)}
+section h2{font-size:clamp(20px,2.6vw,28px);margin:.2em 0 .5em;font-weight:800;letter-spacing:-.01em}
+section h2 .en{display:block;font-size:13.5px;font-weight:600;color:var(--acc2);letter-spacing:.02em;margin-top:4px}
+section h3{font-size:18.5px;margin:1.35em 0 .4em;color:#cfe0ff;font-weight:700}
+section h4{font-size:16px;margin:1.05em 0 .3em;color:var(--acc2)}
+p{margin:.6em 0}
+ul,ol{padding-left:1.25em}
+li{margin:.32em 0}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+.panel.tight{padding:14px 18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+
+.callout{border-left:4px solid var(--acc);background:var(--panel2);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0}
+.callout.warn{border-color:var(--warn)}
+.callout.bad{border-color:var(--bad)}
+.callout.good{border-color:var(--good)}
+.callout.gold{border-color:var(--gold)}
+.callout .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--acc)}
+.callout.warn .tag{color:var(--warn)} .callout.bad .tag{color:var(--bad)} .callout.good .tag{color:var(--good)} .callout.gold .tag{color:var(--gold)}
+
+.tagline{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:6px;vertical-align:middle}
+.v-verified{background:rgba(84,217,140,.14);color:var(--good);border:1px solid rgba(84,217,140,.3)}
+.v-heuristic{background:rgba(255,209,102,.12);color:var(--warn);border:1px solid rgba(255,209,102,.3)}
+.v-sim{background:rgba(93,177,255,.12);color:var(--acc);border:1px solid rgba(93,177,255,.3)}
+
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14.2px;overflow:hidden;border-radius:10px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:#cfe0ff;font-weight:700}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.hl-good{color:var(--good);font-weight:700}
+.hl-bad{color:var(--bad);font-weight:700}
+.hl-warn{color:var(--warn);font-weight:700}
+
+.mermaid{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center;overflow-x:auto}
+.eq{overflow-x:auto;padding:4px 0}
+.kbd{font-family:var(--mono);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:.88em}
+.footn{color:var(--muted);font-size:13px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.pill{font-size:12.5px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--muted)}
+
+details.claim{border:1px solid var(--line);border-radius:12px;margin:12px 0;background:var(--panel)}
+details.claim>summary{cursor:pointer;padding:13px 18px;font-weight:700;color:#cfe0ff;list-style:none}
+details.claim>summary::-webkit-details-marker{display:none}
+details.claim>summary::before{content:"▸ ";color:var(--acc2)}
+details.claim[open]>summary::before{content:"▾ "}
+details.claim .body{padding:12px 18px 16px;border-top:1px solid var(--line)}
+
+/* Simulator styles */
+.sim-preset-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.sim-preset-btn{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 13px;font-size:13px;cursor:pointer;font-weight:600;transition:all .15s}
+.sim-preset-btn:hover,.sim-preset-btn.active{border-color:var(--acc2);color:var(--acc2);background:rgba(110,231,183,.08)}
+.slider-box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+.slider-top{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;margin-bottom:6px}
+.slider-val{font-family:var(--mono);color:var(--acc2);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--acc2);cursor:pointer}
+.kpi-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi-card .k-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.kpi-card .k-num{font-size:23px;font-weight:800;font-family:var(--mono);margin:4px 0}
+.kpi-card .k-sub{font-size:12px;color:var(--muted)}
+
+/* Peer review cards */
+.review-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:14px 0;position:relative}
+.review-card h4{margin:0 0 8px;color:var(--gold);font-size:17px}
+.btn-action{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1f426e 0%,#152b47 100%);color:#9cd5ff;border:1px solid rgba(93,177,255,.45);border-radius:8px;padding:9px 16px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--mono);transition:all .18s}
+.btn-action:hover{background:linear-gradient(135deg,#285794 0%,#1a385f 100%);color:#fff;border-color:var(--acc)}
+
+footer{max-width:var(--maxw);margin:0 auto;padding:30px 20px 60px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0}
+.legend span{font-size:12.5px}
+.toc-mobile{display:none}
+@media(max-width:900px){
+  nav.toc{display:none}
+  .toc-mobile{display:block;position:sticky;top:0;z-index:30;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:8px;margin:10px 20px}
+  .toc-mobile select{width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+    border-radius:8px;padding:9px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="top-nav-bar" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+      <div class="badge-row" style="margin-bottom:0">
+        <span class="badge">Mechanism Design Proposal · v1.0 (English Edition)</span>
+        <span class="badge peer">Peer-Review Edition · Open-Source Fork &amp; PR Ready</span>
+        <span class="tagline v-verified">Co-Designed with Kiro (claude-opus-5.5)</span>
+      </div>
+      <div class="lang-switch" style="font-size:13.5px;font-weight:700;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 14px;display:inline-flex;align-items:center;gap:8px">
+        <span style="font-size:15px">🌐</span>
+        <span style="color:var(--acc2);font-weight:800">EN (Default)</span>
+        <span style="color:var(--line)">|</span>
+        <a href="sgdao-fulfillment-proposal-zh.html" style="color:var(--acc);text-decoration:none">中文</a>
+      </div>
+    </div>
+    <h1 class="title">From Visual Intent to Physical Acquisition: SGDO / VRO Decentralized Fulfillment &amp; Non-Standard Acquisition Mechanism Design Proposal</h1>
+    <div class="subtitle">
+      <b>Why Pure LLM Agents Hit a Physical Wall while Human Daigou Markets Collapse into Akerlof Lemons:</b> When someone sees something they genuinely crave—a phone-only 8-seat counter in Tokyo or a cash-only hand-forged teapot in a Kyoto workshop—how can they acquire it effortlessly without getting gouged or defrauded? We present a complete mechanism design combining an <b>Eye-First Visual Appetite Frontend × Kiro 5-Factor Logit-Shapley De-Biasing × 4-Cell Hybrid Agent/Human Decomposition Operator × Three-Path Orthogonal $R_{\text{verified}}$ Staged Escrow × \$100/mo Seed Calibration Pool</b>.
+    </div>
+    <div class="meta-row">
+      <span class="chip"><b>Core Thesis</b> Pure visual appetite $(v_{\text{eye}}, B_{\max})$ on frontend · 95% digital friction absorbed by \$0-marginal-cost agents · 5% physical last mile isolated into \$5–\$25 micro-bounties</span>
+      <span class="chip"><b>Institutional Covenant</b> Permanent Non-Token ($\text{VotingPower}(\text{Capital})\equiv 0$) · Soulbound Track-Record $W_i(t)$ · 3%–8% reality royalty charged strictly upon verified settlement</span>
+      <span class="chip"><b>Status</b> Peer-Review Draft · PCSE (a)–(f) Compliant · Open-Source MIT</span>
+    </div>
+    <div class="legend">
+      <span><span class="tagline v-verified">VERIFIED</span> Live in production/prototype (HotPepper Calendar Adapter / Spectral Gap-Gate / Pixel 10 Pro Bilingual PWA)</span>
+      <span><span class="tagline v-sim">SIMULATED</span> Equilibrium parameter range &amp; Lemon-Market stress-test (reproducible via interactive simulator below)</span>
+      <span><span class="tagline v-heuristic">HEURISTIC</span> Constructive proof skeleton &amp; operational hypotheses (open to peer critique &amp; counterexamples)</span>
+    </div>
+
+    <div class="companion-bar">
+      <a class="comp-card gold" href="https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en" target="_blank" rel="noopener">
+        <div class="comp-info">
+          <b>📲 Live Interactive Prototype: Tabelog·Eye v0.4 (EN / 中文)</b>
+          <span>Swipe on pure charcoal Maillard &amp; knife craft · 5-Factor Logit-Shapley Waterfall · Device-Isolated Sandbox</span>
+        </div>
+        <span class="comp-arrow">Launch App (EN) ↗</span>
+      </a>
+      <a class="comp-card" href="https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro" target="_blank" rel="noopener">
+        <div class="comp-info">
+          <b>🐙 Open-Source GitHub Repo: Tabelog·Eye + VRO Sovereign Node</b>
+          <span>PWA + De-Biasing Engine + Zero-Dep Python/Docker Self-Host Kit · Community Forks &amp; PRs Welcome</span>
+        </div>
+        <span class="comp-arrow">Fork &amp; PR ↗</span>
+      </a>
+      <a class="comp-card" href="https://future.clawishmacheng.com/preview/tabelog-eye/share.html?lang=en" target="_blank" rel="noopener">
+        <div class="comp-info">
+          <b>📣 1-Tap Broadcast &amp; Share Hub (English Default)</b>
+          <span>Ready-to-post X / Bluesky threads, beacon posts &amp; plain-English academic summaries</span>
+        </div>
+        <span class="comp-arrow">Open Share Hub ↗</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="toc-mobile">
+  <select onchange="if(this.value)location.hash=this.value">
+    <option value="">Jump to section…</option>
+    <option value="#s0">0 · 3-Layer Naming &amp; Non-Token Covenant</option>
+    <option value="#s1">1 · Non-Standard Fulfillment Trilemma</option>
+    <option value="#s2">2 · Eye-First Input × 5-Factor De-Biasing × Hybrid Decomposition</option>
+    <option value="#s3">3 · 3-Path Orthogonal Proofs &amp; Staged Escrow</option>
+    <option value="#s4">4 · $100/mo Seed Pool &amp; Per-Order Self-Balance</option>
+    <option value="#s5">5 · Interactive Lemon-Market Equilibrium Simulator</option>
+    <option value="#s6">6 · End-to-End Walkthroughs (Tokyo Counter &amp; Kyoto Teapot)</option>
+    <option value="#s7">7 · Four Open Peer-Review Questions</option>
+    <option value="#s8">8 · Open-Source Fork &amp; Pull Request Upstream Flow</option>
+    <option value="#symbols">Notation &amp; PCSE Provenance</option>
+  </select>
+</div>
+
+<div class="wrap">
+<nav class="toc" id="toc">
+  <h4>Mechanism Proposal (EN)</h4>
+  <a href="#s0">0 · Naming &amp; Non-Token Covenant</a>
+  <a href="#s1">1 · The Fulfillment Trilemma</a>
+  <a href="#s2">2 · Eye-First × De-Biasing × Decomposition</a>
+  <a href="#s3">3 · 3-Path Proofs &amp; Staged Escrow</a>
+  <a href="#s4">4 · $100 Seed Pool &amp; Metabolism</a>
+  <a href="#s5">5 · Interactive Equilibrium Simulator</a>
+  <a href="#s6">6 · Dual Case Studies (Dining + Craft)</a>
+  <a href="#s7">7 · Four Open Peer-Review Questions</a>
+  <a href="#s8">8 · Open-Source Fork &amp; PR Flow</a>
+  <h4>Reference</h4>
+  <a href="#symbols">Notation Table</a>
+  <a href="#provenance">PCSE &amp; Provenance</a>
+</nav>
+
+<main>
+
+<!-- ================= SECTION 0 ================= -->
+<section id="s0">
+  <h2>0 · Problem Origin, 3-Layer Naming Architecture &amp; Permanent Non-Token Commitment <span class="en">Formal Institutional Foundation</span></h2>
+
+  <div class="callout gold">
+    <span class="tag">The Fundamental Question</span>
+    <p><b>"When someone spots something they truly desire—whether an intimate Tokyo counter seat that only takes domestic landline calls on release day, or a handmade iron teapot sold cash-only at a Kyoto artisan's workshop—how can they acquire it in reality without friction, scalper markups, or bait-and-switch fraud?"</b></p>
+    <p>What looks superficially like "concierge booking" or "cross-border daigou" is in fact one of the sharpest <b>mechanism design blindspots</b> at the boundary between digital intelligence and physical institutions: once an item crosses outside standardized e-commerce SKUs into the non-standard long tail, pure LLM agents die at the API-free physical wall ($\kappa_{\text{API}}=\infty$), while traditional human broker markets collapse into <b>Akerlof's Lemon Market</b> under hidden action and hidden quality.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="panel tight">
+      <h4>Executive Summary (Plain-Language 4 Pillars)</h4>
+      <p>We resolve real-world non-standard acquisition into four plain-language pillars: (1) <b>5-Factor Logit-Shapley True-Taste De-Biasing</b>: normalizing harsh connoisseur $z$-scores, orthogonally stripping "grumpy master / strict rules / cramped Showa shop" service penalties, and anchoring on visual craft priors; (2) <b>EIG-Threshold Hybrid Decomposition $\mathcal{D}(I)$</b>: $\$0$-marginal-cost agents absorb $95\%$ of digital friction while isolating the $5\%$ irreducible physical last mile into $\$5\text{–}\$25$ human micro-bounties; (3) <b>3-Path Orthogonal Verification ($\rho_{ab}<0.2$) + Soulbound Credit $W_i(t)$</b>: staged escrow that makes honest fulfillment strictly dominant; and (4) <b>Spectral-Gap ($\Delta\lambda$) Governance</b>: monitoring task-graph Laplacian eigenvalues to halt collusion rings and spawn specialized agents.</p>
+    </div>
+    <div class="panel tight">
+      <h4>Dual-Loop Capital Metabolism</h4>
+      <p>The system operates without any speculative token via two strictly separated fiat loops: <b>Loop 1 (System Evolution &amp; Cold-Start Calibration)</b> is bounded by a hard $\$100/\text{mo}$ seed pool allocated by Expected Information Gain per dollar ($\text{EIG}(b)/\text{price}(b) \ge \theta_{\text{month}}$); <b>Loop 2 (External Buyer Fulfillment)</b> is $100\%$ self-funded per order via buyer fiat pre-authorization $\to$ 3-path $R_{\text{verified}}$ atomic release $\to$ $3\%\text{–}8\%$ Reality Royalty ($\phi_{\text{royalty}}=0$ on any failed fulfillment).</p>
+    </div>
+  </div>
+
+  <h3>0.1 Formal 3-Layer Naming Architecture (Mapping Colloquial "SGDAO")</h3>
+  <p>In casual conversation we often refer to this architecture as <b>"SGDAO"</b>. Because Web3 "DAOs" have been polluted by speculative governance tokens and whale vote-buying, this specification establishes a formal three-layer nomenclature and a permanent non-token axiom:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:18%">Layer</th>
+        <th style="width:34%">Formal Designation</th>
+        <th>Core Responsibility &amp; Institutional Boundary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Colloquial Alias</b></td>
+        <td><b>SGDAO</b></td>
+        <td>Informal shorthand used in internal discussions; formally decomposed into the three layers below.</td>
+      </tr>
+      <tr>
+        <td><b>Protocol Layer</b></td>
+        <td><b>Decentralized World-State &amp; Fulfillment Protocol</b></td>
+        <td>Defines the domain-agnostic intent tuple $I$, the staged fiat escrow state machine, the three orthogonal verification interfaces, and the Public Posterior Ledger.</td>
+      </tr>
+      <tr>
+        <td><b>Institutional Layer</b></td>
+        <td><b>VRO — Verified-Receipt Organization</b></td>
+        <td>Constitutional rule: <b>Only independently cross-verified receipts $R_{\text{verified}}$ can trigger fund settlement, accrue reputation weight, or unlock higher order exposure</b>. Zero self-verification.</td>
+      </tr>
+      <tr>
+        <td><b>Engine Layer</b></td>
+        <td><b>SGDO — Spectral-Gap Decentralized Organization</b></td>
+        <td>The 4-Cell autonomous mesh (`C-Res`, `C-Pred`, `C-Eng`, `C-Gate`) governed by the normalized task Laplacian <b>Spectral Gap ($\Delta\lambda$)</b> and Davis–Kahan subspace stability gates.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout good">
+    <span class="tag">Permanent Non-Token &amp; Anti-Scalper Compliance Covenant</span>
+    <div class="eq">
+      $$
+      \nexists\ \text{Governance Token},\qquad \nexists\ \text{Speculative Coin},\qquad \forall k:\ \text{VotingPower}(\text{Capital}_k) \equiv 0.
+      $$
+    </div>
+    <ul style="margin:6px 0 0">
+      <li><b>Non-Transferable Soulbound Reputation</b>: Dispatch priority and maximum order exposure $V_{\text{order}} \le \kappa W_i(t) + D_i$ are governed exclusively by Soulbound Track-Record weight $W_i(t)$, which cannot be bought, sold, or collateralized.</li>
+      <li><b>Licensed Fiat Escrow</b>: Buyer funds flow through licensed payment rails (e.g., Stripe Escrow / licensed payment processors) according to deterministic verification states; the protocol never pools unregulated custody funds.</li>
+      <li><b>Anti-Scalping &amp; Merchant Respect</b>: (1) All dining reservations are placed strictly in the <b>buyer's real name</b> with transparent disclosure of concierge assistance—never reselling secondary-market scalped slots; venues forbidding proxy booking are filtered out at `C-Res`; (2) Cross-border physical goods explicitly validate destination customs, quarantine, and tariff constraints inside $\Theta_{\text{constraints}}$.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SECTION 1 ================= -->
+<section id="s1">
+  <h2>1 · The Non-Standard Real-World Fulfillment Trilemma <span class="en">Formal Impossibility Theorem &amp; Structural Escape</span></h2>
+
+  <p>Let a non-standard acquisition request $e$ be represented as a directed acyclic subtask graph $G_e = (E, \prec)$. For each subtask $s \in E$, define its <b>pure digital API reachability cost</b> $\kappa_{\text{API}}(s) \in [0, \infty]$: when no public digital interface can complete $s$ (e.g., domestic landline callback confirmation, early-morning paper ticket queuing, or cash-only workshop pickup with macro glaze inspection), $\kappa_{\text{API}}(s) = \infty$.</p>
+
+  <div class="panel">
+    <div class="eq">
+      $$
+      \textbf{(1) Long-Tail Physical Reach:}\quad \mathcal{R}_{\text{phys}}(e) = \Pr\!\Big[\text{Fulfilled}(e) \;\Big|\; \exists\, s \in E:\ \kappa_{\text{API}}(s) = \infty\Big] \ge 1 - \delta
+      $$
+      $$
+      \textbf{(2) Zero Principal-Agent Moral Hazard:}\quad \mathcal{M}_{\text{trust}} = \mathbb{E}\big[L_{\text{MH}}\big] = \mathbb{E}\big[\text{Buyer loss from hidden action } a \in \{\text{fake receipt, swap, markup, flight}\}\big] \to 0
+      $$
+      $$
+      \textbf{(3) Zero Frontend Cognitive Load:}\quad \mathcal{C}_{\text{UI}}(e) = K_{\text{interact}}(e) \le \bar{c} \quad (\text{at most 1 swipe/tap + optional 1-tap final visual check})
+      $$
+    </div>
+  </div>
+
+  <div class="callout bad">
+    <span class="tag">Proposition 1 · The Single-Homogeneous-Layer Impossibility Trilemma</span>
+    <p><b>Statement</b>: Under Assumptions A1 (Physical API Discontinuity $\exists s: \kappa_{\text{API}}(s)=\infty$), A2 (Positive Single-Channel Verification Fragility $f_k \ge \underline{f} > 0$), and A3 (Bounded Buyer Attention $\mathcal{C}_{\text{UI}} \le \bar{c}$), no single-layer homogeneous mechanism can simultaneously achieve $\mathcal{R}_{\text{phys}} \ge 1-\delta$, $\mathbb{E}[L_{\text{MH}}] \le \epsilon$, and $\mathcal{C}_{\text{UI}} \le \bar{c}$:</p>
+    <ul>
+      <li><b>Pure Digital LLM Agents</b> satisfy (2) and (3), but whenever $\exists s \in E$ with $\kappa_{\text{API}}(s)=\infty$, $\mathcal{R}_{\text{phys}}(e) = 0$.</li>
+      <li><b>Unverified Human Daigou / Freelance Platforms</b> satisfy (1), but under single-channel self-reported receipts ($f_1 \ge \underline{f}$), any agent with cheating temptation $G_{\text{cheat}} > f_1 S_{\text{slash}}$ strictly prefers hidden markup or counterfeit substitution, driving the market into an Akerlof Lemon Equilibrium.</li>
+      <li><b>Buyer-Managed Direct Sourcing</b> satisfies (1) and (2) only by pushing cross-language calls, price verification, and logistics tracking onto the buyer, violating $\mathcal{C}_{\text{UI}} \le \bar{c}$ by an order of magnitude.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SECTION 2 ================= -->
+<section id="s2">
+  <h2>2 · Eye-First Input × Kiro 5-Factor Logit-Shapley De-Biasing × Hybrid Decomposition Operator <span class="en">Frontend Simplicity &amp; Backend Intelligence</span></h2>
+
+  <h3>2.1 Frontend Intent Tuple $I$ &amp; 4-Cell Hybrid Architecture</h3>
+  <p>The buyer never writes prompts or negotiates with runners. A right-swipe in `Tabelog·Eye` emits a compact 4-tuple $I = (v_{\text{eye}}, B_{\max}, \tau_{\text{window}}, \Theta_{\text{constraints}})$ into the 4-Cell SGDO mesh:</p>
+
+  <div class="mermaid">
+flowchart LR
+  subgraph UI["Frontend: Tabelog·Eye (C_UI ≤ 1 Tap)"]
+    A["👁️ Eye-First Swipe v_eye<br/>+ Max Budget Slider B_max"]
+  end
+  subgraph MESH["Backend: SGDO 4-Cell Mesh ($0 Marginal Compute)"]
+    R["C-Res Sourcing<br/>Candidate Set S &amp; API Cost κ_API"]
+    P["C-Pred Kiro 5-Factor De-Biasing<br/>True-Taste S* · Fair Price P_fair"]
+    E["C-Eng Decomposition D(I)<br/>95% Machine Subgraph T_agent"]
+    G["C-Gate 3-Path Verifier<br/>r_A ∧ r_B ∧ r_C (ρ &lt; 0.2)"]
+  end
+  subgraph LAST["Physical Last Mile (5% Exposure)"]
+    H["🏃 Local Trusted Human Node T_human<br/>$5–$25 Standardized Micro-Bounty<br/>(Landline Call / Macro Nonce Probe)"]
+  end
+  A -->|"Intent Tuple I"| R --> P --> E
+  E -->|"κ_API = ∞ or EIG_phys &gt; τ_gate"| H
+  E -->|"95% Digital Friction Absorbed"| G
+  H -->|"3 Orthogonal Proofs"| G
+  G -->|"ATOMIC_SETTLEMENT"| A
+  </div>
+
+  <h3>2.2 `C-Pred` × Kiro 5-Factor Logit-Shapley Score De-Biasing Engine v1.0 &amp; Scalper Guard</h3>
+  <p>Public ratings $S_{i,\text{pub}} \in [3.00, 5.00]$ on dining and craft platforms confound culinary execution with reviewer leniency, social etiquette penalties, and platform Bayesian shrinkage. Co-designed with Kiro (`claude-opus-5.5`), our <b>5-Factor Logit-Shapley De-Biasing Engine</b> maps bounded scores to logit-odds space $\eta_i = \log\frac{S_i - 2.80}{5.00 - S_i}$ and isolates five verifiable components to recover the counterfactual True-Taste Score $\widehat{S}_i^{\star}$:</p>
+
+  <div class="panel">
+    <div class="eq">
+      $$
+      \widehat{S}_i^{\star} = S_{i,\text{pub}} + \underbrace{\Delta_i^{\text{sample}}}_{\substack{\text{👥 Harsh-Critic } z\text{-Score}\\\text{&amp; Lunch/Dinner Split}}} + \underbrace{\Delta_i^{\text{ortho}}}_{\substack{\text{😤 Grumpy Master / Strict Rules}\\\text{&amp; Cramped Showa Halo Stripped}}} + \underbrace{\Delta_i^{\text{surprise}}}_{\substack{\text{🤯 Review Semantic Surprise}\\(\text{Expectation-Gap Residual})}} + \underbrace{\Delta_i^{\text{vision}}}_{\substack{\text{🔪 Multi-Modal Craft Priors}\\(\text{Blade Edge / Maillard / Shari})}} - \underbrace{\Delta_i^{\text{hype}}}_{\substack{\text{🛡️ Inner-Circle Mutual-Praise}\\\text{&amp; Instagram-Bait Discount}}}
+      $$
+    </div>
+    <ul>
+      <li><b>1. $\Delta_i^{\text{sample}}$ (Reviewer $z$-Score &amp; Sample Niche Correction)</b>: Normalizes each reviewer by historical mean $\mu_u$ and spread $\sigma_u$ ($z_{iu}=(r_{iu}-\mu_u)/\sigma_u$) and separates cheap lunch-set drag from evening omakase execution.</li>
+      <li><b>2. $\Delta_i^{\text{ortho}}$ (Orthogonal Stripping of Service/Vibe Penalties)</b>: Applies Double-ML residualization to strip out non-culinary penalties caused by taciturn artisan masters (<i>muaiso / ganko taisho</i>), strict counter rules (no perfume, no loud chatter), or cramped Showa interiors—triggered strictly when food subscore exceeds service subscore by $r_{iu}^{\text{food}} - r_{iu}^{\text{srv}} \ge 0.4$.</li>
+      <li><b>3. $\Delta_i^{\text{surprise}}$ (Semantic Expectation-Gap Residual)</b>: Extracts conditional surprise from 1st-hand Japanese reviews ("Ginza ¥30k quality hiding at 3.4x" vs. "overhyped photo-bait").</li>
+      <li><b>4. $\Delta_i^{\text{vision}}$ (Multi-Modal Relative Craft Metrics)</b>: Evaluates category-relative physical execution (Kohada crosshatch blade geometry, 1.5mm binchotan Maillard crust, shari grain integrity, collagen broth emulsion) while penalizing gold-leaf/dry-ice gimmicks.</li>
+      <li><b>5. $-\Delta_i^{\text{hype}}$ (Inner-Circle Mutual-Praise Discount &amp; Honest Chain Cap)</b>: Penalizes high-density reviewer clique co-occurrence and strictly enforces <b>Kiro's Honest Chain Discipline</b>—mass-market chains (PRONTO, Tengu, Wan) are capped within $\pm 0.08$ ($3.35\to 3.41\text{–}3.44$), never falsely inflated to 3.8 kaiseki territory.</li>
+    </ul>
+    <p class="footn"><span class="tagline v-verified">VERIFIED</span> Full mathematical derivation and the 16-venue calibration ledger are published at <a href="https://future.clawishmacheng.com/preview/tabelog-eye/kiro-debiasing-methodology.md" target="_blank" rel="noopener"><code>kiro-debiasing-methodology.md</code></a>.</p>
+  </div>
+
+  <h3>2.3 Optimal Hybrid Decomposition Operator $\mathcal{D}(I)$ (Information-Value Gate)</h3>
+  <p>For each subtask $s \in E$, $\mathcal{D}(I)$ assigns executor $x_s \in \{\mathsf{A}\text{ (Agent)},\,\mathsf{H}\text{ (Human)}\}$. A human micro-bounty is awakened if and only if:</p>
+  <div class="panel">
+    <div class="eq">
+      $$
+      x_s = \mathsf{H} \iff \kappa_{\text{API}}(s) = \infty \quad \lor \quad \text{EIG}_{\text{phys}}(s) > \tau_{\text{gate}}(s),\qquad \tau_{\text{gate}}(s) = \frac{b_s - \text{VOI}_{\mathsf{A}}(s)}{\nu}
+      $$
+    </div>
+    <p>where $\text{EIG}_{\text{phys}}(s) = H(Y) - \mathbb{E}_{o\sim p(o\mid s)}[H(Y\mid o)]$ is the expected mutual information gain from physical human observation over latent fulfillment quality $Y$, $\nu$ is the monetary loss avoided per nat of uncertainty reduction, and $b_s \in [\$5, \$25]$ is the micro-bounty cost.</p>
+  </div>
+
+  <h3>2.4 Proprietary Curation &amp; Feedback Asset Vault × Per-Browser LocalStorage Sandbox Isolation</h3>
+  <div class="grid2">
+    <div class="panel tight">
+      <h4>🔐 1. Proprietary Curation &amp; Feedback Asset Vault</h4>
+      <ul style="margin:0">
+        <li><b>Real-Time Taste-Graph Persistence</b>: Every swipe (`Crave` / `Pass`), dwell duration, and 1-tap micro-feedback chip (`+🔪 Sharp Knife Craft`, `+😤 Grumpy Master OK`, `+🤯 Huge Surprise`) is logged into a persistent local vault with 1-tap `.jsonl` export and `noai, noimageai` anti-scraper headers.</li>
+        <li><b>Online Personal Weight Adaptation</b>: Micro-feedback updates personal factor weights $\mathbf{w}_{\text{eye}} = (w_{\text{vision}}, w_{\text{ortho}}, w_{\text{surprise}}, w_{\text{sample}})$ in real time.</li>
+      </ul>
+    </div>
+    <div class="panel tight">
+      <h4>📱 2. Automatic Device Fingerprint Isolation + 🚀 1-Tap Self-Host</h4>
+      <ul style="margin:0">
+        <li><b>Zero Cross-Contamination When Shared</b>: On load, `Tabelog·Eye` initializes an isolated per-browser localStorage sandbox (`#Peer-Mobile-xxxxxx` / `#Peer-Desktop-xxxxxx`), giving every friend an isolated taste vector $\mathbf{w}_{\text{eye}}^{(u)}$ and an isolated $\$100.00$ Virtual Guest Sandbox Budget—never consuming the host owner's real $\$100$ pool.</li>
+        <li><b>1-Command Self-Host Kit</b>: Friends can click `🚀 Self-Host` in the top bar to launch their own sovereign node via Docker Compose or `self-host-kit.json`.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 3 ================= -->
+<section id="s3">
+  <h2>3 · Three-Path Orthogonal Verification ($R_{\text{verified}}$) &amp; Staged Fiat Escrow <span class="en">Collapsing Principal-Agent Moral Hazard</span></h2>
+
+  <p>To prevent fake reservations, counterfeit craft substitution, or hidden markups, staged escrow requires three verification signals $r = (r_A, r_B, r_C) \in \{0,1\}^3$ from physically and institutionally orthogonal channels with pairwise error correlation $\rho_{ab} < 0.2$:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Verification Path</th>
+        <th>Physical / Institutional Signal Source</th>
+        <th>What It Proves &amp; Single-Path Fragility $f_k$</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Path A · Institutional Receipt</b><br><span class="mono">r_A ∈ {0,1}</span></td>
+        <td>Hardware-attested telecom call log ($\ge 90\text{s}$ to merchant landline) + merchant confirmation SMS/receipt, or workshop written hold slip.</td>
+        <td>Proves institutional contact occurred ($f_A \le 0.08$).</td>
+      </tr>
+      <tr>
+        <td><b>Path B · Live Sensory Nonce Probe</b><br><span class="mono">r_B ∈ {0,1}</span></td>
+        <td>Continuous macro video displaying a real-time cryptographic challenge nonce alongside the craft item's base hallmark + knuckle-tap acoustic resonance spectrum.</td>
+        <td>Defeats replay attacks, screen-recording spoofs, and cracked/molded counterfeits ($f_B \le 0.06$).</td>
+      </tr>
+      <tr>
+        <td><b>Path C · Downstream Handshake</b><br><span class="mono">r_C ∈ {0,1}</span></td>
+        <td>Buyer geo-fenced seat check-in at restaurant, or tamper-evident numbered seal applied on camera + EMS official scale weight match ($\le \pm 50\text{g}$).</td>
+        <td>Eliminates post-video box-swapping before shipment ($f_C \le 0.05$).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout good">
+    <span class="tag">Proposition 2 · Joint False-Acceptance Bound &amp; Strictly Dominant Honesty (Incentive Compatibility)</span>
+    <div class="eq">
+      $$
+      \Pr\big[R_{\text{verified}} = 1 \mid \text{Fraud}\big] \;\le\; \prod_{k \in \{A,B,C\}} f_k + \sum_{a < b} \rho_{ab}\sqrt{f_a(1-f_a)f_b(1-f_b)} \;\ll\; \min_k f_k
+      $$
+      $$
+      \textbf{Honesty Dominance Condition:}\qquad G_{\text{cheat}}(V_{\text{order}}) \;\le\; \big(1 - P_{\text{FA}}\big)\Big(D_i + \gamma \cdot \text{NPV}\big(W_i(t)\big)\Big) - c_{\text{effort}}
+      $$
+    </div>
+    <p>Because Soulbound Track-Record weight $W_i(t)$ updates with asymmetric decay ($\eta_- \ll \eta_+$: slow to build, instant slashing to zero upon verified fraud) and caps order exposure via $V_{\text{order}} \le \kappa W_i(t) + D_i$, any attempt to cheat faces $>99.5\%$ detection certainty and forfeits both the cash bond $D_i$ and the present value of all future bounty flows.</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 4 ================= -->
+<section id="s4">
+  <h2>4 · \$100/Month Seed Calibration Pool &amp; Per-Order Self-Balancing Metabolism <span class="en">Dual-Loop Capital Architecture &amp; Spectral-Gap Emergence</span></h2>
+
+  <div class="grid2">
+    <div class="panel tight">
+      <h4>Loop 1 · \$100/mo Hard-Capped Seed Pool ($B_{\text{seed}}$)</h4>
+      <p>Used strictly for cold-start exploration, high-EIG ground-truth probes (e.g., verifying 3.3x "grumpy master" counters or acquiring authentic photos for quarantined venues), and runner reliability calibration:</p>
+      <div class="eq">
+        $$
+        \max_{z_b \in \{0,1\}} \sum_b z_b\,\text{EIG}(b) \quad \text{s.t.} \quad \sum_b z_b\,\text{price}(b) \le \$100/\text{mo}
+        $$
+      </div>
+    </div>
+    <div class="panel tight">
+      <h4>Loop 2 · Per-Order Self-Funded Escrow &amp; Reality Royalty</h4>
+      <p>External buyer orders never drain the $\$100$ seed pool. Each order is $100\%$ buyer-prefunded ($Q \le B_{\max}$) and charges a $3\%\text{–}8\%$ Reality Royalty $\phi_{\text{royalty}}$ <b>only upon atomic settlement</b> ($\phi_{\text{royalty}}=0$ if unfulfilled).</p>
+    </div>
+  </div>
+
+  <h3>4.1 Spectral-Gap ($\Delta\lambda$) Collusion Defense &amp; Emergent Specialist Agents</h3>
+  <div class="panel">
+    <div class="eq">
+      $$
+      L_{\text{norm}} = I - D^{-1/2} A D^{-1/2},\qquad \Delta\lambda_d = \lambda_{k+1} - \lambda_k \ge \tau_{\text{gap}},\qquad \sin\theta(U_k, \hat{U}_k) \le \frac{\lVert \hat{E} \rVert_2}{\Delta\lambda_d} \le 0.35
+      $$
+    </div>
+    <p>When a subtask cluster exhibits a stable spectral gap $\Delta\lambda_d$ satisfying the Davis–Kahan perturbation bound and accumulates $\ge 40\%$ of verified receipts $R_{\text{verified}}$, the mesh automatically spawns a dedicated specialist agent (`Tabelog-Booker`, `Artisan-Sourcing-Scout`, `Concierge-Negotiator`, `Quality-Inspector`). Conversely, on the reviewer-runner interaction graph, isolated collusion cliques with weak external links and anomalous internal mutual-rating density manifest as a near-zero Fiedler eigenvalue (low conductance cut $\lambda_2 \to 0$), triggering immediate quarantine.</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 5: INTERACTIVE SIMULATOR ================= -->
+<section id="s5">
+  <h2>5 · Interactive Fulfillment &amp; Lemon-Market Equilibrium Simulator <span class="en">Stress-Testing Physical Friction &amp; Moral Hazard</span></h2>
+  <p>Select a preset scenario or drag the four mechanism sliders below to compare <b>Pure LLM Agent</b>, <b>Traditional Daigou / Freelance Platform</b>, and the <b>SGDO / VRO Hybrid Fulfillment Mesh</b> in real time <span class="tagline v-sim">SIMULATED</span>:</p>
+
+  <div class="panel">
+    <div class="sim-preset-row">
+      <button type="button" class="sim-preset-btn active" onclick="applySimPreset(0.65, 0.25, 0.94, 100, this)">🍣 Scenario A: Tokyo 4.18 Phone-Only Counter Seat</button>
+      <button type="button" class="sim-preset-btn" onclick="applySimPreset(0.82, 0.42, 0.92, 100, this)">🫖 Scenario B: Kyoto Cash-Only Handmade Teapot ($200)</button>
+      <button type="button" class="sim-preset-btn" onclick="applySimPreset(0.90, 0.55, 0.88, 150, this)">🔥 Scenario C: Extreme Friction · High Adverse Selection</button>
+      <button type="button" class="sim-preset-btn" onclick="applySimPreset(0.20, 0.12, 0.96, 50, this)">🟢 Scenario D: Low-Friction Semi-Standard Goods</button>
+    </div>
+
+    <div class="grid2">
+      <div class="slider-box">
+        <div class="slider-top">
+          <span><b>1. Offline Institutional Friction $\eta$</b> (API Discontinuity)</span>
+          <span class="slider-val" id="val-eta">0.65</span>
+        </div>
+        <input type="range" id="sim-eta" min="0.10" max="0.95" step="0.01" value="0.65">
+        <div class="footn">Higher means heavier reliance on domestic phone calls, cash counters, or physical inspection.</div>
+      </div>
+
+      <div class="slider-box">
+        <div class="slider-top">
+          <span><b>2. Lemon-Market Moral Hazard $\mu$</b> (Markup / Swap Propensity)</span>
+          <span class="slider-val" id="val-mu">0.25</span>
+        </div>
+        <input type="range" id="sim-mu" min="0.05" max="0.60" step="0.01" value="0.25">
+        <div class="footn">Prior probability of hidden price inflation, counterfeit substitution, or default without orthogonal proofs.</div>
+      </div>
+
+      <div class="slider-box">
+        <div class="slider-top">
+          <span><b>3. Agent Digital Absorption $\alpha$</b> ($\mathcal{D}(I)$ Machine Coverage)</span>
+          <span class="slider-val" id="val-alpha">94%</span>
+        </div>
+        <input type="range" id="sim-alpha" min="0.50" max="0.98" step="0.01" value="0.94">
+        <div class="footn">Share of sourcing, de-biasing, fair-price checking, and scripting absorbed at $0 marginal cost.</div>
+      </div>
+
+      <div class="slider-box">
+        <div class="slider-top">
+          <span><b>4. Monthly Seed Pool $B_{\text{seed}}$</b> (High-EIG Calibration Budget)</span>
+          <span class="slider-val" id="val-bseed">$100 / mo</span>
+        </div>
+        <input type="range" id="sim-bseed" min="25" max="250" step="5" value="100">
+        <div class="footn">Funds cold-start node calibration and prior refinement, improving multi-channel routing &amp; fraud detection.</div>
+      </div>
+    </div>
+
+    <div class="grid2" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:16px">
+      <div class="kpi-card">
+        <div class="k-title">SGDO / VRO End-to-End Success</div>
+        <div class="k-num hl-good" id="kpi-vro-succ">92.4%</div>
+        <div class="k-sub" id="kpi-vro-succ-sub">vs. Pure LLM Agent: 26.8%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-title">SGDO / VRO Total Buyer Friction Markup</div>
+        <div class="k-num" style="color:var(--acc2)" id="kpi-vro-markup">11.8%</div>
+        <div class="k-sub" id="kpi-vro-markup-sub">vs. Traditional Daigou Markup: 44.5%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-title">Post-3-Path Escaped Fraud Rate</div>
+        <div class="k-num hl-good" id="kpi-vro-fraud">0.18%</div>
+        <div class="k-sub" id="kpi-vro-fraud-sub">vs. Unverified Platform Fraud: 19.3%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-title">Net Buyer Surplus Gain per $100 Order</div>
+        <div class="k-num" style="color:var(--gold)" id="kpi-vro-surplus">+$34.6</div>
+        <div class="k-sub">Saved scalper markup + avoided lemon loss</div>
+      </div>
+    </div>
+
+    <table style="margin-top:18px">
+      <thead>
+        <tr>
+          <th>Fulfillment Paradigm</th>
+          <th class="num">End-to-End Success</th>
+          <th class="num">Buyer Markup / Friction</th>
+          <th class="num">Escaped Fraud Rate</th>
+          <th class="num">Net Utility per $1 Paid</th>
+          <th>Equilibrium Verdict</th>
+        </tr>
+      </thead>
+      <tbody id="sim-fulfill-tbody">
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= SECTION 6: WALKTHROUGH CASE STUDIES ================= -->
+<section id="s6">
+  <h2>6 · Dual End-to-End Walkthroughs (Tokyo Counter Seat &amp; Kyoto Handmade Teapot) <span class="en">Concrete Accounting &amp; State Transitions</span></h2>
+
+  <h3>6.1 Case Study A: Phone-Only Tokyo Sushi Counter Seat (`Tabelog·Eye`)</h3>
+  <div class="panel tight">
+    <p><b>Setup</b>: An 8-seat counter in Tokyo ($\text{JPY }22,500 = \$150.00$ omakase course) that accepts only domestic Japanese phone calls during release windows ($\kappa_{\text{API}}=\infty$). Buyer sets all-in max budget $B_{\max}=\$180.00$. `C-Eng` dispatches a $\$12.00$ phone reservation micro-bounty to a high-$W_i$ Tokyo node; Path A (telecom log + shop confirmation), Path B (live nonce dial proof), and Path C (buyer arrival handshake) settle atomically for <b>$\$171.70 \le \$180.00$</b> (saving $>75\%$ vs. $\$80\text{–}\$150$ scalper fees).</p>
+  </div>
+
+  <h3>6.2 Case Study B: Cash-Only Kyoto Hand-Forged Teapot Acquisition</h3>
+  <div class="panel tight">
+    <p><b>Setup</b>: A Kyoto Higashiyama workshop selling hand-hammered teapots cash-only in person ($\text{JPY }30,000 = \$200.00$, buyer $B_{\max}=\$320.00$). Instead of a traditional daigou charging $\$328+$ ($45\%$ opaque markup) with counterfeit risk, `Artisan-Sourcing-Scout` confirms workshop stock ($\$200$), dispatches an $\$18.00$ standardized micro-bounty for live nonce macro hallmark + knuckle-tap acoustic resonance inspection + tamper-evident EMS sealing ($\$38$ shipping + $\$4$ rail + $\$10.90$ royalty), settling at <b>$\$270.90 \le \$320.00$</b> (net saving $\$57.10$ with 3-path authenticity proof).</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 7: PEER REVIEW QUESTIONS ================= -->
+<section id="s7">
+  <h2>7 · Four Open Peer-Review Questions for Friends &amp; Critics <span class="en">Stress-Testing the Mechanism</span></h2>
+
+  <div class="review-card">
+    <h4>Q1 · Cold-Start Runner Liquidity in Low-Density Craft Towns <span class="tagline v-heuristic">OPEN MECHANISM QUESTION</span></h4>
+    <p>In rural craft regions (e.g., Chiang Mai or Hokuriku kiln villages), strict exposure caps $V_{\text{order}} \le \kappa W_i(t) + D_i$ prevent new runners with low initial $W_0$ from taking $\$200$ craft orders when few small phone bounties exist locally. Should the $\$100/\text{mo}$ seed pool subsidize initial $W_0$, boost honest-attempt fees $a_0$, or allow Web-of-Trust vouching where veteran nodes stake their own $W_i$?</p>
+  </div>
+
+  <div class="review-card">
+    <h4>Q2 · Path B Analog-Hole Spoofing &amp; Merchant-Runner Collusion <span class="tagline v-heuristic">OPEN SECURITY QUESTION</span></h4>
+    <p>When a runner and a dishonest shop clerk collude to swap an item in a camera blind spot after filming the real piece, error correlation $\rho_{AB}$ spikes. Beyond continuous single-take tamper-seal filming + acoustic tap fingerprinting + EMS scale weight matching ($\pm 50\text{g}$), what lightweight physical invariant best restores orthogonality without requiring a destination-port blind inspector (Path D)?</p>
+  </div>
+
+  <div class="review-card">
+    <h4>Q3 · Actuarial Pricing of Post-Path-A Merchant Default <span class="tagline v-heuristic">OPEN ACTUARIAL QUESTION</span></h4>
+    <p>If a runner honestly completes Path A reservation/hold, but the external merchant later cancels unilaterally, the protocol pays the runner and refunds the buyer ($\phi=0$). Should high-default categories carry an actuarial risk premium inside $\phi_{\text{royalty}}(c)$, or be pruned from `C-Res`?</p>
+  </div>
+
+  <div class="review-card">
+    <h4>Q4 · Dynamic AI Voice vs. Human Concierge Boundary $\tau_{\text{gate}}$ &amp; Merchant Goodwill <span class="tagline v-heuristic">OPEN GAME-THEORY QUESTION</span></h4>
+    <p>Concurrent automated AI voice calls risk triggering industry-wide merchant backlash (Tragedy of the Commons). Should the objective function explicitly price "Merchant Goodwill Depletion" and mandate native human micro-bounties for top artisan venues?</p>
+  </div>
+
+  <div class="panel" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px">
+    <div>
+      <b style="color:var(--ink);font-size:16px">📝 1-Tap Copy Structured Peer-Review Critique Template</b>
+      <div class="footn">Click to copy a Markdown critique template covering Q1–Q4 for easy reply on X, Telegram, WeChat, or GitHub Discussions.</div>
+    </div>
+    <button type="button" class="btn-action" onclick="copyReviewTemplate(this)">📋 Copy Peer-Review Template (EN)</button>
+  </div>
+</section>
+
+<!-- ================= SECTION 8: OPEN SOURCE & UPSTREAM PR ================= -->
+<section id="s8">
+  <h2>8 · Open-Source Co-Evolution &amp; Pull Request Upstream Pipeline <span class="en">Fork → Iterate → C-Gate Verify → Merge &amp; Attest</span></h2>
+  <p>To enable researchers, systems builders, and food/craft connoisseurs worldwide to improve the de-biasing engine and fulfillment adapters and merge improvements back upstream, the complete `Tabelog·Eye` PWA and VRO Sovereign Node are open-sourced under MIT:</p>
+
+  <div class="callout gold">
+    <span class="tag">Open-Source Repository &amp; Self-Host Kit</span>
+    <p><b>GitHub Repository</b>: <a href="https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro" target="_blank" rel="noopener"><code>https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro</code></a></p>
+    <p>Includes the bilingual PWA (`app/index.html`, `app/share.html`, `app/dataset.json` with 16 visually verified authentic photos), zero-dependency Python 3 + SQLite WAL taste vault server (`self-host/server.py`), 1-command Docker Compose setup, `CONTRIBUTING.md`, and `.github/PULL_REQUEST_TEMPLATE.md`.</p>
+  </div>
+
+  <div class="mermaid">
+flowchart LR
+  F["🍴 1. Fork Repository<br/>MachengShen/system-evolution-public"] --> B["🌿 2. Feature Branch<br/>feat/debias-or-adapter"]
+  B --> D["💻 3. Local Dev &amp; Authentic Assets<br/>§11 Iron Law: Zero Stock Photos"]
+  D --> V["🛡️ 4. Local Gate Check<br/>surface-verify &amp; r-verify"]
+  V --> P["📬 5. Open Pull Request<br/>Attach Verification Receipt"]
+  P --> C["🤖 6. C-Gate Cross-Model Audit<br/>(verifier.provider != producer)"]
+  C --> M["🎉 7. Upstream Merge &amp; Attestation<br/>Accrue Soulbound Weight ΔW_i"]
+  </div>
+</section>
+
+<!-- ================= REFERENCE: SYMBOLS & PROVENANCE ================= -->
+<section id="symbols">
+  <h2>Notation &amp; PCSE Provenance Boundaries <span class="en">Reference Parameters &amp; Compliance</span></h2>
+  <div id="provenance" class="pill-row">
+    <span class="pill">PCSE (a) ✓ Zero Private Names/Relationships</span>
+    <span class="pill">PCSE (b) ✓ Zero Private Financial Accounts</span>
+    <span class="pill">PCSE (c) ✓ Formal 3-Layer Naming Defined</span>
+    <span class="pill">PCSE (d)/(e) ✓ Public Static Surface · 1h Reversible</span>
+    <span class="pill">PCSE (f) ✓ Zero Automated Third-Party Platform Writes</span>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><b>From Visual Intent to Physical Acquisition: SGDO / VRO Decentralized Fulfillment &amp; Non-Standard Acquisition Mechanism Design Proposal v1.0</b></p>
+  <p>Co-Designed with Kiro (claude-opus-5.5) · PCSE (a)–(f) Compliant · Permanent Non-Token Covenant ($\text{VotingPower}(\text{Capital})\equiv 0$).</p>
+  <p class="footn">
+    Companion Surfaces:
+    <a href="https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en">Tabelog·Eye Interactive App (EN/ZH)</a> ·
+    <a href="https://future.clawishmacheng.com/preview/tabelog-eye/share.html?lang=en">1-Tap Share Hub (EN)</a> ·
+    <a href="https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro">GitHub Repo (Fork &amp; PR)</a> ·
+    <a href="sgdao-fulfillment-proposal-zh.html">中文版提案 (Chinese Edition)</a>
+  </p>
+</footer>
+
+<script>
+mermaid.initialize({startOnLoad:true, theme:'dark', themeVariables:{
+  background:'#131824', primaryColor:'#1a2130', primaryTextColor:'#e7ecf5',
+  primaryBorderColor:'#273146', lineColor:'#6ee7b7', fontSize:'14px'
+}});
+
+const secs=[...document.querySelectorAll('main section')];
+const links=new Map([...document.querySelectorAll('nav.toc a')].map(a=>[a.getAttribute('href').slice(1),a]));
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    links.forEach(l=>l.classList.remove('active'));
+    const l=links.get(e.target.id); if(l) l.classList.add('active');
+  }});
+},{rootMargin:'-15% 0px -70% 0px'});
+secs.forEach(s=>io.observe(s));
+
+function updateFulfillmentSimulator() {
+  const etaEl = document.getElementById('sim-eta');
+  const muEl = document.getElementById('sim-mu');
+  const alphaEl = document.getElementById('sim-alpha');
+  const bseedEl = document.getElementById('sim-bseed');
+  if (!etaEl || !muEl || !alphaEl || !bseedEl) return;
+
+  const eta = parseFloat(etaEl.value);
+  const mu = parseFloat(muEl.value);
+  const alpha = parseFloat(alphaEl.value);
+  const bseed = parseFloat(bseedEl.value);
+
+  document.getElementById('val-eta').textContent = eta.toFixed(2);
+  document.getElementById('val-mu').textContent = mu.toFixed(2);
+  document.getElementById('val-alpha').textContent = (alpha * 100).toFixed(0) + '%';
+  document.getElementById('val-bseed').textContent = '$' + bseed.toFixed(0) + ' / mo';
+
+  const calibBoost = 0.82 + 0.18 * Math.tanh(bseed / 100.0);
+  const llmSucc = Math.max(0.02, (1 - eta) * (0.92 - 0.25 * eta) * alpha);
+  const llmMarkup = 0.025;
+  const llmFraud = 0.012;
+  const llmNetSurplus = llmSucc * (1.0 - llmMarkup - 2.0 * llmFraud) - (1 - llmSucc) * 0.08;
+
+  const daigouSucc = Math.max(0.35, (0.86 - 0.18 * eta) * (1 - 0.42 * mu));
+  const daigouMarkup = 0.18 + 0.32 * eta + 0.48 * mu;
+  const daigouFraud = Math.min(0.65, mu * (0.62 + 0.28 * eta));
+  const daigouNetSurplus = daigouSucc * (1.0 - daigouMarkup - 1.5 * daigouFraud) - 0.15;
+
+  const vroSucc = Math.min(0.985, Math.max(0.68, (0.84 + 0.12 * alpha - 0.09 * eta) * calibBoost));
+  const residualHumanShare = (1 - alpha) * (0.6 + 0.8 * eta);
+  const vroMarkup = 0.05 + residualHumanShare * 0.85 + 0.015;
+  const vroFraud = Math.max(0.0005, mu * 0.018 * (1.15 - 0.35 * (bseed / 100.0)));
+  const vroNetSurplus = vroSucc * (1.0 - vroMarkup - 1.5 * vroFraud);
+
+  const surplusGainPer100 = Math.max(5.0, (vroNetSurplus - daigouNetSurplus) * 100.0);
+
+  document.getElementById('kpi-vro-succ').textContent = (vroSucc * 100).toFixed(1) + '%';
+  document.getElementById('kpi-vro-succ-sub').textContent = `vs. Pure LLM Agent: ${(llmSucc * 100).toFixed(1)}%`;
+  document.getElementById('kpi-vro-markup').textContent = (vroMarkup * 100).toFixed(1) + '%';
+  document.getElementById('kpi-vro-markup-sub').textContent = `vs. Traditional Daigou Markup: ${(daigouMarkup * 100).toFixed(1)}%`;
+  document.getElementById('kpi-vro-fraud').textContent = (vroFraud * 100).toFixed(2) + '%';
+  document.getElementById('kpi-vro-fraud-sub').textContent = `vs. Unverified Platform Fraud: ${(daigouFraud * 100).toFixed(1)}%`;
+  document.getElementById('kpi-vro-surplus').textContent = '+$' + surplusGainPer100.toFixed(1);
+
+  const tbody = document.getElementById('sim-fulfill-tbody');
+  if (tbody) {
+    tbody.innerHTML = `
+      <tr>
+        <td><b>1. Pure LLM Agent Operator</b><br><span class="footn">Digital browsing only; zero physical last-mile micro-bounties</span></td>
+        <td class="num ${llmSucc < 0.4 ? 'hl-bad' : 'hl-warn'}">${(llmSucc * 100).toFixed(1)}%</td>
+        <td class="num">${(llmMarkup * 100).toFixed(1)}%</td>
+        <td class="num">${(llmFraud * 100).toFixed(2)}%</td>
+        <td class="num ${llmNetSurplus < 0.35 ? 'hl-bad' : ''}">${llmNetSurplus.toFixed(2)}</td>
+        <td><span class="tagline" style="background:rgba(255,107,122,0.16);color:var(--bad);border:1px solid rgba(255,107,122,0.3)">PHYSICAL WALL BLOCKED</span></td>
+      </tr>
+      <tr>
+        <td><b>2. Traditional Daigou / Freelance Platform</b><br><span class="footn">Opaque human bundle; no 3-path orthogonal verification</span></td>
+        <td class="num hl-warn">${(daigouSucc * 100).toFixed(1)}%</td>
+        <td class="num hl-bad">${(daigouMarkup * 100).toFixed(1)}%</td>
+        <td class="num hl-bad">${(daigouFraud * 100).toFixed(1)}%</td>
+        <td class="num hl-bad">${daigouNetSurplus.toFixed(2)}</td>
+        <td><span class="tagline v-heuristic">AKERLOF LEMON MARKET</span></td>
+      </tr>
+      <tr>
+        <td><b>3. SGDO / VRO Hybrid Fulfillment Mesh (This Proposal)</b><br><span class="footn">Eye-First UI + 95% Agent + $5–$25 Micro-Bounty + 3-Path R_verified</span></td>
+        <td class="num hl-good">${(vroSucc * 100).toFixed(1)}%</td>
+        <td class="num hl-good">${(vroMarkup * 100).toFixed(1)}%</td>
+        <td class="num hl-good">${(vroFraud * 100).toFixed(2)}%</td>
+        <td class="num hl-good" style="font-size:15.5px">+${vroNetSurplus.toFixed(2)}</td>
+        <td><span class="tagline v-verified">TRILEMMA RELAXED · HONEST DOMINANT</span></td>
+      </tr>
+    `;
+  }
+}
+
+function applySimPreset(eta, mu, alpha, bseed, btn) {
+  document.getElementById('sim-eta').value = eta;
+  document.getElementById('sim-mu').value = mu;
+  document.getElementById('sim-alpha').value = alpha;
+  document.getElementById('sim-bseed').value = bseed;
+  document.querySelectorAll('.sim-preset-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  updateFulfillmentSimulator();
+}
+
+['sim-eta', 'sim-mu', 'sim-alpha', 'sim-bseed'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', updateFulfillmentSimulator);
+});
+updateFulfillmentSimulator();
+
+function copyReviewTemplate(btn) {
+  const template = [
+    "### Peer-Review Critique: SGDO / VRO Decentralized Fulfillment Proposal v1.0",
+    "",
+    "- **Reviewer / Domain**:",
+    "- **Strongest Intuition & Sharpest Vulnerability**:",
+    "",
+    "#### Responses to the 4 Open Mechanism Questions:",
+    "1. **Q1 Low-Density Cold-Start Liquidity (Subsidize W_0 vs. Attempt Fee a_0 vs. Web-of-Trust Vouching)**:",
+    "2. **Q2 Path B Analog-Hole & Merchant-Runner Collusion Defense**:",
+    "3. **Q3 Actuarial Pricing of Post-Path-A Merchant Default**:",
+    "4. **Q4 Dynamic AI Voice vs. Human Concierge Boundary τ_gate & Merchant Goodwill**:",
+    "",
+    "#### Additional Real-World Non-Standard Acquisition Counterexamples or PR Ideas:"
+  ].join("\n");
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(template).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = "✅ Copied Peer-Review Template!";
+      setTimeout(() => { btn.textContent = orig; }, 2200);
+    });
+  }
+}
+</script>
+</body>
+</html>

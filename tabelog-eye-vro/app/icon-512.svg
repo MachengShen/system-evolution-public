@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#0a0a0c"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d77f"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#9a7b1c"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)" stroke="#292524" stroke-width="10"/>
+  <circle cx="256" cy="246" r="148" fill="none" stroke="url(#gold)" stroke-width="12" stroke-dasharray="740 90"/>
+  <path d="M142 246 C182 170, 330 170, 370 246 C330 322, 182 322, 142 246 Z" fill="none" stroke="url(#gold)" stroke-width="12"/>
+  <circle cx="256" cy="246" r="38" fill="url(#gold)"/>
+  <text x="256" y="442" text-anchor="middle" fill="#f5d77f" font-family="sans-serif" font-size="40" font-weight="700" letter-spacing="6">TABELOG·EYE</text>
+</svg>

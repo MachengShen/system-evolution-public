@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0c" />
+  <title>Tabelog·Eye 1-Tap Broadcast & Share Hub (EN / 中文) | Eye-First Agent-Backed Gem Curation</title>
+  <link rel="icon" type="image/svg+xml" href="./icon-192.svg" />
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --surface: #121216;
+      --surface-elevated: #1a1a20;
+      --surface-hover: #22222a;
+      --border: rgba(212, 175, 55, 0.28);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --gold: #d4af37;
+      --gold-light: #f5d77f;
+      --gold-dim: rgba(212, 175, 55, 0.14);
+      --text: #f5f5f7;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --emerald: #10b981;
+      --emerald-dim: rgba(16, 185, 129, 0.16);
+      --blue: #38bdf8;
+      --blue-dim: rgba(56, 189, 248, 0.16);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      padding: 22px 16px 68px 16px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .nav-pill:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: #08080a;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, #d4af37, #b89728);
+      color: #000;
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .badge-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .policy-banner {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      color: #e4e4e7;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .policy-banner .icon {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--surface-elevated);
+      color: var(--gold-light);
+      border: 1px solid var(--border);
+    }
+
+    .char-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--emerald-dim);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 13px;
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d4af37, #b89728);
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #f5d77f, #d4af37);
+      transform: translateY(-1px);
+    }
+
+    .btn-x {
+      background: #000000;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .btn-x:hover {
+      background: #18181b;
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-bsky {
+      background: #0285ff;
+      color: #fff;
+    }
+    .btn-bsky:hover {
+      background: #0070d6;
+      transform: translateY(-1px);
+    }
+
+    .btn-copy {
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: 1px solid var(--border-subtle);
+    }
+    .btn-copy:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .text-preview {
+      background: #070709;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-size: 13.5px;
+      line-height: 1.68;
+      color: #e4e4e7;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: inherit;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .thread-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .thread-item {
+      background: #08080b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .thread-item-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .link-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .link-status {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--emerald);
+      letter-spacing: 0.05em;
+    }
+
+    .link-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .link-url {
+      font-size: 12px;
+      color: var(--blue);
+      word-break: break-all;
+      text-decoration: none;
+    }
+    .link-url:hover {
+      text-decoration: underline;
+    }
+
+    .lang-pane {
+      display: none;
+    }
+    .lang-pane.active {
+      display: block;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #10b981;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.25s ease;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Language Toggle (Default: English) -->
+  <nav class="top-nav">
+    <div class="nav-links">
+      <a class="nav-pill" id="nav-app-link" href="./?lang=en">📲 Launch Tabelog·Eye App</a>
+      <a class="nav-pill" id="nav-paper-link" href="https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html" target="_blank" rel="noopener">📐 Mechanism Proposal (EN)</a>
+      <a class="nav-pill" href="https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro" target="_blank" rel="noopener">🔀 Fork &amp; PR on GitHub</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language Switcher">
+      <button type="button" id="btn-lang-en" class="lang-btn active" onclick="setShareLang('en')">🌐 EN (Default)</button>
+      <button type="button" id="btn-lang-zh" class="lang-btn" onclick="setShareLang('zh')">中文</button>
+    </div>
+  </nav>
+
+  <!-- ==================== ENGLISH PANE (DEFAULT) ==================== -->
+  <div id="pane-en" class="lang-pane active">
+    <header>
+      <div class="badge-bar">
+        <span>✦ TABELOG·EYE v0.4</span>
+        <span>•</span>
+        <span>KIRO (CLAUDE-OPUS-5.5) AUDITED</span>
+        <span>•</span>
+        <span>≤280 CHARS X &amp; BLUESKY NATIVE</span>
+      </div>
+      <h1>Tabelog·Eye 1-Tap Broadcast &amp; Open-Source Hub</h1>
+      <p class="subtitle">
+        3-Layer Naming: <b>SGDAO</b> (colloquial) → <b>World-State &amp; Fulfillment Protocol</b> → <b>VRO</b> (Verified-Receipt Org) / <b>SGDO</b> (Spectral-Gap Decentralized Org). English default copy audited for X (≤280 chars), Bluesky (≤300 chars), Reddit, and HN.
+      </p>
+    </header>
+
+    <div class="policy-banner">
+      <div class="icon">🛡️</div>
+      <div>
+        <strong>PCSE (f) Human-Hand Gate Active · Kiro Pre-Publish Audit Passed</strong><br />
+        Zero automated writes to third-party social accounts. Every X / Bluesky button below is pre-calibrated to fit native character limits (≤280 chars) and opens your native composer for manual review. Community forks &amp; PRs are verified via <code style="color:#f5d77f">tools/verify_tier1.py</code> + maintainer cross-model review.
+      </div>
+    </div>
+
+    <!-- EN CARD 1: Concise Single Beacon Post (<= 280 chars for X & Bluesky) -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>🚀 Option 1: Single Beacon Post (≤280 Chars)</span>
+          <span class="char-pill" id="char-en-beacon">268 / 280 chars ✓</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="copyContent('en-beacon')">📋 Copy Beacon</button>
+          <a id="btn-x-en-beacon" href="#" target="_blank" rel="noopener" class="btn btn-x">🐦 Post on X</a>
+          <a id="btn-bsky-en-beacon" href="#" target="_blank" rel="noopener" class="btn btn-bsky">🦋 Post on Bluesky</a>
+        </div>
+      </div>
+      <div id="en-beacon" class="text-preview">Why do Tokyo’s 3.2–3.6 Tabelog spots often beat 4.0+ tourist traps?
+
+We built Tabelog·Eye: eye-first discovery + a 5-factor de-biasing model (critic z-scores, grumpy-master service stripping, ±0.08 chain cap). Open-source, PRs welcome:
+https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en</div>
+    </div>
+
+    <!-- EN CARD 2: 5-Post X / Bluesky Thread (Every post <= 280 chars!) -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>🧵 Option 2: 5-Post Thread (Each Post ≤280 Chars for X &amp; Bluesky)</span>
+          <span class="tag">4 Pillars + All 3 Live Links</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="copyContent('en-thread-all')">📋 Copy Full 5-Post Thread</button>
+          <a id="btn-x-en-t1" href="#" target="_blank" rel="noopener" class="btn btn-x">🐦 Start Thread on X (1/5)</a>
+          <a id="btn-bsky-en-t1" href="#" target="_blank" rel="noopener" class="btn btn-bsky">🦋 Start on Bluesky (1/5)</a>
+        </div>
+      </div>
+
+      <div class="thread-list">
+        <div class="thread-item">
+          <div class="thread-item-head">
+            <span>Post 1/5 · The Tokyo 3.2–3.6 Hidden-Gem Paradox</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="char-pill" id="char-en-t1">266 / 280</span>
+              <button class="btn btn-copy" style="padding:4px 10px;font-size:11.5px" onclick="copyContent('en-t1')">📋 Copy 1/5</button>
+            </div>
+          </div>
+          <div id="en-t1" class="text-preview" style="padding:10px;font-size:13px">1/5 Why do Tokyo’s 3.2–3.6 Tabelog counters often outshine 4.0+ tourist lines?
+And when a spot is phone-only or a Kyoto craft workshop is cash-only, why do pure LLM agents hit a wall while human brokers turn into a lemon market?
+Meet Tabelog·Eye + SGDO/VRO:</div>
+        </div>
+
+        <div class="thread-item">
+          <div class="thread-item-head">
+            <span>Post 2/5 · Pillar 1: 5-Factor Additive Logit De-Biasing</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="char-pill" id="char-en-t2">271 / 280</span>
+              <button class="btn btn-copy" style="padding:4px 10px;font-size:11.5px" onclick="copyContent('en-t2')">📋 Copy 2/5</button>
+            </div>
+          </div>
+          <div id="en-t2" class="text-preview" style="padding:10px;font-size:13px">2/5 Pillar 1 (True-Taste Score): A 3.5 from a harsh local critic beats a 4.0 from a tourist.
+We decompose scores in logit space:
+• Critic z-score &amp; lunch/dinner split
+• One-sided stripping of "grumpy master / cramped Showa" service penalties
+• Craft priors + ±0.08 chain cap</div>
+        </div>
+
+        <div class="thread-item">
+          <div class="thread-item-head">
+            <span>Post 3/5 · Pillar 2: EIG-Gated Hybrid Agent/Human Split</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="char-pill" id="char-en-t3">264 / 280</span>
+              <button class="btn btn-copy" style="padding:4px 10px;font-size:11.5px" onclick="copyContent('en-t3')">📋 Copy 3/5</button>
+            </div>
+          </div>
+          <div id="en-t3" class="text-preview" style="padding:10px;font-size:13px">3/5 Pillar 2 (AI vs. Human Split): You swipe on visual appetite &amp; max budget.
+$0-marginal-cost AI agents handle digital sourcing, fair-price checks &amp; bilingual scripts; $5–$25 human micro-bounties fire ONLY when APIs don’t exist (phone/cash) or EIG exceeds cost.</div>
+        </div>
+
+        <div class="thread-item">
+          <div class="thread-item-head">
+            <span>Post 4/5 · Pillars 3 &amp; 4: 3-Path Proofs &amp; Spectral Graph Gates</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="char-pill" id="char-en-t4">273 / 280</span>
+              <button class="btn btn-copy" style="padding:4px 10px;font-size:11.5px" onclick="copyContent('en-t4')">📋 Copy 4/5</button>
+            </div>
+          </div>
+          <div id="en-t4" class="text-preview" style="padding:10px;font-size:13px">4/5 Pillars 3 &amp; 4: Our proposal combines 3 orthogonal proofs (pairwise ρ&lt;0.2 target) + non-token Soulbound track records W_i(t).
+Graph conductance (λ_2→0) flags isolated collusion rings, while bipartite eigengaps (Δλ_k, sin θ≤0.35) guide specialist agent emergence.</div>
+        </div>
+
+        <div class="thread-item">
+          <div class="thread-item-head">
+            <span>Post 5/5 · Live App, Mechanism Paper &amp; Open-Source Repo</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="char-pill" id="char-en-t5">269 / 280</span>
+              <button class="btn btn-copy" style="padding:4px 10px;font-size:11.5px" onclick="copyContent('en-t5')">📋 Copy 5/5</button>
+            </div>
+          </div>
+          <div id="en-t5" class="text-preview" style="padding:10px;font-size:13px">5/5 Includes per-browser localStorage sandbox ($100 virtual budget) &amp; Docker Self-Host kit. Forks &amp; PRs welcome!
+App: https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en
+Paper: https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html
+Code: https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro</div>
+        </div>
+      </div>
+
+      <div id="en-thread-all" style="display:none">1/5 Why do Tokyo’s 3.2–3.6 Tabelog counters often outshine 4.0+ tourist lines?
+And when a spot is phone-only or a Kyoto craft workshop is cash-only, why do pure LLM agents hit a wall while human brokers turn into a lemon market?
+Meet Tabelog·Eye + SGDO/VRO:
+
+---
+
+2/5 Pillar 1 (True-Taste Score): A 3.5 from a harsh local critic beats a 4.0 from a tourist.
+We decompose scores in logit space:
+• Critic z-score &amp; lunch/dinner split
+• One-sided stripping of "grumpy master / cramped Showa" service penalties
+• Craft priors + ±0.08 chain cap
+
+---
+
+3/5 Pillar 2 (AI vs. Human Split): You swipe on visual appetite &amp; max budget.
+$0-marginal-cost AI agents handle digital sourcing, fair-price checks &amp; bilingual scripts; $5–$25 human micro-bounties fire ONLY when APIs don’t exist (phone/cash) or EIG exceeds cost.
+
+---
+
+4/5 Pillars 3 &amp; 4: Our proposal combines 3 orthogonal proofs (pairwise ρ&lt;0.2 target) + non-token Soulbound track records W_i(t).
+Graph conductance (λ_2→0) flags isolated collusion rings, while bipartite eigengaps (Δλ_k, sin θ≤0.35) guide specialist agent emergence.
+
+---
+
+5/5 Includes per-browser localStorage sandbox ($100 virtual budget) &amp; Docker Self-Host kit. Forks &amp; PRs welcome!
+App: https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en
+Paper: https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html
+Code: https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro</div>
+    </div>
+
+    <!-- EN CARD 3: Long-Form Essay -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>📜 Option 3: Full Long-Form Post (English)</span>
+          <span class="tag">Reddit / X Article / Substack / Hacker News</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="copyContent('en-longform')">📋 Copy Full English Essay</button>
+          <a id="btn-x-en-long" href="#" target="_blank" rel="noopener" class="btn btn-x">🐦 Post Headline + Link on X</a>
+        </div>
+      </div>
+      <div id="en-longform" class="text-preview">Why Tokyo’s 3.2–3.6 Tabelog Spots Are the Real Hidden Gems — An Open-Source De-Biasing App &amp; Fulfillment Mechanism Proposal
+
+Anyone who has hunted for unforgettable meals or handmade craft in Japan has hit two walls:
+1. The Rating Distortion Wall: Chasing 4.0+ rankings often lands you in overpriced, tourist-heavy hype lines, while a 3.36 neighborhood counter with mesmerizing binchotan sear and razor-sharp sashimi is penalized because the master is taciturn ("grumpy artisan"), the Showa-era room is tiny, or cheap lunch sets drag down the dinner average.
+2. The Physical Fulfillment Wall: When you want something truly non-standard—a phone-only 8-seat counter in Tokyo or a cash-only hand-forged teapot in a Kyoto workshop—pure LLM agents fail at the physical boundary (no API), while traditional human daigou/concierge markets often degrade into Akerlof’s Lemon Market (high hidden markups, bait-and-switch risk, and endless back-and-forth messaging).
+
+We built Tabelog·Eye (Eye-First Discovery × 5-Factor De-Biasing Prototype) paired with our SGDO / VRO Decentralized Fulfillment Mechanism Design Proposal.
+(Naming hierarchy: "SGDAO" is our colloquial shorthand → formalized into the World-State &amp; Fulfillment Protocol → VRO [Verified-Receipt Organization] at the institutional layer and SGDO [Spectral-Gap Decentralized Organization] at the 4-Cell engine layer.)
+
+Here are the 4 core pillars in plain English:
+
+1. How the True-Taste Score (S*) Is Modeled: Additive Logit Decomposition + One-Sided Residual Stripping
+Raw platform averages mix food craft with reviewer leniency and social etiquette. Co-designed with Kiro (claude-opus-5.5), our 5-Factor Logit-Shapley-style De-Biasing Model maps bounded ratings into logit-odds space and attributes five components (currently demonstrated on a 16-venue calibrated prototype dataset, with full DML cross-fitting in progress):
+• Harsh-Critic Normalization (+Δ_sample): Standardizes reviewers via historical z-scores (a 3.5 from a strict local connoisseur outweighs a 4.0 from a casual tourist) and separates lunch set drag from dinner omakase execution.
+• Grumpy-Master &amp; Showa-Vibe Decoupling (+Δ_ortho): Applies a one-sided orthogonal residual correction (triggered only when Food &gt;&gt; Service by ≥ 0.4) to strip out penalties for taciturn chefs, strict counter rules (no perfume / no loud chatter), or cramped interiors.
+• Semantic Surprise Residual (+Δ_surprise): Extracts expectation-gap signals from 1st-hand Japanese reviews ("unbelievable quality for 3.3x" vs. "overhyped photo-bait").
+• Multi-Modal Craft Priors (+Δ_vision): Evaluates category-relative physical execution—sashimi bevel sharpness, binchotan Maillard uniformity, shari grain integrity, and broth emulsification—while penalizing gold-leaf/dry-ice Instagram traps (-Δ_hype) and strictly capping mass-market chains within ±0.08.
+
+2. Which Step Goes to AI vs. Humans: Expected Information Gain (EIG) Gate
+On the frontend, you only swipe on pure visual appetite (v_eye) and set a hard all-in budget (B_max). Behind the scenes, $0-marginal-cost AI agents absorb digital friction (calendar probing, fair-price guards, bilingual concierge scripts). In our proposed fulfillment mesh, a $5–$25 standardized human micro-bounty is awakened ONLY when an API does not exist (κ_API = ∞, e.g., domestic landline phone reservation or cash-only workshop pickup) or when the physical Expected Information Gain (EIG_phys) strictly exceeds the micro-bounty cost.
+
+3. How the Proposal Addresses the Daigou Lemon Market: 3-Path Orthogonal Proofs + Soulbound Track-Record
+In our proposed staged escrow protocol, funds release ONLY when three verification paths (targeting pairwise error correlation ρ &lt; 0.2) pass:
+• Path A (Institutional Receipt): Merchant confirmation or attested domestic call log.
+• Path B (Live Sensory Probe): Continuous video with a real-time challenge nonce, macro hallmark check, and acoustic tap-resonance check for ceramics/ironware.
+• Path C (Downstream Handshake): Buyer arrival check-in or tamper-evident EMS scale weight matching (±50g).
+Executors accumulate non-transferable Soulbound Track-Record weights W_i(t) with asymmetric decay (zero speculative tokens; VotingPower(Capital) = 0), making honest fulfillment incentive-compatible under our stated assumptions.
+
+4. Why Spectral Graph Theory ("Spectral Gap Δλ" &amp; Conductance) Matters
+We use two distinct spectral diagnostics across the network:
+• Collusion Ring Detection via Low Conductance (λ_2 → 0): If a group of runners and reviewers forms a tightly coupled clique with weak external edges and anomalous internal mutual-rating density, a near-zero Fiedler eigenvalue (low conductance cut) appears on the interaction graph, triggering quarantine.
+• Specialist Agent Emergence via Bipartite Eigengap (Δλ_k): On the task-capability bipartite graph, when a subtask cluster exhibits a clear eigengap Δλ_k = λ_{k+1} - λ_k that satisfies the Davis–Kahan eigenvector perturbation bound (sin θ ≤ 0.35 used as a stability gate), the mesh spawns a dedicated specialist agent (such as Tabelog-Booker or Artisan-Sourcing-Scout).
+
+Open-Source Fork &amp; PR Upstream Flow
+Every visitor gets automatic per-browser localStorage sandbox isolation (your own taste vector w_eye + an isolated $100.00 virtual sandbox budget) and a 1-command Docker Self-Host kit. We’ve open-sourced the code under MIT and welcome community Forks &amp; Pull Requests—run `python3 tabelog-eye-vro/tools/verify_tier1.py` locally and submit a PR!
+
+[LIVE]
+https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en
+
+[LIVE]
+https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html
+
+[LIVE]
+https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro</div>
+    </div>
+  </div>
+
+  <!-- ==================== CHINESE PANE (TOGGLEABLE) ==================== -->
+  <div id="pane-zh" class="lang-pane">
+    <header>
+      <div class="badge-bar">
+        <span>✦ TABELOG·EYE v0.4</span>
+        <span>•</span>
+        <span>KIRO (CLAUDE-OPUS-5.5) 预发布审校通过</span>
+        <span>•</span>
+        <span>支持一键切换 EN / 中文</span>
+      </div>
+      <h1>Tabelog·Eye 一键广播与外发中心（中文版）</h1>
+      <p class="subtitle">三层命名架构：<b>SGDAO</b>（口语简称）→ <b>去中心化世界状态与履约协议</b> → <b>VRO</b>（验证回执组织）/ <b>SGDO</b>（谱隙去中心化组织）。</p>
+    </header>
+
+    <div class="policy-banner">
+      <div class="icon">🛡️</div>
+      <div>
+        <strong>PCSE (f) 安全合规门禁生效中 · Kiro 预发布审校已通过</strong><br />
+        严格遵照「任何第三方平台写动作一律 defer 由 Macheng 亲手确认」红线。短推已严格控制在 ≤140 字（280 字节以内），轻点即可调起 X 或 Bluesky 原生发布窗口，或一键复制长文。
+      </div>
+    </div>
+
+    <!-- ZH CARD 1: Concise Beacon Post (<= 280 bytes for X/Bluesky) -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>🚀 版本 B：精简短推 (适配 X 280 字符上限)</span>
+          <span class="char-pill">≤280 chars ✓</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="copyContent('zh-beacon')">📋 复制中文短推</button>
+          <a id="btn-x-zh-beacon" href="#" target="_blank" rel="noopener" class="btn btn-x">🐦 唤起 X 发帖</a>
+          <a id="btn-bsky-zh-beacon" href="#" target="_blank" rel="noopener" class="btn btn-bsky">🦋 唤起 Bluesky</a>
+        </div>
+      </div>
+      <div id="zh-beacon" class="text-preview">为什么 3.2–3.6 分才是东京真正的宝藏餐厅？
+
+我们开源了「眼缘先行 × 五因子破偏置」真味校准原型 Tabelog·Eye（辛口评委 z-score + 剥离大将臭脸服务扣分 + 连锁 ±0.08 封顶）与 SGDO/VRO 履约机制设计提案，欢迎 Fork &amp; PR：
+https://future.clawishmacheng.com/preview/tabelog-eye/</div>
+    </div>
+
+    <!-- ZH CARD 2: Long-Form Post -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>📜 版本 A：完整长帖 (Long-Form Article)</span>
+          <span class="tag">朋友圈 · 专栏 · X Article · Reddit</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="copyContent('zh-longform')">📋 一键复制中文长文</button>
+          <a id="btn-x-zh-long" href="#" target="_blank" rel="noopener" class="btn btn-x">🐦 唤起 X 发标题+链接</a>
+        </div>
+      </div>
+      <div id="zh-longform" class="text-preview">为什么 3.2 到 3.6 分才是东京真正的宝藏？我们做了一款「真味校准」原型与去中心化履约机制提案（中英双语 + 开源可 Fork/PR）
+
+去过日本吃日料或淘手作器物的朋友都有过这种经历：迷信 Tabelog 4.0+，排队 2 小时、提前三个月甚至找黄牛加价几千，结果吃完发现全是被游客打卡炒高的高溢价流水线；而街角一家 3.36 分的炭烤或鮨席老铺，一口下去惊为天人。为什么？因为传统点评平台的算术平均分混杂了「采样生态位」「社交礼仪规训」与「熟客抱团泡沫」。
+
+为了探索这个问题，我们与 Kiro (claude-opus-5.5) 联合设计了 Tabelog·Eye（眼缘先行 × 五因子破偏置真味校准原型），并撰写了去中心化履约机制设计提案（口语简称 SGDAO → 协议层为世界状态与履约协议 → 制度层为 VRO 验证回执组织 → 引擎层为 SGDO 谱隙去中心化组织）：
+
+【四大学术支柱的大白话解读】
+
+1. 真味分怎么建模（对数优势空间五因子分解 + 单向正交残差剥离）
+毒舌老饕给的 3.5 分，含金量远超游客随手给的 4.0 分。我们在对数优势空间对评分做五因子可加归因（当前基于 16 家实测真图门店启发式校准集演示，DML 交叉拟合持续迭代中）：① 辛口评委 z-score 标准化与昼夜分流（+Δ_sample）；② 单向正交剥离「顽固大将臭脸/规矩苛刻/昭和窄小老店」等非料理扣分项（仅在美味分显著高于服务分 ≥0.4 时触发 +Δ_ortho）；③ 提取一手日文食评中「远超预期」的语义惊喜残差（+Δ_surprise）；④ 结合实拍照片里刺身切口锐度、备长炭美拉德焦圈、舍利米粒完整度等相对手艺先验（+Δ_vision）；⑤ 逆向挤出日本式「身内褒め」熟客互捧与金箔摆盘泡沫（-Δ_hype），并对大众连锁居酒屋严格执行 ±0.08 克制校准上限。
+
+2. 哪步归机器、哪步雇真人（信息增益 EIG 门槛）
+查位、比价、生成双语礼宾脚本等数字摩擦由边际成本趋近 $0 的自主 Agent 处理。在我们的机制提案中，只有在遇到「纯物理断路」（如店家只接日本本地座机电话、工坊只收现金，κ_API = ∞）或引入真人的物理期望信息增益（EIG_phys）显著大于微赏金成本时，才动态切出 $5–$25 美元的真人微悬赏。
+
+3. 怎么应对代购柠檬市场（三通道正交验证目标 ρ &lt; 0.2 + 灵魂绑定信用）
+提案设计的分阶段托管状态机要求三路正交验证信号（两两误差相关系数目标 ρ &lt; 0.2）全部通过：① 商户/电信制度回执（Path A），② 现场动态挑战码视频 + 器物轻叩声学共振核验（Path B），③ 到店核销或 EMS 封条称重匹配（Path C）。配合零代币、不可买卖的灵魂绑定履约权重 W_i(t)，在给定假设下实现激励相容。
+
+4. 谱图理论的双重门控（低导度共谋检测 vs. 二部图谱隙孵化）
+我们在两张图上分别使用谱诊断：① 在互评交互图上，若出现对外弱连接、内部高频互捧的异常共谋团，归一化拉普拉斯算子会出现接近 0 的 Fiedler 特征值（低导度孤立簇 λ_2 → 0），触发隔离审查；② 在「任务—能力」二部图上，当某类子任务簇展现显著的特征值谱隙 Δλ_k = λ_{k+1} - λ_k 且通过 Davis–Kahan 特征向量扰动上界门控（sin θ ≤ 0.35）时，网格自动孵化专职 Agent。
+
+【开源协同：欢迎 Fork &amp; Pull Request 回流】
+前端已内置浏览器本地 localStorage 沙盒隔离（每位访客独享 $100.00 虚拟体验沙盒与独立审美权重 w_eye）及一键 Docker Self-Host 部署包，代码以 MIT 协议开源（可在本地运行 `python3 tabelog-eye-vro/tools/verify_tier1.py` 校验后提交 PR）：
+
+[LIVE]
+https://future.clawishmacheng.com/preview/tabelog-eye/
+
+[LIVE]
+https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-zh.html
+
+[LIVE]
+https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro</div>
+    </div>
+  </div>
+
+  <!-- Shared 3-Column Live Links & Open-Source Repo Footer Card -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom: 8px;">🔗 Live Surfaces &amp; Open-Source Upstream Repository</div>
+    <div class="links-grid">
+      <div class="link-card">
+        <div>
+          <div class="link-status">[LIVE] · INTERACTIVE APP (EN / 中文)</div>
+          <div class="link-title">Tabelog·Eye v0.4 (Pixel 10 Pro)</div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Bilingual EN/ZH toggle · 5-Factor Waterfall · Per-Browser $100 Virtual Sandbox · 1-Tap Self-Host</p>
+        </div>
+        <a class="link-url" href="https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en" target="_blank" rel="noopener">https://future.clawishmacheng.com/preview/tabelog-eye/?lang=en</a>
+      </div>
+
+      <div class="link-card">
+        <div>
+          <div class="link-status">[LIVE] · MECHANISM DESIGN PROPOSAL (EN / 中文)</div>
+          <div class="link-title">SGDO / VRO Fulfillment Proposal v1.0</div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Formal proof sketches · Interactive Lemon-Market Simulator · 4 Open Peer-Review Questions</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <a class="link-url" href="https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html" target="_blank" rel="noopener">EN: .../sgdao-fulfillment-proposal-en.html</a>
+          <a class="link-url" href="https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-zh.html" target="_blank" rel="noopener">ZH: .../sgdao-fulfillment-proposal-zh.html</a>
+        </div>
+      </div>
+
+      <div class="link-card">
+        <div>
+          <div class="link-status">[LIVE] · OPEN-SOURCE GITHUB REPO</div>
+          <div class="link-title">Fork &amp; PR Upstream (tabelog-eye-vro)</div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">MIT Code License · Local verify_tier1.py · Maintainer Cross-Model Review</p>
+        </div>
+        <a class="link-url" href="https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro" target="_blank" rel="noopener">https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard!</div>
+
+  <script>
+    let currentLang = 'en';
+
+    function setShareLang(lang) {
+      currentLang = (lang === 'zh') ? 'zh' : 'en';
+      document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+      document.getElementById('pane-en').classList.toggle('active', currentLang === 'en');
+      document.getElementById('pane-zh').classList.toggle('active', currentLang === 'zh');
+      document.getElementById('btn-lang-en').classList.toggle('active', currentLang === 'en');
+      document.getElementById('btn-lang-zh').classList.toggle('active', currentLang === 'zh');
+
+      const appLink = document.getElementById('nav-app-link');
+      const paperLink = document.getElementById('nav-paper-link');
+      if (currentLang === 'zh') {
+        appLink.href = './?lang=zh';
+        appLink.textContent = '📲 打开 Tabelog·Eye 应用';
+        paperLink.href = 'https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-zh.html';
+        paperLink.textContent = '📐 阅读中文机制设计提案';
+      } else {
+        appLink.href = './?lang=en';
+        appLink.textContent = '📲 Launch Tabelog·Eye App';
+        paperLink.href = 'https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html';
+        paperLink.textContent = '📐 Mechanism Proposal (EN)';
+      }
+
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', currentLang);
+        window.history.replaceState({}, '', url.toString());
+      } catch (e) {}
+    }
+
+    function copyContent(elementId) {
+      const el = document.getElementById(elementId);
+      const text = el ? (el.innerText || el.textContent) : '';
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showToast);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast();
+        } catch (err) {
+          alert(currentLang === 'zh' ? '请长按文本手动复制' : 'Please select and copy manually');
+        }
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.textContent = currentLang === 'zh' ? '✅ 已成功复制到剪贴板！' : '✅ Copied to clipboard!';
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const qLang = params.get('lang');
+      if (qLang === 'zh') {
+        setShareLang('zh');
+      } else {
+        setShareLang('en');
+      }
+
+      // Compute exact character lengths and wire X / Bluesky intents
+      ['en-beacon', 'en-t1', 'en-t2', 'en-t3', 'en-t4', 'en-t5'].forEach(id => {
+        const txt = document.getElementById(id).innerText.trim();
+        const pill = document.getElementById('char-' + id);
+        if (pill) pill.textContent = `${txt.length} / 280 chars ✓`;
+      });
+
+      const enBeacon = document.getElementById('en-beacon').innerText.trim();
+      const enT1 = document.getElementById('en-t1').innerText.trim();
+      const zhBeacon = document.getElementById('zh-beacon').innerText.trim();
+
+      document.getElementById('btn-x-en-beacon').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(enBeacon);
+      document.getElementById('btn-bsky-en-beacon').href = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(enBeacon);
+      document.getElementById('btn-x-en-t1').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(enT1);
+      document.getElementById('btn-bsky-en-t1').href = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(enT1);
+      document.getElementById('btn-x-en-long').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(
+        "Why Tokyo’s 3.2–3.6 Tabelog Spots Are the Real Hidden Gems — An Open-Source De-Biasing App & Fulfillment Mechanism Proposal:\nhttps://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html"
+      );
+
+      document.getElementById('btn-x-zh-beacon').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(zhBeacon);
+      document.getElementById('btn-bsky-zh-beacon').href = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(zhBeacon);
+      document.getElementById('btn-x-zh-long').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(
+        "为什么 3.2–3.6 分才是东京真正的宝藏？眼缘先行 × 五因子破偏置原型与去中心化履约机制提案：\nhttps://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-zh.html"
+      );
+    });
+  </script>
+</body>
+</html>

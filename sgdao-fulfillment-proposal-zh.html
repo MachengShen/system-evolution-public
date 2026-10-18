@@ -156,10 +156,18 @@ footer{max-width:var(--maxw);margin:0 auto;padding:30px 20px 60px;color:var(--mu
 
 <header class="hero">
   <div class="hero-in">
-    <div class="badge-row">
-      <span class="badge">Mechanism Design Proposal · v1.0</span>
-      <span class="badge peer">Peer-Review Edition · 朋友审阅专版</span>
-      <span class="tagline v-verified">Co-Designed with Kiro (claude-opus-5.5)</span>
+    <div class="top-nav-bar" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+      <div class="badge-row" style="margin-bottom:0">
+        <span class="badge">Mechanism Design Proposal · v1.0</span>
+        <span class="badge peer">Peer-Review Edition · 朋友审阅专版</span>
+        <span class="tagline v-verified">Co-Designed with Kiro (claude-opus-5.5)</span>
+      </div>
+      <div class="lang-switch" style="font-size:13.5px;font-weight:700;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 14px;display:inline-flex;align-items:center;gap:8px">
+        <span style="font-size:15px">🌐</span>
+        <a href="sgdao-fulfillment-proposal-en.html" style="color:var(--acc);text-decoration:none">EN</a>
+        <span style="color:var(--line)">|</span>
+        <span style="color:var(--acc2);font-weight:800">中文</span>
+      </div>
     </div>
     <h1 class="title">从眼缘意图到现实买通：SGDO / VRO 去中心化自治履约与非标获取机制设计提案</h1>
     <div class="subtitle">
@@ -184,6 +192,13 @@ footer{max-width:var(--maxw);margin:0 auto;padding:30px 20px 60px;color:var(--mu
         </div>
         <span class="comp-arrow">打开 App 原型 ↗</span>
       </a>
+      <a class="comp-card" href="https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro" target="_blank" rel="noopener">
+        <div class="comp-info">
+          <b>🐙 开源仓库：Tabelog·Eye + VRO 自主履约节点</b>
+          <span>前端 PWA + 破偏置引擎 + 零依赖 Python/Docker 自建套件 · 欢迎 Fork &amp; PR 贡献</span>
+        </div>
+        <span class="comp-arrow">GitHub 源码 ↗</span>
+      </a>
       <a class="comp-card" href="https://theory.clawishmacheng.com/system-evolution-public/sgdao-mechanism-design-zh.html" target="_blank" rel="noopener">
         <div class="comp-info">
           <b>📐 姊妹篇规范：SGDAO / VRO 认识论代谢机制设计规范 v1.1</b>
@@ -206,6 +221,7 @@ footer{max-width:var(--maxw);margin:0 auto;padding:30px 20px 60px;color:var(--mu
     <option value="#s5">5 · 交互式柠檬市场对抗模拟器</option>
     <option value="#s6">6 · 双场景全链路拆解 (餐饮 + 器物)</option>
     <option value="#s7">7 · 致审阅朋友的四个核心机制叩问</option>
+    <option value="#s8">8 · 开源共建与 Pull Request 上游回流机制</option>
     <option value="#symbols">符号表与合规边界</option>
   </select>
 </div>
@@ -221,6 +237,7 @@ footer{max-width:var(--maxw);margin:0 auto;padding:30px 20px 60px;color:var(--mu
   <a href="#s5">5 · 交互式履约对抗模拟器</a>
   <a href="#s6">6 · 双场景全链路拆解</a>
   <a href="#s7">7 · 审阅者四个核心叩问</a>
+  <a href="#s8">8 · 开源共建与上游 PR 回流</a>
   <h4>Reference</h4>
   <a href="#symbols">符号表 Notation</a>
   <a href="#provenance">合规与溯源边界</a>
@@ -498,7 +515,7 @@ flowchart LR
     <p class="footn"><span class="tagline v-heuristic">HEURISTIC</span> <b>95% / 5% 摩擦拆分定律</b>：按子任务步数与耗时统计，机器子图 $T_{\text{agent}} = \{s: x_s=\mathsf{A}\}$ 吸收 $\ge 95\%$ 的信息搜寻、校准、轮询与文书摩擦（在包月订阅算力下边际法币成本 $c(s,\mathsf{A})=0$，仅计容量影子价格 $\mu_{\text{cap}}$）；人类子图 $T_{\text{human}} = \{s: x_s=\mathsf{H}\}$ 仅承担 $\le 5\%$ 不可约的物理最后一公里，被封装为输入输出高度标准化的 $\$5\text{–}\$25$ 微赏金单。</p>
   </div>
 
-  <h3>2.4 私有选品与眼缘反馈资产金库 × 多租户设备指纹自动隔离 <span class="en">Proprietary Feedback Asset Vault &amp; Multi-Tenant Device Fingerprint Isolation</span></h3>
+  <h3>2.4 私有选品与眼缘反馈资产金库 × 多租户浏览器本地沙盒自动隔离 <span class="en">Proprietary Feedback Asset Vault &amp; Multi-Tenant Device Fingerprint Isolation</span></h3>
   <p>在真实运营与朋友内测分享中，前端捕获的每一次「右滑心动 / 左滑无感」以及对具体偏置维度的微反馈（如「+🔪 刀工对味」「+😤 不怕臭脸求真味」「+🤯 超预期反差」），本质上都是<b>极具复利价值的专有品味策展数据资产（Proprietary Taste-Graph Asset）</b>。我们在架构层强制执行三大资产保护与多租户隔离机制：</p>
   <div class="grid2">
     <div class="panel tight">
@@ -511,7 +528,7 @@ flowchart LR
     <div class="panel tight">
       <h4>📱 2. 按浏览器/手机特征自动甄别隔离 + 🚀 一键 Self-Host 部署</h4>
       <ul style="margin:0">
-        <li><b>零串味 · 零串账本自动分流</b>：当链接分享给朋友审阅时，前端在加载瞬间通过 Canvas 渲染熵、WebGL 硬件签名、屏幕视口与 UA 特征自动计算确定性设备指纹（如 `#Peer-Mobile-a8f31c`），为每位审阅朋友自动分配<b>独立的偏好权重向量 $\mathbf{w}_{\text{eye}}^{(u)}$</b> 与<b>独立的 $\$100.00$ 访客沙盒体验金</b>，绝不消耗主理人真实资金池，也绝不污染主理人私有眼缘金库。</li>
+        <li><b>零串味 · 零串账本自动分流</b>：当链接分享给朋友审阅时，前端在加载瞬间通过 Canvas 渲染熵、WebGL 硬件签名、屏幕视口与 UA 特征自动计算确定性设备指纹（如 `#Peer-Mobile-a8f31c`），为每位审阅朋友自动分配<b>独立的偏好权重向量 $\mathbf{w}_{\text{eye}}^{(u)}$</b> 与<b>独立的 $\$100.00$ 虚拟访客沙盒体验金 (Virtual Sandbox)</b>，绝不消耗主理人真实资金池，也绝不污染主理人私有眼缘金库。</li>
         <li><b>一键 Self-Host 自托管套装</b>：朋友若希望建立完全属于自己的私人选品库与真实履约金库，可在原型页顶栏点击 <b>「🚀 Self-Host 自建」</b>，通过一行 Docker Compose 命令或导出 `self-host-kit.json` 在 30 秒内拉起独立节点。</li>
       </ul>
     </div>
@@ -998,6 +1015,46 @@ stateDiagram-v2
       <div class="footn">点击右侧按钮即可复制包含上述 4 个叩问的 Markdown 审阅卡片，方便直接在微信/Telegram/邮件中回复你的批注与反例。</div>
     </div>
     <button type="button" class="btn-action" onclick="copyReviewTemplate(this)">📋 复制审阅反馈模板</button>
+  </div>
+</section>
+
+<!-- ================= SECTION 8: OPEN SOURCE & UPSTREAM PR ================= -->
+<section id="s8">
+  <h2>8 · 开源共建与 Pull Request 上游回流机制 <span class="en">Open-Source Fork &amp; Pull Request Upstream Contribution</span></h2>
+  <p>机制的生命力在于开放与真实世界的多方博弈演进。为让全球老饕、系统工程师与博弈论学者共同推进去中心化履约网络，我们将 <b>`Tabelog·Eye` 前端 PWA 交互原型</b> 与 <b>VRO 自主履约/破偏置节点引擎</b> 完整开源于本仓库的子模块：</p>
+
+  <div class="callout gold">
+    <span class="tag">开源代码库与自建节点地址</span>
+    <p><b>GitHub 源码与套件目录</b>：<a href="https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro" target="_blank" rel="noopener"><code>https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro</code></a></p>
+    <p>包含完整 PWA 客户端（含离线 Service Worker 与 16 家实测无假图真品资产）、零依赖 Python 3 标准库 HTTP + SQLite WAL 赏味资产服务端、Docker Compose 一键自建编排文件，以及多设备指纹严格隔离沙箱。</p>
+  </div>
+
+  <h3>8.1 社区贡献者流转工作流 (Fork → Iteration → PR → C-Gate → Merge)</h3>
+  <div class="mermaid">
+flowchart LR
+  F["🍴 1. Fork 主仓库<br/>MachengShen/system-evolution-public"] --> B["🌿 2. 创建特性分支<br/>feat/debias-kyoto-kaiseki"]
+  B --> D["💻 3. 本地开发与真图校验<br/>§11 铁律：零图库假图"]
+  D --> V["🛡️ 4. 本地静态与门禁检验<br/>surface-verify &amp; r-verify"]
+  V --> P["📬 5. 提交 Pull Request<br/>填报 PR 模板与验证证据"]
+  P --> C["🤖 6. C-Gate 跨模型自动化审计<br/>(异构模型交叉裁决)"]
+  C --> M["🎉 7. 上游合并 &amp; 创世账本背书<br/>永久累积灵魂绑定权重 W_i(t)"]
+  </div>
+
+  <div class="grid2">
+    <div class="panel tight">
+      <h4>🛡️ 贡献准入红线与反伪造门禁 (§11 Iron Law)</h4>
+      <ul style="margin:0">
+        <li><b>严禁图库假图掩盖缺失</b>：任何新增实体，严禁使用 Unsplash、Pexels 等图库占位图充数。遇 403 阻断必须显式标记 <code>QUARANTINED_MISSING_AUTHENTIC_ASSET</code> 并入排查悬赏。</li>
+        <li><b>PCSE 清洁红线</b>：零私人真实姓名、零财务数字与私钥、零第三方平台自动化违规写动作。</li>
+      </ul>
+    </div>
+    <div class="panel tight">
+      <h4>🎖️ 贡献者灵魂绑定声誉背书 (Soulbound Track-Record)</h4>
+      <ul style="margin:0">
+        <li><b>不可买卖的协议声誉</b>：通过 <code>C-Gate</code> 跨模型自动化核验并合并的 PR，其贡献者公钥或 GitHub 身份将载入协议公开后验账本（Public Posterior Ledger）。</li>
+        <li><b>赋权高敞口派单节点</b>：为贡献者节点永久赋予正向不可转让的履约权重增量 $\Delta W_i$，解锁未来在高价值非标获取网络中的高敞口优先接单权。</li>
+      </ul>
+    </div>
   </div>
 </section>
 

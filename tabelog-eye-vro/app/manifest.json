@@ -1,0 +1,25 @@
+{
+  "name": "Tabelog·Eye — 眼缘选店 · Agent 订座",
+  "short_name": "Tabelog·Eye",
+  "description": "眼缘留给前端，一切其它沉入后端。Visual-First Calibrated Tabelog Discovery & Autonomous Agent Booking Layer (VRO $100/mo Covenant).",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0c",
+  "theme_color": "#0a0a0c",
+  "icons": [
+    {
+      "src": "./icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

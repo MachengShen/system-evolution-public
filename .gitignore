@@ -1,0 +1,3 @@
+__pycache__/
+*.pyc
+tabelog-eye-vro/app/photos/*.jpg
