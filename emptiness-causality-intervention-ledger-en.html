@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Empty of Intrinsic Order, Non-Void in Constraint: Indefinite causal order, self-referential boundary conditions, and the thermodynamic ledger of predictive intervention.">
+  <title>Empty of Intrinsic Order, Non-Void in Constraint | Indefinite Causal Order &amp; Stochastic Thermodynamics</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e56a0'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white' font-family='sans-serif'>W</text></svg>">
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #555b66;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fdf3eb;
+      --green: #15803d;
+      --green-soft: #eafaf0;
+      --purple: #6d28d9;
+      --purple-soft: #f3e8ff;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(30, 86, 160, 0.06), transparent 32rem),
+        radial-gradient(circle at 88% 15%, rgba(184, 92, 24, 0.05), transparent 28rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.75;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px max(20px, calc((100vw - 960px) / 2));
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 88px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      align-items: center;
+    }
+    .badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 11px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .tag-pill {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .tag-theorem { background: var(--green-soft); color: var(--green); }
+    .tag-iso { background: var(--accent-soft); color: var(--accent); }
+    .tag-hyp { background: var(--highlight-soft); color: var(--highlight); }
+    .tag-meta { background: var(--purple-soft); color: var(--purple); }
+    h1 {
+      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      line-height: 1.28;
+      margin: 0 0 10px;
+      letter-spacing: -0.015em;
+    }
+    .subtitle {
+      font-size: 1.12rem;
+      color: var(--muted);
+      margin: 0 0 18px;
+      font-weight: 500;
+    }
+    .thesis-box {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 18px;
+      font-size: 1.0rem;
+    }
+    .notice-box {
+      background: #f8f6f0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 0.91rem;
+      color: var(--muted);
+    }
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 24px rgba(24, 25, 31, 0.03);
+    }
+    h2 {
+      font-size: 1.36rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+    }
+    h3 {
+      font-size: 1.12rem;
+      margin: 24px 0 10px;
+      color: var(--accent);
+    }
+    h4 {
+      font-size: 1.01rem;
+      margin: 18px 0 8px;
+      color: var(--ink);
+    }
+    p { margin: 0 0 14px; }
+    ul, ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 8px; }
+    .math-block {
+      background: #f6f8fc;
+      border: 1px solid #dce5f4;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", Georgia, serif;
+      font-size: 1.05rem;
+      text-align: center;
+      overflow-x: auto;
+      color: #112a5c;
+    }
+    .proof-box {
+      background: #fafafa;
+      border-left: 3px solid #cbd5e1;
+      padding: 10px 16px;
+      margin: 10px 0 16px;
+      font-size: 0.94rem;
+      color: #334155;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f4f1ea;
+      font-weight: 700;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 640px) {
+      .hero, .section-card { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">System Evolution · Theory Mainline</a>
+    <div class="nav-actions">
+      <a class="btn" href="#part-3">⚡ 3 Thermodynamic Theorems</a>
+      <a class="btn" href="#kill-criteria">🎯 Kill Criteria</a>
+      <a class="btn" href="essays/2026-10-19-emptiness-causality-intervention-ledger-en.md">📄 Markdown Source</a>
+      <a class="btn" href="emptiness-causality-intervention-ledger-zh.html">中文版 (ZH)</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="meta-row">
+        <span class="badge">Public Theory Note v1.0 · 2026-10-19</span>
+        <span>Quantum Foundations × Stochastic Thermodynamics × Network Dynamics</span>
+      </div>
+      <h1>Empty of Intrinsic Order, Non-Void in Constraint</h1>
+      <p class="subtitle">Indefinite causal order, self-referential boundary conditions, and the thermodynamic ledger of predictive intervention</p>
+
+      <div class="thesis-box">
+        <p><strong>1. Ontology (Process Matrices &amp; Constraints):</strong> Process-matrix theory shows that <em>which event comes first</em> need not be an intrinsic property of events. Yet the validity constraints—positivity, unit-trace normalization, and a fixed linear no-signaling subspace—remain strictly rigid. In short: <strong>empty of intrinsic order, non-void in constraint.</strong></p>
+        <p><strong>2. Split-Ledger Information Thermodynamics:</strong> An agent that predicts a system and acts on it runs a measure–feedback–erase loop. Stochastic thermodynamics puts a strict lower bound on that loop, and the dissipation can be <strong>booked to a party other than the beneficiary</strong>.</p>
+        <p style="margin-bottom:0;"><strong>3. Curl vs. Landscape Reshaping:</strong> In overdamped dynamics, the <strong>non-gradient (solenoidal) part</strong> of an actuation field is exactly the part that dissipates beyond the optimal-transport $\mathcal{W}_2$ bound. At steady state it is the housekeeping heat $\dot{Q}_{\text{hk}}$. On a graph, the same object is the cokernel residual $r_\perp$, whose cycle circulations equal Schnakenberg's affinities. <em>Reshaping the landscape</em> is the gradient part; <em>one-way counterfactual clamping</em> generically is not.</p>
+      </div>
+
+      <div class="notice-box">
+        <strong>Epistemic Grading &amp; Scope:</strong> Every claim carries an explicit tag:
+        <span class="tag-pill tag-theorem">[Theorem]</span> Published or directly proved mathematical/physical result with stated hypotheses;
+        <span class="tag-pill tag-iso">[Structural Isomorphism]</span> Exact mathematical correspondence where the cross-domain interpretation is ours;
+        <span class="tag-pill tag-hyp">[Falsifiable Hypothesis]</span> Claim with an explicit kill condition in §4;
+        <span class="tag-pill tag-meta">[Heuristic Metaphor]</span> Communication aid carrying no proof burden.<br>
+        <em>Use of traditional vocabulary:</em> We read Nāgārjuna's <em>pratītyasamutpāda / śūnyatā</em> (MMK), the <em>Daodejing</em>'s "lead without dominating" (长而不宰), and Yuan Liaofan's 16th-century <em>Four Lessons</em> strictly as <strong>historical compressions</strong>—lossy encodings of relational and thermodynamic constraints made without formalism. Where the <a href="emptiness-causality-intervention-ledger-zh.html">Chinese edition</a> and this edition differ in technical precision, this edition governs (see §5 for 7 mathematical corrections).
+      </div>
+    </section>
+
+    <section class="section-card" id="part-1">
+      <h2>Part I — Ontology: Indefinite Causal Order, Relational QM, and the Non-Voidness of Emptiness</h2>
+
+      <h3>1.1 Process Matrices <span class="tag-pill tag-theorem">[Theorem]</span></h3>
+      <p>Consider two local laboratories $A, B$ with input and output Hilbert spaces $\mathcal{H}^{A_I}, \mathcal{H}^{A_O}, \mathcal{H}^{B_I}, \mathcal{H}^{B_O}$. Each local operation is a quantum instrument whose elements have Choi operators $M_A^a \in \mathcal{L}(\mathcal{H}^{A_I A_O})$, $M_A^a \ge 0$, summing to a CPTP map $\mathrm{Tr}_{A_O}\sum_a M_A^a = \mathbb{1}_{A_I}$. Oreshkov, Costa, and Brukner (2012) assume only that local quantum mechanics holds in each laboratory and show that all bilinear, consistent probability rules take the form</p>
+      <div class="math-block">
+        p(a,b) = \mathrm{Tr}\big[W\,(M_A^a \otimes M_B^b)\big], \qquad W \in \mathcal{L}(\mathcal{H}^{A_I A_O B_I B_O}),
+      </div>
+      <p>subject to the validity conditions $W \ge 0$ and $\mathrm{Tr}[W(M_A \otimes M_B)] = 1$ for all CPTP Choi operators $M_A, M_B$. Equivalently, $\mathrm{Tr}\,W = d_{A_O}d_{B_O}$ and $W = L_V(W)$, where $L_V$ is the fixed linear projector onto the no-signaling validity subspace (Araújo et al. 2015):</p>
+      <div class="math-block">
+        \mathcal{W} = \mathrm{PSD} \cap \mathcal{A}, \qquad \mathcal{A} = \{W : L_V(W) = W,\ \mathrm{Tr}\,W = d_{A_O}d_{B_O}\}.
+      </div>
+      <p>A bipartite process $W$ is <strong>causally separable</strong> if $W = q W^{A\prec B} + (1-q)W^{B\prec A}$ ($q \in [0,1]$), and <strong>causally non-separable</strong> otherwise—certifiable via causal witnesses. The <strong>quantum switch</strong> (Chiribella et al. 2013),</p>
+      <div class="math-block">
+        \tfrac{1}{\sqrt{2}}\big(|0\rangle_c\,U_B U_A|\psi\rangle + |1\rangle_c\,U_A U_B|\psi\rangle\big),
+      </div>
+      <p>is causally non-separable and experimentally realised photonically (Procopio et al. 2015; Rubino et al. 2017). Two caveats matter: (i) the quantum switch cannot violate a causal inequality (OCB's inequality-violating process has no known physical implementation); (ii) no valid $W \in \mathcal{W}$ permits superluminal or consistency-breaking signaling under any local CPTP choice. Under quantum reference frame transformations for clocks (Castro-Ruiz et al. 2020), temporal localisation and event ordering can be frame-relative, while validity $W \in \mathcal{W}$ is preserved.</p>
+
+      <h3>1.2 The Isomorphism with Śūnyatā <span class="tag-pill tag-iso">[Structural Isomorphism]</span></h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Madhyamaka Concept</th>
+              <th>Process-Matrix Mathematical Fact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>niḥsvabhāvatā</strong> (absence of intrinsic nature)</td>
+              <td>Causal order is not fixed by local data. The same local instruments embed in both separable and non-separable $W$, and non-separable $W$ exist. Order is a property of a decomposition of the global $W$.</td>
+            </tr>
+            <tr>
+              <td><strong>pratītyasamutpāda</strong> (dependent arising, MMK 24.18)</td>
+              <td>Statistics $p(a,b)$ exist only as the joint contraction of $W$ with <em>both</em> local instruments. Neither side alone defines an outcome distribution over the pair.</td>
+            </tr>
+            <tr>
+              <td><strong>The Middle Way</strong> (non-nihilism / non-voidness)</td>
+              <td>The affine constraint set $\mathcal{A}$ and positivity are fixed independently of any particular $W$. Unit-trace normalization holds for every local CPTP choice; nothing is "anything goes."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Thus <strong>"empty of intrinsic order, yet non-void in relational constraint"</strong> is a precise mathematical statement: order is absent as an intrinsic property, while the affine subspace $\mathcal{A}$ is invariant. Where the isomorphism <strong>breaks</strong> is equally instructive: physics treats $\mathcal{A}$ as fundamental, whereas Madhyamaka denies intrinsic nature to the constraint set itself (§1.3).</p>
+
+      <h3>1.3 Relational QM and the "Emptiness of Emptiness" <span class="tag-pill tag-hyp">[Open Problem]</span></h3>
+      <p>In Relational Quantum Mechanics (Rovelli 1996), physical variables take values only relative to another physical system. Rovelli explicitly links this to Nāgārjuna (<em>Helgoland</em>, 2020). To prevent perspectival solipsism, Adlam and Rovelli (2022) introduce <strong>cross-perspective links (CPL)</strong>: if Alice measures variable $V$ of $S$ and Bob later measures Alice's record, Bob's outcome matches Alice's.</p>
+      <p>The second-order tension is sharp. In MMK 13.8 (*śūnyatā-śūnyatā*, "emptiness of emptiness"), Nāgārjuna rejects reifying relationality itself into an ultimate substrate. CPL postulates a perspective-transcending regularity across relations. This leaves two readings: (a) CPL acts as the invariant constraint subspace $\mathcal{A}$ (conventionally valid *saṃvṛti*, though physics lacks a *saṃvṛti/paramārtha* split), or (b) physics may eventually derive $\mathcal{A}$ and CPL as emergent from a weaker meta-description. <strong>Open question:</strong> <em>Is there a predictive framework in which the validity constraints $\mathcal{A}$ are themselves frame-relative, yet still yield frame-independent testable statistics?</em></p>
+
+      <h3>1.4 Time and Causal Power as Conditional or Coarse-Grained <span class="tag-pill tag-theorem">[Theorem]</span> <span class="tag-pill tag-iso">[Structural Isomorphism]</span></h3>
+      <ul>
+        <li><strong>Page–Wootters (1983):</strong> For $\hat{H} = \hat{H}_C \otimes \mathbb{1} + \mathbb{1} \otimes \hat{H}_S$ satisfying the Wheeler–DeWitt constraint $\hat{H}|\Psi\rangle\rangle = 0$ and clock states $|t\rangle_C = e^{-i\hat{H}_C t}|0\rangle_C$, the conditional state $|\psi_S(t)\rangle \propto \langle t|_C|\Psi\rangle\rangle$ obeys $i\hbar\partial_t|\psi_S(t)\rangle = \hat{H}_S|\psi_S(t)\rangle$ (covariant POVM extensions: Giovannetti–Lloyd–Maccone 2015; Höhn–Smith–Lock 2021). Global state is stationary; time evolution is conditional entanglement projection.</li>
+        <li><strong>Causal Emergence (Hoel–Albantakis–Tononi 2013):</strong> Defining effective information $EI(T) = I(X;Y)$ under uniform intervention $do(X)$, coarse-grainings exist with $EI(\text{macro}) &gt; EI(\text{micro})$ by filtering degeneracy and noise. That $EI$ depends on the chosen intervention measure reinforces our reading: <strong>causal power is defined relative to a description scale.</strong></li>
+      </ul>
+    </section>
+
+    <section class="section-card" id="part-2">
+      <h2>Part II — Self-Referential Boundary Conditions and a Thermodynamic Reading of the Fermi Paradox</h2>
+
+      <h3>2.1 Multi-Axis Credit Transport and the Self-Boundary <span class="tag-pill tag-hyp">[Falsifiable Hypothesis H1]</span></h3>
+      <p>Our May 2026 mainline models <em>Sheng</em> (生) as a recursive generative operator across a product of independent axes (time, space, scale, agent, objective), where learning requires <strong>credit transport</strong>. <strong>Hypothesis H1:</strong> When credit closure is completed across an axis set that includes the channel setting the agent's own initialization/objective boundary, the minimal sufficient world model must represent that boundary origin—exhibiting <strong>threshold emergence</strong> of self-boundary decodability as independent credit axes are added (Kill Criterion K6a).</p>
+
+      <h3>2.2 Boundary Conditions at Both Ends &amp; The Price of Selecting a Future <span class="tag-pill tag-theorem">[Theorem]</span></h3>
+      <ul>
+        <li><strong>Two-State Vector Formalism:</strong> Between pre-selection $|\Psi_{\text{past}}\rangle$ and post-selection $\langle\Phi_{\text{future}}|$, strong intermediate measurements follow the ABL rule (Aharonov–Bergmann–Lebowitz 1964), while the weak value (Aharonov–Albert–Vaidman 1988) is
+          <div class="math-block">
+            A_w = \frac{\langle\Phi_{\text{future}}|\hat{A}|\Psi_{\text{past}}\rangle}{\langle\Phi_{\text{future}}|\Psi_{\text{past}}\rangle},
+          </div>
+          where past and future boundaries enter symmetrically, and large $|A_w|$ requires small $p_{\text{post}} = |\langle\Phi|\Psi\rangle|^2$.
+        </li>
+        <li><strong>Deutsch CTCs vs. P-CTCs:</strong> Deutsch (1991) requires the fixed-point condition $\rho_{\text{CTC}} = \mathrm{Tr}_S[U(\rho_S \otimes \rho_{\text{CTC}})U^\dagger] \equiv \Phi(\rho_{\text{CTC}})$, which always admits a solution on the compact convex state space $\mathcal{D}(\mathcal{H}_{\text{CTC}})$ by Brouwer/Schauder's theorem (at the cost of nonlinearity). By contrast, Lloyd et al.'s (2011) P-CTCs use post-selected teleportation $\rho_S \mapsto C\rho_S C^\dagger / \mathrm{Tr}(C\rho_S C^\dagger)$, where paradoxical branches have probability zero rather than a fixed point.</li>
+        <li><strong>Theorem (Price of Selecting a Future):</strong> For any classical or quantum thermal protocol starting in equilibrium and obeying Jarzynski's equality $\langle e^{-\beta W}\rangle = e^{-\beta\Delta F}$, let $E$ be any post-selected event with probability $P(E) = p$. Then
+          <div class="math-block">
+            \langle W \mid E \rangle \;\ge\; \Delta F - k_B T \ln\frac{1}{p}.
+          </div>
+          <div class="proof-box">
+            <strong>Proof:</strong> By positivity of $e^{-\beta W}$, $p\,\langle e^{-\beta W} \mid E \rangle \le \langle e^{-\beta W}\rangle = e^{-\beta\Delta F}$. Applying Jensen's inequality $e^{-\beta\langle W \mid E\rangle} \le \langle e^{-\beta W} \mid E \rangle$ and taking $-\beta^{-1}\ln(\cdot)$ yields the bound. $\square$
+          </div>
+          Thus the apparent free-energy gain from conditioning on a physically selected future boundary is strictly capped at $k_B T \ln(1/p_{\text{post}})$. <strong>Self-reference is not free.</strong>
+        </li>
+      </ul>
+
+      <h3>2.3 Seeded, Then Left Alone: Observability vs. Controllability <span class="tag-pill tag-iso">[Structural Isomorphism]</span></h3>
+      <p>Our June 2026 note <em>Seeded, Then Left Alone</em> separates <strong>observability</strong> (descendants reconstructing $x_0$, reading the past) from <strong>controllability</strong> (the seeder applying ongoing forcing $u(t)$, writing the future) in $\dot{x} = f(x) + g(x)u(t)$. As shown in Part III below, <strong>it is false that every $u(t) \neq 0$ is thermodynamically suboptimal</strong>: a pure gradient force $u = -\nabla V$ is simply a Hamiltonian modification. What incurs strictly positive perpetual housekeeping heat is the <strong>non-gradient (curl / cycle-affinity) component</strong> of forcing—which becomes unavoidable whenever cross-boundary actuation cannot realise a full state-space gradient. Under the weak hypothesis that mature civilizations minimise long-horizon dissipation per unit of structural influence, their optimal action mode is boundary/landscape specification followed by $u \equiv 0$ (Kill Criterion K6b).</p>
+    </section>
+
+    <section class="section-card" id="part-3">
+      <h2>Part III — The Thermodynamic Ledger of Predictive Intervention: Three Exact Results</h2>
+
+      <h3>Result 1 — Information–Work Transfer and Multi-Monotone Resource Asymmetry <span class="tag-pill tag-theorem">[Theorem]</span></h3>
+      <p>Let system $X$ contact a bath at temperature $T$. A controller/demon $D$ measures $X$ into memory $M$ with mutual information $I = I(X;M)$, and executes a feedback protocol benefiting agent $A$. Combining Sagawa–Ueda (2008, 2009) and Landauer (1961) when the memory's initial and final free energies coincide yields the two-sided bound:</p>
+      <div class="math-block">
+        \langle W_{\text{saved}}^A \rangle \;\le\; k_B T\, I(X;M) \;\le\; W_{\text{meas}}^D + W_{\text{erase}}^D .
+      </div>
+      <p><strong>Split-Ledger Accounting:</strong> When $A = D$ (closed self-feedback), net work gain is $\le 0$. When $A \neq D$ (third-party intervention), $A$ captures $\langle W_{\text{saved}}^A \rangle &gt; 0$ while $D$ carries the correlated memory $I(X;M) &gt; 0$—an <strong>open thermodynamic liability</strong> of at least $k_B T\,I$ payable into $D$'s bath upon erasure.</p>
+      <p><strong>Proposition 1 (Multi-Monotone Compensation Gap) <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> For energy-incoherent states under catalytic thermal operations, Brandão et al. (2015) proved that state convertibility requires non-increase of the entire family of Rényi free energies $F_\alpha(\rho, \gamma_\beta) = k_B T[D_\alpha(\rho\|\gamma_\beta) - \ln Z]$ for all $\alpha \ge 0$ (where $F_1$ is ordinary free energy, $F_0$ governs single-shot deterministic extractable work, and $F_\infty$ governs deterministic work of formation). Suppose an intervention shifts deficits $\Delta_\alpha = F_\alpha(\rho) - F_\alpha(\rho')$:</p>
+      <ul>
+        <li><strong>(i) Deterministic work compensation $w$:</strong> Restoring the pre-intervention state requires $w \ge \sup_{\alpha \ge 0} \Delta_\alpha$. Paying back only the <strong>mean deficit $w = \Delta_1$ fails whenever $\sup_{\alpha \ge 0} \Delta_\alpha &gt; \Delta_1$.</strong></li>
+        <li><strong>(ii) Fluctuating resource compensation $\tau$:</strong> Requires $F_\alpha(\tau) - F_\alpha(\gamma_\tau) \ge \Delta_\alpha\ \forall \alpha$. Since $D_\alpha$ is non-decreasing in $\alpha$, a resource priced at its mean $F_1$ is weakest at the guaranteed-work end $F_0$.</li>
+        <li><strong>(iii) Non-local correlation residual:</strong> For product Gibbs references, $D(\rho_{XM}\|\gamma_X \otimes \gamma_M) = D(\rho_X\|\gamma_X) + D(\rho_M\|\gamma_M) + I(X;M)$. Local scalar transfers cannot erase the shared correlation term $k_B T\,I(X;M)$ without consuming the correlation ($I \to 0$).</li>
+      </ul>
+
+      <h3>Result 2 — Discrete Maximum Principle on Causal Graphs and Motter–Lai Overload Cascades <span class="tag-pill tag-theorem">[Theorem]</span></h3>
+      <p>Let $G=(V,E)$ be a connected oriented graph with incidence matrix $B \in \mathbb{R}^{E\times V}$, conductances $W = \mathrm{diag}(w_e) &gt; 0$, currents $J = WB\phi$, and graph Laplacian $L = B^\top W B$. Injecting unit counterfactual flux at source $A$ and extracting at ground $g$ gives $\rho = \delta_A - \delta_g$, $\phi = L^+(\delta_A - \delta_g)$, and $\phi_A - \phi_g = R_{\text{eff}}(A,g)$.</p>
+      <ul>
+        <li><strong>(a) Discrete Maximum Principle <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> $\phi$ is harmonic on $V \setminus \{A,g\}$, so $\max_v \phi_v = \phi_A$ and $\min_v \phi_v = \phi_g$. Moreover, <strong>every vertex connected to $g$ only through $A$ (dangling dependants of $A$) shares the full peak potential $\phi_v = \phi_A$ exactly.</strong></li>
+        <li><strong>(b) Source Star Lower Bound <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> Outward currents on edges incident to $A$ are non-negative and sum to $1$, so $\max_{e \ni A} \hat{J}_e \ge 1/\deg(A)$.</li>
+        <li><strong>(c) Proposition 2 (First-Overload Bound in Flow-Based Motter–Lai Cascades) <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> With baseline flow $J^{(0)}$ and edge capacities $C_e = (1+\alpha)|J_e^{(0)}|$, an intervention of scale $s$ triggers its first edge overload at threshold
+          <div class="math-block">
+            s^\star \;\le\; (2+\alpha)\,\deg(A)\,\max_{e \ni A} |J_e^{(0)}| .
+          </div>
+          <div class="proof-box">
+            <strong>Proof:</strong> By (b), choose $e \ni A$ with $\hat{J}_e \ge 1/\deg(A)$. Once $s\hat{J}_e &gt; (2+\alpha)|J_e^{(0)}|$, triangle inequality gives $|J_e^{(0)} + s\hat{J}_e| \ge s\hat{J}_e - |J_e^{(0)}| &gt; (1+\alpha)|J_e^{(0)}| = C_e$. $\square$
+          </div>
+          Thus a weakly coupled peripheral source ($\deg(A)$ small) with low baseline traffic on its incident edges is guaranteed an early local failure in its own immediate neighbourhood, followed by Sherman–Morrison rank-one Laplacian redistribution.
+        </li>
+      </ul>
+
+      <h3>Result 3 — Equivalence of Cokernel Residual $r_\perp$, Schnakenberg Cycle Affinity, and Housekeeping Heat + $\mathcal{W}_2$ Speed Limit <span class="tag-pill tag-theorem">[Theorem]</span></h3>
+      <h4>3a. Markov Jump Processes on Graphs</h4>
+      <p>For a continuous-time Markov jump process with rates $k_{uv}&gt;0 \Leftrightarrow k_{vu}&gt;0$, define the edge force $r_e = \ln(k_{uv}/k_{vu})$ and Schnakenberg (1976) cycle affinity $\mathcal{A}(c) = \langle c, r \rangle$ for $c \in \ker B^\top$. Our August 2026 cokernel residual at $\gamma=1$ ($D_1 = B$) is $r_\perp = [I - B(B^\top W B)^+ B^\top W]r = r - B\phi^\star$.</p>
+      <p><strong>Proposition 3.1 <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> For every cycle $c \in \ker B^\top$ and every positive diagonal $W$, $\langle c, r_\perp \rangle = \langle c, r \rangle = \mathcal{A}(c)$. Consequently:</p>
+      <div class="math-block">
+        r_\perp = 0 \;\iff\; \mathcal{A}(c) = 0\ \forall c \;\iff\; J_{\text{ss}} \equiv 0 \;\iff\; \dot{Q}_{\text{hk}} = k_B T\,\sigma_{\text{hk}} = 0 .
+      </div>
+      <div class="proof-box">
+        <strong>Proof:</strong> Since $r - r_\perp \in \mathrm{im}\,B$ and $\ker B^\top = (\mathrm{im}\,B)^\perp$, $\langle c, r - r_\perp \rangle = 0$ for all $c \in \ker B^\top$. Thus $r_\perp = 0 \iff r \in \mathrm{im}\,B \iff r \perp \ker B^\top$, which by Kolmogorov's criterion is detailed balance ($J_{\text{ss}} \equiv 0$) and vanishing Schnakenberg housekeeping entropy production $\sigma_{\text{ss}} = \sum_c J(c)\mathcal{A}(c) = 0$. $\square$
+      </div>
+
+      <h4>3b. Overdamped Langevin Dynamics, the Continuum Cokernel, and the $\mathcal{W}_2$ Speed Limit</h4>
+      <p>For $dx = \mu F\,dt + \sqrt{2D}\,dW_t$ ($D = \mu k_B T$, $F = -\nabla H_\lambda + u$), the local mean velocity $v = \mu F - D\nabla\ln p$ admits the $L^2(p)$ Helmholtz–Hodge decomposition $v = \nabla\psi + w$ with $\nabla\cdot(pw) = 0$.</p>
+      <p><strong>Proposition 3.2 (Dechant–Sasa–Ito 2022; Speck–Seifert 2005) <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> The entropy production rate splits orthogonally into transport excess and solenoidal housekeeping:</p>
+      <div class="math-block">
+        \dot{\Sigma} = \underbrace{\frac{1}{D}\int p\,|\nabla\psi|^2\,dx}_{\text{excess (transport)}} \;+\; \underbrace{\frac{1}{D}\int p\,|w|^2\,dx}_{\text{housekeeping}}, \qquad \Sigma_{\text{tot}}\cdot\tau \;\ge\; \frac{\mathcal{W}_2(p_i, p_f)^2}{D}.
+      </div>
+      <p>Here $w$ is the continuum counterpart of $r_\perp$: it does not transport density ($\partial_t p = -\nabla\cdot(p\nabla\psi)$) and only circulates. By Benamou–Brenier, the excess term is bounded below by $\mathcal{W}_2(p_i, p_f)^2 / (D\tau)$ (Aurell et al. 2011; Nakazato–Ito 2021), and saturated by a pure gradient protocol $F = \mu^{-1}\nabla(\psi + D\ln p)$ with $w \equiv 0$ (Proposition 3.3).</p>
+
+      <h4>3c. Counterfactual Clamping is Non-Reciprocity</h4>
+      <p><strong>Proposition 3.4 <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> In a linear Ornstein–Uhlenbeck network $dx = -Ax\,dt + \sqrt{2D}\,dW_t$ with stationary covariance $AC + CA^\top = 2D\mathbb{1}$, the steady-state entropy production rate is</p>
+      <div class="math-block">
+        \sigma_{\text{ss}} = D^{-1}\,\mathrm{Tr}\big[(A - DC^{-1})\,C\,(A - DC^{-1})^\top\big], \qquad \sigma_{\text{ss}} &gt; 0 \;\iff\; A \neq A^\top .
+      </div>
+      <p>A $do()$-style local counterfactual clamp replaces one node's row in a symmetric interaction matrix $A$ while leaving its column intact—breaking reciprocity ($A \neq A^\top$) and forcing perpetual housekeeping dissipation $\sigma_{\text{ss}} &gt; 0$. Conversely, slow reciprocal landscape reshaping $A(\lambda) = A(\lambda)^\top$ maintains $\sigma_{\text{hk}} = 0$ throughout.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Local Counterfactual Clamping (State Forcing)</th>
+              <th>Quasi-Static Landscape Reshaping</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Operator Action</strong></td>
+              <td>One-way coupling ($A \neq A^\top$) / non-gradient curl ($w \neq 0$)</td>
+              <td>Time-dependent Hamiltonian $H(\lambda)$ / symmetric $A(\lambda)$ ($w \equiv 0$)</td>
+            </tr>
+            <tr>
+              <td><strong>Graph Cokernel Signature</strong></td>
+              <td>$r_\perp \neq 0$ (non-vanishing Schnakenberg cycle affinity)</td>
+              <td>$r_\perp = 0$ (exact potential gradient on all cycles)</td>
+            </tr>
+            <tr>
+              <td><strong>Housekeeping Heat $\dot{Q}_{\text{hk}}$</strong></td>
+              <td>Strictly positive and perpetual ($\dot{Q}_{\text{hk}} &gt; 0$)</td>
+              <td>Identically zero ($\dot{Q}_{\text{hk}} = 0$)</td>
+            </tr>
+            <tr>
+              <td><strong>Transient Transport Cost</strong></td>
+              <td>Diverges as $\ge \mathcal{W}_2(p_i, p_f)^2 / (D\tau)$ for fast forcing $\tau \to 0$</td>
+              <td>Approaches $0$ in the quasi-static limit $\tau \to \infty$</td>
+            </tr>
+            <tr>
+              <td><strong>Thermodynamic Accounting</strong></td>
+              <td>Perpetual interest (housekeeping dissipation)</td>
+              <td>One-time principal $\Delta F$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-card" id="kill-criteria">
+      <h2>Part IV — Six Explicit Kill Criteria &amp; Falsifiable Predictions</h2>
+      <ol>
+        <li><strong>K1 (Ontology / Non-Void Constraint):</strong> A physically realised process that permits signaling breaking normalization under some local CPTP choice, or a reproducible violation of the process-matrix probability rule, falsifies the "non-void in constraint" half of §1.2.</li>
+        <li><strong>K2 (Split-Ledger Calorimetry):</strong> In a feedback-controlled colloid or single-electron box with separate demon-memory calorimetry, measuring $\langle W_{\text{saved}}^A \rangle &gt; W_{\text{meas}}^D + W_{\text{erase}}^D$ beyond experimental error falsifies Result 1.</li>
+        <li><strong>K3 (Multi-Monotone Compensation Gap):</strong> In a thermal-operations simulator or risk-sensitive multi-agent economy with preregistered harm events satisfying $\sup_\alpha \Delta_\alpha &gt; \Delta_1$, if mean-matched scalar compensation $w = \Delta_1$ systematically restores worst-case tail performance while $I(X;M) &gt; 0$, our settlement isomorphism is falsified and withdrawn.</li>
+        <li><strong>K4 (Cascade Locality Null):</strong> In empirical networks with recorded point interventions (power-grid redispatch, supply-chain shocks), if first overloads land on high-margin edges far from the source significantly more often than the flow-based Laplacian model predicts and violate Proposition 2's neighbourhood bound, Hypothesis H3 is falsified.</li>
+        <li><strong>K5 (Coarse-Grained $r_\perp$ vs. Calorimetry):</strong> In a driven colloidal ring or non-reciprocal OU pair ($A \neq A^\top$), if trajectory-estimated coarse-grained $\|r_\perp\| \approx 0$ while calorimetric $\dot{Q}_{\text{hk}}$ is large across reasonable coarse-grainings, $r_\perp$ fails as an operational detector and is downgraded.</li>
+        <li><strong>K6 (Self-Boundary Threshold &amp; Fermi Reading):</strong> (a) If adding independent credit-transport axes in learning systems yields no threshold in probe-decodability of boundary variables, H1 is downgraded. (b) Detection of abundant long-lived high-power beacons, or failure of any proposed initial-condition signature under look-elsewhere correction, falsifies the Fermi reading.</li>
+      </ol>
+    </section>
+
+    <section class="section-card" id="corrections">
+      <h2>5. Technical Refinements Relative to the Chinese Edition</h2>
+      <ol style="font-size:0.94rem; color:var(--muted);">
+        <li>The weak value $A_w$ is credited to Aharonov–Albert–Vaidman (1988); ABL (1964) gives the strong intermediate measurement rule.</li>
+        <li>P-CTCs (Lloyd et al. 2011) are post-selection models, whereas Brouwer/Schauder fixed-point existence applies to Deutsch CTCs (1991). The post-selection cost is proved as the exact Jarzynski–Jensen bound $\langle W \mid E \rangle \ge \Delta F - k_B T \ln(1/p)$.</li>
+        <li>Unit flux crosses every $A$–$g$ cut (not solely $A$'s star); source concentration is stated via the Discrete Maximum Principle ($\max \phi = \phi_A$), the dangling-dependant equality ($\phi_v = \phi_A$), the per-incident-edge lower bound $\max_{e\ni A}\hat{J}_e \ge 1/\deg(A)$, and Proposition 2's first-overload bound.</li>
+        <li>Only the non-gradient (solenoidal/curl) component of actuation incurs housekeeping heat; pure gradient forcing is a Hamiltonian modification (Propositions 3.2–3.4).</li>
+        <li>In Brandão et al. (2015), $F_\infty$ is the max-free energy (work of formation) and $F_0$ governs single-shot extractable work; the scalar compensation gap is proved in Proposition 1 ($w \ge \sup_{\alpha \ge 0} \Delta_\alpha$).</li>
+        <li>$r_\perp \iff$ Schnakenberg cycle affinity holds at $\gamma=1$ as exact equality of cycle circulations $\langle c, r_\perp \rangle = \mathcal{A}(c)$ and vanishing sets.</li>
+        <li>The explicit $L^2(p)$ steady-state integral of housekeeping heat is credited to Speck–Seifert (2005), and the time-dependent orthogonal velocity split to Dechant–Sasa–Ito (2022).</li>
+      </ol>
+    </section>
+
+    <section class="section-card">
+      <h2>References</h2>
+      <p style="font-size:0.91rem; color:var(--muted);">
+        Oreshkov, Costa, Brukner, <em>Nat. Commun.</em> 3, 1092 (2012) · Araújo, Branciard, Costa, Feix, Giarmatzi, Brukner, <em>New J. Phys.</em> 17, 102001 (2015) · Chiribella, D'Ariano, Perinotti, Valiron, <em>Phys. Rev. A</em> 88, 022318 (2013) · Procopio et al., <em>Nat. Commun.</em> 6, 7913 (2015) · Rubino et al., <em>Sci. Adv.</em> 3, e1602589 (2017) · Castro-Ruiz, Giacomini, Belenchia, Brukner, <em>Nat. Commun.</em> 11, 2672 (2020) · Rovelli, <em>Int. J. Theor. Phys.</em> 35, 1637 (1996); <em>Helgoland</em> (2020) · Adlam, Rovelli, <em>Philos. Phys.</em> (2023; arXiv 2022) · Page, Wootters, <em>Phys. Rev. D</em> 27, 2885 (1983) · Giovannetti, Lloyd, Maccone, <em>Phys. Rev. D</em> 92, 045033 (2015) · Höhn, Smith, Lock, <em>Phys. Rev. D</em> 104, 066001 (2021) · Moreva et al., <em>Phys. Rev. A</em> 89, 052122 (2014) · Hoel, Albantakis, Tononi, <em>PNAS</em> 110, 19790 (2013) · Aharonov, Bergmann, Lebowitz, <em>Phys. Rev.</em> 134, B1410 (1964) · Aharonov, Albert, Vaidman, <em>PRL</em> 60, 1351 (1988) · Deutsch, <em>Phys. Rev. D</em> 44, 3197 (1991) · Lloyd et al., <em>PRL</em> 106, 040403 (2011) · Jarzynski, <em>PRL</em> 78, 2690 (1997) · Landauer, <em>IBM J. Res. Dev.</em> 5, 183 (1961) · Sagawa, Ueda, <em>PRL</em> 100, 080403 (2008); <em>PRL</em> 102, 250602 (2009) · Brandão, Horodecki, Ng, Oppenheim, Wehner, <em>PNAS</em> 112, 3275 (2015) · Motter, Lai, <em>Phys. Rev. E</em> 66, 065102 (2002) · Schnakenberg, <em>Rev. Mod. Phys.</em> 48, 571 (1976) · Hatano, Sasa, <em>PRL</em> 86, 3463 (2001) · Speck, Seifert, <em>J. Phys. A</em> 38, L581 (2005) · Esposito, Van den Broeck, <em>PRL</em> 104, 090601 (2010) · Aurell, Mejía-Monasterio, Muratore-Ginanneschi, <em>PRL</em> 106, 250601 (2011) · Nakazato, Ito, <em>Phys. Rev. Research</em> 3, 043093 (2021) · Dechant, Sasa, Ito, <em>Phys. Rev. Research</em> 4, L012034 (2022) · Shiraishi, Funo, Saito, <em>PRL</em> 121, 070601 (2018) · Benamou, Brenier, <em>Numer. Math.</em> 84, 375 (2000).
+      </p>
+    </section>
+
+    <footer>
+      <p>System Evolution Public Theory Mainline · <a href="./">Home</a> · <a href="THEORY.md">Theory Index</a> · <a href="emptiness-causality-intervention-ledger-zh.html">中文版 (ZH)</a></p>
+    </footer>
+  </main>
+</body>
+</html>
