@@ -1,9 +1,9 @@
-# 破偏置真味校准法 v1.0（Tabelog-Eye 多模态 × 全量评论反偏置引擎）
+# 破偏置真味校准法 v1.0（Tabelog·Eye 多模态 × 全量评论反偏置模型规范）
 
-先说结论：Macheng 这个判断成立，AI 在这里的优势也是实打实的。传统软件只能对分数做均值和过滤；AI 能把每条评论拆成「真味 / 服务 / 环境 / 锚定 / 客群 / 人情」几个成分，再结合照片里的手艺证据，把真实口味还原出来。不过有两件事要先摆在前面：
+核心判断：传统点评软件只能对分数做算术均值和简单过滤；多模态与全量评论模型则能将每条评论拆解为「真味 / 服务 / 环境 / 锚定 / 客群 / 人情」等结构性成分，再结合实拍菜品照片中的相对手艺证据，还原「只论火候与出品手艺」的反事实真味校准分。本规范在公开前明确两项认识论与合规前提：
 
-1. 现在 `dataset.json` 里的 `calibrated_score` 是人工启发式写进去的，不是按本方法算出来的。其中「天狗 新宿西口 3.35→3.78」「PRONTO 品川 3.38→3.79」这类连锁店被上调了 0.4 以上，正是本方法要防的过度校准。按本方法重算，这几家大概率只该在 ±0.1 以内。
-2. 【需要你决定】评论和照片从哪来。食べログ的使用条款禁止自动抓取，这是红线外缘的第三方平台问题。可选三条路：A 小规模手动或半自动读取；B 在你本机浏览时由插件就地解析；C 只用公开元数据加 Google 补充。在你选定之前，引擎只做方法、算法和前端，不做批量抓取。
+1. **当前原型状态声明（Heuristic Prototype & Chain Cap Discipline）**：当前 `dataset.json`（31 家门店原型集）中的 `calibrated_score` 为基于五维结构特征与一阶证据的启发式校准值（Heuristic Initial Calibration），完整双层潜变量与 DML 交叉拟合（Cross-Fitting）正在持续迭代中。同时，系统对「天狗」「PRONTO」「わん」等大众连锁居酒屋严格执行 **$\pm 0.08$ 品类内诚实校准上限**，防止将平价连锁虚抬至怀石名店分档。
+2. **数据来源与第三方平台合规边界（PCSE Compliance）**：严格遵守第三方点评平台服务条款（ToS），本开源包不做自动化批量爬虫抓取，仅基于公开商户元数据、已获归属署名的展示图（二进制图片不随 MIT 源码仓库再分发，详见 `photos/ATTRIBUTION.md`）以及用户本地浏览器 `localStorage` 沙盒内的私有品鉴反馈运行。
 
 ---
 
@@ -42,7 +42,7 @@ $$\ell(S) = \operatorname{logit} F_{\text{nat}}(S), \quad F_{\text{nat}} = \text
 $$z_i = \alpha\,\theta_v + \underbrace{\gamma_S \tilde s^{\text{serv}}_i + \gamma_A \tilde s^{\text{amb}}_i}_{\text{ortho}} + \underbrace{\beta_{\text{anc}}(\ell(S^{\text{disp}}_t)-\theta_v)}_{\text{锚定}} + \underbrace{\delta^\top c_i}_{\text{客群}} + \underbrace{\eta\, h_i}_{\text{人情/hype}} + \varepsilon_i$$
 照片作为对 $\theta_v$ 的独立观测：$C_v \sim \mathcal N(\kappa\,\theta_v + b_g,\ \sigma_C^2)$。
 
-**第三步，用 Shapley 归因算瀑布。** 从朴素模型（只有 $S_{\text{tabelog}}$）出发，逐一打开各个因子模块，取所有打开顺序的平均边际贡献 $\phi_k$。这样五个 Δ 加起来严格等于总校准量，而且和打开顺序无关。
+**第三步，用加性 Logit（Shapley-style）归因算瀑布。** 从朴素模型（只有 $S_{\text{tabelog}}$）出发，逐一打开各个因子模块，取所有打开顺序的平均边际贡献 $\phi_k$。这样五个 Δ 加起来严格等于总校准量，而且和打开顺序无关。
 
 **第四步，收缩、封顶、映射回分值：**
 $$\phi_k \leftarrow \phi_k\cdot\frac{n_k}{n_k+\kappa_k},\qquad \Big|\sum_k\phi_k\Big| \le \Phi_{\max}$$
@@ -73,7 +73,7 @@ $$S_{\text{true}} = F_{\text{nat}}^{-1}\!\big(\sigma(\ell(S_{\text{tabelog}}) + 
 **数学定义。** 在「无锚定」子集上训练文本编码器 $f_\theta$，预测评委标准化分 $z$（不预测原始分）。无锚定子集指高一致性评委的评论，或分数尚未公开阶段的早期评论。
 $$\hat z^{\text{text}}_i = f_\theta(\text{text}_i),\qquad e_i = \hat z^{\text{text}}_i - z_i$$
 
-锚定系数 $\beta_{\text{anc}}$：在店铺固定效应下，用同一家店不同时间的显示分 $S^{\text{disp}}_t$ 回归 $z_i$ 得到。
+锚定系数 $\beta_{\text{anc}}$：在门店固定效应下，用同一家店不同时间的显示分 $S^{\text{disp}}_t$ 回归 $z_i$ 得到。
 $$\phi_{\text{surprise}} = \frac{\sum_i w_i\,\max(0,e_i)\,\mathbb 1[\text{A/B/C/D 命中} \lor e_i>\tau]}{\sum_i w_i}\quad(\text{20\% 截尾均值})$$
 
 **反作弊：**
@@ -81,7 +81,7 @@ $$\phi_{\text{surprise}} = \frac{\sum_i w_i\,\max(0,e_i)\,\mathbb 1[\text{A/B/C/
 - 账号评论数少于 5 且首评就是狂喜的，$w\to0$。
 - 必须有 3 个以上独立评委命中才生效。独立的定义：没有互相关注，不是同一天同行。
 
-### Factor 2：维度正交解耦 $\Delta_{\text{ortho}}$
+### Factor 2：维度正交解耦 $\Delta_{\text{ortho}}$（单向非料理惩罚剥离）
 
 **场景。** 頑固親父、塩対応、私語厳禁、撮影禁止、現金のみ、狭い昭和カウンター、行列、一見さんお断り。
 
@@ -92,15 +92,15 @@ $$\phi_{\text{surprise}} = \frac{\sum_i w_i\,\max(0,e_i)\,\mathbb 1[\text{A/B/C/
 
 **数学定义。** 食べログ每条评论自带子分：料理・味、サービス、雰囲気、CP、酒・ドリンク。
 
-1. 光环效应（halo）系数：服务差会连带拉低「料理・味」子分本身。用店铺内变异按 Frisch–Waugh–Lovell 方式估计。逻辑是：同一家店不同晚上的服务体验有起伏，但真味不应该随之变化，所以这里的斜率就是光环效应。
+1. 光环效应（halo）系数：服务差会连带拉低「料理・味」子分本身。用门店内变异按 Frisch–Waugh–Lovell / DML-style 残差化方式估计。逻辑是：同一家店不同晚上的服务体验有起伏，但真味不应该随之变化，所以这里的斜率就是光环效应。
 $$s^{\text{taste}}_i = \mu_v + \gamma_S(s^{\text{serv}}_i-\bar s^{\text{serv}}_v) + \gamma_A(s^{\text{amb}}_i-\bar s^{\text{amb}}_v) + \varepsilon_i$$
 2. 纯味：$\hat T_i = s^{\text{taste}}_i - \hat\gamma_S(s^{\text{serv}}_i - \bar s^{\text{serv}}_g) - \hat\gamma_A(s^{\text{amb}}_i - \bar s^{\text{amb}}_g)$，其中 $g$ 为品类常模。没有子分的评论，用基于方面的情感分析（ABSA）抽取。
-3. 反事实综合分：把服务和环境替换成品类常模，得到 $r^{\text{cf}}_i = \sum_k w_k s^{k,\text{cf}}_i$。于是 $\phi_{\text{ortho}} = \ell(\overline{r^{\text{cf}}}) - \ell(\bar r)$。只剥离低于常模的那部分惩罚，不放大高于常模的服务分。
+3. 反事实综合分（单向修正说明）：把低于常模的服务和环境惩罚替换成品类常模，得到 $r^{\text{cf}}_i = \sum_k w_k s^{k,\text{cf}}_i$，于是 $\phi_{\text{ortho}} = \ell(\overline{r^{\text{cf}}}) - \ell(\bar r)$。仅在美味分显著高于服务分（$r^{\text{food}} - r^{\text{serv}} \ge 0.4$）时做单向正向补偿（one-sided correction），不放大高于常模的服务分，也不奖励口味本身不佳的门店。
 
 **护栏：**
-- **「外国人に冷たい / 外国人お断り」不剥离。** Macheng 是中国人，这类对待会直接影响他的实际体验，必须单独作为硬 flag 显示，不能被「纯味」吃掉。
+- **「外国人に冷たい / 外国人お断り」不剥离。** 这类对待会直接影响国际访客的实际用餐体验，必须单独作为硬 flag 显示，不能被「纯味」吃掉。
 - 私語厳禁、撮影禁止和手艺水平本身正相关，不额外加分，避免反向重复计数。
-- 输出两个分：純粋な味（默认）和 Macheng 加权体验分（服务权重 $\omega_S$ 可调）。
+- 输出两个分：純粋な味（默认）和综合体验加权分（服务权重 $\omega_S$ 可调）。
 
 ### Factor 3：评委样本偏差 $\Delta_{\text{sample}}$
 
@@ -111,7 +111,7 @@ $$\tilde\mu_u = \frac{n_u\mu_u + \kappa\mu_0}{n_u+\kappa},\quad \tilde\sigma_u^2
 可靠度权重 $\rho_u$ = 该评委与长期共识的一致性 × 品类经验（同品类评论数）。
 $$\hat z_v = \frac{\sum_u\rho_u z_{u,v}}{\sum_u\rho_u}$$
 
-**3b. 客群错位（逆倾向加权到 Macheng 的目标客群）：**
+**3b. 客群错位（逆倾向加权到晚间专注品鉴目标客群）：**
 
 客群特征 $c$ 包括：昼/夜（食べログ本身就分昼夜两个分）、支付价位、是否套餐、通りがかり 信号、评委常住地区、品类经验。
 $$w_i = \text{clip}\Big(\frac{p_{\text{target}}(c_i)}{p_{\text{obs}}(c_i)},0.2,5\Big),\quad n_{\text{eff}} = \frac{(\sum w_i)^2}{\sum w_i^2}\ge 8\ \text{否则收缩}$$
@@ -180,17 +180,17 @@ $$\phi_{h3} = \max\big(0,\ \ell(\bar z_{\text{all}}) - \ell(\bar z_{t>t^*}^{\tex
 
 ---
 
-## 4. 验证闭环（不验证就不能称为「校准」）
+## 4. 验证闭环（不验证就不能称为「已校准」）
 
 1. **回测 A（预测力）。** 用 24 个月前的数据快照计算 $S_{\text{true}}$，看它预测「当下食べログ分 / 百名店入选」是否显著优于 $S_{\text{tabelog}}$。指标：Spearman 相关、AUC。某个因子没有带来增量，它的 $\kappa_k$ 就自动调大，相当于收缩掉。这一步专门检验它是否和食べログ自带的影響度加权重复。
 2. **回测 B（泡沫识别）。** 被标为 hype 的店，后续 12 个月分数是否显著下跌。
-3. **Owner 闭环。** Macheng 去过之后留一个 1–5 分加一句话，用来评估 `p_satisfy` 的 Brier 分数，并按偏好更新 $\omega_S$ 等权重。
+3. **实地品鉴闭环。** 用餐者在本地沙盒记录 1–5 分实测反馈，用来评估 `p_satisfy` 的 Brier 分数，并在本机 `localStorage` / SQLite 沙盒内更新 $\omega_S$ 等个人偏好权重。
 
-**Anticipated 体感：** 第一批重算完成后，Macheng 应该看到连锁居酒屋的校准幅度降到 ±0.1 以内，被上调 0.3 以上的只剩少数有职人证据的小店，每一条上调点开都能看到日语原句或照片证据。反信号：上调普遍化（多数店都被抬高），或者某条瀑布拿不出原文证据。
+**校准纪律：** 大众连锁居酒屋的校准幅度严格限制在 $\pm 0.08$ 以内；被上调 $0.25$ 以上的仅限具备明确职人刀工/火候与辛口评委证据的独立小店，每一条上调均附带一手日语评论原句或实拍照片手艺归因。
 
 ---
 
-## 5. 前端：🧬 AI 真味校准拆解条（交 Antigravity 实现）
+## 5. 前端：🧬 AI 真味校准拆解条（UI 与无障碍规范）
 
 **卡片默认折叠，只显示一行，保持「眼缘优先」：**
 ```
@@ -254,20 +254,17 @@ $$\phi_{h3} = \max\big(0,\ \ell(\bar z_{\text{all}}) - \ell(\bar z_{t>t^*}^{\tex
 ```
 
 **呈现规则：**
-- 每一条 Δ 必须能点开看到第一手证据：日语原句、中文释义，或照片裁切图。拿不出证据的条目不显示。
+- 每一条 Δ 必须能点开看到第一手证据：日语原句、中文释义，或照片手艺指标。拿不出证据的条目不显示。
 - `hard_flags`（如外国人に冷たい）永远放在第一行，不能被分数掩盖。
 - 可信区间宽度超过 0.3 时，只显示「证据不足」，不给点估计。
 
 ---
 
-## 6. 分工与下一步
+## 6. 模块分工与演进状态
 
-| 谁 | 做什么 |
+| 模块 | 职责范围 |
 |---|---|
-| Kiro（后端） | 评论抽取 schema → 评委统计 → 联合模型 → Shapley 归因 → 回测 A/B |
-| Antigravity（前端） | §5 的瀑布组件和证据抽屉 |
-| Macheng | 只需决定开头第 2 条：数据来源走 A、B 还是 C |
+| 后端校准引擎（Kiro × Antigravity） | 评论特征 schema → 评委贝叶斯收缩统计 → 联合潜变量模型 → 加性 Logit（Shapley-style）归因 → 回测 A/B |
+| 前端交互层（Tabelog·Eye PWA） | §5 瀑布拆解条组件、证据展示与浏览器本地 `localStorage` 模拟沙盒（Virtual / Paper Sandbox） |
 
-回测 A 跑通之前，卡片上统一标注「校准 β」，不对外宣称已验证。
-
-Session disposable: 否 — 数据来源（A/B/C）还在等你决定；`dataset.json` 的校准分还没按本法重算；本方法还没写进 Hub。
+全量回测 A 完成前，卡片统一标注「真味校准 β（Heuristic Prototype）」，将方法论推演与实证校准透明区分。

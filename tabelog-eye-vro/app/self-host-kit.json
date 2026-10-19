@@ -4,12 +4,13 @@
   "license": "Proprietary-Curated-Data / MIT-Runtime-Engine",
   "description": "One-command self-hostable AI Restaurant De-Biasing, Visual Swipe Curation & Autonomous Booking Dispatcher Node",
   "isolation_guarantees": [
-    "Each browser/device fingerprint (#Peer-xxxx) gets an isolated local taste vector w_eye and isolated sandbox budget",
-    "Owner real $100/mo bounty ledger is hardware/token-gated and never shared with guest links",
+    "Each browser localStorage sandbox (#Peer-xxxx) gets an isolated local taste vector w_eye and isolated 模拟沙盒 (Virtual / Paper Sandbox) budget",
+    "All sandbox bounty simulations run strictly inside an isolated 模拟沙盒 (Virtual / Paper Sandbox) ($100.00 virtual cap)",
     "All swipe & micro-tag feedback events are persisted into a local append-only JSONL/SQLite asset vault"
   ],
   "quick_start_commands": [
-    "git clone https://github.com/MachengShen/system-evolution-public.git && cd system-evolution-public/tabelog-eye-vro/self-host",
+    "git clone https://github.com/macheng/tabelog-eye-node.git && cd tabelog-eye-node",
+    "cp .env.example .env  # Set MONTHLY_BOUNTY_CAP_USD=100 and OWNER_PASSKEY_HASH",
     "docker compose up -d"
   ],
   "docker_compose": {
@@ -27,7 +28,7 @@
         "environment": {
           "VRO_MONTHLY_CAP_USD": "100.00",
           "VRO_COMPUTE_MARGINAL_COST": "0.00",
-          "VRO_TENANT_ISOLATION": "device_fingerprint_strict",
+          "VRO_TENANT_ISOLATION": "per_browser_localstorage_sandbox",
           "VRO_ANTI_STOCK_PHOTO_GATE": "enforced"
         }
       }

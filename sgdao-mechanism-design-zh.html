@@ -184,7 +184,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:22px 0}
     <option value="#m4">4 · 非代币资本代谢 No-Token Capital</option>
     <option value="#m5">5 · 三底座实证 Empirical Calibration</option>
     <option value="#m6">6 · 共建者加入 Builder Onboarding</option>
-    <option value="#m7">7 · 现网实盘悬赏 Live Action Bounties</option>
+    <option value="#m7">7 · 现网行动悬赏 Live Action Bounties</option>
   </select>
 </div>
 
@@ -198,7 +198,7 @@ hr.soft{border:none;border-top:1px dashed var(--line);margin:22px 0}
   <a href="#m4">4 · 非代币资本代谢</a>
   <a href="#m5">5 · 三底座实证</a>
   <a href="#m6">6 · 共建者加入路径</a>
-  <a href="#m7">7 · 现网实盘悬赏</a>
+  <a href="#m7">7 · 现网行动悬赏</a>
   <h4>Reference</h4>
   <a href="#symbols">符号表 Notation</a>
   <a href="#provenance">凭证溯源 Provenance</a>
@@ -677,7 +677,7 @@ flowchart TD
 
   <div class="callout good">
     <span class="tag">口径 / Honesty on numbers</span>
-    <p>下面两类数字严格区分：<span class="tagline v-verified">VERIFIED</span> = 现网 Gap-Gate v2 实跑并经独立跨族 C-Gate 签发 $R_{\text{verified}}$ 凭证的运营指标；<span class="tagline v-sim">SIMULATED</span> = 千人数字人单种子 in-silico 对抗靶场的适应度/漏网率，是方向性证据，<b>不是</b>外部实盘的统计显著性结论。</p>
+    <p>下面两类数字严格区分：<span class="tagline v-verified">VERIFIED</span> = 现网 Gap-Gate v2 实跑并经独立跨族 C-Gate 签发 $R_{\text{verified}}$ 凭证的运营指标；<span class="tagline v-sim">SIMULATED</span> = 千人数字人单种子 in-silico 对抗靶场的适应度/漏网率，是方向性证据，<b>不是</b>外部现场实测的统计显著性结论。</p>
   </div>
 
   <h3>5.1 底座一：Gap-Gate v2 现网实测（去硬编码） <span class="en">Live Gap-Gate v2 — de-hardcoded</span></h3>
@@ -704,7 +704,7 @@ flowchart TD
       <tr><td><b>本机制 VRO/SGDO</b></td><td class="num hl-good">0.765</td><td class="num hl-good">0.34</td><td class="num hl-good">49.4</td><td class="num hl-good">12.3</td><td class="num hl-good">72.5</td><td class="num hl-good">67.2</td></tr>
     </tbody>
   </table>
-  <p class="footn"><span class="tagline v-sim">SIMULATED</span> 极端 regime。常规 regime 下本机制 Fitness=71.8 / 女巫漏网 9.2%；传统代币 DAO 女巫漏网 61.2%。单种子 in-silico，非外部实盘显著性。</p>
+  <p class="footn"><span class="tagline v-sim">SIMULATED</span> 极端 regime。常规 regime 下本机制 Fitness=71.8 / 女巫漏网 9.2%；传统代币 DAO 女巫漏网 61.2%。单种子 in-silico，非外部现场实测显著性。</p>
 
   <h4>5.3 四条相变律（从扫描实验归纳，<span class="tagline v-sim">SIMULATED</span>）</h4>
   <div class="grid2">
@@ -734,7 +734,7 @@ flowchart TD
       <tr><td>M1</td><td><b>ZK / TLS 物理感知证明</b><br><span class="footn">Physical sensing attestation</span></td><td>zkSNARK/zkTLS、硬件签名、时空证明</td><td>感知 $x_i$ 带不可伪造的设备+时空证明；离线可验签；重放攻击被拒</td></tr>
       <tr><td>M2</td><td><b>链下签名账本 + L2 状态根锚定</b><br><span class="footn">Off-chain ledger ↔ L2 state root</span></td><td>Merkle/Verkle、L2 rollup、Ed25519/sigstore</td><td>$R_{\text{verified}}$ 账本的状态根周期性锚定到 L2；锚定可独立重算；篡改被 canonical hash 拒绝</td></tr>
       <tr><td>M3</td><td><b>谱坍缩 BTS 对抗模拟</b><br><span class="footn">SC-BTS adversarial sim</span></td><td>博弈论、谱聚类、机制设计、BNE 证明</td><td>给出 $\rho^\star$ 最优校准 + $\epsilon$-共谋鲁棒性界；复现女巫净收益 $<0$；证明骨架升为定理</td></tr>
-      <tr><td>M4</td><td><b>沙盒实盘节点</b><br><span class="footn">Live sandbox node</span></td><td>边缘设备、数据管道、本地 LLM 路由</td><td>真实感知节点通过三路径验证并修正后验 $P(\theta)$；端到端闭环产出 $\ge1$ 条 $R_{\text{verified}}$</td></tr>
+      <tr><td>M4</td><td><b>沙盒感知节点</b><br><span class="footn">Live sandbox node</span></td><td>边缘设备、数据管道、本地 LLM 路由</td><td>真实感知节点通过三路径验证并修正后验 $P(\theta)$；端到端闭环产出 $\ge1$ 条 $R_{\text{verified}}$</td></tr>
     </tbody>
   </table>
 
@@ -765,7 +765,7 @@ flowchart LR
 
 <!-- ================= MODULE 7 ================= -->
 <section id="m7">
-  <h2>7 · 现网实盘：首批现实世界正交感知与行动悬赏榜 <span class="en">Live Real-World Epistemic &amp; Action Bounties · Batch #01</span></h2>
+  <h2>7 · 现网行动悬赏：首批现实世界正交感知与行动悬赏榜 <span class="en">Live Real-World Epistemic &amp; Action Bounties · Batch #01</span></h2>
 
   <div class="callout good">
     <span class="tag">现场行动网络开放 / Live Action Bounties Active</span>
@@ -923,7 +923,7 @@ flowchart LR
   </div>
   <ul>
     <li><span class="tagline v-verified">VERIFIED</span> 第 5.1 节谱量来自现网 Gap-Gate v2 实跑，并由独立跨族凭证（C-Eng/gemini → C-Gate/claude，verdict=pass）签发；<b>未证</b>：外部标注召回基准。</li>
-    <li><span class="tagline v-sim">SIMULATED</span> 第 5.2–5.3 节适应度/漏网率/相变律来自千人数字人单种子 in-silico 靶场，是方向性证据，非外部实盘统计显著性。</li>
+    <li><span class="tagline v-sim">SIMULATED</span> 第 5.2–5.3 节适应度/漏网率/相变律来自千人数字人单种子 in-silico 靶场，是方向性证据，非外部现场实测统计显著性。</li>
     <li><span class="tagline v-heuristic">HEURISTIC</span> 不可能三角命题、谱隙的学习/物理解释、以及第 3 节 BNE 定理为<b>构造性证明骨架</b>，严格唯一性与 $\epsilon$-共谋鲁棒性仍开放（共建模块 M3）。</li>
     <li>「谱隙」在外部材料中一律作为<b>可计算运营指标 + 设计隐喻</b>，不宣称为已证明的物理/学习定理。</li>
   </ul>

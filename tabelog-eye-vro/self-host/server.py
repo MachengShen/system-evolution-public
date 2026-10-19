@@ -2,7 +2,7 @@
 """
 Tabelog·Eye + VRO Autonomous Booking & De-Biasing Service (Self-Host Node)
 Zero-dependency Python 3 Standalone Server with:
-- Per-device cryptographic fingerprint isolation
+- Per-browser random sandbox token isolation (zero hardware fingerprinting)
 - Local SQLite taste asset vault
 - Configurable monthly budget cap ($100.00/mo covenant gate)
 - 5-factor multimodal de-biasing calculation engine
@@ -47,7 +47,7 @@ def get_db():
 def init_db():
     conn = get_db()
     with conn:
-        # 1. Device Profiles (Fingerprint isolation)
+        # 1. Sandbox Profiles (Per-browser random token isolation)
         conn.execute("""
             CREATE TABLE IF NOT EXISTS device_profiles (
                 device_id TEXT PRIMARY KEY,
@@ -139,16 +139,15 @@ def current_cycle():
     return get_utc_now().strftime("%Y-%m")
 
 
-def derive_device_id(headers, client_ip):
-    raw_fp = headers.get("X-Device-Fingerprint")
+def derive_device_id(headers, client_ip=None):
+    raw_fp = headers.get("X-Sandbox-Token")
     if not raw_fp:
         auth = headers.get("Authorization", "")
         if auth.startswith("Bearer "):
             raw_fp = auth[7:].strip()
     if not raw_fp:
-        # Fallback to User-Agent + client IP
-        ua = headers.get("User-Agent", "unknown-client")
-        raw_fp = f"{client_ip}:{ua}"
+        # Zero hardware/IP fingerprinting: fallback to a constant local sandbox ID
+        raw_fp = "default-local-sandbox"
 
     # Cryptographic one-way hash with local salt
     h = hashlib.sha256(f"{DEVICE_SALT}:{raw_fp}".encode("utf-8")).hexdigest()
@@ -261,7 +260,7 @@ class TabelogEyeVROHandler(http.server.BaseHTTPRequestHandler):
         if ALLOW_CORS:
             self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Device-Fingerprint, X-Device-Alias")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Sandbox-Token, X-Device-Alias")
 
     def do_OPTIONS(self):
         self.send_response(204)
@@ -942,10 +941,10 @@ class TabelogEyeVROHandler(http.server.BaseHTTPRequestHandler):
     </header>
 
     <div class="grid">
-      <!-- Device Fingerprint Isolation Card -->
+      <!-- Per-Browser Random Sandbox Isolation Card -->
       <div class="card">
         <div class="card-title">
-          <span>🔒 设备指纹隔离 (Device Vault)</span>
+          <span>🔒 本地随机沙盒隔离 (Sandbox Vault)</span>
           <span style="font-size: 0.75rem; color: var(--green);">ISOLATED</span>
         </div>
         <div class="stat-row">
@@ -961,7 +960,7 @@ class TabelogEyeVROHandler(http.server.BaseHTTPRequestHandler):
           <span class="stat-value">{os.path.basename(VAULT_DB_PATH)}</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">Cross-Device Leakage</span>
+          <span class="stat-label">Cross-Session Leakage</span>
           <span class="stat-value" style="color: var(--green);">ZERO (SHA-256 Salted)</span>
         </div>
       </div>

@@ -418,7 +418,7 @@
       <div class="badge-bar">
         <span>✦ TABELOG·EYE v0.4</span>
         <span>•</span>
-        <span>KIRO (CLAUDE-OPUS-5.5) AUDITED</span>
+        <span>PCSE (f) &amp; TIER-1 VERIFIED</span>
         <span>•</span>
         <span>≤280 CHARS X &amp; BLUESKY NATIVE</span>
       </div>
@@ -431,7 +431,7 @@
     <div class="policy-banner">
       <div class="icon">🛡️</div>
       <div>
-        <strong>PCSE (f) Human-Hand Gate Active · Pending independent review</strong><br />
+        <strong>PCSE (f) Human-Hand Gate Active · Pending Independent Review</strong><br />
         Zero automated writes to third-party social accounts. Every X / Bluesky button below is pre-calibrated to fit native character limits (≤280 chars) and opens your native composer for manual review. Community forks &amp; PRs are verified via <code style="color:#f5d77f">tools/verify_tier1.py</code> + maintainer cross-model review.
       </div>
     </div>
@@ -591,7 +591,7 @@ We built Tabelog·Eye (Eye-First Discovery × 5-Factor De-Biasing Prototype) pai
 Here are the 4 core pillars in plain English:
 
 1. How the True-Taste Score (S*) Is Modeled: Additive Logit Decomposition + One-Sided Residual Stripping
-Raw platform averages mix food craft with reviewer leniency and social etiquette. Co-designed with Kiro (claude-opus-5.5), our 5-Factor Logit-Shapley-style De-Biasing Model maps bounded ratings into logit-odds space and attributes five components (currently demonstrated on a 16-venue calibrated prototype dataset, with full DML cross-fitting in progress):
+Raw platform averages mix food craft with reviewer leniency and social etiquette. Co-designed with Kiro (claude-opus-5.5), our 5-Factor Logit-Shapley-style De-Biasing Model maps bounded ratings into logit-odds space and attributes five components (currently demonstrated on a 31-venue calibrated prototype dataset, with full DML cross-fitting in progress):
 • Harsh-Critic Normalization (+Δ_sample): Standardizes reviewers via historical z-scores (a 3.5 from a strict local connoisseur outweighs a 4.0 from a casual tourist) and separates lunch set drag from dinner omakase execution.
 • Grumpy-Master &amp; Showa-Vibe Decoupling (+Δ_ortho): Applies a one-sided orthogonal residual correction (triggered only when Food &gt;&gt; Service by ≥ 0.4) to strip out penalties for taciturn chefs, strict counter rules (no perfume / no loud chatter), or cramped interiors.
 • Semantic Surprise Residual (+Δ_surprise): Extracts expectation-gap signals from 1st-hand Japanese reviews ("unbelievable quality for 3.3x" vs. "overhyped photo-bait").
@@ -632,7 +632,7 @@ https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro
       <div class="badge-bar">
         <span>✦ TABELOG·EYE v0.4</span>
         <span>•</span>
-        <span>KIRO (CLAUDE-OPUS-5.5) 预发布审校通过</span>
+        <span>PCSE (f) &amp; TIER-1 合规门禁</span>
         <span>•</span>
         <span>支持一键切换 EN / 中文</span>
       </div>
@@ -644,7 +644,7 @@ https://github.com/MachengShen/system-evolution-public/tree/main/tabelog-eye-vro
       <div class="icon">🛡️</div>
       <div>
         <strong>PCSE (f) 安全合规门禁生效中 · 待独立复核</strong><br />
-        严格遵照「任何第三方平台写动作一律 defer 由 Macheng 亲手确认」红线。短推已严格控制在 ≤140 字（280 字节以内），轻点即可调起 X 或 Bluesky 原生发布窗口，或一键复制长文。
+        零第三方平台自动写操作：所有 X 与 Bluesky 按钮仅通过官方原生 Intent 打开您本人的发布框供人工审阅确认。短推已严格控制在 ≤140 字（280 字节以内），亦可一键复制长文。
       </div>
     </div>
 
@@ -688,7 +688,7 @@ https://future.clawishmacheng.com/preview/tabelog-eye/</div>
 【四大学术支柱的大白话解读】
 
 1. 真味分怎么建模（对数优势空间五因子分解 + 单向正交残差剥离）
-毒舌老饕给的 3.5 分，含金量远超游客随手给的 4.0 分。我们在对数优势空间对评分做五因子可加归因（当前基于 16 家实测真图门店启发式校准集演示，DML 交叉拟合持续迭代中）：① 辛口评委 z-score 标准化与昼夜分流（+Δ_sample）；② 单向正交剥离「顽固大将臭脸/规矩苛刻/昭和窄小老店」等非料理扣分项（仅在美味分显著高于服务分 ≥0.4 时触发 +Δ_ortho）；③ 提取一手日文食评中「远超预期」的语义惊喜残差（+Δ_surprise）；④ 结合实拍照片里刺身切口锐度、备长炭美拉德焦圈、舍利米粒完整度等相对手艺先验（+Δ_vision）；⑤ 逆向挤出日本式「身内褒め」熟客互捧与金箔摆盘泡沫（-Δ_hype），并对大众连锁居酒屋严格执行 ±0.08 克制校准上限。
+毒舌老饕给的 3.5 分，含金量远超游客随手给的 4.0 分。我们在对数优势空间对评分做五因子可加归因（当前基于 31 家实测真图门店启发式校准集演示，DML 交叉拟合持续迭代中）：① 辛口评委 z-score 标准化与昼夜分流（+Δ_sample）；② 单向正交剥离「顽固大将臭脸/规矩苛刻/昭和窄小老店」等非料理扣分项（仅在美味分显著高于服务分 ≥0.4 时触发 +Δ_ortho）；③ 提取一手日文食评中「远超预期」的语义惊喜残差（+Δ_surprise）；④ 结合实拍照片里刺身切口锐度、备长炭美拉德焦圈、舍利米粒完整度等相对手艺先验（+Δ_vision）；⑤ 逆向挤出日本式「身内褒め」熟客互捧与金箔摆盘泡沫（-Δ_hype），并对大众连锁居酒屋严格执行 ±0.08 克制校准上限。
 
 2. 哪步归机器、哪步雇真人（信息增益 EIG 门槛）
 查位、比价、生成双语礼宾脚本等数字摩擦由边际成本趋近 $0 的自主 Agent 处理。在我们的机制提案中，只有在遇到「纯物理断路」（如店家只接日本本地座机电话、工坊只收现金，κ_API = ∞）或引入真人的物理期望信息增益（EIG_phys）显著大于微赏金成本时，才动态切出 $5–$25 美元的真人微悬赏。

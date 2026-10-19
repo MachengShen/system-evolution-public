@@ -1,7 +1,7 @@
 # Tabelog·Eye + VRO: Decentralized Autonomous Taste De-Biasing & Physical Fulfillment Mesh
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Verification: surface-verify v2.1.0 PASS](https://img.shields.io/badge/surface--verify-v2.1.0%20PASS-emerald.svg)](https://github.com/MachengShen/system-evolution-public)
+[![Verification: verify_tier1.py PASS](https://img.shields.io/badge/verify_tier1.py-PASS-emerald.svg)](https://github.com/MachengShen/system-evolution-public)
 [![Tokens: Zero Speculative Tokens](https://img.shields.io/badge/Governance-Zero%20Tokens%20%7C%20Soulbound%20Track--Record-gold.svg)](https://theory.clawishmacheng.com/system-evolution-public/sgdao-fulfillment-proposal-en.html)
 [![Anti-Fabrication: Enforced](https://img.shields.io/badge/Anti--Fabrication-Strict%20Authentic%20Assets-success.svg)](https://github.com/MachengShen/system-evolution-public)
 
@@ -14,15 +14,15 @@
 
 ### 1. Vision & Architecture
 
-When someone encounters something they truly crave—a covert 8-seat Tokyo sushi counter accepting only local landline reservations, or an unlisted artisan ceramic teapot in Kyoto sold strictly offline in cash—why do pure LLM agents fail upon hitting the physical world, while traditional buying agents (*daigou*) and freelance boards degenerate into Akerlof lemon markets plagued by 30%–50% hidden markups and unverified claims?
+When someone encounters something they truly crave—a covert 8-seat Tokyo sushi counter accepting only local landline reservations, or an unlisted artisan ceramic teapot in Kyoto sold strictly offline in cash—why do pure LLM agents fail upon hitting the physical world, while traditional buying agents (*daigou*) and freelance boards degenerate into Akerlof lemon markets plagued by illustrative 30%–50% hidden markups and unverified claims?
 
-**Tabelog·Eye + VRO** solves this structural trilemma (*Long-Tail Physical Reach* vs. *Zero Principal-Agent Moral Hazard* vs. *Zero Frontend Cognitive Load*) via a clean, two-sided architecture:
+**Tabelog·Eye + VRO** addresses this structural trilemma (*Long-Tail Physical Reach* vs. *Zero Principal-Agent Moral Hazard* vs. *Zero Frontend Cognitive Load*) via a clean, two-sided architecture:
 
 1. **Frontend (Zero Cognitive Load)**: A pure, image-first swipe interface capturing irreducible personal aesthetic appetite $v_{\text{eye}}$ alongside an all-inclusive maximum ceiling budget $B_{\max}$. No review fatigue, no score manipulation.
 2. **Backend 4-Cell Autonomous Mesh (SGDO)**:
    - `C-Res` (Resource Sourcing): Resolves candidates, identifies physical bottlenecks ($\kappa_{\text{API}} = \infty$).
    - `C-Pred` (Calibration & Pricing): Executes the **5-Factor Logit-Shapley De-Biasing Engine** to recover counterfactual culinary craft $\widehat{S}_i^\star$, setting fair-value caps $P_{\text{fair}}$ and aborting scalper channels.
-   - `C-Eng` (Engineering & Decomposition): Operates the hybrid decomposition operator $\mathcal{D}(I)$, absorbing $\ge 95\%$ of digital friction via $\$0$-marginal-cost compute, and dispatching only the irreducible $5\%$ physical last mile as $\$5\text{–}\$25$ standardized micro-bounties to trusted local human nodes.
+   - `C-Eng` (Engineering & Decomposition): Operates the hybrid decomposition operator $\mathcal{D}(I)$ with an illustrative target split (~95% / ~5%), absorbing ~95% of digital friction via $\$0$-marginal-cost compute and dispatching only the irreducible ~5% physical last mile as $\$5\text{–}\$25$ standardized micro-bounties to trusted local human nodes.
    - `C-Gate` (Verification Gate): Enforces three orthogonal verification paths ($\rho_{ab} < 0.2$) before triggering non-token staged escrow settlement.
 3. **Double-Circuit Capital Metabolism**:
    - *Circuit 1 (Exploration & Calibration)*: Bootstrapped by a strict $\$100/\text{mo}$ seed pool buying only high-EIG human ground-truth calibration signals.
@@ -42,9 +42,9 @@ When someone encounters something they truly crave—a covert 8-seat Tokyo sushi
 |  Identify API bottlenecks        De-biasing & Scalper Guard P_fair      |
 |                                                                         |
 |  [C-Eng] Hybrid Operator D(I) --> [C-Gate] 3-Path Orthogonal Gate       |
-|  95% machine digital friction    Path A: Independent Store Receipt      |
-|  5% physical micro-bounty        Path B: Nonce Macro Live Probe         |
-|                                  Path C: Carrier Weigh-in / Handshake   |
+|  ~95% machine digital friction   Path A: Independent Store Receipt      |
+|  ~5% physical micro-bounty       Path B: Nonce Macro Live Probe         |
+|  (illustrative target split)     Path C: Carrier Weigh-in / Handshake   |
 +-------------------------------------------------------------------------+
                |                                      |
                v                                      v
@@ -80,12 +80,15 @@ Channels triggering $\text{flag}_{\text{scalper}} = 1$ are immediately pruned fr
 tabelog-eye-vro/
 ├── README.md                  # This comprehensive bilingual documentation
 ├── CONTRIBUTING.md            # Fork, development & PR submission guidelines
+├── CONTRIBUTORS.md            # Verified open-source contributors & attestation log
+├── tools/
+│   └── verify_tier1.py        # Self-contained Tier-1 AST & asset integrity verifier
 ├── app/                       # Tabelog·Eye PWA Client
 │   ├── index.html             # Pixel 10 Pro Dark-Gold Shell & Swipe Interface
-│   ├── dataset.json           # 16 authentic venues with 5-factor calibrated vectors
+│   ├── dataset.json           # 31 authentic venues with 5-factor calibrated vectors
 │   ├── manifest.json          # PWA web manifest
 │   ├── sw.js                  # Offline Service Worker (CacheStorage v3)
-│   ├── photos/                # 16 authentic food & counter photos (Zero Stock Photos!)
+│   ├── photos/                # 31 authentic food & counter photos (Zero Stock Photos!)
 │   ├── curation_feedback_ledger.jsonl  # Append-only taste asset vault export
 │   └── kiro-debiasing-methodology.md   # Mathematical specification of de-biasing
 └── self-host/                 # Standalone Zero-Dependency Self-Host Node
@@ -122,7 +125,7 @@ cd system-evolution-public/tabelog-eye-vro/self-host
 python3 server.py
 ```
 
-Open **`http://localhost:8080/`** to access your private, cryptographic taste vault. Each visiting device/browser receives an isolated SHA-256 fingerprint (`#Peer-xxxx`) with independent sandbox balances and zero risk of cross-polluting your primary taste profile.
+Open **`http://localhost:8080/`** to access your private taste vault. Each visiting browser receives an isolated random `localStorage` sandbox token (`tabelog_eye_sandbox_id`, zero hardware fingerprinting) with independent virtual sandbox balances and zero risk of cross-polluting other profiles.
 
 ---
 
@@ -144,7 +147,7 @@ We encourage open-source contributions from mechanism designers, culinary resear
   - Verify Authentic Physical Assets (ZERO stock photos!)
        │
        ▼
-[Run Verification Harness: surface-verify & r-verify]
+[Run Verification Harness: python3 tabelog-eye-vro/tools/verify_tier1.py]
        │
        ▼
 [Submit Pull Request] (Using .github/PULL_REQUEST_TEMPLATE.md)
@@ -153,7 +156,7 @@ We encourage open-source contributions from mechanism designers, culinary resear
 [Automated C-Gate Cross-Model Evaluation & Upstream Merge]
        │
        ▼
-[Soulbound Track-Record Attestation W_i(t) Awarded to Contributor]
+[Recorded in CONTRIBUTORS.md & Proposed Soulbound Weight W_i(t) Roadmap]
 ```
 
 1. **Fork the Repo**: Fork `https://github.com/MachengShen/system-evolution-public` to your personal GitHub account.
@@ -161,12 +164,12 @@ We encourage open-source contributions from mechanism designers, culinary resear
    - Enhancing de-biasing algorithms or adding regional venue adapters.
    - **Strict Anti-Fabrication Rule**: Never use stock photography (`unsplash.com`, `pexels.com`, `pixabay.com`, etc.). If authentic photography is blocked by anti-scraping (403), mark the venue as `QUARANTINED_MISSING_AUTHENTIC_ASSET` rather than faking images.
 3. **Verify Locally**:
-   Run the static AST and asset integrity check:
+   Run the self-contained Tier-1 static and asset integrity check:
    ```bash
-   surface-verify --dir tabelog-eye-vro/app --tier1-only
+   python3 tabelog-eye-vro/tools/verify_tier1.py
    ```
 4. **Submit PR**: Open a PR with our template (`.github/PULL_REQUEST_TEMPLATE.md`).
-5. **Upstream Review & Soulbound Attestation**: Verified PRs will be merged, and the author's cryptographic node will receive an immutable boost to its Soulbound Track-Record weight $W_i(t)$ in the decentralized fulfillment network.
+5. **Upstream Review & Contributor Attestation**: Verified PRs are merged, recorded in `CONTRIBUTORS.md`, and mapped to the proposed Soulbound Track-Record weight $W_i(t)$ in the decentralized fulfillment roadmap.
 
 ---
 
@@ -176,12 +179,12 @@ We encourage open-source contributions from mechanism designers, culinary resear
 
 当一个人看到真正心动却「难买、难订、仅限本地座机或现金线下、跨语言跨制度」的长尾非标之物时：
 - **纯大模型 Agent** 困死于没有 API 的物理制度墙；
-- **传统代购与众包市场** 则在委托—代理信息不对称下，迅速坍缩为 30%–50% 暗箱加价与假货横行的阿克洛夫柠檬市场。
+- **传统代购与众包市场** 则在委托—代理信息不对称下，迅速坍缩为典型 30%–50% 示意暗箱加价与假货横行的阿克洛夫柠檬市场。
 
-**Tabelog·Eye + VRO** 通过人机混合解耦彻底打破这一三角困境：
+**Tabelog·Eye + VRO** 通过人机混合解耦打破这一三角困境：
 - **前端极简眼缘层**：仅捕获不可压缩的私有审美信号 $v_{\text{eye}}$ 与最高全包预算 $B_{\max}$，绝不让用户承担比价、筛查与盯梢的认知负荷。
-- **后端 SGDO 4-Cell 自治网格**：机器以 $\$0$ 边际成本吞吐 $95\%$ 的数字摩擦；仅当遇到接口断层（$\kappa_{\text{API}}=\infty$）或物理感官期望信息增益超阈值（$\text{EIG}_{\text{phys}}>\tau_{\text{gate}}$）时，才向本地可信人类节点派发 $\$5\text{–}\$25$ 标准化微赏金。
-- **三路径正交履约核验 ($R_{\text{verified}}$)**：制度独立回执 (Path A) ∧ 活体挑战码微距探针 (Path B) ∧ 下游物流称重握手 (Path C)，欺诈漏网率压低至 $10^{-3}$。
+- **后端 SGDO 4-Cell 自治网格**：以目标拆分比例（Illustrative Target Split $\sim 95\% / \sim 5\%$），机器以 $\$0$ 边际成本吞吐约 $95\%$ 的数字摩擦；仅当遇到接口断层（$\kappa_{\text{API}}=\infty$）或物理感官期望信息增益超阈值（$\text{EIG}_{\text{phys}}>\tau_{\text{gate}}$）时，才向本地可信人类节点派发 $\$5\text{–}\$25$ 标准化微赏金。
+- **三路径正交履约核验 ($R_{\text{verified}}$)**：制度独立回执 (Path A) ∧ 活体挑战码微距探针 (Path B) ∧ 下游物流称重握手 (Path C)，在完全条件独立（$\rho_{ab}=0$）下联合伪造漏网率压低至 $\prod_k f_k \approx 10^{-3}$ 量级（单次检测率 $>99.9\%$），在 $\rho_{ab} \le 0.2$ 保守相关界下仍保持 $\Pr[\text{FA}] \le 0.0353$（单次检测率 $\ge 96.5\%$）。
 - **永久零投机代币**：权力完全基于不可转让、不可买卖的灵魂绑定声誉 $W_i(t)$。
 
 ---
@@ -224,12 +227,12 @@ python3 server.py
    - 严禁使用 Unsplash、Pexels 等图库假图掩盖 403 缺失数据。
    - 缺失真实资产时，必须显式标注为 `QUARANTINED_MISSING_AUTHENTIC_ASSET`。
 3. **本地测试与静态门禁**：
-   运行静态 AST 与无假图核验：
+   运行仓库自带的静态与无假图核验脚本：
    ```bash
-   surface-verify --dir tabelog-eye-vro/app --tier1-only
+   python3 tabelog-eye-vro/tools/verify_tier1.py
    ```
 4. **提交 Pull Request**：基于 `.github/PULL_REQUEST_TEMPLATE.md` 详述变更范围、正交验证证据与收益。
-5. **C-Gate 跨模型自动化裁决与灵魂绑定贡献者背书**：PR 经异构模型审计合并后，贡献者公钥节点将被载入网络创世账本并赋予永续声誉权重 $W_i(t)$。
+5. **C-Gate 跨模型自动化裁决与贡献者署名**：PR 经异构模型审计合并后，贡献者将载入 `CONTRIBUTORS.md`，并在协议演进路线图中映射为灵魂绑定声誉权重 $W_i(t)$。
 
 ---
 
