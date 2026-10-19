@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="工时坍塌后的商业模式：从「哪里还稀缺」到「稀缺怎么变成钱」——验证成本瓶颈、柠檬市场二阶博弈、四大赛道拆解与7种原子计费单元（2026.10 公开预测留档）。">
+  <title>工时坍塌后的商业模式：从「哪里还稀缺」到「稀缺怎么变成钱」 | Post-Billable-Hour Business Models</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e56a0'/><text x='50' y='68' font-size='54' text-anchor='middle' fill='white' font-family='sans-serif'>BM</text></svg>">
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --green: #15803d;
+      --red: #b91c1c;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 30rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px max(20px, calc((100vw - 960px) / 2));
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 44px 20px 88px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+    .badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      line-height: 1.3;
+      margin: 0 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .thesis-box {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 18px;
+      font-size: 1.02rem;
+    }
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 24px rgba(24, 25, 31, 0.03);
+    }
+    h2 {
+      font-size: 1.38rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+    }
+    h3 {
+      font-size: 1.12rem;
+      margin: 22px 0 10px;
+      color: var(--accent);
+    }
+    p { margin: 0 0 14px; }
+    ul, ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 8px; }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f4f1ea;
+      font-weight: 700;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin: 16px 0;
+    }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 20px;
+      background: var(--card-bg);
+    }
+    .mini-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      color: var(--ink);
+    }
+    .tag-dead {
+      color: var(--red);
+      font-weight: 700;
+    }
+    .tag-alive {
+      color: var(--green);
+      font-weight: 700;
+    }
+    .lang-en { display: none; }
+    body.en-mode .lang-zh { display: none; }
+    body.en-mode .lang-en { display: block; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 640px) {
+      .hero, .section-card { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="https://theory.clawishmacheng.com/system-evolution-public/">System Evolution · Public Research &amp; Forecast Memo</a>
+    <div class="nav-actions">
+      <button class="btn" id="lang-toggle" onclick="toggleLang()">EN / 中文切换</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- CHINESE EDITION -->
+    <div class="lang-zh">
+      <section class="hero">
+        <div class="meta-row">
+          <span class="badge">Public Research &amp; Forecast Record · 2026-10-19</span>
+          <span>主题：AI 经济学 / 商业模式本质 / 验证成本瓶颈</span>
+        </div>
+        <h1>工时坍塌后的商业模式：从「哪里还稀缺」到「稀缺怎么变成钱」</h1>
+        <div class="thesis-box">
+          <strong>核心命题（一句话）：</strong>单纯的模型与技术能力在本轮 AI 革命中已不再构成护城河，真正的分水岭是新商业模式的涌现。AI 把认知生产的边际成本压近零，但<strong>验证成本（Verification Cost）没有同步下降，且因海量低质生成物冲击导致验证需求总量暴增，成为新的核心瓶颈</strong>。工时计价坍塌后，利润迁移的主线是：<strong>钱更多流向替买方降低验证成本、并为验证结果承担后果（按结果对赌 / 风险承销 / 自有资本下场）的一方，以及守住排他资产与入口闭环的节点。</strong>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>一、商业模式的本质与「工时坍塌」的三种结局</h2>
+        <p><strong>商业模式的本质</strong> = 创造价值之后，怎么把其中一部分稳定收回来。能收多少，取决于你握着别人绕不过去的那个<strong>稀缺环节</strong>（Christensen 利润守恒定律：当一层变成大路货，利润必然转移到相邻的稀缺层）。</p>
+        <p>首先要区分<strong>「人的时间成本高」</strong>与<strong>「按人的时间计费」</strong>：律师按小时、翻译按字、咨询按人天、客服按坐席——过去的价格锚定在「人干一件事要多久」。当 AI 把「多久」压近零后，按工时计价的锚点彻底失效，行业走向三种结局：</p>
+        <ol>
+          <li><strong>老玩家降价硬撑</strong>：单价不变或微降，但客户采购的总工时断崖式缩水；</li>
+          <li><strong>新玩家按结果打包（一口价 + 担责）</strong>：利润从「卖时间」挪到「卖确定性」；</li>
+          <li><strong>价值全漏给客户（消费者剩余）</strong>：技术创造了巨大社会福利，但供给侧无人占住稀缺层，行业收入塌陷。</li>
+        </ol>
+      </section>
+
+      <section class="section-card">
+        <h2>二、走出静态错觉：工时坍塌后的 5 个盲区与二阶博弈</h2>
+        <p>仅仅列出「担责、上下文、注意力渠道、品味判断」四类剩余稀缺是不够的——那只回答了<strong>哪里还稀缺</strong>，没回答<strong>稀缺怎么穿越柠檬市场变成钱</strong>。必须看清以下五条二阶规律：</p>
+
+        <h3>1. 切分粒度：按「具体任务」而非「行业」重新定价</h3>
+        <p>同一家律所或咨询公司内部会迅速分化：基础尽调与报告起草滑向「工具与入口层」（毛利趋近零），核心诉讼/博弈策略留在「判断层」，合伙人信任网络与交易撮合留在「关系层」。按行业一刀切必然误判切口。</p>
+
+        <h3>2. 最致命的分野：「绝对价值市场」vs「相对价值（零和）市场」</h3>
+        <ul>
+          <li><strong>绝对价值市场（翻译、客服、基础诊疗、常规法务）</strong>：AI 普及后社会总福利净增，且触发 <strong>Jevons 悖论</strong>（以前请不起律师和译者的长尾需求爆发，单价趋近零但总量暴涨）。核心矛盾是怎么守住分发入口，防止价值全漏。</li>
+          <li><strong>相对价值市场（二级市场投研 Alpha、广告竞价、核心人才争抢）</strong>：本质是零和博弈与军备竞赛。<strong>人人都有 AI 就等于没人有 AI</strong>，基于公开信息的分析 Alpha 快速衰减。钱流向两处：<strong>卖武器的（算力/独占一手事实数据）</strong>，或<strong>自己拿真金白银下场的人</strong>。</li>
+        </ul>
+
+        <h3>3. 「品味与判断」的柠檬市场危机（Verification Gap）</h3>
+        <p>当生成一份像模像样的战略或投研报告成本趋近零时，市场上会充斥大量看似专业的 AI 噪音。买方在付钱前无法低成本分辨真假（逆向选择）。因此，卖「判断」的行业不会整体涨价，而是发生残酷的 <strong>K 型分化</strong>：腰部塌陷；只有<strong>结果短周期可观测（敢签对赌协议）</strong>或<strong>拥有不可伪造的公开历史验证链（Track Record）与顶级品牌背书</strong>的少数头部能收走溢价。</p>
+
+        <h3>4. 「签字担责」的本质是保险精算，且有监管保质期</h3>
+        <p>牌照与签字权本质是「监管租金」，属于过渡期套利窗口。更深一层：客户为「担责」买单，买的不是你不会错，而是<strong>出错时你赔得起（资本金与偿付信用）</strong>。单一模型出 Bug 会引发<strong>系统性同源赔付（Correlated Failure）</strong>——因此，未来的技术壁垒不在于单一模型多聪明，而在于用<strong>多源异构交叉验证 + 物理世界一手核验</strong>降低错误之间的相关性，使风险更接近可精算的商业承销（配合限额、免赔额与再保结构）。</p>
+
+        <h3>5. 真正搬不走的「活上下文」是私有负样本库</h3>
+        <p>静态历史文档（聊天记录、知识库）容易被客户要求迁移，或被下一代基础模型原生覆盖。真正产生高昂负迁移成本的「活上下文」，是日积月累沉淀在业务流里的<strong>「私有负样本与红线拦截库」（哪些边界被拒绝、哪些错误曾被拦截）与专属评测集</strong>——客户一旦换掉你，系统性能与风控水平立刻显著下降。</p>
+      </section>
+
+      <section class="section-card">
+        <h2>三、四大典型赛道拆解：谁占哪一环、钱怎么收？</h2>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>(A) 翻译出版与知识产品</h4>
+            <p><span class="tag-dead">✗ 必死：</span>按字计价翻译、纯卖译本内容、收「AI 双语阅读工具」订阅费（大厂与终端随时内置）。</p>
+            <p><span class="tag-alive">✓ 稀缺与收钱：</span>① 上游版权与准同步全球首发速度；② 窄人群选书策展（Curation）+ 同频人群共读讨论的圈层会员费。</p>
+          </div>
+          <div class="mini-card">
+            <h4>(B) 投资研究与尽调</h4>
+            <p><span class="tag-dead">✗ 悖论：</span>真正的 Alpha 具有容量衰减性（卖给越多人越不值钱），公开发售的投研观点天然带柠檬信号。</p>
+            <p><span class="tag-alive">✓ 稀缺与收钱：</span>① 直接管钱收 2/20 Carry；② 不卖观点，卖经物理世界核验的「独占一手接地事实流」；③ 交易级财务尽调（如并购 QoE 盈利质量报告）配合陈述与保证保险（R&amp;W Insurance）按单打包。</p>
+          </div>
+          <div class="mini-card">
+            <h4>(C) 管理咨询与战略</h4>
+            <p><span class="tag-dead">✗ 必死：</span>PPT 分析工厂（「1 合伙人 : 10 分析师」金字塔杠杆失效）、中型报告作坊。</p>
+            <p><span class="tag-alive">✓ 稀缺与收钱：</span>结果可测的降本/运营改进全面转向<strong>按节省金额比例对赌抽成</strong>；结果不可测的长期战略继续靠顶级品牌做董事会免责背书（Retainer）。</p>
+          </div>
+          <div class="mini-card">
+            <h4>(D) 多智能体系统 / AI 原生团队</h4>
+            <p><span class="tag-dead">✗ 误区：</span>卖通用 Agent 框架 SaaS（易被上游原厂吞噬）或做代工外包（陷入销售与人力泥潭）。</p>
+            <p><span class="tag-alive">✓ 两段式演化：</span>第一段直接下场做结果可测的自营业务，沉淀带时间戳的公开验证链；第二段凭硬战绩跨过柠檬市场，对外出售「已核验事实凭证」或高信任幕僚席位。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>四、新商业模式工具箱：7 种原子计费单元与「三问试金石」</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>原子计费单元</th>
+                <th>收的是什么钱</th>
+                <th>成立前提</th>
+                <th>典型形态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td><strong>结果（Outcome）</strong></td>
+                <td>每次成交、解决或可审计的节省</td>
+                <td>结果短周期可观测、可归因</td>
+                <td>按结案工单、按降本比例抽成</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td><strong>风险保费（Premium）</strong></td>
+                <td>确定性与兜底赔付</td>
+                <td>赔付资本金、异构验证降低同源错误相关</td>
+                <td>一口价包干 + 限额差错赔付</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td><strong>核验印章（Attestation）</strong></td>
+                <td>替买方省掉高昂复核成本</td>
+                <td>历史公信力、背书出错时的连带代价</td>
+                <td>独立审计、评级、真实性核验凭证</td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td><strong>过路闸门（Toll）</strong></td>
+                <td>不可绕过的场景入口与分发</td>
+                <td>控制高频工作流闭环或终端入口</td>
+                <td>交易抽佣、API 闸门费</td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td><strong>排他资产授权（License）</strong></td>
+                <td>稀缺源头的排他性</td>
+                <td>独家获取权或高负迁移成本</td>
+                <td>版权、独家一手事实流、私有红线评测集</td>
+              </tr>
+              <tr>
+                <td><strong>6</strong></td>
+                <td><strong>关系与身份（Retainer）</strong></td>
+                <td>信任网络、归属感与免责背书</td>
+                <td>极度稀缺的供给方人格信用</td>
+                <td>核心顾问年费、高门槛圈层会员</td>
+              </tr>
+              <tr>
+                <td><strong>7</strong></td>
+                <td><strong>资本分润（Carry / Equity）</strong></td>
+                <td>判断被资本直接兑现的溢价</td>
+                <td>判断极准且愿意真金白银共同下注</td>
+                <td>自营套利、2/20 分成、认知入股</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>选赛道、砍伪需求的「三问试金石」</h3>
+        <ol>
+          <li><strong>瓶颈问</strong>：执行免费之后，客户拿到最终结果还必须经过谁？那是我占住的环节吗？下一代大模型版本更新会不会顺手把它内置了？</li>
+          <li><strong>验证问</strong>：客户在付钱前怎么相信我不是 AI 垃圾？如果结果可测，我敢签对赌吗？如果结果不可测，我有垄断级履历背书吗？（两样都没有 = 柠檬市场，直接砍）</li>
+          <li><strong>下注问</strong>：如果这套判断真这么准，为什么我要拿出来卖，而不是自己下场干？<strong>卖得越多越贬值的信号（Alpha），一律自用不卖；越多人用网络效应越强的坐标系与验证底座，才对外开放。</strong></li>
+        </ol>
+
+        <h3>五、可证伪的公开预测留档（2026–2028 检验窗口）</h3>
+        <ol>
+          <li><strong>预测 1（法律与财税尽调计价迁移）</strong>：到 2028 年底，常规合同审查与标准并购尽调（如基础财务/法务初筛）中，采用「固定一口价 + 差错责任险/限额赔付」替代传统按小时计费的交易占比将超过 50%。</li>
+          <li><strong>预测 2（中腰部独立研报与咨询作坊出清）</strong>：到 2028 年底，不具备独占一手数据源、也不绑定交易执行或资本分润的纯文本订阅制行业研报与中型管理咨询机构，其付费续订率或营收规模将较 2025 年萎缩 40% 以上。</li>
+          <li><strong>预测 3（机器核验凭证成为独立采购项）</strong>：到 2028 年底，在审计、并购尽调与高价值 Agent 采购中，「附带多源交叉验证与真实世界取证记录（Verified Receipt）的核验服务」将作为独立计费条目写入主流企业采购合同。</li>
+        </ol>
+      </section>
+    </div>
+
+    <!-- ENGLISH EDITION -->
+    <div class="lang-en">
+      <section class="hero">
+        <div class="meta-row">
+          <span class="badge">Public Research &amp; Forecast Record · 2026-10-19</span>
+          <span>Topic: AI Economics / Post-Billable-Hour Business Models / Verification Bottleneck</span>
+        </div>
+        <h1>Post-Billable-Hour Business Models: From "What Remains Scarce" to "How Scarcity Captures Value"</h1>
+        <div class="thesis-box">
+          <strong>Core Thesis:</strong> Raw model capability alone is no longer a durable moat; the real divide is the emergence of new business models. AI drives the marginal cost of cognitive output toward zero, while <strong>Verification Cost fails to drop at the same pace—and total verification demand surges under a flood of low-cost synthetic output, becoming the new primary bottleneck</strong>. Once time-based billing collapses, the primary axis of profit migration is clear: <strong>value flows disproportionately to whoever cuts verification cost for the buyer and carries the downside of being wrong (outcome underwriting, risk guarantees, or deploying principal capital), alongside owners of exclusive assets and workflow gates.</strong>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>1. Essence of a Business Model &amp; Three Outcomes of Billable-Hour Collapse</h2>
+        <p><strong>A business model</strong> is how you reliably capture a share of the value you create. How much you capture depends on holding the scarce bottleneck others cannot bypass (Christensen's Law of Conservation of Attractive Profits: when one layer commoditizes, profits shift to an adjacent layer).</p>
+        <p>First, distinguish <strong>"high cost of human time"</strong> from <strong>"billing by human time"</strong>. Lawyers bill by the hour, translators by the word, consultants by the person-day, support centers by the seat—all anchoring price on how long a human takes to finish a task. When AI compresses that duration toward zero, the time-billing anchor breaks, leaving three industry outcomes:</p>
+        <ol>
+          <li><strong>Incumbents discount and shrink:</strong> Hourly rates hold or dip slightly, but total billed hours fall off a cliff.</li>
+          <li><strong>Challengers bundle by outcome (fixed price + liability):</strong> Profit shifts from selling time to selling certainty.</li>
+          <li><strong>Value leaks entirely to consumer surplus:</strong> Technology creates massive user value, but no supplier holds a defensible bottleneck, collapsing industry revenue.</li>
+        </ol>
+      </section>
+
+      <section class="section-card">
+        <h2>2. Five Blind Spots Beyond Static Scarcity Maps</h2>
+        <ol>
+          <li><strong>Task Granularity, Not Industry Labels:</strong> Within a single law or consulting firm, routine due diligence collapses into commodity tooling, litigation strategy stays in high-stakes judgment, and partner deal-making remains a trust network.</li>
+          <li><strong>Absolute-Value vs. Relative-Value (Zero-Sum) Markets:</strong> Translation and customer support are positive-sum (triggering Jevons paradox: unit price approaches zero, total volume explodes). Trading alpha, ad bidding, and talent wars are zero-sum arms races—when everyone has AI, public-data alpha decays rapidly. Value goes to arms dealers (compute / exclusive ground-truth feeds) or principal capital.</li>
+          <li><strong>The Verification Gap &amp; Lemon Market in "Taste/Judgment":</strong> When generating a plausible strategy deck costs near zero, buyers face an ocean of synthetic noise. "Judgment" industries undergo a K-shaped split: mid-tier report factories collapse; only short-cycle measurable outcomes (contingent pricing) or unforgeable public track records and top-tier brand cover survive.</li>
+          <li><strong>Liability Is Actuarial Underwriting + Error Decorrelation:</strong> Licensing is regulatory rent with a finite shelf life. Clients pay for liability because the underwriter has capital to pay claims. Single-model bugs create correlated systemic failures; heterogeneous multi-source verification + physical-world grounding reduces error correlation, making risk closer to actuarially insurable (with caps, deductibles, and reinsurance).</li>
+          <li><strong>Living Context = Negative Switching Cost:</strong> Static RAG docs are easily migrated. True lock-in lives in accumulated boundary rejections, red-line gates, and private negative-sample evaluation suites.</li>
+        </ol>
+      </section>
+
+      <section class="section-card">
+        <h2>3. Four Sector Breakdowns: Who Captures What?</h2>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>(A) Publishing &amp; Knowledge Products</h4>
+            <p><span class="tag-dead">✗ Condemned:</span> Per-word translation billing, selling raw translated text, or charging SaaS subscriptions for basic AI bilingual readers (built natively into platforms).</p>
+            <p><span class="tag-alive">✓ Where Value Moves:</span> (1) Upstream IP rights and near-simultaneous global release speed; (2) Niche curation + high-density peer community memberships.</p>
+          </div>
+          <div class="mini-card">
+            <h4>(B) Investment Research &amp; Due Diligence</h4>
+            <p><span class="tag-dead">✗ Structural Paradox:</span> True alpha is capacity-constrained (selling it destroys it); publicly sold research signals carry a lemon discount.</p>
+            <p><span class="tag-alive">✓ Where Value Moves:</span> (1) Managing principal/client capital (2/20 Carry); (2) Selling physically verified exclusive ground-truth feeds rather than opinions; (3) Transaction financial diligence (e.g., M&amp;A QoE reports) bundled with Representations &amp; Warranties (R&amp;W) insurance.</p>
+          </div>
+          <div class="mini-card">
+            <h4>(C) Management &amp; Strategy Consulting</h4>
+            <p><span class="tag-dead">✗ Condemned:</span> Slide-deck analysis factories (the 1-partner-to-10-analysts pyramid breaks) and mid-market report boutiques.</p>
+            <p><span class="tag-alive">✓ Where Value Moves:</span> Measurable operational/cost turnarounds shift to <strong>contingent % of audited savings</strong>; unmeasurable 5-year strategy stays with top-tier brands selling boardroom political cover on retainer.</p>
+          </div>
+          <div class="mini-card">
+            <h4>(D) Multi-Agent Systems &amp; AI-Native Teams</h4>
+            <p><span class="tag-dead">✗ Trap:</span> Selling generic agent framework SaaS (eaten by foundation model vendors) or running a human-heavy agency.</p>
+            <p><span class="tag-alive">✓ Two-Stage Evolution:</span> Stage 1: Deploy the fleet into a measurable principal business to build a timestamped, auditable public track record. Stage 2: Monetize that proof across the lemon market via per-fact verified receipts or high-trust retainers.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>4. The 7 Atomic Billing Units &amp; 3-Question Litmus Test</h2>
+        <ol>
+          <li><strong>Outcome:</strong> Contingent fee per resolved ticket, hire, or audited cost saving.</li>
+          <li><strong>Risk Premium:</strong> Fixed-price package backed by capped error indemnification and decorrelated verification.</li>
+          <li><strong>Attestation (Verified Receipt):</strong> Fee for slashing third-party verification cost via physically grounded and multi-source verified receipts.</li>
+          <li><strong>Workflow Toll:</strong> Transaction cut at an unbypassable entry point or closed loop.</li>
+          <li><strong>Exclusive License:</strong> Upstream IP rights, proprietary ground-truth feeds, or private red-line benchmarks.</li>
+          <li><strong>Relationship / Retainer:</strong> Scarcity of human trust, boardroom political cover, and high-density peer curation.</li>
+          <li><strong>Carry / Equity:</strong> Deploying judgment directly into capital rather than selling advice.</li>
+        </ol>
+
+        <h3>The 3-Question Litmus Test to Kill Bad AI Business Models</h3>
+        <ol>
+          <li><strong>The Bottleneck Question:</strong> Once execution is free, who must the customer still pass through to get the final result? Do I hold that node, or will the next foundation model release absorb it natively?</li>
+          <li><strong>The Verification Question:</strong> How does the buyer know before paying (or shortly after) that my output isn't synthetic slop? If measurable, am I willing to price on contingency? If unmeasurable, do I have unforgeable reputation cover? (Neither = Lemon Market; kill it.)</li>
+          <li><strong>The Skin-in-the-Game Question:</strong> If my signal is truly this accurate, why sell it instead of deploying it myself? <strong>Signals that decay with capacity (Alpha) must be traded internally; frameworks and verification substrates that gain network effects with adoption should be opened externally.</strong></li>
+        </ol>
+
+        <h3>5. Falsifiable Public Forecasts (2026–2028 Evaluation Window)</h3>
+        <ol>
+          <li><strong>Forecast 1 (Legal &amp; Financial Diligence Pricing Shift):</strong> By end of 2028, over 50% of routine contract reviews and standard M&amp;A screening engagements will be billed via fixed-fee packages paired with capped error liability/insurance rather than traditional billable hours.</li>
+          <li><strong>Forecast 2 (Mid-Tier Research &amp; Consulting Shakeout):</strong> By end of 2028, subscription research boutiques and mid-sized consulting firms lacking either proprietary primary data feeds or contingent/capital-linked pricing will see renewal rates or revenues contract by over 40% relative to 2025.</li>
+          <li><strong>Forecast 3 (Verified Receipts as a Standalone Line Item):</strong> By end of 2028, multi-source cross-verified and physically grounded evidence packets (Verified Receipts) will appear as a distinct billable procurement category in enterprise audit, M&amp;A diligence, and high-stakes agent workflows.</li>
+        </ol>
+      </section>
+    </div>
+
+    <footer>
+      <p>Published on <a href="https://theory.clawishmacheng.com/system-evolution-public/">System Evolution Public Archive</a> · 2026-10-19</p>
+    </footer>
+  </main>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('en-mode');
+    }
+    if (window.location.search.includes('lang=en')) {
+      document.body.classList.add('en-mode');
+    }
+  </script>
+</body>
+</html>
