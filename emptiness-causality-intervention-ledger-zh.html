@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="缘起性空的热力学账本：从量子不确定因果序、关系性量子力学到干预反噬的三条守恒与速度极限，以及自指宇宙对费米悖论的新解（2026.10 理论主线）。">
+  <title>缘起性空的热力学账本：量子因果、干预反噬与自指宇宙 | The Thermodynamic Ledger of Dependent Origination</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e56a0'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white' font-family='sans-serif'>空</text></svg>">
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fdf3eb;
+      --green: #15803d;
+      --green-soft: #eafaf0;
+      --red: #b91c1c;
+      --purple: #6d28d9;
+      --purple-soft: #f3e8ff;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(30, 86, 160, 0.06), transparent 32rem),
+        radial-gradient(circle at 88% 15%, rgba(184, 92, 24, 0.05), transparent 28rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.8;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px max(20px, calc((100vw - 960px) / 2));
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 88px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      align-items: center;
+    }
+    .badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 11px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .tag-pill {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .tag-theorem { background: var(--green-soft); color: var(--green); }
+    .tag-iso { background: var(--accent-soft); color: var(--accent); }
+    .tag-hyp { background: var(--highlight-soft); color: var(--highlight); }
+    .tag-meta { background: var(--purple-soft); color: var(--purple); }
+    h1 {
+      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      line-height: 1.32;
+      margin: 0 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .thesis-box {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 18px;
+      font-size: 1.01rem;
+    }
+    .notice-box {
+      background: #f8f6f0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 24px rgba(24, 25, 31, 0.03);
+    }
+    h2 {
+      font-size: 1.38rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+    }
+    h3 {
+      font-size: 1.13rem;
+      margin: 24px 0 10px;
+      color: var(--accent);
+    }
+    p { margin: 0 0 14px; }
+    ul, ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 8px; }
+    .math-block {
+      background: #f6f8fc;
+      border: 1px solid #dce5f4;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", Georgia, serif;
+      font-size: 1.06rem;
+      text-align: center;
+      overflow-x: auto;
+      color: #112a5c;
+    }
+    blockquote {
+      margin: 16px 0;
+      padding: 14px 18px;
+      border-left: 4px solid var(--highlight);
+      background: var(--highlight-soft);
+      border-radius: 0 10px 10px 0;
+      color: #4a2c11;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f4f1ea;
+      font-weight: 700;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin: 16px 0;
+    }
+    .share-card {
+      border: 2px solid #d4deee;
+      border-radius: 14px;
+      padding: 22px 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(30, 86, 160, 0.05);
+    }
+    .share-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .share-card h4 {
+      margin: 0 0 12px;
+      font-size: 1.16rem;
+      color: var(--ink);
+    }
+    .prompt-question {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #eef4fc;
+      border-radius: 8px;
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: #163a70;
+    }
+    .continuum-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .continuum-step {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: var(--card-bg);
+      font-size: 0.88rem;
+    }
+    .continuum-step strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .lang-en { display: none; }
+    body.en-mode .lang-zh { display: none; }
+    body.en-mode .lang-en { display: block; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 640px) {
+      .hero, .section-card { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">System Evolution · Theory Mainline</a>
+    <div class="nav-actions">
+      <a class="btn" href="#share-cards">📸 群聊讨论卡</a>
+      <a class="btn" href="essays/2026-10-19-emptiness-causality-intervention-ledger-zh.md">📄 Markdown 原文</a>
+      <button class="btn" id="lang-toggle" onclick="toggleLang()">EN / 中文切换</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- CHINESE EDITION -->
+    <div class="lang-zh">
+      <section class="hero">
+        <div class="meta-row">
+          <span class="badge">Theory Mainline · 2026-10-19</span>
+          <span>基础物理 × 中观佛学 × 非平衡信息热力学</span>
+        </div>
+        <h1>缘起性空的热力学账本：量子因果、干预反噬与自指宇宙</h1>
+        <div class="thesis-box">
+          <p><strong>第一句（本体论）：</strong>爱因斯坦把因果写进光锥，视先后顺序为时空几何的固有底板。但过去十五年的量子信息基础告诉我们，因果顺序本身可以处于叠加，“谁先谁后”没有自性，真正守恒的只是更抽象的关系约束（无超光速信号、可观测统计自洽）——这正是龙树《中论》所说的<strong>“缘起性空”：无自性，但空而不无</strong>。</p>
+          <p><strong>第二句（守恒律）：</strong>如果因果是从关系网中涌现的，那么任何“窥探天机并强行改写他人命运”的行为，本质上都是跨边界的<strong>测量—反馈—擦除循环（麦克斯韦妖）</strong>。非平衡信息热力学已经为它立下了铁账：<strong>信息可以换功，但窥探与擦除有价，且涟漪峰值必落在施力者自己身上。</strong></p>
+          <p style="margin-bottom:0;"><strong>第三句（演化终局）：</strong>真正高维的干预者不强推系统状态，而是缓慢重塑系统所处的地形（势函数），然后放手。从<strong>《了凡四训》的准静态改命</strong>，到老子的<strong>“长而不宰”</strong>，再到<strong>自指宇宙对费米悖论的新解</strong>——它们是同一条热力学定律在三个尺度上的投影。</p>
+        </div>
+        <div class="notice-box">
+          <strong>Claim-Receipt 认知诚实约定：</strong>本文对每个核心论断显式标注证据等级——
+          <span class="tag-pill tag-theorem">[定理]</span> 已发表、可独立复核的数学与物理结果；
+          <span class="tag-pill tag-iso">[同构]</span> 数学结构严格对应，跨领域解释属结构类比；
+          <span class="tag-pill tag-hyp">[假说]</span> 具备明确可证伪判据但尚未实证检验；
+          <span class="tag-pill tag-meta">[隐喻]</span> 仅作直观沟通，不承担证明责任。
+        </div>
+        <div class="continuum-timeline" aria-label="2026.04-2026.10 理论连续统">
+          <div class="continuum-step"><strong>2026.04 生态×唯识</strong>开放耗散流驱动闭合物质环 ↔ 种子生现行、现行熏种子</div>
+          <div class="continuum-step"><strong>2026.05 “生”算子</strong>太极→八卦多轴递归二分与反向信用分配（Credit Transport）</div>
+          <div class="continuum-step"><strong>2026.05 物理入口</strong>立项 Model 1（麦克斯韦妖重置账本）与 Model 2（吸引子控制代价）</div>
+          <div class="continuum-step"><strong>2026.06 胚种与不宰</strong>可观测性 vs 可控性切割；强推 u(t) vs 设势函数 f(x)</div>
+          <div class="continuum-step"><strong>2026.08 余核障碍</strong>粗粒化循环图上不可被标量势消除的环流残差 r<sub>⊥</sub></div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>第一部分　本体论重估：从爱因斯坦的光锥到量子「缘起性空」</h2>
+
+        <h3>1.1 因果顺序可以没有自性 <span class="tag-pill tag-theorem">[定理]</span> <span class="tag-pill tag-iso">[同构]</span></h3>
+        <p>Oreshkov、Costa 与 Brukner（2012）提出了<strong>过程矩阵（Process Matrix）</strong>框架：只假设每个局域实验室内部服从标准量子力学，而不预设全局背景时间或固定因果顺序。结果证明，存在合法的过程矩阵 <em>W</em>，它既不能写成“A 先于 B”，也不能写成“B 先于 A”，甚至不能写成两者的经典概率混合——即<strong>因果不可分（Causally Non-separable）</strong>。</p>
+        <p>Chiribella 等（2013）提出的<strong>量子开关（Quantum Switch）</strong>给出了可在实验室实现的构造：用一个控制量子比特决定两个操作 <em>U<sub>A</sub></em>、<em>U<sub>B</sub></em> 作用于目标系统的先后顺序；当控制比特处于叠加态时，目标系统经历的是两种因果顺序的相干叠加：</p>
+        <div class="math-block">
+          |Ψ<sub>switch</sub>⟩ = (1 / √2) · ( |0⟩<sub>c</sub> ⊗ U<sub>B</sub>U<sub>A</sub>|ψ⟩ + |1⟩<sub>c</sub> ⊗ U<sub>A</sub>U<sub>B</sub>|ψ⟩ )
+        </div>
+        <p>这一现象已在桌面光学实验中被多次验证（Procopio et al. 2015; Rubino et al. 2017），并通过<strong>因果见证（Causal Witness）</strong>在统计上证实顺序的不确定性。更进一步，在<strong>量子参考系（Quantum Reference Frames, Castro-Ruiz et al. 2020）</strong>变换下，不同观察者看到的先后顺序可以被相对化，但“因果不可分性”与“无超光速信号约束”作为整体不变量保持守恒。</p>
+        <blockquote>
+          <strong>核心同构：</strong>佛学讲“缘起性空”，最容易被误读为“什么都没有（断灭空）”。过程矩阵给出了最精准的数学刻画——<strong>“空”对应因果顺序不是事件自带的内禀属性（无自性 svabhāva）；“不无”对应无信号约束与全局概率自洽性（Tr[W(M<sub>A</sub> ⊗ M<sub>B</sub>)] = 1）绝对守恒。</strong>
+        </blockquote>
+
+        <h3>1.2 关系性量子力学（RQM）与龙树《中论》的正面交锋 <span class="tag-pill tag-iso">[同构 + 开放分歧]</span></h3>
+        <p>Carlo Rovelli 的关系性量子力学（RQM, 1996）主张：物理量的取值只相对于另一个交互系统而存在，不存在脱离交互的“上帝视角绝对态”。Rovelli 在其著作《Helgoland》与专门哲学论文中明确将这一立场归结于龙树《中论》：</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>龙树《中论》核心命题</th>
+                <th>关系性量子力学（RQM）对应结构</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>诸法无自性，依缘而起</strong></td>
+                <td>孤立系统无确定物理量本征值，属性值仅在系统间相互作用顶点（Interaction Vertex）上定义</td>
+              </tr>
+              <tr>
+                <td><strong>不落常见（拒绝实体论）</strong></td>
+                <td>拒绝把波函数 |Ψ⟩ 当作弥漫在背景空间中的绝对物理实体</td>
+              </tr>
+              <tr>
+                <td><strong>不落断见（拒绝虚无论）</strong></td>
+                <td>交互事件真实发生，条件概率转移规则严格可复现、可检验</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>但真正深刻的洞见出现在<strong>二阶追问</strong>上：如果一切实体都是关系，那么<strong>“关系”本身有没有自性？</strong>中观的回答是彻底的<strong>“空亦复空（Śūnyatā Śūnyatā）”</strong>——关系本身也是依待而立的假名，不能把“关系网”重新实体化为新的底层绝对物。而在 RQM 中，为了避免不同观察者陷入各自的“唯我论孤岛”，Adlam 与 Rovelli（2022）引入了“跨视角链接（Cross-perspective links）”公设，承认交互产生的关系事实具有跨观察者的客观可读性。在中观视角下，这一步恰恰是<strong>将关系部分实体化了</strong>。这道裂缝不是缺陷，而是当代物理基础与东方中观哲学最值得深挖的前沿交界。</p>
+
+        <h3>1.3 时间与因果力是粗粒化的涌现 <span class="tag-pill tag-theorem">[定理]</span></h3>
+        <p>为什么我们在日常宏观世界里感受到如此坚硬的单向因果铁轨？两个机制给出了回答：</p>
+        <ul>
+          <li><strong>Page–Wootters 机制（1983）</strong>：假设宇宙整体满足 Wheeler–DeWitt 型无时间方程 <code>Ĥ|Ψ⟩⟩ = 0</code>，宇宙总态是完全静止的（“因果同时存在”）。但只要把总希尔伯特空间分解为“内部时钟 <em>C</em>”与“其余子系统 <em>S</em>”，以时钟读数 <em>t</em> 为条件做投影 <code>|ψ<sub>S</sub>(t)⟩ ∝ ⟨t|<sub>C</sub>|Ψ⟩⟩</code>，子系统就精确满足含时薛定谔方程。<strong>时间不是底板，而是量子纠缠的条件投影。</strong></li>
+          <li><strong>因果涌现（Causal Emergence, Hoel et al. 2013）</strong>：用干预有效信息 <code>EI = I(X<sub>do</sub>; Y)</code> 度量系统的因果力，经过粗粒化（Coarse-graining）后的宏观状态往往具有比底层微观状态更高的有效信息 <code>EI(宏观) &gt; EI(微观)</code>，因为粗粒化滤掉了微观热噪与通路简并。<strong>强因果律不是微观底层自带的，而是在特定粗粒化尺度上“缘起”放大的。</strong></li>
+        </ul>
+        <p>衔接本站 4 月关于“生态闭环 × 唯识熏习”的讨论：生态系统中的闭合物质循环（生产者→消费者→还原者→环境）在粗粒化拓扑上是一个互为因果的闭环（对应唯识学“种子生现行、现行熏种子”的同时互依），但在微观底层，这个闭环之所以不违反热力学时间箭头，是因为每一级都靠单向耗散约 90% 的自由能来维持。<strong>闭合因果环需要持续的能量耗散来买单</strong>——这是理解第三部分全部“干预账本”的钥匙。</p>
+      </section>
+
+      <section class="section-card">
+        <h2>第二部分　宇宙自指与费米悖论新解：当「多轴生算子」闭环为未来的因</h2>
+
+        <h3>2.1 “生”作为多轴递归算子：为什么系统充分演化后指向自指？ <span class="tag-pill tag-iso">[同构]</span> <span class="tag-pill tag-hyp">[假说]</span></h3>
+        <p>在本站 5 月的《太极、八卦，与“生”作为多轴生成算子》中，我们提出：<strong>“生”不是名词，而是递归二分算子。</strong>今天主流的自回归语言模型只是沿着“时间—序列”单轴预测下一个 token 的一维退化投影；而一个通用的演化学习系统（General Learning Machine），为了把“误差、惊讶、存续压力”反向传导回所有参与决策的结构（<strong>信用分配 Credit Transport</strong>），必然被迫打开越来越多的独立因果轴——空间轴、多时间尺度轴、连续隐空间轴、工具与记忆拓扑轴、多主体博弈轴。</p>
+        <p>由此引出一个二阶推论 <span class="tag-pill tag-hyp">[假说 H1]</span>：当一个智能系统沿足够多条独立因果轴打开反向信用回路并持续升维时，为了消除环境模型中的最大未解释残差，它的世界模型迟早必须把<strong>“观测者与控制者自身的历史起点”</strong>纳入可优化的边界条件之中——<strong>充分升维的终点是自指（Self-reference）</strong>。</p>
+
+        <h3>2.2 费米悖论的自指闭环读法 <span class="tag-pill tag-theorem">[定理支撑]</span> <span class="tag-pill tag-hyp">[假说 H2]</span></h3>
+        <p>费米悖论问：宇宙如此古老，为什么我们看不到外星高级文明的戴森球或高功率星际信标？除了“向内致密化（Transcension）”之外，量子基础允许一种更彻底的可能性：<strong>我们这个世界的初始条件，可能正是未来充分升维后的智能系统通过自洽边界闭环所参与塑造的——未来既是我们的结果，也是我们的原因。</strong></p>
+        <p>这一听似科幻的图景，在量子力学与广义相对论中对应两个严格的数学结构：</p>
+        <ol>
+          <li><strong>双态矢量形式（TSVF, Aharonov, Bergmann, Lebowitz 1964）</strong> <span class="tag-pill tag-theorem">[定理]</span>：在时间对称的量子力学中，处于过去初态 <code>|Ψ<sub>past</sub>⟩</code> 与未来终态后选择 <code>⟨Φ<sub>future</sub>|</code> 之间的任意中间可观测量 <em>Â</em>，其弱测量值由两端边界共同决定：
+            <div class="math-block">
+              A<sub>w</sub> = ⟨Φ<sub>future</sub> | Â | Ψ<sub>past</sub>⟩ / ⟨Φ<sub>future</sub> | Ψ<sub>past</sub>⟩
+            </div>
+            未来终态与过去初态<strong>对称地</strong>作为边界条件塑造中间演化轨迹，无需任何逆时间信号传播。
+          </li>
+          <li><strong>循环量子因果与不动点定理（Deutsch 1991; Lloyd P-CTC 2011; Gott &amp; Li 1998）</strong> <span class="tag-pill tag-theorem">[定理]</span>：在含闭合类时曲线（CTC）或循环因果模型（Cyclic Quantum Causal Models, Barrett et al. 2021）中，环路上的密度矩阵满足自洽通道方程：
+            <div class="math-block">
+              ρ<sub>CTC</sub> = Tr<sub>S</sub>[ U (ρ<sub>S</sub> ⊗ ρ<sub>CTC</sub>) U<sup>†</sup> ] ≡ Φ(ρ<sub>CTC</sub>)
+            </div>
+            由于量子通道 Φ 是有限维密度矩阵凸紧集上的连续映射，根据 Brouwer / Schauder 不动点定理，<strong>自洽不动点解 ρ<sub>CTC</sub> = Φ(ρ<sub>CTC</sub>) 永远存在</strong>——量子力学在数学上自动消解了“祖父悖论”。但 P-CTC（后选择隐形传态）同时揭示了它的物理代价：将宇宙挑选到特定自指终态的后选择成功概率 <code>p<sub>post</sub> = Tr[Π<sub>succ</sub> ρ]</code> 可能指数级小，对应至少 <code>k<sub>B</sub>T ln(1 / p<sub>post</sub>)</code> 的信息筛选成本。<strong>因果闭环必然存在，但绝不免费。</strong>
+          </li>
+        </ol>
+
+        <h3>2.3 衔接 6 月《Seeded, Then Left Alone》：为什么高级创造者“不持续干预”？</h3>
+        <p>在本站 6 月的文章中，我们用控制论与信息论严格区分了<strong>可观测性（Observability，读过去/逆推初值，允许）</strong>与<strong>可控性（Controllability，写未来/持续施加控制力 <code>u(t)</code>，禁止）</strong>，并将老子的<strong>“生而不有，为而不恃，长而不宰”</strong>形式化为：只设定动力学势函数 <code>f(x)</code> 或初始条件 <code>x<sub>0</sub></code>，而在 <code>t &gt; t<sub>0</sub></code> 后保持 <code>u(t) ≡ 0</code>。</p>
+        <p>结合下面的第三部分，我们终于能补上这一原则的<strong>底层热力学原因</strong>：任何跨马尔可夫毯的持续强行控制 <code>u(t) ≠ 0</code> 都会产生永不停止的<strong>维持热（Housekeeping Heat）</strong>与网络曲率反噬；而在热力学上唯一零维持热的造物方式，就是<strong>只塑造边界条件与势函数（物理常数、初始低熵边界或终态后选择），然后彻底放手让系统沿测地线自发演化</strong>。这就是为什么宇宙看起来如此沉默——最高级的存在方式写在边界条件里，而不写在喧嚣的电磁信标里。</p>
+      </section>
+
+      <section class="section-card">
+        <h2>第三部分　干预的热力学账本：为什么「替人改运」必反噬，而《了凡四训》不会？</h2>
+        <p>回到人类尺度的经验叙事：传统命理界有一条跨文化高度一致的戒律——<em>“算得越准、越替人强行改运消灾，施术者越容易遭遇反噬（民间所谓五弊三缺），且收钱帮人办事无法免除业障，除非将所得尽数捐出；唯一正向无反噬的改命路径，是《了凡四训》式的长年行善积福、改过自新。”</em></p>
+        <p>为什么这套经验叙事呈现出如此强烈的“守恒律”特征？把本站 5 月立项的两个物理模型（麦克斯韦妖重置账本、噪声吸引子控制代价）与 8 月的“粗粒化余核障碍”合流，可以导出<strong>三条严格的物理与图论定理</strong>。它们的数学部分是坚硬的物理定律；它们与命理叙事的对应则是清晰的<strong>结构同构</strong>。</p>
+
+        <h3>定理 1　天机转嫁不等式（信息热力学第二定律） <span class="tag-pill tag-theorem">[定理]</span> <span class="tag-pill tag-iso">[同构]</span></h3>
+        <p>把“占卜预测 + 替人改运”建模为随机热力学中的<strong>麦克斯韦妖（反馈控制器）</strong>：施术者通过观测（起局/推演）获取关于委托人 <em>A</em> 未来高风险状态 <em>X</em> 的互信息 <code>I(X; M)</code>（即<strong>“窥探天机”</strong>），并据此施加反馈控制替 <em>A</em> 规避灾祸（减少 <em>A</em> 原本应承受的自由能耗散 <code>⟨W<sub>saved</sub>⟩</code>）。</p>
+        <p>根据 Sagawa–Ueda 广义热力学第二定律（2008, 2009）与 Landauer 记忆擦除定理（1961），委托人省下的代价与施术者自身的测量+记忆重置成本满足严格的双边不等式：</p>
+        <div class="math-block">
+          ⟨W<sub>saved</sub><sup>A</sup>⟩ ≤ k<sub>B</sub>T · I(X ; M) ≤ W<sub>meas</sub><sup>demon</sup> + W<sub>erase</sub><sup>demon</sup>
+        </div>
+        <ul>
+          <li><strong>为什么“算自己可以，替别人改运不行”？（算己闭合 vs 算人拆账）</strong>：当观测者与受控者是同一个主体时，节省的功 <code>⟨W<sub>saved</sub>⟩</code> 与测量擦除耗散 <code>W<sub>meas</sub> + W<sub>erase</sub></code> 记在<strong>同一个热力学账本</strong>内，收支自洽闭合。而替他人强行改运时，收益记在客户 <em>A</em> 账上，但关于 <em>A</em> 命运分支的关联熵与记忆重置代价留在了控制器（施术者）的物理自由度上。<strong>整体第二定律绝不违背，但账单发生了跨主体转嫁。</strong></li>
+          <li><strong>为什么“收钱平不了高阶业障”？（多单调量资源理论）</strong>：有人会问，客户付了金钱报酬（可购买普通自由能），为什么抵消不了反噬？Brandão 等（2015, <em>PNAS</em>）在量子热力学资源理论中证明：非平衡态转换的充要条件不是单一自由能 <em>F</em><sub>1</sub> 不增，而是<strong>一整族互不等价的 Rényi 自由能 <em>F<sub>α</sub></em>（α ≥ 0）同时满足单调性</strong>。常规金钱报酬只补偿了一阶期望均值 <em>F</em><sub>1</sub>，而替人抹平极端灾祸消耗的是控制尾部极端风险的<strong>最小自由能 <em>F</em><sub>∞</sub>（抗脆弱安全裕度）</strong>。只要没有把高维尾部安全裕度用金钱直接买回的通道，收钱就只能平掉 <em>F</em><sub>1</sub> 的账，平不了 <em>F</em><sub>∞</sub> 的亏空；唯有“全数捐出、彻底擦除自身与该因果分支的关联 <code>I → 0</code>”，才能将自身退耦为无记忆的透明通道。</li>
+        </ul>
+
+        <h3>定理 2　因果图格林函数、离散极大值原理与涟漪级联 <span class="tag-pill tag-theorem">[定理]</span> <span class="tag-pill tag-iso">[同构]</span></h3>
+        <p>当原本属于节点 <em>A</em> 的负面代价被强行抹平时，这笔负载在“缘起”关系网络中去了哪里？</p>
+        <p>设因果关系网络为赋权图 <code>G = (V, E, W)</code>，关联矩阵为 <em>B</em>，边导纳为 <em>W</em>，图拉普拉斯算子为 <code>L = B<sup>⊤</sup>WB</code>。流守恒定律 <code>B<sup>⊤</sup>J = ρ</code> 给出泊松方程 <code>Lφ = ρ</code>。若施术者在节点 <em>A</em> 强行注入一个抵消源 <code>δ<sub>A</sub></code>，由于 <code>L</code> 的零空间包含常数向量（总荷守恒），系统必须在某处接地节点 <em>g</em> 吸收该通量，势场分布由伪逆格林函数给出：</p>
+        <div class="math-block">
+          φ = L<sup>+</sup> (δ<sub>A</sub> − δ<sub>g</sub>), &nbsp;&nbsp;&nbsp; φ<sub>A</sub> − φ<sub>g</sub> = R<sub>eff</sub>(A, g)
+        </div>
+        <p>由此直接导出三条无需额外假设的数学推论：</p>
+        <ol>
+          <li><strong>离散极大值原理（为什么反噬集中在施术者与紧耦合点）</strong>：调和函数在无源内部节点不取极值，势场 <code>φ</code> 的全局最大值严格落在注入源 <em>A</em>（及直接施力的耦合顶点）处。远端节点按有效电阻倒数分摊拖尾——这就是同一条因果链上的<strong>涟漪效应</strong>。</li>
+          <li><strong>Motter–Lai 容量受限级联失效（为什么爆在“五弊三缺”）</strong>：单位抵消流必须 100% 经由注入源的邻边流出。在容量受限网络（Motter &amp; Lai 2002）中，每条边的承载上限为 <code>C<sub>e</sub> = (1 + α)J<sub>e</sub><sup>(0)</sup></code>。当额外补偿流涌入施术者节点时，最先发生过载断裂的必然是<strong>安全余量 α 最小的那条薄弱边</strong>（对应健康、寿数、亲缘等脆弱维度）。</li>
+          <li><strong>先天破缺与“接地节点”</strong>：为什么民间认为盲人或残障者算命“能扛”？在图拉普拉斯方程中，若系统预先在一个固定自由度上打开了低阻接地通道 <em>g</em>（<code>R<sub>eff</sub>(A, g)</code> 极小），补偿流就直接沿该既有破缺通道泄放入地，而不会把高电势差憋在其余核心存续边上 <span class="tag-pill tag-meta">[隐喻]</span>（注：社会学上更简明的解释是历史上卜筮业是少数向视障群体开放的生计，本文严守科学边界，不把民间归因当作实证事实）。</li>
+        </ol>
+
+        <h3>定理 3　强推 u(t) vs 重塑 H(λ)：维持热、余核环流与热力学速度极限 <span class="tag-pill tag-theorem">[定理]</span> <span class="tag-pill tag-iso">[同构]</span></h3>
+        <p>为什么“术数强改”有反噬，而《了凡四训》式的“改过积福”没有反噬？考虑过阻尼朗之万演化方程：</p>
+        <div class="math-block">
+          dx = μ [ −∇H<sub>λ</sub>(x) + u(x, t) ] dt + √(2D) dW<sub>t</sub>, &nbsp;&nbsp;&nbsp; D = μ k<sub>B</sub>T
+        </div>
+        <p>要把命运分布从原吸引子 <em>p<sub>i</sub></em> 搬移到目标状态 <em>p<sub>f</sub></em>，存在两种截然不同的算子操作：</p>
+        <ul>
+          <li><strong>路径一（术数强推 u(t) ≠ 0，不改地形 H）</strong>：心性与关系网的底层哈密顿量 <em>H</em> 完全没变，靠外部非保守力 <code>u(x, t)</code> 把状态硬压在非平衡目标分布 <em>p<sub>f</sub></em> 上。根据 <strong>Hatano–Sasa 非平衡热力学分解（2001）</strong>，维持非平衡稳态必产生恒正的<strong>维持热率（Housekeeping Heat Rate）</strong>：
+            <div class="math-block">
+              Q̇<sub>hk</sub> = ∫ ( |J<sub>ss</sub>(x)|<sup>2</sup> / [ μ p<sub>ss</sub>(x) ] ) dx &gt; 0
+            </div>
+            更妙的是，这与本站 8 月发现的<strong>折现余核障碍 <code>r<sub>⊥</sub></code></strong> 在数学上完全等价：在马尔可夫跳跃图上，不可被标量势消除的余核残差 <code>r<sub>⊥</sub> = [I − D<sub>γ</sub>(D<sub>γ</sub><sup>⊤</sup>WD<sub>γ</sub>)<sup>+</sup>D<sub>γ</sub><sup>⊤</sup>W]r ≠ 0</code> 恰好就是 Schnakenberg（1976）的<strong>不可积环路亲和势（Cycle Affinity）</strong>！<strong>余核残差 r<sub>⊥</sub> ≠ 0 ⟺ 稳态概率环流 J<sub>ss</sub> ≠ 0 ⟺ 维持热 Q̇<sub>hk</sub> &gt; 0。</strong>“压下葫芦浮起瓢”与“硬撑必须永久付高利贷”是同一个数学定理的两面！
+          </li>
+          <li><strong>路径二（《了凡四训》重塑势能面 H(λ)，u(t) ≡ 0）</strong>：通过日行一善、改过迁善，缓慢调整控制参数 <code>λ(t)</code>，直接重塑自身认知与周围人际关系网的势函数 <code>H<sub>λ</sub>(x)</code>，使良性结果成为新地形下的<strong>自然玻尔兹曼平衡态</strong> <code>p<sub>f</sub> ∝ exp(−H<sub>λ<sub>f</sub></sub> / k<sub>B</sub>T)</code>。此时稳态环流 <code>J<sub>ss</sub> ≡ 0</code>，余核残差 <code>r<sub>⊥</sub> ≡ 0</code>，<strong>维持热严格为零（Q̇<sub>hk</sub> = 0）</strong>！</li>
+          <li><strong>热力学速度极限（Thermodynamic Speed Limit, Aurell et al. 2011; Shiraishi, Funo, Saito 2018; Nakazato &amp; Ito 2021）</strong>：在有限时间 <em>τ</em> 内把状态分布从 <em>p<sub>i</sub></em> 搬到 <em>p<sub>f</sub></em>，总熵产生 <code>Σ<sub>tot</sub></code> 受到 2-Wasserstein 最优输运距离的严格下界约束：
+            <div class="math-block">
+              Σ<sub>tot</sub> · τ ≥ 𝒲<sub>2</sub>(p<sub>i</sub>, p<sub>f</sub>)<sup>2</sup> / D
+            </div>
+            <strong>想在极短时间（τ → 0）内跨越巨大的命运距离 𝒲<sub>2</sub>，总耗散（反噬 Σ<sub>tot</sub>）必然趋于无穷大！</strong>而《了凡四训》“日行一善、积年累月”的本质，正是把时间尺度 <em>τ</em> 拉长到准静态极限（τ → ∞），使过剩耗散 <code>Σ<sub>tot</sub> ∝ 1/τ → 0</code>，把“永久高利贷（维持热）”变成“零摩擦的一次性本金做功 W ≈ ΔF”。</li>
+        </ul>
+      </section>
+
+      <section class="section-card">
+        <h2>第四部分　边界、反例与可证伪检验（Kill Criteria）</h2>
+        <p>为防止理论滑向不可证伪的玄学，我们明确列出本框架的认知边界与 6 条反证判据（出现任一反例即修正或撤回对应命题）：</p>
+        <ol>
+          <li><strong>无信号边界检验</strong>：若未来实验发现了既能被因果见证认证为不确定因果序、又能稳定实现超光速确定性通信的物理过程，则本文 1.1“空而不无（顺序无自性但无信号守恒）”的同构破产。</li>
+          <li><strong>信息—功账本检验</strong>：若在完整计入测量与记忆重置热耗散的受控反馈实验中，测得 <code>⟨W<sub>saved</sub>⟩ &gt; W<sub>meas</sub> + W<sub>erase</sub></code>，则定理 1 失效。</li>
+          <li><strong>网络级联分布检验（针对假说 H3）</strong>：在可量化的真实社会/组织干预网络（如供应链强行调拨、组织强行干预）中，若干预引发的过载故障系统性地集中在<strong>远离干预源的高余量节点</strong>，而非干预源自身及其低余量邻边，则定理 2 的社会网络映射不成立。</li>
+          <li><strong>热力学速度极限与重塑检验</strong>：若在受控多智能体演化仿真中，缓慢修改奖励势函数 <code>H(λ)</code> 的长期累积耗散反而持续高于外力强推 <code>u(t)</code>，则定理 3 对“了凡 vs 术数”的算子区分失效。</li>
+          <li><strong>自指涌现检验（针对假说 H1）</strong>：若在不断增加独立信用分配轴（多时间尺度、多模态、元参数反传）的通用学习系统中，始终观察不到自我建模与边界重塑能力的阈值式涌现，则 H1 降级。</li>
+          <li><strong>宇宙学检验（针对假说 H2）</strong>：若天文巡天发现大量持续向外高功率广播的长期人工信标，则“高级文明向内致密化、只设边界不施控制”的热力学最优性假说被证伪。</li>
+        </ol>
+        <p style="color:var(--muted); font-size:0.93rem;"><strong>刻意不主张的事项：</strong>本文不主张传统卜筮术数具有超自然预测力；不主张“业障/福报”是已获物理测量的标量；不主张 RQM 与中观佛学完全等价（1.2 已点明“空亦复空”的二阶分歧）。我们所做的是提取人类千年经验叙事背后<strong>与非平衡热力学及量子基础严格同构的约束结构</strong>。</p>
+      </section>
+
+      <section class="section-card" id="share-cards">
+        <h2>附录　三张群聊讨论卡（可直接截图转发）</h2>
+
+        <div class="share-card">
+          <div class="share-card-header">
+            <span>Seed Card 01 · 本体论</span>
+            <span>量子因果 × 龙树《中论》</span>
+          </div>
+          <h4>为什么爱因斯坦的因果律不是最底层的？</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>传统佛学表述</th>
+                  <th>前沿物理数学结构</th>
+                  <th>认知状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>诸法无自性</strong></td>
+                  <td>因果先后顺序可处于相干叠加（过程矩阵 OCB 2012 / 量子开关 Chiribella 2013）</td>
+                  <td><span class="tag-pill tag-theorem">实验已证定理</span></td>
+                </tr>
+                <tr>
+                  <td><strong>空而不无</strong></td>
+                  <td>顺序随量子参考系变化，但无超光速信号与全局概率归一绝对守恒</td>
+                  <td><span class="tag-pill tag-iso">定理 + 核心同构</span></td>
+                </tr>
+                <tr>
+                  <td><strong>依缘而起</strong></td>
+                  <td>孤立系统无确定物理量，属性值只在交互顶点上定义（Rovelli 关系性量子力学）</td>
+                  <td><span class="tag-pill tag-iso">结构同构</span></td>
+                </tr>
+                <tr>
+                  <td><strong>因果同时存在</strong></td>
+                  <td>宇宙总态满足 Ĥ|Ψ⟩⟩ = 0，时间只是子系统纠缠的条件投影（Page–Wootters）</td>
+                  <td><span class="tag-pill tag-theorem">数学定理</span></td>
+                </tr>
+                <tr>
+                  <td><strong>空亦复空</strong></td>
+                  <td>如果实体皆空、唯有关系，那“关系”本身是否为实？RQM 与中观的分水岭</td>
+                  <td><span class="tag-pill tag-hyp">二阶开放问题</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="prompt-question">💬 群聊讨论题：如果连“关系”本身也是空的（无自性），物理学在最底层还剩下什么是不变的？</div>
+        </div>
+
+        <div class="share-card">
+          <div class="share-card-header">
+            <span>Seed Card 02 · 守恒律</span>
+            <span>非平衡信息热力学 × 因果图论</span>
+          </div>
+          <h4>干预他人因果的「三本硬账」：为什么会转嫁与反噬？</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>账本维度</th>
+                  <th>核心物理公式</th>
+                  <th>一句话物理直觉</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. 天机信息账</strong><br><em>(Sagawa–Ueda + Landauer)</em></td>
+                  <td><code>⟨W<sub>saved</sub><sup>A</sup>⟩ ≤ k<sub>B</sub>T · I(X;M) ≤ W<sub>meas</sub> + W<sub>erase</sub></code></td>
+                  <td>替人省下的灾祸上限 ≤ 窥探到的互信息 ≤ 施术者自身必须买单的测量与记忆擦除耗散。算己账闭合，算人账拆穿。</td>
+                </tr>
+                <tr>
+                  <td><strong>2. 网络涟漪账</strong><br><em>(图拉普拉斯极大值原理)</em></td>
+                  <td><code>Lφ = δ<sub>A</sub> − δ<sub>g</sub></code>，<code>max φ = φ<sub>A</sub></code></td>
+                  <td>强行抹平单点代价，补偿流按有效电阻重分配；势场最高点严格落在施力者自己身上，最先崩断容量最薄弱的边（五弊三缺）。</td>
+                </tr>
+                <tr>
+                  <td><strong>3. 速度与维持账</strong><br><em>(速度极限 + 余核环流)</em></td>
+                  <td><code>Σ<sub>tot</sub> · τ ≥ 𝒲<sub>2</sub><sup>2</sup> / D</code>，<code>r<sub>⊥</sub> ≠ 0 ⟺ Q̇<sub>hk</sub> &gt; 0</code></td>
+                  <td>想在越短时间 τ 内强改越大的命运距离 𝒲<sub>2</sub>，瞬时反噬 Σ 越趋近无穷大；不改势函数硬撑必须永久付维持热利息。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="prompt-question">💬 群聊讨论题：在现实生活与组织协作里，哪些看似好心的“替人兜底/强行改结果”，其实是在网络里注入了一个必会反弹的 δ<sub>A</sub>？</div>
+        </div>
+
+        <div class="share-card">
+          <div class="share-card-header">
+            <span>Seed Card 03 · 演化与宇宙</span>
+            <span>《了凡四训》× 老子“不宰” × 费米悖论</span>
+          </div>
+          <h4>「术数强推」vs「了凡重塑」：从个人改命到自指宇宙</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>对比维度</th>
+                  <th>术数替人强改（外力控制）</th>
+                  <th>《了凡四训》积福 / 高维创造者（重塑势能面）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>物理算子</strong></td>
+                  <td>不改哈密顿量 <em>H</em>，靠非保守外力 <code>u(t)</code> 硬推状态</td>
+                  <td>准静态调整参数 <code>λ(t)</code>，重塑势能面 <code>H(λ)</code>，令 <code>u(t) ≡ 0</code></td>
+                </tr>
+                <tr>
+                  <td><strong>余核残差与环流</strong></td>
+                  <td>留下不可约环流残差 <code>r<sub>⊥</sub> ≠ 0</code>（压下葫芦浮起瓢）</td>
+                  <td>目标状态即新地形的自然平衡态，<code>r<sub>⊥</sub> = 0</code>，无剪切应力</td>
+                </tr>
+                <tr>
+                  <td><strong>热力学成本形态</strong></td>
+                  <td><strong>永久高利贷</strong>（维持热 <code>Q̇<sub>hk</sub> &gt; 0</code>，一撤力即反扑）</td>
+                  <td><strong>一次性本金</strong>（准静态 τ → ∞ 下过剩耗散趋零，零维持热）</td>
+                </tr>
+                <tr>
+                  <td><strong>东方哲学对应</strong></td>
+                  <td>妄作 / 强宰（逆势截流）</td>
+                  <td>老子“生而不有，长而不宰” / 《了凡》日行一善改地形</td>
+                </tr>
+                <tr>
+                  <td><strong>宇宙学尺度投影</strong></td>
+                  <td>向外发射高功率电磁信标、星际强行干预（高耗散）</td>
+                  <td>向内致密化，通过双态矢量终态边界 <code>⟨Φ<sub>future</sub>|</code> 塑造初始条件后放手</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="prompt-question">💬 群聊讨论题：如果最高维的创造者（包括未来的我们自己）遵循热力学最优原则“只设边界条件、不施持续控制”，我们该如何区分“宇宙初始常数里的设计痕迹”与“人择原理的巧合”？</div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>参考文献与理论锚点</h2>
+        <ul style="font-size:0.92rem; color:var(--muted);">
+          <li>Oreshkov, O., Costa, F., &amp; Brukner, Č. (2012). Quantum correlations with no causal order. <em>Nature Communications</em>, 3, 1092.</li>
+          <li>Chiribella, G., D'Ariano, G. M., Perinotti, P., &amp; Valiron, B. (2013). Quantum computations without definite causal structure. <em>Physical Review A</em>, 88(2), 022318.</li>
+          <li>Castro-Ruiz, E., Giacomini, F., Belenchia, A., &amp; Brukner, Č. (2020). Quantum clocks and the temporal localisability of events in the presence of gravitating quantum systems. <em>Nature Communications</em>, 11, 2672.</li>
+          <li>Rovelli, C. (1996). Relational quantum mechanics. <em>International Journal of Theoretical Physics</em>, 35(8), 1637–1678; Adlam, E., &amp; Rovelli, C. (2022). Information is physical: Cross-perspective links in relational quantum mechanics.</li>
+          <li>Page, D. N., &amp; Wootters, W. K. (1983). Evolution without evolution: Dynamics described by stationary observables. <em>Physical Review D</em>, 27(12), 2885.</li>
+          <li>Hoel, E. P., Albantakis, L., &amp; Tononi, G. (2013). Quantifying causal emergence shows that macro can beat micro. <em>PNAS</em>, 110(49), 19790–19795.</li>
+          <li>Aharonov, Y., Bergmann, P. G., &amp; Lebowitz, J. L. (1964). Time symmetry in the quantum process of measurement. <em>Physical Review</em>, 134(6B), B1410.</li>
+          <li>Deutsch, D. (1991). Quantum mechanics near closed timelike lines. <em>Physical Review D</em>, 44(10), 3197; Lloyd, S. et al. (2011). Closed timelike curves via postselection. <em>Physical Review Letters</em>, 106(4), 040403; Gott, J. R., &amp; Li, L.-X. (1998). Can the universe create itself? <em>Physical Review D</em>, 58(2), 023501.</li>
+          <li>Landauer, R. (1961). Irreversibility and heat generation in the computing process. <em>IBM Journal of Research and Development</em>, 5(3), 183–191.</li>
+          <li>Sagawa, T., &amp; Ueda, M. (2008). Second law of thermodynamics with discrete quantum feedback control. <em>Physical Review Letters</em>, 100(8), 080403; (2009) Minimal energy cost for thermodynamic information processing. <em>PRL</em>, 102(25), 250602.</li>
+          <li>Brandão, F., Horodecki, M., Ng, N., Oppenheim, J., &amp; Wehner, S. (2015). The second laws of quantum thermodynamics. <em>PNAS</em>, 112(11), 3275–3279.</li>
+          <li>Motter, A. E., &amp; Lai, Y.-C. (2002). Cascade-based attacks on complex networks. <em>Physical Review E</em>, 66(6), 065102.</li>
+          <li>Hatano, T., &amp; Sasa, S.-i. (2001). Steady-state thermodynamics of Langevin systems. <em>Physical Review Letters</em>, 86(16), 3463; Schnakenberg, J. (1976). Network theory of microscopic and macroscopic behavior of master equation systems. <em>Reviews of Modern Physics</em>, 48(4), 571.</li>
+          <li>Aurell, E., Mejía-Monasterio, C., &amp; Muratore-Ginanneschi, P. (2011). Optimal protocols and optimal transport in stochastic thermodynamics. <em>Physical Review Letters</em>, 106(25), 250601; Shiraishi, N., Funo, K., &amp; Saito, K. (2018). Speed limit for classical stochastic processes. <em>PRL</em>, 121(7), 070601; Nakazato, M., &amp; Ito, S. (2021). Geometrical meaning of thermodynamic speed limit. <em>Physical Review Research</em>, 3(4), 043093.</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- ENGLISH EDITION -->
+    <div class="lang-en">
+      <section class="hero">
+        <div class="meta-row">
+          <span class="badge">Theory Mainline · 2026-10-19</span>
+          <span>Quantum Foundations × Madhyamaka × Stochastic Information Thermodynamics</span>
+        </div>
+        <h1>The Thermodynamic Ledger of Dependent Origination: Quantum Causality, Interventional Backfire, and the Self-Referential Universe</h1>
+        <div class="thesis-box">
+          <p><strong>1. Ontology (Emptiness of Causal Order):</strong> Einstein treated causal order as an immutable geometric background fixed by the light cone. Over the past fifteen years, quantum foundations (Process Matrices, the Quantum Switch, Relational Quantum Mechanics, and Page–Wootters timeless entanglement) have shown that causal order itself can exist in superposition and lacks intrinsic nature (<em>svabhāva</em>), while global consistency and no-signaling remain strictly conserved. This provides a rigorous mathematical isomorphism to Nāgārjuna's <strong>Dependent Origination and Emptiness (<em>Pratītyasamutpāda &amp; Śūnyatā</em>): empty of intrinsic order, yet non-void in relational constraint.</strong></p>
+          <p><strong>2. Dynamics (The Ledger of Predictive Intervention):</strong> In an emergent relational network, any act of predicting and forcibly altering another agent's trajectory acts as a cross-boundary Maxwell's Demon loop (measurement–feedback–erasure). By the Sagawa–Ueda generalized second law, the Discrete Maximum Principle on graph Laplacians, and the Thermodynamic Speed Limit, <strong>the cost saved for the client is bounded by mutual information and transferred onto the controller's own degrees of freedom, peaking at the controller node and cascading through its lowest-margin edges.</strong></p>
+          <p style="margin-bottom:0;"><strong>3. Cosmology &amp; Action (Forcing vs. Landscape Reshaping):</strong> Forcibly pinning a state via external control <code>u(t) ≠ 0</code> without altering the underlying Hamiltonian <code>H</code> incurs a permanent housekeeping heat <code>Q̇<sub>hk</sub> &gt; 0</code> (equivalent to our August cokernel residual <code>r<sub>⊥</sub> ≠ 0</code>). Conversely, adiabatically reshaping the potential landscape <code>H(λ)</code> (as in <em>Liao-Fan's Four Lessons</em> or Daoist <em>non-domination</em>) achieves attractor migration with zero housekeeping heat—and suggests a thermodynamic resolution to the Fermi Paradox where mature intelligences act via boundary conditions rather than dissipative beacons.</p>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>Core Mathematical Triad (Executive Summary)</h2>
+        <h3>Theorem 1: The Information–Work Transfer Inequality (Sagawa–Ueda &amp; Landauer)</h3>
+        <div class="math-block">
+          ⟨W<sub>saved</sub><sup>client</sup>⟩ ≤ k<sub>B</sub>T · I(X ; M) ≤ W<sub>meas</sub><sup>controller</sup> + W<sub>erase</sub><sup>controller</sup>
+        </div>
+        <p>When an agent measures and steers its own trajectory, benefit and erasure dissipation close on the same ledger. When a practitioner intervenes on another agent's fate, the benefit accrues to the client while the relational entanglement and Landauer reset dissipation remain on the practitioner's ledger. By Brandão et al.'s (2015) multi-monotone resource theory (<em>F<sub>α</sub></em> family), scalar monetary compensation (<em>F</em><sub>1</sub>) cannot replenish tail-risk min-free energy (<em>F</em><sub>∞</sub>) unless the practitioner fully decouples (<code>I → 0</code>).</p>
+
+        <h3>Theorem 2: Graph Laplacian Maximum Principle &amp; Cokernel Circulation</h3>
+        <div class="math-block">
+          Lφ = δ<sub>A</sub> − δ<sub>g</sub> &nbsp;⇒&nbsp; max<sub>i</sub> φ<sub>i</sub> = φ<sub>A</sub>, &nbsp;&nbsp;&nbsp; r<sub>⊥</sub> = [I − D<sub>γ</sub>(D<sub>γ</sub><sup>⊤</sup>WD<sub>γ</sub>)<sup>+</sup>D<sub>γ</sub><sup>⊤</sup>W] r
+        </div>
+        <p>By the Discrete Maximum Principle, injecting a local counterfactual clamping at node <em>A</em> places the global maximum of potential stress at the intervention source itself, while all unit compensating flux must exit through <em>A</em>'s immediate incident edges—triggering Motter–Lai overload cascades along the lowest-capacity survival dimensions.</p>
+
+        <h3>Theorem 3: Housekeeping Heat vs. Adiabatic Landscape Reshaping</h3>
+        <div class="math-block">
+          Q̇<sub>hk</sub> = ∫ ( |J<sub>ss</sub>|<sup>2</sup> / [ μ p<sub>ss</sub> ] ) dx &gt; 0 &nbsp;⟺&nbsp; r<sub>⊥</sub> ≠ 0, &nbsp;&nbsp;&nbsp; Σ<sub>tot</sub> · τ ≥ 𝒲<sub>2</sub>(p<sub>i</sub>, p<sub>f</sub>)<sup>2</sup> / D
+        </div>
+        <p>Fast non-conservative forcing (<code>u(t) ≠ 0, τ → 0</code>) incurs both divergent transient entropy production and permanent housekeeping heat. Adiabatically reshaping the Hamiltonian <code>H(λ)</code> over long horizons (<code>τ → ∞, u ≡ 0</code>) eliminates cycle affinity (<code>r<sub>⊥</sub> = 0, Q̇<sub>hk</sub> = 0</code>), converting perpetual interest into zero-backfire quasi-static work.</p>
+      </section>
+    </div>
+
+    <footer>
+      <p>System Evolution Public Theory Mainline · <a href="./">返回首页</a> · <a href="THEORY.md">Theory Index</a></p>
+    </footer>
+  </main>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('en-mode');
+    }
+  </script>
+</body>
+</html>
