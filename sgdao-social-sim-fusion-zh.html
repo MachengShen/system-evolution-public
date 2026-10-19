@@ -247,6 +247,114 @@
     </p>
   </header>
 
+  <!-- Section 00: Plain Language Overview -->
+  <h2>00 / 大白话一分钟看懂：这个实验到底在模拟什么场景？</h2>
+  <div class="card" style="border: 1px solid rgba(56, 189, 248, 0.4); background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, rgba(17, 24, 39, 0.95) 100%); margin-bottom: 28px;">
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 18px;">
+      <!-- Card 1: 1,000 Villagers -->
+      <div style="background: var(--card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+          <span style="font-size: 20px;">👥</span>
+          <h3 style="margin: 0; font-size: 16px; color: var(--accent);">① 村子里的 1,000 个人是谁？</h3>
+        </div>
+        <p style="font-size: 13.5px; color: var(--text); line-height: 1.65; margin: 0 0 10px;">
+          从美国真实人口普查（斯坦福 GSS 库）里抽出的 <b>1,000 个有真实家底、学历和性格的人</b>：
+        </p>
+        <ul style="font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; padding-left: 20px;">
+          <li><b style="color: var(--heading);">700 个老村民</b>：建村第一天就在，里面既有年入千万的富豪、大V，也有普通打工人；</li>
+          <li><b style="color: var(--heading);">300 个草根新村民</b>：后进村，没背景、没大钱，但手里握着实打实的真活儿与专业本领；</li>
+          <li><b style="color: var(--heading);">真实复杂人性</b>：每个人身上带着不同程度的<b>贪心</b>（想刷假单骗赏金）、<b>偏见</b>（拉帮结派）和<b>盲从</b>（看谁粉丝多就跟谁投）。</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: What happens each tick -->
+      <div style="background: var(--card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+          <span style="font-size: 20px;">🎯</span>
+          <h3 style="margin: 0; font-size: 16px; color: var(--gold);">② 每一轮（Tick）大家在干嘛？有什么任务？</h3>
+        </div>
+        <p style="font-size: 13.5px; color: var(--text); line-height: 1.65; margin: 0 0 10px;">
+          村里有个公共金库（悬赏池），每一轮会放出 <b style="color: var(--heading);">30 个悬赏任务名额</b>（好比“去清迈核实哪条路封了、写一个自动化工具、预测下周行情”）。
+        </p>
+        <ul style="font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; padding-left: 20px;">
+          <li>抢到名额的人交上自己的活儿：有的新人交的是<b style="color: var(--green);">真正高质量的独家发现</b>；</li>
+          <li>有的骗子交的是用 <b style="color: var(--red);">AI 瞎编的假报告</b>想骗赏金；</li>
+          <li><b>考验制度的核心</b>：金库的真金白银到底发给了谁？是真正干活的人，还是被骗子大V联手掏空？新人还能不能出头？</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 3: The 3 Groups Comparison -->
+    <div style="border-top: 1px solid var(--border); padding-top: 18px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+        <span style="font-size: 20px;">⚖️</span>
+        <h3 style="margin: 0; font-size: 16px; color: var(--heading);">③ 三组实验唯一区别是什么？（怎么分这 30 个任务名额、怎么验活儿发钱）</h3>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 14px;">
+        <!-- Red Group -->
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-weight: 700; color: var(--red); font-size: 14px;">🔴 红组 · Baseline 传统币圈 DAO</span>
+            <span class="pill-fail">资本与大V垄断</span>
+          </div>
+          <div style="font-size: 13px; color: var(--text); line-height: 1.65;">
+            <p style="margin: 0 0 8px;">
+              <b>规则：</b><b>谁钱多、粉丝多，谁就抢到名额、说话算数</b>。
+            </p>
+            <p style="margin: 0 0 8px; color: var(--muted);">
+              <b>验活发钱：</b>骗子只要分 <b>40% 赃款行贿大户</b>就能过审领钱；没钱的草根新人哪怕活儿干得再好，也没人理。
+            </p>
+            <div style="background: rgba(239, 68, 68, 0.1); border-radius: 6px; padding: 8px 10px; font-size: 12px; color: #fca5a5;">
+              <b>实测结局：</b>骗子漏网率高达 <b>89%</b>，金库被洗劫；草根新人<b>仅 11% 能过</b>。
+            </div>
+          </div>
+        </div>
+
+        <!-- Gold Group -->
+        <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-weight: 700; color: var(--gold); font-size: 14px;">🟡 黄组 · 初代 SGDAO v1</span>
+            <span class="pill-warn">只认功劳簿 · 功劳永不过期</span>
+          </div>
+          <div style="font-size: 13px; color: var(--text); line-height: 1.65;">
+            <p style="margin: 0 0 8px;">
+              <b>规则：</b>设了独立验货员，骗子的假报告 <b>100% 被拦死（0% 漏网）</b>，花钱买票也没用。
+            </p>
+            <p style="margin: 0 0 8px; color: var(--muted);">
+              <b>致命伤：</b>但因为<b>老人的功劳积分（声誉）永远不打折</b>，跑到第 30 轮以后，前 5% 的早期老功臣攒了巨高的积分，把每轮 30 个申报和评审名额全霸占了（成了“老学阀”），后面进来的草根新人排都排不上号。
+            </p>
+            <div style="background: rgba(245, 158, 11, 0.1); border-radius: 6px; padding: 8px 10px; font-size: 12px; color: #fcd34d;">
+              <b>实测结局：</b>假报告虽归零，但草根新人破局率从 <b>76% 暴跌至 32%</b>，陷入死水。
+            </div>
+          </div>
+        </div>
+
+        <!-- Green Group -->
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-weight: 700; color: var(--green); font-size: 14px;">🟢 绿组 · 二代 SGDAO v2</span>
+            <span class="pill-pass">功劳打折 + 25% 新人绿色通道</span>
+          </div>
+          <div style="font-size: 13px; color: var(--text); line-height: 1.65;">
+            <p style="margin: 0 0 8px;">
+              <b>规则：</b>两大反学阀机制齐下：
+            </p>
+            <ul style="margin: 0 0 8px; padding-left: 18px; color: var(--muted);">
+              <li><b>功劳动态衰减：</b>老功臣躺平不干新活儿，历史功劳<b>每 20 轮自动衰减一半</b>；</li>
+              <li><b>硬性配额保护：</b>每轮 30 个名额里<b>硬性留出 25%（7~8 个）专门给草根新人和反共识怪才</b>，不看资历只看交上来的活儿真不真。</li>
+            </ul>
+            <div style="background: rgba(16, 185, 129, 0.1); border-radius: 6px; padding: 8px 10px; font-size: 12px; color: #6ee7b7;">
+              <b>实测结局：</b>骗子依然 <b>0% 漏网</b>，老学阀垄断不起来，草根新人从头到尾都有 <b>77% 的破局率</b>。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- Section 1: Resource Profiling -->
   <h2>01 / 实测资源与成本对照 (实跑数据)</h2>
   <div class="grid-4">
