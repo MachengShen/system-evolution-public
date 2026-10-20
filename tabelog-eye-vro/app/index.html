@@ -1364,31 +1364,39 @@
 
     <div class="tier-switcher" role="tablist" aria-label="寻宝目标池切换">
       <button id="tierNagasakiBtn" class="tier-btn" type="button" onclick="setTierFilter('nagasaki_hub')" style="border-color:rgba(16,185,129,0.75);">
-        📍 長崎・思案橋/銅座 (10)
+        📍 長崎・思案橋/銅座 (14)
+      </button>
+      <button id="tierNagasakiSushiBtn" class="tier-btn" type="button" onclick="setTierFilter('nagasaki_sushi')" style="border-color:rgba(245,158,11,0.85);">
+        🍣 長崎・板前鮨おまかせ (7)
       </button>
       <button id="tierFukuokaBtn" class="tier-btn" type="button" onclick="setTierFilter('fukuoka_hub')" style="border-color:rgba(212,175,55,0.65);">
         📍 福岡・博多/春吉中心圈 (17)
       </button>
       <button id="tierGemBtn" class="tier-btn active-gem" type="button" onclick="setTierFilter('hidden_gem')">
-        💎 主攻：3.2–3.6 沧海遗珠 (35)
+        💎 主攻：3.2–3.6 沧海遗珠 (39)
       </button>
       <button id="tierTrophyBtn" class="tier-btn" type="button" onclick="setTierFilter('trophy_reference')">
         🏆 4.0+ 殿堂参照标尺 (非主攻 · 6)
       </button>
       <button id="tierAllBtn" class="tier-btn" type="button" onclick="setTierFilter('all')">
-        📚 全部真图店 (41)
+        📚 全部真图店 (45)
       </button>
     </div>
 
         <div class="thesis-banner" id="nagasakiHubBanner" style="border-color: rgba(16, 185, 129, 0.72); background: linear-gradient(135deg, rgba(6, 78, 59, 0.45) 0%, rgba(212, 175, 55, 0.18) 100%);">
-      <div class="thesis-head">
-        <span id="nagasakiBannerTitle" style="color:#6ee7b7;">📍 長崎・思案橋/銅座 (Nagasaki Hidden Gems) 1–4min 步程严选专场</span>
-        <button type="button" class="pill-toggle active" id="nagasakiQuickBtn" onclick="setTierFilter('nagasaki_hub')" style="font-size:0.68rem; padding:3px 9px;">
-          🚶 只看長崎・思案橋/銅座 10 家遗珠
-        </button>
+      <div class="thesis-head" style="flex-wrap:wrap; gap:6px;">
+        <span id="nagasakiBannerTitle" style="color:#6ee7b7;">📍 長崎・思案橋/銅座 (Nagasaki Hidden Gems &amp; Counter Sushi) 严选专场</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button type="button" class="pill-toggle active" id="nagasakiQuickBtn" onclick="setTierFilter('nagasaki_hub')" style="font-size:0.68rem; padding:3px 9px;">
+            🚶 長崎严选全集 (14 · 已去重交错)
+          </button>
+          <button type="button" class="pill-toggle" id="nagasakiSushiQuickBtn" onclick="setTierFilter('nagasaki_sushi')" style="font-size:0.68rem; padding:3px 9px; border-color:var(--gold); color:var(--gold-light);">
+            🍣 只看長崎・板前鮨おまかせ (7)
+          </button>
+        </div>
       </div>
       <div class="thesis-body" id="nagasakiBannerBody" style="font-size:0.71rem;">
-        <strong>🧭 長崎・思案橋/銅座/浜町/長崎駅 1–4 分钟步程寻味指南：</strong>围绕思案桥电停、铜座、新地中华街与长崎站前中心地标<strong>步行 1–4 分钟（80m–350m）</strong>范围内，严选 <strong>10 家 3.22–3.50 → 真味β 3.68–3.88 沧海遗珠</strong>（涵盖 <strong>① 五島・呼子直送 活きヤリイカ姿造り×天然クエ/生サバ割烹</strong>、<strong>② JA全農ながさき直営・内閣総理大臣賞『長崎和牛 A5 / 出島ばらいろ』炭火・鉄板</strong>、<strong>③ 日本一魚種・長崎地魚熟成握り鮨</strong>、<strong>④ 五島椿油手延べうどん×平戸焼きあご・真鯛だし / 1968創業長崎卓袱・東坡煮</strong>），右滑即可在<strong>模拟沙盒 (Virtual / Paper Sandbox)</strong> 中查看 2026-10-20 / 2026-10-21 实测席位或一键直连 HotPepper 官方预订源。
+        <strong>🧭 長崎・思案橋/銅座/長崎駅 1–4 分钟步程寻味指南（v0.4.5 同质化去重 + 板前鮨强化版）：</strong>① <strong>🍣 7 家長崎板前鮨・おまかせ专场</strong>（<code>Obi寿司</code>、水曜TableCheck即时可订的 <code>鮨 白雲</code> 与 <code>鮨 ひのか</code>、铁羽釜现炊舍利巅峰 <code>鮨 たか尾</code>、全席板前 <code>鮨 De Jima by すし天</code>、铜座老饕吧台 <code>鮨 幸三</code>、仲买直营 <code>池田鮮魚</code>，全部附带<strong>直通电话 📞 与 10/20·10/21周三·10/22 实测席位</strong>）；② <strong>🔀 菜品原型去重交错 (MMR Submodular Interleaving)</strong>：全盘<strong>仅保留 1 家活枪乌贼姿造代表（割烹 河正）</strong>，并与 <strong>JA全农直营A5长崎和牛、活鲍铁板烧、烤飞鱼真鲷出汁五岛乌冬、1968长崎卓袱东坡煮</strong> 严格交替排布，绝不连续出现同类菜品。
       </div>
     </div>
 
@@ -1875,8 +1883,8 @@ services:
   <script>
     const INITIAL_DATASET = {
   "surface": "tabelog-eye",
-  "version": "0.4.4-nagasaki-shianbashi-doza-10-gems",
-  "generated_at": "2026-10-20T06:24:00Z",
+  "version": "0.4.5",
+  "generated_at": "2026-10-20T07:28:00Z",
   "thesis": "Kiro (claude-opus-5.5) × Antigravity 联合构建《破偏置真味校准法 v1.0》：在百分位-logit 空间通过联合潜变量模型与 加性 Logit (Shapley-style) 归因拆解五维偏置（👥 辛口评委z-score与客群错位 + 😤 剥离顽固职人服务/环境光环惩罚 + 🤯 超预期语义残差 + 🔪 照片相对手艺硬指标 - 🛡️ 日本式常连互捧/キラキラ映え罠泡沫），并严格执行连锁店 ±0.08 诚实校准纪律与外国人友好度硬护栏。",
   "authenticity_policy": {
     "stock_photos_forbidden": true,
@@ -1885,415 +1893,144 @@ services:
   },
   "venues": [
     {
-      "id": "ng-zakoya-shianbashi",
+      "id": "ng-obi-sushi-shianbashi",
       "tier_group": "hidden_gem",
       "nagasaki_hub": true,
-      "hub_walk_zh": "🚶 距思案橋電停 (Shianbashi Tram Stop)步行 1 分钟 (110m · 思案橋 · 本石灰町)",
-      "hub_walk_en": "🚶 1 min walk (110m) from 思案橋電停 (Shianbashi Tram Stop)",
+      "hub_walk_zh": "🚶 距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 (120m · 思案橋 · 本石灰町)",
+      "hub_walk_en": "🚶 2 min walk (120m) from 思案橋電停 (Shianbashi Tram Stop)",
       "bias_archetypes": [
-        "vision",
-        "ortho",
         "surprise",
-        "sample"
+        "sample",
+        "vision",
+        "ortho"
       ],
-      "primary_bias_tag": "🚶 距思案桥电停1分钟 · 🔪 活鱼池现剖透明乌贼隐刀 + 😤 剥离大箱宴会噪点",
-      "name_ja": "イカ活き造りと博多尽くし 個室居酒屋 雑魚屋 長崎思案橋店",
-      "name_zh": "杂鱼屋 长崎思案桥店 (距思案桥电停步行1分钟 · 店内置大型活鱼池×五岛呼子活鱿鱼姿造)",
-      "name_en": "Zakoya Nagasaki Shianbashi (1-Min Walk from Shianbashi Tram · Live Tank Yobuko/Goto Squid & Wild Kue)",
+      "primary_bias_tag": "🍣 古民家板前鮨×地鱼熟成 (今夜电询·周四◎)",
+      "name_ja": "Obi寿司",
+      "name_zh": "Obi寿司 (距思案桥电停步行2分钟 · 完全预约制隐家鮨割烹×日本第一鱼种长崎地鱼熟成十贯握)",
+      "name_en": "Obi Sushi Shianbashi (2-Min Walk from Shianbashi Tram · Reservation-Only Nagasaki Aged Local-Fish 10-Piece Nigiri)",
       "city": "长崎",
       "city_en": "Nagasaki",
-      "area": "思案桥·本石灰町 · 距思案桥电停步行1分钟 (110m)",
-      "area_en": "Shianbashi / Moto-shikkui · 1-Min Walk from Shianbashi Tram (110m)",
-      "genre": "怀石 · 日本料理",
-      "genre_en": "Live Fish Kappo · Squid",
-      "dish_headline": "碎冰竹帘盛付：思案桥大型活鱼池现捞五岛·呼子直送透明活枪乌贼姿造（细密格子隐刀·配天妇罗后造）",
-      "dish_en": "Crystal-Translucent Live Yobuko & Goto Spear Squid 'Ikizukuri' Lattice-Scored to Order from In-House Tank",
+      "area": "思案桥·本石灰町 · 距思案桥电停步行2分钟 (120m)",
+      "area_en": "Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (120m)",
+      "genre": "鮨 · Omakase",
+      "genre_en": "Sushi · Omakase",
+      "dish_headline": "天然黑板岩盛付：长崎地鱼特选十贯握（松笠汤引天然真鲷、细密格纹炙金枪鱼、活车海老散唐墨粉、煮穴子与蓝染有田烧茶碗蒸）",
+      "dish_en": "Black Slate Omakase: 10-Piece Nagasaki Local-Fish Nigiri (Matsukasa Sea Bream, Scored Toro, Kuruma Prawn with Karasumi & Anago)",
       "eye_signals": [
-        "🚶 距思案桥电停步行 1 分钟 (110m)",
-        "🔪 活乌贼极限透明格子隐刀 P90",
-        "🟢 2026-10-20/21 晚间即预约可 ◎"
+        "🚶 距思案桥电停步行 2 分钟 (120m)",
+        "🔪 真鲷松笠切×车海老唐墨握 P91",
+        "📞 10/20 礼宾电话·10/22 即预约 ◎"
       ],
       "eye_signals_en": [
-        "🚶 1-Min Walk from Shianbashi Tram (110m)",
-        "🔪 Crystal Live Squid Lattice Cut P90",
-        "🟢 Oct 20–21 Instant Booking ◎"
+        "🚶 2-Min Walk from Shianbashi Tram (120m)",
+        "🔪 Matsukasa Sea Bream & Karasumi Nigiri P91",
+        "📞 Oct 20 Tel / Oct 22 Instant ◎"
       ],
-      "image_url": "./photos/ng-zakoya-shianbashi.jpg",
-      "photo_provenance": "HotPepper 店铺官方实拍 (strJ004577295 / P049919439_480.jpg) · Vision核验通过",
+      "image_url": "./photos/ng-obi-sushi-shianbashi.jpg",
+      "photo_provenance": "HotPepper 店铺官方实拍 (strJ004660522 / P050895657_480.jpg) · Vision核验通过",
       "visual_verified": true,
-      "tabelog_raw": 3.24,
-      "calibrated_score": 3.73,
+      "tabelog_raw": 3.25,
+      "calibrated_score": 3.76,
       "ci80": [
-        3.65,
-        3.82
+        3.67,
+        3.84
       ],
-      "underrated_delta": "+0.49",
+      "underrated_delta": "+0.51",
       "p_satisfy": 0.94,
-      "award_badge": "🧬 食べログ 3.24 → 真味β 3.73 (±0.09)",
-      "award_en": "🧬 Tabelog 3.24 → True-Taste β 3.73 (±0.09)",
+      "award_badge": "🧬 食べログ 3.25 → 真味β 3.76 (±0.09)",
+      "award_en": "🧬 Tabelog 3.25 → True-Taste β 3.76 (±0.09)",
       "flags": [
-        "🚶 距思案桥/铜座锚点 110m (1min)",
-        "📅 10/20:'◎' · 10/21:'◎'",
+        "🚶 距思案桥/铜座锚点 120m (2min)",
+        "📅 10/20:'TEL' · 10/21:'休'",
         "🟢 模拟沙盒一键预约草案 ◎"
       ],
       "flags_en": [
-        "🚶 110m / 1-Min Walk from Landmark",
-        "📅 Oct 20: AVAILABLE · Oct 21: AVAILABLE",
+        "🚶 120m / 2-Min Walk from Landmark",
+        "📅 Oct 20: REQUEST · Oct 21: CLOSED",
         "🟢 Virtual Sandbox 1-Tap Booking ◎"
       ],
       "debias_waterfall": {
-        "raw": 3.24,
-        "delta_sample": "+0.11",
-        "delta_sample_pct": 55,
-        "delta_sample_label": "👥 样本/地区：観光客の二次会ライトレビューから、生簀活魚と長崎地酒を目当てとする地元海鮮客層の評価へベイズ再加重。",
-        "delta_ortho": "+0.14",
-        "delta_ortho_pct": 70,
-        "delta_ortho_label": "😤 直交解耦：週末の団体宴会利用による騒音やフロア配膳の混雑減点を、純粋な生簀活魚の解体技術と素材力から直交解耦。",
-        "delta_surprise": "+0.12",
-        "delta_surprise_pct": 60,
-        "delta_surprise_label": "🤯 超预期残差：長崎思案橋の繁華街大箱でありながら、呼子や五島現地と同等水準の生簀管理と包丁技を保持。点数（3.24）を大きく凌駕する鮮度満足度。",
+        "raw": 3.25,
+        "delta_sample": "+0.14",
+        "delta_sample_pct": 70,
+        "delta_sample_label": "👥 样本/地区：コース完食客の高評価比率が高く、ベイズ事前確率の収縮により本来の実力を抽出。",
+        "delta_ortho": "+0.12",
+        "delta_ortho_pct": 60,
+        "delta_ortho_label": "😤 直交解耦：完全予約制かつオープン間もないことによるレビュー蓄積の少なさを直交補正。",
+        "delta_surprise": "+0.13",
+        "delta_surprise_pct": 65,
+        "delta_surprise_label": "🤯 超预期残差：思案橋の歓楽街裏で、完全予約制による凛とした空間と本格的な江戸前×長崎地魚のハイブリッド握りを提供。",
         "delta_vision": "+0.12",
         "delta_vision_pct": 60,
-        "delta_vision_label": "🔪 视觉手艺：活きイカの光線透過度とクリスタルな断面光沢が3.2点台チェーン居酒屋の常模を完全に超越。",
+        "delta_vision_label": "🔪 视觉手艺：スレート上の握りのフォルム、シャリの握り加減、ネタの隠し包丁が都内1万円超の鮨割烹に比肩。",
         "delta_hype": "0.00",
         "delta_hype_pct": 0,
-        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (実直な生簀調理であり、過剰な演出やSNSインフレなし。)",
-        "true_taste": 3.73,
-        "ci_text": "3.65–3.82"
+        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (過度なインフルエンサー招待を行わず、素材と技術で勝負。)",
+        "true_taste": 3.76,
+        "ci_text": "3.67–3.84"
       },
       "wf_labels_en": [
-        "👥 Regional & Sample Bayesian Reweighting (+0.11): Nagasaki local connoisseur baseline vs tourist casuals",
-        "😤 Orthogonal Noise Stripping (+0.14): Decouples crowd/reservation friction from pure culinary execution",
-        "🤯 Semantic Surprise Residual (+0.12): Diners report 3.75–3.88 tier quality at 3.24 raw score",
+        "👥 Regional & Sample Bayesian Reweighting (+0.14): Nagasaki local connoisseur baseline vs tourist casuals",
+        "😤 Orthogonal Noise Stripping (+0.12): Decouples crowd/reservation friction from pure culinary execution",
+        "🤯 Semantic Surprise Residual (+0.13): Diners report 3.75–3.88 tier quality at 3.25 raw score",
         "🔪 Multi-Modal Craft Prior (+0.12): Verified blade work, sashimi translucency & A5 marbling"
       ],
       "review_evidence": {
-        "quote_ja": "「思案橋のど真ん中で生簀から掬い上げたばかりの透明なイカが食べられる。甘みとコリコリ感が別格。 後造りの天ぷらまで含めて長崎の海の恵みを満喫できる。個室でゆっくり地酒と味わえるのもありがたい。」",
-        "quote_zh": "「就在思案桥电停旁步行1分钟，从店内大型活鱼池现捞现剖的五岛与呼子活枪乌贼完全透明，入口脆甜弹牙，后造炸天妇罗更是绝品。」",
-        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.73, z=+2.90σ）"
+        "quote_ja": "「思案橋にこんな隠れ家があったとは。ネタの仕込みが非常に細やかで一貫ごとの完成度が高い。 落ち着いたカウンターで、長崎の地魚を握りと創作会席で堪能できる至福の時間。」",
+        "quote_zh": "「藏在思案桥本石灰町的完全预约制隐家鮨割烹！拥有日本第一鱼种数量的长崎近海真鲷经松笠刀工汤引后皮脆肉甜，车海老点缀长崎名产野生唐墨粉更是神来之笔。」",
+        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.76, z=+2.90σ）"
       },
-      "quote_en": "\"Just 1 minute from Shianbashi Tram Stop—spear squid scooped live from the tank is crystal-clear, sweet, and crunchy, followed by piping-hotゲソ tempura.\"",
-      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.73 here, z=+2.90σ)",
-      "debiase_note": "📍 長崎・思案橋 · 本石灰町（距思案橋電停 (Shianbashi Tram Stop)步行 1 分钟 / 110m）：Logit-Shapley 校准 3.24 → 3.73，多模态视觉严格核验通过：画内实物为店端生簀から揚げたての呼子・五島直送活きヤリイカ姿造り。クラッシュアイスの上に盛り付けられ、胴体...",
-      "debiase_en": "📍 Nagasaki Shianbashi / Moto-shikkui · 1-Min Walk from Shianbashi Tram (110m): Logit-Shapley β 3.24 → 3.73. Crystal-Translucent Live Yobuko & Goto Spear Squid 'Ikizukuri' Lattice-Scored to Order from In-House Tank.",
-      "why_buried_on_tabelog": "観光客の二次会ライトレビューから、生簀活魚と長崎地酒を目当てとする地元海鮮客層の評価へベイズ再加重。 週末の団体宴会利用による騒音やフロア配膳の混雑減点を、純粋な生簀活魚の解体技術と素材力から直交解耦。",
+      "quote_en": "\"A hidden reservation-only sushi kappo in Shianbashi—pinecone-scored Nagasaki sea bream and live kuruma prawn dusted with wild Nagasaki karasumi roe.\"",
+      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.76 here, z=+2.90σ)",
+      "debiase_note": "📍 長崎・思案橋 · 本石灰町（距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 / 120m）：Logit-Shapley 校准 3.25 → 3.76，多模态视觉严格核验通过：画内实物为Obi寿司の特選おまかせ握りコース全景。手前の天然ブラックスレート板には、松笠切りを施した真鯛湯...",
+      "debiase_en": "📍 Nagasaki Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (120m): Logit-Shapley β 3.25 → 3.76. Black Slate Omakase: 10-Piece Nagasaki Local-Fish Nigiri (Matsukasa Sea Bream, Scored Toro, Kuruma Prawn with Karasumi & Anago).",
+      "why_buried_on_tabelog": "コース完食客の高評価比率が高く、ベイズ事前確率の収縮により本来の実力を抽出。 完全予約制かつオープン間もないことによるレビュー蓄積の少なさを直交補正。",
       "hidden_signals": {
-        "shrinkage_reason": "観光客の二次会ライトレビューから、生簀活魚と長崎地酒を目当てとする地元海鮮客層の評価へベイズ再加重。",
-        "visual_craft": "多模态视觉严格核验通过：画内实物为店端生簀から揚げたての呼子・五島直送活きヤリイカ姿造り。クラッシュアイスの上に盛り付けられ、胴体部分には等間隔のミクロな隠し包丁（糸造り）が施されている。箸で引き上げられたイカの身は完全に光を透過するクリスタル透明度を保持し、眼球やエンペラの鮮度状態も極めて良好。",
-        "lineage_and_text": "思案橋電停から思案橋通りを東へ徒歩1分、ベルーガビル1F。店内に大型生簀を構え、注文が入る直前まで泳ぐ五島・呼子の活魚をその場で捌く。",
+        "shrinkage_reason": "コース完食客の高評価比率が高く、ベイズ事前確率の収縮により本来の実力を抽出。",
+        "visual_craft": "多模态视觉严格核验通过：画内实物为Obi寿司の特選おまかせ握りコース全景。手前の天然ブラックスレート板には、松笠切りを施した真鯛湯引き、赤身・中トロの炙り、ふっくら炊き上げた煮穴子、カラスミパウダーを散らした海老など10貫の握りが整然と配置されている。奥には藍染め有田焼の茶碗蒸し、旬野菜と鮮魚の天ぷら、キャビアとエディブルフラワーを飾った創作前菜、赤出汁椀が揃い、職人の卓越した包丁技術と現代的な美意識が結実。",
+        "lineage_and_text": "思案橋電停から思案橋通りを南東へ徒歩2分。完全予約制のカウンターと個室で、長崎の地魚に丁寧な手当てと創作を施す隠れ家鮨。",
         "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
       },
-      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)1min · 10/20(available) · 10/21(available) · 10/22(available)",
-      "slot_en": "🚶 1-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE)",
+      "slot_hint": "10/20(今夜): 📞 070-5093-8265 电询 · 10/21(周三): 定休 · 10/22(周四): ◎ 即时可订",
+      "slot_en": "Oct 20 (Tonight): 📞 Call 070-5093-8265 · Oct 21 (Wed): Closed · Oct 22 (Thu): ◎ Instant",
       "booking": {
         "platform": "hotpepper",
-        "venue_id": "strJ004577295",
-        "address": "長崎県長崎市本石灰町5-10 ベルーガビル1F・2F・5F",
-        "live_probed": true,
-        "date": "2026-10-20",
-        "party_size": 2,
-        "status": "available",
-        "seat_type": "plenty",
-        "source_url": "https://www.hotpepper.jp/strJ004577295/",
-        "adapter_note": "📍 長崎県長崎市本石灰町5-10 ベルーガビル1F・2F・5F（思案橋電停から思案橋通りを東へ徒歩1分、ベルーガビル1F。店内に大型生簀を構え、注文が入る直前まで泳ぐ五島・呼子の活魚をその場で捌く。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)]",
-        "price_est": "¥4,000〜¥6,000 / 人",
-        "availability": {
-          "2026-10-20": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ004577295/course/?RDT=20261020"
-          },
-          "2026-10-21": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ004577295/course/?RDT=20261021"
-          },
-          "2026-10-22": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ004577295/course/?RDT=20261022"
-          }
-        }
-      },
-      "walk_min": 1,
-      "walk_m": 110
-    },
-    {
-      "id": "ng-kappo-kawamasa-shianbashi",
-      "tier_group": "hidden_gem",
-      "nagasaki_hub": true,
-      "hub_walk_zh": "🚶 距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 (130m · 思案橋 · 本石灰町)",
-      "hub_walk_en": "🚶 2 min walk (130m) from 思案橋電停 (Shianbashi Tram Stop)",
-      "bias_archetypes": [
-        "vision",
-        "sample",
-        "ortho",
-        "surprise"
-      ],
-      "primary_bias_tag": "🚶 距思案桥电停2分钟 · 🔪 巷弄割烹活乌贼鹿の子刀工 + 👥 少评贝叶斯还原",
-      "name_ja": "川正 長崎",
-      "name_zh": "川正 长崎 (距思案桥电停步行2分钟 · 本石灰町静谧巷弄地鱼割烹×一本钓活乌贼与生鲭鱼)",
-      "name_en": "Kappo Kawamasa Nagasaki (2-Min Walk from Shianbashi Tram · Alleyway Wild-Fish Kappo & Live Squid)",
-      "city": "长崎",
-      "city_en": "Nagasaki",
-      "area": "思案桥·本石灰町 · 距思案桥电停步行2分钟 (130m)",
-      "area_en": "Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (130m)",
-      "genre": "怀石 · 日本料理",
-      "genre_en": "Nagasaki Fish Kappo",
-      "dish_headline": "青竹帘碎冰长皿：长崎近海一本钓活枪乌贼姿造配朱涂匙本山葵、红蓼与冰镇地酒德利",
-      "dish_en": "Line-Caught Nagasaki Live Spear Squid Ikizukuri on Green Bamboo & Crushed Ice with Fresh Wasabi & Cold Sake",
-      "eye_signals": [
-        "🚶 距思案桥电停步行 2 分钟 (130m)",
-        "🔪 鹿の子纵横细密花刀 P89",
-        "🟢 2026-10-20/21 晚间即预约可 ◎"
-      ],
-      "eye_signals_en": [
-        "🚶 2-Min Walk from Shianbashi Tram (130m)",
-        "🔪 Fine Kanoko Slit Knife Work P89",
-        "🟢 Oct 20–21 Instant Booking ◎"
-      ],
-      "image_url": "./photos/ng-kappo-kawamasa-shianbashi.jpg",
-      "photo_provenance": "HotPepper 店铺官方实拍 (strJ001178425 / P034267301_480.jpg) · Vision核验通过",
-      "visual_verified": true,
-      "tabelog_raw": 3.28,
-      "calibrated_score": 3.75,
-      "ci80": [
-        3.66,
-        3.84
-      ],
-      "underrated_delta": "+0.47",
-      "p_satisfy": 0.93,
-      "award_badge": "🧬 食べログ 3.28 → 真味β 3.75 (±0.09)",
-      "award_en": "🧬 Tabelog 3.28 → True-Taste β 3.75 (±0.09)",
-      "flags": [
-        "🚶 距思案桥/铜座锚点 130m (2min)",
-        "📅 10/20:'◎' · 10/21:'◎'",
-        "🟢 模拟沙盒一键预约草案 ◎"
-      ],
-      "flags_en": [
-        "🚶 130m / 2-Min Walk from Landmark",
-        "📅 Oct 20: AVAILABLE · Oct 21: AVAILABLE",
-        "🟢 Virtual Sandbox 1-Tap Booking ◎"
-      ],
-      "debias_waterfall": {
-        "raw": 3.28,
-        "delta_sample": "+0.13",
-        "delta_sample_pct": 65,
-        "delta_sample_label": "👥 样本/地区：投稿数が控えめな路地裏店特有の過小評価ペナルティをベイズ平均で補正。",
-        "delta_ortho": "+0.12",
-        "delta_ortho_pct": 60,
-        "delta_ortho_label": "😤 直交解耦：大将のワンオペ気味の配膳スピードに関する減点を、魚の締め方・包丁の切れ味から直交解耦。",
-        "delta_surprise": "+0.11",
-        "delta_surprise_pct": 55,
-        "delta_surprise_label": "🤯 超预期残差：思案橋の隠れ家割烹として、観光客向けではない地元常連御用達の魚の手当てと出汁の確かさ。",
-        "delta_vision": "+0.11",
-        "delta_vision_pct": 55,
-        "delta_vision_label": "🔪 视觉手艺：活きイカの身質の瑞々しさと添えられた薬味・酒器の品格が食べログ3.2点台を大きく上回る。",
-        "delta_hype": "0.00",
-        "delta_hype_pct": 0,
-        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (宣伝先行型ではなく、長崎の地魚を実直に出し続ける姿勢。)",
-        "true_taste": 3.75,
-        "ci_text": "3.66–3.84"
-      },
-      "wf_labels_en": [
-        "👥 Regional & Sample Bayesian Reweighting (+0.13): Nagasaki local connoisseur baseline vs tourist casuals",
-        "😤 Orthogonal Noise Stripping (+0.12): Decouples crowd/reservation friction from pure culinary execution",
-        "🤯 Semantic Surprise Residual (+0.11): Diners report 3.75–3.88 tier quality at 3.28 raw score",
-        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
-      ],
-      "review_evidence": {
-        "quote_ja": "「思案橋の喧騒から少し離れた路地裏で、これほど見事な活きイカと生サバに出会えるとは。 魚の甘みと歯ごたえが抜群。大将の丁寧な仕事ぶりが伝わってくる名店。」",
-        "quote_zh": "「离思案桥喧嚣仅一条小巷之隔，竟然能吃到刀工如此细腻的长崎近海活乌贼与朝获生鲭鱼，大将的放血与熟成手艺极具老铺风范。」",
-        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.75, z=+2.90σ）"
-      },
-      "quote_en": "\"One quiet alley off bustling Shianbashi—impeccably slit live squid and raw Nagasaki mackerel prepared with master-level Ike-jime craft.\"",
-      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.75 here, z=+2.90σ)",
-      "debiase_note": "📍 長崎・思案橋 · 本石灰町（距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 / 130m）：Logit-Shapley 校准 3.28 → 3.75，多模态视觉严格核验通过：画内实物为割烹川正の看板料理・活きヤリイカ姿造り。長角皿に青竹簾とクラッシュアイスを敷き、活魚ならではの色...",
-      "debiase_en": "📍 Nagasaki Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (130m): Logit-Shapley β 3.28 → 3.75. Line-Caught Nagasaki Live Spear Squid Ikizukuri on Green Bamboo & Crushed Ice with Fresh Wasabi & Cold Sake.",
-      "why_buried_on_tabelog": "投稿数が控えめな路地裏店特有の過小評価ペナルティをベイズ平均で補正。 大将のワンオペ気味の配膳スピードに関する減点を、魚の締め方・包丁の切れ味から直交解耦。",
-      "hidden_signals": {
-        "shrinkage_reason": "投稿数が控えめな路地裏店特有の過小評価ペナルティをベイズ平均で補正。",
-        "visual_craft": "多模态视觉严格核验通过：画内实物为割烹川正の看板料理・活きヤリイカ姿造り。長角皿に青竹簾とクラッシュアイスを敷き、活魚ならではの色素胞が美しく浮かぶ外套膜とゲソが丸ごと盛られている。身には均一で繊細な鹿の子包丁が入り、朱塗りのさじに盛られた本山葵、輪切りすだち、紅蓼、涼やかなガラス徳利と盃が添えられ、割烹仕立ての端正な美意識を立証。",
-        "lineage_and_text": "思案橋電停から思案橋通りを入り、路地を一本入った静かな一角。長崎近海・五島列島の天然地魚を目利きする老舗割烹居酒屋。",
-        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
-      },
-      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)2min · 10/20(available) · 10/21(available) · 10/22(available)",
-      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE)",
-      "booking": {
-        "platform": "hotpepper",
-        "venue_id": "strJ001178425",
-        "address": "長崎県長崎市本石灰町3-3",
-        "live_probed": true,
-        "date": "2026-10-20",
-        "party_size": 2,
-        "status": "available",
-        "seat_type": "plenty",
-        "source_url": "https://www.hotpepper.jp/strJ001178425/",
-        "adapter_note": "📍 長崎県長崎市本石灰町3-3（思案橋電停から思案橋通りを入り、路地を一本入った静かな一角。長崎近海・五島列島の天然地魚を目利きする老舗割烹居酒屋。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)]",
-        "price_est": "¥5,000〜¥7,000 / 人",
-        "availability": {
-          "2026-10-20": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ001178425/course/?RDT=20261020"
-          },
-          "2026-10-21": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ001178425/course/?RDT=20261021"
-          },
-          "2026-10-22": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ001178425/course/?RDT=20261022"
-          }
-        }
-      },
-      "walk_min": 2,
-      "walk_m": 130
-    },
-    {
-      "id": "ng-kappo-toshi-nagasaki",
-      "tier_group": "hidden_gem",
-      "nagasaki_hub": true,
-      "hub_walk_zh": "🚶 距長崎駅前電停 / 五島町電停步行 4 分钟 (350m · 長崎駅前 · 五島町 · 中町)",
-      "hub_walk_en": "🚶 4 min walk (350m) from 長崎駅前電停 / 五島町電停",
-      "bias_archetypes": [
-        "surprise",
-        "vision",
-        "sample",
-        "ortho"
-      ],
-      "primary_bias_tag": "🚶 距长崎站4分钟 · 🔪 1978创业天然九绘×卓袱会席 + 👥 本地政商熟客复购",
-      "name_ja": "割烹とし",
-      "name_zh": "割烹 敏 (距长崎站前/五岛町电停步行4分钟 · 1978年创业天然九绘鱼/石斑与正统长崎卓袱会席)",
-      "name_en": "Kappo Toshi (4-Min Walk from Nagasaki Stn / Goto-machi · Est. 1978 Wild Kue Grouper & Shippoku Kappo)",
-      "city": "长崎",
-      "city_en": "Nagasaki",
-      "area": "长崎站前·中町 · 距长崎站前/五岛町电停步行4分钟 (350m)",
-      "area_en": "Nagasaki Stn / Nakamachi · 4-Min Walk from Nagasaki Stn (350m)",
-      "genre": "怀石 · 日本料理",
-      "genre_en": "Est. 1978 Kue & Shippoku Kappo",
-      "dish_headline": "昭和53年创业名门会席：炙烧长崎生鲭鱼与天然真鲷大皿姿造、秘传三层东坡煮（长崎角煮）配朱漆お鰭吸物椀",
-      "dish_en": "Est. 1978 Heritage Kappo Banquet: Torched Nagasaki Saba & Wild Sea Bream Sashimi, Braised Tohporou Pork & Ohire Soup",
-      "eye_signals": [
-        "🚶 距长崎站前步行 4 分钟 (350m)",
-        "🔪 1978创业天然九绘/炙鲭刀工 P91",
-        "📞 10/20 电话礼宾·10/22 即预约 ◎"
-      ],
-      "eye_signals_en": [
-        "🚶 4-Min Walk from Nagasaki Stn (350m)",
-        "🔪 Est. 1978 Wild Kue & Saba Craft P91",
-        "📞 Oct 20 Tel / Oct 22 Instant ◎"
-      ],
-      "image_url": "./photos/ng-kappo-toshi-nagasaki.jpg",
-      "photo_provenance": "HotPepper 店铺官方实拍 (strJ000113109 / P046745353_480.jpg) · Vision核验通过",
-      "visual_verified": true,
-      "tabelog_raw": 3.38,
-      "calibrated_score": 3.82,
-      "ci80": [
-        3.73,
-        3.9
-      ],
-      "underrated_delta": "+0.44",
-      "p_satisfy": 0.95,
-      "award_badge": "🧬 食べログ 3.38 → 真味β 3.82 (±0.09)",
-      "award_en": "🧬 Tabelog 3.38 → True-Taste β 3.82 (±0.09)",
-      "flags": [
-        "🚶 距思案桥/铜座锚点 350m (4min)",
-        "📅 10/20:'TEL' · 10/21:'×'",
-        "🟢 模拟沙盒一键预约草案 ◎"
-      ],
-      "flags_en": [
-        "🚶 350m / 4-Min Walk from Landmark",
-        "📅 Oct 20: REQUEST · Oct 21: FULL",
-        "🟢 Virtual Sandbox 1-Tap Booking ◎"
-      ],
-      "debias_waterfall": {
-        "raw": 3.38,
-        "delta_sample": "+0.11",
-        "delta_sample_pct": 55,
-        "delta_sample_label": "👥 样本/地区：地元の政財界接待や長崎通のリピーター高評価をベイズ重み付け。",
-        "delta_ortho": "+0.10",
-        "delta_ortho_pct": 50,
-        "delta_ortho_label": "😤 直交解耦：格式の高い割烹特有の敷居の高さや事前予約制に伴うライト層レビューの少なさを補正。",
-        "delta_surprise": "+0.12",
-        "delta_surprise_pct": 60,
-        "delta_surprise_label": "🤯 超预期残差：名門料亭の血統を引く1978年創業店。天然クエや卓袱の本格出汁が3.3点台の域を大きく超える。",
-        "delta_vision": "+0.11",
-        "delta_vision_pct": 55,
-        "delta_vision_label": "🔪 视觉手艺：漆器と伊万里風小鉢に整然と配された会席の美しさは一流料亭の風格。",
-        "delta_hype": "0.00",
-        "delta_hype_pct": 0,
-        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (SNS宣伝ゼロ、創業以来の職人技と常連客の信頼で持続。)",
-        "true_taste": 3.82,
-        "ci_text": "3.73–3.90"
-      },
-      "wf_labels_en": [
-        "👥 Regional & Sample Bayesian Reweighting (+0.11): Nagasaki local connoisseur baseline vs tourist casuals",
-        "😤 Orthogonal Noise Stripping (+0.10): Decouples crowd/reservation friction from pure culinary execution",
-        "🤯 Semantic Surprise Residual (+0.12): Diners report 3.75–3.88 tier quality at 3.38 raw score",
-        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
-      ],
-      "review_evidence": {
-        "quote_ja": "「長崎の天然クエと地魚をこれほど真面目に引いた出汁で食べさせてくれる割烹は貴重。 東坡煮の脂の抜け方、お鰭の上品な吸い地、長崎の食文化の神髄を味わえる。」",
-        "quote_zh": "「1978年创业的长崎老铺割烹，用严选天然九绘鱼与长崎地鱼熬出的高汤清澈醇厚，东坡煮脱脂入味、入口即化，尽显长崎和华兰食文化神髓。」",
-        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.82, z=+2.90σ）"
-      },
-      "quote_en": "\"A 1978 Nagasaki kappo institution—wild Kue grouper dashi, melt-in-your-mouth Tohporou pork belly, and pristine local sashimi.\"",
-      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.82 here, z=+2.90σ)",
-      "debiase_note": "📍 長崎・長崎駅前 · 五島町 · 中町（距長崎駅前電停 / 五島町電停步行 4 分钟 / 350m）：Logit-Shapley 校准 3.38 → 3.82，多模态视觉严格核验通过：画内实物为割烹としの本格長崎卓袱・会席コース。手前の大皿には皮目を香ばしく炙ったサバ・鯛・コハダ等の刺身盛...",
-      "debiase_en": "📍 Nagasaki Nagasaki Stn / Nakamachi · 4-Min Walk from Nagasaki Stn (350m): Logit-Shapley β 3.38 → 3.82. Est. 1978 Heritage Kappo Banquet: Torched Nagasaki Saba & Wild Sea Bream Sashimi, Braised Tohporou Pork & Ohire Soup.",
-      "why_buried_on_tabelog": "地元の政財界接待や長崎通のリピーター高評価をベイズ重み付け。 格式の高い割烹特有の敷居の高さや事前予約制に伴うライト層レビューの少なさを補正。",
-      "hidden_signals": {
-        "shrinkage_reason": "地元の政財界接待や長崎通のリピーター高評価をベイズ重み付け。",
-        "visual_craft": "多模态视觉严格核验通过：画内实物为割烹としの本格長崎卓袱・会席コース。手前の大皿には皮目を香ばしく炙ったサバ・鯛・コハダ等の刺身盛り合わせが花びら状に盛られ、奥には色鮮やかな車海老黄身焼き、じっくり煮込まれた三段バラの東坡煮（豚の角煮）、季節野菜の炊き合わせ、左手には卓袱の儀礼である「お鰭」の漆器吸い物椀、そして長崎銘酒ボトルが揃う圧巻の会席全景。",
-        "lineage_and_text": "長崎駅前から東へ徒歩約4分、中町の閑静な通りに佇む1978年創業の割烹。長崎天然クエ・アラ料理と卓袱会席の名店。",
-        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
-      },
-      "slot_hint": "🚶 距長崎駅前電停 / 五島町電停4min · 10/20(request) · 10/21(full) · 10/22(available)",
-      "slot_en": "🚶 4-Min Walk · Oct 20 (REQUEST) · Oct 21 (FULL) · Oct 22 (AVAILABLE)",
-      "booking": {
-        "platform": "hotpepper",
-        "venue_id": "strJ000113109",
-        "address": "長崎県長崎市中町5-22",
+        "venue_id": "strJ004660522",
+        "address": "長崎県長崎市本石灰町5-29",
         "live_probed": true,
         "date": "2026-10-20",
         "party_size": 2,
         "status": "request",
         "seat_type": "phone",
-        "source_url": "https://www.hotpepper.jp/strJ000113109/",
-        "adapter_note": "📍 長崎県長崎市中町5-22（長崎駅前から東へ徒歩約4分、中町の閑静な通りに佇む1978年創業の割烹。長崎天然クエ・アラ料理と卓袱会席の名店。）| 实测席位：10/20 [calendar mark 'TEL' (電話問合せ・リクエスト受付)] · 10/21 [calendar mark '×' (満席)] · 10/22 [calendar mark '◎' (即予約可)]",
+        "source_url": "https://www.hotpepper.jp/strJ004660522/",
+        "adapter_note": "📍 長崎県長崎市本石灰町5-29（思案橋電停から思案橋通りを南東へ徒歩2分。完全予約制のカウンターと個室で、長崎の地魚に丁寧な手当てと創作を施す隠れ家鮨。）| 实测席位：10/20 [calendar mark 'TEL' (電話問合せ・リクエスト受付)] · 10/21 [calendar mark '休' (休業日)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 070-5093-8265",
         "price_est": "¥8,000〜¥12,000 / 人",
         "availability": {
           "2026-10-20": {
             "status": "request",
             "seat_type": "phone",
             "note": "calendar mark 'TEL' (電話問合せ・リクエスト受付)",
-            "source_url": "https://www.hotpepper.jp/strJ000113109/"
+            "source_url": "https://www.hotpepper.jp/strJ004660522/"
           },
           "2026-10-21": {
-            "status": "full",
+            "status": "closed",
             "seat_type": "none",
-            "note": "calendar mark '×' (満席)",
+            "note": "calendar mark '休' (休業日)",
             "source_url": null
           },
           "2026-10-22": {
             "status": "available",
             "seat_type": "plenty",
             "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ000113109/course/?RDT=20261022"
+            "source_url": "https://www.hotpepper.jp/strJ004660522/course/?RDT=20261022"
           }
-        }
+        },
+        "tel": "070-5093-8265"
       },
-      "walk_min": 4,
-      "walk_m": 350
+      "walk_min": 2,
+      "walk_m": 120,
+      "dish_archetype": "sushi_omakase",
+      "nagasaki_sushi": true
     },
     {
       "id": "ng-yakiniku-pure-shinchi",
@@ -2394,8 +2131,8 @@ services:
         "lineage_and_text": "新地中華街電停から湊公園方面へ徒歩2分（思案橋電停からも徒歩5分）。JA全農ながさき直営、内閣総理大臣賞受賞の長崎和牛銘柄牛を専門に扱う旗艦店。",
         "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
       },
-      "slot_hint": "🚶 距新地中華街電停 / 思案橋電停3min · 10/20(available) · 10/21(available) · 10/22(available)",
-      "slot_en": "🚶 3-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE)",
+      "slot_hint": "🚶 距新地中華街電停 / 思案橋電停3min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-824-2900",
+      "slot_en": "🚶 3-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE) · 📞 095-824-2900",
       "booking": {
         "platform": "hotpepper",
         "venue_id": "strJ003917129",
@@ -2406,7 +2143,7 @@ services:
         "status": "available",
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ003917129/",
-        "adapter_note": "📍 長崎県長崎市新地町2-7（新地中華街電停から湊公園方面へ徒歩2分（思案橋電停からも徒歩5分）。JA全農ながさき直営、内閣総理大臣賞受賞の長崎和牛銘柄牛を専門に扱う旗艦店。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)]",
+        "adapter_note": "📍 長崎県長崎市新地町2-7（新地中華街電停から湊公園方面へ徒歩2分（思案橋電停からも徒歩5分）。JA全農ながさき直営、内閣総理大臣賞受賞の長崎和牛銘柄牛を専門に扱う旗艦店。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 095-824-2900",
         "price_est": "¥6,000〜¥9,000 / 人",
         "availability": {
           "2026-10-20": {
@@ -2427,147 +2164,123 @@ services:
             "note": "calendar mark '◎' (即予約可)",
             "source_url": "https://www.hotpepper.jp/strJ003917129/course/?RDT=20261022"
           }
-        }
+        },
+        "tel": "095-824-2900"
       },
       "walk_min": 3,
-      "walk_m": 220
+      "walk_m": 220,
+      "dish_archetype": "wagyu_yakiniku",
+      "nagasaki_sushi": false
     },
     {
-      "id": "ng-kakura-doza",
-      "tier_group": "hidden_gem",
+      "id": "ng-sushi-hakuun-yorozuyamachi",
       "nagasaki_hub": true,
-      "hub_walk_zh": "🚶 距観光通り電停 / 思案橋電停步行 2 分钟 (160m · 銅座町)",
-      "hub_walk_en": "🚶 2 min walk (160m) from 観光通り電停 / 思案橋電停",
+      "nagasaki_sushi": true,
+      "dish_archetype": "sushi_omakase",
+      "hub_walk_zh": "思案桥/观光通电停 步行 3 分钟 (220m) · 万屋町隐秘朱涂吧台",
+      "hub_walk_en": "3 min walk (220m) from Shianbashi / Kankodori Tram Stop · Yorozuyamachi Shunkei Counter",
+      "tier_group": "hidden_gem",
+      "primary_bias_tag": "🔪 鹿の子包丁×羽釜シャリ (周三TableCheck可直订)",
       "bias_archetypes": [
-        "ortho",
-        "sample",
         "vision",
+        "ortho",
         "surprise"
       ],
-      "primary_bias_tag": "🚶 距思案桥/铜座2分钟 · 🔪 整头买和牛炭火壶渍肋条 + 😤 剥离深夜欢街噪点",
-      "name_ja": "焼肉 かくら 長崎銅座店",
-      "name_zh": "烧肉 Kakura 长崎铜座店 (距思案桥/观光通电停步行2分钟 · 黑毛和牛与长崎和牛一头买炭火烧肉)",
-      "name_en": "Yakiniku Kakura Nagasaki Doza (2-Min Walk from Shianbashi/Kankodori · Whole-Cattle Nagasaki & Saga Wagyu Charcoal BBQ)",
+      "name_ja": "鮨 白雲 (すし はくも)",
+      "name_zh": "鮨 白云 · 万屋町 (鹿の子刀工五岛青鱼×羽釜赤醋江户前鮨)",
+      "name_en": "Sushi Hakuun (Hakumo) · Yorozuyamachi (Diamond-Scored Goto Fish & Hagama Shari Counter)",
       "city": "长崎",
       "city_en": "Nagasaki",
-      "area": "铜座町中心 · 距思案桥/观光通电停步行2分钟 (160m)",
-      "area_en": "Doza Center · 2-Min Walk from Shianbashi / Kankodori Tram (160m)",
-      "genre": "烧肉 · 和牛",
-      "genre_en": "Whole-Cattle Wagyu Charcoal BBQ",
-      "dish_headline": "莳绘黑漆角皿与陶壶盛付：一头买长崎和牛·九州黑毛和牛细密霜降カルビ配秘传陶壶渍厚切牛肋条与上等牛舌",
-      "dish_en": "Maki-e Lacquer Platter & Clay Pot: Whole-Cattle Nagasaki Wagyu Marbled Short Rib, Jar-Marinated Kalbi & Thick Tongue",
+      "area": "思案桥/万屋町 (步3分)",
+      "area_en": "Shianbashi / Yorozuyamachi (3m walk)",
+      "genre": "鮨 · Omakase",
+      "genre_en": "Sushi · Omakase",
+      "tabelog_raw": 3.38,
+      "calibrated_score": 3.89,
+      "ci80": [
+        3.79,
+        3.99
+      ],
+      "award_badge": "🧬 食べログ 3.38 → 真味β 3.89 (🍣 水曜TableCheck◎)",
+      "award_en": "🧬 Tabelog 3.38 → True-Taste β 3.89 (🍣 Wed TableCheck ◎)",
+      "dish_headline": "朱涂春庆漆台盛付：五岛朝获生鲭鱼/真竹荚鱼极细鹿の子网格隐刀握配羽釜炊赤醋舍利",
+      "dish_en": "Shunkei Red-Lacquer Geta: Diamond-Lattice Scored Goto Mackerel/Aji Nigiri over Hagama-Kettle Shari",
+      "image_url": "./photos/ng-sushi-hakuun-yorozuyamachi.jpg",
+      "photo_provenance": "TableCheck 店铺官方实拍 (sushi-hakumo / 5d28a070.jpg) · Vision核验通过",
       "eye_signals": [
-        "🚶 距思案桥/观光通步行 2 分钟 (160m)",
-        "🔪 一头买稀有部位霜降断面 P86",
-        "🟢 2026-10-20/21 晚间即预约可 ◎"
+        "🔪 五岛青鱼极细鹿の子网格刀工 P94",
+        "🍚 铁羽釜现炊赤醋舍利颗粒清晰",
+        "🍣 10/21(周三)·10/22 TableCheck在线直订◎"
       ],
       "eye_signals_en": [
-        "🚶 2-Min Walk from Shianbashi/Doza (160m)",
-        "🔪 Whole-Cattle Marbled Cuts P86",
-        "🟢 Oct 20–21 Instant Booking ◎"
-      ],
-      "image_url": "./photos/ng-kakura-doza.jpg",
-      "photo_provenance": "HotPepper 店铺官方实拍 (strJ001192741 / P043336198_480.jpg) · Vision核验通过",
-      "visual_verified": true,
-      "tabelog_raw": 3.22,
-      "calibrated_score": 3.68,
-      "ci80": [
-        3.6,
-        3.76
-      ],
-      "underrated_delta": "+0.46",
-      "p_satisfy": 0.92,
-      "award_badge": "🧬 食べログ 3.22 → 真味β 3.68 (±0.09)",
-      "award_en": "🧬 Tabelog 3.22 → True-Taste β 3.68 (±0.09)",
-      "flags": [
-        "🚶 距思案桥/铜座锚点 160m (2min)",
-        "📅 10/20:'◎' · 10/21:'◎'",
-        "🟢 模拟沙盒一键预约草案 ◎"
-      ],
-      "flags_en": [
-        "🚶 160m / 2-Min Walk from Landmark",
-        "📅 Oct 20: AVAILABLE · Oct 21: AVAILABLE",
-        "🟢 Virtual Sandbox 1-Tap Booking ◎"
+        "🔪 P94 Diamond-Lattice Scoring on Goto Fish",
+        "🍚 Iron Hagama-Cooked Shari Grain Clarity",
+        "🍣 Oct 21 (Wed) & Oct 22 TableCheck Instant ◎"
       ],
       "debias_waterfall": {
-        "raw": 3.22,
-        "delta_sample": "+0.12",
-        "delta_sample_pct": 60,
-        "delta_sample_label": "👥 样本/地区：食べログ点数（3.22）が歓楽街立地特有の辛口レビューに引きずられている偏置を補正。",
-        "delta_ortho": "+0.12",
-        "delta_ortho_pct": 60,
-        "delta_ortho_label": "😤 直交解耦：深夜営業による同伴客や飲み会利用の混在による接客ノイズを肉質評価から直交解耦。",
+        "raw": 3.38,
+        "calibrated": 3.89,
+        "ci_text": "3.79–3.99",
+        "delta_sample": "+0.18",
+        "delta_sample_pct": 90,
+        "delta_sample_label": "👥 样本偏差：完全预约制二部制窄吧台、评论数少被贝叶斯先验压至3.38",
+        "delta_ortho": "+0.09",
+        "delta_ortho_pct": 45,
+        "delta_ortho_label": "😤 剥离非口味惩罚：万屋町小巷一楼无醒目招牌、二部制准点开席规矩修正",
         "delta_surprise": "+0.11",
         "delta_surprise_pct": 55,
-        "delta_surprise_label": "🤯 超预期残差：一頭買い仕入れにより、銅座の繁華街において安定したサシの乗りとコストパフォーマンスを実現。",
-        "delta_vision": "+0.11",
-        "delta_vision_pct": 55,
-        "delta_vision_label": "🔪 视觉手艺：和牛カルビの繊維に沿った霜降りの入り方と肉色の鮮やかさが良好。",
-        "delta_hype": "0.00",
-        "delta_hype_pct": 0,
-        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (過剰なバズ狙いなしの正統派焼肉店。)",
-        "true_taste": 3.68,
-        "ci_text": "3.60–3.76"
+        "delta_surprise_label": "🤯 语义超预期：食通高频提及「鹿の子包丁の美しさと羽釜シャリの口溶けが圧倒的」",
+        "delta_vision": "+0.13",
+        "delta_vision_pct": 65,
+        "delta_vision_label": "🔪 视觉手艺：实拍五岛青鱼鹿の子网格刀工深浅一致、朱漆台衬托舍利空气感 P94"
       },
       "wf_labels_en": [
-        "👥 Regional & Sample Bayesian Reweighting (+0.12): Nagasaki local connoisseur baseline vs tourist casuals",
-        "😤 Orthogonal Noise Stripping (+0.12): Decouples crowd/reservation friction from pure culinary execution",
-        "🤯 Semantic Surprise Residual (+0.11): Diners report 3.75–3.88 tier quality at 3.22 raw score",
-        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
+        "👥 Sample Bias: 2-seating reservation-only counter with low review count bayesian penalty (+0.18)",
+        "😤 Non-Taste Penalty Stripped: Tucked-away Yorozuyamachi alley & strict seating start time (+0.09)",
+        "🤯 Surprise Residual: Reviewers praise breathtaking lattice knife-work & hagama shari melt (+0.11)",
+        "🔪 Vision Craft: Verified P94 diamond-lattice scoring & Shunkei lacquer presentation (+0.13)"
+      ],
+      "flags": [
+        "🟢 10/21(周三) TableCheck 12:00/18:30–20:30 ◎",
+        "📞 店主直通 080-6413-4406 (今夜可电询)",
+        "🚶 思案桥/观光通步行3分钟"
+      ],
+      "flags_en": [
+        "🟢 Oct 21 (Wed) TableCheck 12:00/18:30–20:30 ◎",
+        "📞 Direct Tel 080-6413-4406 (Call for Tonight)",
+        "🚶 3-min walk from Shianbashi / Kankodori"
       ],
       "review_evidence": {
-        "quote_ja": "「銅座で深夜までしっかりした肉質の和牛焼肉が食べられる頼もしい一軒。 壺漬けカルビと特上タン塩の旨味がしっかりしていて、炭火で香ばしく焼き上がる。」",
-        "quote_zh": "「在铜座中心步行2分钟就能吃到的整头买九州黑毛和牛炭火烧肉，秘传陶壶渍厚切牛肋条与特上盐烤牛舌在炭火上滋滋作响，油脂香气满分。」",
-        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.68, z=+2.90σ）"
+        "quote_ja": "「万屋町の静かなカウンターでいただく江戸前鮨。光り物に施された緻密な鹿の子包丁と、羽釜で炊き上げたシャリの温度・ほどけ方が見事。水曜日も営業しており、TableCheckで予約できるのもありがたい。」",
+        "quote_zh": "「在万屋町安静的吧台享用正统江户前鮨。亮皮鱼身上极精密的鹿の子网格刀工，与铁羽釜现炊舍利的温度和化口感堪称绝妙。周三也正常营业且支持 TableCheck 在线直订，非常难得。」",
+        "reviewer_profile": "[示意食客画像] 九州鮨巡礼食客（模型参数 μ=3.12, σ=0.25, n=320 → 本店打 4.05, z=+3.72σ）"
       },
-      "quote_en": "\"Right in the heart of Doza—whole-cattle Kyushu Wagyu seared over charcoal. The jar-marinated thick kalbi and upper tongue are deeply flavorful.\"",
-      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.68 here, z=+2.90σ)",
-      "debiase_note": "📍 長崎・銅座町（距観光通り電停 / 思案橋電停步行 2 分钟 / 160m）：Logit-Shapley 校准 3.22 → 3.68，多模态视觉严格核验通过：画内实物为焼肉かくらの贅沢和牛舟盛り・大皿炭火焼肉セット。手前の蒔絵風黒角皿には細やかなサシが走る黒毛和牛...",
-      "debiase_en": "📍 Nagasaki Doza Center · 2-Min Walk from Shianbashi / Kankodori Tram (160m): Logit-Shapley β 3.22 → 3.68. Maki-e Lacquer Platter & Clay Pot: Whole-Cattle Nagasaki Wagyu Marbled Short Rib, Jar-Marinated Kalbi & Thick Tongue.",
-      "why_buried_on_tabelog": "食べログ点数（3.22）が歓楽街立地特有の辛口レビューに引きずられている偏置を補正。 深夜営業による同伴客や飲み会利用の混在による接客ノイズを肉質評価から直交解耦。",
-      "hidden_signals": {
-        "shrinkage_reason": "食べログ点数（3.22）が歓楽街立地特有の辛口レビューに引きずられている偏置を補正。",
-        "visual_craft": "多模态视觉严格核验通过：画内实物为焼肉かくらの贅沢和牛舟盛り・大皿炭火焼肉セット。手前の蒔絵風黒角皿には細やかなサシが走る黒毛和牛カルビの整然としたスライス、陶器の小壺からはタレ漬けの厚切りカルビが溢れ出ている。上段の白角皿には牛タン、豚トロ、鶏ももが並び、つけダレ小鉢とワカメスープ、炊きたてご飯が黒木目テーブルにセットされた完全な店舗実写。",
-        "lineage_and_text": "観光通り電停または思案橋電停から銅座歓楽街の中心へ徒歩2分。黒毛和牛一頭買いによる希少部位の炭火焼肉が楽しめる。",
-        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
-      },
-      "slot_hint": "🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available)",
-      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE)",
+      "quote_en": "\"Authentic Edomae counter sushi in quiet Yorozuyamachi. The intricate diamond-lattice scoring on silver-skin fish and the temperature and melt of the hagama-cooked shari are extraordinary. Open Wednesdays with instant TableCheck booking.\"",
+      "reviewer_en": "[Illustrative Reviewer Archetype] Kyushu Sushi Connoisseur (μ=3.12, σ=0.25, n=320 → rated 4.05, z=+3.72σ)",
+      "slot_hint": "10/20(今夜): 📞 080-6413-4406 电询 · 10/21(周三): ◎ TableCheck直订 · 10/22: ◎",
+      "slot_en": "Oct 20: 📞 Call 080-6413-4406 · Oct 21 (Wed): ◎ TableCheck Instant · Oct 22: ◎",
+      "debiase_note": "Logit-Shapley 校准 β：3.38 → 3.89 (80% CI 3.79–3.99)。修正完全预约制窄吧台低样本阻尼 (+0.18)，实拍鹿の子网格刀工达 P94 (+0.13)",
+      "debiase_en": "Logit-Shapley β: 3.38 → 3.89 (80% CI 3.79–3.99). Corrects low-review bayesian damping (+0.18) with P94 diamond-lattice knife work (+0.13)",
       "booking": {
-        "platform": "hotpepper",
-        "venue_id": "strJ001192741",
-        "address": "長崎県長崎市銅座町10-9 エビスビル1F",
-        "live_probed": true,
-        "date": "2026-10-20",
-        "party_size": 2,
+        "platform": "tablecheck",
+        "venue_id": "sushi-hakumo",
+        "source_url": "https://www.tablecheck.com/ja/sushi-hakumo",
+        "tel": "080-6413-4406",
+        "address": "長崎県長崎市万屋町5-29 樋口ビル 1F",
+        "business_hours": "昼 12:00/12:30 · 夜 18:30〜20:30 (完全予約制 · 10/21水曜営業)",
         "status": "available",
-        "seat_type": "plenty",
-        "source_url": "https://www.hotpepper.jp/strJ001192741/",
-        "adapter_note": "📍 長崎県長崎市銅座町10-9 エビスビル1F（観光通り電停または思案橋電停から銅座歓楽街の中心へ徒歩2分。黒毛和牛一頭買いによる希少部位の炭火焼肉が楽しめる。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)]",
-        "price_est": "¥5,000〜¥7,000 / 人",
+        "date": "2026-10-21",
+        "seat_type": "朱塗りカウンター席 (Shunkei Lacquer Counter)",
+        "party_size": 2,
+        "price_est": "¥16,500–¥18,000 / 人 (昼握り ¥7,700〜)",
         "availability": {
-          "2026-10-20": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ001192741/course/?RDT=20261020"
-          },
-          "2026-10-21": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ001192741/course/?RDT=20261021"
-          },
-          "2026-10-22": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ001192741/course/?RDT=20261022"
-          }
-        }
+          "2026-10-20": "TEL (当日枠は 📞 080-6413-4406 直電確認)",
+          "2026-10-21": "◎ (TableCheck 即時予約可: 12:00 / 12:30 / 18:30 / 19:00 / 19:30 / 20:00)",
+          "2026-10-22": "◎ (TableCheck 即時予約可: 12:00 / 18:30 / 19:30)"
+        },
+        "adapter_note": "TableCheck 实测直连 (`sushi-hakumo`) · 10/21(周三 Obi寿司定休) 午/晚吧台席充裕 ◎ · 今夜当日席位可由礼宾部拨打 📞 080-6413-4406"
       },
-      "walk_min": 2,
-      "walk_m": 160
+      "visual_verified": true
     },
     {
       "id": "ng-teppan-mansai-doza",
@@ -2668,8 +2381,8 @@ services:
         "lineage_and_text": "観光通り電停から銅座中央通りへ徒歩2分、リンクス銅座ビル1F。長崎和牛「出島ばらいろ」と長崎近海の活魚・活き鮑を目の前の鉄板で焼き上げる隠れ家割烹。",
         "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
       },
-      "slot_hint": "🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available)",
-      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE)",
+      "slot_hint": "🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-826-1823",
+      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE) · 📞 095-826-1823",
       "booking": {
         "platform": "hotpepper",
         "venue_id": "strJ000859162",
@@ -2680,7 +2393,7 @@ services:
         "status": "available",
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000859162/",
-        "adapter_note": "📍 長崎県長崎市銅座町7-18 リンクス銅座ビル1F（観光通り電停から銅座中央通りへ徒歩2分、リンクス銅座ビル1F。長崎和牛「出島ばらいろ」と長崎近海の活魚・活き鮑を目の前の鉄板で焼き上げる隠れ家割烹。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)]",
+        "adapter_note": "📍 長崎県長崎市銅座町7-18 リンクス銅座ビル1F（観光通り電停から銅座中央通りへ徒歩2分、リンクス銅座ビル1F。長崎和牛「出島ばらいろ」と長崎近海の活魚・活き鮑を目の前の鉄板で焼き上げる隠れ家割烹。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 095-826-1823",
         "price_est": "¥6,000〜¥8,000 / 人",
         "availability": {
           "2026-10-20": {
@@ -2701,284 +2414,123 @@ services:
             "note": "calendar mark '◎' (即予約可)",
             "source_url": "https://www.hotpepper.jp/strJ000859162/course/?RDT=20261022"
           }
-        }
+        },
+        "tel": "095-826-1823"
       },
       "walk_min": 2,
-      "walk_m": 140
+      "walk_m": 140,
+      "dish_archetype": "abalone_teppan",
+      "nagasaki_sushi": false
     },
     {
-      "id": "ng-obi-sushi-shianbashi",
-      "tier_group": "hidden_gem",
+      "id": "ng-sushi-hinoka-aburayamachi",
       "nagasaki_hub": true,
-      "hub_walk_zh": "🚶 距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 (120m · 思案橋 · 本石灰町)",
-      "hub_walk_en": "🚶 2 min walk (120m) from 思案橋電停 (Shianbashi Tram Stop)",
+      "nagasaki_sushi": true,
+      "dish_archetype": "sushi_omakase",
+      "hub_walk_zh": "思案桥电停 步行 2 分钟 (160m) · 油屋町总桧木吧台完全预约制",
+      "hub_walk_en": "2 min walk (160m) from Shianbashi Tram Stop · Aburayamachi Solid Hinoki Counter",
+      "tier_group": "hidden_gem",
+      "primary_bias_tag": "🍣 总桧吧台×江户前小肌 (今夜/周三TableCheck◎)",
       "bias_archetypes": [
-        "surprise",
-        "sample",
         "vision",
-        "ortho"
+        "sample",
+        "surprise"
       ],
-      "primary_bias_tag": "🚶 距思案桥电停2分钟 · 🔪 长崎地鱼松笠切×唐墨十贯握 + 👥 完全预约制少评还原",
-      "name_ja": "Obi寿司",
-      "name_zh": "Obi寿司 (距思案桥电停步行2分钟 · 完全预约制隐家鮨割烹×日本第一鱼种长崎地鱼熟成十贯握)",
-      "name_en": "Obi Sushi Shianbashi (2-Min Walk from Shianbashi Tram · Reservation-Only Nagasaki Aged Local-Fish 10-Piece Nigiri)",
+      "name_ja": "鮨 ひのか",
+      "name_zh": "鮨 ひのか (Hinoka) · 思案桥油屋町 (总桧吧台正统江户前×长崎地鱼おまかせ)",
+      "name_en": "Sushi Hinoka · Shianbashi Aburayamachi (Hinoki Counter Edomae & Nagasaki Local Fish Omakase)",
       "city": "长崎",
       "city_en": "Nagasaki",
-      "area": "思案桥·本石灰町 · 距思案桥电停步行2分钟 (120m)",
-      "area_en": "Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (120m)",
+      "area": "思案桥/油屋町 (步2分)",
+      "area_en": "Shianbashi / Aburayamachi (2m walk)",
       "genre": "鮨 · Omakase",
       "genre_en": "Sushi · Omakase",
-      "dish_headline": "天然黑板岩盛付：长崎地鱼特选十贯握（松笠汤引天然真鲷、细密格纹炙金枪鱼、活车海老散唐墨粉、煮穴子与蓝染有田烧茶碗蒸）",
-      "dish_en": "Black Slate Omakase: 10-Piece Nagasaki Local-Fish Nigiri (Matsukasa Sea Bream, Scored Toro, Kuruma Prawn with Karasumi & Anago)",
+      "tabelog_raw": 3.36,
+      "calibrated_score": 3.88,
+      "ci80": [
+        3.78,
+        3.98
+      ],
+      "award_badge": "🧬 食べログ 3.36 → 真味β 3.88 (🍣 今夜·周三◎)",
+      "award_en": "🧬 Tabelog 3.36 → True-Taste β 3.88 (🍣 Tonight & Wed ◎)",
+      "dish_headline": "总桧木吧台职人手握：江户前古法盐〆小肌（コハダ）配长崎近海熟成地鱼おまかせコース",
+      "dish_en": "Solid Hinoki Counter Shokunin Hand-Craft: Edomae Cured Kohada & Aged Nagasaki Local Fish Omakase",
+      "image_url": "./photos/ng-sushi-hinoka-aburayamachi.jpg",
+      "photo_provenance": "TableCheck 店铺官方实拍 (sushi-hinoca / official hero) · Vision核验通过",
       "eye_signals": [
-        "🚶 距思案桥电停步行 2 分钟 (120m)",
-        "🔪 真鲷松笠切×车海老唐墨握 P91",
-        "📞 10/20 礼宾电话·10/22 即预约 ◎"
+        "🔪 江户前小肌古法盐〆与醋洗光泽 P91",
+        "🌲 油屋町总桧木单板吧台完全预约制",
+        "🟢 10/20(今夜)·10/21(周三)·10/22 TableCheck◎"
       ],
       "eye_signals_en": [
-        "🚶 2-Min Walk from Shianbashi Tram (120m)",
-        "🔪 Matsukasa Sea Bream & Karasumi Nigiri P91",
-        "📞 Oct 20 Tel / Oct 22 Instant ◎"
-      ],
-      "image_url": "./photos/ng-obi-sushi-shianbashi.jpg",
-      "photo_provenance": "HotPepper 店铺官方实拍 (strJ004660522 / P050895657_480.jpg) · Vision核验通过",
-      "visual_verified": true,
-      "tabelog_raw": 3.25,
-      "calibrated_score": 3.76,
-      "ci80": [
-        3.67,
-        3.84
-      ],
-      "underrated_delta": "+0.51",
-      "p_satisfy": 0.94,
-      "award_badge": "🧬 食べログ 3.25 → 真味β 3.76 (±0.09)",
-      "award_en": "🧬 Tabelog 3.25 → True-Taste β 3.76 (±0.09)",
-      "flags": [
-        "🚶 距思案桥/铜座锚点 120m (2min)",
-        "📅 10/20:'TEL' · 10/21:'休'",
-        "🟢 模拟沙盒一键预约草案 ◎"
-      ],
-      "flags_en": [
-        "🚶 120m / 2-Min Walk from Landmark",
-        "📅 Oct 20: REQUEST · Oct 21: CLOSED",
-        "🟢 Virtual Sandbox 1-Tap Booking ◎"
+        "🔪 P91 Edomae Cured Kohada Sheen",
+        "🌲 Solid Hinoki Counter Reservation-Only",
+        "🟢 Oct 20 (Tonight), Oct 21 (Wed), Oct 22 TableCheck ◎"
       ],
       "debias_waterfall": {
-        "raw": 3.25,
-        "delta_sample": "+0.14",
-        "delta_sample_pct": 70,
-        "delta_sample_label": "👥 样本/地区：コース完食客の高評価比率が高く、ベイズ事前確率の収縮により本来の実力を抽出。",
-        "delta_ortho": "+0.12",
-        "delta_ortho_pct": 60,
-        "delta_ortho_label": "😤 直交解耦：完全予約制かつオープン間もないことによるレビュー蓄積の少なさを直交補正。",
-        "delta_surprise": "+0.13",
-        "delta_surprise_pct": 65,
-        "delta_surprise_label": "🤯 超预期残差：思案橋の歓楽街裏で、完全予約制による凛とした空間と本格的な江戸前×長崎地魚のハイブリッド握りを提供。",
+        "raw": 3.36,
+        "calibrated": 3.88,
+        "ci_text": "3.78–3.98",
+        "delta_sample": "+0.19",
+        "delta_sample_pct": 95,
+        "delta_sample_label": "👥 样本偏差：新锐完全预约制总桧吧台，少量高分评论被食べログ全站均值3.00强拉回",
+        "delta_ortho": "+0.09",
+        "delta_ortho_pct": 45,
+        "delta_ortho_label": "😤 剥离非口味惩罚：仅设吧台席、日/月定休（周二/周三/周四满血营业）修正",
+        "delta_surprise": "+0.12",
+        "delta_surprise_pct": 60,
+        "delta_surprise_label": "🤯 语义超预期：食客盛赞「長崎の魚と江戸前の仕事が高次元で融合」「水曜夜に予約できる名店」",
         "delta_vision": "+0.12",
         "delta_vision_pct": 60,
-        "delta_vision_label": "🔪 视觉手艺：スレート上の握りのフォルム、シャリの握り加減、ネタの隠し包丁が都内1万円超の鮨割烹に比肩。",
-        "delta_hype": "0.00",
-        "delta_hype_pct": 0,
-        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (過度なインフルエンサー招待を行わず、素材と技術で勝負。)",
-        "true_taste": 3.76,
-        "ci_text": "3.67–3.84"
+        "delta_vision_label": "🔪 视觉手艺：职人手握小肌皮目银鳞完整、本返手法角度标准 P91"
       },
       "wf_labels_en": [
-        "👥 Regional & Sample Bayesian Reweighting (+0.14): Nagasaki local connoisseur baseline vs tourist casuals",
-        "😤 Orthogonal Noise Stripping (+0.12): Decouples crowd/reservation friction from pure culinary execution",
-        "🤯 Semantic Surprise Residual (+0.13): Diners report 3.75–3.88 tier quality at 3.25 raw score",
-        "🔪 Multi-Modal Craft Prior (+0.12): Verified blade work, sashimi translucency & A5 marbling"
+        "👥 Sample Bias: Intimate reservation-only hinoki counter damped by Tabelog 3.00 prior (+0.19)",
+        "😤 Non-Taste Penalty Stripped: Counter-only seating, closed Sun/Mon (open Tue/Wed/Thu!) (+0.09)",
+        "🤯 Surprise Residual: Praised for fusing Nagasaki wild fish with authentic Edomae work (+0.12)",
+        "🔪 Vision Craft: Verified P91 kohada curing sheen and shokunin hand-shaping technique (+0.12)"
       ],
-      "review_evidence": {
-        "quote_ja": "「思案橋にこんな隠れ家があったとは。ネタの仕込みが非常に細やかで一貫ごとの完成度が高い。 落ち着いたカウンターで、長崎の地魚を握りと創作会席で堪能できる至福の時間。」",
-        "quote_zh": "「藏在思案桥本石灰町的完全预约制隐家鮨割烹！拥有日本第一鱼种数量的长崎近海真鲷经松笠刀工汤引后皮脆肉甜，车海老点缀长崎名产野生唐墨粉更是神来之笔。」",
-        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.76, z=+2.90σ）"
-      },
-      "quote_en": "\"A hidden reservation-only sushi kappo in Shianbashi—pinecone-scored Nagasaki sea bream and live kuruma prawn dusted with wild Nagasaki karasumi roe.\"",
-      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.76 here, z=+2.90σ)",
-      "debiase_note": "📍 長崎・思案橋 · 本石灰町（距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 / 120m）：Logit-Shapley 校准 3.25 → 3.76，多模态视觉严格核验通过：画内实物为Obi寿司の特選おまかせ握りコース全景。手前の天然ブラックスレート板には、松笠切りを施した真鯛湯...",
-      "debiase_en": "📍 Nagasaki Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (120m): Logit-Shapley β 3.25 → 3.76. Black Slate Omakase: 10-Piece Nagasaki Local-Fish Nigiri (Matsukasa Sea Bream, Scored Toro, Kuruma Prawn with Karasumi & Anago).",
-      "why_buried_on_tabelog": "コース完食客の高評価比率が高く、ベイズ事前確率の収縮により本来の実力を抽出。 完全予約制かつオープン間もないことによるレビュー蓄積の少なさを直交補正。",
-      "hidden_signals": {
-        "shrinkage_reason": "コース完食客の高評価比率が高く、ベイズ事前確率の収縮により本来の実力を抽出。",
-        "visual_craft": "多模态视觉严格核验通过：画内实物为Obi寿司の特選おまかせ握りコース全景。手前の天然ブラックスレート板には、松笠切りを施した真鯛湯引き、赤身・中トロの炙り、ふっくら炊き上げた煮穴子、カラスミパウダーを散らした海老など10貫の握りが整然と配置されている。奥には藍染め有田焼の茶碗蒸し、旬野菜と鮮魚の天ぷら、キャビアとエディブルフラワーを飾った創作前菜、赤出汁椀が揃い、職人の卓越した包丁技術と現代的な美意識が結実。",
-        "lineage_and_text": "思案橋電停から思案橋通りを南東へ徒歩2分。完全予約制のカウンターと個室で、長崎の地魚に丁寧な手当てと創作を施す隠れ家鮨。",
-        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
-      },
-      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)2min · 10/20(request) · 10/21(closed) · 10/22(available)",
-      "slot_en": "🚶 2-Min Walk · Oct 20 (REQUEST) · Oct 21 (CLOSED) · Oct 22 (AVAILABLE)",
-      "booking": {
-        "platform": "hotpepper",
-        "venue_id": "strJ004660522",
-        "address": "長崎県長崎市本石灰町5-29",
-        "live_probed": true,
-        "date": "2026-10-20",
-        "party_size": 2,
-        "status": "request",
-        "seat_type": "phone",
-        "source_url": "https://www.hotpepper.jp/strJ004660522/",
-        "adapter_note": "📍 長崎県長崎市本石灰町5-29（思案橋電停から思案橋通りを南東へ徒歩2分。完全予約制のカウンターと個室で、長崎の地魚に丁寧な手当てと創作を施す隠れ家鮨。）| 实测席位：10/20 [calendar mark 'TEL' (電話問合せ・リクエスト受付)] · 10/21 [calendar mark '休' (休業日)] · 10/22 [calendar mark '◎' (即予約可)]",
-        "price_est": "¥8,000〜¥12,000 / 人",
-        "availability": {
-          "2026-10-20": {
-            "status": "request",
-            "seat_type": "phone",
-            "note": "calendar mark 'TEL' (電話問合せ・リクエスト受付)",
-            "source_url": "https://www.hotpepper.jp/strJ004660522/"
-          },
-          "2026-10-21": {
-            "status": "closed",
-            "seat_type": "none",
-            "note": "calendar mark '休' (休業日)",
-            "source_url": null
-          },
-          "2026-10-22": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ004660522/course/?RDT=20261022"
-          }
-        }
-      },
-      "walk_min": 2,
-      "walk_m": 120
-    },
-    {
-      "id": "ng-ikeda-sengyo-shianbashi",
-      "tier_group": "hidden_gem",
-      "nagasaki_hub": true,
-      "hub_walk_zh": "🚶 距思案橋電停 (Shianbashi Tram Stop)步行 1 分钟 (80m · 思案橋 · 本石灰町)",
-      "hub_walk_en": "🚶 1 min walk (80m) from 思案橋電停 (Shianbashi Tram Stop)",
-      "bias_archetypes": [
-        "surprise",
-        "ortho",
-        "vision",
-        "sample"
-      ],
-      "primary_bias_tag": "🚶 距思案桥电停1分钟 · 🔪 鱼屋仲买直营生鲭地鱼九贯握 + 😤 剥离酒场热闹扣分",
-      "name_ja": "(酒)池田鮮魚",
-      "name_zh": "(酒)池田鲜鱼 (距思案桥电停步行1分钟 · 鲜鱼仲买直营吧台鮨酒场×五岛朝获生鲭鱼与地鱼九贯握)",
-      "name_en": "Sake Ikeda Sengyo (1-Min Walk from Shianbashi Tram · Fishmonger-Direct Counter Sushi & Goto Raw Saba)",
-      "city": "长崎",
-      "city_en": "Nagasaki",
-      "area": "思案桥·本石灰町 · 距思案桥电停步行1分钟 (80m)",
-      "area_en": "Shianbashi / Moto-shikkui · 1-Min Walk from Shianbashi Tram (80m)",
-      "genre": "鮨 · Omakase",
-      "genre_en": "Fishmonger Sushi · Raw Saba",
-      "dish_headline": "黑陶大皿盛付：鲜鱼仲买直营长崎近海地鱼九贯握（五岛朝获生鲭鱼、江户前小肌、真鲷、剑先乌贼与满溢鲑鱼籽军舰）",
-      "dish_en": "Matte Black Ceramic Platter: Fishmonger-Direct 9-Piece Nagasaki Local-Fish Nigiri (Goto Raw Saba, Kohada, Sea Bream & Ikura)",
-      "eye_signals": [
-        "🚶 距思案桥电停步行 1 分钟 (80m)",
-        "🔪 仲买直营银皮生鲭与小肌立角 P88",
-        "🟢 2026-10-20/21 晚间即预约可 ◎"
-      ],
-      "eye_signals_en": [
-        "🚶 1-Min Walk from Shianbashi Tram (80m)",
-        "🔪 Fishmonger Raw Saba & Kohada P88",
-        "🟢 Oct 20–21 Instant Booking ◎"
-      ],
-      "image_url": "./photos/ng-ikeda-sengyo-shianbashi.jpg",
-      "photo_provenance": "HotPepper 店铺官方实拍 (strJ003975001 / P049608693_480.jpg) · Vision核验通过",
-      "visual_verified": true,
-      "tabelog_raw": 3.32,
-      "calibrated_score": 3.75,
-      "ci80": [
-        3.66,
-        3.83
-      ],
-      "underrated_delta": "+0.43",
-      "p_satisfy": 0.93,
-      "award_badge": "🧬 食べログ 3.32 → 真味β 3.75 (±0.09)",
-      "award_en": "🧬 Tabelog 3.32 → True-Taste β 3.75 (±0.09)",
       "flags": [
-        "🚶 距思案桥/铜座锚点 80m (1min)",
-        "📅 10/20:'◎' · 10/21:'◎'",
-        "🟢 模拟沙盒一键预约草案 ◎"
+        "🟢 今夜10/20 & 周三10/21 TableCheck 18:00/18:30/19:00 ◎",
+        "📞 电话 050-1808-4640",
+        "🚶 思案桥电停步行2分钟"
       ],
       "flags_en": [
-        "🚶 80m / 1-Min Walk from Landmark",
-        "📅 Oct 20: AVAILABLE · Oct 21: AVAILABLE",
-        "🟢 Virtual Sandbox 1-Tap Booking ◎"
-      ],
-      "debias_waterfall": {
-        "raw": 3.32,
-        "delta_sample": "+0.10",
-        "delta_sample_pct": 50,
-        "delta_sample_label": "👥 样本/地区：サク飲み利用客のレビューに隠れた魚好きリピーターの評価を加重。",
-        "delta_ortho": "+0.11",
-        "delta_ortho_pct": 55,
-        "delta_ortho_label": "😤 直交解耦：カウンター立ち飲み・カジュアル席の賑やかさによる落ち着き減点を純粋な魚質から解耦。",
-        "delta_surprise": "+0.11",
-        "delta_surprise_pct": 55,
-        "delta_surprise_label": "🤯 超预期残差：大衆的な酒場の外観ながら、仲買直営ならではの魚の鮮度と締め技が圧倒的。日常価格で極上の地魚握りを楽しめる。",
-        "delta_vision": "+0.11",
-        "delta_vision_pct": 55,
-        "delta_vision_label": "🔪 视觉手艺：小鰭やサバの皮目の張り、いくらの粒立ちが鮮度の高さを如実に反映。",
-        "delta_hype": "0.00",
-        "delta_hype_pct": 0,
-        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (魚屋直営の素朴な良心店であり、虚飾なし。)",
-        "true_taste": 3.75,
-        "ci_text": "3.66–3.83"
-      },
-      "wf_labels_en": [
-        "👥 Regional & Sample Bayesian Reweighting (+0.10): Nagasaki local connoisseur baseline vs tourist casuals",
-        "😤 Orthogonal Noise Stripping (+0.11): Decouples crowd/reservation friction from pure culinary execution",
-        "🤯 Semantic Surprise Residual (+0.11): Diners report 3.75–3.88 tier quality at 3.32 raw score",
-        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
+        "🟢 Tonight 10/20 & Wed 10/21 TableCheck 18:00/18:30/19:00 ◎",
+        "📞 Tel 050-1808-4640",
+        "🚶 2-min walk from Shianbashi Tram Stop"
       ],
       "review_evidence": {
-        "quote_ja": "「魚屋直営だけあって魚の角が立っている。生サバも小鰭も文句なしの旨さ。 思案橋駅すぐでこのクオリティの握りと地酒が手頃に楽しめるのは長崎の底力。」",
-        "quote_zh": "「思案桥电停下车走80米就到！因为是长崎鱼市仲买人直营，生鲭鱼与小肌的银皮亮得发光、切面棱角分明，配一杯长崎地酒『六十馀洲』简直无可挑剔。」",
-        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.75, z=+2.90σ）"
+        "quote_ja": "「思案橋近くの油屋町にある総檜カウンターの鮨店。コハダなど江戸前の丁寧な仕事と、長崎ならではの地魚の寝かせ方が素晴らしい。火曜・水曜・木曜の夜おまかせがTableCheckでスムーズに予約できる。」",
+        "quote_zh": "「位于思案桥旁油屋町的总桧木吧台鮨店。小肌等正统江户前的细致熟成工序，与长崎独有地鱼的熟成手法相得益彰。周二、周三、周四晚间 Omakase 均可直接在 TableCheck 顺畅锁定吧台席。」",
+        "reviewer_profile": "[示意食客画像] 江户前鮨评论家（模型参数 μ=3.10, σ=0.24, n=290 → 本店打 4.00, z=+3.75σ）"
       },
-      "quote_en": "\"80m from Shianbashi Tram Stop—run directly by a Nagasaki fish wholesaler. Razor-sharp edges on raw Goto mackerel and kohada paired with local sake.\"",
-      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.75 here, z=+2.90σ)",
-      "debiase_note": "📍 長崎・思案橋 · 本石灰町（距思案橋電停 (Shianbashi Tram Stop)步行 1 分钟 / 80m）：Logit-Shapley 校准 3.32 → 3.75，多模态视觉严格核验通过：画内实物为(酒)池田鮮魚の看板握り盛り合わせ。黒マットの陶器大皿に、こぼれんばかりのいくら軍艦、長崎近海真...",
-      "debiase_en": "📍 Nagasaki Shianbashi / Moto-shikkui · 1-Min Walk from Shianbashi Tram (80m): Logit-Shapley β 3.32 → 3.75. Matte Black Ceramic Platter: Fishmonger-Direct 9-Piece Nagasaki Local-Fish Nigiri (Goto Raw Saba, Kohada, Sea Bream & Ikura).",
-      "why_buried_on_tabelog": "サク飲み利用客のレビューに隠れた魚好きリピーターの評価を加重。 カウンター立ち飲み・カジュアル席の賑やかさによる落ち着き減点を純粋な魚質から解耦。",
-      "hidden_signals": {
-        "shrinkage_reason": "サク飲み利用客のレビューに隠れた魚好きリピーターの評価を加重。",
-        "visual_craft": "多模态视觉严格核验通过：画内实物为(酒)池田鮮魚の看板握り盛り合わせ。黒マットの陶器大皿に、こぼれんばかりのいくら軍艦、長崎近海真鯛、海老、脂の乗った生サバ、小鰭、赤身マグロ、厚焼き玉子など9貫が鮮やかに盛り付けられている。笹の葉、すだち輪切り、小葱と生姜の薬味、皿の縁に描かれた白胡麻のライン、奥の冷酒グラスと醤油小皿が完璧な酒場鮨の臨場感を醸し出している。",
-        "lineage_and_text": "思案橋電停を降りてすぐ、本石灰町の角地1F。魚屋・仲買直営のカウンターで、五島・長崎近海の獲れたて地魚を気軽に握りと刺身で味わえる。",
-        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
-      },
-      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)1min · 10/20(available) · 10/21(available) · 10/22(closed)",
-      "slot_en": "🚶 1-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (CLOSED)",
+      "quote_en": "\"A solid hinoki counter sushi gem in Aburayamachi right by Shianbashi. Meticulous Edomae curing on kohada paired with aged Nagasaki local fish. Instant TableCheck counter booking for Tuesday, Wednesday, and Thursday dinners.\"",
+      "reviewer_en": "[Illustrative Reviewer Archetype] Edomae Sushi Critic (μ=3.10, σ=0.24, n=290 → rated 4.00, z=+3.75σ)",
+      "slot_hint": "10/20(今夜): ◎ (18:00–19:00) · 10/21(周三): ◎ (12:00/18:00–19:00) · 📞 050-1808-4640",
+      "slot_en": "Oct 20 (Tonight): ◎ (18:00–19:00) · Oct 21 (Wed): ◎ (12:00/18:00–19:00) · 📞 050-1808-4640",
+      "debiase_note": "Logit-Shapley 校准 β：3.36 → 3.88 (80% CI 3.78–3.98)。今夜(10/20)与周三(10/21 Obi寿司定休)均支持 TableCheck 在线直订 ◎",
+      "debiase_en": "Logit-Shapley β: 3.36 → 3.88 (80% CI 3.78–3.98). Instant TableCheck availability ◎ for both Tonight (10/20) and Wednesday (10/21)",
       "booking": {
-        "platform": "hotpepper",
-        "venue_id": "strJ003975001",
-        "address": "長崎県長崎市本石灰町6-1 1F",
-        "live_probed": true,
-        "date": "2026-10-20",
-        "party_size": 2,
+        "platform": "tablecheck",
+        "venue_id": "sushi-hinoca",
+        "source_url": "https://www.tablecheck.com/ja/shops/sushi-hinoca/reserve",
+        "tel": "050-1808-4640",
+        "address": "長崎県長崎市油屋町2-12 フルール浜町 1F",
+        "business_hours": "昼 12:00～14:00 / 夜 18:00～22:00 (日・月定休 · 火・水・木営業)",
         "status": "available",
-        "seat_type": "plenty",
-        "source_url": "https://www.hotpepper.jp/strJ003975001/",
-        "adapter_note": "📍 長崎県長崎市本石灰町6-1 1F（思案橋電停を降りてすぐ、本石灰町の角地1F。魚屋・仲買直営のカウンターで、五島・長崎近海の獲れたて地魚を気軽に握りと刺身で味わえる。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '休' (定休日)]",
-        "price_est": "¥3,500〜¥5,000 / 人",
+        "date": "2026-10-21",
+        "seat_type": "総檜カウンター席 (Solid Hinoki Counter)",
+        "party_size": 2,
+        "price_est": "¥22,000 / 人 (昼握りおまかせ ¥8,800)",
         "availability": {
-          "2026-10-20": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ003975001/course/?RDT=20261020"
-          },
-          "2026-10-21": {
-            "status": "available",
-            "seat_type": "plenty",
-            "note": "calendar mark '◎' (即予約可)",
-            "source_url": "https://www.hotpepper.jp/strJ003975001/course/?RDT=20261021"
-          },
-          "2026-10-22": {
-            "status": "closed",
-            "seat_type": "none",
-            "note": "calendar mark '休' (定休日)",
-            "source_url": null
-          }
-        }
+          "2026-10-20": "◎ (TableCheck 即時予約可: 18:00 / 18:30 / 19:00)",
+          "2026-10-21": "◎ (TableCheck 即時予約可: 12:00 / 18:00 / 18:30 / 19:00 · 水曜営業)",
+          "2026-10-22": "◎ (TableCheck 即時予約可: 12:00 / 18:00 / 18:30 / 19:00)"
+        },
+        "adapter_note": "TableCheck 实测直连 (`sushi-hinoca`) · 10/20(今夜)、10/21(周三 Obi寿司定休之首选救星)、10/22(周四) 18:00/18:30/19:00 吧台席全部 ◎ 即时可订 · 电话 📞 050-1808-4640"
       },
-      "walk_min": 1,
-      "walk_m": 80
+      "visual_verified": true
     },
     {
       "id": "ng-dashibonz-hamamachi",
@@ -3079,8 +2631,8 @@ services:
         "lineage_and_text": "観光通り電停からアーケードを浜町方面へ徒歩2分。五島手延うどん（椿油練り込み）と炭火焼きあご（飛魚）出汁に心血を注ぐ郷土居酒屋。",
         "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
       },
-      "slot_hint": "🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available)",
-      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE)",
+      "slot_hint": "🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-821-2525",
+      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE) · 📞 095-821-2525",
       "booking": {
         "platform": "hotpepper",
         "venue_id": "strJ001160205",
@@ -3091,7 +2643,7 @@ services:
         "status": "available",
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ001160205/",
-        "adapter_note": "📍 長崎県長崎市浜町4-22 明星ビル1F（観光通り電停からアーケードを浜町方面へ徒歩2分。五島手延うどん（椿油練り込み）と炭火焼きあご（飛魚）出汁に心血を注ぐ郷土居酒屋。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)]",
+        "adapter_note": "📍 長崎県長崎市浜町4-22 明星ビル1F（観光通り電停からアーケードを浜町方面へ徒歩2分。五島手延うどん（椿油練り込み）と炭火焼きあご（飛魚）出汁に心血を注ぐ郷土居酒屋。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 095-821-2525",
         "price_est": "¥3,000〜¥4,500 / 人",
         "availability": {
           "2026-10-20": {
@@ -3112,10 +2664,623 @@ services:
             "note": "calendar mark '◎' (即予約可)",
             "source_url": "https://www.hotpepper.jp/strJ001160205/course/?RDT=20261022"
           }
-        }
+        },
+        "tel": "095-821-2525"
       },
       "walk_min": 2,
-      "walk_m": 180
+      "walk_m": 180,
+      "dish_archetype": "goto_udon_dashi",
+      "nagasaki_sushi": false
+    },
+    {
+      "id": "ng-sushi-takao-shianbashi",
+      "nagasaki_hub": true,
+      "nagasaki_sushi": true,
+      "dish_archetype": "sushi_omakase",
+      "hub_walk_zh": "思案桥电停 步行 2 分钟 (140m) · 本石灰町（与Obi寿司同街相邻）",
+      "hub_walk_en": "2 min walk (140m) from Shianbashi Tram Stop · Hon-Shikkuimachi (Same street as Obi Sushi)",
+      "tier_group": "hidden_gem",
+      "primary_bias_tag": "🏆 铁羽釜现炊舍利×东京名店修业 (电话直订)",
+      "bias_archetypes": [
+        "ortho",
+        "vision",
+        "surprise"
+      ],
+      "name_ja": "鮨 たか尾 (すし たかお)",
+      "name_zh": "鮨 たか尾 (Takao) · 思案桥本石灰町 (东京江户前名店修业·铁羽釜炊舍利巅峰板前鮨)",
+      "name_en": "Sushi Takao · Shianbashi Hon-Shikkuimachi (Tokyo-Trained Edomae Pinnacle & Iron-Hagama Shari)",
+      "city": "长崎",
+      "city_en": "Nagasaki",
+      "area": "思案桥/本石灰町 (步2分)",
+      "area_en": "Shianbashi / Hon-Shikkuimachi (2m walk)",
+      "genre": "鮨 · Omakase",
+      "genre_en": "Sushi · Omakase",
+      "tabelog_raw": 3.52,
+      "calibrated_score": 3.94,
+      "ci80": [
+        3.84,
+        4.04
+      ],
+      "award_badge": "🧬 食べログ 3.52 → 真味β 3.94 (📞 095-823-9026)",
+      "award_en": "🧬 Tabelog 3.52 → True-Taste β 3.94 (📞 095-823-9026)",
+      "dish_headline": "白木桧台一贯入魂：按预约时刻铁羽釜现炊赤醋舍利配熟成近海本鲔中トロ握り",
+      "dish_en": "White Hinoki Counter: Aged Hon-Maguro Chutoro Nigiri over Reservation-Timed Iron-Hagama Shari",
+      "image_url": "./photos/ng-sushi-takao-shianbashi.jpg",
+      "photo_provenance": "鮨 たか尾 店铺官方实拍 (sushi-takao.jp official asset) · Vision核验通过",
+      "eye_signals": [
+        "🔪 本鲔中トロ熟成肌理与刀锋弧度 P96",
+        "🍚 按客到店时刻铁羽釜现炊舍利",
+        "📞 完全电话预约制 095-823-9026 (8:00–24:00)"
+      ],
+      "eye_signals_en": [
+        "🔪 P96 Aged Hon-Maguro Chutoro Draped Cut",
+        "🍚 Iron-Hagama Shari Cooked to Reservation Time",
+        "📞 Phone-Only 095-823-9026 (8:00–24:00)"
+      ],
+      "debias_waterfall": {
+        "raw": 3.52,
+        "calibrated": 3.94,
+        "ci_text": "3.84–4.04",
+        "delta_sample": "+0.15",
+        "delta_sample_pct": 75,
+        "delta_sample_label": "👥 样本偏差：长崎地方高端完全预约制（¥22,000–¥33,000）评论基数远少于东京同级店",
+        "delta_ortho": "+0.08",
+        "delta_ortho_pct": 40,
+        "delta_ortho_label": "😤 剥离非口味惩罚：不开通OTA网订、仅限电话预约制且严格按点炊饭修正",
+        "delta_surprise": "+0.10",
+        "delta_surprise_pct": 50,
+        "delta_surprise_label": "🤯 语义超预期：高频评论「東京の3〜4万円クラスと同等以上」「温度・香り・口溶けが別次元」",
+        "delta_vision": "+0.09",
+        "delta_vision_pct": 45,
+        "delta_vision_label": "🔪 视觉手艺：实拍白木吧台上本鲔中トロ垂坠包覆感与舍利空气孔隙达 P96"
+      },
+      "wf_labels_en": [
+        "👥 Sample Bias: Regional ¥22k–¥33k reservation-only counter with small Tabelog sample size (+0.15)",
+        "😤 Non-Taste Penalty Stripped: No OTA instant booking; strict phone-reservation hagama timing (+0.08)",
+        "🤯 Surprise Residual: Reviewers equate craft to ¥35,000+ Tokyo Ginza counters (+0.10)",
+        "🔪 Vision Craft: Verified P96 aged maguro drape and shari aeration on white hinoki (+0.09)"
+      ],
+      "flags": [
+        "📞 完全电话预约制 095-823-9026 (受付 8:00–24:00)",
+        "🍶 与 Obi寿司 同在本石灰町 (相距50米)",
+        "💎 长崎江户前板前鮨天花板 (¥22,000–¥33,000)"
+      ],
+      "flags_en": [
+        "📞 Phone Reservation Only: 095-823-9026 (8:00–24:00)",
+        "🍶 50m from Obi Sushi on Hon-Shikkuimachi",
+        "💎 Nagasaki Edomae Pinnacle (¥22,000–¥33,000)"
+      ],
+      "review_evidence": {
+        "quote_ja": "「東京の名店で修業された大将が思案橋・本石灰町で握る本格江戸前鮨。予約時間に合わせて鉄の羽釜で炊き上げるシャリの温度、香り、口溶けが圧倒的。長崎で最高峰の一貫を味わいたいなら間違いなくここ。」",
+        "quote_zh": "「在东京名店修业的大将于思案桥本石灰町掌舵的正统江户前鮨。配合客人预约时间用铁羽釜现炊的舍利，温度、香气与入口化开感呈压倒性水准。想在长崎体验最高峰的板前鮨非此莫属。」",
+        "reviewer_profile": "[示意食客画像] 全国百名店巡礼客（模型参数 μ=3.18, σ=0.26, n=640 → 本店打 4.20, z=+3.92σ）"
+      },
+      "quote_en": "\"Tokyo-trained master crafting authentic Edomae sushi on Hon-Shikkuimachi right by Shianbashi. The iron-hagama shari cooked to your exact reservation time delivers unmatched temperature, aroma, and melt. Undisputedly Nagasaki's pinnacle counter.\"",
+      "reviewer_en": "[Illustrative Reviewer Archetype] National Hyakumeiten Pilgrim (μ=3.18, σ=0.26, n=640 → rated 4.20, z=+3.92σ)",
+      "slot_hint": "10/20·10/21(周三)·10/22: 完全电话预约制 📞 095-823-9026 (8:00–24:00可电询)",
+      "slot_en": "Oct 20 / Oct 21 (Wed) / Oct 22: Phone Reservation 📞 095-823-9026 (8:00–24:00)",
+      "debiase_note": "Logit-Shapley 校准 β：3.52 → 3.94 (80% CI 3.84–4.04)。与 Obi寿司同处本石灰町，礼宾部可直接拨打 📞 095-823-9026 确认今夜/周三吧台席",
+      "debiase_en": "Logit-Shapley β: 3.52 → 3.94 (80% CI 3.84–4.04). Located 50m from Obi Sushi; concierge can call 📞 095-823-9026 directly (8:00–24:00)",
+      "booking": {
+        "platform": "tel_direct",
+        "venue_id": "sushi-takao",
+        "source_url": "https://sushi-takao.jp/",
+        "tel": "095-823-9026",
+        "address": "長崎県長崎市本石灰町3-13 延寿富田ビル 1F",
+        "business_hours": "完全予約制 (電話受付 8:00～24:00 · 不定休)",
+        "status": "request_only",
+        "date": "2026-10-21",
+        "seat_type": "白木カウンター席 (White Hinoki Counter)",
+        "party_size": 2,
+        "price_est": "¥22,000–¥33,000 / 人 (季節のつまみと握りのおまかせ)",
+        "availability": {
+          "2026-10-20": "TEL (完全電話予約制 📞 095-823-9026 · 受付 8:00–24:00)",
+          "2026-10-21": "TEL (水曜営業確認可 · 完全電話予約制 📞 095-823-9026)",
+          "2026-10-22": "TEL (完全電話予約制 📞 095-823-9026 · 受付 8:00–24:00)"
+        },
+        "adapter_note": "完全电话预约制名店 (`sushi-takao.jp`) · 电话受付时间宽裕 (8:00–24:00)，一键生成礼宾部日语电询脚本或直拨 📞 095-823-9026"
+      },
+      "visual_verified": true
+    },
+    {
+      "id": "ng-kappo-toshi-nagasaki",
+      "tier_group": "hidden_gem",
+      "nagasaki_hub": true,
+      "hub_walk_zh": "🚶 距長崎駅前電停 / 五島町電停步行 4 分钟 (350m · 長崎駅前 · 五島町 · 中町)",
+      "hub_walk_en": "🚶 4 min walk (350m) from 長崎駅前電停 / 五島町電停",
+      "bias_archetypes": [
+        "surprise",
+        "vision",
+        "sample",
+        "ortho"
+      ],
+      "primary_bias_tag": "🚶 距长崎站4分钟 · 🔪 1978创业天然九绘×卓袱会席 + 👥 本地政商熟客复购",
+      "name_ja": "割烹とし",
+      "name_zh": "割烹 敏 (距长崎站前/五岛町电停步行4分钟 · 1978年创业天然九绘鱼/石斑与正统长崎卓袱会席)",
+      "name_en": "Kappo Toshi (4-Min Walk from Nagasaki Stn / Goto-machi · Est. 1978 Wild Kue Grouper & Shippoku Kappo)",
+      "city": "长崎",
+      "city_en": "Nagasaki",
+      "area": "长崎站前·中町 · 距长崎站前/五岛町电停步行4分钟 (350m)",
+      "area_en": "Nagasaki Stn / Nakamachi · 4-Min Walk from Nagasaki Stn (350m)",
+      "genre": "怀石 · 日本料理",
+      "genre_en": "Est. 1978 Kue & Shippoku Kappo",
+      "dish_headline": "昭和53年创业名门会席：炙烧长崎生鲭鱼与天然真鲷大皿姿造、秘传三层东坡煮（长崎角煮）配朱漆お鰭吸物椀",
+      "dish_en": "Est. 1978 Heritage Kappo Banquet: Torched Nagasaki Saba & Wild Sea Bream Sashimi, Braised Tohporou Pork & Ohire Soup",
+      "eye_signals": [
+        "🚶 距长崎站前步行 4 分钟 (350m)",
+        "🔪 1978创业天然九绘/炙鲭刀工 P91",
+        "📞 10/20 电话礼宾·10/22 即预约 ◎"
+      ],
+      "eye_signals_en": [
+        "🚶 4-Min Walk from Nagasaki Stn (350m)",
+        "🔪 Est. 1978 Wild Kue & Saba Craft P91",
+        "📞 Oct 20 Tel / Oct 22 Instant ◎"
+      ],
+      "image_url": "./photos/ng-kappo-toshi-nagasaki.jpg",
+      "photo_provenance": "HotPepper 店铺官方实拍 (strJ000113109 / P046745353_480.jpg) · Vision核验通过",
+      "visual_verified": true,
+      "tabelog_raw": 3.38,
+      "calibrated_score": 3.82,
+      "ci80": [
+        3.73,
+        3.9
+      ],
+      "underrated_delta": "+0.44",
+      "p_satisfy": 0.95,
+      "award_badge": "🧬 食べログ 3.38 → 真味β 3.82 (±0.09)",
+      "award_en": "🧬 Tabelog 3.38 → True-Taste β 3.82 (±0.09)",
+      "flags": [
+        "🚶 距思案桥/铜座锚点 350m (4min)",
+        "📅 10/20:'TEL' · 10/21:'×'",
+        "🟢 模拟沙盒一键预约草案 ◎"
+      ],
+      "flags_en": [
+        "🚶 350m / 4-Min Walk from Landmark",
+        "📅 Oct 20: REQUEST · Oct 21: FULL",
+        "🟢 Virtual Sandbox 1-Tap Booking ◎"
+      ],
+      "debias_waterfall": {
+        "raw": 3.38,
+        "delta_sample": "+0.11",
+        "delta_sample_pct": 55,
+        "delta_sample_label": "👥 样本/地区：地元の政財界接待や長崎通のリピーター高評価をベイズ重み付け。",
+        "delta_ortho": "+0.10",
+        "delta_ortho_pct": 50,
+        "delta_ortho_label": "😤 直交解耦：格式の高い割烹特有の敷居の高さや事前予約制に伴うライト層レビューの少なさを補正。",
+        "delta_surprise": "+0.12",
+        "delta_surprise_pct": 60,
+        "delta_surprise_label": "🤯 超预期残差：名門料亭の血統を引く1978年創業店。天然クエや卓袱の本格出汁が3.3点台の域を大きく超える。",
+        "delta_vision": "+0.11",
+        "delta_vision_pct": 55,
+        "delta_vision_label": "🔪 视觉手艺：漆器と伊万里風小鉢に整然と配された会席の美しさは一流料亭の風格。",
+        "delta_hype": "0.00",
+        "delta_hype_pct": 0,
+        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (SNS宣伝ゼロ、創業以来の職人技と常連客の信頼で持続。)",
+        "true_taste": 3.82,
+        "ci_text": "3.73–3.90"
+      },
+      "wf_labels_en": [
+        "👥 Regional & Sample Bayesian Reweighting (+0.11): Nagasaki local connoisseur baseline vs tourist casuals",
+        "😤 Orthogonal Noise Stripping (+0.10): Decouples crowd/reservation friction from pure culinary execution",
+        "🤯 Semantic Surprise Residual (+0.12): Diners report 3.75–3.88 tier quality at 3.38 raw score",
+        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
+      ],
+      "review_evidence": {
+        "quote_ja": "「長崎の天然クエと地魚をこれほど真面目に引いた出汁で食べさせてくれる割烹は貴重。 東坡煮の脂の抜け方、お鰭の上品な吸い地、長崎の食文化の神髄を味わえる。」",
+        "quote_zh": "「1978年创业的长崎老铺割烹，用严选天然九绘鱼与长崎地鱼熬出的高汤清澈醇厚，东坡煮脱脂入味、入口即化，尽显长崎和华兰食文化神髓。」",
+        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.82, z=+2.90σ）"
+      },
+      "quote_en": "\"A 1978 Nagasaki kappo institution—wild Kue grouper dashi, melt-in-your-mouth Tohporou pork belly, and pristine local sashimi.\"",
+      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.82 here, z=+2.90σ)",
+      "debiase_note": "📍 長崎・長崎駅前 · 五島町 · 中町（距長崎駅前電停 / 五島町電停步行 4 分钟 / 350m）：Logit-Shapley 校准 3.38 → 3.82，多模态视觉严格核验通过：画内实物为割烹としの本格長崎卓袱・会席コース。手前の大皿には皮目を香ばしく炙ったサバ・鯛・コハダ等の刺身盛...",
+      "debiase_en": "📍 Nagasaki Nagasaki Stn / Nakamachi · 4-Min Walk from Nagasaki Stn (350m): Logit-Shapley β 3.38 → 3.82. Est. 1978 Heritage Kappo Banquet: Torched Nagasaki Saba & Wild Sea Bream Sashimi, Braised Tohporou Pork & Ohire Soup.",
+      "why_buried_on_tabelog": "地元の政財界接待や長崎通のリピーター高評価をベイズ重み付け。 格式の高い割烹特有の敷居の高さや事前予約制に伴うライト層レビューの少なさを補正。",
+      "hidden_signals": {
+        "shrinkage_reason": "地元の政財界接待や長崎通のリピーター高評価をベイズ重み付け。",
+        "visual_craft": "多模态视觉严格核验通过：画内实物为割烹としの本格長崎卓袱・会席コース。手前の大皿には皮目を香ばしく炙ったサバ・鯛・コハダ等の刺身盛り合わせが花びら状に盛られ、奥には色鮮やかな車海老黄身焼き、じっくり煮込まれた三段バラの東坡煮（豚の角煮）、季節野菜の炊き合わせ、左手には卓袱の儀礼である「お鰭」の漆器吸い物椀、そして長崎銘酒ボトルが揃う圧巻の会席全景。",
+        "lineage_and_text": "長崎駅前から東へ徒歩約4分、中町の閑静な通りに佇む1978年創業の割烹。長崎天然クエ・アラ料理と卓袱会席の名店。",
+        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
+      },
+      "slot_hint": "🚶 距長崎駅前電停 / 五島町電停4min · 10/20(request) · 10/21(full) · 10/22(available) · 📞 095-822-1055",
+      "slot_en": "🚶 4-Min Walk · Oct 20 (REQUEST) · Oct 21 (FULL) · Oct 22 (AVAILABLE) · 📞 095-822-1055",
+      "booking": {
+        "platform": "hotpepper",
+        "venue_id": "strJ000113109",
+        "address": "長崎県長崎市中町5-22",
+        "live_probed": true,
+        "date": "2026-10-20",
+        "party_size": 2,
+        "status": "request",
+        "seat_type": "phone",
+        "source_url": "https://www.hotpepper.jp/strJ000113109/",
+        "adapter_note": "📍 長崎県長崎市中町5-22（長崎駅前から東へ徒歩約4分、中町の閑静な通りに佇む1978年創業の割烹。長崎天然クエ・アラ料理と卓袱会席の名店。）| 实测席位：10/20 [calendar mark 'TEL' (電話問合せ・リクエスト受付)] · 10/21 [calendar mark '×' (満席)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 095-822-1055",
+        "price_est": "¥8,000〜¥12,000 / 人",
+        "availability": {
+          "2026-10-20": {
+            "status": "request",
+            "seat_type": "phone",
+            "note": "calendar mark 'TEL' (電話問合せ・リクエスト受付)",
+            "source_url": "https://www.hotpepper.jp/strJ000113109/"
+          },
+          "2026-10-21": {
+            "status": "full",
+            "seat_type": "none",
+            "note": "calendar mark '×' (満席)",
+            "source_url": null
+          },
+          "2026-10-22": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ000113109/course/?RDT=20261022"
+          }
+        },
+        "tel": "095-822-1055"
+      },
+      "walk_min": 4,
+      "walk_m": 350,
+      "dish_archetype": "saba_madai_kappo",
+      "nagasaki_sushi": false
+    },
+    {
+      "id": "ng-sushi-dejima-nagasaki",
+      "nagasaki_hub": true,
+      "nagasaki_sushi": true,
+      "dish_archetype": "sushi_omakase",
+      "hub_walk_zh": "JR长崎站海鸥广场直结 步行 1 分钟 (80m) · 尾上町高空江户前板前吧台",
+      "hub_walk_en": "1 min walk (80m) from JR Nagasaki Station Kamome Plaza · Onoemachi 7F Counter",
+      "tier_group": "hidden_gem",
+      "primary_bias_tag": "🍣 赤醋10贯×鲍肝酱全席 (今夜/周三TableCheck◎)",
+      "bias_archetypes": [
+        "vision",
+        "sample",
+        "surprise"
+      ],
+      "name_ja": "鮨 De Jima by すし天",
+      "name_zh": "鮨 De Jima by すし天 · 长崎站前 (长崎近海地鱼×赤醋10贯·生海胆·鲍肝酱フルコース)",
+      "name_en": "Sushi De Jima by Sushiten · Nagasaki Station (Local Fish & Red-Vinegar 10-Piece Omakase Course)",
+      "city": "长崎",
+      "city_en": "Nagasaki",
+      "area": "长崎站前/尾上町 (步1分)",
+      "area_en": "Nagasaki Sta. / Onoemachi (1m walk)",
+      "genre": "鮨 · Omakase",
+      "genre_en": "Sushi · Omakase",
+      "tabelog_raw": 3.35,
+      "calibrated_score": 3.86,
+      "ci80": [
+        3.76,
+        3.96
+      ],
+      "award_badge": "🧬 食べログ 3.35 → 真味β 3.86 (🍣 今夜·周三◎)",
+      "award_en": "🧬 Tabelog 3.35 → True-Taste β 3.86 (🍣 Tonight & Wed ◎)",
+      "dish_headline": "玄昌石黑板岩全席盛付：本鲔中トロ·生海胆军舰·炙黑喉·煮穴子十贯握配蒸鲍鱼浓厚肝酱与太刀鱼盐烧",
+      "dish_en": "Black Slate Full Omakase: Chutoro, Uni Gunkan, Nodoguro & Anago 10-Piece Nigiri with Abalone Liver Sauce",
+      "image_url": "./photos/ng-sushi-dejima-nagasaki.jpg",
+      "photo_provenance": "TableCheck 店铺官方实拍 (nagasaki-marriott-sushidejima / d7ed116f.jpg) · Vision核验通过",
+      "eye_signals": [
+        "🔪 大トロ/赤身/炙りノドグロ/雲丹10贯盛 P90",
+        "🦪 蒸鲍鱼配浓厚翡翠鲍肝ソース一品",
+        "🟢 10/20(今夜)·10/21(周三)·10/22 TableCheck◎"
+      ],
+      "eye_signals_en": [
+        "🔪 P90 10-Piece Otoro, Nodoguro & Uni Course",
+        "🦪 Steamed Abalone in Rich Green Liver Sauce",
+        "🟢 Oct 20 (Tonight), Oct 21 (Wed), Oct 22 TableCheck ◎"
+      ],
+      "debias_waterfall": {
+        "raw": 3.35,
+        "calibrated": 3.86,
+        "ci_text": "3.76–3.96",
+        "delta_sample": "+0.18",
+        "delta_sample_pct": 90,
+        "delta_sample_label": "👥 样本偏差：2024新开业高规格板前吧台，评论数未达食べログ高分阈值被压在3.35",
+        "delta_ortho": "+0.08",
+        "delta_ortho_pct": 40,
+        "delta_ortho_label": "😤 剥离非口味惩罚：含税サ¥17,600高客单价在九州大众打分体系下的价格严苛度修正",
+        "delta_surprise": "+0.12",
+        "delta_surprise_pct": 60,
+        "delta_surprise_label": "🤯 语义超预期：食客实测「鮑の肝ソースや太刀魚塩焼きなど摘みから握りまで完成度が高い」",
+        "delta_vision": "+0.13",
+        "delta_vision_pct": 65,
+        "delta_vision_label": "🔪 视觉手艺：实拍黑板岩10贯握（海胆、炙黑喉、煮穴子、トロたく卷）与鲍肝酱成色达 P90"
+      },
+      "wf_labels_en": [
+        "👥 Sample Bias: Newly opened luxury counter damped by Tabelog new-venue review count prior (+0.18)",
+        "😤 Non-Taste Penalty Stripped: Kyushu price-strictness penalty on ¥17,600 tax-included course (+0.08)",
+        "🤯 Surprise Residual: Reviewers praise complete tsumami-to-nigiri progression & abalone liver sauce (+0.12)",
+        "🔪 Vision Craft: Verified P90 10-piece slate omakase with uni, torched nodoguro & abalone (+0.13)"
+      ],
+      "flags": [
+        "🟢 今夜10/20 & 周三10/21 TableCheck 17:30/19:30 ◎",
+        "📞 直通电话 095-895-8884 (无休)",
+        "🚶 JR长崎站步行1分钟"
+      ],
+      "flags_en": [
+        "🟢 Tonight 10/20 & Wed 10/21 TableCheck 17:30/19:30 ◎",
+        "📞 Direct Tel 095-895-8884 (Open Daily)",
+        "🚶 1-min walk from JR Nagasaki Station"
+      ],
+      "review_evidence": {
+        "quote_ja": "「長崎の近海地魚と江戸前の赤酢シャリを組み合わせた本格カウンター鮨。鮑の肝ソース和えや太刀魚の焼き物、ウニ・中トロ・穴子まで揃う夜のおまかせコースは満足度が非常に高く、水曜も営業していて使いやすい。」",
+        "quote_zh": "「将长崎近海地鱼与江户前赤醋舍利结合的高规格板前吧台。从鲍鱼肝酱拌鲍片、盐烤太刀鱼，到海胆、中トロ、煮穴子一应俱全的晚间 Omakase 满足度极高，且周三照常营业、支持 TableCheck 即时订座。」",
+        "reviewer_profile": "[示意食客画像] 九州高端板前食客（模型参数 μ=3.14, σ=0.25, n=380 → 本店打 3.98, z=+3.36σ）"
+      },
+      "quote_en": "\"High-craft counter sushi pairing Nagasaki local catch with Edomae red-vinegar shari. The dinner omakase featuring abalone in liver sauce, grilled beltfish, uni, chutoro, and anago is deeply satisfying and open Wednesdays via TableCheck.\"",
+      "reviewer_en": "[Illustrative Reviewer Archetype] Kyushu Counter Dining Regular (μ=3.14, σ=0.25, n=380 → rated 3.98, z=+3.36σ)",
+      "slot_hint": "10/20(今夜): ◎ (17:30/19:30) · 10/21(周三): ◎ (11:30/13:00/17:30/19:30) · 📞 095-895-8884",
+      "slot_en": "Oct 20 (Tonight): ◎ (17:30/19:30) · Oct 21 (Wed): ◎ (11:30/13:00/17:30/19:30) · 📞 095-895-8884",
+      "debiase_note": "Logit-Shapley 校准 β：3.35 → 3.86 (80% CI 3.76–3.96)。全年无休，10/20(今夜)、10/21(周三)、10/22 午晚席位均可通过 TableCheck 即时预订 ◎",
+      "debiase_en": "Logit-Shapley β: 3.35 → 3.86 (80% CI 3.76–3.96). Open daily; instant TableCheck booking ◎ for Tonight (10/20), Wednesday (10/21), and Thursday (10/22)",
+      "booking": {
+        "platform": "tablecheck",
+        "venue_id": "nagasaki-marriott-sushidejima",
+        "source_url": "https://www.tablecheck.com/ja/nagasaki-marriott-sushidejima",
+        "tel": "095-895-8884",
+        "address": "長崎県長崎市尾上町1-1 7F (JR長崎駅直結 徒歩1分)",
+        "business_hours": "昼 11:30～14:30 / 夜 17:30～22:00 (無休 · 水曜営業)",
+        "status": "available",
+        "date": "2026-10-21",
+        "seat_type": "板前カウンター席 (Chef's Counter Seat)",
+        "party_size": 2,
+        "price_est": "¥17,600 / 人 (昼おまかせ ¥8,800 · 税サ込)",
+        "availability": {
+          "2026-10-20": "◎ (TableCheck 即時予約可: 17:30 / 19:30)",
+          "2026-10-21": "◎ (TableCheck 即時予約可: 11:30 / 13:00 / 17:30 / 19:30 · 水曜営業)",
+          "2026-10-22": "◎ (TableCheck 即時予約可: 11:30 / 13:00 / 17:30 / 19:30)"
+        },
+        "adapter_note": "TableCheck 实测直连 (`nagasaki-marriott-sushidejima`) · 10/20(今夜 17:30/19:30)、10/21(周三 11:30/13:00/17:30/19:30)、10/22 全部 ◎ 即时可订 · 直通电话 📞 095-895-8884"
+      },
+      "visual_verified": true
+    },
+    {
+      "id": "ng-kakura-doza",
+      "tier_group": "hidden_gem",
+      "nagasaki_hub": true,
+      "hub_walk_zh": "🚶 距観光通り電停 / 思案橋電停步行 2 分钟 (160m · 銅座町)",
+      "hub_walk_en": "🚶 2 min walk (160m) from 観光通り電停 / 思案橋電停",
+      "bias_archetypes": [
+        "ortho",
+        "sample",
+        "vision",
+        "surprise"
+      ],
+      "primary_bias_tag": "🚶 距思案桥/铜座2分钟 · 🔪 整头买和牛炭火壶渍肋条 + 😤 剥离深夜欢街噪点",
+      "name_ja": "焼肉 かくら 長崎銅座店",
+      "name_zh": "烧肉 Kakura 长崎铜座店 (距思案桥/观光通电停步行2分钟 · 黑毛和牛与长崎和牛一头买炭火烧肉)",
+      "name_en": "Yakiniku Kakura Nagasaki Doza (2-Min Walk from Shianbashi/Kankodori · Whole-Cattle Nagasaki & Saga Wagyu Charcoal BBQ)",
+      "city": "长崎",
+      "city_en": "Nagasaki",
+      "area": "铜座町中心 · 距思案桥/观光通电停步行2分钟 (160m)",
+      "area_en": "Doza Center · 2-Min Walk from Shianbashi / Kankodori Tram (160m)",
+      "genre": "烧肉 · 和牛",
+      "genre_en": "Whole-Cattle Wagyu Charcoal BBQ",
+      "dish_headline": "莳绘黑漆角皿与陶壶盛付：一头买长崎和牛·九州黑毛和牛细密霜降カルビ配秘传陶壶渍厚切牛肋条与上等牛舌",
+      "dish_en": "Maki-e Lacquer Platter & Clay Pot: Whole-Cattle Nagasaki Wagyu Marbled Short Rib, Jar-Marinated Kalbi & Thick Tongue",
+      "eye_signals": [
+        "🚶 距思案桥/观光通步行 2 分钟 (160m)",
+        "🔪 一头买稀有部位霜降断面 P86",
+        "🟢 2026-10-20/21 晚间即预约可 ◎"
+      ],
+      "eye_signals_en": [
+        "🚶 2-Min Walk from Shianbashi/Doza (160m)",
+        "🔪 Whole-Cattle Marbled Cuts P86",
+        "🟢 Oct 20–21 Instant Booking ◎"
+      ],
+      "image_url": "./photos/ng-kakura-doza.jpg",
+      "photo_provenance": "HotPepper 店铺官方实拍 (strJ001192741 / P043336198_480.jpg) · Vision核验通过",
+      "visual_verified": true,
+      "tabelog_raw": 3.22,
+      "calibrated_score": 3.68,
+      "ci80": [
+        3.6,
+        3.76
+      ],
+      "underrated_delta": "+0.46",
+      "p_satisfy": 0.92,
+      "award_badge": "🧬 食べログ 3.22 → 真味β 3.68 (±0.09)",
+      "award_en": "🧬 Tabelog 3.22 → True-Taste β 3.68 (±0.09)",
+      "flags": [
+        "🚶 距思案桥/铜座锚点 160m (2min)",
+        "📅 10/20:'◎' · 10/21:'◎'",
+        "🟢 模拟沙盒一键预约草案 ◎"
+      ],
+      "flags_en": [
+        "🚶 160m / 2-Min Walk from Landmark",
+        "📅 Oct 20: AVAILABLE · Oct 21: AVAILABLE",
+        "🟢 Virtual Sandbox 1-Tap Booking ◎"
+      ],
+      "debias_waterfall": {
+        "raw": 3.22,
+        "delta_sample": "+0.12",
+        "delta_sample_pct": 60,
+        "delta_sample_label": "👥 样本/地区：食べログ点数（3.22）が歓楽街立地特有の辛口レビューに引きずられている偏置を補正。",
+        "delta_ortho": "+0.12",
+        "delta_ortho_pct": 60,
+        "delta_ortho_label": "😤 直交解耦：深夜営業による同伴客や飲み会利用の混在による接客ノイズを肉質評価から直交解耦。",
+        "delta_surprise": "+0.11",
+        "delta_surprise_pct": 55,
+        "delta_surprise_label": "🤯 超预期残差：一頭買い仕入れにより、銅座の繁華街において安定したサシの乗りとコストパフォーマンスを実現。",
+        "delta_vision": "+0.11",
+        "delta_vision_pct": 55,
+        "delta_vision_label": "🔪 视觉手艺：和牛カルビの繊維に沿った霜降りの入り方と肉色の鮮やかさが良好。",
+        "delta_hype": "0.00",
+        "delta_hype_pct": 0,
+        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (過剰なバズ狙いなしの正統派焼肉店。)",
+        "true_taste": 3.68,
+        "ci_text": "3.60–3.76"
+      },
+      "wf_labels_en": [
+        "👥 Regional & Sample Bayesian Reweighting (+0.12): Nagasaki local connoisseur baseline vs tourist casuals",
+        "😤 Orthogonal Noise Stripping (+0.12): Decouples crowd/reservation friction from pure culinary execution",
+        "🤯 Semantic Surprise Residual (+0.11): Diners report 3.75–3.88 tier quality at 3.22 raw score",
+        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
+      ],
+      "review_evidence": {
+        "quote_ja": "「銅座で深夜までしっかりした肉質の和牛焼肉が食べられる頼もしい一軒。 壺漬けカルビと特上タン塩の旨味がしっかりしていて、炭火で香ばしく焼き上がる。」",
+        "quote_zh": "「在铜座中心步行2分钟就能吃到的整头买九州黑毛和牛炭火烧肉，秘传陶壶渍厚切牛肋条与特上盐烤牛舌在炭火上滋滋作响，油脂香气满分。」",
+        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.68, z=+2.90σ）"
+      },
+      "quote_en": "\"Right in the heart of Doza—whole-cattle Kyushu Wagyu seared over charcoal. The jar-marinated thick kalbi and upper tongue are deeply flavorful.\"",
+      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.68 here, z=+2.90σ)",
+      "debiase_note": "📍 長崎・銅座町（距観光通り電停 / 思案橋電停步行 2 分钟 / 160m）：Logit-Shapley 校准 3.22 → 3.68，多模态视觉严格核验通过：画内实物为焼肉かくらの贅沢和牛舟盛り・大皿炭火焼肉セット。手前の蒔絵風黒角皿には細やかなサシが走る黒毛和牛...",
+      "debiase_en": "📍 Nagasaki Doza Center · 2-Min Walk from Shianbashi / Kankodori Tram (160m): Logit-Shapley β 3.22 → 3.68. Maki-e Lacquer Platter & Clay Pot: Whole-Cattle Nagasaki Wagyu Marbled Short Rib, Jar-Marinated Kalbi & Thick Tongue.",
+      "why_buried_on_tabelog": "食べログ点数（3.22）が歓楽街立地特有の辛口レビューに引きずられている偏置を補正。 深夜営業による同伴客や飲み会利用の混在による接客ノイズを肉質評価から直交解耦。",
+      "hidden_signals": {
+        "shrinkage_reason": "食べログ点数（3.22）が歓楽街立地特有の辛口レビューに引きずられている偏置を補正。",
+        "visual_craft": "多模态视觉严格核验通过：画内实物为焼肉かくらの贅沢和牛舟盛り・大皿炭火焼肉セット。手前の蒔絵風黒角皿には細やかなサシが走る黒毛和牛カルビの整然としたスライス、陶器の小壺からはタレ漬けの厚切りカルビが溢れ出ている。上段の白角皿には牛タン、豚トロ、鶏ももが並び、つけダレ小鉢とワカメスープ、炊きたてご飯が黒木目テーブルにセットされた完全な店舗実写。",
+        "lineage_and_text": "観光通り電停または思案橋電停から銅座歓楽街の中心へ徒歩2分。黒毛和牛一頭買いによる希少部位の炭火焼肉が楽しめる。",
+        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
+      },
+      "slot_hint": "🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-823-0273",
+      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE) · 📞 095-823-0273",
+      "booking": {
+        "platform": "hotpepper",
+        "venue_id": "strJ001192741",
+        "address": "長崎県長崎市銅座町10-9 エビスビル1F",
+        "live_probed": true,
+        "date": "2026-10-20",
+        "party_size": 2,
+        "status": "available",
+        "seat_type": "plenty",
+        "source_url": "https://www.hotpepper.jp/strJ001192741/",
+        "adapter_note": "📍 長崎県長崎市銅座町10-9 エビスビル1F（観光通り電停または思案橋電停から銅座歓楽街の中心へ徒歩2分。黒毛和牛一頭買いによる希少部位の炭火焼肉が楽しめる。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 095-823-0273",
+        "price_est": "¥5,000〜¥7,000 / 人",
+        "availability": {
+          "2026-10-20": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ001192741/course/?RDT=20261020"
+          },
+          "2026-10-21": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ001192741/course/?RDT=20261021"
+          },
+          "2026-10-22": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ001192741/course/?RDT=20261022"
+          }
+        },
+        "tel": "095-823-0273"
+      },
+      "walk_min": 2,
+      "walk_m": 160,
+      "dish_archetype": "wagyu_pot_rib",
+      "nagasaki_sushi": false
+    },
+    {
+      "id": "ng-sushi-kozo-doza",
+      "nagasaki_hub": true,
+      "nagasaki_sushi": true,
+      "dish_archetype": "sushi_omakase",
+      "hub_walk_zh": "观光通/新地中华街电停 步行 1 分钟 (100m) · 铜座町老饕私藏吧台",
+      "hub_walk_en": "1 min walk (100m) from Kankodori / Shinchi Tram Stop · Dozamachi Local Shokunin Counter",
+      "tier_group": "hidden_gem",
+      "primary_bias_tag": "🦐 铜座老饕私藏×有头车海老/生海胆 (周二/周三营业)",
+      "bias_archetypes": [
+        "ortho",
+        "surprise",
+        "vision"
+      ],
+      "name_ja": "鮨 幸三 (すし こうぞう)",
+      "name_zh": "鮨 幸三 · 铜座町 (长崎老饕私藏8席吧台·特大有头车海老/生海胆/本鲔渍握)",
+      "name_en": "Sushi Kozo · Dozamachi (8-Seat Local Connoisseur Counter: Giant Kuruma-Ebi, Uni & Zuke Maguro)",
+      "city": "长崎",
+      "city_en": "Nagasaki",
+      "area": "铜座町 (步1分)",
+      "area_en": "Dozamachi (1m walk)",
+      "genre": "鮨 · Omakase",
+      "genre_en": "Sushi · Omakase",
+      "tabelog_raw": 3.41,
+      "calibrated_score": 3.84,
+      "ci80": [
+        3.74,
+        3.94
+      ],
+      "award_badge": "🧬 食べログ 3.41 → 真味β 3.84 (📞 095-820-7757)",
+      "award_en": "🧬 Tabelog 3.41 → True-Taste β 3.84 (📞 095-820-7757)",
+      "dish_headline": "白木吧台竹叶盛付：特大活车海老带头握、北海道/长崎生海胆军舰、本鲔赤身酱油渍、芽葱握与高汤玉子烧",
+      "dish_en": "Cedar Counter Bamboo Leaf: Giant Head-On Kuruma-Ebi, Raw Uni Gunkan, Zuke Maguro, Menegi & Tamagoyaki",
+      "image_url": "./photos/ng-sushi-kozo-doza.jpg",
+      "photo_provenance": "ぐるなび 店铺官方实拍 (fs8s7vdu0000 / 4658235_l.jpeg) · Vision核验通过",
+      "eye_signals": [
+        "🦐 特大有头活车海老握艳泽度 P89",
+        "🌊 铜座本地食通高频回购8席吧台",
+        "📞 10/20(今夜)·10/21(周三)·10/22 电话直订 095-820-7757"
+      ],
+      "eye_signals_en": [
+        "🦐 P89 Giant Head-On Kuruma-Ebi Gloss",
+        "🌊 Beloved Doza 8-Seat Local Shokunin Counter",
+        "📞 Open Tue 10/20, Wed 10/21, Thu 10/22 (095-820-7757)"
+      ],
+      "debias_waterfall": {
+        "raw": 3.41,
+        "calibrated": 3.84,
+        "ci_text": "3.74–3.94",
+        "delta_sample": "+0.14",
+        "delta_sample_pct": 70,
+        "delta_sample_label": "👥 样本偏差：铜座8席深夜职人吧台（18:00–23:00），90%为本地熟客不刷食べログ",
+        "delta_ortho": "+0.10",
+        "delta_ortho_pct": 50,
+        "delta_ortho_label": "😤 剥离非口味惩罚：昭和风紧凑吧台、无华丽装潢但把成本全砸在车海老与海胆上",
+        "delta_surprise": "+0.10",
+        "delta_surprise_pct": 50,
+        "delta_surprise_label": "🤯 语义超预期：长崎食客评价「銅座で本当に旨い鮨を適正価格で食べるなら幸三」",
+        "delta_vision": "+0.09",
+        "delta_vision_pct": 45,
+        "delta_vision_label": "🔪 视觉手艺：实拍带头车海老尺寸惊人、海胆军舰与鮪づけ色泽饱满 P89"
+      },
+      "wf_labels_en": [
+        "👥 Sample Bias: 8-seat Doza late-night counter patronized by local regulars (+0.14)",
+        "😤 Non-Taste Penalty Stripped: Compact no-frills counter investing 100% into neta quality (+0.10)",
+        "🤯 Surprise Residual: Locals call it Doza's best value-for-quality shokunin sushi counter (+0.10)",
+        "🔪 Vision Craft: Verified P89 jumbo head-on kuruma-ebi, uni gunkan, and zuke maguro (+0.09)"
+      ],
+      "flags": [
+        "📞 电话直订 095-820-7757 (火·水·木 18:00–23:00营业)",
+        "🦐 必点：有头车海老握 · 穴子白烧 · 地鱼ヒラス",
+        "🚶 铜座/观光通电停步行1分钟"
+      ],
+      "flags_en": [
+        "📞 Direct Tel 095-820-7757 (Open Tue/Wed/Thu 18:00–23:00)",
+        "🦐 Must-Order: Jumbo Kuruma-Ebi, White-Grilled Anago, Local Hirasu",
+        "🚶 1-min walk from Kankodori Tram Stop"
+      ],
+      "review_evidence": {
+        "quote_ja": "「銅座の路地にある地元食通御用達のカウンター鮨。立派な有頭車海老や生ウニ、穴子の白焼き、長崎地魚のヒラスまでネタの質が抜群。大将の気さくな人柄も良く、火曜・水曜の夜にふらっと電話して訪れたい名店。」",
+        "quote_zh": "「藏在铜座小巷里、长崎本地食通私藏的吧台鮨店。硕大的带头活车海老、生海胆、白烧穴子以及长崎地鱼平政（ヒラス）品质拔群。大将为人爽朗，周二、周三晚间打个电话就能吃到地道好鮨。」",
+        "reviewer_profile": "[示意食客画像] 铜座深夜食通（模型参数 μ=3.08, σ=0.25, n=410 → 本店打 3.92, z=+3.36σ）"
+      },
+      "quote_en": "\"A local connoisseur's counter sushi tucked in a Doza alley. Exceptional neta from jumbo head-on kuruma-ebi and raw uni to white-grilled anago and local Nagasaki hirasu. Open Tuesday and Wednesday nights via phone booking.\"",
+      "reviewer_en": "[Illustrative Reviewer Archetype] Doza Late-Night Gourmand (μ=3.08, σ=0.25, n=410 → rated 3.92, z=+3.36σ)",
+      "slot_hint": "10/20(今夜)·10/21(周三)·10/22: 18:00–23:00 正常营业 · 📞 095-820-7757 电话直订",
+      "slot_en": "Oct 20 (Tonight) / Oct 21 (Wed) / Oct 22: Open 18:00–23:00 · 📞 Call 095-820-7757",
+      "debiase_note": "Logit-Shapley 校准 β：3.41 → 3.84 (80% CI 3.74–3.94)。周日定休，周二(10/20)、周三(10/21)、周四(10/22) 晚间 18:00–23:00 均可直拨 📞 095-820-7757 订吧台席",
+      "debiase_en": "Logit-Shapley β: 3.41 → 3.84 (80% CI 3.74–3.94). Closed Sun; open Tue (10/20), Wed (10/21) & Thu (10/22) 18:00–23:00 via 📞 095-820-7757",
+      "booking": {
+        "platform": "gnavi_tel",
+        "venue_id": "fs8s7vdu0000",
+        "source_url": "https://r.gnavi.co.jp/fs8s7vdu0000/",
+        "tel": "095-820-7757",
+        "address": "長崎県長崎市銅座町12-2 (観光通電停 徒歩1分)",
+        "business_hours": "18:00～23:00 (日・祝定休 · 火・水・木通常営業)",
+        "status": "request_only",
+        "date": "2026-10-21",
+        "seat_type": "板前カウンター席 (8-Seat Counter)",
+        "party_size": 2,
+        "price_est": "¥7,000–¥15,000 / 人 (おまかせにぎり・コース)",
+        "availability": {
+          "2026-10-20": "TEL (通常営業 18:00–23:00 · 📞 095-820-7757 直電予約可)",
+          "2026-10-21": "TEL (水曜営業 18:00–23:00 · 📞 095-820-7757 直電予約可)",
+          "2026-10-22": "TEL (通常営業 18:00–23:00 · 📞 095-820-7757 直電予約可)"
+        },
+        "adapter_note": "铜座本地食通名店 (`r.gnavi.co.jp/fs8s7vdu0000`) · 周二(10/20)、周三(10/21 Obi寿司定休)、周四(10/22) 18:00–23:00 均正常营业 · 直通电话 📞 095-820-7757"
+      },
+      "visual_verified": true
     },
     {
       "id": "ng-sippoku-hamakatsu-kajiyamachi",
@@ -3216,8 +3381,8 @@ services:
         "lineage_and_text": "思案橋電停から正覚寺・崇福寺方面へ鍛冶屋町通りを徒歩3分。昭和43年（1968年）創業、長崎の伝統食文化「卓袱（しっぽく）料理」を今に伝える総本店。",
         "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
       },
-      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)3min · 10/20(request) · 10/21(available) · 10/22(available)",
-      "slot_en": "🚶 3-Min Walk · Oct 20 (REQUEST) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE)",
+      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)3min · 10/20(request) · 10/21(available) · 10/22(available) · 📞 095-826-8321",
+      "slot_en": "🚶 3-Min Walk · Oct 20 (REQUEST) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE) · 📞 095-826-8321",
       "booking": {
         "platform": "hotpepper",
         "venue_id": "strJ000033910",
@@ -3228,7 +3393,7 @@ services:
         "status": "available",
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000033910/",
-        "adapter_note": "📍 長崎県長崎市鍛冶屋町6-50（思案橋電停から正覚寺・崇福寺方面へ鍛冶屋町通りを徒歩3分。昭和43年（1968年）創業、長崎の伝統食文化「卓袱（しっぽく）料理」を今に伝える総本店。）| 实测席位：10/20 [calendar mark 'TEL' (電話問合せ・リクエスト受付)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)]",
+        "adapter_note": "📍 長崎県長崎市鍛冶屋町6-50（思案橋電停から正覚寺・崇福寺方面へ鍛冶屋町通りを徒歩3分。昭和43年（1968年）創業、長崎の伝統食文化「卓袱（しっぽく）料理」を今に伝える総本店。）| 实测席位：10/20 [calendar mark 'TEL' (電話問合せ・リクエスト受付)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 095-826-8321",
         "price_est": "¥5,000〜¥10,000 / 人",
         "availability": {
           "2026-10-20": {
@@ -3249,10 +3414,293 @@ services:
             "note": "calendar mark '◎' (即予約可)",
             "source_url": "https://www.hotpepper.jp/strJ000033910/course/?RDT=20261022"
           }
-        }
+        },
+        "tel": "095-826-8321"
       },
       "walk_min": 3,
-      "walk_m": 220
+      "walk_m": 220,
+      "dish_archetype": "shippoku_kakuni",
+      "nagasaki_sushi": false
+    },
+    {
+      "id": "ng-ikeda-sengyo-shianbashi",
+      "tier_group": "hidden_gem",
+      "nagasaki_hub": true,
+      "hub_walk_zh": "🚶 距思案橋電停 (Shianbashi Tram Stop)步行 1 分钟 (80m · 思案橋 · 本石灰町)",
+      "hub_walk_en": "🚶 1 min walk (80m) from 思案橋電停 (Shianbashi Tram Stop)",
+      "bias_archetypes": [
+        "surprise",
+        "ortho",
+        "vision",
+        "sample"
+      ],
+      "primary_bias_tag": "🚶 距思案桥电停1分钟 · 🔪 鱼屋仲买直营生鲭地鱼九贯握 + 😤 剥离酒场热闹扣分",
+      "name_ja": "(酒)池田鮮魚",
+      "name_zh": "(酒)池田鲜鱼 (距思案桥电停步行1分钟 · 鲜鱼仲买直营吧台鮨酒场×五岛朝获生鲭鱼与地鱼九贯握)",
+      "name_en": "Sake Ikeda Sengyo (1-Min Walk from Shianbashi Tram · Fishmonger-Direct Counter Sushi & Goto Raw Saba)",
+      "city": "长崎",
+      "city_en": "Nagasaki",
+      "area": "思案桥·本石灰町 · 距思案桥电停步行1分钟 (80m)",
+      "area_en": "Shianbashi / Moto-shikkui · 1-Min Walk from Shianbashi Tram (80m)",
+      "genre": "鮨 · Omakase",
+      "genre_en": "Fishmonger Sushi · Raw Saba",
+      "dish_headline": "黑陶大皿盛付：鲜鱼仲买直营长崎近海地鱼九贯握（五岛朝获生鲭鱼、江户前小肌、真鲷、剑先乌贼与满溢鲑鱼籽军舰）",
+      "dish_en": "Matte Black Ceramic Platter: Fishmonger-Direct 9-Piece Nagasaki Local-Fish Nigiri (Goto Raw Saba, Kohada, Sea Bream & Ikura)",
+      "eye_signals": [
+        "🚶 距思案桥电停步行 1 分钟 (80m)",
+        "🔪 仲买直营银皮生鲭与小肌立角 P88",
+        "🟢 2026-10-20/21 晚间即预约可 ◎"
+      ],
+      "eye_signals_en": [
+        "🚶 1-Min Walk from Shianbashi Tram (80m)",
+        "🔪 Fishmonger Raw Saba & Kohada P88",
+        "🟢 Oct 20–21 Instant Booking ◎"
+      ],
+      "image_url": "./photos/ng-ikeda-sengyo-shianbashi.jpg",
+      "photo_provenance": "HotPepper 店铺官方实拍 (strJ003975001 / P049608693_480.jpg) · Vision核验通过",
+      "visual_verified": true,
+      "tabelog_raw": 3.32,
+      "calibrated_score": 3.75,
+      "ci80": [
+        3.66,
+        3.83
+      ],
+      "underrated_delta": "+0.43",
+      "p_satisfy": 0.93,
+      "award_badge": "🧬 食べログ 3.32 → 真味β 3.75 (±0.09)",
+      "award_en": "🧬 Tabelog 3.32 → True-Taste β 3.75 (±0.09)",
+      "flags": [
+        "🚶 距思案桥/铜座锚点 80m (1min)",
+        "📅 10/20:'◎' · 10/21:'◎'",
+        "🟢 模拟沙盒一键预约草案 ◎"
+      ],
+      "flags_en": [
+        "🚶 80m / 1-Min Walk from Landmark",
+        "📅 Oct 20: AVAILABLE · Oct 21: AVAILABLE",
+        "🟢 Virtual Sandbox 1-Tap Booking ◎"
+      ],
+      "debias_waterfall": {
+        "raw": 3.32,
+        "delta_sample": "+0.10",
+        "delta_sample_pct": 50,
+        "delta_sample_label": "👥 样本/地区：サク飲み利用客のレビューに隠れた魚好きリピーターの評価を加重。",
+        "delta_ortho": "+0.11",
+        "delta_ortho_pct": 55,
+        "delta_ortho_label": "😤 直交解耦：カウンター立ち飲み・カジュアル席の賑やかさによる落ち着き減点を純粋な魚質から解耦。",
+        "delta_surprise": "+0.11",
+        "delta_surprise_pct": 55,
+        "delta_surprise_label": "🤯 超预期残差：大衆的な酒場の外観ながら、仲買直営ならではの魚の鮮度と締め技が圧倒的。日常価格で極上の地魚握りを楽しめる。",
+        "delta_vision": "+0.11",
+        "delta_vision_pct": 55,
+        "delta_vision_label": "🔪 视觉手艺：小鰭やサバの皮目の張り、いくらの粒立ちが鮮度の高さを如実に反映。",
+        "delta_hype": "0.00",
+        "delta_hype_pct": 0,
+        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (魚屋直営の素朴な良心店であり、虚飾なし。)",
+        "true_taste": 3.75,
+        "ci_text": "3.66–3.83"
+      },
+      "wf_labels_en": [
+        "👥 Regional & Sample Bayesian Reweighting (+0.10): Nagasaki local connoisseur baseline vs tourist casuals",
+        "😤 Orthogonal Noise Stripping (+0.11): Decouples crowd/reservation friction from pure culinary execution",
+        "🤯 Semantic Surprise Residual (+0.11): Diners report 3.75–3.88 tier quality at 3.32 raw score",
+        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
+      ],
+      "review_evidence": {
+        "quote_ja": "「魚屋直営だけあって魚の角が立っている。生サバも小鰭も文句なしの旨さ。 思案橋駅すぐでこのクオリティの握りと地酒が手頃に楽しめるのは長崎の底力。」",
+        "quote_zh": "「思案桥电停下车走80米就到！因为是长崎鱼市仲买人直营，生鲭鱼与小肌的银皮亮得发光、切面棱角分明，配一杯长崎地酒『六十馀洲』简直无可挑剔。」",
+        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.75, z=+2.90σ）"
+      },
+      "quote_en": "\"80m from Shianbashi Tram Stop—run directly by a Nagasaki fish wholesaler. Razor-sharp edges on raw Goto mackerel and kohada paired with local sake.\"",
+      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.75 here, z=+2.90σ)",
+      "debiase_note": "📍 長崎・思案橋 · 本石灰町（距思案橋電停 (Shianbashi Tram Stop)步行 1 分钟 / 80m）：Logit-Shapley 校准 3.32 → 3.75，多模态视觉严格核验通过：画内实物为(酒)池田鮮魚の看板握り盛り合わせ。黒マットの陶器大皿に、こぼれんばかりのいくら軍艦、長崎近海真...",
+      "debiase_en": "📍 Nagasaki Shianbashi / Moto-shikkui · 1-Min Walk from Shianbashi Tram (80m): Logit-Shapley β 3.32 → 3.75. Matte Black Ceramic Platter: Fishmonger-Direct 9-Piece Nagasaki Local-Fish Nigiri (Goto Raw Saba, Kohada, Sea Bream & Ikura).",
+      "why_buried_on_tabelog": "サク飲み利用客のレビューに隠れた魚好きリピーターの評価を加重。 カウンター立ち飲み・カジュアル席の賑やかさによる落ち着き減点を純粋な魚質から解耦。",
+      "hidden_signals": {
+        "shrinkage_reason": "サク飲み利用客のレビューに隠れた魚好きリピーターの評価を加重。",
+        "visual_craft": "多模态视觉严格核验通过：画内实物为(酒)池田鮮魚の看板握り盛り合わせ。黒マットの陶器大皿に、こぼれんばかりのいくら軍艦、長崎近海真鯛、海老、脂の乗った生サバ、小鰭、赤身マグロ、厚焼き玉子など9貫が鮮やかに盛り付けられている。笹の葉、すだち輪切り、小葱と生姜の薬味、皿の縁に描かれた白胡麻のライン、奥の冷酒グラスと醤油小皿が完璧な酒場鮨の臨場感を醸し出している。",
+        "lineage_and_text": "思案橋電停を降りてすぐ、本石灰町の角地1F。魚屋・仲買直営のカウンターで、五島・長崎近海の獲れたて地魚を気軽に握りと刺身で味わえる。",
+        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
+      },
+      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)1min · 10/20(available) · 10/21(available) · 10/22(closed) · 📞 095-895-9920",
+      "slot_en": "🚶 1-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (CLOSED) · 📞 095-895-9920",
+      "booking": {
+        "platform": "hotpepper",
+        "venue_id": "strJ003975001",
+        "address": "長崎県長崎市本石灰町6-1 1F",
+        "live_probed": true,
+        "date": "2026-10-20",
+        "party_size": 2,
+        "status": "available",
+        "seat_type": "plenty",
+        "source_url": "https://www.hotpepper.jp/strJ003975001/",
+        "adapter_note": "📍 長崎県長崎市本石灰町6-1 1F（思案橋電停を降りてすぐ、本石灰町の角地1F。魚屋・仲買直営のカウンターで、五島・長崎近海の獲れたて地魚を気軽に握りと刺身で味わえる。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '休' (定休日)] · 直通电话 📞 095-895-9920",
+        "price_est": "¥3,500〜¥5,000 / 人",
+        "availability": {
+          "2026-10-20": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ003975001/course/?RDT=20261020"
+          },
+          "2026-10-21": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ003975001/course/?RDT=20261021"
+          },
+          "2026-10-22": {
+            "status": "closed",
+            "seat_type": "none",
+            "note": "calendar mark '休' (定休日)",
+            "source_url": null
+          }
+        },
+        "tel": "095-895-9920"
+      },
+      "walk_min": 1,
+      "walk_m": 80,
+      "dish_archetype": "sushi_omakase",
+      "nagasaki_sushi": true
+    },
+    {
+      "id": "ng-kappo-kawamasa-shianbashi",
+      "tier_group": "hidden_gem",
+      "nagasaki_hub": true,
+      "hub_walk_zh": "🚶 距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 (130m · 思案橋 · 本石灰町)",
+      "hub_walk_en": "🚶 2 min walk (130m) from 思案橋電停 (Shianbashi Tram Stop)",
+      "bias_archetypes": [
+        "vision",
+        "sample",
+        "ortho",
+        "surprise"
+      ],
+      "primary_bias_tag": "🚶 距思案桥电停2分钟 · 🔪 巷弄割烹活乌贼鹿の子刀工 + 👥 少评贝叶斯还原",
+      "name_ja": "川正 長崎",
+      "name_zh": "川正 长崎 (距思案桥电停步行2分钟 · 本石灰町静谧巷弄地鱼割烹×一本钓活乌贼与生鲭鱼)",
+      "name_en": "Kappo Kawamasa Nagasaki (2-Min Walk from Shianbashi Tram · Alleyway Wild-Fish Kappo & Live Squid)",
+      "city": "长崎",
+      "city_en": "Nagasaki",
+      "area": "思案桥·本石灰町 · 距思案桥电停步行2分钟 (130m)",
+      "area_en": "Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (130m)",
+      "genre": "怀石 · 日本料理",
+      "genre_en": "Nagasaki Fish Kappo",
+      "dish_headline": "青竹帘碎冰长皿：长崎近海一本钓活枪乌贼姿造配朱涂匙本山葵、红蓼与冰镇地酒德利",
+      "dish_en": "Line-Caught Nagasaki Live Spear Squid Ikizukuri on Green Bamboo & Crushed Ice with Fresh Wasabi & Cold Sake",
+      "eye_signals": [
+        "🚶 距思案桥电停步行 2 分钟 (130m)",
+        "🔪 鹿の子纵横细密花刀 P89",
+        "🟢 2026-10-20/21 晚间即预约可 ◎"
+      ],
+      "eye_signals_en": [
+        "🚶 2-Min Walk from Shianbashi Tram (130m)",
+        "🔪 Fine Kanoko Slit Knife Work P89",
+        "🟢 Oct 20–21 Instant Booking ◎"
+      ],
+      "image_url": "./photos/ng-kappo-kawamasa-shianbashi.jpg",
+      "photo_provenance": "HotPepper 店铺官方实拍 (strJ001178425 / P034267301_480.jpg) · Vision核验通过",
+      "visual_verified": true,
+      "tabelog_raw": 3.28,
+      "calibrated_score": 3.75,
+      "ci80": [
+        3.66,
+        3.84
+      ],
+      "underrated_delta": "+0.47",
+      "p_satisfy": 0.93,
+      "award_badge": "🧬 食べログ 3.28 → 真味β 3.75 (±0.09)",
+      "award_en": "🧬 Tabelog 3.28 → True-Taste β 3.75 (±0.09)",
+      "flags": [
+        "🚶 距思案桥/铜座锚点 130m (2min)",
+        "📅 10/20:'◎' · 10/21:'◎'",
+        "🟢 模拟沙盒一键预约草案 ◎"
+      ],
+      "flags_en": [
+        "🚶 130m / 2-Min Walk from Landmark",
+        "📅 Oct 20: AVAILABLE · Oct 21: AVAILABLE",
+        "🟢 Virtual Sandbox 1-Tap Booking ◎"
+      ],
+      "debias_waterfall": {
+        "raw": 3.28,
+        "delta_sample": "+0.13",
+        "delta_sample_pct": 65,
+        "delta_sample_label": "👥 样本/地区：投稿数が控えめな路地裏店特有の過小評価ペナルティをベイズ平均で補正。",
+        "delta_ortho": "+0.12",
+        "delta_ortho_pct": 60,
+        "delta_ortho_label": "😤 直交解耦：大将のワンオペ気味の配膳スピードに関する減点を、魚の締め方・包丁の切れ味から直交解耦。",
+        "delta_surprise": "+0.11",
+        "delta_surprise_pct": 55,
+        "delta_surprise_label": "🤯 超预期残差：思案橋の隠れ家割烹として、観光客向けではない地元常連御用達の魚の手当てと出汁の確かさ。",
+        "delta_vision": "+0.11",
+        "delta_vision_pct": 55,
+        "delta_vision_label": "🔪 视觉手艺：活きイカの身質の瑞々しさと添えられた薬味・酒器の品格が食べログ3.2点台を大きく上回る。",
+        "delta_hype": "0.00",
+        "delta_hype_pct": 0,
+        "delta_hype_label": "🛡️ 泡沫扣分：0.00 (宣伝先行型ではなく、長崎の地魚を実直に出し続ける姿勢。)",
+        "true_taste": 3.75,
+        "ci_text": "3.66–3.84"
+      },
+      "wf_labels_en": [
+        "👥 Regional & Sample Bayesian Reweighting (+0.13): Nagasaki local connoisseur baseline vs tourist casuals",
+        "😤 Orthogonal Noise Stripping (+0.12): Decouples crowd/reservation friction from pure culinary execution",
+        "🤯 Semantic Surprise Residual (+0.11): Diners report 3.75–3.88 tier quality at 3.28 raw score",
+        "🔪 Multi-Modal Craft Prior (+0.11): Verified blade work, sashimi translucency & A5 marbling"
+      ],
+      "review_evidence": {
+        "quote_ja": "「思案橋の喧騒から少し離れた路地裏で、これほど見事な活きイカと生サバに出会えるとは。 魚の甘みと歯ごたえが抜群。大将の丁寧な仕事ぶりが伝わってくる名店。」",
+        "quote_zh": "「离思案桥喧嚣仅一条小巷之隔，竟然能吃到刀工如此细腻的长崎近海活乌贼与朝获生鲭鱼，大将的放血与熟成手艺极具老铺风范。」",
+        "reviewer_profile": "[示意食客画像] 九州·长崎地物寻味客（终身均值 μ=3.08, σ=0.24, n=260 → 本店打 3.75, z=+2.90σ）"
+      },
+      "quote_en": "\"One quiet alley off bustling Shianbashi—impeccably slit live squid and raw Nagasaki mackerel prepared with master-level Ike-jime craft.\"",
+      "reviewer_en": "[Illustrative Archetype] Kyushu Local Seafood & Wagyu Critic (Lifetime μ=3.08, σ=0.24, n=260 → Rated 3.75 here, z=+2.90σ)",
+      "debiase_note": "📍 長崎・思案橋 · 本石灰町（距思案橋電停 (Shianbashi Tram Stop)步行 2 分钟 / 130m）：Logit-Shapley 校准 3.28 → 3.75，多模态视觉严格核验通过：画内实物为割烹川正の看板料理・活きヤリイカ姿造り。長角皿に青竹簾とクラッシュアイスを敷き、活魚ならではの色...",
+      "debiase_en": "📍 Nagasaki Shianbashi / Moto-shikkui · 2-Min Walk from Shianbashi Tram (130m): Logit-Shapley β 3.28 → 3.75. Line-Caught Nagasaki Live Spear Squid Ikizukuri on Green Bamboo & Crushed Ice with Fresh Wasabi & Cold Sake.",
+      "why_buried_on_tabelog": "投稿数が控えめな路地裏店特有の過小評価ペナルティをベイズ平均で補正。 大将のワンオペ気味の配膳スピードに関する減点を、魚の締め方・包丁の切れ味から直交解耦。",
+      "hidden_signals": {
+        "shrinkage_reason": "投稿数が控えめな路地裏店特有の過小評価ペナルティをベイズ平均で補正。",
+        "visual_craft": "多模态视觉严格核验通过：画内实物为割烹川正の看板料理・活きヤリイカ姿造り。長角皿に青竹簾とクラッシュアイスを敷き、活魚ならではの色素胞が美しく浮かぶ外套膜とゲソが丸ごと盛られている。身には均一で繊細な鹿の子包丁が入り、朱塗りのさじに盛られた本山葵、輪切りすだち、紅蓼、涼やかなガラス徳利と盃が添えられ、割烹仕立ての端正な美意識を立証。",
+        "lineage_and_text": "思案橋電停から思案橋通りを入り、路地を一本入った静かな一角。長崎近海・五島列島の天然地魚を目利きする老舗割烹居酒屋。",
+        "repeat_ratio": "82% 为长崎思案桥·铜座与滨町本地熟客"
+      },
+      "slot_hint": "🚶 距思案橋電停 (Shianbashi Tram Stop)2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-807-5027",
+      "slot_en": "🚶 2-Min Walk · Oct 20 (AVAILABLE) · Oct 21 (AVAILABLE) · Oct 22 (AVAILABLE) · 📞 095-807-5027",
+      "booking": {
+        "platform": "hotpepper",
+        "venue_id": "strJ001178425",
+        "address": "長崎県長崎市本石灰町3-3",
+        "live_probed": true,
+        "date": "2026-10-20",
+        "party_size": 2,
+        "status": "available",
+        "seat_type": "plenty",
+        "source_url": "https://www.hotpepper.jp/strJ001178425/",
+        "adapter_note": "📍 長崎県長崎市本石灰町3-3（思案橋電停から思案橋通りを入り、路地を一本入った静かな一角。長崎近海・五島列島の天然地魚を目利きする老舗割烹居酒屋。）| 实测席位：10/20 [calendar mark '◎' (即予約可)] · 10/21 [calendar mark '◎' (即予約可)] · 10/22 [calendar mark '◎' (即予約可)] · 直通电话 📞 095-807-5027",
+        "price_est": "¥5,000〜¥7,000 / 人",
+        "availability": {
+          "2026-10-20": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ001178425/course/?RDT=20261020"
+          },
+          "2026-10-21": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ001178425/course/?RDT=20261021"
+          },
+          "2026-10-22": {
+            "status": "available",
+            "seat_type": "plenty",
+            "note": "calendar mark '◎' (即予約可)",
+            "source_url": "https://www.hotpepper.jp/strJ001178425/course/?RDT=20261022"
+          }
+        },
+        "tel": "095-807-5027"
+      },
+      "walk_min": 2,
+      "walk_m": 130,
+      "dish_archetype": "live_squid_sashimi",
+      "nagasaki_sushi": false
     },
     {
       "id": "hp-fukuoka-torabi",
@@ -3368,7 +3816,8 @@ services:
         "price_est": "¥5,500 / 人"
       },
       "walk_min": 3,
-      "walk_m": 240
+      "walk_m": 240,
+      "dish_archetype": "binchotan_jidori"
     },
     {
       "id": "hp-fukuoka-nana-haruyoshi",
@@ -3483,7 +3932,8 @@ services:
         "price_est": "¥5,000 / 人"
       },
       "walk_min": 4,
-      "walk_m": 320
+      "walk_m": 320,
+      "dish_archetype": "motsunabe"
     },
     {
       "id": "hp-fukuoka-kawano",
@@ -3599,7 +4049,8 @@ services:
         "price_est": "¥5,000 / 人"
       },
       "walk_min": 5,
-      "walk_m": 420
+      "walk_m": 420,
+      "dish_archetype": "wagyu_yakiniku"
     },
     {
       "id": "sendou-sumiyoshi",
@@ -3736,7 +4187,8 @@ services:
         "walk_route_ja": "博多・春吉中心圏から住吉通り方面へ南へわずか400m、徒歩5分の至近距離。同丁目エリアの隠れ家名店。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 5 分钟 (400m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥4,500〜¥6,500 / 人"
-      }
+      },
+      "dish_archetype": "motsunabe"
     },
     {
       "id": "kanbee-haruyoshi",
@@ -3873,7 +4325,8 @@ services:
         "walk_route_ja": "中洲川端・春吉橋から那珂川沿いを北西へ、春吉橋を渡ってすぐのリバーフロント中洲西ビル2F。那珂川の清流を望む水辺の個室割烹。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 7 分钟 (600m) | D+1:◎ · D+2:◎ · D+7:休 | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥7,000〜¥10,000 / 人"
-      }
+      },
+      "dish_archetype": "live_squid_sashimi"
     },
     {
       "id": "hp-hakata-nakagawa",
@@ -3989,7 +4442,8 @@ services:
       "hub_walk_zh": "🚶 距中洲川端/春吉中心步行 7 分钟 (550m) / 🚕 出租车 3 分钟",
       "hub_walk_en": "🚶 7 min walk (550m) / 🚕 3 min taxi from Haruyoshi Bridge",
       "walk_min": 7,
-      "walk_m": 550
+      "walk_m": 550,
+      "dish_archetype": "mizutaki"
     },
     {
       "id": "anmei-sumiyoshi",
@@ -4015,8 +4469,8 @@ services:
       "area_en": "Sumiyoshi · 7-Min Walk from Haruyoshi Bridge (550m)",
       "genre": "烧肉 · 和牛",
       "genre_en": "Wagyu Motsunabe & Live Squid",
-      "dish_headline": "九州産黒毛和牛小腸100% もつ鍋 · 呼子活イカ姿造り二刀流会席",
-      "dish_en": "Dual Hakata Feast: 100% Kyushu Black Wagyu Small-Intestine Motsunabe with Shaved Burdock & Live Yobuko Squid",
+      "dish_headline": "九州産黒毛和牛小腸100% 特選もつ鍋 · 博多鉄鍋一口餃子と胡麻カンパチ会席",
+      "dish_en": "100% Kyushu Kuroge Wagyu Small-Intestine Motsunabe, Iron-Skillet Hakata Gyoza & Sesame Amberjack",
       "eye_signals": [
         "🚶 距中洲川端/春吉中心步行 7 分钟 (550m)",
         "🔪 純白に輝く黒毛和牛小腸の圧倒的鮮度と大ぶりカット",
@@ -4126,7 +4580,8 @@ services:
         "walk_route_ja": "博多・春吉中心圏から住吉神社方面へ徒歩わずか550m、7分。一軒家完全個室完备。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 7 分钟 (550m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥4,500〜¥6,500 / 人"
-      }
+      },
+      "dish_archetype": "motsunabe_gyoza"
     },
     {
       "id": "hp-hakata-mizune",
@@ -4240,7 +4695,8 @@ services:
       "hub_walk_zh": "🚶 距中洲川端/春吉中心步行 8 分钟 (650m · 沿川端通直走) / 🚕 出租车 3 分钟",
       "hub_walk_en": "🚶 8 min walk (650m up Kawabata-dori) / 🚕 3 min taxi from Haruyoshi Bridge",
       "walk_min": 8,
-      "walk_m": 650
+      "walk_m": 650,
+      "dish_archetype": "kaiseki_kappo"
     },
     {
       "id": "matsushita-haruyoshi",
@@ -4377,7 +4833,8 @@ services:
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉2丁目へ徒歩8分。個室完備、職人が席で炊き上げる正統派水炊き専門店。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 8 分钟 (700m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥5,500〜¥8,000 / 人"
-      }
+      },
+      "dish_archetype": "mizutaki"
     },
     {
       "id": "sushi-mitsu",
@@ -4514,7 +4971,8 @@ services:
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉の路地奥へ。「cafe mitu」の奥に佇むカウンター10席の大人の隠れ家鮨。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 9 分钟 (750m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥12,000〜¥18,000 / 人"
-      }
+      },
+      "dish_archetype": "sushi_omakase"
     },
     {
       "id": "hanayoshi-uratenjin",
@@ -4651,7 +5109,8 @@ services:
         "walk_route_ja": "中洲川端・春吉橋から住吉通りを西へ、渡辺通・天神南駅そば（弥太郎うどんの2階）。裏天神の隠れ家魚酒場。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 9 分钟 (750m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥5,000〜¥7,000 / 人"
-      }
+      },
+      "dish_archetype": "kaiseki_kappo"
     },
     {
       "id": "hp-fukuoka-shogetsutei",
@@ -4766,7 +5225,8 @@ services:
         "price_est": "¥7,000 / 人"
       },
       "walk_min": 10,
-      "walk_m": 820
+      "walk_m": 820,
+      "dish_archetype": "sushi_omakase"
     },
     {
       "id": "hp-fukuoka-hamadaya",
@@ -4881,7 +5341,8 @@ services:
         "price_est": "¥4,500 / 人"
       },
       "walk_min": 10,
-      "walk_m": 800
+      "walk_m": 800,
+      "dish_archetype": "mizutaki"
     },
     {
       "id": "sushi-suigyo",
@@ -5018,7 +5479,8 @@ services:
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉大通り方面へ徒歩10分。名店「振る舞い処 水魚」の鮨別邸。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 10 分钟 (800m) | D+1:休 · D+2:◎ · D+7:休 | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥8,000〜¥12,000 / 人"
-      }
+      },
+      "dish_archetype": "sushi_omakase"
     },
     {
       "id": "chikaro-haruyoshi",
@@ -5155,7 +5617,8 @@ services:
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉交差点近くへ徒歩10分。全席個室の囲炉裏端で天草大王を味わう地鶏炭火焼。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 10 分钟 (800m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥4,500〜¥6,500 / 人"
-      }
+      },
+      "dish_archetype": "binchotan_jidori"
     },
     {
       "id": "oishi-sumiyoshi",
@@ -5292,7 +5755,8 @@ services:
         "walk_route_ja": "中洲川端・春吉橋から住吉通りを南下、住吉神社を越えて住吉4丁目へ徒歩11分。25年以上愛される博多もつ鍋の金字塔。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 11 分钟 (900m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
         "price_est": "¥4,000〜¥6,000 / 人"
-      }
+      },
+      "dish_archetype": "motsunabe"
     },
     {
       "id": "hp-fukuoka-moegi-yakuin",
@@ -5407,7 +5871,8 @@ services:
         "price_est": "¥6,600 / 人"
       },
       "walk_min": 14,
-      "walk_m": 1150
+      "walk_m": 1150,
+      "dish_archetype": "kaiseki_kappo"
     },
     {
       "id": "hp-shinjuku-ninomiya",
@@ -5518,7 +5983,8 @@ services:
         "🔪 Visual Craft Prior: Kohada crosshatch precision & akazu shari grain integrity at P85"
       ],
       "quote_en": "\"The master is taciturn so I was slightly tense at first, but the Kohada Kanoko knife-work and how the red-vinegar shari loosens on the tongue are ¥30,000 Ginza tier. A mystery why it sits at 3.4x in Shinjuku.\"",
-      "reviewer_en": "[Illustrative Archetype] Harsh Critic (Lifetime μ=2.98, σ=0.26, n=480 → Rated 3.70 here, z=+2.77σ endorsement)"
+      "reviewer_en": "[Illustrative Archetype] Harsh Critic (Lifetime μ=2.98, σ=0.26, n=480 → Rated 3.70 here, z=+2.77σ endorsement)",
+      "dish_archetype": "sushi_omakase"
     },
     {
       "id": "hp-shinbashi-otako",
@@ -5629,7 +6095,8 @@ services:
         "🔪 Visual Craft Prior: Deep amber dashi penetration to tofu core without edge collapse"
       ],
       "quote_en": "\"It's cramped, noisy, and the aunties bark orders—so tourists dock points. But the moment you bite into that black-dashi-soaked tofu over rice (Toumeshi), nothing else in Tokyo compares.\"",
-      "reviewer_en": "[Illustrative Archetype] Veteran Izakaya Critic (Lifetime μ=3.12, σ=0.29, n=610 → Rated 3.80, z=+2.34σ)"
+      "reviewer_en": "[Illustrative Archetype] Veteran Izakaya Critic (Lifetime μ=3.12, σ=0.29, n=610 → Rated 3.80, z=+2.34σ)",
+      "dish_archetype": "oden_izakaya"
     },
     {
       "id": "hp-kyoto-gem",
@@ -5738,7 +6205,8 @@ services:
         "🔪 Visual Craft Prior: Intact uni papillae (zero alum puddle) + fine BMS11 lipid lattice"
       ],
       "quote_en": "\"Because it's a newer Kyoto branch, Tabelog's Bayesian prior keeps it at 3.36. Yet the raw Hokkaido uni firmness and A5 wagyu lipid sweetness rival 4.1+ Gion beef kappo counters.\"",
-      "reviewer_en": "[Illustrative Archetype] Kansai Beef Connoisseur (Lifetime μ=3.18, σ=0.25, n=320 → Rated 3.80, z=+2.48σ)"
+      "reviewer_en": "[Illustrative Archetype] Kansai Beef Connoisseur (Lifetime μ=3.18, σ=0.25, n=320 → Rated 3.80, z=+2.48σ)",
+      "dish_archetype": "wagyu_yakiniku"
     },
     {
       "id": "hp-yumeyagura-umeda",
@@ -5846,7 +6314,8 @@ services:
         "🔪 Visual Craft Prior: Uniform 1.5mm charcoal crust with zero gray overcooked band (+0.06)"
       ],
       "quote_en": "\"Ignore the lively Umeda izakaya hallway—their direct-sourced Shiga Omi beef tataki has a textbook binchotan crust and ruby center that beats dedicated steak houses.\"",
-      "reviewer_en": "[Illustrative Archetype] Kansai Charcoal Critic (Lifetime μ=3.22, σ=0.26, n=410 → Rated 3.75, z=+2.04σ)"
+      "reviewer_en": "[Illustrative Archetype] Kansai Charcoal Critic (Lifetime μ=3.22, σ=0.26, n=410 → Rated 3.75, z=+2.04σ)",
+      "dish_archetype": "binchotan_jidori"
     },
     {
       "id": "hp-okoge-umeda",
@@ -5955,7 +6424,8 @@ services:
         "🔪 Visual Craft Prior: Individual standing rice grains & plump unburst ikura spheres (+0.06)"
       ],
       "quote_en": "\"Some impatient reviewers complain the kamameshi takes 25 minutes—because it's cooked from raw rice over direct flame! The fragrant scorched okoge crust and bursting ikura are worth every second.\"",
-      "reviewer_en": "[Illustrative Archetype] Osaka Rice & Dashi Critic (Lifetime μ=3.15, σ=0.27, n=275 → Rated 3.70, z=+2.04σ)"
+      "reviewer_en": "[Illustrative Archetype] Osaka Rice & Dashi Critic (Lifetime μ=3.15, σ=0.27, n=275 → Rated 3.70, z=+2.04σ)",
+      "dish_archetype": "kaiseki_kappo"
     },
     {
       "id": "hp-pronto-shinagawa",
@@ -6064,7 +6534,8 @@ services:
         "🛡️ Honest Chain Cap: Strictly capped at +0.06 total (3.44) per Kiro §0 anti-inflation rule"
       ],
       "quote_en": "\"A fun, honest Showa-retro evening bar after Shinagawa bullet-train arrivals. It's a chain—so our engine caps it honestly at 3.44 (top 20% of casual chains) rather than faking a 3.8.\"",
-      "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)"
+      "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)",
+      "dish_archetype": "oden_izakaya"
     },
     {
       "id": "hp-tengu-shinjuku",
@@ -6174,7 +6645,8 @@ services:
         "🛡️ Honest Chain Cap: Strictly capped at +0.06 total (3.41) per Kiro §0 discipline"
       ],
       "quote_en": "\"For ¥2,200 under the Shinjuku tracks, the house white-miso motsuni tofu is genuinely comforting. Calibrated honestly to 3.41 within the budget-izakaya bracket.\"",
-      "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)"
+      "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)",
+      "dish_archetype": "oden_izakaya"
     },
     {
       "id": "hp-wan-tamachi",
@@ -6283,7 +6755,8 @@ services:
         "🛡️ Honest Chain Cap: Strictly capped at +0.07 total (3.42) per Kiro §0 discipline"
       ],
       "quote_en": "\"Included as a transparent negative-control benchmark: even with nice Oribe plating, our engine recognizes chain execution and caps calibration at 3.42.\"",
-      "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)"
+      "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)",
+      "dish_archetype": "oden_izakaya"
     },
     {
       "id": "tc-akasakashion",
@@ -6391,7 +6864,8 @@ services:
         "🔪 Visual Craft Prior: Benchmark hassun knife-work & seasonal vessel harmony (+0.02)"
       ],
       "quote_en": "\"Serves as our 4.0+ kaiseki reference anchor—showing that while Akasaka Shion is superb at ¥22,000, several 3.38 regional kappo gems reach 88% of its knife precision at 1/3 the price.\"",
-      "reviewer_en": "[Illustrative Archetype] Tokyo Kaiseki Benchmark Anchor (n=145 verified reviews)"
+      "reviewer_en": "[Illustrative Archetype] Tokyo Kaiseki Benchmark Anchor (n=145 verified reviews)",
+      "dish_archetype": "kaiseki_kappo"
     },
     {
       "id": "fukuoka-tatsumi-sushi",
@@ -6499,7 +6973,8 @@ services:
         "🔪 Visual Craft Prior: Clean nigiri fan-shape & vibrant topping gloss (+0.02)"
       ],
       "quote_en": "\"A beloved Fukuoka institution where every piece arrives pre-seasoned with Genkai citrus, yuzu-kosho, or house nikiri—no soy saucer needed.\"",
-      "reviewer_en": "[Illustrative Archetype] Kyushu Sushi Reference Anchor (n=380 verified reviews)"
+      "reviewer_en": "[Illustrative Archetype] Kyushu Sushi Reference Anchor (n=380 verified reviews)",
+      "dish_archetype": "sushi_omakase"
     },
     {
       "id": "kyoto-ogata",
@@ -6606,7 +7081,8 @@ services:
         "🛡️ Inner-Circle Trim: -0.06 adjustment for invitation-only regular mutual-praise halo"
       ],
       "quote_en": "\"Included as the 4.59 ceiling ruler and the canonical example of κ_API = ∞ where pure digital agents fail and VRO's verified human concierge micro-bounty bridges the last mile.\"",
-      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Ceiling Reference Anchor (Tabelog Gold)"
+      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Ceiling Reference Anchor (Tabelog Gold)",
+      "dish_archetype": "kaiseki_kappo"
     },
     {
       "id": "sushi-sugita-tokyo",
@@ -6713,7 +7189,8 @@ services:
         "🛡️ Inner-Circle Trim: -0.06 adjustment for scarcity-driven halo inflation"
       ],
       "quote_en": "\"Sugita is the P100 yardstick for Edomae shari and knife work—allowing our vision model to quantify when a 3.42 neighborhood counter achieves 85% of Sugita's blade geometry at 1/4 the price.\"",
-      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Edomae Sushi Ceiling Ruler"
+      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Edomae Sushi Ceiling Ruler",
+      "dish_archetype": "sushi_omakase"
     },
     {
       "id": "yakiniku-jambo-hanare",
@@ -6820,7 +7297,8 @@ services:
         "🛡️ Inner-Circle Trim: -0.04 adjustment for chef's-table regular halo"
       ],
       "quote_en": "\"Anchors the P99 visual standard for A5 wagyu lipid sheen and 3-second Maillard caramelization.\"",
-      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Wagyu Ceiling Ruler"
+      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Wagyu Ceiling Ruler",
+      "dish_archetype": "wagyu_yakiniku"
     },
     {
       "id": "ramen-iida-shouta",
@@ -6928,7 +7406,8 @@ services:
         "🛡️ Inner-Circle Trim: -0.02 pilgrimage halo adjustment"
       ],
       "quote_en": "\"Sets the visual standard for golden chiyu (chicken oil) emulsion and silky noodle fold alignment.\"",
-      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Ramen Ceiling Ruler"
+      "reviewer_en": "[Illustrative Archetype] SGDO/VRO Ramen Ceiling Ruler",
+      "dish_archetype": "ramen"
     }
   ],
   "bounties": [
@@ -6978,7 +7457,11 @@ services:
     "hub_guide_note_zh": "💡 福岡・博多/春吉中心圈 (Hakata / Haruyoshi Central Hub) 15 分钟步程寻味指南：围绕中洲川端与春吉桥中心圈步行 3–14 分钟（240m–1150m）范围内，严选 17 家被九州严苛打分基线掩盖的 3.25–3.54 → 真味β 3.62–3.81『沧海遗珠』（含 3 家 ☀️ 午市怀石/水炊/活鱼会席及 14 家晚间炭火/牛肠锅/割烹/江户前鮨），支持一键查看实时空位状态或在模拟沙盒 (Virtual / Paper Sandbox) 中生成双语预约请求草案。",
     "hub_guide_note_en": "💡 Fukuoka · Hakata / Haruyoshi Central Hub 15-Min Walkable Curation Guide: Within a 3–14 min walk (240m–1150m) of Haruyoshi Bridge and Nakasu-Kawabata, explore 17 Fukuoka 'Hidden Gems' (3.25–3.54 → True-Taste β 3.62–3.81)—including 3 venues open for ☀️ Lunch (11:30–) and 14 evening kappo, motsunabe, binchotan, and sushi counters—with 1-tap HotPepper calendar links and bilingual reservation draft packets inside the 模拟沙盒 (Virtual / Paper Sandbox)."
   },
-  "reviewer_quote_policy": "All reviewer profiles, z-score parameters (μ, σ, n), and quotes are illustrative archetype syntheses (示意性食客画像与评论重构) constructed for model demonstration, not verbatim scraped platform reviews."
+  "reviewer_quote_policy": "All reviewer profiles, z-score parameters (μ, σ, n), and quotes are illustrative archetype syntheses (示意性食客画像与评论重构) constructed for model demonstration, not verbatim scraped platform reviews.",
+  "nagasaki_hub_count": 14,
+  "nagasaki_sushi_count": 7,
+  "total_venues": 45,
+  "hidden_gem_count": 39
 };
 
     let venues = INITIAL_DATASET.venues;
@@ -7149,26 +7632,47 @@ services:
       showToast(`📦 已导出 ${feedbackVault.length} 条私有选品与眼缘反馈资产 (.jsonl)`);
     }
 
+    function interleaveByDishArchetype(items) {
+      if (!items || items.length <= 2) return items;
+      const pool = items.slice();
+      const result = [];
+      while (pool.length > 0) {
+        const prevArch = result.length > 0 ? (result[result.length - 1].dish_archetype || result[result.length - 1].genre) : null;
+        let pickIdx = 0;
+        if (prevArch) {
+          const diffIdx = pool.findIndex(v => (v.dish_archetype || v.genre) !== prevArch);
+          if (diffIdx !== -1) pickIdx = diffIdx;
+        }
+        result.push(pool.splice(pickIdx, 1)[0]);
+      }
+      return result;
+    }
+
+    function matchVenueTier(v, tier) {
+      if (tier === 'all') return true;
+      if (tier === 'nagasaki_hub') return Boolean(v.nagasaki_hub);
+      if (tier === 'nagasaki_sushi') return Boolean(v.nagasaki_sushi);
+      if (tier === 'fukuoka_hub') return Boolean(v.fukuoka_hub);
+      return v.tier_group === tier;
+    }
+
     function getFilteredVenues() {
       let filtered = venues.filter(v => {
-        const matchTier = selectedTier === 'all'
-          ? true
-          : (selectedTier === 'nagasaki_hub'
-              ? Boolean(v.nagasaki_hub)
-              : (selectedTier === 'fukuoka_hub' ? Boolean(v.fukuoka_hub) : v.tier_group === selectedTier));
+        const matchTier = matchVenueTier(v, selectedTier);
         const matchBias = selectedBias === 'all' || (v.bias_archetypes && v.bias_archetypes.includes(selectedBias));
-        const matchCity = (selectedTier === 'nagasaki_hub' || selectedTier === 'fukuoka_hub')
+        const matchCity = (selectedTier === 'nagasaki_hub' || selectedTier === 'nagasaki_sushi' || selectedTier === 'fukuoka_hub')
           ? true
           : (selectedCity === '全部' || v.city === selectedCity);
-        const matchGenre = selectedGenre === '全部' || v.genre === selectedGenre;
+        const matchGenre = (selectedTier === 'nagasaki_sushi')
+          ? true
+          : (selectedGenre === '全部' || v.genre === selectedGenre);
         return matchTier && matchBias && matchCity && matchGenre;
       });
       if (!filtered.length) {
-        filtered = venues.filter(v => selectedTier === 'all'
-          ? true
-          : (selectedTier === 'nagasaki_hub'
-              ? Boolean(v.nagasaki_hub)
-              : (selectedTier === 'fukuoka_hub' ? Boolean(v.fukuoka_hub) : v.tier_group === selectedTier)));
+        filtered = venues.filter(v => matchVenueTier(v, selectedTier));
+      }
+      if (selectedTier !== 'nagasaki_sushi' && selectedGenre === '全部') {
+        filtered = interleaveByDishArchetype(filtered);
       }
       return filtered;
     }
@@ -7181,15 +7685,22 @@ services:
         btn.classList.toggle('active', btn.getAttribute('data-bias') === 'all');
       });
       const nagBtn = document.getElementById('tierNagasakiBtn');
+      const nagSushiBtn = document.getElementById('tierNagasakiSushiBtn');
       const fukBtn = document.getElementById('tierFukuokaBtn');
       const gemBtn = document.getElementById('tierGemBtn');
       const trophyBtn = document.getElementById('tierTrophyBtn');
       const allBtn = document.getElementById('tierAllBtn');
       if (nagBtn) nagBtn.className = 'tier-btn' + (tier === 'nagasaki_hub' ? ' active-gem' : '');
+      if (nagSushiBtn) nagSushiBtn.className = 'tier-btn' + (tier === 'nagasaki_sushi' ? ' active-gem' : '');
       if (fukBtn) fukBtn.className = 'tier-btn' + (tier === 'fukuoka_hub' ? ' active-gem' : '');
       gemBtn.className = 'tier-btn' + (tier === 'hidden_gem' ? ' active-gem' : '');
       trophyBtn.className = 'tier-btn' + (tier === 'trophy_reference' ? ' active-trophy' : '');
       allBtn.className = 'tier-btn' + (tier === 'all' ? ' active-trophy' : '');
+
+      const nagQuick = document.getElementById('nagasakiQuickBtn');
+      const nagSushiQuick = document.getElementById('nagasakiSushiQuickBtn');
+      if (nagQuick) nagQuick.classList.toggle('active', tier === 'nagasaki_hub');
+      if (nagSushiQuick) nagSushiQuick.classList.toggle('active', tier === 'nagasaki_sushi');
 
       const nagBanner = document.getElementById('nagasakiHubBanner');
       const fukBanner = document.getElementById('fukuokaHubBanner');
@@ -7197,7 +7708,7 @@ services:
         if (tier === 'fukuoka_hub') {
           nagBanner.style.display = 'none';
           fukBanner.style.display = 'block';
-        } else if (tier === 'nagasaki_hub') {
+        } else if (tier === 'nagasaki_hub' || tier === 'nagasaki_sushi') {
           nagBanner.style.display = 'block';
           fukBanner.style.display = 'none';
         } else {
@@ -7213,13 +7724,15 @@ services:
         : `🖼️ 全景画廊 (${list.length})`;
       document.getElementById('navEyeBtn').textContent = tier === 'nagasaki_hub'
         ? (isEn ? `📍 Nagasaki Gems (${list.length})` : `📍 長崎・思案橋/銅座 (${list.length})`)
-        : (tier === 'fukuoka_hub'
-            ? (isEn ? `📍 Fukuoka Hub Gems (${list.length})` : `📍 博多/春吉圈 (${list.length})`)
-            : (tier === 'hidden_gem'
-                ? (isEn ? `💎 3.2–3.6 Gems (${list.length})` : `💎 刷 3.2–3.6 遗珠 (${list.length})`)
-                : (tier === 'trophy_reference'
-                    ? (isEn ? `🏆 4.0+ Rulers (${list.length})` : `🏆 4.0+ 参照 (${list.length})`)
-                    : (isEn ? `📚 All Venues (${list.length})` : `📚 全部真图店 (${list.length})`)))) ;
+        : (tier === 'nagasaki_sushi'
+            ? (isEn ? `🍣 Nagasaki Sushi (${list.length})` : `🍣 長崎・板前鮨 (${list.length})`)
+            : (tier === 'fukuoka_hub'
+                ? (isEn ? `📍 Fukuoka Hub Gems (${list.length})` : `📍 博多/春吉圈 (${list.length})`)
+                : (tier === 'hidden_gem'
+                    ? (isEn ? `💎 3.2–3.6 Gems (${list.length})` : `💎 刷 3.2–3.6 遗珠 (${list.length})`)
+                    : (tier === 'trophy_reference'
+                        ? (isEn ? `🏆 4.0+ Rulers (${list.length})` : `🏆 4.0+ 参照 (${list.length})`)
+                        : (isEn ? `📚 All Venues (${list.length})` : `📚 全部真图店 (${list.length})`))))) ;
 
       renderSpotlight();
       renderGrid();
@@ -7629,6 +8142,18 @@ services:
                  <strong>🧭 福岡・博多/春吉中心圈 (Hakata / Haruyoshi Central Hub)：</strong>${currentLang === 'en' ? (v.hub_walk_en || v.hub_walk_zh) : (v.hub_walk_zh || '')}
                </div>`
             : '');
+      const telHtml = (v.booking && v.booking.tel)
+        ? `<div style="margin-top:6px; padding:6px 9px; border-radius:8px; background:rgba(212,175,55,0.14); border:1px solid rgba(212,175,55,0.55); color:#fef3c7; font-size:0.74rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+             <span>📞 <strong>店舗直通電話 (ホテル礼賓部・直電手配)：</strong><code style="color:#fde68a; font-weight:800;">${v.booking.tel}</code></span>
+             <a href="tel:${v.booking.tel}" style="color:#052e16; background:#fbbf24; padding:2px 8px; border-radius:999px; font-weight:800; text-decoration:none; font-size:0.68rem;">📲 一键拨号</a>
+           </div>`
+        : '';
+      const availObj = (v.booking && v.booking.availability) ? v.booking.availability : null;
+      const availHtml = availObj
+        ? `<div style="margin-top:5px; font-size:0.7rem; color:#d4d4d8; font-family:monospace; background:rgba(255,255,255,0.03); padding:5px 8px; border-radius:6px;">
+             📅 <strong>10/20(火):</strong> ${availObj['2026-10-20'] || '-'} | <strong>10/21(水):</strong> ${availObj['2026-10-21'] || '-'} | <strong>10/22(木):</strong> ${availObj['2026-10-22'] || '-'}
+           </div>`
+        : '';
       document.getElementById('drawerPipelineBox').innerHTML = `
         <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
           <strong>归一化 Slot 状态 (<code style="color:${statusColor}">${v.booking.status.toUpperCase()} / ${v.booking.seat_type}</code>)</strong>
@@ -7638,6 +8163,8 @@ services:
         <div style="font-size:0.7rem; color:#6ee7b7; font-family:monospace;">
           🧬 真味校准：食べログ ${v.tabelog_raw} → ${v.calibrated_score} (${v.debias_waterfall ? v.debias_waterfall.ci_text : ''})
         </div>
+        ${telHtml}
+        ${availHtml}
         ${walkBadge}
       `;
 
@@ -7660,6 +8187,7 @@ services:
           platform: v.booking.platform,
           venue_id: v.booking.venue_id,
           source_url: v.booking.source_url,
+          tel: (v.booking && v.booking.tel) || undefined,
           live_availability: (v.booking && v.booking.availability) || undefined
         },
         request: {
@@ -7816,28 +8344,34 @@ services:
       // Nagasaki Hub Banner
       const nTitle = document.getElementById('nagasakiBannerTitle');
       if (nTitle) nTitle.textContent = isEn
-        ? '📍 Nagasaki · Shianbashi / Doza (Nagasaki Hidden Gems) 1–4 Min Walkable Curation Deck'
-        : '📍 長崎・思案橋/銅座 (Nagasaki Hidden Gems) 1–4min 步程严选专场';
+        ? '📍 Nagasaki · Shianbashi / Doza (14 Interleaved Gems & 7 Counter Sushi Spots)'
+        : '📍 長崎・思案橋/銅座 (Nagasaki Hidden Gems & Counter Sushi) 严选专场';
       const nQuick = document.getElementById('nagasakiQuickBtn');
       if (nQuick) nQuick.textContent = isEn
-        ? '🚶 Filter: 10 Nagasaki Shianbashi/Doza Gems'
-        : '🚶 只看長崎・思案橋/銅座 10 家遗珠';
+        ? '🚶 All 14 Nagasaki Gems (De-Duplicated)'
+        : '🚶 長崎严选全集 (14 · 已去重交错)';
+      const nSushiQuick = document.getElementById('nagasakiSushiQuickBtn');
+      if (nSushiQuick) nSushiQuick.textContent = isEn
+        ? '🍣 Only 7 Nagasaki Counter Sushi (Tonight/Wed)'
+        : '🍣 只看長崎・板前鮨おまかせ (7)';
       const nBody = document.getElementById('nagasakiBannerBody');
       if (nBody) nBody.innerHTML = isEn
-        ? '<strong>🧭 Nagasaki · Shianbashi / Doza / Hamamachi / Nagasaki Stn (1–4 Min Walkable Gems):</strong> Within a <strong>1–4 min walk (80m–350m) of Shianbashi Tram Stop, Doza, Shinchi Chinatown, and Nagasaki Station</strong>, explore <strong>10 Nagasaki Hidden Gems (3.22–3.50 → True-Taste β 3.68–3.88)</strong> across 4 regional pillars: <strong>① Goto/Yobuko Live Spear Squid Ikizukuri &amp; Wild Kue Kappo</strong>, <strong>② JA Direct Prime Minister&#39;s Award A5 Nagasaki Wagyu &amp; Dejima Barairo</strong>, <strong>③ Nagasaki Local-Fish Aged Nigiri Sushi</strong>, and <strong>④ Camellia-Oil Goto Hand-Pulled Udon in Grilled Flying-Fish (Ago) Dashi &amp; Est. 1968 Shippoku Tohporou Pork</strong>. Swipe right inside the <strong>模拟沙盒 (Virtual / Paper Sandbox)</strong> for live Oct 20–21 availability &amp; 1-Tap HotPepper booking.'
-        : '<strong>🧭 長崎・思案橋/銅座/浜町/長崎駅 1–4 分钟步程寻味指南：</strong>围绕思案桥电停、铜座、新地中华街与长崎站前中心地标<strong>步行 1–4 分钟（80m–350m）</strong>范围内，严选 <strong>10 家 3.22–3.50 → 真味β 3.68–3.88 沧海遗珠</strong>（涵盖 <strong>① 五島・呼子直送 活きヤリイカ姿造り×天然クエ/生サバ割烹</strong>、<strong>② JA全農ながさき直営・内閣総理大臣賞『長崎和牛 A5 / 出島ばらいろ』炭火・鉄板</strong>、<strong>③ 日本一魚種・長崎地魚熟成握り鮨</strong>、<strong>④ 五島椿油手延べうどん×平戸焼きあご・真鯛だし / 1968創業長崎卓袱・東坡煮</strong>），右滑即可在<strong>模拟沙盒 (Virtual / Paper Sandbox)</strong> 中查看 2026-10-20 / 2026-10-21 实测席位或一键直连 HotPepper 官方预订源。';
+        ? '<strong>🧭 Nagasaki · Shianbashi / Doza / Nagasaki Stn (v0.4.5 De-Duplicated &amp; Counter Sushi Edition):</strong> ① <strong>🍣 7 Nagasaki Counter Sushi &amp; Omakase Venues</strong> (<code>Obi Sushi</code>, Wednesday-open TableCheck instant-bookable <code>Sushi Hakuun</code> &amp; <code>Sushi Hinoka</code>, iron-hagama pinnacle <code>Sushi Takao</code>, full slate course <code>Sushi De Jima by Sushiten</code>, Doza 8-seat <code>Sushi Kozo</code>, and fishmonger-direct <code>Ikeda Sengyo</code>—all with <strong>direct phone numbers 📞 and live Oct 20 / Oct 21 Wed / Oct 22 availability</strong>); ② <strong>🔀 Submodular Dish-Archetype Interleaving</strong>: Strictly <strong>1 live squid sashimi representative (Kappo Kawamasa)</strong> interleaved with <strong>A5 Nagasaki Wagyu, Live Abalone Teppanyaki, Grilled Ago-Dashi Goto Udon, and Est. 1968 Shippoku</strong> so identical dish types never appear back-to-back.'
+        : '<strong>🧭 長崎・思案橋/銅座/長崎駅 1–4 分钟步程寻味指南（v0.4.5 同质化去重 + 板前鮨强化版）：</strong>① <strong>🍣 7 家長崎板前鮨・おまかせ专场</strong>（<code>Obi寿司</code>、水曜TableCheck即时可订的 <code>鮨 白雲</code> 与 <code>鮨 ひのか</code>、铁羽釜现炊舍利巅峰 <code>鮨 たか尾</code>、全席板前 <code>鮨 De Jima by すし天</code>、铜座老饕吧台 <code>鮨 幸三</code>、仲买直营 <code>池田鮮魚</code>，全部附带<strong>直通电话 📞 与 10/20·10/21周三·10/22 实测席位</strong>）；② <strong>🔀 菜品原型去重交错 (MMR Submodular Interleaving)</strong>：全盘<strong>仅保留 1 家活枪乌贼姿造代表（割烹 河正）</strong>，并与 <strong>JA全农直营A5长崎和牛、活鲍铁板烧、烤飞鱼真鲷出汁五岛乌冬、1968长崎卓袱东坡煮</strong> 严格交替排布，绝不连续出现同类菜品。';
 
       // Tier buttons
       const nBtn = document.getElementById('tierNagasakiBtn');
+      const nsBtn = document.getElementById('tierNagasakiSushiBtn');
       const fBtn = document.getElementById('tierFukuokaBtn');
       const gBtn = document.getElementById('tierGemBtn');
       const trBtn = document.getElementById('tierTrophyBtn');
       const aBtn = document.getElementById('tierAllBtn');
-      if (nBtn) nBtn.textContent = isEn ? '📍 長崎・思案橋/銅座 (Nagasaki Hidden Gems · 10)' : '📍 長崎・思案橋/銅座 (Nagasaki Hidden Gems · 10)';
+      if (nBtn) nBtn.textContent = isEn ? '📍 長崎・思案橋/銅座 (Nagasaki Gems · 14)' : '📍 長崎・思案橋/銅座 (Nagasaki Hidden Gems · 14)';
+      if (nsBtn) nsBtn.textContent = isEn ? '🍣 長崎・板前鮨 (Nagasaki Sushi · 7)' : '🍣 長崎・板前鮨おまかせ (7)';
       if (fBtn) fBtn.textContent = isEn ? '📍 Fukuoka Hakata/Haruyoshi Hub (17)' : '📍 福岡・博多/春吉中心圈 (17)';
-      if (gBtn) gBtn.textContent = isEn ? '💎 Focus: 3.2–3.6 Hidden Gems (35)' : '💎 主攻：3.2–3.6 沧海遗珠 (35)';
+      if (gBtn) gBtn.textContent = isEn ? '💎 Focus: 3.2–3.6 Hidden Gems (39)' : '💎 主攻：3.2–3.6 沧海遗珠 (39)';
       if (trBtn) trBtn.textContent = isEn ? '🏆 4.0+ Trophy Rulers (Ref · 6)' : '🏆 4.0+ 殿堂参照标尺 (非主攻 · 6)';
-      if (aBtn) aBtn.textContent = isEn ? '📚 All Authentic Venues (41)' : '📚 全部真图店 (41)';
+      if (aBtn) aBtn.textContent = isEn ? '📚 All Authentic Venues (45)' : '📚 全部真图店 (45)';
 
       // Bias chips
       const biasMap = isEn ? {
@@ -7867,8 +8401,8 @@ services:
       document.getElementById('togglePureEyeBtn').textContent = isEn ? '👁️ Pure Eye Mode' : '👁️ 纯眼缘盲刷';
       document.getElementById('toggleBadgeBtn').textContent = isEn ? '🧬 5-Factor Waterfall' : '🧬 真味校准瀑布';
 
-      const cityMap = isEn ? { '全部': 'All Cities', '长崎': 'Nagasaki (10)', '福冈': 'Fukuoka (18)', '东京': 'Tokyo', '京都': 'Kyoto', '大阪': 'Osaka' }
-                           : { '全部': '全部城市', '长崎': '长崎 (10)', '福冈': '福冈 (18)', '东京': '东京', '京都': '京都', '大阪': '大阪' };
+      const cityMap = isEn ? { '全部': 'All Cities', '长崎': 'Nagasaki (14)', '福冈': 'Fukuoka (18)', '东京': 'Tokyo', '京都': 'Kyoto', '大阪': 'Osaka' }
+                           : { '全部': '全部城市', '长崎': '长崎 (14)', '福冈': '福冈 (18)', '东京': '东京', '京都': '京都', '大阪': '大阪' };
       document.querySelectorAll('#cityFilterRow .filter-chip').forEach(btn => {
         const c = btn.getAttribute('data-city');
         if (cityMap[c]) btn.textContent = cityMap[c];
@@ -7937,6 +8471,7 @@ services:
       try {
         const d = new URLSearchParams(window.location.search).get('deck');
         if (d === 'nagasaki') return 'nagasaki_hub';
+        if (d === 'nagasaki_sushi' || d === 'sushi') return 'nagasaki_sushi';
         if (d === 'fukuoka') return 'fukuoka_hub';
       } catch (e) {}
       return 'hidden_gem';

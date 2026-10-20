@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  tabelog-eye-vro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tabelog-eye-vro-node
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - HOST=0.0.0.0
+      - DEFAULT_MONTHLY_BUDGET_CAP=100.00
+      - VAULT_DB_PATH=/app/data/taste_vault.db
+      - DEVICE_SALT=tabelog-eye-vro-local-salt-2026
+      - ALLOW_CORS=true
+    volumes:
+      - ./data:/app/data
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
