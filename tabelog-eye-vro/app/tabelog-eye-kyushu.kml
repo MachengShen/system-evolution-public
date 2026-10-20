@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Tabelog·Eye — 九州厳選食通レーダー (Google Maps Native Layer)</name>
+    <description>Tabelog·Eye AI 破偏置真味校准 × 私有眼缘资产库 — 官方 Google Maps 原生图层 (彻底过滤大车店与游客陷阱)</description>
+    <Style id="style-sushi">
+      <IconStyle>
+        <color>ff147efb</color>
+        <scale>1.2</scale>
+        <Icon>
+          <href>https://maps.google.com/mapfiles/kml/paddle/orange-stars.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="style-nagasaki">
+      <IconStyle>
+        <color>ff50b848</color>
+        <scale>1.2</scale>
+        <Icon>
+          <href>https://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="style-fukuoka">
+      <IconStyle>
+        <color>ff37afd4</color>
+        <scale>1.2</scale>
+        <Icon>
+          <href>https://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Folder>
+      <name>🍣 長崎・高級板前鮨おまかせ 7選 (Counter Sushi)</name>
+      <Placemark>
+        <name>Obi寿司 (★ 3.76)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.76 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.25)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 天然黑板岩盛付：长崎地鱼特选十贯握（松笠汤引天然真鲷、细密格纹炙金枪鱼、活车海老散唐墨粉、煮穴子与蓝染有田烧茶碗蒸）</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市本石灰町5-29</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:070-5093-8265">070-5093-8265</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">10/20(今夜): 📞 070-5093-8265 电询 · 10/21(周三): 定休 · 10/22(周四): ◎ 即时可订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-sushi</styleUrl>
+        <Point>
+          <coordinates>129.879364,32.742546,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鮨 白雲 (すし はくも) (★ 3.89)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.89 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.38)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 朱涂春庆漆台盛付：五岛朝获生鲭鱼/真竹荚鱼极细鹿の子网格隐刀握配羽釜炊赤醋舍利</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市万屋町5-29 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:080-6413-4406">080-6413-4406</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">10/20(今夜): 📞 080-6413-4406 电询 · 10/21(周三): ◎ TableCheck直订 · 10/22: ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-sushi</styleUrl>
+        <Point>
+          <coordinates>129.879715,32.744057,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鮨 ひのか (★ 3.88)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.88 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.36)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 总桧木吧台职人手握：江户前古法盐〆小肌（コハダ）配长崎近海熟成地鱼おまかせコース</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市油屋町2-12 ふるーる浜んまち 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:050-1808-4640">050-1808-4640</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">10/20(今夜): ◎ (18:00–19:00) · 10/21(周三): ◎ (12:00/18:00–19:00) · 📞 050-1808-4640</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-sushi</styleUrl>
+        <Point>
+          <coordinates>129.881149,32.74334,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鮨 たか尾 (すし たかお) (★ 3.94)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.94 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.52)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 白木桧台一贯入魂：按预约时刻铁羽釜现炊赤醋舍利配熟成近海本鲔中トロ握り</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市本石灰町3-13 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-823-9026">095-823-9026</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">10/20·10/21(周三)·10/22: 完全电话预约制 📞 095-823-9026 (8:00–24:00可电询)</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-sushi</styleUrl>
+        <Point>
+          <coordinates>129.878601,32.7425,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鮨 De Jima by すし天 (★ 3.86)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.86 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.35)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 玄昌石黑板岩全席盛付：本鲔中トロ·生海胆军舰·炙黑喉·煮穴子十贯握配蒸鲍鱼浓厚肝酱与太刀鱼盐烧</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市尾上町1-1 7F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-895-8884">095-895-8884</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">10/20(今夜): ◎ (17:30/19:30) · 10/21(周三): ◎ (11:30/13:00/17:30/19:30) · 📞 095-895-8884</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-sushi</styleUrl>
+        <Point>
+          <coordinates>129.868652,32.753613,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鮨 幸三 (すし こうぞう) (★ 3.84)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.84 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.41)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 白木吧台竹叶盛付：特大活车海老带头握、北海道/长崎生海胆军舰、本鲔赤身酱油渍、芽葱握与高汤玉子烧</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市銅座町12-2</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-820-7757">095-820-7757</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">10/20(今夜)·10/21(周三)·10/22: 18:00–23:00 正常营业 · 📞 095-820-7757 电话直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-sushi</styleUrl>
+        <Point>
+          <coordinates>129.87822,32.742706,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>(酒)池田鮮魚 (★ 3.75)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.75 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.32)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 黑陶大皿盛付：鲜鱼仲买直营长崎近海地鱼九贯握（五岛朝获生鲭鱼、江户前小肌、真鲷、剑先乌贼与满溢鲑鱼籽军舰）</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市本石灰町6-1 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-895-9920">095-895-9920</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距思案橋電停 (Shianbashi Tram Stop)1min · 10/20(available) · 10/21(available) · 10/22(closed) · 📞 095-895-9920</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-sushi</styleUrl>
+        <Point>
+          <coordinates>129.880081,32.742592,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>🏮 長崎・思案橋/銅座 滄海遺珠 7選 (Nagasaki Hidden Gems)</name>
+      <Placemark>
+        <name>長崎和牛焼肉 ぴゅあ (★ 3.86)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.86 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.46)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> JA全农直营白木盛箱：内阁总理大臣赏A5长崎和牛特选五部位木札盛合（特选カルビ·ロース·夏多布里昂ヒレ·カメノコ）</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市新地町2-7</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-824-2900">095-824-2900</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距新地中華街電停 / 思案橋電停3min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-824-2900</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-nagasaki</styleUrl>
+        <Point>
+          <coordinates>129.874863,32.741982,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鉄板や 万菜 (★ 3.74)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.74 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.31)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 天然珍珠鲍壳盛付：长崎近海活鲍鱼与浓厚鲍肝焦香黄油酱油铁板嫩煎（配幻之长崎和牛『出岛ばらいろ』铁板烧）</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市銅座町7-18 リンクス銅座ビル 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-826-1823">095-826-1823</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-826-1823</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-nagasaki</styleUrl>
+        <Point>
+          <coordinates>129.876694,32.742035,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>五島うどん 居酒屋 だしぼんず (★ 3.84)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.84 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.48)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 浓茶大钵盛付：名物炭火香烤天然真鲷带骨兜煮×平户炭火烤飞鱼（焼きあご）黄金清汤五岛椿油手延乌冬</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市浜町4-22 明星ビル 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-821-2525">095-821-2525</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-821-2525</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-nagasaki</styleUrl>
+        <Point>
+          <coordinates>129.877365,32.743881,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>割烹とし (★ 3.82)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.82 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.38)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 昭和53年创业名门会席：炙烧长崎生鲭鱼与天然真鲷大皿姿造、秘传三层东坡煮（长崎角煮）配朱漆お鰭吸物椀</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市中町5-22</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-822-1055">095-822-1055</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距長崎駅前電停 / 五島町電停4min · 10/20(request) · 10/21(full) · 10/22(available) · 📞 095-822-1055</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-nagasaki</styleUrl>
+        <Point>
+          <coordinates>129.873718,32.752201,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>焼肉 かくら 長崎銅座店 (★ 3.68)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.68 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.22)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 莳绘黑漆角皿与陶壶盛付：一头买长崎和牛·九州黑毛和牛细密霜降カルビ配秘传陶壶渍厚切牛肋条与上等牛舌</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市銅座町10-9 エビスビル 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-823-0273">095-823-0273</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距観光通り電停 / 思案橋電停2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-823-0273</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-nagasaki</styleUrl>
+        <Point>
+          <coordinates>129.877182,32.742523,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>長崎卓袱浜勝 長崎総本店 (★ 3.88)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.88 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.5)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 朱涂圆桌黑漆手桶御膳：琥珀色慢炖东坡煮（长崎豚角煮）、现炸金黄虾仁吐司ハトシ、仪礼お鰭吸物椀与近海地鱼刺身</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市鍛冶屋町6-50</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-826-8321">095-826-8321</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距思案橋電停 (Shianbashi Tram Stop)3min · 10/20(request) · 10/21(available) · 10/22(available) · 📞 095-826-8321</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-nagasaki</styleUrl>
+        <Point>
+          <coordinates>129.881302,32.743282,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>川正 長崎 (★ 3.75)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.75 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.28)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 青竹帘碎冰长皿：长崎近海一本钓活枪乌贼姿造配朱涂匙本山葵、红蓼与冰镇地酒德利</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 長崎県長崎市本石灰町3-3</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:095-807-5027">095-807-5027</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距思案橋電停 (Shianbashi Tram Stop)2min · 10/20(available) · 10/21(available) · 10/22(available) · 📞 095-807-5027</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=nagasaki&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-nagasaki</styleUrl>
+        <Point>
+          <coordinates>129.878983,32.74268,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>🔥 福岡・博多/春吉/住吉 滄海遺珠 17選 (Fukuoka Hidden Gems)</name>
+      <Placemark>
+        <name>寅火 中洲（とらび） (★ 3.76)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.76 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.41)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 织部绿釉长皿：备长炭豪快黑炎炙烤九州地鸡带骨腿肉配德岛酢橘与粗海盐</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区上川端町3-14</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-263-0505">092-263-0505</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心步行3min · 晚间 17:00–24:00 吧台/个室可订 ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.410126,33.592342,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Japanese Cuisine 菜な 春吉店 (★ 3.73)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.73 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.39)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 黑铁浅锅沸腾实拍：九州产黑毛和牛极上丸肠（マルチョウ）雪白脂玉配牛蒡丝、韭菜山与金胡麻</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区春吉3-11-19 パノラマスクエア博多 B1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-738-8377">092-738-8377</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心步行4min · 今晚/本周包厢与吧台可订 ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.405533,33.589722,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>もつ料理 かわ乃 本店 (★ 3.79)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.79 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.46)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 滚烫黑铁板厚切：朝挽九州和牛ハツ（牛心）牛排配秘传焦香蒜片酱油与豆芽</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区春吉2-16-8</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-761-1256">092-761-1256</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心步行5min · 晚间 17:00–22:30 在线/电话预约可订 ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.406311,33.585365,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多塩もつ鍋 仙頭 博多住吉店 (★ 3.68)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.68 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.36)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 名物 炭火炙り黒毛和牛もつ鍋 (特製塩ダレ · 塩麹レモン · 白ネギ山盛り)</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区住吉2丁目4-7 レジデンス博多 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-474-5555">092-474-5555</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心5min(400m) · D+1(◎) · D+2(◎) · D+7(◎) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.412949,33.588085,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多 かんべえ 春吉天神邸 (★ 3.77)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.77 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.48)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 呼子直送・活きヤリイカ姿造り (糸造り) · 対馬産天然本あら (クエ) 薄造り</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区春吉3-5-7 リバーフロント中洲西サウスサイド 2F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-717-3888">092-717-3888</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心7min(600m) · D+1(◎) · D+2(◎) · D+7(休) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.407913,33.589321,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多水炊き なかがわ (★ 3.69)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.69 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.34)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 伊万里彩绘大皿：朝挽九州鲜鸡胸/腿肉厚切与手打软骨鸡肉丸（生つくね）</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区店屋町3-32 中村ビル 1F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-282-7778">092-282-7778</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心步行7min · 免排长队 HotPepper 在线锁位 ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.410156,33.595642,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多もつ鍋 安明 福岡博多本店 (★ 3.62)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.62 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.28)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 九州産黒毛和牛小腸100% 特選もつ鍋 · 博多鉄鍋一口餃子と胡麻カンパチ会席</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区住吉2-15-33</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-409-7757">092-409-7757</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心7min(550m) · D+1(◎) · D+2(◎) · D+7(◎) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.412018,33.587963,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多割烹 水音 (★ 3.71)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.71 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.38)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 有田烧青花大皿菊花盛付：糸岛豚与玄界滩白身鱼薄造配黄金出汁纸锅</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区上川端町6-17</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-281-2230">092-281-2230</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心步行8min · 中洲川端吧台/个室在线可订 ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.409027,33.593277,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多水炊き まつした (★ 3.71)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.71 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.38)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 九州産朝引き鶏8時間炊き込み 黄金白濁スープ水炊き · 締め鶏白湯ラーメン</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区春吉2-12-11 アクラス南天神 102</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-732-4129">092-732-4129</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心8min(700m) · D+1(◎) · D+2(◎) · D+7(◎) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.407547,33.586643,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鮨みつ (★ 3.74)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.74 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.25)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 極上大トロ握り (赤酢舎利 · 隠し包丁) · 旬魚江戸前おまかせ握り</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区春吉3丁目23-22</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-716-1600">092-716-1600</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心9min(750m) · D+1(◎) · D+2(◎) · D+7(◎) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.405228,33.58876,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多 華吉 裏天神店 (★ 3.73)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.73 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.35)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 名物 活サバのゴマ鯖 · 博多鮮魚熟成盛り合わせ</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区渡辺通5-1-18 2F・3F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-738-1616">092-738-1616</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心9min(750m) · D+1(◎) · D+2(◎) · D+7(◎) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.404083,33.589104,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>海鮮処 松月亭 博多本店 (★ 3.77)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.77 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.44)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 刷毛目荒陶大皿：玄界滩白身鱼备长炭皮霜炙り、本鲔中落细卷与鱼子酱枪乌贼握寿司</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区博多駅中央街4-10 2F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-482-0055">092-482-0055</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">☀️ 午市11:30–14:00 / 晚市17:00– · 包厢在线可订 ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.422348,33.591393,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>博多水たき 濱田屋 天神 (★ 3.75)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.75 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.43)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 青磁茶壶先饮一番汤：纯鸡骨新鲜慢熬乳白胶质浓汤、朝挽赤鸡腿肉切片与手打鸡肉丸</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区天神2-2-20 警固神社社務所ビル 2F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-732-5888">092-732-5888</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">☀️ 午市11:30– / 晚市17:00– · 距春吉中心打车4min 在线即订 ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.399002,33.587593,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>鮨 水魚 (★ 3.65)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.65 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.31)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 車海老 刷毛塗り煮切り醤油 · 熟成地魚と炙り握り盛り込み</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区春吉3-24-4 KS SQUARE 2F</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-732-7200">092-732-7200</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心10min(800m) · D+1(休) · D+2(◎) · D+7(休) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.406021,33.588249,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>全席個室 炭火地鶏屋 地かろ 博多春吉店 (★ 3.65)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.65 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.3)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 幻の地鶏 熊本県産天草大王 囲炉裏炭火焼き · 朝引き地鶏刺し盛り</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区春吉3-11-19</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-791-3837">092-791-3837</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心10min(800m) · D+1(◎) · D+2(◎) · D+7(◎) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.405533,33.589722,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>牛もつ鍋 おおいし 住吉店 (★ 3.81)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.81 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.54)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 創業25年の真骨頂 秘伝4種ブレンド味噌牛もつ鍋 · 一面を覆う翡翠色の青韮絨毯</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区住吉4-8-21</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-476-3014">092-476-3014</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">🚶 距春吉中心11min(900m) · D+1(◎) · D+2(◎) · D+7(◎) 在线直订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.413269,33.584164,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>和創り 萌木（わづくり もえぎ） (★ 3.74)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 3.74 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.37)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 黑金莳绘漆盘向付：特大带籽牡丹虾、玄界滩天然平目薄造、鹿の子刀工枪乌贼与本鲔赤身</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市中央区薬院4-21-1</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-525-0141">092-525-0141</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">☀️ 午市怀石11:30– / 晚市17:30– · 距春吉中心打车6min ◎</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.393753,33.579391,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>たつみ寿司 総本店 (★ 4.06)</name>
+        <description><![CDATA[
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.5; color: #222;">
+  <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: bold; color: #059669;">
+    ★ 真味分 (True-Taste): 4.06 <span style="font-size: 11px; color: #888; font-weight: normal;">(vs 食べログ原分 3.88)</span>
+  </p>
+  <p style="margin: 0 0 4px 0;"><b>🍽️ 招牌菜:</b> 【高分参照】玄界滩旬鱼「一贯一品」创作握寿司盛合 · 海胆鲑鱼籽高脚杯</p>
+  <p style="margin: 0 0 4px 0;"><b>📍 精确地址:</b> 福岡県福岡市博多区下川端町8-5 博多座西隣</p>
+  <p style="margin: 0 0 4px 0;"><b>📞 电话:</b> <a href="tel:092-263-1661">092-263-1661</a></p>
+  <p style="margin: 0 0 8px 0;"><b>📅 近3日空位:</b> <span style="color: #059669; font-weight: bold;">TableCheck / 双语礼宾可订</span></p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;" />
+  <p style="margin: 0;"><a href="https://future.clawishmacheng.com/preview/tabelog-eye/?deck=fukuoka&amp;lang=zh" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">🔗 Tabelog·Eye 详情与预订</a></p>
+</div>
+]]></description>
+        <styleUrl>#style-fukuoka</styleUrl>
+        <Point>
+          <coordinates>130.406677,33.596092,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

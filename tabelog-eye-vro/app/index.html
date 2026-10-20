@@ -1305,7 +1305,118 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.55);
       white-space: nowrap;
     }
+    /* Map Radar & Leaflet Custom Styles */
+    .radar-marker-wrap {
+      background: transparent;
+      border: none;
+    }
+    .custom-radar-pin {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px 4px 7px;
+      background: rgba(18, 18, 22, 0.94);
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7), 0 0 10px rgba(212, 175, 55, 0.2);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+      user-select: none;
+    }
+    .custom-radar-pin:hover, .custom-radar-pin.active-pin {
+      transform: scale(1.12);
+      border-color: #f5d77f;
+      background: rgba(26, 26, 32, 0.98);
+      z-index: 1000 !important;
+    }
+    .custom-radar-pin.pin-sushi {
+      border-color: #f59e0b;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7), 0 0 12px rgba(245, 158, 11, 0.35);
+    }
+    .custom-radar-pin.pin-nagasaki {
+      border-color: #10b981;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7), 0 0 12px rgba(16, 185, 129, 0.35);
+    }
+    .custom-radar-pin.pin-fukuoka {
+      border-color: #d4af37;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7), 0 0 12px rgba(212, 175, 55, 0.35);
+    }
+    .pin-emoji {
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+    .pin-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .radar-mini-card {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      background: rgba(18, 18, 24, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      z-index: 1000;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.75);
+      animation: miniCardSlideUp 0.22s ease-out;
+    }
+    @keyframes miniCardSlideUp {
+      from { transform: translateY(18px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .mini-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+    }
+    .user-location-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 9px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      border-radius: 999px;
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+      animation: pulseUser 1.8s infinite;
+      white-space: nowrap;
+    }
+    @keyframes pulseUser {
+      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+      70% { box-shadow: 0 0 0 14px rgba(37, 99, 235, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+    }
+    .spotlight-address-bar {
+      margin: 8px 0;
+      padding: 7px 11px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
   <div id="toast" class="toast">已记录眼缘偏好至私有资产库</div>
@@ -1323,6 +1434,9 @@
         </div>
       </div>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end;">
+        <button id="mapViewToggleBtn" class="install-btn" type="button" onclick="toggleMapView()" style="background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-weight:800;border-color:#34d399;">
+          🗺️ 严选地图 (过滤大车店)
+        </button>
         <button id="langToggleBtn" class="install-btn" type="button" onclick="toggleAppLang()" style="background:linear-gradient(135deg,#d4af37,#b89728);color:#09090b;font-weight:900;border-color:#f5d77f;">
           🌐 EN / 中文
         </button>
@@ -1423,12 +1537,15 @@
 
     <section id="eyePanel" class="eye-panel">
       <div class="doctrine-strip">
-        <div class="view-mode-bar">
+                <div class="view-mode-bar">
           <button id="modeSwipeBtn" class="pill-toggle active" type="button" onclick="setInteractionView('swipe')">
             🔥 左滑右滑刷菜 (默认)
           </button>
           <button id="modeGridBtn" class="pill-toggle" type="button" onclick="setInteractionView('grid')">
             🖼️ 全景画廊 (10)
+          </button>
+          <button id="modeMapBtn" class="pill-toggle" type="button" onclick="setInteractionView('map')">
+            🗺️ 严选地图雷达
           </button>
         </div>
         <div class="view-mode-bar">
@@ -1498,6 +1615,14 @@
             </div>
 
             <div class="spotlight-body">
+              <div class="spotlight-address-bar" id="spotAddressBar">
+                <span style="font-size:0.75rem; color:#e4e4e7; display:flex; align-items:center; gap:5px; flex:1; min-width:180px;">
+                  📍 <span id="spotAddressText" style="font-weight:600; color:#f4f4f5;"></span>
+                </span>
+                <a id="spotGmapsLink" href="#" target="_blank" rel="noopener noreferrer" class="pill-toggle active" style="text-decoration:none; color:#10b981; border-color:rgba(16,185,129,0.5); background:rgba(16,185,129,0.15); font-size:0.72rem; padding:4px 10px; display:inline-flex; align-items:center; gap:4px; font-weight:800; white-space:nowrap;">
+                  🧭 Google Maps 导航 / 标星
+                </a>
+              </div>
               <div class="waterfall-box" id="spotHiddenBox">
                 <div class="waterfall-head">
                   <span id="spotWaterfallTitle">🧬 AI 真味校准拆解条 (Logit-Shapley Waterfall)</span>
@@ -1574,6 +1699,53 @@
               </div>
             </div>
           </article>
+        </div>
+      </div>
+
+      <div id="mapRadarSection" style="display:none; position:relative; width:100%; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border); margin:12px 0 24px; background:#0d0d12;">
+        <div style="padding:10px 14px; background:linear-gradient(180deg, #18181f 0%, #121216 100%); border-bottom:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div>
+            <div style="font-size:0.88rem; font-weight:800; color:#6ee7b7; display:flex; align-items:center; gap:6px;">
+              🗺️ 九州・長崎/福岡 食通厳選レーダー
+              <span style="font-size:0.68rem; padding:2px 7px; border-radius:999px; background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.6); color:#a7f3d0; font-family:monospace;">
+                [彻底过滤大车店与游客陷阱]
+              </span>
+            </div>
+            <div style="font-size:0.71rem; color:var(--text-secondary); margin-top:2px;">
+              零假图 · 实拍多模态核验通过 · 仅呈现 AI 破偏置后 ≥3.70 分沧海遗珠与板前鮨
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="pill-toggle" onclick="locateMe()" style="font-size:0.72rem; padding:5px 10px; background:rgba(59,130,246,0.15); border-color:rgba(59,130,246,0.5); color:#93c5fd; display:inline-flex; align-items:center; gap:4px;">
+              📍 定位我当前位置
+            </button>
+            <button type="button" class="pill-toggle active" onclick="openKmlModal()" style="font-size:0.72rem; padding:5px 10px; background:linear-gradient(135deg, rgba(212,175,55,0.25), rgba(16,185,129,0.25)); border-color:var(--gold); color:var(--gold-light); display:inline-flex; align-items:center; gap:4px; font-weight:800;">
+              📌 叠加到我的 Google Maps App (下载 KML 图层)
+            </button>
+          </div>
+        </div>
+
+        <div id="leafletMapContainer" style="width:100%; height:540px; min-height:480px; background:#0a0a0c;"></div>
+
+        <div id="radarMiniCard" class="radar-mini-card" style="display:none;">
+          <button class="mini-close" type="button" onclick="closeRadarMiniCard()" aria-label="关闭">✕</button>
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <img id="miniCardImg" src="" alt="" style="width:78px; height:78px; border-radius:12px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);" />
+            <div style="flex:1; min-width:0;">
+              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:2px;">
+                <span class="score-pill" id="miniCardScore" style="font-size:0.68rem; padding:2px 7px;">★ 3.91</span>
+                <span id="miniCardCityGenre" style="font-size:0.68rem; color:var(--text-secondary);">长崎 · 鮨 · Omakase</span>
+              </div>
+              <h4 id="miniCardTitle" style="font-size:0.92rem; font-weight:800; color:#fff; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">鮨 ひのか</h4>
+              <p id="miniCardDish" style="font-size:0.75rem; color:var(--gold-light); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"></p>
+              <p id="miniCardAddress" style="font-size:0.72rem; color:#a1a1aa; margin-bottom:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"></p>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">
+            <a id="miniCardPhone" href="#" class="pill-toggle" style="background:#fbbf24; color:#052e16; font-weight:800; text-decoration:none; font-size:0.72rem; padding:5px 10px; border-radius:8px; display:inline-flex; align-items:center; gap:3px;">📞 一键拨号</a>
+            <a id="miniCardNav" href="#" target="_blank" rel="noopener" class="pill-toggle" style="background:#10b981; color:#052e16; font-weight:800; text-decoration:none; font-size:0.72rem; padding:5px 10px; border-radius:8px; display:inline-flex; align-items:center; gap:3px;">🧭 唤起 Google Maps App 导航</a>
+            <button id="miniCardBook" type="button" class="btn-primary-crave" style="font-size:0.72rem; padding:5px 12px; border-radius:8px; font-weight:800;">🔥 预订此店</button>
+          </div>
         </div>
       </div>
 
@@ -1880,6 +2052,58 @@ services:
     </div>
   </div>
 
+  <div id="kmlModalBackdrop" class="drawer-backdrop" onclick="if(event.target.id==='kmlModalBackdrop') closeKmlModal()">
+    <div class="booking-drawer" role="dialog" aria-modal="true" aria-labelledby="kmlModalTitle" style="max-height:85vh; overflow-y:auto;">
+      <div class="drawer-handle"></div>
+      <div class="drawer-header">
+        <div>
+          <span class="brand-badge" style="border-color:rgba(16,185,129,0.7); color:#6ee7b7;">Google Maps Native Sync · 1-Tap Overlay</span>
+          <h3 class="drawer-title" id="kmlModalTitle" style="margin-top: 4px;">📌 叠加严选图层到 Google Maps App 原生应用</h3>
+          <p style="font-size: 0.74rem; color: var(--gold-light);">一次导入，手机原生 Google Maps 永久常驻，彻底告别观光大车店与同质化假图陷阱</p>
+        </div>
+        <button class="drawer-close" type="button" onclick="closeKmlModal()" aria-label="关闭">✕</button>
+      </div>
+
+      <div style="margin: 12px 0; display:flex; flex-direction:column; gap:10px;">
+        <div style="background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.3); border-radius:12px; padding:12px;">
+          <h4 style="font-size:0.82rem; color:var(--gold-light); margin-bottom:6px;">📥 第 1 步：下载官方 KML 严选图层文件</h4>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a href="./tabelog-eye-kyushu.kml" download="tabelog-eye-kyushu.kml" class="pill-toggle active" style="font-size:0.75rem; padding:8px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+              ⚡ 下载「九州全集 (長崎板前鮨7+遺珠7 + 福岡18)」.kml
+            </a>
+            <a href="./tabelog-eye-nagasaki.kml" download="tabelog-eye-nagasaki.kml" class="pill-toggle" style="font-size:0.75rem; padding:8px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+              🍣 下载「長崎专享 (板前鮨7 + 思案桥/铜座遺珠7)」.kml
+            </a>
+          </div>
+        </div>
+
+        <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.3); border-radius:12px; padding:12px;">
+          <h4 style="font-size:0.82rem; color:#6ee7b7; margin-bottom:6px;">🌐 第 2 步：导入 Google My Maps (我的地图)</h4>
+          <p style="font-size:0.75rem; color:#d4d4d8; line-height:1.6; margin-bottom:8px;">
+            1. 浏览器打开 <a href="https://www.google.com/maps/d/" target="_blank" rel="noopener" style="color:#6ee7b7; font-weight:800; text-decoration:underline;">google.com/maps/d/ (Google 我的地图)</a><br/>
+            2. 点击左上角 <strong>「+ 创建新地图」</strong><br/>
+            3. 在未命名的图层下点击 <strong>「导入 (Import)」</strong> -> 选择刚才下载的 <code>tabelog-eye-kyushu.kml</code> 文件上传！
+          </p>
+        </div>
+
+        <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.3); border-radius:12px; padding:12px;">
+          <h4 style="font-size:0.82rem; color:#93c5fd; margin-bottom:6px;">📱 第 3 步：在手机 Google Maps App 中随时随地查看</h4>
+          <p style="font-size:0.75rem; color:#d4d4d8; line-height:1.6;">
+            打开手机上的 <strong>Google Maps App (谷歌地图原生客户端)</strong>：<br/>
+            底栏点击 <strong>「已保存 (Saved)」</strong> ➔ 向上滑到底部点击 <strong>「地图 (Maps)」</strong> ➔ 勾选刚刚导入的 <strong>「Tabelog·Eye」</strong>！<br/>
+            🎉 <strong>即刻完成！</strong>今后在长崎、福冈街道漫步时，所有经过 AI 破偏置校准的沧海遗珠与板前鮨都会直接高亮标记在你的官方地图上，一键点击即可开启步行导航或电话订座。
+          </p>
+        </div>
+      </div>
+
+      <div class="drawer-actions">
+        <button class="btn-primary-crave" type="button" onclick="closeKmlModal()">
+          ✅ 我知道了，返回严选地图
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const INITIAL_DATASET = {
   "surface": "tabelog-eye",
@@ -2030,7 +2254,13 @@ services:
       "walk_min": 2,
       "walk_m": 120,
       "dish_archetype": "sushi_omakase",
-      "nagasaki_sushi": true
+      "nagasaki_sushi": true,
+      "address_ja": "長崎県長崎市本石灰町5-29",
+      "lat": 32.742546,
+      "lng": 129.879364,
+      "phone": "070-5093-8265",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=Obi%E5%AF%BF%E5%8F%B8%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA5-29",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=Obi%E5%AF%BF%E5%8F%B8%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA5-29&travelmode=walking"
     },
     {
       "id": "ng-yakiniku-pure-shinchi",
@@ -2170,7 +2400,13 @@ services:
       "walk_min": 3,
       "walk_m": 220,
       "dish_archetype": "wagyu_yakiniku",
-      "nagasaki_sushi": false
+      "nagasaki_sushi": false,
+      "address_ja": "長崎県長崎市新地町2-7",
+      "lat": 32.741982,
+      "lng": 129.874863,
+      "phone": "095-824-2900",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%95%B7%E5%B4%8E%E5%92%8C%E7%89%9B%E7%84%BC%E8%82%89%20%E3%81%B4%E3%82%85%E3%81%82%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%96%B0%E5%9C%B0%E7%94%BA2-7",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%95%B7%E5%B4%8E%E5%92%8C%E7%89%9B%E7%84%BC%E8%82%89%20%E3%81%B4%E3%82%85%E3%81%82%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%96%B0%E5%9C%B0%E7%94%BA2-7&travelmode=walking"
     },
     {
       "id": "ng-sushi-hakuun-yorozuyamachi",
@@ -2266,7 +2502,7 @@ services:
         "venue_id": "sushi-hakumo",
         "source_url": "https://www.tablecheck.com/ja/sushi-hakumo",
         "tel": "080-6413-4406",
-        "address": "長崎県長崎市万屋町5-29 樋口ビル 1F",
+        "address": "長崎県長崎市万屋町5-29 1F",
         "business_hours": "昼 12:00/12:30 · 夜 18:30〜20:30 (完全予約制 · 10/21水曜営業)",
         "status": "available",
         "date": "2026-10-21",
@@ -2280,7 +2516,13 @@ services:
         },
         "adapter_note": "TableCheck 实测直连 (`sushi-hakumo`) · 10/21(周三 Obi寿司定休) 午/晚吧台席充裕 ◎ · 今夜当日席位可由礼宾部拨打 📞 080-6413-4406"
       },
-      "visual_verified": true
+      "visual_verified": true,
+      "address_ja": "長崎県長崎市万屋町5-29 1F",
+      "lat": 32.744057,
+      "lng": 129.879715,
+      "phone": "080-6413-4406",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%20%E7%99%BD%E9%9B%B2%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E4%B8%87%E5%B1%8B%E7%94%BA5-29%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%AE%A8%20%E7%99%BD%E9%9B%B2%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E4%B8%87%E5%B1%8B%E7%94%BA5-29%201F&travelmode=walking"
     },
     {
       "id": "ng-teppan-mansai-doza",
@@ -2386,7 +2628,7 @@ services:
       "booking": {
         "platform": "hotpepper",
         "venue_id": "strJ000859162",
-        "address": "長崎県長崎市銅座町7-18 リンクス銅座ビル1F",
+        "address": "長崎県長崎市銅座町7-18 リンクス銅座ビル 1F",
         "live_probed": true,
         "date": "2026-10-20",
         "party_size": 2,
@@ -2420,7 +2662,13 @@ services:
       "walk_min": 2,
       "walk_m": 140,
       "dish_archetype": "abalone_teppan",
-      "nagasaki_sushi": false
+      "nagasaki_sushi": false,
+      "address_ja": "長崎県長崎市銅座町7-18 リンクス銅座ビル 1F",
+      "lat": 32.742035,
+      "lng": 129.876694,
+      "phone": "095-826-1823",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%89%84%E6%9D%BF%E3%82%84%20%E4%B8%87%E8%8F%9C%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8A%85%E5%BA%A7%E7%94%BA7-18%20%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%B9%E9%8A%85%E5%BA%A7%E3%83%93%E3%83%AB%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%89%84%E6%9D%BF%E3%82%84%20%E4%B8%87%E8%8F%9C%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8A%85%E5%BA%A7%E7%94%BA7-18%20%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%B9%E9%8A%85%E5%BA%A7%E3%83%93%E3%83%AB%201F&travelmode=walking"
     },
     {
       "id": "ng-sushi-hinoka-aburayamachi",
@@ -2516,7 +2764,7 @@ services:
         "venue_id": "sushi-hinoca",
         "source_url": "https://www.tablecheck.com/ja/shops/sushi-hinoca/reserve",
         "tel": "050-1808-4640",
-        "address": "長崎県長崎市油屋町2-12 フルール浜町 1F",
+        "address": "長崎県長崎市油屋町2-12 ふるーる浜んまち 1F",
         "business_hours": "昼 12:00～14:00 / 夜 18:00～22:00 (日・月定休 · 火・水・木営業)",
         "status": "available",
         "date": "2026-10-21",
@@ -2530,7 +2778,13 @@ services:
         },
         "adapter_note": "TableCheck 实测直连 (`sushi-hinoca`) · 10/20(今夜)、10/21(周三 Obi寿司定休之首选救星)、10/22(周四) 18:00/18:30/19:00 吧台席全部 ◎ 即时可订 · 电话 📞 050-1808-4640"
       },
-      "visual_verified": true
+      "visual_verified": true,
+      "address_ja": "長崎県長崎市油屋町2-12 ふるーる浜んまち 1F",
+      "lat": 32.74334,
+      "lng": 129.881149,
+      "phone": "050-1808-4640",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%20%E3%81%B2%E3%81%AE%E3%81%8B%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%B2%B9%E5%B1%8B%E7%94%BA2-12%20%E3%81%B5%E3%82%8B%E3%83%BC%E3%82%8B%E6%B5%9C%E3%82%93%E3%81%BE%E3%81%A1%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%AE%A8%20%E3%81%B2%E3%81%AE%E3%81%8B%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%B2%B9%E5%B1%8B%E7%94%BA2-12%20%E3%81%B5%E3%82%8B%E3%83%BC%E3%82%8B%E6%B5%9C%E3%82%93%E3%81%BE%E3%81%A1%201F&travelmode=walking"
     },
     {
       "id": "ng-dashibonz-hamamachi",
@@ -2636,7 +2890,7 @@ services:
       "booking": {
         "platform": "hotpepper",
         "venue_id": "strJ001160205",
-        "address": "長崎県長崎市浜町4-22 明星ビル1F",
+        "address": "長崎県長崎市浜町4-22 明星ビル 1F",
         "live_probed": true,
         "date": "2026-10-20",
         "party_size": 2,
@@ -2670,7 +2924,13 @@ services:
       "walk_min": 2,
       "walk_m": 180,
       "dish_archetype": "goto_udon_dashi",
-      "nagasaki_sushi": false
+      "nagasaki_sushi": false,
+      "address_ja": "長崎県長崎市浜町4-22 明星ビル 1F",
+      "lat": 32.743881,
+      "lng": 129.877365,
+      "phone": "095-821-2525",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E4%BA%94%E5%B3%B6%E3%81%86%E3%81%A9%E3%82%93%20%E5%B1%85%E9%85%92%E5%B1%8B%20%E3%81%A0%E3%81%97%E3%81%BC%E3%82%93%E3%81%9A%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%B5%9C%E7%94%BA4-22%20%E6%98%8E%E6%98%9F%E3%83%93%E3%83%AB%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E4%BA%94%E5%B3%B6%E3%81%86%E3%81%A9%E3%82%93%20%E5%B1%85%E9%85%92%E5%B1%8B%20%E3%81%A0%E3%81%97%E3%81%BC%E3%82%93%E3%81%9A%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%B5%9C%E7%94%BA4-22%20%E6%98%8E%E6%98%9F%E3%83%93%E3%83%AB%201F&travelmode=walking"
     },
     {
       "id": "ng-sushi-takao-shianbashi",
@@ -2766,7 +3026,7 @@ services:
         "venue_id": "sushi-takao",
         "source_url": "https://sushi-takao.jp/",
         "tel": "095-823-9026",
-        "address": "長崎県長崎市本石灰町3-13 延寿富田ビル 1F",
+        "address": "長崎県長崎市本石灰町3-13 1F",
         "business_hours": "完全予約制 (電話受付 8:00～24:00 · 不定休)",
         "status": "request_only",
         "date": "2026-10-21",
@@ -2780,7 +3040,13 @@ services:
         },
         "adapter_note": "完全电话预约制名店 (`sushi-takao.jp`) · 电话受付时间宽裕 (8:00–24:00)，一键生成礼宾部日语电询脚本或直拨 📞 095-823-9026"
       },
-      "visual_verified": true
+      "visual_verified": true,
+      "address_ja": "長崎県長崎市本石灰町3-13 1F",
+      "lat": 32.7425,
+      "lng": 129.878601,
+      "phone": "095-823-9026",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%20%E3%81%9F%E3%81%8B%E5%B0%BE%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA3-13%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%AE%A8%20%E3%81%9F%E3%81%8B%E5%B0%BE%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA3-13%201F&travelmode=walking"
     },
     {
       "id": "ng-kappo-toshi-nagasaki",
@@ -2920,7 +3186,13 @@ services:
       "walk_min": 4,
       "walk_m": 350,
       "dish_archetype": "saba_madai_kappo",
-      "nagasaki_sushi": false
+      "nagasaki_sushi": false,
+      "address_ja": "長崎県長崎市中町5-22",
+      "lat": 32.752201,
+      "lng": 129.873718,
+      "phone": "095-822-1055",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%89%B2%E7%83%B9%E3%81%A8%E3%81%97%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E4%B8%AD%E7%94%BA5-22",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%89%B2%E7%83%B9%E3%81%A8%E3%81%97%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E4%B8%AD%E7%94%BA5-22&travelmode=walking"
     },
     {
       "id": "ng-sushi-dejima-nagasaki",
@@ -3016,7 +3288,7 @@ services:
         "venue_id": "nagasaki-marriott-sushidejima",
         "source_url": "https://www.tablecheck.com/ja/nagasaki-marriott-sushidejima",
         "tel": "095-895-8884",
-        "address": "長崎県長崎市尾上町1-1 7F (JR長崎駅直結 徒歩1分)",
+        "address": "長崎県長崎市尾上町1-1 7F",
         "business_hours": "昼 11:30～14:30 / 夜 17:30～22:00 (無休 · 水曜営業)",
         "status": "available",
         "date": "2026-10-21",
@@ -3030,7 +3302,13 @@ services:
         },
         "adapter_note": "TableCheck 实测直连 (`nagasaki-marriott-sushidejima`) · 10/20(今夜 17:30/19:30)、10/21(周三 11:30/13:00/17:30/19:30)、10/22 全部 ◎ 即时可订 · 直通电话 📞 095-895-8884"
       },
-      "visual_verified": true
+      "visual_verified": true,
+      "address_ja": "長崎県長崎市尾上町1-1 7F",
+      "lat": 32.753613,
+      "lng": 129.868652,
+      "phone": "095-895-8884",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%20De%20Jima%20by%20%E3%81%99%E3%81%97%E5%A4%A9%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E5%B0%BE%E4%B8%8A%E7%94%BA1-1%207F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%AE%A8%20De%20Jima%20by%20%E3%81%99%E3%81%97%E5%A4%A9%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E5%B0%BE%E4%B8%8A%E7%94%BA1-1%207F&travelmode=walking"
     },
     {
       "id": "ng-kakura-doza",
@@ -3136,7 +3414,7 @@ services:
       "booking": {
         "platform": "hotpepper",
         "venue_id": "strJ001192741",
-        "address": "長崎県長崎市銅座町10-9 エビスビル1F",
+        "address": "長崎県長崎市銅座町10-9 エビスビル 1F",
         "live_probed": true,
         "date": "2026-10-20",
         "party_size": 2,
@@ -3170,7 +3448,13 @@ services:
       "walk_min": 2,
       "walk_m": 160,
       "dish_archetype": "wagyu_pot_rib",
-      "nagasaki_sushi": false
+      "nagasaki_sushi": false,
+      "address_ja": "長崎県長崎市銅座町10-9 エビスビル 1F",
+      "lat": 32.742523,
+      "lng": 129.877182,
+      "phone": "095-823-0273",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E7%84%BC%E8%82%89%20%E3%81%8B%E3%81%8F%E3%82%89%20%E9%95%B7%E5%B4%8E%E9%8A%85%E5%BA%A7%E5%BA%97%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8A%85%E5%BA%A7%E7%94%BA10-9%20%E3%82%A8%E3%83%93%E3%82%B9%E3%83%93%E3%83%AB%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E7%84%BC%E8%82%89%20%E3%81%8B%E3%81%8F%E3%82%89%20%E9%95%B7%E5%B4%8E%E9%8A%85%E5%BA%A7%E5%BA%97%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8A%85%E5%BA%A7%E7%94%BA10-9%20%E3%82%A8%E3%83%93%E3%82%B9%E3%83%93%E3%83%AB%201F&travelmode=walking"
     },
     {
       "id": "ng-sushi-kozo-doza",
@@ -3266,7 +3550,7 @@ services:
         "venue_id": "fs8s7vdu0000",
         "source_url": "https://r.gnavi.co.jp/fs8s7vdu0000/",
         "tel": "095-820-7757",
-        "address": "長崎県長崎市銅座町12-2 (観光通電停 徒歩1分)",
+        "address": "長崎県長崎市銅座町12-2",
         "business_hours": "18:00～23:00 (日・祝定休 · 火・水・木通常営業)",
         "status": "request_only",
         "date": "2026-10-21",
@@ -3280,7 +3564,13 @@ services:
         },
         "adapter_note": "铜座本地食通名店 (`r.gnavi.co.jp/fs8s7vdu0000`) · 周二(10/20)、周三(10/21 Obi寿司定休)、周四(10/22) 18:00–23:00 均正常营业 · 直通电话 📞 095-820-7757"
       },
-      "visual_verified": true
+      "visual_verified": true,
+      "address_ja": "長崎県長崎市銅座町12-2",
+      "lat": 32.742706,
+      "lng": 129.87822,
+      "phone": "095-820-7757",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%20%E5%B9%B8%E4%B8%89%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8A%85%E5%BA%A7%E7%94%BA12-2",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%AE%A8%20%E5%B9%B8%E4%B8%89%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8A%85%E5%BA%A7%E7%94%BA12-2&travelmode=walking"
     },
     {
       "id": "ng-sippoku-hamakatsu-kajiyamachi",
@@ -3420,7 +3710,13 @@ services:
       "walk_min": 3,
       "walk_m": 220,
       "dish_archetype": "shippoku_kakuni",
-      "nagasaki_sushi": false
+      "nagasaki_sushi": false,
+      "address_ja": "長崎県長崎市鍛冶屋町6-50",
+      "lat": 32.743282,
+      "lng": 129.881302,
+      "phone": "095-826-8321",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%95%B7%E5%B4%8E%E5%8D%93%E8%A2%B1%E6%B5%9C%E5%8B%9D%20%E9%95%B7%E5%B4%8E%E7%B7%8F%E6%9C%AC%E5%BA%97%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8D%9B%E5%86%B6%E5%B1%8B%E7%94%BA6-50",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%95%B7%E5%B4%8E%E5%8D%93%E8%A2%B1%E6%B5%9C%E5%8B%9D%20%E9%95%B7%E5%B4%8E%E7%B7%8F%E6%9C%AC%E5%BA%97%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E9%8D%9B%E5%86%B6%E5%B1%8B%E7%94%BA6-50&travelmode=walking"
     },
     {
       "id": "ng-ikeda-sengyo-shianbashi",
@@ -3560,7 +3856,13 @@ services:
       "walk_min": 1,
       "walk_m": 80,
       "dish_archetype": "sushi_omakase",
-      "nagasaki_sushi": true
+      "nagasaki_sushi": true,
+      "address_ja": "長崎県長崎市本石灰町6-1 1F",
+      "lat": 32.742592,
+      "lng": 129.880081,
+      "phone": "095-895-9920",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E6%B1%A0%E7%94%B0%E9%AE%AE%E9%AD%9A%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA6-1%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%B1%A0%E7%94%B0%E9%AE%AE%E9%AD%9A%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA6-1%201F&travelmode=walking"
     },
     {
       "id": "ng-kappo-kawamasa-shianbashi",
@@ -3700,7 +4002,13 @@ services:
       "walk_min": 2,
       "walk_m": 130,
       "dish_archetype": "live_squid_sashimi",
-      "nagasaki_sushi": false
+      "nagasaki_sushi": false,
+      "address_ja": "長崎県長崎市本石灰町3-3",
+      "lat": 32.74268,
+      "lng": 129.878983,
+      "phone": "095-807-5027",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%B7%9D%E6%AD%A3%20%E9%95%B7%E5%B4%8E%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA3-3",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%B7%9D%E6%AD%A3%20%E9%95%B7%E5%B4%8E%20%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82%E6%9C%AC%E7%9F%B3%E7%81%B0%E7%94%BA3-3&travelmode=walking"
     },
     {
       "id": "hp-fukuoka-torabi",
@@ -3813,11 +4121,19 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ004026083/",
         "adapter_note": "距中洲川端/春吉中心圈极近的沧海遗珠（往川端商店街步行 240 米即达），支持在线直订或通过双语礼宾脚本电话锁吧台位",
-        "price_est": "¥5,500 / 人"
+        "price_est": "¥5,500 / 人",
+        "address": "福岡県福岡市博多区上川端町3-14",
+        "tel": "092-263-0505"
       },
       "walk_min": 3,
       "walk_m": 240,
-      "dish_archetype": "binchotan_jidori"
+      "dish_archetype": "binchotan_jidori",
+      "address_ja": "福岡県福岡市博多区上川端町3-14",
+      "lat": 33.592342,
+      "lng": 130.410126,
+      "phone": "092-263-0505",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%AF%85%E7%81%AB%20%E4%B8%AD%E6%B4%B2%EF%BC%88%E3%81%A8%E3%82%89%E3%81%B3%EF%BC%89%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%B8%8A%E5%B7%9D%E7%AB%AF%E7%94%BA3-14",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%AF%85%E7%81%AB%20%E4%B8%AD%E6%B4%B2%EF%BC%88%E3%81%A8%E3%82%89%E3%81%B3%EF%BC%89%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%B8%8A%E5%B7%9D%E7%AB%AF%E7%94%BA3-14&travelmode=walking"
     },
     {
       "id": "hp-fukuoka-nana-haruyoshi",
@@ -3929,11 +4245,19 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000999721/",
         "adapter_note": "从中洲川端过那珂川春吉桥步行 4 分钟即达，免去网红牛肠锅排队之苦，在线直订包厢",
-        "price_est": "¥5,000 / 人"
+        "price_est": "¥5,000 / 人",
+        "address": "福岡県福岡市中央区春吉3-11-19 パノラマスクエア博多 B1F",
+        "tel": "092-738-8377"
       },
       "walk_min": 4,
       "walk_m": 320,
-      "dish_archetype": "motsunabe"
+      "dish_archetype": "motsunabe",
+      "address_ja": "福岡県福岡市中央区春吉3-11-19 パノラマスクエア博多 B1F",
+      "lat": 33.589722,
+      "lng": 130.405533,
+      "phone": "092-738-8377",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=Japanese%20Cuisine%20%E8%8F%9C%E3%81%AA%20%E6%98%A5%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-11-19%20%E3%83%91%E3%83%8E%E3%83%A9%E3%83%9E%E3%82%B9%E3%82%AF%E3%82%A8%E3%82%A2%E5%8D%9A%E5%A4%9A%20B1F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=Japanese%20Cuisine%20%E8%8F%9C%E3%81%AA%20%E6%98%A5%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-11-19%20%E3%83%91%E3%83%8E%E3%83%A9%E3%83%9E%E3%82%B9%E3%82%AF%E3%82%A8%E3%82%A2%E5%8D%9A%E5%A4%9A%20B1F&travelmode=walking"
     },
     {
       "id": "hp-fukuoka-kawano",
@@ -4046,11 +4370,19 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000558767/",
         "adapter_note": "距中洲川端/春吉中心仅 5 分钟步行的 1953 年传奇老铺，必点『厚切铁板牛心』+『元祖白味噌牛肠锅』",
-        "price_est": "¥5,000 / 人"
+        "price_est": "¥5,000 / 人",
+        "address": "福岡県福岡市中央区春吉2-16-8",
+        "tel": "092-761-1256"
       },
       "walk_min": 5,
       "walk_m": 420,
-      "dish_archetype": "wagyu_yakiniku"
+      "dish_archetype": "wagyu_yakiniku",
+      "address_ja": "福岡県福岡市中央区春吉2-16-8",
+      "lat": 33.585365,
+      "lng": 130.406311,
+      "phone": "092-761-1256",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E3%82%82%E3%81%A4%E6%96%99%E7%90%86%20%E3%81%8B%E3%82%8F%E4%B9%83%20%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%892-16-8",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E3%82%82%E3%81%A4%E6%96%99%E7%90%86%20%E3%81%8B%E3%82%8F%E4%B9%83%20%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%892-16-8&travelmode=walking"
     },
     {
       "id": "sendou-sumiyoshi",
@@ -4186,9 +4518,16 @@ services:
         "address": "福岡県福岡市博多区住吉2丁目4-7 レジデンス博多 1F",
         "walk_route_ja": "博多・春吉中心圏から住吉通り方面へ南へわずか400m、徒歩5分の至近距離。同丁目エリアの隠れ家名店。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 5 分钟 (400m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥4,500〜¥6,500 / 人"
+        "price_est": "¥4,500〜¥6,500 / 人",
+        "tel": "092-474-5555"
       },
-      "dish_archetype": "motsunabe"
+      "dish_archetype": "motsunabe",
+      "address_ja": "福岡県福岡市博多区住吉2丁目4-7 レジデンス博多 1F",
+      "lat": 33.588085,
+      "lng": 130.412949,
+      "phone": "092-474-5555",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E5%A1%A9%E3%82%82%E3%81%A4%E9%8D%8B%20%E4%BB%99%E9%A0%AD%20%E5%8D%9A%E5%A4%9A%E4%BD%8F%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%BD%8F%E5%90%892%E4%B8%81%E7%9B%AE4-7%20%E3%83%AC%E3%82%B8%E3%83%87%E3%83%B3%E3%82%B9%E5%8D%9A%E5%A4%9A%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%E5%A1%A9%E3%82%82%E3%81%A4%E9%8D%8B%20%E4%BB%99%E9%A0%AD%20%E5%8D%9A%E5%A4%9A%E4%BD%8F%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%BD%8F%E5%90%892%E4%B8%81%E7%9B%AE4-7%20%E3%83%AC%E3%82%B8%E3%83%87%E3%83%B3%E3%82%B9%E5%8D%9A%E5%A4%9A%201F&travelmode=walking"
     },
     {
       "id": "kanbee-haruyoshi",
@@ -4321,12 +4660,19 @@ services:
             "source_url": null
           }
         },
-        "address": "福岡県福岡市中央区春吉3-5-7 リバーフロント中洲西サウスサイド2F",
+        "address": "福岡県福岡市中央区春吉3-5-7 リバーフロント中洲西サウスサイド 2F",
         "walk_route_ja": "中洲川端・春吉橋から那珂川沿いを北西へ、春吉橋を渡ってすぐのリバーフロント中洲西ビル2F。那珂川の清流を望む水辺の個室割烹。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 7 分钟 (600m) | D+1:◎ · D+2:◎ · D+7:休 | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥7,000〜¥10,000 / 人"
+        "price_est": "¥7,000〜¥10,000 / 人",
+        "tel": "092-717-3888"
       },
-      "dish_archetype": "live_squid_sashimi"
+      "dish_archetype": "live_squid_sashimi",
+      "address_ja": "福岡県福岡市中央区春吉3-5-7 リバーフロント中洲西サウスサイド 2F",
+      "lat": 33.589321,
+      "lng": 130.407913,
+      "phone": "092-717-3888",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%20%E3%81%8B%E3%82%93%E3%81%B9%E3%81%88%20%E6%98%A5%E5%90%89%E5%A4%A9%E7%A5%9E%E9%82%B8%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-5-7%20%E3%83%AA%E3%83%90%E3%83%BC%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E4%B8%AD%E6%B4%B2%E8%A5%BF%E3%82%B5%E3%82%A6%E3%82%B9%E3%82%B5%E3%82%A4%E3%83%89%202F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%20%E3%81%8B%E3%82%93%E3%81%B9%E3%81%88%20%E6%98%A5%E5%90%89%E5%A4%A9%E7%A5%9E%E9%82%B8%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-5-7%20%E3%83%AA%E3%83%90%E3%83%BC%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E4%B8%AD%E6%B4%B2%E8%A5%BF%E3%82%B5%E3%82%A6%E3%82%B9%E3%82%B5%E3%82%A4%E3%83%89%202F&travelmode=walking"
     },
     {
       "id": "hp-hakata-nakagawa",
@@ -4410,7 +4756,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ003624566/",
         "adapter_note": "真正的沧海遗珠：不用去排游客爆满的连锁店，直接在线订位吃朝挽鲜鸡水炊锅",
-        "price_est": "¥5,000 / 人"
+        "price_est": "¥5,000 / 人",
+        "address": "福岡県福岡市博多区店屋町3-32 中村ビル 1F",
+        "tel": "092-282-7778"
       },
       "name_en": "Hakata Mizutaki Nakagawa (Slow-Simmered Chicken Collagen Pot)",
       "city_en": "Fukuoka",
@@ -4443,7 +4791,13 @@ services:
       "hub_walk_en": "🚶 7 min walk (550m) / 🚕 3 min taxi from Haruyoshi Bridge",
       "walk_min": 7,
       "walk_m": 550,
-      "dish_archetype": "mizutaki"
+      "dish_archetype": "mizutaki",
+      "address_ja": "福岡県福岡市博多区店屋町3-32 中村ビル 1F",
+      "lat": 33.595642,
+      "lng": 130.410156,
+      "phone": "092-282-7778",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E6%B0%B4%E7%82%8A%E3%81%8D%20%E3%81%AA%E3%81%8B%E3%81%8C%E3%82%8F%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%BA%97%E5%B1%8B%E7%94%BA3-32%20%E4%B8%AD%E6%9D%91%E3%83%93%E3%83%AB%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%E6%B0%B4%E7%82%8A%E3%81%8D%20%E3%81%AA%E3%81%8B%E3%81%8C%E3%82%8F%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%BA%97%E5%B1%8B%E7%94%BA3-32%20%E4%B8%AD%E6%9D%91%E3%83%93%E3%83%AB%201F&travelmode=walking"
     },
     {
       "id": "anmei-sumiyoshi",
@@ -4579,9 +4933,16 @@ services:
         "address": "福岡県福岡市博多区住吉2-15-33",
         "walk_route_ja": "博多・春吉中心圏から住吉神社方面へ徒歩わずか550m、7分。一軒家完全個室完备。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 7 分钟 (550m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥4,500〜¥6,500 / 人"
+        "price_est": "¥4,500〜¥6,500 / 人",
+        "tel": "092-409-7757"
       },
-      "dish_archetype": "motsunabe_gyoza"
+      "dish_archetype": "motsunabe_gyoza",
+      "address_ja": "福岡県福岡市博多区住吉2-15-33",
+      "lat": 33.587963,
+      "lng": 130.412018,
+      "phone": "092-409-7757",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E3%82%82%E3%81%A4%E9%8D%8B%20%E5%AE%89%E6%98%8E%20%E7%A6%8F%E5%B2%A1%E5%8D%9A%E5%A4%9A%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%BD%8F%E5%90%892-15-33",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%E3%82%82%E3%81%A4%E9%8D%8B%20%E5%AE%89%E6%98%8E%20%E7%A6%8F%E5%B2%A1%E5%8D%9A%E5%A4%9A%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%BD%8F%E5%90%892-15-33&travelmode=walking"
     },
     {
       "id": "hp-hakata-mizune",
@@ -4663,7 +5024,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ001117063/",
         "adapter_note": "人均仅 ¥5,500 即可吃到正统菊花薄造与黄金高汤纸锅，HotPepper 在线即订",
-        "price_est": "¥5,500 / 人"
+        "price_est": "¥5,500 / 人",
+        "address": "福岡県福岡市博多区上川端町6-17",
+        "tel": "092-281-2230"
       },
       "name_en": "Hakata Kappo Mizune (Genkai Sea Live-Fish Kappo)",
       "city_en": "Fukuoka",
@@ -4696,7 +5059,13 @@ services:
       "hub_walk_en": "🚶 8 min walk (650m up Kawabata-dori) / 🚕 3 min taxi from Haruyoshi Bridge",
       "walk_min": 8,
       "walk_m": 650,
-      "dish_archetype": "kaiseki_kappo"
+      "dish_archetype": "kaiseki_kappo",
+      "address_ja": "福岡県福岡市博多区上川端町6-17",
+      "lat": 33.593277,
+      "lng": 130.409027,
+      "phone": "092-281-2230",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E5%89%B2%E7%83%B9%20%E6%B0%B4%E9%9F%B3%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%B8%8A%E5%B7%9D%E7%AB%AF%E7%94%BA6-17",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%E5%89%B2%E7%83%B9%20%E6%B0%B4%E9%9F%B3%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%B8%8A%E5%B7%9D%E7%AB%AF%E7%94%BA6-17&travelmode=walking"
     },
     {
       "id": "matsushita-haruyoshi",
@@ -4829,12 +5198,19 @@ services:
             "source_url": "https://www.hotpepper.jp/strJ003474505/course/"
           }
         },
-        "address": "福岡県福岡市中央区春吉2-12-11 アクラス南天神102",
+        "address": "福岡県福岡市中央区春吉2-12-11 アクラス南天神 102",
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉2丁目へ徒歩8分。個室完備、職人が席で炊き上げる正統派水炊き専門店。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 8 分钟 (700m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥5,500〜¥8,000 / 人"
+        "price_est": "¥5,500〜¥8,000 / 人",
+        "tel": "092-732-4129"
       },
-      "dish_archetype": "mizutaki"
+      "dish_archetype": "mizutaki",
+      "address_ja": "福岡県福岡市中央区春吉2-12-11 アクラス南天神 102",
+      "lat": 33.586643,
+      "lng": 130.407547,
+      "phone": "092-732-4129",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E6%B0%B4%E7%82%8A%E3%81%8D%20%E3%81%BE%E3%81%A4%E3%81%97%E3%81%9F%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%892-12-11%20%E3%82%A2%E3%82%AF%E3%83%A9%E3%82%B9%E5%8D%97%E5%A4%A9%E7%A5%9E%20102",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%E6%B0%B4%E7%82%8A%E3%81%8D%20%E3%81%BE%E3%81%A4%E3%81%97%E3%81%9F%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%892-12-11%20%E3%82%A2%E3%82%AF%E3%83%A9%E3%82%B9%E5%8D%97%E5%A4%A9%E7%A5%9E%20102&travelmode=walking"
     },
     {
       "id": "sushi-mitsu",
@@ -4970,9 +5346,16 @@ services:
         "address": "福岡県福岡市中央区春吉3丁目23-22",
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉の路地奥へ。「cafe mitu」の奥に佇むカウンター10席の大人の隠れ家鮨。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 9 分钟 (750m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥12,000〜¥18,000 / 人"
+        "price_est": "¥12,000〜¥18,000 / 人",
+        "tel": "092-716-1600"
       },
-      "dish_archetype": "sushi_omakase"
+      "dish_archetype": "sushi_omakase",
+      "address_ja": "福岡県福岡市中央区春吉3丁目23-22",
+      "lat": 33.58876,
+      "lng": 130.405228,
+      "phone": "092-716-1600",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%E3%81%BF%E3%81%A4%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893%E4%B8%81%E7%9B%AE23-22",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%AE%A8%E3%81%BF%E3%81%A4%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893%E4%B8%81%E7%9B%AE23-22&travelmode=walking"
     },
     {
       "id": "hanayoshi-uratenjin",
@@ -5108,9 +5491,16 @@ services:
         "address": "福岡県福岡市中央区渡辺通5-1-18 2F・3F",
         "walk_route_ja": "中洲川端・春吉橋から住吉通りを西へ、渡辺通・天神南駅そば（弥太郎うどんの2階）。裏天神の隠れ家魚酒場。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 9 分钟 (750m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥5,000〜¥7,000 / 人"
+        "price_est": "¥5,000〜¥7,000 / 人",
+        "tel": "092-738-1616"
       },
-      "dish_archetype": "kaiseki_kappo"
+      "dish_archetype": "kaiseki_kappo",
+      "address_ja": "福岡県福岡市中央区渡辺通5-1-18 2F・3F",
+      "lat": 33.589104,
+      "lng": 130.404083,
+      "phone": "092-738-1616",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%20%E8%8F%AF%E5%90%89%20%E8%A3%8F%E5%A4%A9%E7%A5%9E%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%B8%A1%E8%BE%BA%E9%80%9A5-1-18%202F%E3%83%BB3F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%20%E8%8F%AF%E5%90%89%20%E8%A3%8F%E5%A4%A9%E7%A5%9E%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%B8%A1%E8%BE%BA%E9%80%9A5-1-18%202F%E3%83%BB3F&travelmode=walking"
     },
     {
       "id": "hp-fukuoka-shogetsutei",
@@ -5222,11 +5612,19 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ001054134/",
         "adapter_note": "午市活鱼御膳/会席与晚间玄界滩全席皆可在线直订或通过双语礼宾脚本预约",
-        "price_est": "¥7,000 / 人"
+        "price_est": "¥7,000 / 人",
+        "address": "福岡県福岡市博多区博多駅中央街4-10 2F",
+        "tel": "092-482-0055"
       },
       "walk_min": 10,
       "walk_m": 820,
-      "dish_archetype": "sushi_omakase"
+      "dish_archetype": "sushi_omakase",
+      "address_ja": "福岡県福岡市博多区博多駅中央街4-10 2F",
+      "lat": 33.591393,
+      "lng": 130.422348,
+      "phone": "092-482-0055",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E6%B5%B7%E9%AE%AE%E5%87%A6%20%E6%9D%BE%E6%9C%88%E4%BA%AD%20%E5%8D%9A%E5%A4%9A%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%9A%E5%A4%9A%E9%A7%85%E4%B8%AD%E5%A4%AE%E8%A1%974-10%202F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%B5%B7%E9%AE%AE%E5%87%A6%20%E6%9D%BE%E6%9C%88%E4%BA%AD%20%E5%8D%9A%E5%A4%9A%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%9A%E5%A4%9A%E9%A7%85%E4%B8%AD%E5%A4%AE%E8%A1%974-10%202F&travelmode=walking"
     },
     {
       "id": "hp-fukuoka-hamadaya",
@@ -5338,11 +5736,19 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ004558746/",
         "adapter_note": "午市(11:30-15:00)与晚市皆可预订，水炊御膳 ¥3,400 起 / 全套水炊会席 ¥4,800 起",
-        "price_est": "¥4,500 / 人"
+        "price_est": "¥4,500 / 人",
+        "address": "福岡県福岡市中央区天神2-2-20 警固神社社務所ビル 2F",
+        "tel": "092-732-5888"
       },
       "walk_min": 10,
       "walk_m": 800,
-      "dish_archetype": "mizutaki"
+      "dish_archetype": "mizutaki",
+      "address_ja": "福岡県福岡市中央区天神2-2-20 警固神社社務所ビル 2F",
+      "lat": 33.587593,
+      "lng": 130.399002,
+      "phone": "092-732-5888",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E6%B0%B4%E3%81%9F%E3%81%8D%20%E6%BF%B1%E7%94%B0%E5%B1%8B%20%E5%A4%A9%E7%A5%9E%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%A4%A9%E7%A5%9E2-2-20%20%E8%AD%A6%E5%9B%BA%E7%A5%9E%E7%A4%BE%E7%A4%BE%E5%8B%99%E6%89%80%E3%83%93%E3%83%AB%202F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%8D%9A%E5%A4%9A%E6%B0%B4%E3%81%9F%E3%81%8D%20%E6%BF%B1%E7%94%B0%E5%B1%8B%20%E5%A4%A9%E7%A5%9E%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%A4%A9%E7%A5%9E2-2-20%20%E8%AD%A6%E5%9B%BA%E7%A5%9E%E7%A4%BE%E7%A4%BE%E5%8B%99%E6%89%80%E3%83%93%E3%83%AB%202F&travelmode=walking"
     },
     {
       "id": "sushi-suigyo",
@@ -5478,9 +5884,16 @@ services:
         "address": "福岡県福岡市中央区春吉3-24-4 KS SQUARE 2F",
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉大通り方面へ徒歩10分。名店「振る舞い処 水魚」の鮨別邸。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 10 分钟 (800m) | D+1:休 · D+2:◎ · D+7:休 | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥8,000〜¥12,000 / 人"
+        "price_est": "¥8,000〜¥12,000 / 人",
+        "tel": "092-732-7200"
       },
-      "dish_archetype": "sushi_omakase"
+      "dish_archetype": "sushi_omakase",
+      "address_ja": "福岡県福岡市中央区春吉3-24-4 KS SQUARE 2F",
+      "lat": 33.588249,
+      "lng": 130.406021,
+      "phone": "092-732-7200",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%20%E6%B0%B4%E9%AD%9A%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-24-4%20KS%20SQUARE%202F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E9%AE%A8%20%E6%B0%B4%E9%AD%9A%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-24-4%20KS%20SQUARE%202F&travelmode=walking"
     },
     {
       "id": "chikaro-haruyoshi",
@@ -5616,9 +6029,16 @@ services:
         "address": "福岡県福岡市中央区春吉3-11-19",
         "walk_route_ja": "中洲川端・春吉橋から那珂川を渡り春吉交差点近くへ徒歩10分。全席個室の囲炉裏端で天草大王を味わう地鶏炭火焼。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 10 分钟 (800m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥4,500〜¥6,500 / 人"
+        "price_est": "¥4,500〜¥6,500 / 人",
+        "tel": "092-791-3837"
       },
-      "dish_archetype": "binchotan_jidori"
+      "dish_archetype": "binchotan_jidori",
+      "address_ja": "福岡県福岡市中央区春吉3-11-19",
+      "lat": 33.589722,
+      "lng": 130.405533,
+      "phone": "092-791-3837",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%85%A8%E5%B8%AD%E5%80%8B%E5%AE%A4%20%E7%82%AD%E7%81%AB%E5%9C%B0%E9%B6%8F%E5%B1%8B%20%E5%9C%B0%E3%81%8B%E3%82%8D%20%E5%8D%9A%E5%A4%9A%E6%98%A5%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-11-19",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%85%A8%E5%B8%AD%E5%80%8B%E5%AE%A4%20%E7%82%AD%E7%81%AB%E5%9C%B0%E9%B6%8F%E5%B1%8B%20%E5%9C%B0%E3%81%8B%E3%82%8D%20%E5%8D%9A%E5%A4%9A%E6%98%A5%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%98%A5%E5%90%893-11-19&travelmode=walking"
     },
     {
       "id": "oishi-sumiyoshi",
@@ -5754,9 +6174,16 @@ services:
         "address": "福岡県福岡市博多区住吉4-8-21",
         "walk_route_ja": "中洲川端・春吉橋から住吉通りを南下、住吉神社を越えて住吉4丁目へ徒歩11分。25年以上愛される博多もつ鍋の金字塔。",
         "adapter_note": "📍 距中洲川端/春吉中心步行 11 分钟 (900m) | D+1:◎ · D+2:◎ · D+7:◎ | 可一键跳转 HotPepper 或生成双语礼宾预约脚本",
-        "price_est": "¥4,000〜¥6,000 / 人"
+        "price_est": "¥4,000〜¥6,000 / 人",
+        "tel": "092-476-3014"
       },
-      "dish_archetype": "motsunabe"
+      "dish_archetype": "motsunabe",
+      "address_ja": "福岡県福岡市博多区住吉4-8-21",
+      "lat": 33.584164,
+      "lng": 130.413269,
+      "phone": "092-476-3014",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E7%89%9B%E3%82%82%E3%81%A4%E9%8D%8B%20%E3%81%8A%E3%81%8A%E3%81%84%E3%81%97%20%E4%BD%8F%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%BD%8F%E5%90%894-8-21",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E7%89%9B%E3%82%82%E3%81%A4%E9%8D%8B%20%E3%81%8A%E3%81%8A%E3%81%84%E3%81%97%20%E4%BD%8F%E5%90%89%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%BD%8F%E5%90%894-8-21&travelmode=walking"
     },
     {
       "id": "hp-fukuoka-moegi-yakuin",
@@ -5868,11 +6295,19 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000728648/",
         "adapter_note": "午市四季怀石 (11:30-14:30) 与晚市割烹皆可在线锁位，从中洲川端/春吉中心打车至药院仅需 6 分钟",
-        "price_est": "¥6,600 / 人"
+        "price_est": "¥6,600 / 人",
+        "address": "福岡県福岡市中央区薬院4-21-1",
+        "tel": "092-525-0141"
       },
       "walk_min": 14,
       "walk_m": 1150,
-      "dish_archetype": "kaiseki_kappo"
+      "dish_archetype": "kaiseki_kappo",
+      "address_ja": "福岡県福岡市中央区薬院4-21-1",
+      "lat": 33.579391,
+      "lng": 130.393753,
+      "phone": "092-525-0141",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%92%8C%E5%89%B5%E3%82%8A%20%E8%90%8C%E6%9C%A8%EF%BC%88%E3%82%8F%E3%81%A5%E3%81%8F%E3%82%8A%20%E3%82%82%E3%81%88%E3%81%8E%EF%BC%89%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E8%96%AC%E9%99%A24-21-1",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%92%8C%E5%89%B5%E3%82%8A%20%E8%90%8C%E6%9C%A8%EF%BC%88%E3%82%8F%E3%81%A5%E3%81%8F%E3%82%8A%20%E3%82%82%E3%81%88%E3%81%8E%EF%BC%89%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E8%96%AC%E9%99%A24-21-1&travelmode=walking"
     },
     {
       "id": "hp-shinjuku-ninomiya",
@@ -5956,7 +6391,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ004698945/",
         "adapter_note": "3.42分沧海遗珠首选：无需像 4.6+ 殿堂店苦等半年，晚间江户前おまかせ ¥8,800 起直接在线锁位",
-        "price_est": "¥8,800 / 人"
+        "price_est": "¥8,800 / 人",
+        "address": "東京都新宿区歌舞伎町1-15-3 歌舞伎町輝ビル 1F",
+        "tel": "03-3209-7177"
       },
       "name_en": "Sushidokoro Ninomiya Shinjuku Honten (Edomae Akazu Sushi)",
       "city_en": "Tokyo",
@@ -5984,7 +6421,13 @@ services:
       ],
       "quote_en": "\"The master is taciturn so I was slightly tense at first, but the Kohada Kanoko knife-work and how the red-vinegar shari loosens on the tongue are ¥30,000 Ginza tier. A mystery why it sits at 3.4x in Shinjuku.\"",
       "reviewer_en": "[Illustrative Archetype] Harsh Critic (Lifetime μ=2.98, σ=0.26, n=480 → Rated 3.70 here, z=+2.77σ endorsement)",
-      "dish_archetype": "sushi_omakase"
+      "dish_archetype": "sushi_omakase",
+      "address_ja": "東京都新宿区歌舞伎町1-15-3 歌舞伎町輝ビル 1F",
+      "lat": 35.694019,
+      "lng": 139.702072,
+      "phone": "03-3209-7177",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E3%81%99%E3%81%97%E5%87%A6%20%E4%BA%8C%E3%83%8E%E5%AE%AE%20%E6%96%B0%E5%AE%BF%E6%9C%AC%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E6%AD%8C%E8%88%9E%E4%BC%8E%E7%94%BA1-15-3%20%E6%AD%8C%E8%88%9E%E4%BC%8E%E7%94%BA%E8%BC%9D%E3%83%93%E3%83%AB%201F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E3%81%99%E3%81%97%E5%87%A6%20%E4%BA%8C%E3%83%8E%E5%AE%AE%20%E6%96%B0%E5%AE%BF%E6%9C%AC%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E6%AD%8C%E8%88%9E%E4%BC%8E%E7%94%BA1-15-3%20%E6%AD%8C%E8%88%9E%E4%BC%8E%E7%94%BA%E8%BC%9D%E3%83%93%E3%83%AB%201F&travelmode=walking"
     },
     {
       "id": "hp-shinbashi-otako",
@@ -6068,7 +6511,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000723641/",
         "adapter_note": "银座/新桥深夜灵魂关东煮老铺，HotPepper 直接在线锁位",
-        "price_est": "¥4,800 / 人"
+        "price_est": "¥4,800 / 人",
+        "address": "東京都港区新橋3-7-9 川辺ビル B1F",
+        "tel": "03-3503-6076"
       },
       "name_en": "Shinbashi Otako (Founded 1924 · Kanto Dark-Broth Oden)",
       "city_en": "Tokyo",
@@ -6096,7 +6541,13 @@ services:
       ],
       "quote_en": "\"It's cramped, noisy, and the aunties bark orders—so tourists dock points. But the moment you bite into that black-dashi-soaked tofu over rice (Toumeshi), nothing else in Tokyo compares.\"",
       "reviewer_en": "[Illustrative Archetype] Veteran Izakaya Critic (Lifetime μ=3.12, σ=0.29, n=610 → Rated 3.80, z=+2.34σ)",
-      "dish_archetype": "oden_izakaya"
+      "dish_archetype": "oden_izakaya",
+      "address_ja": "東京都港区新橋3-7-9 川辺ビル B1F",
+      "lat": 35.665367,
+      "lng": 139.754883,
+      "phone": "03-3503-6076",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E6%A9%8B%20%E3%81%8A%E5%A4%9A%E5%B9%B8%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E6%96%B0%E6%A9%8B3-7-9%20%E5%B7%9D%E8%BE%BA%E3%83%93%E3%83%AB%20B1F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E6%A9%8B%20%E3%81%8A%E5%A4%9A%E5%B9%B8%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E6%96%B0%E6%A9%8B3-7-9%20%E5%B7%9D%E8%BE%BA%E3%83%93%E3%83%AB%20B1F&travelmode=walking"
     },
     {
       "id": "hp-kyoto-gem",
@@ -6178,7 +6629,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ004576748/",
         "adapter_note": "当京都 4.5+ 怀石全部满席时，这家 3.36 分（校准 3.72）的全包厢和牛海胆割烹可直接在线预订",
-        "price_est": "¥9,500 / 人"
+        "price_est": "¥9,500 / 人",
+        "address": "京都府京都市東山区三条通大橋東入大橋町115",
+        "tel": "075-746-6084"
       },
       "name_en": "Saryo Kenshiro Kyoto Kawaramachi (A5 Wagyu Kappo)",
       "city_en": "Kyoto",
@@ -6206,7 +6659,13 @@ services:
       ],
       "quote_en": "\"Because it's a newer Kyoto branch, Tabelog's Bayesian prior keeps it at 3.36. Yet the raw Hokkaido uni firmness and A5 wagyu lipid sweetness rival 4.1+ Gion beef kappo counters.\"",
       "reviewer_en": "[Illustrative Archetype] Kansai Beef Connoisseur (Lifetime μ=3.18, σ=0.25, n=320 → Rated 3.80, z=+2.48σ)",
-      "dish_archetype": "wagyu_yakiniku"
+      "dish_archetype": "wagyu_yakiniku",
+      "address_ja": "京都府京都市東山区三条通大橋東入大橋町115",
+      "lat": 35.00703,
+      "lng": 135.775436,
+      "phone": "075-746-6084",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E8%8C%B6%E5%AF%AE%20%E3%81%91%E3%82%93%E3%81%97%E3%82%8D%E3%81%86%20%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E6%9D%B1%E5%B1%B1%E5%8C%BA%E4%B8%89%E6%9D%A1%E9%80%9A%E5%A4%A7%E6%A9%8B%E6%9D%B1%E5%85%A5%E5%A4%A7%E6%A9%8B%E7%94%BA115",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E8%8C%B6%E5%AF%AE%20%E3%81%91%E3%82%93%E3%81%97%E3%82%8D%E3%81%86%20%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E6%9D%B1%E5%B1%B1%E5%8C%BA%E4%B8%89%E6%9D%A1%E9%80%9A%E5%A4%A7%E6%A9%8B%E6%9D%B1%E5%85%A5%E5%A4%A7%E6%A9%8B%E7%94%BA115&travelmode=walking"
     },
     {
       "id": "hp-yumeyagura-umeda",
@@ -6287,7 +6746,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ003411689/course/",
         "adapter_note": "booking_layer 实测：Point-Plus 日历解析通过，D+7 为 '◎' (available/plenty)，建议预订席位后单点近江牛タタキ",
-        "price_est": "¥5,500 / 人"
+        "price_est": "¥5,500 / 人",
+        "address": "大阪府大阪市北区曽根崎2-8-7 コーストスタジョーネ 4F",
+        "tel": "06-6363-2929"
       },
       "name_en": "Yumeyagura Umeda Honten (Binchotan Omi-Beef Tataki)",
       "city_en": "Osaka",
@@ -6315,7 +6776,13 @@ services:
       ],
       "quote_en": "\"Ignore the lively Umeda izakaya hallway—their direct-sourced Shiga Omi beef tataki has a textbook binchotan crust and ruby center that beats dedicated steak houses.\"",
       "reviewer_en": "[Illustrative Archetype] Kansai Charcoal Critic (Lifetime μ=3.22, σ=0.26, n=410 → Rated 3.75, z=+2.04σ)",
-      "dish_archetype": "binchotan_jidori"
+      "dish_archetype": "binchotan_jidori",
+      "address_ja": "大阪府大阪市北区曽根崎2-8-7 コーストスタジョーネ 4F",
+      "lat": 34.699615,
+      "lng": 135.501053,
+      "phone": "06-6363-2929",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A2%E3%82%84%E3%81%90%E3%82%89%20%E6%A2%85%E7%94%B0%E6%9C%AC%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E6%9B%BD%E6%A0%B9%E5%B4%8E2-8-7%20%E3%82%B3%E3%83%BC%E3%82%B9%E3%83%88%E3%82%B9%E3%82%BF%E3%82%B8%E3%83%A7%E3%83%BC%E3%83%8D%204F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E5%A4%A2%E3%82%84%E3%81%90%E3%82%89%20%E6%A2%85%E7%94%B0%E6%9C%AC%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E6%9B%BD%E6%A0%B9%E5%B4%8E2-8-7%20%E3%82%B3%E3%83%BC%E3%82%B9%E3%83%88%E3%82%B9%E3%82%BF%E3%82%B8%E3%83%A7%E3%83%BC%E3%83%8D%204F&travelmode=walking"
     },
     {
       "id": "hp-okoge-umeda",
@@ -6397,7 +6864,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ004501712/",
         "adapter_note": "booking_layer 实测：直火釜饭名所，进店即先点釜饭刚好配前菜，当晚可直接在线锁位",
-        "price_est": "¥4,500 / 人"
+        "price_est": "¥4,500 / 人",
+        "address": "大阪府大阪市北区曽根崎2-8-12 B1F",
+        "tel": "06-6367-7757"
       },
       "name_en": "Okoge Umeda (Hagama Direct-Fire Claypot Kamameshi)",
       "city_en": "Osaka",
@@ -6425,7 +6894,13 @@ services:
       ],
       "quote_en": "\"Some impatient reviewers complain the kamameshi takes 25 minutes—because it's cooked from raw rice over direct flame! The fragrant scorched okoge crust and bursting ikura are worth every second.\"",
       "reviewer_en": "[Illustrative Archetype] Osaka Rice & Dashi Critic (Lifetime μ=3.15, σ=0.27, n=275 → Rated 3.70, z=+2.04σ)",
-      "dish_archetype": "kaiseki_kappo"
+      "dish_archetype": "kaiseki_kappo",
+      "address_ja": "大阪府大阪市北区曽根崎2-8-12 B1F",
+      "lat": 34.699657,
+      "lng": 135.500626,
+      "phone": "06-6367-7757",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E3%81%93%E3%81%92%20%E6%A2%85%E7%94%B0%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E6%9B%BD%E6%A0%B9%E5%B4%8E2-8-12%20B1F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E3%81%8A%E3%81%93%E3%81%92%20%E6%A2%85%E7%94%B0%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E6%9B%BD%E6%A0%B9%E5%B4%8E2-8-12%20B1F&travelmode=walking"
     },
     {
       "id": "hp-pronto-shinagawa",
@@ -6507,7 +6982,9 @@ services:
         "seat_type": "phone",
         "source_url": "https://www.hotpepper.jp/strJ000001147/course/",
         "adapter_note": "booking_layer 实测 (BUG-2 修复验证)：calendar mark 'TEL' 映射为 status='request', seat_type='phone'",
-        "price_est": "¥3,200 / 人"
+        "price_est": "¥3,200 / 人",
+        "address": "東京都港区港南2-15-2 品川インターシティ B棟 B1F",
+        "tel": "03-5783-5120"
       },
       "name_en": "Kissakaba PRONTO Shinagawa Intercity (Showa Retro Bar · Chain Benchmark)",
       "city_en": "Tokyo",
@@ -6535,7 +7012,13 @@ services:
       ],
       "quote_en": "\"A fun, honest Showa-retro evening bar after Shinagawa bullet-train arrivals. It's a chain—so our engine caps it honestly at 3.44 (top 20% of casual chains) rather than faking a 3.8.\"",
       "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)",
-      "dish_archetype": "oden_izakaya"
+      "dish_archetype": "oden_izakaya",
+      "address_ja": "東京都港区港南2-15-2 品川インターシティ B棟 B1F",
+      "lat": 35.626335,
+      "lng": 139.742004,
+      "phone": "03-5783-5120",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E3%82%AD%E3%83%83%E3%82%B5%E3%82%AB%E3%83%90%20PRONTO%20%E5%93%81%E5%B7%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%86%E3%82%A3%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E6%B8%AF%E5%8D%972-15-2%20%E5%93%81%E5%B7%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%86%E3%82%A3%20B%E6%A3%9F%20B1F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E3%82%AD%E3%83%83%E3%82%B5%E3%82%AB%E3%83%90%20PRONTO%20%E5%93%81%E5%B7%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%86%E3%82%A3%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E6%B8%AF%E5%8D%972-15-2%20%E5%93%81%E5%B7%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%86%E3%82%A3%20B%E6%A3%9F%20B1F&travelmode=walking"
     },
     {
       "id": "hp-tengu-shinjuku",
@@ -6618,7 +7101,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000124720/course/",
         "adapter_note": "booking_layer 实测：2026-10-27 calendar mark '◎' (day-level available/plenty)",
-        "price_est": "¥3,500 / 人"
+        "price_est": "¥3,500 / 人",
+        "address": "東京都新宿区西新宿1-1-1 新宿パレットビル 7F",
+        "tel": "03-3342-8871"
       },
       "name_en": "Kandaya Tengu Shinjuku West O-Guard (Teppan & Motsuni · Chain Benchmark)",
       "city_en": "Tokyo",
@@ -6646,7 +7131,13 @@ services:
       ],
       "quote_en": "\"For ¥2,200 under the Shinjuku tracks, the house white-miso motsuni tofu is genuinely comforting. Calibrated honestly to 3.41 within the budget-izakaya bracket.\"",
       "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)",
-      "dish_archetype": "oden_izakaya"
+      "dish_archetype": "oden_izakaya",
+      "address_ja": "東京都新宿区西新宿1-1-1 新宿パレットビル 7F",
+      "lat": 35.68858,
+      "lng": 139.699432,
+      "phone": "03-3342-8871",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E7%94%B0%E5%B1%8B%E3%83%BB%E5%A4%A9%E7%8B%97%20%E6%96%B0%E5%AE%BF%E8%A5%BF%E5%8F%A3%E5%A4%A7%E3%82%AC%E3%83%BC%E3%83%89%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF1-1-1%20%E6%96%B0%E5%AE%BF%E3%83%91%E3%83%AC%E3%83%83%E3%83%88%E3%83%93%E3%83%AB%207F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E7%A5%9E%E7%94%B0%E5%B1%8B%E3%83%BB%E5%A4%A9%E7%8B%97%20%E6%96%B0%E5%AE%BF%E8%A5%BF%E5%8F%A3%E5%A4%A7%E3%82%AC%E3%83%BC%E3%83%89%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF1-1-1%20%E6%96%B0%E5%AE%BF%E3%83%91%E3%83%AC%E3%83%83%E3%83%88%E3%83%93%E3%83%AB%207F&travelmode=walking"
     },
     {
       "id": "hp-wan-tamachi",
@@ -6728,7 +7219,9 @@ services:
         "seat_type": "plenty",
         "source_url": "https://www.hotpepper.jp/strJ000972128/course/",
         "adapter_note": "booking_layer 实测 (BUG-1 完整店名验证)：calendar mark '◎' (day-level available/plenty)",
-        "price_est": "¥4,500 / 人"
+        "price_est": "¥4,500 / 人",
+        "address": "東京都港区芝5-31-24 勝文館共同ビル 2F・3F",
+        "tel": "03-5484-8855"
       },
       "name_en": "Kuimonoya Wan Tamachi (Private-Booth Izakaya · Chain Benchmark)",
       "city_en": "Tokyo",
@@ -6756,7 +7249,13 @@ services:
       ],
       "quote_en": "\"Included as a transparent negative-control benchmark: even with nice Oribe plating, our engine recognizes chain execution and caps calibration at 3.42.\"",
       "reviewer_en": "[Illustrative Archetype] Kiro §0 Calibration Audit (Strict Chain Cap |Δ| ≤ 0.08 enforced)",
-      "dish_archetype": "oden_izakaya"
+      "dish_archetype": "oden_izakaya",
+      "address_ja": "東京都港区芝5-31-24 勝文館共同ビル 2F・3F",
+      "lat": 35.646557,
+      "lng": 139.745956,
+      "phone": "03-5484-8855",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E3%81%8F%E3%81%84%E3%82%82%E3%81%AE%E5%B1%8B%20%E3%82%8F%E3%82%93%20%E7%94%B0%E7%94%BA%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E8%8A%9D5-31-24%20%E5%8B%9D%E6%96%87%E9%A4%A8%E5%85%B1%E5%90%8C%E3%83%93%E3%83%AB%202F%E3%83%BB3F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E3%81%8F%E3%81%84%E3%82%82%E3%81%AE%E5%B1%8B%20%E3%82%8F%E3%82%93%20%E7%94%B0%E7%94%BA%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E8%8A%9D5-31-24%20%E5%8B%9D%E6%96%87%E9%A4%A8%E5%85%B1%E5%90%8C%E3%83%93%E3%83%AB%202F%E3%83%BB3F&travelmode=walking"
     },
     {
       "id": "tc-akasakashion",
@@ -6837,7 +7336,9 @@ services:
         "seat_type": "concierge_or_widget",
         "source_url": "https://www.tablecheck.com/ja/shops/akasakashion/reserve",
         "adapter_note": "booking_layer 实测：已解析 TableCheck shop_id=5715bdbd342fc494b6001043；支持直达 TableCheck 预约页",
-        "price_est": "¥28,000 / 人"
+        "price_est": "¥28,000 / 人",
+        "address": "東京都港区赤坂2-14-5 プラザミカドビル B1F",
+        "tel": "03-3585-7800"
       },
       "name_en": "Nihonryori Akasaka Shion (Seasonal Hassun Kaiseki · 4.0+ Reference)",
       "city_en": "Tokyo",
@@ -6865,7 +7366,13 @@ services:
       ],
       "quote_en": "\"Serves as our 4.0+ kaiseki reference anchor—showing that while Akasaka Shion is superb at ¥22,000, several 3.38 regional kappo gems reach 88% of its knife precision at 1/3 the price.\"",
       "reviewer_en": "[Illustrative Archetype] Tokyo Kaiseki Benchmark Anchor (n=145 verified reviews)",
-      "dish_archetype": "kaiseki_kappo"
+      "dish_archetype": "kaiseki_kappo",
+      "address_ja": "東京都港区赤坂2-14-5 プラザミカドビル B1F",
+      "lat": 35.672062,
+      "lng": 139.737106,
+      "phone": "03-3585-7800",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%9C%AC%E6%96%99%E7%90%86%20%E8%B5%A4%E5%9D%82%20%E7%B4%99%E9%9F%B3%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E8%B5%A4%E5%9D%822-14-5%20%E3%83%97%E3%83%A9%E3%82%B6%E3%83%9F%E3%82%AB%E3%83%89%E3%83%93%E3%83%AB%20B1F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%97%A5%E6%9C%AC%E6%96%99%E7%90%86%20%E8%B5%A4%E5%9D%82%20%E7%B4%99%E9%9F%B3%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E8%B5%A4%E5%9D%822-14-5%20%E3%83%97%E3%83%A9%E3%82%B6%E3%83%9F%E3%82%AB%E3%83%89%E3%83%93%E3%83%AB%20B1F&travelmode=walking"
     },
     {
       "id": "fukuoka-tatsumi-sushi",
@@ -6946,7 +7453,9 @@ services:
         "seat_type": "phone",
         "source_url": "https://www.tablecheck.com/ja/shops/tatsumi-sushi-souhonten/reserve",
         "adapter_note": "支持 TableCheck 线上预约或双语礼宾电话代订",
-        "price_est": "¥22,000 / 人"
+        "price_est": "¥22,000 / 人",
+        "address": "福岡県福岡市博多区下川端町8-5 博多座西隣",
+        "tel": "092-263-1661"
       },
       "name_en": "Tatsumi Sushi Sohonten (Genkai Sosaku Sushi · Reference)",
       "city_en": "Fukuoka",
@@ -6974,7 +7483,13 @@ services:
       ],
       "quote_en": "\"A beloved Fukuoka institution where every piece arrives pre-seasoned with Genkai citrus, yuzu-kosho, or house nikiri—no soy saucer needed.\"",
       "reviewer_en": "[Illustrative Archetype] Kyushu Sushi Reference Anchor (n=380 verified reviews)",
-      "dish_archetype": "sushi_omakase"
+      "dish_archetype": "sushi_omakase",
+      "address_ja": "福岡県福岡市博多区下川端町8-5 博多座西隣",
+      "lat": 33.596092,
+      "lng": 130.406677,
+      "phone": "092-263-1661",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E3%81%9F%E3%81%A4%E3%81%BF%E5%AF%BF%E5%8F%B8%20%E7%B7%8F%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%B8%8B%E5%B7%9D%E7%AB%AF%E7%94%BA8-5%20%E5%8D%9A%E5%A4%9A%E5%BA%A7%E8%A5%BF%E9%9A%A3",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E3%81%9F%E3%81%A4%E3%81%BF%E5%AF%BF%E5%8F%B8%20%E7%B7%8F%E6%9C%AC%E5%BA%97%20%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E4%B8%8B%E5%B7%9D%E7%AB%AF%E7%94%BA8-5%20%E5%8D%9A%E5%A4%9A%E5%BA%A7%E8%A5%BF%E9%9A%A3&travelmode=walking"
     },
     {
       "id": "kyoto-ogata",
@@ -7054,7 +7569,9 @@ services:
         "seat_type": "phone",
         "source_url": "https://tabelog.com/kyoto/A2601/A260201/26011404/",
         "adapter_note": "4.59 金奖殿堂（非主攻池）：若临时起意去京都，建议直接预订主攻池内 3.36 分（校准 3.72）的『茶寮 けんしろう』",
-        "price_est": "¥50,000 / 人"
+        "price_est": "¥50,000 / 人",
+        "address": "京都府京都市下京区綾小路通西洞院東入新釜座町726",
+        "tel": "075-344-8000"
       },
       "name_en": "Kyoto Ogata (Tabelog Gold 4.59 · Ultimate Kaiseki Ruler)",
       "city_en": "Kyoto",
@@ -7082,7 +7599,13 @@ services:
       ],
       "quote_en": "\"Included as the 4.59 ceiling ruler and the canonical example of κ_API = ∞ where pure digital agents fail and VRO's verified human concierge micro-bounty bridges the last mile.\"",
       "reviewer_en": "[Illustrative Archetype] SGDO/VRO Ceiling Reference Anchor (Tabelog Gold)",
-      "dish_archetype": "kaiseki_kappo"
+      "dish_archetype": "kaiseki_kappo",
+      "address_ja": "京都府京都市下京区綾小路通西洞院東入新釜座町726",
+      "lat": 35.002567,
+      "lng": 135.76329,
+      "phone": "075-344-8000",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E7%B7%92%E6%96%B9%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E4%B8%8B%E4%BA%AC%E5%8C%BA%E7%B6%BE%E5%B0%8F%E8%B7%AF%E9%80%9A%E8%A5%BF%E6%B4%9E%E9%99%A2%E6%9D%B1%E5%85%A5%E6%96%B0%E9%87%9C%E5%BA%A7%E7%94%BA726",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E7%B7%92%E6%96%B9%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E4%B8%8B%E4%BA%AC%E5%8C%BA%E7%B6%BE%E5%B0%8F%E8%B7%AF%E9%80%9A%E8%A5%BF%E6%B4%9E%E9%99%A2%E6%9D%B1%E5%85%A5%E6%96%B0%E9%87%9C%E5%BA%A7%E7%94%BA726&travelmode=walking"
     },
     {
       "id": "sushi-sugita-tokyo",
@@ -7162,7 +7685,9 @@ services:
         "seat_type": "concierge_priority",
         "source_url": "https://omakase.in/ja/r/fa129537",
         "adapter_note": "4.67 金奖殿堂（非主攻池）：今晚想吃同流派赤醋江户前鮨，请直接订主攻池第一张卡 3.42 分（校准 3.76）『すし処 二ノ宮 新宿本店』",
-        "price_est": "¥45,000 / 人"
+        "price_est": "¥45,000 / 人",
+        "address": "東京都中央区日本橋蛎殻町1-33-6 ビューハイツ日本橋 B1F",
+        "tel": "03-3669-3855"
       },
       "name_en": "Nihonbashi Kakigaracho Sugita (Tabelog Gold 4.67 · Edomae Ruler)",
       "city_en": "Tokyo",
@@ -7190,7 +7715,13 @@ services:
       ],
       "quote_en": "\"Sugita is the P100 yardstick for Edomae shari and knife work—allowing our vision model to quantify when a 3.42 neighborhood counter achieves 85% of Sugita's blade geometry at 1/4 the price.\"",
       "reviewer_en": "[Illustrative Archetype] SGDO/VRO Edomae Sushi Ceiling Ruler",
-      "dish_archetype": "sushi_omakase"
+      "dish_archetype": "sushi_omakase",
+      "address_ja": "東京都中央区日本橋蛎殻町1-33-6 ビューハイツ日本橋 B1F",
+      "lat": 35.681984,
+      "lng": 139.785034,
+      "phone": "03-3669-3855",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%9C%AC%E6%A9%8B%E8%9B%8E%E6%AE%BB%E7%94%BA%20%E3%81%99%E3%81%8E%E3%81%9F%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%97%A5%E6%9C%AC%E6%A9%8B%E8%9B%8E%E6%AE%BB%E7%94%BA1-33-6%20%E3%83%93%E3%83%A5%E3%83%BC%E3%83%8F%E3%82%A4%E3%83%84%E6%97%A5%E6%9C%AC%E6%A9%8B%20B1F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%97%A5%E6%9C%AC%E6%A9%8B%E8%9B%8E%E6%AE%BB%E7%94%BA%20%E3%81%99%E3%81%8E%E3%81%9F%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%97%A5%E6%9C%AC%E6%A9%8B%E8%9B%8E%E6%AE%BB%E7%94%BA1-33-6%20%E3%83%93%E3%83%A5%E3%83%BC%E3%83%8F%E3%82%A4%E3%83%84%E6%97%A5%E6%9C%AC%E6%A9%8B%20B1F&travelmode=walking"
     },
     {
       "id": "yakiniku-jambo-hanare",
@@ -7270,7 +7801,9 @@ services:
         "seat_type": "concierge_or_widget",
         "source_url": "https://www.tablecheck.com/ja/shops/yakiniku-jambo-hanare/reserve",
         "adapter_note": "支持 TableCheck 预约页查看下月放位，或切换回主攻池预订今晚有位的和牛割烹",
-        "price_est": "¥18,000 / 人"
+        "price_est": "¥18,000 / 人",
+        "address": "東京都文京区本郷3-27-9 アンダーウッドビル B1F・1F",
+        "tel": "03-5689-8705"
       },
       "name_en": "Yakiniku Jambo Hanare Hongo (Tabelog Silver 4.34 · Wagyu Ruler)",
       "city_en": "Tokyo",
@@ -7298,7 +7831,13 @@ services:
       ],
       "quote_en": "\"Anchors the P99 visual standard for A5 wagyu lipid sheen and 3-second Maillard caramelization.\"",
       "reviewer_en": "[Illustrative Archetype] SGDO/VRO Wagyu Ceiling Ruler",
-      "dish_archetype": "wagyu_yakiniku"
+      "dish_archetype": "wagyu_yakiniku",
+      "address_ja": "東京都文京区本郷3-27-9 アンダーウッドビル B1F・1F",
+      "lat": 35.706654,
+      "lng": 139.762405,
+      "phone": "03-5689-8705",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E7%84%BC%E8%82%89%20%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%9C%20%E3%81%AF%E3%81%AA%E3%82%8C%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%87%E4%BA%AC%E5%8C%BA%E6%9C%AC%E9%83%B73-27-9%20%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%A6%E3%83%83%E3%83%89%E3%83%93%E3%83%AB%20B1F%E3%83%BB1F",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E7%84%BC%E8%82%89%20%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%9C%20%E3%81%AF%E3%81%AA%E3%82%8C%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%87%E4%BA%AC%E5%8C%BA%E6%9C%AC%E9%83%B73-27-9%20%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%A6%E3%83%83%E3%83%89%E3%83%93%E3%83%AB%20B1F%E3%83%BB1F&travelmode=walking"
     },
     {
       "id": "ramen-iida-shouta",
@@ -7379,7 +7918,9 @@ services:
         "seat_type": "some",
         "source_url": "https://omakase.in/ja/r/uu486796",
         "adapter_note": "每周二 12:00 JST 在 OMAKASE 放号",
-        "price_est": "¥3,200 / 人"
+        "price_est": "¥3,200 / 人",
+        "address": "神奈川県足柄下郡湯河原町土肥2-12-14",
+        "tel": "0465-62-0141"
       },
       "name_en": "Ramen Iida Shouta Yugawara (Tabelog 4.10 · Artisan Shoyu Ramen Ruler)",
       "city_en": "Tokyo",
@@ -7407,7 +7948,13 @@ services:
       ],
       "quote_en": "\"Sets the visual standard for golden chiyu (chicken oil) emulsion and silky noodle fold alignment.\"",
       "reviewer_en": "[Illustrative Archetype] SGDO/VRO Ramen Ceiling Ruler",
-      "dish_archetype": "ramen"
+      "dish_archetype": "ramen",
+      "address_ja": "神奈川県足柄下郡湯河原町土肥2-12-14",
+      "lat": 35.144531,
+      "lng": 139.109375,
+      "phone": "0465-62-0141",
+      "gmaps_search_url": "https://www.google.com/maps/search/?api=1&query=%E3%82%89%E3%81%81%E9%BA%BA%20%E9%A3%AF%E7%94%B0%E5%95%86%E5%BA%97%20%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E8%B6%B3%E6%9F%84%E4%B8%8B%E9%83%A1%E6%B9%AF%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%9C%9F%E8%82%A52-12-14",
+      "gmaps_nav_url": "https://www.google.com/maps/dir/?api=1&destination=%E3%82%89%E3%81%81%E9%BA%BA%20%E9%A3%AF%E7%94%B0%E5%95%86%E5%BA%97%20%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E8%B6%B3%E6%9F%84%E4%B8%8B%E9%83%A1%E6%B9%AF%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%9C%9F%E8%82%A52-12-14&travelmode=walking"
     }
   ],
   "bounties": [
@@ -7463,7 +8010,6 @@ services:
   "total_venues": 45,
   "hidden_gem_count": 39
 };
-
     let venues = INITIAL_DATASET.venues;
     let bounties = INITIAL_DATASET.bounties;
     let currentLang = (function() {
@@ -7736,6 +8282,7 @@ services:
 
       renderSpotlight();
       renderGrid();
+      if (radarMapInstance) updateRadarMarkers();
     }
 
     function setBiasFilter(bias) {
@@ -7840,6 +8387,15 @@ services:
         document.getElementById('spotQuoteMeta').textContent = isEn
           ? `💬 Illustrative Reviewer Archetype: ${v.reviewer_en || v.review_evidence.reviewer_profile}`
           : `💬 示意食客画像重构：${v.review_evidence.reviewer_profile}`;
+      }
+
+      // Exact Address & Google Maps Navigation Link
+      const addrText = v.address_ja || (v.booking && v.booking.address) || '';
+      const addrEl = document.getElementById('spotAddressText');
+      if (addrEl) addrEl.textContent = addrText;
+      const gmapsLink = document.getElementById('spotGmapsLink');
+      if (gmapsLink) {
+        gmapsLink.href = v.gmaps_search_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.name_ja + ' ' + addrText)}`;
       }
     }
 
@@ -7957,22 +8513,231 @@ services:
       });
     }
 
+    let radarMapInstance = null;
+    let radarMarkerLayer = null;
+    let userLocMarker = null;
+
     function setInteractionView(mode) {
       const swipeSec = document.getElementById('swipeDeckSection');
       const gridSec = document.getElementById('gridGallerySection');
+      const mapSec = document.getElementById('mapRadarSection');
       const btnSwipe = document.getElementById('modeSwipeBtn');
       const btnGrid = document.getElementById('modeGridBtn');
-      if (mode === 'grid') {
+      const btnMap = document.getElementById('modeMapBtn');
+      const btnTopMap = document.getElementById('mapViewToggleBtn');
+
+      if (mode === 'map') {
+        swipeSec.style.display = 'none';
+        gridSec.style.display = 'none';
+        if (mapSec) mapSec.style.display = 'block';
+        if (btnSwipe) btnSwipe.classList.remove('active');
+        if (btnGrid) btnGrid.classList.remove('active');
+        if (btnMap) btnMap.classList.add('active');
+        if (btnTopMap) {
+          btnTopMap.style.boxShadow = '0 0 14px rgba(16,185,129,0.7)';
+          btnTopMap.innerHTML = '🗺️ 严选地图 [雷达模式]';
+        }
+        renderMapRadar();
+      } else if (mode === 'grid') {
+        if (mapSec) mapSec.style.display = 'none';
         swipeSec.style.display = 'none';
         gridSec.style.display = 'block';
-        btnSwipe.classList.remove('active');
-        btnGrid.classList.add('active');
+        if (btnSwipe) btnSwipe.classList.remove('active');
+        if (btnMap) btnMap.classList.remove('active');
+        if (btnGrid) btnGrid.classList.add('active');
+        if (btnTopMap) {
+          btnTopMap.style.boxShadow = '';
+          btnTopMap.innerHTML = '🗺️ 严选地图 (过滤大车店)';
+        }
       } else {
+        if (mapSec) mapSec.style.display = 'none';
         gridSec.style.display = 'none';
         swipeSec.style.display = 'block';
-        btnGrid.classList.remove('active');
-        btnSwipe.classList.add('active');
+        if (btnGrid) btnGrid.classList.remove('active');
+        if (btnMap) btnMap.classList.remove('active');
+        if (btnSwipe) btnSwipe.classList.add('active');
+        if (btnTopMap) {
+          btnTopMap.style.boxShadow = '';
+          btnTopMap.innerHTML = '🗺️ 严选地图 (过滤大车店)';
+        }
       }
+    }
+
+    function toggleMapView() {
+      const mapSec = document.getElementById('mapRadarSection');
+      if (mapSec && mapSec.style.display === 'block') {
+        setInteractionView('swipe');
+      } else {
+        setInteractionView('map');
+      }
+    }
+
+    function renderMapRadar() {
+      if (!window.L) {
+        console.warn('Leaflet loading...');
+        setTimeout(renderMapRadar, 200);
+        return;
+      }
+      const container = document.getElementById('leafletMapContainer');
+      if (!container) return;
+
+      if (!radarMapInstance) {
+        radarMapInstance = L.map('leafletMapContainer', {
+          zoomControl: true,
+          attributionControl: false
+        });
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd',
+          maxZoom: 19
+        }).addTo(radarMapInstance);
+
+        radarMarkerLayer = L.layerGroup().addTo(radarMapInstance);
+      }
+
+      setTimeout(() => {
+        if (radarMapInstance) radarMapInstance.invalidateSize();
+      }, 150);
+
+      updateRadarMarkers();
+    }
+
+    function updateRadarMarkers() {
+      if (!radarMapInstance || !radarMarkerLayer) return;
+      radarMarkerLayer.clearLayers();
+
+      const list = getFilteredVenues();
+      const bounds = [];
+
+      list.forEach(v => {
+        if (!v.lat || !v.lng) return;
+        const lat = v.lat;
+        const lng = v.lng;
+        bounds.push([lat, lng]);
+
+        const isSushi = v.nagasaki_sushi;
+        const isNagasaki = v.city === '长崎';
+        let emoji = '🏮';
+        if (isSushi) emoji = '🍣';
+        else if ((v.genre || '').includes('烧肉') || (v.genre || '').includes('和牛')) emoji = '🥩';
+        else if ((v.genre || '').includes('乌贼') || (v.genre || '').includes('海鲜')) emoji = '🦑';
+        else if ((v.genre || '').includes('锅') || (v.genre || '').includes('水炊')) emoji = '🍲';
+        else if ((v.genre || '').includes('拉面')) emoji = '🍜';
+
+        const pinClass = isSushi ? 'pin-sushi' : (isNagasaki ? 'pin-nagasaki' : 'pin-fukuoka');
+        const html = `
+          <div class="custom-radar-pin ${pinClass}" id="pin-${v.id}">
+            <span class="pin-emoji">${emoji}</span>
+            <span class="pin-badge">★ ${v.calibrated_score} ${v.name_ja}</span>
+          </div>
+        `;
+
+        const icon = L.divIcon({
+          className: 'radar-marker-wrap',
+          html: html,
+          iconAnchor: [30, 16]
+        });
+
+        const marker = L.marker([lat, lng], { icon: icon });
+        marker.on('click', () => {
+          openRadarMiniCard(v);
+        });
+        marker.addTo(radarMarkerLayer);
+      });
+
+      if (bounds.length > 0) {
+        if (selectedTier === 'nagasaki_hub' || selectedTier === 'nagasaki_sushi') {
+          radarMapInstance.setView([32.7435, 129.8785], 15);
+        } else if (selectedTier === 'fukuoka_hub') {
+          radarMapInstance.setView([33.5895, 130.4075], 15);
+        } else {
+          radarMapInstance.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+        }
+      }
+    }
+
+    function locateMe() {
+      if (!navigator.geolocation) {
+        showToast('⚠️ 您的浏览器不支持地理定位');
+        return;
+      }
+      showToast('🛰️ 正在获取您的当前位置...');
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          if (radarMapInstance) {
+            if (userLocMarker) {
+              radarMapInstance.removeLayer(userLocMarker);
+            }
+            const userIcon = L.divIcon({
+              className: 'radar-marker-wrap',
+              html: `<div class="user-location-pulse">📍 我在这里</div>`,
+              iconAnchor: [30, 16]
+            });
+            userLocMarker = L.marker([lat, lng], { icon: userIcon }).addTo(radarMapInstance);
+            radarMapInstance.setView([lat, lng], 16);
+            showToast('📍 已定位到您的当前坐标');
+          }
+        },
+        err => {
+          showToast('⚠️ 无法获取位置，请在系统设置中允许定位权限');
+        },
+        { timeout: 10000, enableHighAccuracy: true }
+      );
+    }
+
+    function openRadarMiniCard(v) {
+      const isEn = currentLang === 'en';
+      const dishText = (isEn && v.dish_en) ? v.dish_en : v.dish_headline;
+      const cityText = (isEn && v.city_en) ? v.city_en : v.city;
+      const genreText = (isEn && v.genre_en) ? v.genre_en : v.genre;
+
+      document.getElementById('miniCardImg').src = v.image_url;
+      document.getElementById('miniCardImg').alt = dishText;
+      document.getElementById('miniCardScore').textContent = `★ ${v.calibrated_score} (${v.tabelog_raw})`;
+      document.getElementById('miniCardCityGenre').textContent = `${cityText} · ${genreText}`;
+      document.getElementById('miniCardTitle').textContent = `${v.name_ja} (${isEn && v.name_en ? v.name_en : (v.name_zh || '')})`;
+      document.getElementById('miniCardDish').textContent = dishText;
+      document.getElementById('miniCardAddress').textContent = `📍 ${v.address_ja}`;
+
+      const phone = v.phone || (v.booking && v.booking.tel) || '';
+      const phoneBtn = document.getElementById('miniCardPhone');
+      if (phone) {
+        phoneBtn.href = `tel:${phone}`;
+        phoneBtn.style.display = 'inline-flex';
+        phoneBtn.innerHTML = `📞 ${phone}`;
+      } else {
+        phoneBtn.style.display = 'none';
+      }
+
+      const navBtn = document.getElementById('miniCardNav');
+      navBtn.href = v.gmaps_nav_url || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(v.name_ja + ' ' + v.address_ja)}&travelmode=walking`;
+
+      const bookBtn = document.getElementById('miniCardBook');
+      bookBtn.onclick = () => openBookingDrawer(v.id);
+
+      const card = document.getElementById('radarMiniCard');
+      card.style.display = 'block';
+
+      if (radarMapInstance) {
+        radarMapInstance.panTo([v.lat, v.lng], { animate: true });
+      }
+    }
+
+    function closeRadarMiniCard() {
+      const card = document.getElementById('radarMiniCard');
+      if (card) card.style.display = 'none';
+    }
+
+    function openKmlModal() {
+      const modal = document.getElementById('kmlModalBackdrop');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeKmlModal() {
+      const modal = document.getElementById('kmlModalBackdrop');
+      if (modal) modal.classList.remove('open');
     }
 
     function renderGrid() {
@@ -8025,6 +8790,13 @@ services:
                 </div>
               ` : ''}
             </div>
+            <div style="margin:6px 0; padding:4px 8px; border-radius:6px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); font-size:0.71rem; color:#a1a1aa; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px;">
+              <span style="flex:1; min-width:140px;">📍 ${v.address_ja || ''}</span>
+              <div style="display:flex; gap:4px;">
+                <a href="${v.gmaps_nav_url || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(v.name_ja + ' ' + (v.address_ja || ''))}&travelmode=walking`}" target="_blank" rel="noopener" style="color:#6ee7b7; text-decoration:none; font-weight:700; background:rgba(16,185,129,0.12); padding:2px 7px; border-radius:6px; border:1px solid rgba(16,185,129,0.4); font-size:0.67rem;">🧭 导航</a>
+                <a href="${v.gmaps_search_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.name_ja + ' ' + (v.address_ja || ''))}`}" target="_blank" rel="noopener" style="color:#fde68a; text-decoration:none; font-weight:700; background:rgba(212,175,55,0.12); padding:2px 7px; border-radius:6px; border:1px solid rgba(212,175,55,0.4); font-size:0.67rem;">⭐ 标星</a>
+              </div>
+            </div>
             <div class="card-footer">
               <span class="card-slot-text">${slotText}</span>
               <button class="btn-card-book" type="button" onclick="openBookingDrawer('${v.id}')">${isEn ? '❤️ Crave · Book' : '❤️ 想吃 · 订座'}</button>
@@ -8063,6 +8835,7 @@ services:
       });
       renderSpotlight();
       renderGrid();
+      if (radarMapInstance) updateRadarMarkers();
     }
 
     function setGenreFilter(genre) {
@@ -8162,6 +8935,17 @@ services:
         <div style="color:var(--text-secondary); margin-bottom:6px;">${v.booking.adapter_note}</div>
         <div style="font-size:0.7rem; color:#6ee7b7; font-family:monospace;">
           🧬 真味校准：食べログ ${v.tabelog_raw} → ${v.calibrated_score} (${v.debias_waterfall ? v.debias_waterfall.ci_text : ''})
+        </div>
+        <div style="margin-top:6px; padding:7px 10px; border-radius:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.45); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+          <span style="font-size:0.73rem; color:#ecfdf5; flex:1; min-width:180px;">📍 <strong>官方精确地址：</strong><code style="color:#a7f3d0;">${v.address_ja || (v.booking && v.booking.address) || ''}</code></span>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <a href="${v.gmaps_nav_url || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(v.name_ja + ' ' + (v.address_ja || v.booking.address))}&travelmode=walking`}" target="_blank" rel="noopener" style="color:#052e16; background:#10b981; padding:3px 9px; border-radius:999px; font-weight:800; text-decoration:none; font-size:0.69rem; display:inline-flex; align-items:center; gap:3px;">
+              🧭 Google Maps 步行导航
+            </a>
+            <a href="${v.gmaps_search_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.name_ja + ' ' + (v.address_ja || v.booking.address))}`}" target="_blank" rel="noopener" style="color:#fde68a; background:rgba(212,175,55,0.22); border:1px solid rgba(212,175,55,0.6); padding:2px 8px; border-radius:999px; font-weight:700; text-decoration:none; font-size:0.69rem; display:inline-flex; align-items:center; gap:3px;">
+              ⭐ 标星保存
+            </a>
+          </div>
         </div>
         ${telHtml}
         ${availHtml}
@@ -8285,6 +9069,7 @@ services:
           renderSpotlight();
           renderGrid();
           renderBounties();
+          if (radarMapInstance) updateRadarMarkers();
         }
       })
       .catch(() => {});
@@ -8477,10 +9262,22 @@ services:
       return 'hidden_gem';
     })();
 
+    const initialViewParam = (function() {
+      try {
+        const v = new URLSearchParams(window.location.search).get('view');
+        if (v === 'map') return 'map';
+        if (v === 'grid') return 'grid';
+      } catch (e) {}
+      return 'swipe';
+    })();
+
     applyLanguageUI();
     setupTouchSwipeGesture();
     setTierFilter(initialDeckParam);
     renderBounties();
+    if (initialViewParam === 'map') {
+      setInteractionView('map');
+    }
   </script>
 </body>
 </html>

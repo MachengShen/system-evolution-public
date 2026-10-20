@@ -1,9 +1,11 @@
-const CACHE_NAME = 'tabelog-eye-v9';
+const CACHE_NAME = 'tabelog-eye-v10';
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
   "./dataset.json",
+  "./tabelog-eye-kyushu.kml",
+  "./tabelog-eye-nagasaki.kml",
   "./icon-192.svg",
   "./icon-512.svg"
 ];
