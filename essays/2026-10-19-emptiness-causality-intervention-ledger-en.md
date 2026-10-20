@@ -13,7 +13,13 @@
 
 ---
 
-## 0. Thesis in three lines
+## 0. The Counter-Intuitive Hook & Thesis in Three Lines
+
+**Why this is surprising (plain-language overview).** Everyone—including Einstein—instinctively treats strict cause-and-effect as the unshakeable bedrock of reality: Event $A$ happens before Event $B$, and the past pushes the future like a rigid row of dominoes. Yet foundational physics over the past decade has quietly overturned this picture. In tabletop quantum optics (the *quantum switch*), photons traverse two operations in a superposition of "$A$ before $B$" and "$B$ before $A$"; in Wheeler–DeWitt quantum cosmology, the universe as a whole has no external clock at all. Causal order is not built-in hardware—it is an emergent, relational pattern, strikingly close to what Buddhist Madhyamaka philosophy called *dependent origination and emptiness of intrinsic nature* (*pratītyasamutpāda* & *śūnyatā*).
+
+**The second surprise.** If strict causal order isn't fundamental, does that mean "anything goes"—or that an observer can peek ahead and rewrite outcomes ("steer fate") for free? **The exact opposite.** Dissolving a rigid causal timeline replaces "A pushes B" with an unyielding **global consistency and thermodynamic balance sheet**. When an external agent predicts a trajectory and forces a counterfactual outcome, the entropy cost lands squarely on the intervener, network stress concentrates right at the intervention point, and clamping a trajectory against the natural flow burns continuous housekeeping heat—whereas reshaping the underlying potential landscape avoids that perpetual tax.
+
+### Formal summary in three lines
 
 1. Process-matrix theory shows that *which event comes first* need not be an intrinsic property of events. The validity constraints (positivity, normalization, and a fixed linear subspace) stay rigid. In short: **empty of intrinsic order, non-void in constraint.**
 2. An agent that predicts a system and then acts on it is running a measure–feedback–erase loop. Stochastic thermodynamics puts a price on that loop, and the price can be **booked to a party other than the beneficiary.**
