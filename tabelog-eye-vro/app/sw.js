@@ -4,8 +4,6 @@ const ASSETS = [
   "./index.html",
   "./manifest.json",
   "./dataset.json",
-  "./tabelog-eye-kyushu.kml",
-  "./tabelog-eye-nagasaki.kml",
   "./icon-192.svg",
   "./icon-512.svg"
 ];
@@ -13,7 +11,7 @@ const ASSETS = [
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => Promise.allSettled(ASSETS.map((u) => cache.add(u))))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
