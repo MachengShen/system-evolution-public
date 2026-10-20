@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="当 AI Agent 开始替人花钱：从 Grok Bot 链上杀币漏斗看未来支付方式、经济形态与 6 种新商业物种（附一分钟大白话导读与红队冷水修正 · 2026.10 公开研究留档）。">
+  <title>当 AI Agent 开始替人花钱：未来支付轨道、经济形态与 6 大新商业物种 | Agentic Economy Phase Transition</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e56a0'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif'>AE</text></svg>">
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fef5ee;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 32rem),
+        radial-gradient(circle at 90% 10%, rgba(184, 92, 24, 0.04), transparent 28rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: #f2efe9;
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #2b303c;
+    }
+    .topbar {
+      position: sticky;
+      z-index: 30;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px max(16px, calc((100vw - 960px) / 2));
+      background: rgba(250, 248, 245, 0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: #16437e;
+      color: #fff;
+    }
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 32px 16px 88px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      align-items: center;
+    }
+    .badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .badge-warm {
+      background: var(--highlight-soft);
+      color: var(--highlight);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+      line-height: 1.32;
+      margin: 0 0 14px;
+      letter-spacing: -0.01em;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 18px;
+    }
+    /* Plain-language 60s Abstract Box */
+    .plain-abstract {
+      background: linear-gradient(135deg, #fffdf9 0%, #fef6ec 100%);
+      border: 2px solid #e6c6a5;
+      border-left: 6px solid var(--highlight);
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin-bottom: 26px;
+      box-shadow: 0 10px 30px rgba(184, 92, 24, 0.07);
+    }
+    .plain-abstract-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #e2cbb0;
+    }
+    .plain-abstract-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: var(--highlight);
+      margin: 0;
+    }
+    .plain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .plain-item {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid #eadbc8;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .plain-item strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+    }
+    .plain-item p {
+      margin: 0;
+      font-size: 0.93rem;
+      color: #363a45;
+      line-height: 1.65;
+    }
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 24px rgba(24, 25, 31, 0.03);
+    }
+    h2 {
+      font-size: 1.34rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin: 22px 0 10px;
+      color: var(--accent);
+    }
+    p { margin: 0 0 14px; }
+    ul, ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 8px; }
+    .callout {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 15px 18px;
+      border-radius: 0 10px 10px 0;
+      margin: 16px 0;
+      font-size: 0.96rem;
+    }
+    .callout-warn {
+      background: var(--red-soft);
+      border-left: 4px solid var(--red);
+      padding: 15px 18px;
+      border-radius: 0 10px 10px 0;
+      margin: 16px 0;
+      font-size: 0.96rem;
+    }
+    /* Interactive Funnel Widget */
+    .funnel-box {
+      background: #f7f5f0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 18px 0;
+    }
+    .funnel-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .funnel-step {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      border-radius: 10px;
+      padding: 13px 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .funnel-step:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .funnel-step.step-paid {
+      border-left-color: var(--highlight);
+      background: #fffaf5;
+    }
+    .funnel-step.step-human {
+      border-left-color: var(--green);
+      background: #f5fbf7;
+    }
+    .funnel-step-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .funnel-step-title {
+      font-weight: 700;
+      font-size: 0.97rem;
+    }
+    .funnel-pill {
+      font-size: 0.78rem;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-weight: 600;
+      background: #eef0f4;
+      color: #3d4352;
+    }
+    .funnel-pill.paid {
+      background: var(--highlight-soft);
+      color: var(--highlight);
+    }
+    .funnel-pill.human {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+    .funnel-detail {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+      font-size: 0.91rem;
+      color: #373c47;
+      display: none;
+    }
+    .funnel-step.open .funnel-detail {
+      display: block;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      min-width: 600px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 11px 13px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f4f1ea;
+      font-weight: 700;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 20px;
+      background: var(--card-bg);
+    }
+    .mini-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      color: var(--ink);
+    }
+    /* 5-Layer Stack Visual */
+    .stack-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .stack-layer {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px 18px;
+      background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stack-layer.l0 {
+      background: linear-gradient(90deg, #eff6ff 0%, #ffffff 100%);
+      border-left: 6px solid var(--accent);
+    }
+    .stack-layer.l4 { border-left: 6px solid #7c3aed; }
+    .stack-layer.l3 { border-left: 6px solid #0284c7; }
+    .stack-layer.l2 { border-left: 6px solid var(--green); }
+    .stack-layer.l1 { border-left: 6px solid var(--highlight); }
+    .stack-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+    .stack-sub {
+      font-size: 0.91rem;
+      color: #434957;
+    }
+    .lang-en { display: none; }
+    body.en-mode .lang-zh { display: none; }
+    body.en-mode .lang-en { display: block; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 640px) {
+      .hero, .section-card, .plain-abstract { padding: 20px 16px; }
+      body { font-size: 15.8px; }
+      h1 { font-size: 1.48rem; }
+      h2 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">System Evolution · Public Research Memo</a>
+    <div class="nav-actions">
+      <a class="btn" href="post-billable-hour-business-models.html">← 工时坍塌商业模式</a>
+      <a class="btn" href="twin-ledger-sandbox.html">🎮 破壁共生沙盒</a>
+      <button class="btn btn-primary" id="lang-toggle" onclick="toggleLang()">EN / 中文</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ==================== CHINESE EDITION ==================== -->
+    <div class="lang-zh">
+      <section class="hero">
+        <div class="meta-row">
+          <span class="badge">Public Research &amp; Architecture Synthesis · 2026-10-20</span>
+          <span class="badge-warm">Grok Bot 链上交易台 × Agent 经济学</span>
+        </div>
+        <h1>当 AI Agent 开始替人花钱：从 Grok Bot 链上杀币漏斗看未来支付轨道、经济形态与 6 大新商业物种</h1>
+        <p class="subtitle">
+          触发案例：X 社区热传的实操教程（<code>@chenke20266</code> 编译自 <code>@0xboan</code>《Grok Bot from zero in one night: full setup + a copy-paste rug filter》）——用 Grok Bot 搭建自动交易 Solana 链上代币的风控漏斗。当成千上万个持有预算的 Agent 走上街头和链上，未来的支付方式、经济形态与商业模式会长出什么新物种？
+        </p>
+      </section>
+
+      <!-- 60-Second Plain Language Abstract -->
+      <section class="plain-abstract" id="plain-summary">
+        <div class="plain-abstract-header">
+          <h2 class="plain-abstract-title">⚡ 一分钟大白话导读（零黑话·说人话版）</h2>
+          <span class="badge-warm">手机端 60 秒速读</span>
+        </div>
+        <p style="margin-bottom:12px;">
+          很多人看到有人用 Grok Bot 自动炒区块链上的 Meme 币，第一反应是“AI 又能帮人自动炒币赚钱了”。<strong>恰恰相反——Meme 币本身是个九死一生的零和赌场，真正具有颠覆性的是这套机器人的「花钱和防骗结构」：</strong>
+        </p>
+        <div class="plain-grid">
+          <div class="plain-item">
+            <strong>1. 这台机器到底在干嘛？（90% 的工作是拒买）</strong>
+            <p>它不是“找百倍币的机器”，而是<strong>“专门杀骗局的守门员”</strong>。看任何一个商品前，先用免费死规矩（池子够不够深、有没有留后门、信息全不全）砍掉 90% 的垃圾，<strong>少填一个数字就直接枪毙（缺失即致命）</strong>；最后活下来的极少数，才花几美分让 Grok 去读 X（推特）看是不是水军刷量；真要掏钱时，AI 绝不碰你的钱包私钥，只给你发条待签字账单。</p>
+          </div>
+          <div class="plain-item">
+            <strong>2. 支付方式会怎么变？（从“按一下验证码”到“批一张限额卡”）</strong>
+            <p>现在的信用卡防盗靠“发短信验证码确认你是活人”，这会把 AI 机器人卡死。未来的 AI 钱包标配是一份<strong>「可编程限额授权书」</strong>（比如：单笔最多花 $25、一天最多亏 $50、超额自动断电），而且<strong>管账限额的死代码必须写在大模型外面</strong>（防止别人发条带毒推文忽悠大模型把钱全转走）。未来谁能在链上秒级付钱之上做出<strong>「AI 交易可撤回/争议退款（链上版 Visa 拒付）」</strong>，谁就是新金融霸主。</p>
+          </div>
+          <div class="plain-item">
+            <strong>3. 经济形态会怎么变？（广告失灵 + AI 花钱雇真人跑腿）</strong>
+            <p>① <strong>买方人人配“冷酷守门员”</strong>：以后你买机票、订餐厅、采购，前面都站着一个先砍 90% 垃圾的 AI，靠精美假图（比如网图充数）和软文营销的商家连被看到的资格都没有；<br>② <strong>机器反过来雇真人（反向零工）</strong>：AI 有钱包但没肉身，进不了巷子里的餐馆看鱼生新不新鲜。于是 AI 会自动挂出 <strong>$8 美金悬赏</strong>，雇店里的真人食客拍一张带硬件防伪签名的实拍图，验收合格秒打款。</p>
+          </div>
+          <div class="plain-item">
+            <strong>4. 会长出什么赚钱的新生意？（6 个新物种）</strong>
+            <p>① <strong>给 AI 看的打假体检 API</strong>（像餐饮界的 Rugcheck）；② <strong>帮好商家把数据做成 AI 免检格式</strong>（AEO，取代 SEO）；③ <strong>真人现场拍照/验货悬赏网</strong>；④ <strong>只卖“防骗风控漏斗模板”不卖喊单信号</strong>；⑤ <strong>水军/刷量热力学照妖镜</strong>（一眼看穿“30 个新号同一分钟发帖”）；⑥ <strong>给 AI 钱包卖失误保险与托管</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Anatomy & Interactive Funnel -->
+      <section class="section-card">
+        <h2>一、本质解构：为什么值得看的不是 Meme 币，而是「买方守门 Agent 的花钱形状」？</h2>
+        <p>
+          大多数散户把 AI 交易机器人想象成「对着 K 线预测涨跌的水晶球」，结果第一个 50 美元就亏在「买之前就已经死了（蜜罐或撤池子）」的假币上。<code>@0xboan</code> 这套架构最聪明的地方，在于它<strong>彻底放弃了让大模型去猜价格，而是守死了一条冷酷的三权分立线</strong>：
+        </p>
+        <div class="callout">
+          <strong>核心铁律：<code>代码负责杀（90% 确定性硬过滤） → Grok 负责读 X（只审幸存者的舆论真伪） → 人类负责签名（Bot 永不碰私钥与参数文件）</code></strong>
+        </div>
+
+        <div class="funnel-box">
+          <div class="funnel-controls">
+            <div>
+              <strong>🔍 交互拆解：8 步成本递增拒止漏斗（点击任一关卡展开工程细节）</strong>
+              <div style="font-size:0.84rem; color:var(--muted);">顺序绝对不能反：免费本地检查先行，只有活过前 13 项硬指标的极少数幸存者，才配花一次大模型 + 搜索调用的钱。</div>
+            </div>
+            <button class="btn" onclick="toggleAllFunnel()">全部展开 / 收起</button>
+          </div>
+
+          <div class="funnel-step open" onclick="this.classList.toggle('open')">
+            <div class="funnel-step-head">
+              <span class="funnel-step-title">第 0 关 · LEAD（脏线索源接入：<code>scan.py</code>）</span>
+              <span class="funnel-pill">默认敌意输入 · 每次拉 5 个</span>
+            </div>
+            <div class="funnel-detail">
+              从喊单群、推文或 DexScreener 刚付费购买资料页的新币列表拿到合约地址（CA）。作者在代码注释里写了一句极其诚实的话：<code>"a paid profile is not a quality signal, it just means the dev spent money. the filter decides."</code>（付钱买档案不是质量信号，只说明开发者花了钱）。<strong>架构启示：线索源可以很脏，只要后面的过滤器够硬。</strong>
+            </div>
+          </div>
+
+          <div class="funnel-step open" onclick="this.classList.toggle('open')">
+            <div class="funnel-step-head">
+              <span class="funnel-step-title">第 1 关 · LIMITS（本地预算与仓位防火墙：<code>book.py</code>）</span>
+              <span class="funnel-pill">网络成本 $0 · 0 毫秒延迟</span>
+            </div>
+            <div class="funnel-detail">
+              <strong>在发任何网络请求之前先查本地账本（<code>positions.json</code> / <code>trades.csv</code>）</strong>：① 今日已实现亏损 ≥ $50（<code>DAILY_LOSS_HALT_USD</code>）→ 直接停摆到明天；② 已经持有该币 → 拒；③ 当前持仓已满 4 个槽位（4 × $25 = $100 上限）→ 拒；④ 今日开仓已满 6 次 → 拒；⑤ 24 小时内刚卖过该币（防报复性重买冷却期）→ 拒。<strong>被拦下的交易成本严格为零，且账本是纯文本文件，Bot 挂了账还在。</strong>
+            </div>
+          </div>
+
+          <div class="funnel-step" onclick="this.classList.toggle('open')">
+            <div class="funnel-step-head">
+              <span class="funnel-step-title">第 2 关 · FACTS（合约权限与筹码 9 项硬杀：<code>rugcheck.py</code>）</span>
+              <span class="funnel-pill">免费 API · NULL IS NOT CLEAN</span>
+            </div>
+            <div class="funnel-detail">
+              调用免费 Rugcheck 接口做 9 项纯数字比对：① 已被标为 rugged；② 铸币权限未关（能无限印新币）；③ 冻结权限未关（能让你卖不掉）；④ 存在 danger 标记；⑤ 风险分 &gt; 40；⑥ 最大池子 LP 锁定/烧毁 &lt; 90%；⑦ <strong>剔除 AMM 金库和锁仓合约后</strong>前十持仓 &gt; 30%；⑧ 创建者钱包余额 &gt; 5%；⑨ 内幕关联图谱 &gt; 0。<br>
+              <strong>核心戒律 <code>NULL IS NOT CLEAN</code></strong>：任何一项字段没取回来（<code>is None</code>），直接判死刑（<code>SKIP</code>），绝不把“没查到”当成“0 风险”放行！且裁剪掉所有无关字段，<strong>绝不让 Grok 看到原始报告</strong>（省 Token 且防大模型被无关噪音带偏）。
+            </div>
+          </div>
+
+          <div class="funnel-step" onclick="this.classList.toggle('open')">
+            <div class="funnel-step-head">
+              <span class="funnel-step-title">第 3 关 · POOL（流动性深度与蜜罐硬杀：<code>market.py</code>）</span>
+              <span class="funnel-pill">免费 API · 专杀“只进不出”</span>
+            </div>
+            <div class="funnel-detail">
+              合约完美不代表池子能让你全身而退。查 4 项硬指标：① 池子总流动性 &lt; $30,000（防滑点成为别人出口）；② 单笔 $25 占池子比例 &gt; 1%；③ 创建时间 &lt; 30 分钟（太新全在猜）或 &gt; 72 小时（行情已走完）；④ <strong>第 13 项反直觉杀招：<code>buys_1h &gt;= 20 and sells_1h == 0</code>（过去 1 小时 20+ 笔买入但 0 笔卖出）</strong>——新手以为是大家惜售看好，代码直接识别为“蜜罐合约（只许买不许卖）”当场击毙。
+            </div>
+          </div>
+
+          <div class="funnel-step step-paid" onclick="this.classList.toggle('open')">
+            <div class="funnel-step-head">
+              <span class="funnel-step-title">第 4 关 · JUDGE（唯一花钱的一步：<code>grok.py</code> + X 实时舆情深潜）</span>
+              <span class="funnel-pill paid">唯一付费关 · max_turns=2 锁死账单</span>
+            </div>
+            <div class="funnel-detail">
+              只有扛过前 13 项硬检查的幸存者，才触发一次带 <code>x_search</code> 的 Grok 调用（限制搜索最多 2 轮 <code>max_turns = 2</code> 控制按条计费账单）。Prompt 下达四条铁律：<br>
+              1. <code>Do not re-check those numbers</code>（不许重查代码已验过的数字，防大模型推翻确定性事实）；<br>
+              2. <code>You never size, you never pick exits</code>（不许决定买多少和何时卖）；<br>
+              3. <strong>只看代码看不到的舆论结构</strong>：最早发帖的是真实老号，还是<strong>“30 个本周刚注册的新号在同一分钟发同一句文案”</strong>（买量水军）？帖子里的合约地址跟输入是否一致（防李鬼仿盘）？<br>
+              4. <code>Zero posts on X = SKIP</code>（X 上没人提直接杀，堵死大模型“虽然没搜到但看起来很有潜力”的脑补）；若返回散文而非 JSON 直接报错当 SKIP，<strong>绝不用正则表达式从散文里“抢救”交易指令</strong>。
+            </div>
+          </div>
+
+          <div class="funnel-step step-human" onclick="this.classList.toggle('open')">
+            <div class="funnel-step-head">
+              <span class="funnel-step-title">第 5 关 · FILL（纸面沙盒先行 + 实盘私钥物理隔离）</span>
+              <span class="funnel-pill human">PAPER=True 先跑一周 · 人类亲手签名</span>
+            </div>
+            <div class="funnel-detail">
+              第一周强制 <code>PAPER = True</code>（真代币、真实时价、真退出信号，只有钱是假的）。切到实盘后，<code>check.py</code> <strong>依然绝不触碰私钥</strong>，只输出一行 <code>APPROVAL NEEDED: buy $25 in your own wallet</code>。即便 Bot 被提示词注入攻破、API Key 泄露，你的最大损失上界也只是“它骗你多看了一个垃圾币”，而不是钱包被清空。
+            </div>
+          </div>
+
+          <div class="funnel-step" onclick="this.classList.toggle('open')">
+            <div class="funnel-step-head">
+              <span class="funnel-step-title">第 6 &amp; 7 关 · WATCH &amp; REPORT（买前锁死退出 + 执行者只读不写规则）</span>
+              <span class="funnel-pill">沉默即状态 · NEVER WRITES config.py</span>
+            </div>
+            <div class="funnel-detail">
+              · <strong>退出条件在买入前就已写死在 <code>watch.py</code></strong>：池子流动性抽走 40% 无条件清仓（<code>LIQUIDITY FIRST</code>，哪怕账面浮盈也立即跑）；-35% 硬止损；+100% 卖一半、+200% 再卖四分之一后才激活 30% 移动止盈；6 小时没涨够 +20% 时间止损腾槽位；<strong>没变化就一个字都不打印（<code>SILENCE IS A STATUS</code>，防噪音麻痹）</strong>。<br>
+              · <strong>最核心的治理同构（第 7 关）</strong>：每晚 21:30 <code>report.py</code> 复盘时，要求 Bot 每天质疑 <code>config.py</code> 里的一个参数并给出理由，但<strong><code>THE BOT READS config.py, IT NEVER WRITES IT</code>（执行者可以质疑规则，但永远无权修改自己的护栏参数）</strong>，且人类自己放宽过滤器也必须当天在对话里留书面理由（防临时上头）。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Payment Rails Evolution -->
+      <section class="section-card">
+        <h2>二、第一维演进：未来的【支付方式（Payment Rails）】会长出什么新东西？</h2>
+        <p>
+          如果这种 Agent 辅助甚至自主交易的模式普及到机票、酒店、餐饮、API 采购和供应链，现有的支付轨道会发生三大结构性演变：
+        </p>
+
+        <h3>1. 交易原子单位的相变：从「一次点击（Click + 3DS2 验证码）」到「一份受限授权书（Bounded Mandate）」</h3>
+        <p>
+          今天的银行卡与移动支付建立在「每一笔交易都有活人在屏幕前按确认（短信 OTP、3DS2 弹窗、人脸识别）」的假设上。当 Agent 替你办事时，弹窗验证码成了最大的阻塞点；但如果你把主信用卡无限额交给 Agent，一次幻觉或提示词注入就能刷爆额度。
+        </p>
+        <p>
+          因此，未来支付的原子单位不再是一次性点击，而是事先签发的<strong>「可编程受限授权书（Bounded Autonomous Allowance / Mandate）」</strong>——明确规定：<em>哪个 Agent、出于什么结构化目的、单笔上限多少（如 $25）、日累计熔断线多少（如 $50）、冷却期多久、只能在哪些白名单商户/合约内调用、超出边界如何自动挂起等人类签字</em>。目前 Google AP2 Mandate、Visa Intelligent Commerce、Mastercard Agent Pay、Stripe Shared Payment Tokens 以及以太坊 ERC-7715 / Solana 委托子账户都在朝这一终局收敛。
+        </p>
+
+        <h3>2. 为什么 <code>book.py</code>（三层钱包防火墙）会成为所有 AI 钱包的出厂标配？</h3>
+        <ul>
+          <li><strong>防御提示词注入（Prompt Injection）的唯一物理隔离</strong>：大模型会读外部网页和推文，一条暗藏恶意指令的推文或商品详情页就能诱导 LLM 做出“立即全仓打款”的判断；但确定性的 <code>book.py</code> 根本不读推文，它只认本地冷冰冰的限额数字。<strong>护栏必须放在大模型够不着的地方。</strong></li>
+          <li><strong>保险精算的可保性（Insurability）</strong>：发卡行与保险公司未来要为 AI 钱包提供被盗险或失误险，「我的大模型很聪明」无法精算定价，只有「<strong>① 本地确定性策略（<code>book.py</code>）+ ② 链上合约/Session Key 硬限额（进程被黑也绕不过）+ ③ 跨阈值人类硬件签名</strong>」的三层防火墙才能被商业承保。</li>
+        </ul>
+
+        <h3>3. 反直觉终局：谁在链上重新发明「Chargeback（可撤销与争议仲裁层）」，谁就是下一个 Visa</h3>
+        <p>
+          很多人以为区块链稳定币会直接秒杀信用卡，但其实两边各缺一半：<strong>传统信用卡反 Agent（到处弹窗），但回报是消费者保护与拒付撤回（Chargeback）；链上支付是 Agent 原生的（7×24、秒级、微额、无弹窗），但代价是转账即最终结算——一旦转给骗子合约，零追索、零申诉。</strong>
+        </p>
+        <div class="callout">
+          <strong>支付终局判断：</strong>未来的黄金基建不是单纯发一种稳定币，而是<strong>「用稳定币/代币化存款做秒级微额结算层 + 在上面重建一层可逆性协议（智能合约延时托管窗口、机器可读履约验真、自动化争议仲裁与错误承保）」</strong>。谁在 Agent 原生轨道上把 Chargeback 重新造出来，谁就拿走未来三十年的 Visa 生态位。
+        </div>
+      </section>
+
+      <!-- Section 3: Economic Morphology Phase Transitions -->
+      <section class="section-card">
+        <h2>三、第二维演进：未来的【经济形态（Economic Morphology）】会发生哪三大相变？</h2>
+
+        <h3>相变 A：买方前置 90% 拒止过滤器（Kill-Filter Economy）与 Goodhart 攻防转移</h3>
+        <p>
+          过去的互联网经济是「眼球与多巴胺经济」——因为人类买家精力有限、容易被精修网图和情绪化标题诱惑，卖家把预算全砸在买量投流和包装上。当每个消费者和采购方前面都站着一个像 <code>check.py</code> 这样<strong>「先跑 13 项硬指标、砍掉 90% 垃圾、遵循 <code>NULL IS NOT CLEAN</code>（缺失字段直接当死刑而非 0 风险）」</strong>的守门 Agent 时，靠信息不对称和假图充数的商家连进入候选池的资格都会瞬间归零。
+        </p>
+        <p>
+          <strong>但劣币不会自动消失，而是引发残酷的 Goodhart 反扑（见第六节冷水修正）</strong>：当公开过滤器的阈值（如“流动性锁定 ≥ 90%、前十持仓 ≤ 30%”）人尽皆知，造假者会立刻定制出「锁定 90.1%、前十持仓 29.9%」的精准过线骗局，或者填满虚假的字段。因此，<strong>未来的博弈战场将从「骗人类消费者」全面转移到「骗机器验证者」</strong>——这倒逼所有的商品和资产信息必须附带<strong>密码学来源签名（Cryptographic Attestation）</strong>，而验证者本身将成为整个经济中最昂贵的核心基础设施。
+        </p>
+
+        <h3>相变 B：反向雇佣经济（Reverse Labor / 机器发悬赏雇真人做物理世界预言机）</h3>
+        <p>
+          当 Agent 拥有了自己的受限钱包和预算，一个极具画面感的新经济形态就会涌现：<strong>AI 有钱、有算力、能一秒扫完链上数据，但 AI 没有肉身（No Body）</strong>——它进不了东京或福冈小巷子里的餐厅看一眼今天的鱼生刀工和备长炭火候，也没法替你拧开一瓶线下二手商品看有没有暗伤。
+        </p>
+        <p>
+          于是，传统的「人雇机器干活」被反转为<strong>「机器悬赏雇人去物理世界取证（Human-as-an-Oracle）」</strong>：当买方 Agent 发现某家高潜力餐厅缺少真实菜品图（被防火墙标记为 <code>QUARANTINED_MISSING_AUTHENTIC_ASSET</code> 隔离状态）时，Agent 会自动调用预算池挂出一笔 <strong>$8 美金的真图微悬赏（Real-Photo Micro-Bounty）</strong>；恰巧在店里的真人食客手机接单、现场拍下带硬件防伪签名（C2PA）的实拍图上传，Agent 多模态验真通过后秒级打款。<strong>在 Agent 经济里，人类最后不可替代的三大稀缺供给是：物理在场（Presence）、肉身感官（Embodied Senses）与承担法律责任（Liability）。</strong>
+        </p>
+
+        <h3>相变 C：M2M 纳米级要素计价（Per-Query / Per-Post 定价），倒逼「成本递增漏斗」成为铁律</h3>
+        <p>
+          这篇教程里藏着一个极其重要的商业信号：<strong>xAI 的 <code>x_search</code> 接口自 2026 年 9 月底起，按「每拉取 1,000 条帖子收费 $5、每拉取 1,000 个用户资料收费 $10」精确计价</strong>（所以作者在代码里死死锁住 <code>max_turns = 2</code> 防止账单爆炸）。
+        </p>
+        <p>
+          过去 30 年互联网微支付（比如看一篇文章付 2 美分）之所以失败，是因为人类大脑每次思考“值不值得付这 2 美分”的心理摩擦成本远大于 2 美分本身。<strong>但 Agent 没有心理摩擦，它只算期望信息增益（EIG）是否大于 $0.005（HTTP 402 / x402 协议）</strong>。当每一条社交舆情、每一次征信核验、每一次算力推理都变成按次微计量的原子商品时，<strong><code>@0xboan</code> 的「成本递增漏斗（免费本地检查 → 免费公共事实 → 最后才为极少数幸存者花钱买高阶推理）」将从个人省钱技巧上升为所有企业的生存铁律。</strong>
+        </p>
+      </section>
+
+      <!-- Section 4: 6 New Business Models -->
+      <section class="section-card">
+        <h2>四、第三维演进：未来的【商业模式（Business Models）】会长出哪 6 个新物种？</h2>
+        <p>
+          结合我们在 <a href="post-billable-hour-business-models.html">《工时坍塌后的商业模式》</a> 与 <a href="twin-ledger-sandbox.html">《现实 ⇄ 游戏双向数字孪生热力学账本》</a> 中的推演，Agent 交易普及将直接催生以下 6 个高价值商业新物种：
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:6%;">#</th>
+                <th style="width:22%;">新商业物种</th>
+                <th style="width:26%;">怎么收钱（原子计费模式）</th>
+                <th style="width:26%;">核心护城河与反脆弱机制</th>
+                <th style="width:20%;">现实对标与落地形态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td><strong>Verifier-as-a-Service<br>（机器可读真实性体检 API）</strong></td>
+                <td>按 API 调用微计费（x402），直接被千千万万个买方守门 Agent 在第 2/3 关调用</td>
+                <td>严守 <code>NULL IS NOT CLEAN</code> 与零假图门禁；<strong>公开杀单理由日志（<code>READ THE KILLS</code>）</strong>建立公信力，同时保留防刷榜的私有动态权重</td>
+                <td>链上的 Rugcheck / DexScreener；本地生活与餐饮领域的机器可读“沧海遗珠”体检预言机</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td><strong>AEO（Agent Engine Optimization）<br>面向守门 Agent 的结构化合规</strong></td>
+                <td>向优质实体商家收工具/认证费，帮其将库存、原产地、实拍图、退改规则封装成带数字签名、零缺失字段的端点</td>
+                <td><strong>铁律警示（利益冲突隔离）</strong>：既当 #1 裁判又向商家收钱做 #2 辅导会彻底摧毁裁判公信力！#1 与 #2 必须分属不同主体，或将 #2 做成免费开源标准</td>
+                <td>取代传统 SEO/大众点评代运营：让不懂营销但东西极好的匠人小店不被 Agent 在第 2 关因“字段缺失”误杀</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td><strong>Physical Oracle Bounty Network<br>（物理世界真实性悬赏网）</strong></td>
+                <td>Agent 遇缺失真图/状态时自动发微悬赏（如 $8/单），平台收体验真与撮合抽成</td>
+                <td><strong>反伪造验证栈</strong>：对抗零成本 AI 假图与网图翻拍，必须叠加设备硬件签名（C2PA）、多独立食客交叉验证、质押信誉与多模态刀工火候核验</td>
+                <td>餐饮真实切面/火候实拍悬赏、二手奢侈品/房产现场勘验微任务池</td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td><strong>Policy-as-Code 固件与沙盒市场<br>（卖漏斗形状，绝不卖喊单信号）</strong></td>
+                <td>出售可复制的「风控漏斗骨架 + <code>book.py</code> 防火墙固件 + 纸面回测沙盒」，收订阅与审计费</td>
+                <td><strong>合规安全边界</strong>：卖“买什么币/股票”属于非法投顾且容量衰减；卖“防骗风控形状（Copy the Shape）”与纸面/实盘滑点校准数据则完全合规且越用越厚</td>
+                <td><code>@0xboan</code> 杀币漏斗模版、《Grok Bot 橙皮书》多智能体招募卡、双向孪生纸面沙盒</td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td><strong>Thermodynamic Sybil Detector<br>（水军造势“维持热”检测器）</strong></td>
+                <td>在第 4 关按次向买方 Agent、VC 或品牌方收费，识别标的背后是“有机共识”还是“花钱硬推”</td>
+                <td>基于<strong>钳制账本恒等式（P1）与参与定理（P2）</strong>：将人工造势的“维持热 $\sigma_{\text{ss}}$”转化为可测指标（新号年龄分布、同秒同文案聚类、停投后热度半衰期）</td>
+                <td>专抓“30 个本周新号同分钟发同文案”的舆情审计 API、网红带货注水率透视仪</td>
+              </tr>
+              <tr>
+                <td><strong>6</strong></td>
+                <td><strong>Agent 责任与托管承保<br>（Agent-Native Chargeback）</strong></td>
+                <td>为运行在标准 <code>book.py</code> 防火墙上的 Agent 支付提供智能合约延时托管、争议仲裁与失误赔付，收微保费</td>
+                <td><strong>独家精算数据壁垒</strong>：哪类 Mandate 授权书、哪个模型版本、在什么滑点下出事率最高？早期沙盒积累的真实拦截账本就是最值钱的精算矿山</td>
+                <td>Agent 时代的链上 Visa 争议保护层、AI 采购履约担保池</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 5: The 5-Layer Agentic Economy Stack -->
+      <section class="section-card">
+        <h2>五、统一战略拼图：未来「Agent 经济栈（Agentic Economy Stack）」的五层架构</h2>
+        <p>
+          如果我们把视野拉高，会发现无论是「小额预充值支付沙盒」、「餐饮真实性体检与 $8 真图悬赏」、「现实⇄游戏双向数字孪生账本（P1–P3）」，还是「Grok Bot 舆情漏斗」，它们根本不是孤立的散装工具，而是<strong>同一台未来商业机器的五层垂直拼图</strong>：
+        </p>
+
+        <div class="stack-wrap">
+          <div class="stack-layer l0">
+            <div class="stack-head">
+              <span>L0 · 人类主权与签名责任层（Human Sovereignty &amp; Liability Layer）</span>
+              <span class="badge">永不自动化 · 不可外包</span>
+            </div>
+            <div class="stack-sub">
+              <strong>核心职能：</strong>持有私钥、签发 Mandate 授权额度、决定价值方向（道）、对最终外发与资金交割签字担责。<code>THE BOT READS config.py, IT NEVER WRITES IT</code>——执行者永远不能修改自己的护栏。
+            </div>
+          </div>
+
+          <div class="stack-layer l4">
+            <div class="stack-head">
+              <span>L4 · 注意力与叙事真伪代谢层（Attention &amp; Narrative Layer）</span>
+              <span class="funnel-pill paid">对应第 4 关 JUDGE · 测量维持热 σ_ss</span>
+            </div>
+            <div class="stack-sub">
+              <strong>核心职能：</strong>只对通过前序硬过滤的幸存标的，调用实时社交搜索（如 Grok <code>x_search</code>），区分<strong>「P2 多节点自愿开门的有机共识（$\sigma_{\text{ss}} \to 0$）」</strong>与<strong>「P1 水军矩阵每秒烧钱强拧的伪造势场（高维持热 $\sigma_{\text{ss}}$，停投即崩盘）」</strong>。
+            </div>
+          </div>
+
+          <div class="stack-layer l3">
+            <div class="stack-head">
+              <span>L3 · 双向数字孪生沙盒与破壁门户层（Twin Sandbox &amp; Portal Layer）</span>
+              <span class="funnel-pill human">对应第 5 关 PAPER=True · λ_G ≪ λ_R</span>
+            </div>
+            <div class="stack-sub">
+              <strong>核心职能：</strong>遵循 <a href="twin-ledger-sandbox.html">命题 P3（双向孪生方阵）</a>——先在试错成本极低廉的纸面沙盒 $\mathcal{G}$（<code>PAPER = True</code>，真实价格、真实信号、虚拟资金）中付清后选择信息账单，并校准纸面与实盘的滑点缺口，再经受控门户 $\gamma: \mathcal{G} \to \mathcal{R}$ 进入物理现实。
+            </div>
+          </div>
+
+          <div class="stack-layer l2">
+            <div class="stack-head">
+              <span>L2 · 确定性事实与物理世界预言机层（Facts &amp; Physical Oracle Layer）</span>
+              <span class="funnel-pill">对应第 2/3 关 FACTS &amp; POOL · NULL IS NOT CLEAN</span>
+            </div>
+            <div class="stack-sub">
+              <strong>核心职能：</strong>用零妥协的确定性代码先杀掉 90% 的结构性骗局（未锁流动性、蜜罐单向边、刷榜连锁、网图充数）。遇到缺失的物理世界一手事实，绝不脑补，立即隔离（<code>QUARANTINED</code>）并触发 <strong>$8 真图微悬赏</strong> 雇佣附近人类实地取证。
+            </div>
+          </div>
+
+          <div class="stack-layer l1">
+            <div class="stack-head">
+              <span>L1 · 受限额度与可编程结算层（Bounded Allowance &amp; Settlement Layer）</span>
+              <span class="funnel-pill">对应第 1 关 LIMITS · book.py 钱包防火墙</span>
+            </div>
+            <div class="stack-sub">
+              <strong>核心职能：</strong>在 Web2 侧通过「预充值限额虚拟卡 + 商户专用礼品卡」实现物理隔离，在 Web3 侧通过「本地 <code>book.py</code> 熔断器 + 链上 Session Key / 子账户 + 延时托管可逆层」提供毫秒级、可审计、可承保的受限弹药。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Red-Team Counter-Analysis & Falsifiable Predictions -->
+      <section class="section-card">
+        <h2>六、红队冷水修正（Red-Team Counter-Analysis）与可证伪预测</h2>
+        <p>
+          为了防止陷入技术乌托邦式的过度外推，我们的联合审视（<code>claude-opus-5.5</code> 独立红队推演）对上述趋势泼下 <strong>4 盆冷水</strong>，并给出 <strong>3 个带明确时间节点的检验锚点</strong>：
+        </p>
+
+        <div class="callout-warn">
+          <strong>冷水修正 1：为什么「劣币经济瞬间失灵」不会发生？（Goodhart 反扑与过滤器单一化）</strong><br>
+          只要验证规则和阈值是公开的（例如 Rugcheck 规定 LP 锁仓 ≥ 90%、前十持仓 ≤ 30%），攻击者就会把阈值当成“考试大纲”，批量造出「LP 锁 90.1%、前十持仓 29.9%」的精准过线骗局；当守门员执行 <code>NULL IS NOT CLEAN</code>，商家就会用假造的数值把字段填满。此外，如果全网 Agent 都抄同一份 <code>config.py</code> 常数（Monoculture），会导致严重的同质化踩踏。<strong>结论：欺诈不会消失，只是从“骗散户”升级为“针对验证者的对抗样本攻击”。因此验证者必须做到「公开杀单理由 + 私有动态扰动阈值 + 字段级硬件签名溯源」。</strong>
+        </div>
+
+        <div class="callout-warn">
+          <strong>冷水修正 2：<code>PAPER = True</code> 的纸面-实盘缺口（Sim-to-Real Gap）在金融高频场上极其凶险</strong><br>
+          在温和的消费场景（订餐厅、买车票）中，沙盒预览与真实履约的缺口很小；但在 Solana Meme 币这种负和 PvP 战场上，<code>PAPER = True</code> 按屏幕价成交会<strong>系统性高估收益</strong>——因为纸面交易不存在实盘中的巨额滑点、MEV 夹子机器人（Sandwich Attacks）、优先打包费（Priority Fee）以及拥堵时的交易失败。因此从沙盒 $\mathcal{G}$ 走向现实 $\mathcal{R}$ 的门户 $\gamma$ 绝不能只靠“人拍板签字”，还必须包含一步<strong>「小额实单滑点校准（Gap Calibration）」</strong>。
+        </div>
+
+        <div class="callout-warn">
+          <strong>冷水修正 3：「$8 真图悬赏」的最大难点不在链上秒级付钱，而在「防伪激励兼容」与「线下合规」</strong><br>
+          今天用 AI 生成一张逼真的餐厅烤肉图或翻拍别人网图的成本接近 $0。如果伪造成本低于 $8，悬赏池会在一天内被羊毛党薅光。单靠照片 EXIF 和 GPS 根本防不住（均可软件篡改），必须组合<strong>「设备级硬件签名（C2PA）+ 多名独立食客交叉一致 + 质押信誉分 + 抽检罚没」</strong>，且悬赏金额必须按“该店被证实后的信息增益（EIG）”动态定价，而非固定工时价。
+        </div>
+
+        <div class="callout-warn">
+          <strong>冷水修正 4：卖「风控形状（#4）」与卖「投顾信号」之间有一条高压法律红线</strong><br>
+          做 <code>Policy-as-Code</code>（卖风控漏斗代码、卖预算防火墙固件、卖沙盒工具）在法律上是安全的软件工程服务；但一旦跨过边界去卖「今天该买哪一个具体代币/股票的 BUY 信号」，不仅立刻踏入各国证券与投资顾问监管红线，还会因为 Alpha 容量衰减而沦为柠檬市场。<strong>守住「只卖筛子形状、不卖具体标的」是商业模式 #4 的生死线。</strong>
+        </div>
+
+        <h3>📌 三个可证伪的公开预测（Anticipated Checkpoints）</h3>
+        <ol>
+          <li><strong>预测 1（2027-Q1 检验 · Goodhart 反扑验证）</strong>：链上与电商领域将出现专门针对主流 AI 守门员公开阈值的「精准卡线欺诈工具包（Threshold-Gaming Kits）」。若如期出现，证明「私有动态阈值 + 公开杀单日志」是验证者 API（物种 #1）的真正护城河。</li>
+          <li><strong>预测 2（2027-06 检验 · Web2 支付轨道 Agent 化）</strong>：至少一家主流国际卡组织或收单机构（Visa Intelligent Commerce / Stripe SPT）在东亚高风控市场（如日本新干线/本地外卖）跑通免人工 3DS2 弹窗的加密 Agent Mandate 令牌，届时手工预充值虚拟卡沙盒可正式退居二线备份。</li>
+          <li><strong>预测 3（物理预言机悬赏试点检验）</strong>：在「真图悬赏」纸面试点（只记账验图、未开启无门槛公网撒钱）中，若无硬件签名约束的纯上传模式伪造率 &gt; 20%，则证明固定 $8 无质押模式不成立，必须强制启用「信誉质押 + C2PA 硬件签名 / 双人交叉验证」后方可放行实盘微支付。</li>
+        </ol>
+      </section>
+    </div>
+
+    <!-- ==================== ENGLISH EDITION ==================== -->
+    <div class="lang-en">
+      <section class="hero">
+        <div class="meta-row">
+          <span class="badge">Public Research &amp; Architecture Synthesis · 2026-10-20</span>
+          <span class="badge-warm">Grok Bot On-Chain Desk × Agentic Economy</span>
+        </div>
+        <h1>When AI Agents Start Spending Money: Future Payment Rails, Economic Morphologies, and 6 New Business Species</h1>
+        <p class="subtitle">
+          Triggered by the viral operational guide (<code>@chenke20266</code> adapted from <code>@0xboan</code>'s <em>"Grok Bot from zero in one night: full setup + a copy-paste rug filter"</em>)—building an autonomous Solana token trading desk on Grok Bot. When millions of budget-holding Agents enter commerce and on-chain markets, what new payment rails, economic morphologies, and business models will emerge?
+        </p>
+      </section>
+
+      <section class="plain-abstract">
+        <div class="plain-abstract-header">
+          <h2 class="plain-abstract-title">⚡ 60-Second Plain-Language Abstract (Zero Jargon Edition)</h2>
+          <span class="badge-warm">Mobile Quick Read</span>
+        </div>
+        <p style="margin-bottom:12px;">
+          Seeing people use Grok Bot to trade Solana memecoins, most assume the story is "AI can now day-trade crypto for you." <strong>The exact opposite is true—memecoins are a negative-sum PvP casino, and what actually matters is the engineering shape of how an Agent safely spends money in a hostile market:</strong>
+        </p>
+        <div class="plain-grid">
+          <div class="plain-item">
+            <strong>1. What is this bot really doing? (90% of its job is saying NO)</strong>
+            <p>It is not a "100x gem finder"; it is a <strong>token-killing machine</strong>. Before spending a cent, free deterministic code checks 13 hard facts (liquidity depth, mint/freeze authorities, honeypot sell-counts) and kills 90%+ of candidates. <strong>Any missing data field is treated as fatal (`NULL IS NOT CLEAN`)</strong>. Only the tiny fraction of survivors trigger a paid Grok call to search X for bot-farm hype, and the bot never touches your wallet private key.</p>
+          </div>
+          <div class="plain-item">
+            <strong>2. How will payments change? (From "OTP Clicks" to "Bounded Mandates")</strong>
+            <p>Legacy credit cards rely on SMS/3DS2 popups to prove a human is present, blocking autonomous Agents. Future AI wallets will run on <strong>Bounded Autonomous Mandates</strong> ($25 flat ticket, $50 daily loss halt) enforced by a deterministic code firewall (<code>book.py</code>) outside the LLM. Whoever builds <strong>Agent-Native Chargebacks (escrow + reversible dispute resolution)</strong> on top of instant stablecoins will become the Visa of the Agent era.</p>
+          </div>
+          <div class="plain-item">
+            <strong>3. How will the economy shift? (Ad Collapse + Agents Hiring Humans)</strong>
+            <p>① <strong>Buyer-Side Kill-Filters</strong>: Every buyer will have a gatekeeper Agent that silently drops products with missing specs or fake stock photos at Stage 2;<br>② <strong>Reverse Labor (Human-as-an-Oracle)</strong>: Agents have budgets but no physical body. When an Agent needs to verify a local restaurant's real dish quality, it posts an <strong>$8 micro-bounty</strong> to hire a nearby human diner to snap a hardware-attested photo.</p>
+          </div>
+          <div class="plain-item">
+            <strong>4. What new businesses will emerge? (6 New Species)</strong>
+            <p>① <strong>Verifier-as-a-Service APIs</strong> (Rugcheck for local commerce/travel); ② <strong>AEO</strong> (helping honest merchants pass strict machine filters); ③ <strong>Physical-World Authenticity Bounty Networks</strong>; ④ <strong>Policy-as-Code Firewalls</strong> (selling the funnel shape, never the trading signal); ⑤ <strong>Thermodynamic Sybil Detectors</strong>; ⑥ <strong>Agent Escrow &amp; Liability Underwriting</strong>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>1. Structural Anatomy: "Copy the Shape, Not the Constants"</h2>
+        <p>
+          The enduring value of <code>@0xboan</code>'s Grok Bot desk is not its memecoin constants, but its strict separation of powers across an 8-stage cost-escalating funnel:
+        </p>
+        <ul>
+          <li><strong>Stage 0–3 (Free Deterministic Killers: <code>book.py</code> → <code>rugcheck.py</code> → <code>market.py</code>)</strong>: Local spend envelope checks run at zero network cost ($25 flat ticket, max 4 open slots, $50 daily loss halt). Next, 13 hard contract and pool checks enforce <code>NULL IS NOT CLEAN</code> (any missing field is an immediate kill, never treated as zero risk) and catch honeypots (<code>buys_1h &gt;= 20 and sells_1h == 0</code>).</li>
+          <li><strong>Stage 4 (Paid High-EIG Judge: <code>grok.py</code> + <code>x_search</code>)</strong>: Only survivors reach Grok (`max_turns = 2` to cap per-post API spend). Grok is forbidden from re-checking code facts or sizing positions; it only judges whether X chatter is organic (Proposition P2) or a coordinated bot wave of 30 fresh accounts posting identical text in the same minute (Proposition P1 high housekeeping heat $\sigma_{\text{ss}}$).</li>
+          <li><strong>Stage 5–7 (Paper Sandbox First, Human Signature, Read-Only Guardrail)</strong>: Week 1 runs with <code>PAPER = True</code>. In live mode, the bot never holds private keys—it outputs <code>APPROVAL NEEDED</code>. Every evening, <code>report.py</code> asks the bot to question one parameter in <code>config.py</code>, while enforcing the deepest safety theorem of all: <strong><code>THE BOT READS config.py, IT NEVER WRITES IT</code></strong>.</li>
+        </ul>
+      </section>
+
+      <section class="section-card">
+        <h2>2. Evolution across Payment Rails, Economic Morphology &amp; 6 Business Species</h2>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>💳 Payment Rails: Wallet Firewalls &amp; Reversible Stablecoins</h4>
+            <p>Transactions shift from human clicks to pre-signed <strong>Mandates</strong>. Because LLMs are vulnerable to prompt injection from untrusted web/social text, deterministic budget firewalls (<code>book.py</code> + on-chain session keys) must sit outside the model to make Agent spend actuarially insurable. The ultimate prize is building <strong>programmable chargebacks &amp; escrow</strong> over instant stablecoin rails.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🛡️ Kill-Filter Economy &amp; Goodhart Warfare</h4>
+            <p>Marketing shifts from persuading human eyeballs to passing machine gatekeepers. However, public thresholds invite <strong>Goodhart gaming</strong> (scammers engineering 90.1% LP locks). The battleground moves from deceiving consumers to deceiving verifiers—requiring cryptographic provenance attestations and private/randomized thresholds paired with public kill logs.</p>
+          </div>
+          <div class="mini-card">
+            <h4>📸 Reverse Labor: Humans as Physical-World Oracles</h4>
+            <p>Agents have liquidity but lack embodied senses and legal standing. In our restaurant verification architecture, when an Agent quarantines a hidden-gem venue for lacking authentic photos, it issues an <strong>$8 Real-Photo Bounty</strong> to nearby humans—requiring hardware C2PA attestation and cross-verification so forgery costs exceed the bounty.</p>
+          </div>
+          <div class="mini-card">
+            <h4>⚡ M2M Nano-Metered Factor Markets</h4>
+            <p>With xAI charging $5 per 1,000 fetched posts and $10 per 1,000 user profiles, human mental transaction costs vanish and atomic per-query pricing (x402) takes over—making the cost-escalating funnel a universal economic law.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2>3. The 5-Layer Agentic Economy Stack &amp; Falsifiable Checkpoints</h2>
+        <ul>
+          <li><strong>L0 · Human Sovereignty &amp; Liability Layer</strong>: Private keys, Mandate issuance, value judgment, and final liability (never automated).</li>
+          <li><strong>L1 · Bounded Allowance &amp; Settlement Layer</strong>: Pre-funded virtual card sandboxes bridging to on-chain session keys, <code>book.py</code> firewalls, and reversible escrow.</li>
+          <li><strong>L2 · Deterministic Facts &amp; Physical Oracle Layer</strong>: <code>NULL IS NOT CLEAN</code> hard verifiers + $8 real-photo human oracle bounties.</li>
+          <li><strong>L3 · Mutual Digital Twin Sandbox Layer</strong>: Paying post-selection trial costs in cheap paper sandboxes ($\lambda_{\mathcal{G}} \ll \lambda_{\mathcal{R}}$) with empirical slippage/MEV calibration before crossing portal $\gamma$.</li>
+          <li><strong>L4 · Attention &amp; Narrative Layer</strong>: Measuring housekeeping heat $\sigma_{\text{ss}}$ to separate organic adoption from paid Sybil manipulation.</li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        System Evolution Public Research · 2026-10-20 ·
+        <a href="essays/2026-10-20-agent-economy-phase-transition.md">Markdown Source</a> ·
+        <a href="post-billable-hour-business-models.html">Post-Billable-Hour Models</a> ·
+        <a href="twin-ledger-sandbox.html">Twin Ledger Sandbox</a> ·
+        <a href="./">Index</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('en-mode');
+    }
+    function toggleAllFunnel() {
+      const steps = document.querySelectorAll('.funnel-step');
+      const anyClosed = Array.from(steps).some(s => !s.classList.contains('open'));
+      steps.forEach(s => {
+        if (anyClosed) s.classList.add('open');
+        else s.classList.remove('open');
+      });
+    }
+  </script>
+</body>
+</html>
