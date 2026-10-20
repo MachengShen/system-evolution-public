@@ -244,7 +244,8 @@
   <header class="topbar">
     <a class="brand" href="./">System Evolution · Theory Mainline</a>
     <div class="nav-actions">
-      <a class="btn" href="#part-3">⚡ 3 Thermodynamic Theorems</a>
+      <a class="btn" href="twin-ledger-sandbox.html" style="border-color:#b85c18; color:#b85c18; font-weight:750;">🎮 Interactive Fourth-Wall Sandbox</a>
+      <a class="btn" href="#part-3">⚡ 4 Thermodynamic Results</a>
       <a class="btn" href="#kill-criteria">🎯 Kill Criteria</a>
       <a class="btn" href="essays/2026-10-19-emptiness-causality-intervention-ledger-en.md">📄 Markdown Source</a>
       <a class="btn" href="emptiness-causality-intervention-ledger-zh.html">中文版 (ZH)</a>
@@ -424,6 +425,19 @@
         \sigma_{\text{ss}} = D^{-1}\,\mathrm{Tr}\big[(A - DC^{-1})\,C\,(A - DC^{-1})^\top\big], \qquad \sigma_{\text{ss}} &gt; 0 \;\iff\; A \neq A^\top .
       </div>
       <p>A $do()$-style local counterfactual clamp replaces one node's row in a symmetric interaction matrix $A$ while leaving its column intact—breaking reciprocity ($A \neq A^\top$) and forcing perpetual housekeeping dissipation $\sigma_{\text{ss}} &gt; 0$. Conversely, slow reciprocal landscape reshaping $A(\lambda) = A(\lambda)^\top$ maintains $\sigma_{\text{hk}} = 0$ throughout.</p>
+
+      <h4>3d. Unification Across the Fourth Wall: Clamp Ledger Identity (P1), Participation Theorem (P2), and Mutual Digital Twins (P3) <span class="tag-pill tag-theorem">[Theorem]</span> <span class="tag-pill tag-iso">[Structural Isomorphism]</span></h4>
+      <p>What happens when an AI agent living inside an internal world model or game ($\mathcal{G}$) discovers that its actions cross a transducer portal ($\gamma: \mathcal{G}\to\mathcal{R}$) and reshape physical reality ($\mathcal{R}$)—so that Reality and Game form <strong>Mutual Digital Twins</strong>? Three exact propositions unify Results 1–3 across the $\mathcal{G}\rightleftarrows\mathcal{R}$ boundary (implemented live in the <a href="twin-ledger-sandbox.html"><strong>🎮 Interactive Fourth-Wall Ledger Sandbox</strong></a>):</p>
+      <ul>
+        <li><strong>Proposition P1 (Clamp Ledger Identity — Backlash IS the Housekeeping Return Current) <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> Linearizing around detailed balance ($L = B^\top WB$), let an agent drive a channel $D: A\to g$ at constant flux $s = \Delta\mu / R_{\text{eff}}(A,g)$. Then $J_{\text{ss}} = W r_\perp$ with $r_\perp = [I - BL^+B^\top W]\delta r$ yields both the passive return current on $E\setminus D$ ($L\mu = s(\delta_g - \delta_A)$, triggering Result 2's cascade) and the exact resistance-gap housekeeping dissipation:
+          <div class="math-block">
+            \sigma_{\text{ss}} \;=\; \|r_\perp\|_W^2 \;=\; s^2\big(R_D - R_{\text{eff}}(A,g)\big) \;=\; \frac{\Delta\mu^2\big(R_D - R_{\text{eff}}(A,g)\big)}{R_{\text{eff}}(A,g)^2} \;\ge\; 0,
+          </div>
+          where $R_D = \sum_{e\in D} w_e^{-1} \ge R_{\text{eff}}(A,g)$ by Rayleigh monotonicity (equality iff $D$ is a bridge with no cycle). Overload cascades and housekeeping heat are literally the driven leg and passive return leg of the same cycle.</li>
+        <li><strong>Proposition P2 (The Participation Theorem / Co-Creation Necessity) <span class="tag-pill tag-theorem">[Theorem]</span>:</strong> Let actuation be supported on $D = \mathrm{star}(P)$ where $P \subseteq V$ is the set of consenting nodes that adopt a potential shift $\Delta V$. A target steady state $p_f$ is reachable with $\sigma_{\text{ss}} = 0$ <strong>if and only if</strong> $\ln(p_f/p_0)$ is constant on every connected component of $(V, E\setminus D)$. Thus a single portal $A$ cannot steer the relative odds of non-participating nodes without paying perpetual curl dissipation (Mode I `PUSH`). <strong>Co-creation (Mode II `PROPOSE`)—where nodes in $\mathcal{R}$ voluntarily adopt $\Delta V$—is the unique zero-heat mechanism to enlarge $D$ and eliminate $r_\perp$.</strong></li>
+        <li><strong>Proposition P3 (The Mutual Twin Square &amp; Sandbox Arbitrage) <span class="tag-pill tag-hyp">[Falsifiable Hypothesis]</span>:</strong> Coupled via observation $\alpha: \mathcal{R}\to\mathcal{G}$ (<em>perfuming / 熏习</em>) and actuation $\gamma: \mathcal{G}\to\mathcal{R}$ (<em>manifestation / 现行</em>), the pair $(\mathcal{R},\mathcal{G})$ has modeling residual $\varepsilon_\alpha = \sup d_{\text{TV}}(\alpha_\# S_{\mathcal{R}}, S_{\mathcal{G}}\alpha)$ and performative residual $\varepsilon_\gamma = \sup d_{\text{TV}}(S_{\mathcal{R}}\gamma, \gamma_\# S_{\mathcal{G}})$. Paying the post-selection search cost inside the game sandbox ($\lambda_{\mathcal{G}}\ln(1/p) + n_v\lambda_{\mathcal{R}} &lt; \lambda_{\mathcal{R}}\ln(1/p)$) and exporting a co-signed $\Delta V$ closes the square from the $\gamma$-end ($\varepsilon_\gamma \to 0$).</li>
+      </ul>
+      <p><a class="btn" href="twin-ledger-sandbox.html" style="background:var(--accent); color:#fff; border-color:var(--accent);">👉 Launch the Interactive Fourth-Wall Ledger Sandbox (Mode I PUSH vs. Mode II PROPOSE Live Simulator)</a></p>
 
       <div class="table-wrap">
         <table>
