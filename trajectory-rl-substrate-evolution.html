@@ -1,0 +1,1858 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="轨迹滚动与基质强化学习（Substrate RL）：当大模型权重 θ 冻结或通过 API 托管时，智能体进化发生在外部认知基质 E。基于 505 个真实会话、15,068 步动作与 287 次绕行片段的轨迹审计与三因子环境侧强化学习形式化。">
+  <title>轨迹滚动与基质强化学习：当模型权重冻结，进化发生在环境侧 | Trajectory Rollouts &amp; Substrate RL</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e56a0'/><text x='50' y='68' font-size='48' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'>RL</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fef5ee;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 34rem),
+        radial-gradient(circle at 90% 12%, rgba(184, 92, 24, 0.04), transparent 30rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: #f2efe9;
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #2b303c;
+    }
+    .topbar {
+      position: sticky;
+      z-index: 30;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px max(16px, calc((100vw - 920px) / 2));
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      font-weight: 750;
+      font-size: 0.94rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 4px 9px;
+      border-radius: 6px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-color: rgba(30, 86, 160, 0.2);
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 16px 88px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(30, 86, 160, 0.2);
+    }
+    .badge-warm {
+      background: var(--highlight-soft);
+      color: var(--highlight);
+      border-color: rgba(184, 92, 24, 0.25);
+    }
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: rgba(21, 128, 61, 0.25);
+    }
+    h1 {
+      font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+      line-height: 1.32;
+      margin: 0 0 14px;
+      letter-spacing: -0.01em;
+    }
+    h2 {
+      font-size: 1.35rem;
+      line-height: 1.38;
+      margin: 0 0 14px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+    h3 {
+      font-size: 1.08rem;
+      margin: 20px 0 8px;
+      color: var(--ink);
+    }
+    .subtitle {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      scroll-margin-top: 72px;
+    }
+    .callout {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .callout-warm {
+      background: var(--highlight-soft);
+      border-left: 4px solid var(--highlight);
+    }
+    .callout-green {
+      background: var(--green-soft);
+      border-left: 4px solid var(--green);
+    }
+    .callout-red {
+      background: var(--red-soft);
+      border-left: 4px solid var(--red);
+    }
+    .math-box {
+      background: #f8f6f2;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+    .math-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .mini-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mini-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .stat-card .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: block;
+    }
+    .stat-card .stat-val {
+      font-size: 1.48rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.25;
+      margin: 4px 0;
+      display: block;
+    }
+    .stat-card .stat-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f5f2ec;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    tr:hover td {
+      background: rgba(30, 86, 160, 0.03);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 650;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: #16437e;
+      color: #ffffff;
+    }
+    .btn-warm {
+      background: var(--highlight);
+      color: #ffffff;
+      border-color: var(--highlight);
+    }
+    .btn-warm:hover {
+      background: #964810;
+      color: #ffffff;
+    }
+    .btn-green {
+      background: var(--green);
+      color: #ffffff;
+      border-color: var(--green);
+    }
+    .btn-green:hover {
+      background: #11632f;
+      color: #ffffff;
+    }
+    .sim-box {
+      background: #fcfbf9;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      margin: 24px 0;
+    }
+    .sim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .sim-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 160px;
+      flex: 1;
+    }
+    .control-group label {
+      font-size: 0.8rem;
+      font-weight: 650;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .canvas-wrap {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    canvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .svg-compare {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .svg-panel {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .svg-panel-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+    .status-admitted {
+      background: var(--green-soft);
+      color: var(--green);
+      border: 1.5px solid var(--green);
+    }
+    .status-rejected {
+      background: var(--red-soft);
+      color: var(--red);
+      border: 1.5px solid var(--red);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 600px) {
+      .hero, .section-card { padding: 20px 16px; }
+      .sim-box { padding: 14px; }
+      th, td { padding: 8px 6px; font-size: 0.83rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">← System Evolution</a>
+    <nav class="nav-links" aria-label="Page sections">
+      <a href="#intro">1. 导读</a>
+      <a href="#formal-theory">2. 形式化</a>
+      <a href="#three-factor">3. 三因子映射</a>
+      <a href="#empirical-audit">4. 真实轨迹审计</a>
+      <a href="#simulators">5. 三大模拟器</a>
+      <a href="#falsifiability">6. 可证伪性</a>
+      <a href="#sources">7. 来源与方法</a>
+      <a href="essays/2026-10-22-trajectory-rollout-substrate-rl-zh.md">Markdown 全文</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="meta-row">
+        <span class="badge">Flagship Theory &amp; Audit · 2026-10-22</span>
+        <span class="badge badge-warm">Frozen Snapshot: N = 505 Sessions / 15,068 Actions</span>
+        <span class="badge badge-green">Zero Stock Photos · Pure SVG/Canvas</span>
+      </div>
+      <h1>轨迹滚动与基质强化学习：当模型权重冻结，进化发生在环境侧<br><span style="font-size:0.68em; font-weight:600; color:var(--muted);">Trajectory Rollouts &amp; Environment-Side Reinforcement Learning (Substrate RL)</span></h1>
+      <p class="subtitle">
+        当基座大模型参数 $\theta$ 被冻结或通过云端 API 租用时，智能体的持续进化并非权重反向传播（$\nabla_\theta$），而是<strong>环境侧强化学习（Substrate RL）</strong>——利用每一次会话轨迹滚动 $\tau$ 产生的验证反馈与局部搜索热耗散，在信赖域门控（<code>rsi-gate</code>）约束下，对外部认知基质 $E$（文件系统拓扑、规范化软链、<code>@registry/bin-manifest</code> $O(1)$ 查表、<code>capability-registrar</code> 语义路由与常驻宪章规则）执行拓扑梯度更新 $\nabla_E J(\pi_\theta, E)$。
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <a class="btn btn-primary" href="#simulators">⚡ 立即体验三大交互式模拟器</a>
+        <a class="btn" href="#empirical-audit">📊 查看 505 会话真实绕行审计</a>
+        <a class="btn" href="essays/2026-10-22-trajectory-rollout-substrate-rl-zh.md">📄 阅读配套学术合成长文 (Markdown)</a>
+      </div>
+    </section>
+
+    <!-- SECTION 1: PLAIN-LANGUAGE INTRO -->
+    <section id="intro" class="section-card">
+      <h2>1. 一分钟大白话导读：大脑是租来的，但「书房与路标」是你自己的</h2>
+      <p>
+        在今天的主流大模型工程中，有一个被普遍忽视的物理事实：<strong>你无法修改前沿大模型的权重 $\theta$</strong>。无论是调用云端闭源模型，还是在本地运行冻结权重的基座模型，每一次新会话启动时，模型本身的「脑细胞连接」都退回出厂设置。如果学习只能写进权重 $\theta$，那么智能体就永远困在「土拨鼠之日」——今天踩过的坑、花十步才翻出来的脚本，明天新会话一开，照样再盲搜十步。
+      </p>
+      <div class="callout callout-warm">
+        <strong>核心洞察（Substrate RL 第一性原理）：</strong><br>
+        既然大脑权重 $\theta$ 是冻结的（租来的算力），学习就不能往脑子里写，而必须写进智能体身处的<strong>外部世界——即「外部认知基质（External Cognitive Substrate, $E$）」</strong>：它的目录拓扑、软链接（Symlinks）、<code>~/bin/</code> 速查表、工具注册表和常驻规则。
+      </div>
+      <div class="grid-3">
+        <div class="mini-card">
+          <strong>🏃 每次会话 = 一次轨迹滚动 ($\tau$)</strong>
+          智能体从接手任务到最终通过验证器验收，走出的完整动作序列 $\tau = (s_0, a_0, r_0, \dots, s_T, a_T, R_{\text{verified}})$ 就是强化学习中的一次真实采样（Rollout）。
+        </div>
+        <div class="mini-card">
+          <strong>🔥 反复翻找 = 局部热耗散 ($T_d$)</strong>
+          当智能体为了找同一个文件（如 <code>relay.py</code> 或 <code>codex-memory</code>）连续执行 $\ge 3$ 次 <code>find / ls / grep / read</code> 时，这段盲目试探就是<strong>无用功（热力学耗散）</strong>，也是环境侧最鲜明的预测误差信号。
+        </div>
+        <div class="mini-card">
+          <strong>⚡ 修路架桥 = 拓扑捷径压缩</strong>
+          系统捕获到高热耗散热点后，在安全门控（<code>rsi-gate</code>）批准下安装一条规范化软链或 <code>@registry/bin-manifest</code> 路由，把下一次滚动的 $O(k)$ 盲搜直接坍缩为 $O(1)$ 直达。
+        </div>
+      </div>
+      <p style="margin-bottom:0;">
+        一句话总结：<strong>传统 RL 改变模型参数以适应固定环境；基质强化学习（Substrate RL）在固定模型参数下雕刻环境拓扑，让冻结的大脑在演化的世界中表现出指数级跃升的熟稔度。</strong>
+      </p>
+    </section>
+
+    <!-- SECTION 2: FORMAL THEORY & LINEAGE -->
+    <section id="formal-theory" class="section-card">
+      <h2>2. 理论形式化与五大谱系合流（Formal Theory &amp; Lineage Unification）</h2>
+      <p>
+        本节将 2026 年 5 月至 10 月的五条独立理论脉络（信用输运、非反向传播三因子、MemRL 贝叶斯效用、SkillProx 信赖域门控、真实轨迹摩擦审计）收束为统一的<strong>环境侧强化学习（Environment-Side / Substrate RL）</strong>数学框架。
+      </p>
+
+      <h3>2.1 五大前序理论谱系合流（Lineage Unification）</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>谱系编号与时期</th>
+            <th>前序理论主线</th>
+            <th>在 Substrate RL 中的精确同构映射</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Strand 1 (2026-05)</strong></td>
+            <td><a href="essays/2026-05-19-credit-transport-general-learning-machine.md">信用输运与通用学习机 (Credit Transport &amp; GLM)</a></td>
+            <td>未来的误差、惊讶与存续压力沿着导致结果的因果结构向后输运并改变该结构。此处承载改变的「结构」不再是神经元突触，而是外部认知基质 $E$。</td>
+          </tr>
+          <tr>
+            <td><strong>Strand 2 (2026-10)</strong></td>
+            <td><a href="essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md">非反向传播三因子信用分配 (Three-Factor Credit)</a></td>
+            <td>$\Delta w \propto e_{\text{local}} \times g_{\text{coord}} \times (R_{\text{verified}} - b)$。局部资格迹对应实际走过的绕行路径；协调门控对应 <code>rsi-gate</code> 准入；标量奖励对应确定性验证器回执。</td>
+          </tr>
+          <tr>
+            <td><strong>Strand 3 (MemRL)</strong></td>
+            <td>贝叶斯后验记忆效用 $Q(m) = \frac{\alpha}{\alpha+\beta}$</td>
+            <td>将 Beta-Bernoulli 后验效用从记忆条目扩展至<strong>工具、<code>capability-registrar</code> 路由与文件系统路径</strong>：每条路径维护 $(\alpha, \beta)$，由是否导向 $R_{\text{verified}}$ 成功动态更新。</td>
+          </tr>
+          <tr>
+            <td><strong>Strand 4 (SkillProx / RRSI)</strong></td>
+            <td>信赖域复杂度门控 (<code>rsi-gate</code>)</td>
+            <td>与 PPO 裁剪步长同构，基质修改 $\Delta E$ 仅在复杂度/散度距离 $D(E_{\text{new}} \parallel E_{\text{old}}) \le \delta$ 内放行，超限重写一律 Fail-Closed 拒绝，杜绝规则漂移。</td>
+          </tr>
+          <tr>
+            <td><strong>Strand 5 (2026-10-22)</strong></td>
+            <td>真实会话轨迹绕行审计 (Empirical Detour Audit)</td>
+            <td>对 505 个真实会话、15,068 步动作进行只读解析，精确定位 287 个绕行片段（Detour Episodes）与高频摩擦构件，提供驱动拓扑压缩的物理梯度源。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>2.2 核心数学形式化对象（Formal Mathematical Objects）</h3>
+
+      <div class="math-box">
+        <span class="math-label">Object 1 · 轨迹滚动与环境侧策略目标 (Rollout &amp; Substrate Objective)</span>
+        <p style="margin:6px 0;">
+          设基座模型参数 $\theta \in \Theta_{\text{frozen}}$ 严格冻结（$\nabla_\theta \equiv 0$），外部认知基质 $E \in \mathcal{E}$（包含目录树、<code>~/bin/</code> 软链、<code>@registry/bin-manifest</code> 与 <code>capability-registrar</code> 索引）为可学习结构参数。单次会话产生轨迹滚动：
+        </p>
+        $$\tau = (s_0, a_0, r_0, \dots, s_T, a_T, R_{\text{verified}}), \quad s_{t+1} \sim \mathcal{T}(\cdot \mid s_t, a_t; E), \quad a_t \sim \pi_\theta(\cdot \mid s_t; E)$$
+        <p style="margin:6px 0;">
+          系统最大化期望已验证回报 $J(\pi_\theta, E) = \mathbb{E}_{\tau \sim (\pi_\theta, E)}[R_{\text{verified}}(\tau)]$。对基质 $E$ 求环境侧策略梯度（Score-Function / Environment Gradient）：
+        </p>
+        $$\nabla_E J(\pi_\theta, E) \approx \mathbb{E}_{\tau} \left[ \sum_{t=0}^{T} \nabla_E \log \pi_\theta(a_t \mid s_t, E) \cdot \big(R_{\text{verified}}(\tau) - b\big) \right]$$
+        <p style="margin:4px 0 0; font-size:0.88rem; color:var(--muted);">
+          其中 $b$ 为滑动平均回报基线（Baseline）。<strong>关键物理分野：$\theta$ 完全冻结，$E$ 是唯一可更新的参数空间。</strong>
+        </p>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">Object 2 · 三因子基质更新方程 (Three-Factor Substrate Update Rule)</span>
+        <p style="margin:6px 0;">
+          针对离散工具与文件系统拓扑，连续梯度离散化为非反向传播三因子局部更新算子：
+        </p>
+        $$\Delta E_{\text{path}} \propto \underbrace{e_{\text{path}}(\tau)}_{\text{局部绕行资格迹}} \cdot \underbrace{g_{\text{coord}} \in \{0, 1\}}_{\text{rsi-gate 协调准入门}} \cdot \underbrace{\big(R_{\text{verified}}(\tau) - b\big)}_{\text{确定性验证标量反馈}}$$
+        <p style="margin:4px 0 0; font-size:0.88rem; color:var(--muted);">
+          其中资格迹 $e_{\text{path}}(\tau) = \sum_{t=0}^T \gamma^{T-t} \mathbb{I}[\text{action } a_t \text{ probes or traverses } \text{path}]$ 记录了当前滚动中实际走过的探索路径强度。
+        </p>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">Object 3 · 路径与注册表项的 Beta 后验效用 (MemRL Beta Utility Extended to Paths)</span>
+        <p style="margin:6px 0;">
+          将 MemRL 效用函数从记忆块扩展至每一条文件系统路径、软链与 <code>capability-registrar</code> 条目 $\text{path} \in E$，每个条目维护独立的 Beta-Bernoulli 共轭先验参数 $(\alpha_{\text{path}}, \beta_{\text{path}})$：
+        </p>
+        $$Q(\text{path}) = \frac{\alpha_{\text{path}}}{\alpha_{\text{path}} + \beta_{\text{path}}}, \quad \begin{cases} \alpha_{\text{path}} \leftarrow \alpha_{\text{path}} + 1 & \text{若调用该路径且导向 } R_{\text{verified}} = 1 \text{（有效命中）} \\ \beta_{\text{path}} \leftarrow \beta_{\text{path}} + 1 & \text{若发生 } \ge 3 \text{ 步探索绕行或查找未命中（Detour/Miss）} \end{cases}$$
+        <p style="margin:4px 0 0; font-size:0.88rem; color:var(--muted);">
+          当候选捷径的目标构件累积高频摩擦、且安装后的后验效用满足 $Q(\text{path}) \ge \tau_Q$ 并通过信赖域门控时，拓扑捷径被正式固化进基质 $E$。
+        </p>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">Object 4 · 信赖域复杂度门控 (SkillProx / RRSI Trust-Region Gate)</span>
+        <p style="margin:6px 0;">
+          为防止基质无界膨胀、语义漂移或破坏既有不变量，<code>rsi-gate</code> 实施严格的单步信赖域约束（Fail-Closed）：
+        </p>
+        $$\text{Admit}(E_{\text{new}} \leftarrow E_{\text{old}} + \Delta E) \iff D_{\text{sub}}(E_{\text{new}} \parallel E_{\text{old}}) \le \delta \;\land\; \text{Invariants}(E_{\text{new}}) = \text{PASS}$$
+        <p style="margin:4px 0 0; font-size:0.88rem; color:var(--muted);">
+          其中 $D_{\text{sub}}(E_{\text{new}} \parallel E_{\text{old}})$ 度量行为策略偏移与描述长度增量（KL / 最小描述长度复杂度步长）。一旦超出半径 $\delta$，修改立即被拒绝并回滚。
+        </p>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">Object 5 · 热耗散信号与拓扑捷径退火 (Dissipation-Driven Shortcut Compression)</span>
+        <p style="margin:6px 0;">
+          定义系统的<strong>轨迹绕行温度（Detour Temperature）</strong> $T_d$ 为落在连续探索绕行片段（$\ge 3$ 步连续 <code>find/ls/grep/read</code>）中的动作占总动作的比例：
+        </p>
+        $$T_d(E) = \frac{N_{\text{actions\_in\_detours}}(E)}{N_{\text{total\_actions}}(E)}, \qquad \Delta \mathbb{E}_{\tau}\big[|\text{detour}(v^*)|\big] : \underbrace{O(k)}_{\text{多跳探索探针}} \xrightarrow{\text{Install Canonical Shortcut } e^*=(s_0 \to v^*)} \underbrace{O(1)}_{\text{直接索引查表}}$$
+        <p style="margin:4px 0 0; font-size:0.88rem; color:var(--muted);">
+          每次在高频热点 $v^*$ 上安装规范化软链或 <code>@registry/bin-manifest</code> 条目，都相当于在图上跨过 $k$ 步中间试探节点直接连边，单调降低期望路径长度 $\mathbb{E}[|\text{detour}|]$ 并使系统温度 $T_d(E)$ 退火下降。
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THREE-FACTOR SUBSTRATE MAPPING -->
+    <section id="three-factor" class="section-card">
+      <h2>3. 三因子信用分配的环境侧映射（Three-Factor Credit Mapped to Substrate）</h2>
+      <p>
+        为什么不能直接让智能体「想到什么就改什么配置文件」？在非反向传播理论中，缺少门控与验证标量的双因子 Hebbian 学习（只要同时激活就强化）必然导致<strong>噪声自激与失控漂移</strong>。Substrate RL 必须严格集齐三个正交因子才能触发一次基质写入：
+      </p>
+      <div class="grid-3">
+        <div class="mini-card" style="border-top: 4px solid var(--highlight);">
+          <strong>因子 I · 局部资格迹 ($e_{\text{path}}$)</strong>
+          <p style="font-size:0.9rem; margin:6px 0 0;">
+            <strong>物理含义：</strong>智能体在本次滚动中真实走过的探索路径与绕行热迹。<br>
+            <strong>环境映射：</strong>当智能体为定位 <code>relay.py</code> 连续触发 <code>find</code> $\to$ <code>grep</code> $\to$ <code>read</code> 时，该路径上的摩擦计数器点亮资格迹 $e_{\text{path}} > 0$。没有真实踩坑的臆想优化，资格迹为 0，不予触发。
+          </p>
+        </div>
+        <div class="mini-card" style="border-top: 4px solid var(--accent);">
+          <strong>因子 II · 协调与信赖域门控 ($g_{\text{coord}}$)</strong>
+          <p style="font-size:0.9rem; margin:6px 0 0;">
+            <strong>物理含义：</strong>调制神经递质 / 谱隙与信赖域准入开关 $g_{\text{coord}} \in \{0, 1\}$。<br>
+            <strong>环境映射：</strong>由顶层协调器与 <code>rsi-gate</code> 联合把关：检查修改步长 $D(E_{\text{new}} \parallel E_{\text{old}}) \le \delta$、红线不变量与零退化回归测试。任一不满足则 $g_{\text{coord}} = 0$（Fail-Closed）。
+          </p>
+        </div>
+        <div class="mini-card" style="border-top: 4px solid var(--green);">
+          <strong>因子 III · 验证器标量反馈 ($R_{\text{verified}} - b$)</strong>
+          <p style="font-size:0.9rem; margin:6px 0 0;">
+            <strong>物理含义：</strong>带符号的全局多巴胺预测误差信号。<br>
+            <strong>环境映射：</strong>严禁执行智能体自报完成！必须由独立确定性验证器（如 <code>surface-verify</code>、<code>selftest.sh</code>、契约校验）给出客观回执 $R_{\text{verified}}$。高于基线 $b$ 则强化固化（$\alpha+1$），否则记为耗散教训（$\beta+1$）。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: EMPIRICAL TRAJECTORY AUDIT -->
+    <section id="empirical-audit" class="section-card">
+      <h2>4. 真实轨迹审计：505 会话、15,068 步动作的绕行摩擦快照</h2>
+      <div class="callout">
+        <strong>📌 实时只读追加账本快照声明（LIVE APPEND-ONLY LEDGER SNAPSHOT）：</strong><br>
+        以下全部数据固定取自 <strong><code>2026-10-22T11:07Z</code></strong> 对真实智能体会话日志执行的只读轨迹审计（Read-Only Trajectory Audit）。由于底层账本为实时追加写入（Live Append-Only Ledger），随会话持续运行，实时重跑时的计数会有个位数自然增量。本文严格冻结 <code>2026-10-22T11:07Z</code> 审计截面，零合成数据、零捏造数字。
+      </div>
+
+      <!-- KPI STAT CARDS -->
+      <div class="grid-4">
+        <div class="stat-card">
+          <span class="stat-label">解析会话总数 (Sessions)</span>
+          <span class="stat-val">505</span>
+          <span class="stat-sub">antigravity: 257 · kiro: 248</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">总工具动作数 (Total Actions)</span>
+          <span class="stat-val">15,068</span>
+          <span class="stat-sub">跨会话真实工具调用总计</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">探索性动作 (Exploratory)</span>
+          <span class="stat-val" style="color:var(--highlight);">3,004</span>
+          <span class="stat-sub">占总动作 <strong>19.94%</strong></span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">绕行片段数 (Detour Episodes)</span>
+          <span class="stat-val" style="color:var(--red);">287</span>
+          <span class="stat-sub">连续 $\ge 3$ 步探索 · 平均 <strong>4.67</strong> 步</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="mini-card">
+          <strong>🔥 全局绕行温度 $T_d$ 与步长分布</strong>
+          <ul style="margin:8px 0 0; padding-left:20px; font-size:0.92rem;">
+            <li><strong>绕行内部动作总数（Actions Inside Detours）：</strong><code>1,340</code> 步</li>
+            <li><strong>当前基质绕行温度 $T_d$：</strong><code>8.89%</code>（即每 100 步动作中有 8.89 步处于连续 $\ge 3$ 步的搜寻绕行中）</li>
+            <li><strong>平均每次绕行长度 $\mathbb{E}[|\text{detour}|]$：</strong><code>4.67</code> 步</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <strong>🧭 分席位对比：交互执行席位 vs 顶层探索控制器</strong>
+          <ul style="margin:8px 0 0; padding-left:20px; font-size:0.92rem;">
+            <li><strong><code>antigravity</code>（257 会话 / 12,150 动作）：</strong>探索动作占 <code>15.92%</code>，绕行内动作占 <code>6.91%</code>。</li>
+            <li><strong><code>kiro</code>（248 会话 / 2,916 动作）：</strong>探索动作占 <code>36.66%</code>，绕行内动作占 <code>17.15%</code>（顶层 Manager 承担了更密集的跨目录发现与验收探针任务）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>4.1 探索性动作类型拆解（Exploratory Action Breakdown, N = 3,004）</h3>
+      <p style="font-size:0.92rem; color:var(--muted);">
+        下表与纯 SVG 条形图展示了全部 15 类探索性动作的真实频次分布。其中 <code>read</code>（1,386 次）、管道过滤 <code>"| grep"</code>（799 次）、<code>search</code>（299 次）与按文件名查找 <code>"-name"</code>（255 次）占了探索总量的 <strong>91.18%</strong>：
+      </p>
+
+      <!-- PURE SVG BAR CHART FOR EXPLORATORY BREAKDOWN -->
+      <div class="svg-panel" style="margin: 14px 0; overflow-x:auto;">
+        <div class="svg-panel-title">
+          <span>探索动作频次分布图 (SVG 精确比例绘制 · Frozen 2026-10-22T11:07Z)</span>
+          <span style="font-size:0.78rem; color:var(--muted);">总探索步数: 3,004 (19.94%)</span>
+        </div>
+        <svg viewBox="0 0 820 390" width="100%" role="img" aria-label="Exploratory Action Breakdown Bar Chart">
+          <style>
+            .bar-label { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 12px; fill: #18191f; }
+            .bar-val { font-family: -apple-system, sans-serif; font-size: 11.5px; font-weight: 700; fill: #18191f; }
+            .axis-line { stroke: #e3ded6; stroke-width: 1; }
+          </style>
+          <line x1="120" y1="15" x2="120" y2="370" class="axis-line"/>
+          <line x1="120" y1="370" x2="780" y2="370" class="axis-line"/>
+          <!-- 15 bars: y step = 23px -->
+          <g transform="translate(0, 18)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">read</text>
+            <rect x="120" y="2" width="580" height="16" rx="4" fill="#1e56a0"/>
+            <text x="706" y="14" class="bar-val">1,386 (46.14%)</text>
+          </g>
+          <g transform="translate(0, 41)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">"| grep"</text>
+            <rect x="120" y="2" width="334.4" height="16" rx="4" fill="#1e56a0"/>
+            <text x="460" y="14" class="bar-val">799 (26.60%)</text>
+          </g>
+          <g transform="translate(0, 64)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">search</text>
+            <rect x="120" y="2" width="125.1" height="16" rx="4" fill="#b85c18"/>
+            <text x="251" y="14" class="bar-val">299 (9.95%)</text>
+          </g>
+          <g transform="translate(0, 87)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">"-name"</text>
+            <rect x="120" y="2" width="106.7" height="16" rx="4" fill="#b85c18"/>
+            <text x="233" y="14" class="bar-val">255 (8.49%)</text>
+          </g>
+          <g transform="translate(0, 110)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">ls</text>
+            <rect x="120" y="2" width="30.5" height="16" rx="4" fill="#2b6cb0"/>
+            <text x="157" y="14" class="bar-val">73</text>
+          </g>
+          <g transform="translate(0, 133)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">grep(tool)</text>
+            <rect x="120" y="2" width="28.5" height="16" rx="4" fill="#2b6cb0"/>
+            <text x="155" y="14" class="bar-val">68</text>
+          </g>
+          <g transform="translate(0, 156)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">cat</text>
+            <rect x="120" y="2" width="21.3" height="16" rx="4" fill="#2b6cb0"/>
+            <text x="148" y="14" class="bar-val">51</text>
+          </g>
+          <g transform="translate(0, 179)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">grep(cmd)</text>
+            <rect x="120" y="2" width="10.9" height="16" rx="3" fill="#4a5568"/>
+            <text x="137" y="14" class="bar-val">26</text>
+          </g>
+          <g transform="translate(0, 202)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">glob</text>
+            <rect x="120" y="2" width="8.4" height="16" rx="3" fill="#4a5568"/>
+            <text x="135" y="14" class="bar-val">20</text>
+          </g>
+          <g transform="translate(0, 225)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">which</text>
+            <rect x="120" y="2" width="4" height="16" rx="2" fill="#718096"/>
+            <text x="130" y="14" class="bar-val">8</text>
+          </g>
+          <g transform="translate(0, 248)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">find</text>
+            <rect x="120" y="2" width="4" height="16" rx="2" fill="#718096"/>
+            <text x="130" y="14" class="bar-val">8</text>
+          </g>
+          <g transform="translate(0, 271)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">head</text>
+            <rect x="120" y="2" width="2.5" height="16" rx="2" fill="#718096"/>
+            <text x="129" y="14" class="bar-val">4</text>
+          </g>
+          <g transform="translate(0, 294)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">stat</text>
+            <rect x="120" y="2" width="2" height="16" rx="1" fill="#718096"/>
+            <text x="128" y="14" class="bar-val">3</text>
+          </g>
+          <g transform="translate(0, 317)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">tail</text>
+            <rect x="120" y="2" width="1.5" height="16" rx="1" fill="#718096"/>
+            <text x="128" y="14" class="bar-val">2</text>
+          </g>
+          <g transform="translate(0, 340)">
+            <text x="112" y="14" text-anchor="end" class="bar-label">fd</text>
+            <rect x="120" y="2" width="1.2" height="16" rx="1" fill="#718096"/>
+            <text x="128" y="14" class="bar-val">1</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3>4.2 Top 8 高频摩擦热点构件（Top Friction Hotspots — Prime Shortcut Candidates）</h3>
+      <p style="font-size:0.92rem; color:var(--muted);">
+        下表列出了智能体在多个会话中反复搜寻、触发连续绕行的 Top 8 核心构件基名（Basename）。它们就是「热耗散最高」的物理坐标，也是安装 $O(1)$ 拓扑捷径（<code>~/bin/</code> 软链、<code>@registry/bin-manifest</code> 查表或 <code>capability-registrar</code> 路由）的首要靶点：
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>排名</th>
+            <th>构件基名 (Artifact Basename)</th>
+            <th>总探索频次 (Frequency)</th>
+            <th>绕行片段命中 (Detour-Episode Hits)</th>
+            <th>涉及独立会话数 (Distinct Sessions)</th>
+            <th>推荐环境侧拓扑压缩动作 ($\Delta E_{\text{shortcut}}$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>#1</strong></td>
+            <td><code>relay.py</code></td>
+            <td><strong>118</strong></td>
+            <td><strong>24</strong></td>
+            <td>13</td>
+            <td>注册至 <code>@registry/bin-manifest</code> 并建立 <code>~/bin/</code> 规范化入口软链</td>
+          </tr>
+          <tr>
+            <td><strong>#2</strong></td>
+            <td><code>selftest.sh</code></td>
+            <td><strong>77</strong></td>
+            <td><strong>20</strong></td>
+            <td>9</td>
+            <td>绑定至验证器标准别名与 <code>capability-registrar</code> 自检路由</td>
+          </tr>
+          <tr>
+            <td><strong>#3</strong></td>
+            <td><code>codex-memory</code></td>
+            <td><strong>69</strong></td>
+            <td><strong>11</strong></td>
+            <td><strong>35</strong></td>
+            <td>固化为 <code>~/bin/codex-memory</code> 全局 $O(1)$ 直达路径与常驻规则</td>
+          </tr>
+          <tr>
+            <td><strong>#4</strong></td>
+            <td><code>backfill-20261020</code></td>
+            <td><strong>47</strong></td>
+            <td><strong>21</strong></td>
+            <td>7</td>
+            <td>归档至任务账本索引表，消除 <code>-name</code> 通配符盲搜</td>
+          </tr>
+          <tr>
+            <td><strong>#5</strong></td>
+            <td><code>relay</code></td>
+            <td><strong>46</strong></td>
+            <td><strong>12</strong></td>
+            <td>11</td>
+            <td>与 <code>relay.py</code> 合并规范化入口，消除同名歧义探测</td>
+          </tr>
+          <tr>
+            <td><strong>#6</strong></td>
+            <td><code>apply.sh</code></td>
+            <td><strong>43</strong></td>
+            <td><strong>10</strong></td>
+            <td>13</td>
+            <td>在 <code>capability-registrar</code> 中按模块命名空间显式索引</td>
+          </tr>
+          <tr>
+            <td><strong>#7</strong></td>
+            <td><code>intake_broker.py</code></td>
+            <td><strong>37</strong></td>
+            <td><strong>8</strong></td>
+            <td>11</td>
+            <td>写入 <code>@registry/bin-manifest</code> 核心守护组件映射表</td>
+          </tr>
+          <tr>
+            <td><strong>#8</strong></td>
+            <td><code>SHA256SUMS</code></td>
+            <td><strong>37</strong></td>
+            <td><strong>14</strong></td>
+            <td>7</td>
+            <td>在验证流水线 <code>surface-verify</code> 中固定标准校验路径</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 5: THREE INTERACTIVE SIMULATORS -->
+    <section id="simulators" class="section-card">
+      <h2>5. 三大交互式基质强化学习模拟器（Interactive Substrate RL Simulators）</h2>
+      <p>
+        以下三个交互式模拟器全部采用原生 HTML5 Canvas / SVG 与确定性数学方程实时计算渲染，分别演示：<strong>(S1) 轨迹绕行热耗散与退火</strong>、<strong>(S2) $O(k) \to O(1)$ 图拓扑捷径压缩</strong>、以及 <strong>(S3) 三因子信用分配与 Beta 后验信赖域门控</strong>。
+      </p>
+
+      <!-- SIMULATOR 1 -->
+      <div class="sim-box" id="sim1-container">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-warm">Simulator S1 · Heat Dissipation &amp; Annealing</span>
+            <h3 style="margin:6px 0 4px;">轨迹滚动绕行热耗散与拓扑退火可视化器 (Trajectory Rollout Detour Heat Visualizer)</h3>
+            <p style="margin:0; font-size:0.88rem; color:var(--muted);">
+              观察智能体令牌从起点 <code>s₀ (Session Start)</code> 寻找目标构件（如 <code>relay.py</code> / <code>codex-memory</code>）。未安装捷径时，智能体在探索探针节点（<code>find</code> / <code>ls</code> / <code>grep</code> / <code>read</code>）间盲目游走并产生红色热耗散；点击「🔥 热力学退火（安装 O(1) 捷径）」将高频摩擦路径重连为蓝色 $O(1)$ 直达边，实时降低绕行温度 $T_d$。
+            </p>
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="s1-detour-slider">
+              <span>环境未索引摩擦度 (Detour Propensity)</span>
+              <strong id="s1-detour-val">75%</strong>
+            </label>
+            <input type="range" id="s1-detour-slider" min="15" max="95" value="75" step="5">
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <button type="button" class="btn btn-primary" id="s1-step-btn">▶ 采样单次轨迹 (Run Rollout)</button>
+            <button type="button" class="btn btn-warm" id="s1-anneal-btn">⚡ 热力学退火：安装捷径 (Anneal +1)</button>
+            <button type="button" class="btn" id="s1-auto-btn">🔄 连续滚动: 关</button>
+            <button type="button" class="btn" id="s1-reset-btn">↺ 重置基质</button>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:12px;">
+          <div class="stat-card">
+            <span class="stat-label">本轮轨迹步数 (Steps Taken)</span>
+            <span class="stat-val" id="s1-steps-now">5 步</span>
+            <span class="stat-sub" id="s1-mode-label">含 4 步探索绕行</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">期望绕行长度 $\mathbb{E}[|\text{detour}|]$</span>
+            <span class="stat-val" id="s1-expected-detour" style="color:var(--highlight);">4.67 步</span>
+            <span class="stat-sub">审计初始基准: 4.67 步</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">绕行温度 $T_d$ (Dissipation)</span>
+            <span class="stat-val" id="s1-temp-td" style="color:var(--red);">8.89%</span>
+            <span class="stat-sub">actions_in_detours / total</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">已固化 $O(1)$ 捷径数</span>
+            <span class="stat-val" id="s1-shortcuts-count" style="color:var(--green);">0 / 4</span>
+            <span class="stat-sub">每次退火消除一条高频盲搜链</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="s1-canvas" width="840" height="310"></canvas>
+        </div>
+      </div>
+
+      <!-- SIMULATOR 2 -->
+      <div class="sim-box" id="sim2-container">
+        <div class="sim-header">
+          <div>
+            <span class="badge">Simulator S2 · Topological Shortcut Compressor</span>
+            <h3 style="margin:6px 0 4px;">散乱基质 vs 规范化压缩基质对比器 (Before / After Graph Shortcut Compressor)</h3>
+            <p style="margin:0; font-size:0.88rem; color:var(--muted);">
+              基于真实审计的 Top 8 高频摩擦热点权重（<code>relay.py</code> 118、<code>selftest.sh</code> 77、<code>codex-memory</code> 69 等），对比左侧未压缩的 $O(k)$ 多跳探测树与右侧安装 <code>~/bin/</code> 软链及 <code>@registry/bin-manifest</code> 后的 $O(1)$ 直达拓扑。
+            </p>
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="s2-hotspot-select">
+              <span>选择审计热点构件 (Inspect Friction Hotspot)</span>
+            </label>
+            <select id="s2-hotspot-select" style="padding:7px 10px; border-radius:7px; border:1px solid var(--line); font-size:0.88rem; background:#fff;">
+              <option value="0">ALL Top 8 Hotspots (全局压缩概览 · 474 次探针)</option>
+              <option value="1">#1 relay.py (频次: 118 | 绕行命中: 24 | 会话: 13)</option>
+              <option value="2">#2 selftest.sh (频次: 77 | 绕行命中: 20 | 会话: 9)</option>
+              <option value="3">#3 codex-memory (频次: 69 | 绕行命中: 11 | 会话: 35)</option>
+              <option value="4">#4 backfill-20261020 (频次: 47 | 绕行命中: 21 | 会话: 7)</option>
+              <option value="5">#5 relay (频次: 46 | 绕行命中: 12 | 会话: 11)</option>
+              <option value="6">#6 apply.sh (频次: 43 | 绕行命中: 10 | 会话: 13)</option>
+              <option value="7">#7 intake_broker.py (频次: 37 | 绕行命中: 8 | 会话: 11)</option>
+              <option value="8">#8 SHA256SUMS (频次: 37 | 绕行命中: 14 | 会话: 7)</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="s2-compress-slider">
+              <span>拓扑捷径覆盖率 (Shortcut Compression Ratio)</span>
+              <strong id="s2-compress-pct">100% (8/8 热点已建索引)</strong>
+            </label>
+            <input type="range" id="s2-compress-slider" min="0" max="8" value="8" step="1">
+          </div>
+          <button type="button" class="btn btn-primary" id="s2-toggle-btn">⚡ 切换 0% ⇄ 100% 压缩对比</button>
+        </div>
+
+        <div class="grid-3" style="margin-bottom:12px;">
+          <div class="stat-card">
+            <span class="stat-label">路径复杂度跃迁 (Path Complexity)</span>
+            <span class="stat-val" id="s2-complexity-text">O(4.67) → O(1.00)</span>
+            <span class="stat-sub">消除中间目录枚举与 grep 盲探</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">热点累计节省探索步数</span>
+            <span class="stat-val" id="s2-saved-steps" style="color:var(--green);">354 步</span>
+            <span class="stat-sub" id="s2-saved-sub">基于 Top 8 热点 474 次总频次测算</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">预测绕行温度 $T_d$ 降幅</span>
+            <span class="stat-val" id="s2-td-drop" style="color:var(--accent);">8.89% → 5.69%</span>
+            <span class="stat-sub">仅压缩 Top 8 热点即可削减 36% 绕行热</span>
+          </div>
+        </div>
+
+        <div class="svg-compare">
+          <div class="svg-panel">
+            <div class="svg-panel-title">
+              <span style="color:var(--red);">LEFT · 压缩前：散乱基质 $E_{\text{old}}$ ($O(k)$ 探索树)</span>
+              <span class="badge badge-warm">Avg 4.67 Hops</span>
+            </div>
+            <svg id="s2-svg-left" viewBox="0 0 400 280" width="100%"></svg>
+          </div>
+          <div class="svg-panel">
+            <div class="svg-panel-title">
+              <span style="color:var(--green);">RIGHT · 压缩后：规范化基质 $E_{\text{new}}$ ($O(1)$ 查表直达)</span>
+              <span class="badge badge-green" id="s2-right-badge">O(1) Direct Lookup</span>
+            </div>
+            <svg id="s2-svg-right" viewBox="0 0 400 280" width="100%"></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIMULATOR 3 -->
+      <div class="sim-box" id="sim3-container">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-green">Simulator S3 · 3-Factor Credit &amp; Trust-Region Gate</span>
+            <h3 style="margin:6px 0 4px;">三因子信用分配与 Beta 后验信赖域门控检验器 (3-Factor Credit &amp; Trust-Region Inspector)</h3>
+            <p style="margin:0; font-size:0.88rem; color:var(--muted);">
+              调节局部绕行资格迹 $e_{\text{path}}$、协调器门控 $g_{\text{coord}} \in \{0,1\}$、验证标量反馈 $(R_{\text{verified}} - b)$ 以及信赖域半径 $\delta$；点击按钮模拟路径命中（$\alpha+1$）或绕行未命中（$\beta+1$），实时观察 $\mathrm{Beta}(\alpha,\beta)$ 概率密度曲线与 <code>rsi-gate</code> 准入裁决。
+            </p>
+          </div>
+          <div id="s3-status-badge" class="status-pill status-admitted">
+            ✓ SHORTCUT ADMITTED · 准予刻入基质
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="s3-elig">
+              <span>(a) 局部资格迹 $e_{\text{path}}$</span>
+              <strong id="s3-elig-val">0.80</strong>
+            </label>
+            <input type="range" id="s3-elig" min="0" max="1" value="0.80" step="0.05">
+          </div>
+          <div class="control-group">
+            <label for="s3-gate">
+              <span>(b) 协调门控 $g_{\text{coord}} \in \{0,1\}$</span>
+              <strong id="s3-gate-val">1 (OPEN)</strong>
+            </label>
+            <input type="range" id="s3-gate" min="0" max="1" value="1" step="1">
+          </div>
+          <div class="control-group">
+            <label for="s3-reward">
+              <span>(c) 验证反馈 $(R_{\text{verified}} - b)$</span>
+              <strong id="s3-reward-val">+0.65</strong>
+            </label>
+            <input type="range" id="s3-reward" min="-1" max="1" value="0.65" step="0.05">
+          </div>
+          <div class="control-group">
+            <label for="s3-delta">
+              <span>(d) 信赖域半径 $\delta$ (rsi-gate)</span>
+              <strong id="s3-delta-val">0.45</strong>
+            </label>
+            <input type="range" id="s3-delta" min="0.10" max="0.80" value="0.45" step="0.05">
+          </div>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; align-items:center;">
+          <button type="button" class="btn btn-green" id="s3-alpha-btn">✓ 验证有效调用 (α += 1)</button>
+          <button type="button" class="btn btn-warm" id="s3-beta-btn">✗ 绕行/探测未命中 (β += 1)</button>
+          <button type="button" class="btn" id="s3-reset-beta-btn">↺ 重置 Beta(α=6, β=2)</button>
+          <span style="font-size:0.82rem; color:var(--muted); margin-left:auto;" id="s3-reason-text">
+            准入条件：$g_{\text{coord}}=1 \;\land\; \Delta E_{\text{path}} > 0 \;\land\; Q(\text{path}) \ge 0.65 \;\land\; D(E_{\text{new}}\parallel E_{\text{old}}) \le \delta$
+          </span>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:12px;">
+          <div class="stat-card">
+            <span class="stat-label">三因子更新量 $\Delta E_{\text{path}}$</span>
+            <span class="stat-val" id="s3-de-val">+0.520</span>
+            <span class="stat-sub">$e_{\text{path}} \cdot g_{\text{coord}} \cdot (R_{\text{verified}}-b)$</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">路径后验效用 $Q(\text{path})$</span>
+            <span class="stat-val" id="s3-q-val" style="color:var(--green);">0.750</span>
+            <span class="stat-sub" id="s3-ab-sub">α = 6, β = 2 (阈值 τ_Q = 0.65)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">基质复杂度步长 $D(E_{\text{new}}\parallel E_{\text{old}})$</span>
+            <span class="stat-val" id="s3-kl-val">0.312</span>
+            <span class="stat-sub" id="s3-kl-sub">上限 δ = 0.45 (SkillProx bound)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">门控最终裁决 (Gate Verdict)</span>
+            <span class="stat-val" id="s3-verdict-short" style="color:var(--green); font-size:1.2rem;">ADMITTED</span>
+            <span class="stat-sub" id="s3-verdict-detail">符合信赖域与效用门槛</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="s3-canvas" width="840" height="230"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CONCLUSION & FALSIFIABILITY -->
+    <section id="falsifiability" class="section-card">
+      <h2>6. 结语与可证伪反信号（Conclusion &amp; Falsifiability Anti-Signals）</h2>
+      <p>
+        科学的理论必须声明什么观测结果能够推翻自己。如果「基质强化学习（Substrate RL）」仅仅沦为把更多文档塞进仓库的修辞包装，而不能在后续的只读轨迹审计中产生可测量的物理退火，则该机制应当被判伪并触发回滚。我们确立以下四条硬性<strong>可证伪反信号（Falsifiability Anti-Signals）</strong>：
+      </p>
+      <div class="grid-2">
+        <div class="callout callout-red" style="margin:0;">
+          <strong>反信号 1 · 基质膨胀但期望绕行长度不降（Substrate Bloat without Compression）</strong><br>
+          若安装规范化软链、<code>@registry/bin-manifest</code> 与 <code>capability-registrar</code> 路由后，后续 500 个会话中的全局绕行温度 $T_d$ 未从 <code>8.89%</code> 显著下降，或目标热点构件的 $\mathbb{E}[|\text{detour}|]$ 仍维持在 <code>4.67</code> 步附近，说明捷径未被策略分布 $\pi_\theta(\cdot \mid s_t, E)$ 有效感知，应立即移除无效索引。
+        </div>
+        <div class="callout callout-red" style="margin:0;">
+          <strong>反信号 2 · 路径效用 $Q(\text{path})$ 校准失真（Miscalibrated Beta Utility）</strong><br>
+          若高 $Q(\text{path}) = \alpha/(\alpha+\beta)$ 的路径在实际调用中并未带来更高的 $R_{\text{verified}}$ 通过率（即自报命中与独立验证回执脱钩），说明 $(\alpha,\beta)$ 更新混入了未验证的虚假正反馈，必须重绑确定性验证器。
+        </div>
+        <div class="callout callout-red" style="margin:0;">
+          <strong>反信号 3 · 信赖域过紧导致僵死，或过松导致漂移（Trust-Region Pathology）</strong><br>
+          若 $\delta$ 设得过小导致 100% 的高频热点压缩提案被拒（零学习率），或 $\delta$ 设得过大导致常驻规则发生语义冲突与不可审查的脚本覆写，则表明复杂度度量 $D(E_{\text{new}} \parallel E_{\text{old}})$ 失准。
+        </div>
+        <div class="callout callout-red" style="margin:0;">
+          <strong>反信号 4 · 别名歧义引发新的探测环路（Shortcut Aliasing Loops）</strong><br>
+          若新增的软链或注册表项与既有同名构件（如 <code>relay</code> 与 <code>relay.py</code>）产生新的命名冲突，反而诱发智能体执行额外的 <code>which / stat / read</code> 消歧探针，则净热耗散 $\Delta T_d > 0$，必须触发自动合并或剪枝。
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: SOURCES, METHOD & AUTHENTICITY -->
+    <section id="sources" class="section-card">
+      <h2>7. 来源、审计方法论与反捏造真实性声明（Sources, Methodology &amp; Authenticity）</h2>
+      <ul style="margin:0; padding-left:20px;">
+        <li>
+          <strong>只读轨迹审计方法论（Read-Only Trajectory Audit Methodology）：</strong>
+          审计器对本地持久化的智能体会话日志（共 <code>505</code> 个会话：<code>antigravity</code> 席位 <code>257</code> 个、<code>kiro</code> 席位 <code>248</code> 个）执行纯只读语法解析，提取全部 <code>15,068</code> 步工具调用事件。凡属文件读取、目录列举、模式检索、路径探针的动作归入 15 类探索性动作（共 <code>3,004</code> 步，<code>19.94%</code>）；当同一会话内连续出现 $\ge 3$ 步探索性动作时，标记为一个<strong>绕行片段（Detour Episode）</strong>，共检出 <code>287</code> 个片段、包含 <code>1,340</code> 步动作（<code>8.89%</code>，平均长度 <code>4.67</code> 步）。
+        </li>
+        <li>
+          <strong>实时账本截面说明（Live Ledger Caveat）：</strong>
+          审计截面固定于 <code>2026-10-22T11:07Z</code>。由于会话日志为实时追加账本（Live Append-Only Ledger），任何时刻重新运行审计脚本都会因当前活跃会话的新增动作而产生个位数自然浮动。
+        </li>
+        <li>
+          <strong>反捏造与纯矢量承诺（Anti-Fabrication &amp; Zero-Stock-Photo Gate）：</strong>
+          本页面严格遵守系统真实性门禁（Authenticity Gate），<strong>零外部图库图片、零 <code>&lt;img&gt;</code> 标签、零合成捏造数据</strong>。所有图表与交互式模拟器均由内联 SVG 与 HTML5 Canvas 根据真实冻结截面数据及显式数学公式实时绘制。
+        </li>
+        <li>
+          <strong>理论谱系内部链接（Internal Lineage Links）：</strong>
+          <a href="THEORY.md">THEORY.md (理论主线索引)</a> ·
+          <a href="essays/2026-10-22-trajectory-rollout-substrate-rl-zh.md">配套学术长文 (2026-10-22 Markdown)</a> ·
+          <a href="essays/2026-05-19-credit-transport-general-learning-machine.md">Credit Transport &amp; GLM (2026-05)</a> ·
+          <a href="essays/2026-10-16-non-backprop-brain-inspired-pivot-zh.md">非反向传播三因子战略转向 (2026-10)</a> ·
+          <a href="non-backprop-pivot-zh.html">Non-BP Interactive Guide</a>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>
+        System Evolution Public Research · 2026-10-22 ·
+        <a href="essays/2026-10-22-trajectory-rollout-substrate-rl-zh.md">Companion Markdown Essay</a> ·
+        <a href="THEORY.md">THEORY.md</a> ·
+        <a href="./">Public Update Board (Index)</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    /* =========================================================================
+       SIMULATOR 1: Trajectory Rollout Detour Heat Dissipation Visualizer
+       ========================================================================= */
+    (function() {
+      const canvas = document.getElementById('s1-canvas');
+      const ctx = canvas.getContext('2d');
+      const slider = document.getElementById('s1-detour-slider');
+      const detourValEl = document.getElementById('s1-detour-val');
+      const stepBtn = document.getElementById('s1-step-btn');
+      const annealBtn = document.getElementById('s1-anneal-btn');
+      const autoBtn = document.getElementById('s1-auto-btn');
+      const resetBtn = document.getElementById('s1-reset-btn');
+
+      const stepsNowEl = document.getElementById('s1-steps-now');
+      const modeLabelEl = document.getElementById('s1-mode-label');
+      const expectedDetourEl = document.getElementById('s1-expected-detour');
+      const tempTdEl = document.getElementById('s1-temp-td');
+      const shortcutsCountEl = document.getElementById('s1-shortcuts-count');
+
+      // Topology: Start node (left), 4 intermediate exploratory lanes (each 4 probe nodes), Target artifacts (right)
+      const startNode = { x: 75, y: 155, label: 's₀ (Start)' };
+      const targetNode = { x: 760, y: 155, label: 'Target Artifact' };
+
+      const lanes = [
+        {
+          name: 'relay.py (118)',
+          shortcutInstalled: false,
+          nodes: [
+            { x: 220, y: 52, cmd: 'find -name', heat: 0.6 },
+            { x: 365, y: 52, cmd: '| grep relay', heat: 0.7 },
+            { x: 510, y: 52, cmd: 'ls -la', heat: 0.5 },
+            { x: 640, y: 52, cmd: 'read probe', heat: 0.8 }
+          ]
+        },
+        {
+          name: 'selftest.sh (77)',
+          shortcutInstalled: false,
+          nodes: [
+            { x: 220, y: 120, cmd: 'search dir', heat: 0.5 },
+            { x: 365, y: 120, cmd: 'glob *.sh', heat: 0.6 },
+            { x: 510, y: 120, cmd: 'cat header', heat: 0.4 },
+            { x: 640, y: 120, cmd: 'read check', heat: 0.6 }
+          ]
+        },
+        {
+          name: 'codex-memory (69)',
+          shortcutInstalled: false,
+          nodes: [
+            { x: 220, y: 190, cmd: 'which cmd', heat: 0.5 },
+            { x: 365, y: 190, cmd: 'find ~/bin', heat: 0.7 },
+            { x: 510, y: 190, cmd: '| grep mem', heat: 0.6 },
+            { x: 640, y: 190, cmd: 'read help', heat: 0.5 }
+          ]
+        },
+        {
+          name: 'apply.sh (43)',
+          shortcutInstalled: false,
+          nodes: [
+            { x: 220, y: 258, cmd: '-name apply*', heat: 0.4 },
+            { x: 365, y: 258, cmd: 'grep(tool)', heat: 0.5 },
+            { x: 510, y: 258, cmd: 'stat file', heat: 0.4 },
+            { x: 640, y: 258, cmd: 'read script', heat: 0.5 }
+          ]
+        }
+      ];
+
+      let activePath = [];
+      let tokenPos = { x: startNode.x, y: startNode.y };
+      let animProgress = 1;
+      let autoTimer = null;
+
+      function updateMetrics(lastSteps, wasShortcut) {
+        const installed = lanes.filter(l => l.shortcutInstalled).length;
+        const propensity = parseInt(slider.value, 10) / 100;
+        detourValEl.textContent = slider.value + '%';
+
+        // Effective detour length drops from 4.67 toward 1.00 as shortcuts are installed
+        const remainingFraction = (4 - installed) / 4;
+        const effDetour = (1.0 + (3.67 * remainingFraction * (propensity / 0.75))).toFixed(2);
+        const effTd = (1.20 + (7.69 * remainingFraction * (propensity / 0.75))).toFixed(2);
+
+        stepsNowEl.textContent = lastSteps + ' 步';
+        modeLabelEl.textContent = wasShortcut
+          ? 'O(1) 规范化直达 (零绕行耗散)'
+          : '含 ' + (lastSteps - 1) + ' 步探索探针 (产生热耗散)';
+        expectedDetourEl.textContent = effDetour + ' 步';
+        tempTdEl.textContent = effTd + '%';
+        shortcutsCountEl.textContent = installed + ' / 4';
+      }
+
+      function triggerRollout() {
+        const propensity = parseInt(slider.value, 10) / 100;
+        // Pick a lane weighted by whether we are probing
+        const laneIdx = Math.floor(Math.random() * lanes.length);
+        const lane = lanes[laneIdx];
+
+        if (lane.shortcutInstalled || Math.random() > propensity) {
+          // Direct O(1) lookup!
+          activePath = [
+            { x: startNode.x, y: startNode.y },
+            { x: (startNode.x + targetNode.x) / 2, y: lane.nodes[0].y - 16, shortcut: true, laneName: lane.name },
+            { x: targetNode.x, y: targetNode.y }
+          ];
+          // Cool down heat slightly across all nodes
+          lanes.forEach(l => l.nodes.forEach(n => { n.heat = Math.max(0.1, n.heat * 0.88); }));
+          updateMetrics(1, true);
+        } else {
+          // Detour through 3 to 5 exploratory steps
+          const k = 3 + Math.floor(Math.random() * 2); // 3 or 4 intermediate nodes
+          activePath = [{ x: startNode.x, y: startNode.y }];
+          for (let i = 0; i < k; i++) {
+            const node = lane.nodes[i];
+            node.heat = Math.min(1.0, node.heat + 0.28);
+            activePath.push({ x: node.x, y: node.y, detour: true });
+          }
+          activePath.push({ x: targetNode.x, y: targetNode.y });
+          updateMetrics(k + 1, false);
+        }
+        animProgress = 0;
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Background grid
+        ctx.strokeStyle = '#f2efe9';
+        ctx.lineWidth = 1;
+        for (let x = 40; x < canvas.width; x += 40) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 30; y < canvas.height; y += 40) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // Draw lanes
+        lanes.forEach((lane) => {
+          const y = lane.nodes[0].y;
+          // Draw exploratory chain edges
+          ctx.strokeStyle = lane.shortcutInstalled ? '#cbd5e1' : '#e3ded6';
+          ctx.lineWidth = lane.shortcutInstalled ? 1.2 : 2;
+          ctx.setLineDash(lane.shortcutInstalled ? [4, 4] : []);
+          ctx.beginPath();
+          ctx.moveTo(startNode.x, startNode.y);
+          lane.nodes.forEach(n => ctx.lineTo(n.x, n.y));
+          ctx.lineTo(targetNode.x, targetNode.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Draw exploratory nodes with heat glow
+          lane.nodes.forEach(n => {
+            const heatAlpha = lane.shortcutInstalled ? 0.08 : n.heat * 0.42;
+            ctx.fillStyle = 'rgba(185, 28, 28, ' + heatAlpha + ')';
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, 22, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = lane.shortcutInstalled ? '#f8fafc' : '#fff5f5';
+            ctx.strokeStyle = lane.shortcutInstalled ? '#94a3b8' : '#b91c1c';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.roundRect(n.x - 42, n.y - 13, 84, 26, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = lane.shortcutInstalled ? '#94a3b8' : '#18191f';
+            ctx.font = '11px ui-monospace, monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(n.cmd, n.x, n.y + 4);
+          });
+
+          // If shortcut installed, draw crisp O(1) blue arc
+          if (lane.shortcutInstalled) {
+            ctx.strokeStyle = '#1e56a0';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(startNode.x, startNode.y);
+            ctx.quadraticCurveTo((startNode.x + targetNode.x) / 2, y - 24, targetNode.x, targetNode.y);
+            ctx.stroke();
+
+            ctx.fillStyle = '#eaf1fb';
+            ctx.strokeStyle = '#1e56a0';
+            ctx.lineWidth = 1.2;
+            const mx = (startNode.x + targetNode.x) / 2;
+            const my = y - 16;
+            ctx.beginPath();
+            ctx.roundRect(mx - 78, my - 10, 156, 20, 10);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#1e56a0';
+            ctx.font = 'bold 10.5px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('O(1) Shortcut: ' + lane.name, mx, my + 4);
+          } else {
+            ctx.fillStyle = '#b85c18';
+            ctx.font = 'bold 10.5px -apple-system, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Hotspot: ' + lane.name, 130, y - 17);
+          }
+        });
+
+        // Draw active rollout trajectory highlight
+        if (activePath.length > 1) {
+          const isShortcut = activePath[1] && activePath[1].shortcut;
+          ctx.strokeStyle = isShortcut ? '#15803d' : '#b91c1c';
+          ctx.lineWidth = 3.5;
+          ctx.beginPath();
+          ctx.moveTo(activePath[0].x, activePath[0].y);
+          for (let i = 1; i < activePath.length; i++) {
+            ctx.lineTo(activePath[i].x, activePath[i].y);
+          }
+          ctx.stroke();
+
+          // Animate token along activePath
+          if (animProgress < 1) {
+            animProgress = Math.min(1, animProgress + 0.045);
+          }
+          const totalSegs = activePath.length - 1;
+          const exactSeg = animProgress * totalSegs;
+          const segIdx = Math.min(totalSegs - 1, Math.floor(exactSeg));
+          const segT = exactSeg - segIdx;
+          const p0 = activePath[segIdx];
+          const p1 = activePath[segIdx + 1];
+          tokenPos.x = p0.x + (p1.x - p0.x) * segT;
+          tokenPos.y = p0.y + (p1.y - p0.y) * segT;
+
+          ctx.fillStyle = isShortcut ? '#15803d' : '#b91c1c';
+          ctx.beginPath();
+          ctx.arc(tokenPos.x, tokenPos.y, 9, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        // Draw Start & Target nodes
+        [startNode, targetNode].forEach((node, idx) => {
+          ctx.fillStyle = idx === 0 ? '#1e56a0' : '#15803d';
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, 26, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 11px -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(idx === 0 ? 's₀' : 'Artifact', node.x, node.y - 2);
+          ctx.font = '10px -apple-system, sans-serif';
+          ctx.fillText(idx === 0 ? 'Start' : 'R_verified', node.x, node.y + 11);
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      stepBtn.addEventListener('click', triggerRollout);
+      slider.addEventListener('input', () => {
+        updateMetrics(activePath.length ? activePath.length - 1 : 5, false);
+      });
+      annealBtn.addEventListener('click', () => {
+        const nextLane = lanes.find(l => !l.shortcutInstalled);
+        if (nextLane) {
+          nextLane.shortcutInstalled = true;
+          nextLane.nodes.forEach(n => { n.heat = 0.08; });
+        }
+        triggerRollout();
+      });
+      autoBtn.addEventListener('click', () => {
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+          autoBtn.textContent = '🔄 连续滚动: 关';
+        } else {
+          triggerRollout();
+          autoTimer = setInterval(triggerRollout, 1100);
+          autoBtn.textContent = '⏸ 连续滚动: 开';
+        }
+      });
+      resetBtn.addEventListener('click', () => {
+        lanes.forEach(l => {
+          l.shortcutInstalled = false;
+          l.nodes.forEach(n => { n.heat = 0.65; });
+        });
+        slider.value = 75;
+        triggerRollout();
+      });
+
+      triggerRollout();
+      requestAnimationFrame(draw);
+    })();
+
+    /* =========================================================================
+       SIMULATOR 2: Before/After Graph Shortcut Compressor (SVG)
+       ========================================================================= */
+    (function() {
+      const hotspots = [
+        { name: 'relay.py', freq: 118, detours: 24, sessions: 13, route: '@registry/bin-manifest' },
+        { name: 'selftest.sh', freq: 77, detours: 20, sessions: 9, route: 'capability-registrar' },
+        { name: 'codex-memory', freq: 69, detours: 11, sessions: 35, route: '~/bin/codex-memory' },
+        { name: 'backfill-20261020', freq: 47, detours: 21, sessions: 7, route: '@registry/ledger-index' },
+        { name: 'relay', freq: 46, detours: 12, sessions: 11, route: '~/bin/relay (proposed symlink)' },
+        { name: 'apply.sh', freq: 43, detours: 10, sessions: 13, route: 'capability-registrar' },
+        { name: 'intake_broker.py', freq: 37, detours: 8, sessions: 11, route: '@registry/bin-manifest' },
+        { name: 'SHA256SUMS', freq: 37, detours: 14, sessions: 7, route: 'surface-verify anchor' }
+      ];
+
+      const selectEl = document.getElementById('s2-hotspot-select');
+      const sliderEl = document.getElementById('s2-compress-slider');
+      const pctEl = document.getElementById('s2-compress-pct');
+      const toggleBtn = document.getElementById('s2-toggle-btn');
+      const complexityEl = document.getElementById('s2-complexity-text');
+      const savedStepsEl = document.getElementById('s2-saved-steps');
+      const savedSubEl = document.getElementById('s2-saved-sub');
+      const tdDropEl = document.getElementById('s2-td-drop');
+      const rightBadgeEl = document.getElementById('s2-right-badge');
+      const svgLeft = document.getElementById('s2-svg-left');
+      const svgRight = document.getElementById('s2-svg-right');
+
+      function renderGraphs() {
+        const selectedIdx = parseInt(selectEl.value, 10) - 1; // -1 means ALL
+        const compressedCount = parseInt(sliderEl.value, 10);
+        pctEl.textContent = Math.round((compressedCount / 8) * 100) + '% (' + compressedCount + '/8 热点已建索引)';
+
+        // Compute savings using real hotspot frequencies and detour hits
+        let totalFreq = 0;
+        let compressedFreq = 0;
+        let compressedDetourHits = 0;
+
+        hotspots.forEach((h, idx) => {
+          if (selectedIdx === -1 || selectedIdx === idx) {
+            totalFreq += h.freq;
+            if (idx < compressedCount) {
+              compressedFreq += h.freq;
+              compressedDetourHits += h.detours;
+            }
+          }
+        });
+
+        // Each compressed detour episode saves (4.67 - 1.00) = 3.67 steps, plus direct lookup savings
+        const savedSteps = Math.round(compressedDetourHits * 3.67 + (compressedFreq - compressedDetourHits) * 0.55);
+        const newAvgHops = totalFreq > 0
+          ? (4.67 - 3.67 * (compressedFreq / totalFreq)).toFixed(2)
+          : '4.67';
+        const globalSavedDetourActions = Math.round(
+          hotspots.slice(0, compressedCount).reduce((acc, h) => acc + h.detours * 3.67, 0)
+        );
+        const newTd = Math.max(1.5, ((1340 - globalSavedDetourActions) / 15068) * 100).toFixed(2);
+
+        complexityEl.textContent = 'O(4.67) → O(' + newAvgHops + ')';
+        savedStepsEl.textContent = savedSteps + ' 步';
+        savedSubEl.textContent = selectedIdx === -1
+          ? '基于已压缩热点 (' + compressedFreq + '/474 次探针) 测算'
+          : '单个构件 ' + hotspots[selectedIdx].name + ' (频次 ' + hotspots[selectedIdx].freq + ')';
+        tdDropEl.textContent = '8.89% → ' + newTd + '%';
+        rightBadgeEl.textContent = 'O(' + newAvgHops + ') Lookup';
+
+        // Build LEFT SVG (Uncompressed O(k) exploratory tree)
+        let leftHtml = `
+          <circle cx="38" cy="140" r="22" fill="#1e56a0"/>
+          <text x="38" y="144" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Agent</text>
+        `;
+        const intermediateProbes = ['find -name', '| grep', 'ls / stat', 'read probe'];
+        intermediateProbes.forEach((p, i) => {
+          const py = 50 + i * 60;
+          leftHtml += `
+            <line x1="60" y1="140" x2="145" y2="${py}" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/>
+            <rect x="110" y="${py - 12}" width="76" height="24" rx="5" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+            <text x="148" y="${py + 4}" text-anchor="middle" fill="#b91c1c" font-size="10.5" font-family="monospace">${p}</text>
+          `;
+        });
+
+        hotspots.forEach((h, idx) => {
+          const hy = 22 + idx * 33;
+          const isFocus = selectedIdx === -1 || selectedIdx === idx;
+          const pIdx = idx % 4;
+          const py = 50 + pIdx * 60;
+          const strokeCol = isFocus ? '#b91c1c' : '#e2e8f0';
+          const opacity = isFocus ? '1' : '0.35';
+          leftHtml += `
+            <g opacity="${opacity}">
+              <line x1="186" y1="${py}" x2="255" y2="${hy}" stroke="${strokeCol}" stroke-width="${isFocus ? 1.8 : 1}"/>
+              <rect x="255" y="${hy - 11}" width="135" height="22" rx="5" fill="#fff" stroke="${strokeCol}" stroke-width="1.3"/>
+              <text x="263" y="${hy + 4}" fill="#18191f" font-size="10.5" font-family="monospace">${h.name}</text>
+              <text x="384" y="${hy + 4}" text-anchor="end" fill="#b85c18" font-size="10" font-weight="bold">${h.freq}</text>
+            </g>
+          `;
+        });
+        svgLeft.innerHTML = leftHtml;
+
+        // Build RIGHT SVG (Compressed Canonical Substrate O(1))
+        let rightHtml = `
+          <circle cx="38" cy="140" r="22" fill="#1e56a0"/>
+          <text x="38" y="144" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Agent</text>
+          <rect x="108" y="95" width="92" height="90" rx="10" fill="#eaf1fb" stroke="#1e56a0" stroke-width="2"/>
+          <text x="154" y="128" text-anchor="middle" fill="#1e56a0" font-size="10.5" font-weight="bold">Substrate E</text>
+          <text x="154" y="144" text-anchor="middle" fill="#18191f" font-size="9.5" font-family="monospace">~/bin/ symlink</text>
+          <text x="154" y="159" text-anchor="middle" fill="#18191f" font-size="9.5" font-family="monospace">bin-manifest</text>
+          <text x="154" y="174" text-anchor="middle" fill="#15803d" font-size="9.5" font-weight="bold">O(1) Index</text>
+          <line x1="60" y1="140" x2="108" y2="140" stroke="#1e56a0" stroke-width="3"/>
+        `;
+
+        hotspots.forEach((h, idx) => {
+          const hy = 22 + idx * 33;
+          const isFocus = selectedIdx === -1 || selectedIdx === idx;
+          const isCompressed = idx < compressedCount;
+          const strokeCol = isCompressed ? '#15803d' : '#b91c1c';
+          const bgCol = isCompressed ? '#ecfdf5' : '#fef2f2';
+          const opacity = isFocus ? '1' : '0.35';
+          rightHtml += `
+            <g opacity="${opacity}">
+              <line x1="200" y1="140" x2="255" y2="${hy}" stroke="${strokeCol}" stroke-width="${isCompressed ? 2.2 : 1.2}" ${isCompressed ? '' : 'stroke-dasharray="3,3"'}/>
+              <rect x="255" y="${hy - 11}" width="135" height="22" rx="5" fill="${bgCol}" stroke="${strokeCol}" stroke-width="1.4"/>
+              <text x="263" y="${hy + 4}" fill="#18191f" font-size="10.5" font-family="monospace">${h.name}</text>
+              <text x="384" y="${hy + 4}" text-anchor="end" fill="${strokeCol}" font-size="9.5" font-weight="bold">${isCompressed ? 'O(1)' : 'O(k)'}</text>
+            </g>
+          `;
+        });
+        svgRight.innerHTML = rightHtml;
+      }
+
+      selectEl.addEventListener('change', renderGraphs);
+      sliderEl.addEventListener('input', renderGraphs);
+      toggleBtn.addEventListener('click', () => {
+        sliderEl.value = parseInt(sliderEl.value, 10) === 8 ? 0 : 8;
+        renderGraphs();
+      });
+
+      renderGraphs();
+    })();
+
+    /* =========================================================================
+       SIMULATOR 3: 3-Factor Credit Assignment & Trust-Region Inspector
+       ========================================================================= */
+    (function() {
+      const eligSlider = document.getElementById('s3-elig');
+      const gateSlider = document.getElementById('s3-gate');
+      const rewardSlider = document.getElementById('s3-reward');
+      const deltaSlider = document.getElementById('s3-delta');
+
+      const eligVal = document.getElementById('s3-elig-val');
+      const gateVal = document.getElementById('s3-gate-val');
+      const rewardVal = document.getElementById('s3-reward-val');
+      const deltaVal = document.getElementById('s3-delta-val');
+
+      const alphaBtn = document.getElementById('s3-alpha-btn');
+      const betaBtn = document.getElementById('s3-beta-btn');
+      const resetBetaBtn = document.getElementById('s3-reset-beta-btn');
+
+      const deValEl = document.getElementById('s3-de-val');
+      const qValEl = document.getElementById('s3-q-val');
+      const abSubEl = document.getElementById('s3-ab-sub');
+      const klValEl = document.getElementById('s3-kl-val');
+      const klSubEl = document.getElementById('s3-kl-sub');
+      const verdictShortEl = document.getElementById('s3-verdict-short');
+      const verdictDetailEl = document.getElementById('s3-verdict-detail');
+      const badgeEl = document.getElementById('s3-status-badge');
+
+      const canvas = document.getElementById('s3-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let alpha = 6;
+      let beta = 2;
+      const thresholdQ = 0.65;
+
+      function logGamma(z) {
+        // Numerical approximation for continuous Beta PDF rendering
+        const c = [
+          76.18009172947146, -86.50532032941677, 24.01409824083091,
+          -1.231739572450155, 0.001208650973866179, -0.000005395239384953
+        ];
+        let x = z;
+        let y = z;
+        let tmp = x + 5.5;
+        tmp -= (x + 0.5) * Math.log(tmp);
+        let ser = 1.000000000190015;
+        for (let j = 0; j < 6; j++) {
+          y += 1;
+          ser += c[j] / y;
+        }
+        return -tmp + Math.log(2.5066282746310005 * ser / x);
+      }
+
+      function betaPdf(x, a, b) {
+        if (x <= 0.001 || x >= 0.999) return 0;
+        const lnB = logGamma(a) + logGamma(b) - logGamma(a + b);
+        return Math.exp((a - 1) * Math.log(x) + (b - 1) * Math.log(1 - x) - lnB);
+      }
+
+      function updateInspector() {
+        const e = parseFloat(eligSlider.value);
+        const g = parseInt(gateSlider.value, 10);
+        const r = parseFloat(rewardSlider.value);
+        const delta = parseFloat(deltaSlider.value);
+
+        eligVal.textContent = e.toFixed(2);
+        gateVal.textContent = g === 1 ? '1 (OPEN)' : '0 (CLOSED)';
+        rewardVal.textContent = (r >= 0 ? '+' : '') + r.toFixed(2);
+        deltaVal.textContent = delta.toFixed(2);
+
+        const dE = e * g * r;
+        const q = alpha / (alpha + beta);
+        const klStep = Math.abs(e * r) * 0.60; // induced substrate complexity step
+
+        deValEl.textContent = (dE >= 0 ? '+' : '') + dE.toFixed(3);
+        deValEl.style.color = dE > 0 ? 'var(--green)' : (dE < 0 ? 'var(--red)' : 'var(--muted)');
+
+        qValEl.textContent = q.toFixed(3);
+        qValEl.style.color = q >= thresholdQ ? 'var(--green)' : 'var(--red)';
+        abSubEl.textContent = 'α = ' + alpha + ', β = ' + beta + ' (门槛 τ_Q = 0.65)';
+
+        klValEl.textContent = klStep.toFixed(3);
+        klValEl.style.color = klStep <= delta ? 'var(--accent)' : 'var(--red)';
+        klSubEl.textContent = '上限 δ = ' + delta.toFixed(2) + ' (SkillProx bound)';
+
+        // Admission logic
+        let admitted = true;
+        let reason = '符合全部门控条件，准予固化 O(1) 捷径';
+        if (g === 0) {
+          admitted = false;
+          reason = '被拦截：协调门控 g_coord = 0 (rsi-gate 静默)';
+        } else if (dE <= 0) {
+          admitted = false;
+          reason = '被拦截：验证反馈或资格迹非正 (ΔE_path ≤ 0)';
+        } else if (q < thresholdQ) {
+          admitted = false;
+          reason = '被拦截：Beta 效用 Q(path) < 0.65 (未达准入门槛)';
+        } else if (klStep > delta) {
+          admitted = false;
+          reason = '被拦截：改动步长 D(E_new‖E_old) > δ (超出信赖域)';
+        }
+
+        if (admitted) {
+          badgeEl.className = 'status-pill status-admitted';
+          badgeEl.textContent = '✓ SHORTCUT ADMITTED · 准予刻入基质';
+          verdictShortEl.textContent = 'ADMITTED';
+          verdictShortEl.style.color = 'var(--green)';
+        } else {
+          badgeEl.className = 'status-pill status-rejected';
+          badgeEl.textContent = '✗ REJECTED (FAIL-CLOSED) · 门控拦截';
+          verdictShortEl.textContent = 'REJECTED';
+          verdictShortEl.style.color = 'var(--red)';
+        }
+        verdictDetailEl.textContent = reason;
+
+        drawBetaCanvas(q, klStep, delta, admitted);
+      }
+
+      function drawBetaCanvas(q, klStep, delta, admitted) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const padL = 55;
+        const padR = 260;
+        const padT = 28;
+        const padB = 36;
+        const plotW = canvas.width - padL - padR;
+        const plotH = canvas.height - padT - padB;
+
+        // Compute PDF curve points
+        const pts = [];
+        let maxY = 1.0;
+        for (let i = 1; i <= 199; i++) {
+          const x = i / 200;
+          const y = betaPdf(x, alpha, beta);
+          if (y > maxY) maxY = y;
+          pts.push({ x, y });
+        }
+        maxY = Math.max(maxY * 1.12, 2.5);
+
+        // Axes
+        ctx.strokeStyle = '#e3ded6';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(padL, padT);
+        ctx.lineTo(padL, padT + plotH);
+        ctx.lineTo(padL + plotW, padT + plotH);
+        ctx.stroke();
+
+        // Admission threshold line tau_Q = 0.65
+        const threshX = padL + thresholdQ * plotW;
+        ctx.strokeStyle = '#b85c18';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([5, 4]);
+        ctx.beginPath();
+        ctx.moveTo(threshX, padT);
+        ctx.lineTo(threshX, padT + plotH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = '#b85c18';
+        ctx.font = 'bold 11px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('准入门槛 τ_Q = 0.65', threshX, padT - 8);
+
+        // Fill Beta PDF area
+        ctx.fillStyle = q >= thresholdQ ? 'rgba(21, 128, 61, 0.14)' : 'rgba(185, 28, 28, 0.14)';
+        ctx.beginPath();
+        ctx.moveTo(padL, padT + plotH);
+        pts.forEach(p => {
+          const px = padL + p.x * plotW;
+          const py = padT + plotH - (p.y / maxY) * plotH;
+          ctx.lineTo(px, py);
+        });
+        ctx.lineTo(padL + plotW, padT + plotH);
+        ctx.closePath();
+        ctx.fill();
+
+        // Stroke Beta PDF curve
+        ctx.strokeStyle = q >= thresholdQ ? '#15803d' : '#b91c1c';
+        ctx.lineWidth = 2.6;
+        ctx.beginPath();
+        pts.forEach((p, idx) => {
+          const px = padL + p.x * plotW;
+          const py = padT + plotH - (p.y / maxY) * plotH;
+          if (idx === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        });
+        ctx.stroke();
+
+        // Posterior mean Q(path) marker
+        const meanX = padL + q * plotW;
+        ctx.strokeStyle = '#1e56a0';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(meanX, padT + 4);
+        ctx.lineTo(meanX, padT + plotH);
+        ctx.stroke();
+
+        ctx.fillStyle = '#1e56a0';
+        ctx.font = 'bold 11.5px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Q(path) = ' + q.toFixed(3), meanX, padT + plotH + 22);
+
+        // X-axis ticks
+        ctx.fillStyle = '#5e6472';
+        ctx.font = '11px ui-monospace, monospace';
+        [0, 0.25, 0.5, 0.75, 1.0].forEach(t => {
+          const tx = padL + t * plotW;
+          ctx.fillText(t.toFixed(2), tx, padT + plotH + 14);
+        });
+        ctx.save();
+        ctx.translate(18, padT + plotH / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.textAlign = 'center';
+        ctx.fillText('Beta(α, β) Density', 0, 0);
+        ctx.restore();
+
+        // Right-side Trust Region radial gauge
+        const cx = canvas.width - 125;
+        const cy = canvas.height / 2 + 6;
+        const maxR = 68;
+        const deltaR = (delta / 0.80) * maxR;
+        const stepR = Math.min(maxR + 12, (klStep / 0.80) * maxR);
+
+        ctx.fillStyle = '#18191f';
+        ctx.font = 'bold 12px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('rsi-gate 信赖域 (D ≤ δ)', cx, 22);
+
+        // Trust region allowed circle
+        ctx.fillStyle = 'rgba(30, 86, 160, 0.08)';
+        ctx.strokeStyle = '#1e56a0';
+        ctx.lineWidth = 1.8;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.arc(cx, cy, deltaR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Step vector circle
+        ctx.fillStyle = klStep <= delta && admitted ? 'rgba(21, 128, 61, 0.28)' : 'rgba(185, 28, 28, 0.28)';
+        ctx.strokeStyle = klStep <= delta && admitted ? '#15803d' : '#b91c1c';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.arc(cx, cy, Math.max(4, stepR), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#5e6472';
+        ctx.font = '11px ui-monospace, monospace';
+        ctx.fillText('D=' + klStep.toFixed(2) + ' / δ=' + delta.toFixed(2), cx, canvas.height - 12);
+      }
+
+      [eligSlider, gateSlider, rewardSlider, deltaSlider].forEach(el => {
+        el.addEventListener('input', updateInspector);
+      });
+      alphaBtn.addEventListener('click', () => { alpha += 1; updateInspector(); });
+      betaBtn.addEventListener('click', () => { beta += 1; updateInspector(); });
+      resetBetaBtn.addEventListener('click', () => {
+        alpha = 6;
+        beta = 2;
+        eligSlider.value = 0.80;
+        gateSlider.value = 1;
+        rewardSlider.value = 0.65;
+        deltaSlider.value = 0.45;
+        updateInspector();
+      });
+
+      updateInspector();
+    })();
+  </script>
+</body>
+</html>
