@@ -445,9 +445,10 @@
       <a href="#formal-theory">2. 形式化</a>
       <a href="#three-factor">3. 三因子映射</a>
       <a href="#empirical-audit">4. 真实轨迹审计</a>
-      <a href="#simulators">5. 三大模拟器</a>
-      <a href="#falsifiability">6. 可证伪性</a>
-      <a href="#sources">7. 来源与方法</a>
+      <a href="#meta-rules">5. 四条普适元规则</a>
+      <a href="#simulators">6. 三大模拟器</a>
+      <a href="#falsifiability">7. 可证伪性</a>
+      <a href="#sources">8. 来源与方法</a>
       <a href="essays/2026-10-22-trajectory-rollout-substrate-rl-zh.md">Markdown 全文</a>
     </nav>
   </header>
@@ -870,9 +871,175 @@
       </table>
     </section>
 
-    <!-- SECTION 5: THREE INTERACTIVE SIMULATORS -->
+    <!-- SECTION 5: FOUR UNIVERSAL META-RULES (BOOTLOOPS VS SUBSTRATE RL) -->
+    <section id="meta-rules" class="section-card">
+      <h2>5. 从精确科学计算到通用智能体工程：四条普适元规则</h2>
+      <p class="subtitle" style="margin-top:-6px; margin-bottom:16px;">
+        From Scientific Computing to General Agent Engineering: Four Universal Meta-Rules (BootLoops vs Substrate RL)
+      </p>
+      <p>
+        为什么一套在精密数学物理与高能自举计算（BootLoops）中锻造出的研究支架，能够无缝迁移到日常全栈软件与多智能体协同控制面？核心原因在于：<strong>当你剥离掉 BootLoops 的精确科学计算外壳（符号代数、百位任意精度球算术、解析延拓），底下暴露出的同一组四条结构不变量（Four Structural Invariants），同样统治着通用智能体工程。</strong> 这正是同一个「活体工作台（Living Harness）」在环境侧强化学习（Substrate RL）中的同构实现。
+      </p>
+
+      <!-- INLINE NATIVE SVG: SCIENCE SHELL STRIPPED -> UNIVERSAL CORE -->
+      <div class="svg-panel" style="margin: 18px 0; overflow-x: auto;">
+        <div class="svg-panel-title">
+          <span>结构同构映射：剥离科学计算外壳 → 通用智能体控制面核心 (Science Shell Stripped → Universal Living Harness Core)</span>
+          <span class="badge badge-green">Isomorphic Invariants</span>
+        </div>
+        <svg viewBox="0 0 840 210" width="100%" role="img" aria-label="Science Shell Stripped to Universal Core Diagram">
+          <defs>
+            <marker id="meta-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e56a0"/>
+            </marker>
+          </defs>
+          <!-- Left Box: Scientific Computing Shell (BootLoops) -->
+          <rect x="16" y="18" width="240" height="174" rx="12" fill="#fef5ee" stroke="#b85c18" stroke-width="1.6" stroke-dasharray="5,3"/>
+          <text x="136" y="42" text-anchor="middle" fill="#b85c18" font-size="12.5" font-weight="bold">科学计算外壳 (BootLoops Shell)</text>
+          <text x="136" y="66" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• 符号计算 vs 100位数值核验</text>
+          <text x="136" y="92" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• Arb 区间跨零 → 拒绝认证</text>
+          <text x="136" y="118" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• 预测值预封存 SHA 哈希</text>
+          <text x="136" y="144" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• 数学包移植入 Toolkit Index</text>
+          <text x="136" y="174" text-anchor="middle" fill="#5e6472" font-size="10.5">Balls falsify; exactness affirms</text>
+
+          <!-- Arrow 1 -->
+          <line x1="262" y1="105" x2="304" y2="105" stroke="#1e56a0" stroke-width="2.2" marker-end="url(#meta-arrow)"/>
+          <text x="283" y="94" text-anchor="middle" fill="#1e56a0" font-size="10" font-weight="bold">剥离外壳</text>
+
+          <!-- Center Box: Universal Core (Four Invariants) -->
+          <rect x="312" y="14" width="216" height="182" rx="14" fill="#eaf1fb" stroke="#1e56a0" stroke-width="2.2"/>
+          <text x="420" y="38" text-anchor="middle" fill="#1e56a0" font-size="12.5" font-weight="bold">四条普适元规则 (Universal Core)</text>
+          <rect x="326" y="48" width="188" height="28" rx="6" fill="#ffffff" stroke="#1e56a0" stroke-width="1"/>
+          <text x="420" y="66" text-anchor="middle" fill="#18191f" font-size="11" font-weight="bold">1. 正交双通道核验</text>
+          <rect x="326" y="82" width="188" height="28" rx="6" fill="#ffffff" stroke="#1e56a0" stroke-width="1"/>
+          <text x="420" y="100" text-anchor="middle" fill="#18191f" font-size="11" font-weight="bold">2. 认知弃权 (Fail-Closed)</text>
+          <rect x="326" y="116" width="188" height="28" rx="6" fill="#ffffff" stroke="#1e56a0" stroke-width="1"/>
+          <text x="420" y="134" text-anchor="middle" fill="#18191f" font-size="11" font-weight="bold">3. 执行前判准哈希封存</text>
+          <rect x="326" y="150" width="188" height="28" rx="6" fill="#ffffff" stroke="#1e56a0" stroke-width="1"/>
+          <text x="420" y="168" text-anchor="middle" fill="#18191f" font-size="11" font-weight="bold">4. 痛点沉淀为 O(1) 工具</text>
+
+          <!-- Arrow 2 -->
+          <line x1="534" y1="105" x2="576" y2="105" stroke="#1e56a0" stroke-width="2.2" marker-end="url(#meta-arrow)"/>
+          <text x="555" y="94" text-anchor="middle" fill="#15803d" font-size="10" font-weight="bold">环境侧实例化</text>
+
+          <!-- Right Box: General Agent Engineering (Substrate RL) -->
+          <rect x="584" y="18" width="240" height="174" rx="12" fill="#ecfdf5" stroke="#15803d" stroke-width="1.8"/>
+          <text x="704" y="42" text-anchor="middle" fill="#15803d" font-size="12.5" font-weight="bold">通用工程形态 (Substrate RL)</text>
+          <text x="704" y="66" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• CLI 0 vs surface-verify + 异构审查</text>
+          <text x="704" y="92" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• 403/缺真图 → QUARANTINED 隔离</text>
+          <text x="704" y="118" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• claim-seal 锁定测试 SHA-256</text>
+          <text x="704" y="144" text-anchor="middle" fill="#18191f" font-size="11.5" font-family="ui-monospace, monospace">• trajectory-audit → O(1) 索引</text>
+          <text x="704" y="174" text-anchor="middle" fill="#15803d" font-size="10.5" font-weight="bold">Living Harness in Substrate E</text>
+        </svg>
+      </div>
+
+      <h3>5.1 四条普适元规则对照表（BootLoops vs Substrate RL Comparative Matrix）</h3>
+      <div style="overflow-x: auto;">
+        <table style="border: 1px solid var(--line); border-radius: 10px;">
+          <thead>
+            <tr style="background: var(--accent-soft); border-bottom: 2px solid var(--accent);">
+              <th style="width: 20%; color: var(--accent);">元规则 Meta-Rule</th>
+              <th style="width: 26%;">科学计算形态 (BootLoops)</th>
+              <th style="width: 30%;">通用工程形态 (Substrate RL / our control plane)</th>
+              <th style="width: 24%; color: var(--red);">失败模式它杀死的 (Failure mode killed)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>1. 正交双通道核验</strong><br>
+                <span style="font-size:0.82rem; color:var(--muted);">Orthogonal Dual-Channel Verification</span>
+              </td>
+              <td>
+                符号推导（Symbolic computation）与独立的 100 位高精度数值计算必须吻合至 30–100 位有效数字（<em>“Balls falsify; exactness affirms”</em>）。
+              </td>
+              <td>
+                代码/CLI 退出码 <code>exit 0</code> 与多模态运行时/DOM/像素渲染核验（<code>surface-verify</code>）+ 跨模型家族对抗审查（Cross-model-family adversarial review）双通道正交印证。
+              </td>
+              <td>
+                <span style="color:var(--red); font-weight:600;">单路径共模缺陷 + 看似合理实则错误的「伪满意 / 迎合幻觉」（Single-path correlated bugs + plausible-but-wrong 'Satisfiction' / sycophancy）</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>2. 认知弃权 / 不确定性下默认拒止</strong><br>
+                <span style="font-size:0.82rem; color:var(--muted);">Epistemic Abstention / Fail-Closed on Uncertainty</span>
+              </td>
+              <td>
+                当 Arb 区间算术球（Ball interval）横跨 <code>0</code> 时 $\to$ 相对半径发散至无穷大 $\to$ 系统拒绝给出可信认证（Refuses to certify）。
+              </td>
+              <td>
+                遭遇 <code>HTTP 403</code> 或缺失真实世界资产时 $\to$ 显式打标为 <code>QUARANTINED_MISSING_AUTHENTIC_ASSET</code>；绝不塞入图库假图或靠猜测糊弄。
+              </td>
+              <td>
+                <span style="color:var(--red); font-weight:600;">不确定性下的自信造假与捏造充数（Confident fabrication under uncertainty）</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>3. 执行前判准/测试哈希封存</strong><br>
+                <span style="font-size:0.82rem; color:var(--muted);">Pre-Execution Rubric/Test Sealing</span>
+              </td>
+              <td>
+                理论预测值在验证前预先计算并以 SHA 校验码封存发布（Sealed beforehand with a SHA code, published before verification）。
+              </td>
+              <td>
+                <code>claim-seal</code> 在执行前预先锁定测试脚本与验收判准的 <code>SHA-256</code> 指纹，使智能体无法在事后偷偷弱化测试来蒙混过关。
+              </td>
+              <td>
+                <span style="color:var(--red); font-weight:600;">奖励黑客与事后篡改测试判准（Reward-hacking / after-the-fact test editing）</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>4. 痛点沉淀为 $O(1)$ 工具</strong><br>
+                <span style="font-size:0.82rem; color:var(--muted);">Pain-to-O(1)-Tool Accretion</span>
+              </td>
+              <td>
+                将散落的成熟数学软件包移植并固化进 <code>Toolkit Index</code>，使每一次攻克难题都在身后留下更强大的计算工作台。
+              </td>
+              <td>
+                <code>trajectory-audit</code> 自动捕获 $\ge 3$ 步的探索绕行摩擦，并将其结晶为 <code>bin-manifest.md</code> 与 <code>capability-registrar</code> 的 $O(1)$ 直达查表项。
+              </td>
+              <td>
+                <span style="color:var(--red); font-weight:600;">重复探索摩擦与工作台原地踏步（Repeated exploration friction + the harness never improving）</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-4" style="margin-top: 18px;">
+        <div class="mini-card" style="border-top: 3px solid var(--accent);">
+          <strong>Rule 1 · 正交性公理</strong>
+          <p style="font-size:0.86rem; margin:6px 0 0; color:var(--muted);">
+            单通道自检永远无法发现与生成过程同源的盲区。唯有让「符号/逻辑通道」与「数值/视觉像素通道」彼此正交对撞，才能刺穿看似自洽的幻觉。
+          </p>
+        </div>
+        <div class="mini-card" style="border-top: 3px solid var(--highlight);">
+          <strong>Rule 2 · 诚实边界公理</strong>
+          <p style="font-size:0.86rem; margin:6px 0 0; color:var(--muted);">
+            区分「已验证真值」与「未知区间」是智能体可信赖的底线。跨零球拒绝认证与 <code>QUARANTINED_MISSING_AUTHENTIC_ASSET</code> 本质上是同一条认识论停机坪。
+          </p>
+        </div>
+        <div class="mini-card" style="border-top: 3px solid var(--red);">
+          <strong>Rule 3 · 时间因果不可逆公理</strong>
+          <p style="font-size:0.86rem; margin:6px 0 0; color:var(--muted);">
+            先射箭后画靶会让一切验证坍缩为恒真重言式。通过 <code>claim-seal</code> 在时间轴上冻结判准 <code>SHA-256</code>，从密码学上封死了奖励黑客的退路。
+          </p>
+        </div>
+        <div class="mini-card" style="border-top: 3px solid var(--green);">
+          <strong>Rule 4 · 耗散结晶公理</strong>
+          <p style="font-size:0.86rem; margin:6px 0 0; color:var(--muted);">
+            允许犯错和探路，但绝不允许在同一处迷宫交两次学费。<code>trajectory-audit</code> 将每一次 $\ge 3$ 步的绕行痛点转化为 <code>bin-manifest.md</code> 与 <code>capability-registrar</code> 的永久复利。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: THREE INTERACTIVE SIMULATORS -->
     <section id="simulators" class="section-card">
-      <h2>5. 三大交互式基质强化学习模拟器（Interactive Substrate RL Simulators）</h2>
+      <h2>6. 三大交互式基质强化学习模拟器（Interactive Substrate RL Simulators）</h2>
       <p>
         以下三个交互式模拟器全部采用原生 HTML5 Canvas / SVG 与确定性数学方程实时计算渲染，分别演示：<strong>(S1) 轨迹绕行热耗散与退火</strong>、<strong>(S2) $O(k) \to O(1)$ 图拓扑捷径压缩</strong>、以及 <strong>(S3) 三因子信用分配与 Beta 后验信赖域门控</strong>。
       </p>
@@ -1092,9 +1259,9 @@
       </div>
     </section>
 
-    <!-- SECTION 6: CONCLUSION & FALSIFIABILITY -->
+    <!-- SECTION 7: CONCLUSION & FALSIFIABILITY -->
     <section id="falsifiability" class="section-card">
-      <h2>6. 结语与可证伪反信号（Conclusion &amp; Falsifiability Anti-Signals）</h2>
+      <h2>7. 结语与可证伪反信号（Conclusion &amp; Falsifiability Anti-Signals）</h2>
       <p>
         科学的理论必须声明什么观测结果能够推翻自己。如果「基质强化学习（Substrate RL）」仅仅沦为把更多文档塞进仓库的修辞包装，而不能在后续的只读轨迹审计中产生可测量的物理退火，则该机制应当被判伪并触发回滚。我们确立以下四条硬性<strong>可证伪反信号（Falsifiability Anti-Signals）</strong>：
       </p>
@@ -1118,9 +1285,9 @@
       </div>
     </section>
 
-    <!-- SECTION 7: SOURCES, METHOD & AUTHENTICITY -->
+    <!-- SECTION 8: SOURCES, METHOD & AUTHENTICITY -->
     <section id="sources" class="section-card">
-      <h2>7. 来源、审计方法论与反捏造真实性声明（Sources, Methodology &amp; Authenticity）</h2>
+      <h2>8. 来源、审计方法论与反捏造真实性声明（Sources, Methodology &amp; Authenticity）</h2>
       <ul style="margin:0; padding-left:20px;">
         <li>
           <strong>只读轨迹审计方法论（Read-Only Trajectory Audit Methodology）：</strong>

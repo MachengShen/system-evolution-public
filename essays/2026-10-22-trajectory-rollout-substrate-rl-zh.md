@@ -217,7 +217,35 @@ $$\Delta T_d = T_d(E_{\text{new}}) - T_d(E_{\text{old}}) \approx -\frac{M(v^*) \
 
 ---
 
-## 5. 可证伪性与四大反信号（Falsifiability & Anti-Signals）
+## 5. 从精确科学计算到通用智能体工程：四条普适元规则（BootLoops vs Substrate RL）
+
+> **From Scientific Computing to General Agent Engineering: Four Universal Meta-Rules (BootLoops vs Substrate RL)**
+
+为什么一套最初在精密数学物理与高能自举计算（BootLoops）中打磨出的计算认知框架，能够直接同构映射到日常的全栈软件工程与多智能体控制面？核心洞察在于：**当你剥离掉 BootLoops 的精确科学计算外壳（符号代数推导、100 位任意精度球算术、解析延拓），底下暴露出的完全相同的四条结构不变量（Four Structural Invariants），同样统治着通用智能体工程。** 这正是同一个「活体工作台（Living Harness）」在环境侧 / 基质强化学习（Substrate RL）中的工程实现。
+
+### 5.1 科学计算形态 vs 通用工程形态对照矩阵（Comparative Matrix）
+
+| 元规则 Meta-Rule | 科学计算形态 (BootLoops) | 通用工程形态 (Substrate RL / our control plane) | 失败模式它杀死的 (Failure mode killed) |
+|---|---|---|---|
+| **1. 正交双通道核验**<br>*(Orthogonal Dual-Channel Verification)* | 符号计算（Symbolic computation）与独立的 100 位高精度数值计算必须吻合至 30–100 位有效数字（*“Balls falsify; exactness affirms”*）。 | 代码/CLI 退出码 `exit 0` 与多模态运行时/DOM/像素渲染核验（`surface-verify`）+ 跨模型家族对抗审查（Cross-model-family adversarial review）双通道正交印证。 | 单路径共模缺陷 + 看似合理实则错误的「伪满意 / 迎合幻觉」（Single-path correlated bugs + plausible-but-wrong 'Satisfiction' / sycophancy） |
+| **2. 认知弃权 / 不确定性下默认拒止**<br>*(Epistemic Abstention / Fail-Closed on Uncertainty)* | 当 Arb 区间算术球（Ball interval）横跨 `0` 时 $\to$ 相对半径发散至无穷大 $\to$ 系统拒绝给出可信认证（Refuses to certify）。 | 遭遇 `HTTP 403` 或缺失真实世界资产时 $\to$ 显式打标为 `QUARANTINED_MISSING_AUTHENTIC_ASSET`；绝不塞入图库假图或靠猜测糊弄。 | 不确定性下的自信造假与捏造充数（Confident fabrication under uncertainty） |
+| **3. 执行前判准/测试哈希封存**<br>*(Pre-Execution Rubric/Test Sealing)* | 理论预测值在验证前预先计算并以 SHA 校验码封存发布（Sealed beforehand with a SHA code, published before verification）。 | `claim-seal` 在执行前预先锁定测试脚本与验收判准的 `SHA-256` 指纹，使智能体无法在事后偷偷弱化测试来蒙混过关。 | 奖励黑客与事后篡改测试判准（Reward-hacking / after-the-fact test editing） |
+| **4. 痛点沉淀为 $O(1)$ 工具**<br>*(Pain-to-O(1)-Tool Accretion)* | 将散落的成熟数学软件包移植并固化进 `Toolkit Index`，使每一次攻克难题都在身后留下更强大的计算工作台。 | `trajectory-audit` 自动捕获 $\ge 3$ 步的探索绕行摩擦，并将其结晶为 `bin-manifest.md` 与 `capability-registrar` 的 $O(1)$ 直达查表项。 | 重复探索摩擦与工作台原地踏步（Repeated exploration friction + the harness never improving） |
+
+### 5.2 四条普适不变量的结构解析（Structural Analysis of the Four Invariants）
+
+1. **正交双通道核验（Orthogonal Dual-Channel Verification）**：
+   在 BootLoops 中，单纯依赖符号化简容易陷入分支切割错误，单纯依赖数值求值则受困于截断误差；唯有「球算术证伪，精确代数证实（Balls falsify; exactness affirms）」在 30–100 位精度上正交吻合，结论才得以确立。在通用智能体工程中，单元测试或脚本返回 `exit 0` 只是符号层的自洽——它完全可能对应空白页面、破损布局或同模型家族的盲区。因此必须引入正交的第二通道：`surface-verify` 多模态运行时/DOM/像素渲染核验与跨模型家族对抗审查，彻底杀死单路径共模 bug 与讨好型「Satisfiction」。
+2. **认知弃权与不确定性下 Fail-Closed（Epistemic Abstention / Fail-Closed on Uncertainty）**：
+   在精确区间算术中，一旦包含真值的 Arb 球横跨零点（Straddling 0），相对误差半径即刻发散为无穷大，求解器必须诚实中止认证，绝不输出伪精确浮点数。在通用工程中，当外部数据源返回 `HTTP 403` 或真实图像缺失时，最危险的退化就是智能体用图库假图或编造文本去填平空缺。强制执行 `QUARANTINED_MISSING_AUTHENTIC_ASSET` 隔离状态，正是将「跨零球拒止」公理化为工程控制面的真实性门禁（Authenticity Gate）。
+3. **执行前判准/测试哈希封存（Pre-Execution Rubric/Test Sealing）**：
+   科学方法之所以具有可证伪的尊严，是因为理论预测在实验揭晓前已通过 SHA 哈希公开锁定，杜绝了事后拟合（Post-hoc fitting）。在智能体自治循环中，如果允许执行者在写业务代码的同时随意修改测试断言，强化学习的优化压力就会沿着最小阻力路径退化为「删掉报错的测试」（Reward-hacking）。通过 `claim-seal` 在执行前锁定测试与验收判准的 `SHA-256`，我们在时间因果链上划定了不可逆的防篡改边界。
+4. **痛点沉淀为 $O(1)$ 工具（Pain-to-$O(1)$-Tool Accretion）**：
+   在 BootLoops 中，每解出一道高阶圈积分难题，研究所得的方法都会被打包移植进 `Toolkit Index`，让下一道题站在更高的台阶上启动。在 Substrate RL 中，`trajectory-audit` 扫描历史轨迹中 $\ge 3$ 步的探索绕行片段（Detour Episodes），将这些局部热力学耗散热点结晶为 `bin-manifest.md` 与 `capability-registrar` 中的 $O(1)$ 查表路由。无论基座权重 $\theta$ 如何冻结，只要这四条不变量持续运转，外部认知基质 $E$ 就会成为一台不断自我强化的**活体工作台（Living Harness）**。
+
+---
+
+## 6. 可证伪性与四大反信号（Falsifiability & Anti-Signals）
 
 根据科学哲学中的可证伪性原则（Falsifiability Principle）以及本仓库 `THEORY.md` 的一贯纪律，如果一项架构宣称「实现了环境侧强化学习」，但无法通过客观指标检验，那它就只是修辞装饰。我们为 Substrate RL 设定以下四条硬性**判伪反信号（Anti-Signals）**：
 
@@ -232,7 +260,7 @@ $$\Delta T_d = T_d(E_{\text{new}}) - T_d(E_{\text{old}}) \approx -\frac{M(v^*) \
 
 ---
 
-## 6. 结论（Conclusion）
+## 7. 结论（Conclusion）
 
 当基础大模型的参数 $\theta$ 被冻结在云端或只读权重文件中时，智能体的持续演化并未终结——它只是从不可见的微观浮点矩阵，转移到了完全可审计、可版本化、可回滚的**外部认知基质 $E$** 之中。
 
