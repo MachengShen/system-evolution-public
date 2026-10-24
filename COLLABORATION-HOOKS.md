@@ -107,6 +107,20 @@ forecast claim auditable rather than merely impressive?
 **Out of scope:** using another team's work as attention bait. A useful hook
 must contribute a reusable audit primitive, schema, test, or falsifier.
 
+## 6. Epistemic Bounty Marketplace: Verifiable Facts & Bench-Level Uncertainties for Physical Embodiment
+
+**Problem:** Bridging thermodynamic learning theory to physical embodiment (thermodynamic SPU, morphological metamaterials, physical niche construction, and closed-loop somatic attractor steering) requires ground-truth "dirty data" that front-line technicians, bench experimentalists, and clinical engineers possess. Pure-text summaries or LLM hallucinations are worthless ($0). We buy verifiable physical facts (Tier 1: $50–$150, Tier 2: $200–$600, Tier 3: $800–$2,500).
+
+**Start here:**
+
+- [Physics of Learning Interactive Reader & Epistemic Bounty Board](physics-of-learning-reachability.html#sec-bounty)
+- [Treatise §7: Epistemic Bounty Marketplace Protocol](essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md#7-理论到现实的最大断层uncertainties与一线可验证事实网络悬赏协议epistemic-bounty-marketplace)
+- [Claim-Receipt Schema](CLAIM-RECEIPT.md)
+
+**Useful feedback:** Submit a structured `Claim-Receipt` PR or Issue with uncropped time-series data (EDF/CSV), oscilloscope waveforms, or reproducible STEP/code packages resolving one of the 7 bounty targets (#B4-01 through #B3-01).
+
+**Out of scope:** Submitting ungrounded LLM-generated essays, literature surveys without instrumentation data, or requesting private access.
+
 ## Boundaries
 
 This repository contains public protocols, schemas, essays, and synthetic
