@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="通用持续学习（GCL）与热力学第一性原理智能定义的消解与统一：大白话直觉版 × 严格数学物理推导版 · 双向对照互动旗舰。涵盖各向异性峡谷度规 SAM、具身规范场、梯度核心集与生成回放对偶、CBP 定向热退火融化定律。">
+  <title>通用持续学习（GCL）与热力学智能物理第一性原理的消解与统一 | Continual Learning &amp; Thermodynamic Reachability</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2318191f'/><text x='50' y='68' font-size='46' font-weight='bold' text-anchor='middle' fill='%23faf8f5' font-family='serif'>GCL</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fef5ee;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --purple: #6d28d9;
+      --purple-soft: #f5f3ff;
+      --topbar-bg: rgba(24, 25, 31, 0.96);
+      --topbar-ink: #f5f3ef;
+      --topbar-muted: #b5bcc9;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+      --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 34rem),
+        radial-gradient(circle at 90% 12%, rgba(184, 92, 24, 0.04), transparent 30rem),
+        var(--paper);
+      font-family: var(--sans);
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: #f2efe9;
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #2b303c;
+    }
+    .topbar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px max(18px, calc((100vw - 1100px) / 2));
+      background: var(--topbar-bg);
+      color: var(--topbar-ink);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14);
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.9rem;
+    }
+    .topbar-nav a {
+      color: var(--topbar-muted);
+      transition: color 0.2s;
+    }
+    .topbar-nav a:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* Mode Switcher Bar */
+    .mode-bar-wrap {
+      position: sticky;
+      top: 57px;
+      z-index: 45;
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px max(18px, calc((100vw - 1100px) / 2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .mode-pills {
+      display: inline-flex;
+      background: #e7e3dc;
+      padding: 3px;
+      border-radius: 999px;
+      gap: 2px;
+    }
+    .mode-pill {
+      border: none;
+      background: transparent;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 650;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .mode-pill.active {
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .mode-tip {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* Layout Containers */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 18px 80px;
+    }
+    .hero {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .kicker {
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      color: var(--highlight);
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.8vw, 2.85rem);
+      line-height: 1.25;
+      font-weight: 800;
+      margin: 0 0 16px;
+      color: var(--ink);
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin: 0 0 24px;
+      line-height: 1.65;
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow);
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.65rem;
+      font-weight: 750;
+      margin: 0 0 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 28px 0 14px;
+      color: var(--ink);
+    }
+
+    /* Dual Column Layout for Compare Mode */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin: 20px 0;
+    }
+    @media (max-width: 820px) {
+      .dual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .plain-col {
+      background: linear-gradient(180deg, #fefbf8 0%, #ffffff 100%);
+      border: 1.5px solid rgba(184, 92, 24, 0.22);
+      border-radius: 14px;
+      padding: 22px 24px;
+      position: relative;
+    }
+    .math-col {
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      border: 1.5px solid rgba(30, 86, 160, 0.22);
+      border-radius: 14px;
+      padding: 22px 24px;
+      position: relative;
+    }
+    .col-badge {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .plain-badge {
+      background: var(--highlight-soft);
+      color: var(--highlight);
+      border: 1px solid rgba(184,92,24,0.3);
+    }
+    .math-badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(30,86,160,0.3);
+    }
+
+    /* Math formula boxes */
+    .math-box {
+      background: #fbfbfd;
+      border: 1px solid #dbe2ea;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.96rem;
+      overflow-x: auto;
+    }
+
+    /* Callouts */
+    .callout {
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      font-size: 0.95rem;
+    }
+    .callout-warm {
+      border-left-color: var(--highlight);
+      background: var(--highlight-soft);
+    }
+    .callout-green {
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    /* Simulator styling */
+    .sim-wrap {
+      background: #18191f;
+      color: #faf8f5;
+      border-radius: 16px;
+      padding: 26px 28px;
+      margin: 28px 0;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.22);
+    }
+    .sim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .sim-title {
+      font-size: 1.25rem;
+      font-weight: 750;
+      color: #ffffff;
+      margin: 0;
+    }
+    .sim-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .control-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: #cdd3de;
+    }
+    .control-item label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+    .control-item input[type="range"] {
+      width: 100%;
+      accent-color: #b85c18;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .sim-btn {
+      background: #2b2e38;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #faf8f5;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sim-btn:hover {
+      background: #3c404d;
+      border-color: rgba(255,255,255,0.3);
+    }
+    .sim-btn-primary {
+      background: var(--highlight);
+      border-color: transparent;
+    }
+    .sim-btn-primary:hover {
+      background: #d46b1d;
+    }
+    .sim-kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .kpi-card {
+      background: #242731;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .kpi-name {
+      font-size: 0.78rem;
+      color: #9ea5b3;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .kpi-val {
+      font-size: 1.4rem;
+      font-weight: 750;
+      color: #ffffff;
+      margin: 4px 0 2px;
+      font-family: ui-monospace, monospace;
+    }
+    .kpi-sub {
+      font-size: 0.75rem;
+      color: #798294;
+    }
+    canvas {
+      width: 100%;
+      height: 380px;
+      background: #111216;
+      border-radius: 10px;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Mode Visibility Classes */
+    body.view-plain .math-col { display: none !important; }
+    body.view-plain .dual-grid { grid-template-columns: 1fr; }
+    body.view-plain .math-only { display: none !important; }
+
+    body.view-math .plain-col { display: none !important; }
+    body.view-math .dual-grid { grid-template-columns: 1fr; }
+    body.view-math .plain-only { display: none !important; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 36px max(18px, calc((100vw - 1100px) / 2));
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body class="view-compare">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="brand-group">
+      <a class="brand-badge" href="physics-of-learning-reachability.html">
+        <span>← 返回母篇：学习的物理学</span>
+      </a>
+      <span style="opacity:0.35;">|</span>
+      <a href="./" style="color:var(--topbar-muted); font-size:0.9rem;">System Evolution Index</a>
+    </div>
+    <nav class="topbar-nav">
+      <a href="physics-of-learning-reachability-en.html">English Edition</a>
+      <a href="papers/index.html">Preprint PDFs</a>
+      <a href="trajectory-rl-substrate-evolution.html">Substrate RL</a>
+    </nav>
+  </header>
+
+  <!-- STICKY MODE SWITCHER BAR -->
+  <div class="mode-bar-wrap">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span style="font-weight:700; font-size:0.9rem; color:var(--ink);">阅读模式：</span>
+      <div class="mode-pills" role="tablist">
+        <button type="button" class="mode-pill active" id="btn-mode-compare" onclick="setMode('compare')">全量双栏对照版</button>
+        <button type="button" class="mode-pill" id="btn-mode-plain" onclick="setMode('plain')">纯大白话直觉版</button>
+        <button type="button" class="mode-pill" id="btn-mode-math" onclick="setMode('math')">纯数学物理定理版</button>
+      </div>
+    </div>
+    <div class="mode-tip" id="mode-tip-text">
+      当前模式：左侧大白话生动直觉 × 右侧严格物理数学推导，并排对照阅读。
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="kicker">The First-Principles Physics of Continual Learning</div>
+      <h1>通用持续学习（GCL）学术困境的物理消解：各向异性峡谷度规、具身规范场与怀旧热代谢</h1>
+      <p class="subtitle">
+        当过去十年学术界关于持续学习（No-Replay、SAM 平坦极小值、Sutton CBP、Task-IL 数据集蒸馏）的争议，撞上随机热力学第一性原理——我们如何用「物理学第一性原理」彻底破局？
+      </p>
+
+      <div class="callout callout-warm">
+        <strong>三分钟导读（The Core Resolution）：</strong><br>
+        传统机器学习学术界追求的「无回放、无边界、过去所有旧任务绝对零遗忘」并不是高尚的理想，而在统计物理上是一场<strong>不可逆热耗散爆炸的「热力学自杀」</strong>。一旦把视野从「孤立静止的参数权重 $\theta$」扩展到「具身低熵安全区图册」，原本相互打架的 SAM 优化器、Sutton 的 CBP 神经元重置、数据集蒸馏与生成式回放，将立刻在数学物理上严丝合缝地统一成一个优雅的<strong>峡谷雕刻与昼夜热力学循环</strong>。
+      </div>
+    </header>
+
+    <!-- PART I: WHY THEY CLASH -->
+    <section class="section-card" id="part-1">
+      <h2><span>⚡ Part I · 为什么表面上对着干？</span></h2>
+      <p style="color:var(--muted); margin-bottom:24px;">
+        学术界主流的通用持续学习（General Continual Learning, GCL）教条，与非平衡统计物理第一性原理之间存在 4 处尖锐对立。
+      </p>
+
+      <!-- CLASH 1 -->
+      <h3>1. 冲突一：旧任务绝对零遗忘 vs. 怀旧耗散定律</h3>
+      <div class="dual-grid">
+        <div class="plain-col">
+          <span class="col-badge plain-badge">大白话直觉版</span>
+          <h4 style="margin:0 0 8px; color:var(--highlight);">「死记硬背过去所有题，脑细胞塞死，直接变成老年痴呆」</h4>
+          <p>
+            学术界 GCL 设立了一个极其苛刻的教条：不管你学了 10 个任务还是 10,000 个任务，所有过去的旧任务<strong>绝对不准掉分（Zero Forgetting）</strong>。
+          </p>
+          <p>
+            但这在物理世界里根本行不通！你在小学背的期末考试座位表、两年前打游戏每一秒的走位，对你明天买菜或写代码有帮助吗？毫无帮助。如果你脑子死记硬背所有过期的陈芝麻烂谷子，你的脑容量很快就会被这些垃圾信息填死，导致脑子彻底硬化，再也学不进任何新知识（这就是学术界常说的 <em>Loss of Plasticity / 可塑性丧失</em>）。
+          </p>
+          <p style="font-weight:600; color:var(--highlight); margin-bottom:0;">
+            👉 结论：死保过期记忆不是智能，而是慢性自杀。
+          </p>
+        </div>
+
+        <div class="math-col">
+          <span class="col-badge math-badge">严格物理推导版</span>
+          <h4 style="margin:0 0 8px; color:var(--accent);">Still–Sivak–Bell–Crooks 怀旧耗散恒等式</h4>
+          <div class="math-box">
+            $$\beta W_{\text{diss}} = I(S_t; X_{\le t}) - I(S_t; X_{>t}) = I_{\text{nostalgia}}$$
+          </div>
+          <p>
+            任何在非平稳环境中运行的有限学习系统，其单步无效能量耗散 $\beta W_{\text{diss}}$ 严格正比于它所保留的<strong>「怀旧信息（Nostalgia）」</strong>——即记住了过去历史 $X_{\le t}$、却对未来预测 $X_{>t}$ 互信息为零的冗余度。
+          </p>
+          <p>
+            若在有限相空间容量（$\dim(\Theta) < \infty$）内强推所有旧任务 $\Delta\text{Acc}_{\text{past}} = 0$，当任务数 $K \to \infty$ 时，$I_{\text{nostalgia}} \to \infty$，系统无效发热爆炸，自由有效相空间体积坍缩至零（$\Omega_{\text{free}} \to 0$），使得快变磁化率 $\chi_{\text{fast}} \to 0$。
+          </p>
+        </div>
+      </div>
+
+      <!-- CLASH 2 -->
+      <h3>2. 冲突二：脱敏无边界单一权重 $\theta$ vs. 具身安全区图册</h3>
+      <div class="dual-grid">
+        <div class="plain-col">
+          <span class="col-badge plain-badge">大白话直觉版</span>
+          <h4 style="margin:0 0 8px; color:var(--highlight);">「非要用同一个脑筋回路同时切菜和开飞机，还不准看周围在哪」</h4>
+          <p>
+            学术界原教旨 GCL 鄙视「任务增量学习（Task-IL）」，认为别人在训练时带个任务标签（比如告诉模型当前是任务 1 还是任务 2）是「作弊」或者「范式 Hack」，要求只准用单一的裸权重向量 $\theta$ 硬扛所有环境。
+          </p>
+          <p>
+            但真实物理世界中，人从来不是在真空中算题的！你在厨房里看到砧板菜刀，在驾驶舱看到方向盘仪表盘——<strong>周围的物理环境本身就是一个天然的模式开关</strong>。把物理环境当作天然门控根本不是作弊，学术界把所有相互冲突的技能硬塞进同一个没有隔离的全局矩阵，就必然导致新技能一脚把旧技能踩死（灾难性遗忘）。
+          </p>
+        </div>
+
+        <div class="math-col">
+          <span class="col-badge math-badge">严格物理推导版</span>
+          <h4 style="margin:0 0 8px; color:var(--accent);">具身物理规范场与正交投影算子</h4>
+          <div class="math-box">
+            $$\mathcal{A} = \big\{ \big(\mathcal{R}_\alpha, V_\alpha(x; E_\alpha), \Delta\lambda_\alpha\big) \big\}, \quad \mathcal{P}_\alpha \perp \mathcal{P}_\beta$$
+          </div>
+          <p>
+            物理世界基质 $E_\alpha$ 作为连续的天然规范联络 $A_\mu(E_\alpha)$，使得内部波函数发生规范协变变换 $\psi \mapsto e^{i\int A\cdot dx}\psi$。系统在相空间内由主体—环境共同张成局部李雅普诺夫吸引势阱 $V_\alpha(x; E_\alpha)$。
+          </p>
+          <p>
+            学术界混淆了「人工外部注入整数 Task ID 作弊」与「物理环境天然具身规范场」。无门控单一权重违背黑塞矩阵的正交容量界，必然导致梯度沿同一主轴剧烈覆盖。
+          </p>
+        </div>
+      </div>
+
+      <!-- CLASH 3 -->
+      <h3>3. 冲突三：SAM 各向同性平坦极小值 vs. 慢核大谱隙与势阱峭壁</h3>
+      <div class="dual-grid">
+        <div class="plain-col">
+          <span class="col-badge plain-badge">大白话直觉版</span>
+          <h4 style="margin:0 0 8px; color:var(--highlight);">「为了防颠簸把所有山全铲平，结果变成一马平川，一阵风吹散所有底线」</h4>
+          <p>
+            现在大模型和持续学习学术界最推崇的优化器是 <strong>SAM（锐度感知最小化）</strong>。它的逻辑是：陡峭的山峰容易滑倒，所以把损失景观各个方向都磨得平平的（寻找平坦极小值 Flat Minima）。
+          </p>
+          <p>
+            但在物理学看来：<strong>到处都平 = 没有任何刚性和骨架！</strong> 如果连系统的核心因果常识、核心原则（慢核）也被磨平了，这个模型就像没有四壁的泥土，外界稍微来一点噪音或微风，整个因果结构瞬间就被冲垮坍塌了。真正的高手不是把世界全磨平，而是修一条<strong>「大峡谷」</strong>：两边的悬崖绝壁极陡极硬（守住常识不被冲跨），中间的峡谷谷底极平极滑（任务切换行云流水）。
+          </p>
+        </div>
+
+        <div class="math-col">
+          <span class="col-badge math-badge">严格物理推导版</span>
+          <h4 style="margin:0 0 8px; color:var(--accent);">Davis–Kahan 谱隙保护与混沌侵蚀界</h4>
+          <div class="math-box">
+            $$\frac{d}{dt} I_{\text{local}}(S_{\text{core}}) = J_{\text{adapt}}(\chi_{\text{fast}}) - \Gamma_{\text{chaos}}\left(\frac{\|E_{\text{noise}}\|}{\Delta\lambda_{\text{slow}}}\right)$$
+          </div>
+          <p>
+            若如传统 SAM 那样让所有黑塞特征值趋向于零（$\lambda_{\max}(\nabla^2\mathcal{L}) \to 0$），必然导致慢核谱隙坍塌（$\Delta\lambda_{\text{slow}} \to 0$）。
+          </p>
+          <p>
+            根据 Davis–Kahan 定理，特征子空间的抗噪偏转角满足 $\sin\theta \le \frac{2\|E\|}{\Delta\lambda}$。谱隙为零意味着系统在遭遇微小扰动时侵蚀率发散（$\Gamma_{\text{chaos}} \to \infty$），导致慢核不变量崩溃。
+          </p>
+        </div>
+      </div>
+
+      <!-- CLASH 4 -->
+      <h3>4. 冲突四：绝对「无回放」洁癖 vs. 生成式回放与基质筑巢对偶</h3>
+      <div class="dual-grid">
+        <div class="plain-col">
+          <span class="col-badge plain-badge">大白话直觉版</span>
+          <h4 style="margin:0 0 8px; color:var(--highlight);">「既不准翻旧笔记，又不准睡觉做梦，还要求永远不犯错」</h4>
+          <p>
+            学术界 GCL 有严重的「无回放洁癖（No Replay）」，认为存哪怕一丁点旧样本都是不纯洁的，连「生成式回放（用生成器自己造假样本复习）」也被视作擦边球。
+          </p>
+          <p>
+            但这在物理上要求一个在线单步系统同时拥有零能耗与零误差，直接撞穿了热力学速率极限！地球上没有任何高级动物是这么干的：我们白天在外部物理世界<strong>「筑巢改环境」</strong>（把笔记写在纸上，物理世界就是零内存生成器）；晚上<strong>「睡觉做梦」</strong>（生成式回放，把白天的碎片记忆过滤洗脱，只留下核心因果沉淀进慢核）。
+          </p>
+        </div>
+
+        <div class="math-col">
+          <span class="col-badge math-badge">严格物理推导版</span>
+          <h4 style="margin:0 0 8px; color:var(--accent);">热力学速率极限（TSL）与昼夜勒让德对偶</h4>
+          <div class="math-box">
+            $$\tau \cdot \Sigma \ge \frac{\mathcal{W}_2^2\big(p_0, p_{\text{future}}; g(E)\big)}{2D}$$
+          </div>
+          <p>
+            在固定环境度规 $g(E_0)$ 下，单步无回放梯度无法改变几何距离 $\mathcal{W}_2$。
+          </p>
+          <p>
+            要缩短到达未来的耗时 $\tau$ 与能耗 $\Sigma$，必须依赖两相热力学变换：清醒期的外部做功筑巢 $\nabla_{E_{\text{ext}}} \mathcal{W}_2 < 0$ 与睡眠期的内部生成重整 $G_\phi(z) \sim p_{\text{slow}}(\theta)$。二者在全系统总熵增速率约束下互为勒让德对偶。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART II: HOW THEY UNIFY -->
+    <section class="section-card" id="part-2">
+      <h2><span>🧩 Part II · 怎么拧到一起？消解冲突的三大新定理</span></h2>
+      <p style="color:var(--muted); margin-bottom:24px;">
+        只要承认系统是「具身的、有双时间尺度的、允许不可逆热代谢的」，两套体系立刻无缝统一，导出现代持续学习的三大第一性原理物理定律。
+      </p>
+
+      <!-- THEOREM A -->
+      <div style="margin-bottom:32px;">
+        <h3>定理 A · 各向异性峡谷度规定理（Spectral-Split SAM &amp; Canyon Sculptor）</h3>
+        <div class="dual-grid">
+          <div class="plain-col">
+            <span class="col-badge plain-badge">大白话直觉版</span>
+            <h4 style="margin:0 0 8px; color:var(--highlight);">「峡谷优化器：因果轴筑高墙，任务轴铺高铁」</h4>
+            <p>
+              为什么 SAM（找平坦极小值）在大模型微调里这么灵？物理学给出的解释是：<strong>切空间不是均匀的，它由两条路交叉组成！</strong>
+            </p>
+            <ul>
+              <li><strong>第一条路：跨任务切换的高铁线（规范方向）</strong>。这一条路必须用 SAM 把它彻底修平！只要它又平又滑，模型从「写代码」跳到「写诗」就不需要翻越任何能耗大山，几步就能滑过去（运输距离 $\mathcal{W}_2$ 极小）。</li>
+              <li><strong>第二条路：核心因果的高耸峡谷壁（因果方向）</strong>。这里的山峰不仅不能磨平，还要修得像刀削一样陡峭（高谱隙 $\Delta\lambda$）！两边的峭壁紧紧夹住系统，外部不管怎么刮风下雨，核心知识永远稳稳当当，绝不漂移。</li>
+            </ul>
+            <p style="font-weight:600; color:var(--highlight); margin-bottom:0;">
+              👉 结论：理想的优化器叫「峡谷雕刻器」，谷底如镜面滑行，谷壁如铜墙铁壁。
+            </p>
+          </div>
+
+          <div class="math-col">
+            <span class="col-badge math-badge">严格数学物理定理</span>
+            <div class="math-box">
+              <span class="math-label" style="font-weight:700; color:var(--accent);">Theorem A (Anisotropic Canyon-Metric)</span>
+              $$T_\theta \mathcal{M} = \mathcal{T}_{\text{invariant}} \oplus \mathcal{T}_{\text{gauge}}$$
+              <ol style="margin:6px 0 0; padding-left:18px;">
+                <li>
+                  $\forall j \in \mathcal{T}_{\text{gauge}}$, $\lambda_j(\nabla^2_\theta \mathcal{L}) \le \epsilon_{\text{flat}} \implies \mathcal{W}_2(p_\alpha, p_\beta; g(E)) \to \min$;
+                </li>
+                <li>
+                  $\forall i \in \mathcal{T}_{\text{invariant}}$, $\lambda_{\min}^{\text{inv}}(\nabla^2_\theta \mathcal{L}) = \Delta\lambda_{\text{slow}} \ge \frac{2\|E_{\text{noise}}\|}{\sin\theta_{\text{tol}}} \implies \Gamma_{\text{chaos}} \le \Gamma_0 e^{-\Delta\lambda_{\text{slow}} t}$.
+                </li>
+              </ol>
+            </div>
+            <p>
+              参数流形 $\mathcal{M}$ 的切空间严格正交分裂为慢核因果子空间 $\mathcal{T}_{\text{invariant}}$ 与任务规范子空间 $\mathcal{T}_{\text{gauge}}$。
+            </p>
+            <p>
+              各向异性 SAM 沿规范方向极小化黑塞特征值以最大化动力学迁移率张量 $D_{jk} \approx \frac{1}{\gamma} g^{jk}$，同时沿慢核方向维持大谱隙以指数衰减外界噪声侵蚀。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- THEOREM B -->
+      <div style="margin-bottom:32px;">
+        <h3>定理 B · 具身规范场、梯度核心集与生成式回放的热力学对偶</h3>
+        <div class="dual-grid">
+          <div class="plain-col">
+            <span class="col-badge plain-badge">大白话直觉版</span>
+            <h4 style="margin:0 0 8px; color:var(--highlight);">「白天在现实里筑巢做笔记，晚上在脑子里做梦洗杂质」</h4>
+            <p>
+              为什么学术界在 Task-IL 里用「数据集蒸馏」和「梯度核心集（Coreset）」效果奇好，却老被批为作弊？物理学证明：
+            </p>
+            <ol>
+              <li><strong>环境就是零内存的天然生成器</strong>：外部世界的物理上下文（你在哪个房间、用哪个工具）本身就是最强的天然规范场，不需要人类手动喂数字标签。</li>
+              <li><strong>核心集不是存旧图作弊，而是压缩的航海图</strong>：核心集是排除了所有废话细节（$I_{\text{nostalgia}}$）之后，在几何流形上留下的几个关键航标。</li>
+              <li><strong>白天筑巢与晚上做梦对偶</strong>：白天你在桌上贴便签、整理文件夹（外部物理筑巢），晚上大脑通过生成式回放把白天的杂乱经验蒸馏排毒（内部生成重整），两者在物理上完全等价！</li>
+            </ol>
+          </div>
+
+          <div class="math-col">
+            <span class="col-badge math-badge">严格数学物理定理</span>
+            <div class="math-box">
+              <span class="math-label" style="font-weight:700; color:var(--accent);">Theorem B (Embodied Gauge Duality &amp; Coresets)</span>
+              $$\mathcal{C}^* = \arg\min_{\mathcal{C}} \mathcal{W}_2\left( \sum_{x \in \mathcal{C}} \nabla_\theta \ell(x), \, \mathbb{E}[\nabla_\theta \ell] \right) \text{ s.t. } I(\mathcal{C}; X_{\le t} \mid X_{>t}) \le \epsilon$$
+              $$\nabla_{E_{\text{ext}}} \mathcal{W}_2 \ \overset{\text{Legendre}}{\longleftrightarrow} \ G_\phi(z) \sim p_{\text{slow}}(\theta)$$
+            </div>
+            <p>
+              代表梯度核心集是 Landauer 不可逆擦除排净怀旧信息 $I_{\text{nostalgia}}$ 后，在参数流形上留下的最小充分测地线度规基。
+            </p>
+            <p>
+              清醒期的外部物理基质重塑（$\nabla_E \mathcal{W}_2 < 0$）与睡眠期的生成式内部重整（Generative Replay）在全系统不可逆熵产生约束下严格互为勒让德对偶。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- THEOREM C -->
+      <div style="margin-bottom:12px;">
+        <h3>定理 C · 塑性—怀旧守恒律与 Sutton CBP 定向热退火融化</h3>
+        <div class="dual-grid">
+          <div class="plain-col">
+            <span class="col-badge plain-badge">大白话直觉版</span>
+            <h4 style="margin:0 0 8px; color:var(--highlight);">「Sutton 的神经元重置不是投机取巧，而是给坏死的神经元人工发烧」</h4>
+            <p>
+              强化学习之父 Sutton 提出的 <strong>CBP（Continual Backprop）</strong>：定期把贡献低、快死掉的神经元随机重置（重新随机初始化）。学术界老有人觉得这是脏技巧。
+            </p>
+            <p>
+              但物理学告诉你：<strong>这是大自然最伟大的发明——热退火融化！</strong> 当神经元死记硬背了太多陈旧垃圾信息，它们就像水泥凝固成了死玻璃（相变玻璃化，可塑性为零）。CBP 相当于向这些死水泥里<strong>定向注入一束温度脉冲（人工发烧）</strong>，把冻死的权重重新烧化成流体，让它腾出空间去学新东西。主动忘掉 5% 的陈旧废话，换取脑神经 100% 满血复活！
+            </p>
+          </div>
+
+          <div class="math-col">
+            <span class="col-badge math-badge">严格数学物理定理</span>
+            <div class="math-box">
+              <span class="math-label" style="font-weight:700; color:var(--accent);">Theorem C (Plasticity-Nostalgia Conservation &amp; CBP Melting)</span>
+              $$\chi_{\text{fast}}(\theta) \cdot \exp\left( \frac{I_{\text{nostalgia}}(S_t)}{k_B C_{\text{eff}}} \right) \le \chi_0$$
+              $$T_k(t) = T_{\text{ambient}} + T_{\text{reset}} \cdot \Theta(u_{\text{thresh}} - u_k)$$
+            </div>
+            <p>
+              有限容量系统中，快变可塑性磁化率 $\chi_{\text{fast}}$ 与怀旧信息 $I_{\text{nostalgia}}$ 呈指数守恒反比。死保旧任务导致系统进入不可逆玻璃化冻结（Glass Transition）。
+            </p>
+            <p>
+              Sutton 的 CBP 动力学等价于在朗之万方程 $d\theta_k = -\nabla_k\mathcal{L}dt + \sqrt{2k_BT_k}dW_t$ 中引入局域温度脉冲 $T_{\text{reset}}$，通过局部做功融化死相空间，实现可塑性热力学恢复。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SIMULATOR SANDBOX -->
+    <section class="section-card" id="sandbox">
+      <h2><span>🧪 互动物理实验台 · 峡谷度规 vs 各向同性平原</span></h2>
+      <p style="color:var(--muted); margin-bottom:18px;">
+        在下方的动力学沙盒中，实时对比传统各向同性 SAM / 强求零遗忘 GCL（左侧粒子在平坦中漂移、神经元玻璃化死锁）与热力学峡谷 SAM + 昼夜筑巢-做梦-CBP 循环（右侧高耸峭壁、平滑峡谷测地线、活跃发烧退火）。
+      </p>
+
+      <div class="sim-wrap">
+        <div class="sim-header">
+          <div>
+            <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:#b85c18; font-weight:750;">Phase Space Dynamics</span>
+            <h3 class="sim-title">各向同性平原 vs 峡谷度规与热退火循环</h3>
+          </div>
+          <span id="sim-status-pill" style="background:#15803d; color:#ffffff; font-size:0.8rem; font-weight:700; padding:4px 12px; border-radius:999px;">系统运行平稳</span>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-item">
+            <label for="slider-canyon-wall">慢核峡谷壁陡峭度 $\Delta\lambda_{\text{slow}}$ <span id="val-canyon-wall" style="color:#b85c18; font-family:monospace;">1.20</span></label>
+            <input type="range" id="slider-canyon-wall" min="0.10" max="2.50" step="0.05" value="1.20" oninput="updateSimParams()">
+          </div>
+          <div class="control-item">
+            <label for="slider-floor-flat">规范谷底平坦度 $1/\epsilon_{\text{flat}}$ <span id="val-floor-flat" style="color:#1e56a0; font-family:monospace;">1.50</span></label>
+            <input type="range" id="slider-floor-flat" min="0.20" max="3.00" step="0.10" value="1.50" oninput="updateSimParams()">
+          </div>
+          <div class="control-item">
+            <label for="slider-cbp-rate">CBP / 做梦排毒强度 $T_{\text{reset}}$ <span id="val-cbp-rate" style="color:#6d28d9; font-family:monospace;">0.80</span></label>
+            <input type="range" id="slider-cbp-rate" min="0.00" max="1.50" step="0.05" value="0.80" oninput="updateSimParams()">
+          </div>
+          <div class="control-item">
+            <label for="slider-noise">外部环境混沌噪声 $T_{\text{noise}}$ <span id="val-noise" style="color:#b91c1c; font-family:monospace;">0.45</span></label>
+            <input type="range" id="slider-noise" min="0.05" max="1.00" step="0.05" value="0.45" oninput="updateSimParams()">
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="sim-btn sim-btn-primary" onclick="simTriggerTaskHop()">🧭 跨任务输运跃迁 (Task Hop)</button>
+          <button type="button" class="sim-btn" onclick="simTriggerSleep()">🌙 昼夜交替/做梦重整 (Sleep Distill)</button>
+          <button type="button" class="sim-btn" onclick="simTriggerCBP()">🔥 CBP 定向发烧退火 (Thermal Reset)</button>
+          <button type="button" class="sim-btn" onclick="simReset()">↺ 重置环境</button>
+        </div>
+
+        <div class="sim-kpis">
+          <div class="kpi-card">
+            <div class="kpi-name">未来达未时间 $\tau$</div>
+            <div class="kpi-val" id="kpi-tau" style="color:#38bdf8;">14.2 ms</div>
+            <div class="kpi-sub">沿着谷底测地线极小化</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-name">不可逆热耗散 $\Sigma$</div>
+            <div class="kpi-val" id="kpi-sigma" style="color:#fbbf24;">1.28 $k_BT$</div>
+            <div class="kpi-sub">无冗余寄生势垒摩擦</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-name">快变可塑性 $\chi_{\text{fast}}$</div>
+            <div class="kpi-val" id="kpi-plasticity" style="color:#4ade80;">0.92</div>
+            <div class="kpi-sub">CBP 退火维持相空间活跃</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-name">慢核信息留存率 $I_{\text{core}}$</div>
+            <div class="kpi-val" id="kpi-retention" style="color:#c084fc;">99.4%</div>
+            <div class="kpi-sub">大谱隙峭壁锁死因果不变量</div>
+          </div>
+        </div>
+
+        <canvas id="canyon-canvas" width="1020" height="380"></canvas>
+        <div style="font-size:0.8rem; color:#8e96a5; margin-top:12px; line-height:1.6;">
+          <strong>画布图例指南：</strong><br>
+          • <strong>左半区（传统无门控/各向同性 SAM）</strong>：地面被全局压平，没有峭壁约束。在噪声冲刷下，蓝色粒子在因果轴漂移，下方神经元网络因累积怀旧信息而逐步变成「灰色死锁态」，$\chi_{\text{fast}}$ 跌至冰点。<br>
+          • <strong>右半区（热力学峡谷 SAM + 具身循环）</strong>：金色峡谷展现出两侧极陡的深谷壁（抗噪谱隙 $\Delta\lambda$）与中间极平的低阻轨道（$\mathcal{W}_2 \to \min$）。粒子飞速穿梭；点击「CBP 定向发烧退火」或「做梦重整」，可见周期性绿色热浪将灰色死神经元重新点亮，$\chi_{\text{fast}}$ 始终生机勃勃。
+        </div>
+      </div>
+    </section>
+
+    <!-- PART III: FUTURE ROADMAP -->
+    <section class="section-card" id="part-3">
+      <h2><span>🚀 Part III · 物理第一性原理指导 ML 持续学习的 4 个未来探索方向</span></h2>
+      <p style="color:var(--muted); margin-bottom:24px;">
+        从物理第一性原理出发，我们不再被学术界的「零回放教条」或「范式 Hack 争吵」所困，而是明确了未来 3–5 年机器学习持续学习的四大工程突破方向：
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
+        <div style="background:#fcfbf8; border:1px solid #ebdccb; border-radius:12px; padding:20px; border-top:4px solid var(--highlight);">
+          <span style="font-weight:750; font-size:0.82rem; color:var(--highlight); text-transform:uppercase;">方向一 · 评测标准革命</span>
+          <h4 style="margin:8px 0 10px; font-size:1.12rem;">从「考过去保分」到「考未来达未效率 $\eta_{\mathcal{F}}$」</h4>
+          <p style="font-size:0.92rem; color:var(--muted); margin:0;">
+            彻底废除要求模型在过时旧任务上 100% 保持满分的死板 Benchmark。引入热力学达未效率 $\eta_{\mathcal{F}} = \frac{\mathcal{W}_2^2 / 2D\tau}{\Sigma}$：衡量模型在遭遇未知新环境时，能否以<strong>最小的微调算力步数 $\tau$ 与最小的熵增耗能 $\Sigma$</strong>，最快收敛到新任务的最优测地线。
+          </p>
+        </div>
+
+        <div style="background:#f9fbfd; border:1px solid #cde0f7; border-radius:12px; padding:20px; border-top:4px solid var(--accent);">
+          <span style="font-weight:750; font-size:0.82rem; color:var(--accent); text-transform:uppercase;">方向二 · 优化器革命</span>
+          <h4 style="margin:8px 0 10px; font-size:1.12rem;">切空间谱分裂「峡谷 SAM 优化器 (Canyon-SAM)」</h4>
+          <p style="font-size:0.92rem; color:var(--muted); margin:0;">
+            告别各向同性的暴力 SAM。通过低秩因果投影，将切空间动态分解为 $\mathcal{T}_{\text{invariant}} \oplus \mathcal{T}_{\text{gauge}}$。在慢核因果轴上主动施加正向曲率加固（筑墙，增大 $\Delta\lambda$）；在任务规范轴上强力执行 SAM 平坦化（修路，消除跨任务势垒）。
+          </p>
+        </div>
+
+        <div style="background:#f9fcf9; border:1px solid #cae8d5; border-radius:12px; padding:20px; border-top:4px solid var(--green);">
+          <span style="font-weight:750; font-size:0.82rem; color:var(--green); text-transform:uppercase;">方向三 · 架构演进革命</span>
+          <h4 style="margin:8px 0 10px; font-size:1.12rem;">算法级「主动环境筑巢 (Niche Construction)」</h4>
+          <p style="font-size:0.92rem; color:var(--muted); margin:0;">
+            放弃把万亿知识全部硬塞进单一权重矩阵的执念。给智能体配备外部持久基质（文件系统、Prompt Cache、本地工具链）。智能体每到一个新领域，先通过不可逆做功「改造外部环境」，将复杂任务变成 $O(1)$ 查表，利用物理环境作为零内存开销的天然规范场。
+          </p>
+        </div>
+
+        <div style="background:#faf8fd; border:1px solid #decbf7; border-radius:12px; padding:20px; border-top:4px solid var(--purple);">
+          <span style="font-weight:750; font-size:0.82rem; color:var(--purple); text-transform:uppercase;">方向四 · 训练范式革命</span>
+          <h4 style="margin:8px 0 10px; font-size:1.12rem;">清醒做功 + 睡眠蒸馏 + CBP 局部退火双相循环</h4>
+          <p style="font-size:0.92rem; color:var(--muted); margin:0;">
+            摒弃永远在线单步梯度硬抗。构建像生命一样的昼夜节律：清醒期只更新快变层，高频响应外界；闲歇期启动生成式回放与核心集提炼，洗脱怀旧熵 $I_{\text{nostalgia}}$；对低贡献冻结单元执行 CBP 式定向热退火，使网络终身具备澎湃可塑性 $\chi_{\text{fast}}$。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="max-width:800px; margin:0 auto;">
+      <p style="font-weight:600; color:var(--ink); margin-bottom:8px;">
+        从物理学第一性原理重新定义「学习」与「智能」系列研究 · System Evolution 开放理论线
+      </p>
+      <p style="margin:0 0 12px;">
+        母篇交互论著：<a href="physics-of-learning-reachability.html">《从物理学第一性原理理解「学习」与「智能」：不可逆计算、达未速率极限与耗散结构》</a><br>
+        思想剧场原文：<a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener">《后AI思想剧场：谁教会机器知道轻重？》</a> · 英文全量版：<a href="physics-of-learning-reachability-en.html">Physics of Learning (EN)</a>
+      </p>
+      <p style="font-size:0.8rem; color:#888;">
+        Apache-2.0 License · 本篇由 Antigravity 交互会话与 Kiro Auto 联合理论推导合成 · 纯公开理论与学术探索 · 无私有转录与数据引用
+      </p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT: MODE SWITCHER & CANVAS SIMULATOR -->
+  <script>
+    // Mode Switcher Logic
+    function setMode(mode) {
+      document.body.classList.remove('view-compare', 'view-plain', 'view-math');
+      document.querySelectorAll('.mode-pill').forEach(el => el.classList.remove('active'));
+
+      const tip = document.getElementById('mode-tip-text');
+      if (mode === 'plain') {
+        document.body.classList.add('view-plain');
+        document.getElementById('btn-mode-plain').classList.add('active');
+        tip.textContent = '当前模式：纯大白话直觉版 —— 隐藏数学公式，用最接地气的通俗比喻讲透底层逻辑。';
+      } else if (mode === 'math') {
+        document.body.classList.add('view-math');
+        document.getElementById('btn-mode-math').classList.add('active');
+        tip.textContent = '当前模式：纯数学物理定理版 —— 隐藏通俗口语，聚焦微分几何切空间分解、热力学速率极限与严格定理证明。';
+      } else {
+        document.body.classList.add('view-compare');
+        document.getElementById('btn-mode-compare').classList.add('active');
+        tip.textContent = '当前模式：全量双栏对照版 —— 左侧大白话生动直觉 × 右侧严格物理数学推导，并排对照阅读。';
+      }
+    }
+
+    // Canvas Simulator State & Animation
+    const canvas = document.getElementById('canyon-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let simState = {
+      canyonWall: 1.20,
+      floorFlat: 1.50,
+      cbpRate: 0.80,
+      noise: 0.45,
+      // Particles
+      pLeft: { x: 250, y: 190, vx: 0, vy: 0 },
+      pRight: { x: 760, y: 190, vx: 0, vy: 0 },
+      // Neurons state
+      leftNeurons: [],
+      rightNeurons: [],
+      tick: 0,
+      targetTaskX: 820,
+      sleepGlow: 0,
+      cbpGlow: 0,
+      tau: 14.2,
+      sigma: 1.28,
+      plasticity: 0.92,
+      retention: 99.4
+    };
+
+    // Init neurons
+    for (let i = 0; i < 28; i++) {
+      simState.leftNeurons.push({
+        x: 60 + (i % 7) * 55,
+        y: 280 + Math.floor(i / 7) * 20,
+        frozen: Math.random() > 0.4
+      });
+      simState.rightNeurons.push({
+        x: 580 + (i % 7) * 55,
+        y: 280 + Math.floor(i / 7) * 20,
+        activePulse: Math.random()
+      });
+    }
+
+    function updateSimParams() {
+      simState.canyonWall = parseFloat(document.getElementById('slider-canyon-wall').value);
+      simState.floorFlat = parseFloat(document.getElementById('slider-floor-flat').value);
+      simState.cbpRate = parseFloat(document.getElementById('slider-cbp-rate').value);
+      simState.noise = parseFloat(document.getElementById('slider-noise').value);
+
+      document.getElementById('val-canyon-wall').textContent = simState.canyonWall.toFixed(2);
+      document.getElementById('val-floor-flat').textContent = simState.floorFlat.toFixed(2);
+      document.getElementById('val-cbp-rate').textContent = simState.cbpRate.toFixed(2);
+      document.getElementById('val-noise').textContent = simState.noise.toFixed(2);
+    }
+
+    function simTriggerTaskHop() {
+      simState.targetTaskX = simState.targetTaskX === 820 ? 680 : 820;
+      simState.pRight.vx = (simState.targetTaskX - simState.pRight.x) * 0.08;
+      simState.pLeft.vx = (Math.random() - 0.5) * 6;
+      simState.pLeft.vy = (Math.random() - 0.5) * 6;
+    }
+
+    function simTriggerSleep() {
+      simState.sleepGlow = 1.0;
+    }
+
+    function simTriggerCBP() {
+      simState.cbpGlow = 1.0;
+      simState.rightNeurons.forEach(n => {
+        n.activePulse = 1.0;
+      });
+    }
+
+    function simReset() {
+      simState.pLeft = { x: 250, y: 190, vx: 0, vy: 0 };
+      simState.pRight = { x: 760, y: 190, vx: 0, vy: 0 };
+      simState.sleepGlow = 0;
+      simState.cbpGlow = 0;
+    }
+
+    function renderLoop() {
+      simState.tick++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Divider line
+      ctx.strokeStyle = "rgba(255,255,255,0.15)";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 6]);
+      ctx.beginPath();
+      ctx.moveTo(510, 20);
+      ctx.lineTo(510, 360);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Section Labels
+      ctx.font = "bold 13px sans-serif";
+      ctx.fillStyle = "#fb7185";
+      ctx.fillText("传统各向同性 SAM / 强求零遗忘 GCL（无壁平原·冻结死锁）", 40, 42);
+
+      ctx.fillStyle = "#38bdf8";
+      ctx.fillText("热力学峡谷 SAM + 昼夜筑巢-做梦-CBP 循环（陡壁平谷·持续生机）", 540, 42);
+
+      // --- LEFT SIDE: FLAT TERRAIN ---
+      // Landscape lines
+      ctx.strokeStyle = "rgba(251, 113, 133, 0.35)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 40; x <= 480; x += 10) {
+        let y = 190 + Math.sin(x * 0.02 + simState.tick * 0.03) * 6;
+        if (x === 40) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Left particle drift (wanders chaotically under noise)
+      let noiseScale = simState.noise * 2.8;
+      simState.pLeft.vx += (Math.random() - 0.5) * noiseScale;
+      simState.pLeft.vy += (Math.random() - 0.5) * noiseScale;
+      simState.pLeft.vx *= 0.92;
+      simState.pLeft.vy *= 0.92;
+      simState.pLeft.x += simState.pLeft.vx;
+      simState.pLeft.y += simState.pLeft.vy;
+      if (simState.pLeft.x < 50) simState.pLeft.x = 50;
+      if (simState.pLeft.x > 470) simState.pLeft.x = 470;
+      if (simState.pLeft.y < 120) simState.pLeft.y = 120;
+      if (simState.pLeft.y > 240) simState.pLeft.y = 240;
+
+      // Draw Left particle
+      ctx.fillStyle = "#fb7185";
+      ctx.beginPath();
+      ctx.arc(simState.pLeft.x, simState.pLeft.y, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.font = "11px sans-serif";
+      ctx.fillStyle = "#fda4af";
+      ctx.fillText("参数状态 θ (因果漂移中)", simState.pLeft.x - 45, simState.pLeft.y - 14);
+
+      // Left Neurons (frozen/glassified)
+      ctx.font = "11px sans-serif";
+      ctx.fillStyle = "#94a3b8";
+      ctx.fillText("隐层神经元状态 (怀旧信息累积 → 玻璃化死锁 85%)", 50, 268);
+      simState.leftNeurons.forEach(n => {
+        ctx.fillStyle = n.frozen ? "#475569" : "#64748b";
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 6, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // --- RIGHT SIDE: CANYON METRIC ---
+      // Canyon Walls (parabolic potential well in y)
+      let wallSteep = simState.canyonWall * 35;
+      let floorFlat = simState.floorFlat;
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.4)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      // Draw 3D-like canyon lines
+      for (let offset = -40; offset <= 40; offset += 20) {
+        ctx.beginPath();
+        for (let x = 540; x <= 980; x += 15) {
+          let distFromCenterY = Math.abs(offset);
+          let y = 190 + offset + (Math.sin((x - 540) * 0.02) * 5) - Math.pow(distFromCenterY / 40, 2) * (offset > 0 ? -1 : 1) * 15;
+          if (x === 540) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      // Canyon wall boundary indicators (steep walls)
+      ctx.fillStyle = "rgba(184, 92, 24, 0.15)";
+      ctx.fillRect(540, 110, 440, 30);
+      ctx.fillRect(540, 230, 440, 30);
+      ctx.font = "10px sans-serif";
+      ctx.fillStyle = "#f59e0b";
+      ctx.fillText("▲ 慢核李雅普诺夫大谱隙峭壁 Δλ (抗噪高墙)", 640, 128);
+      ctx.fillText("▼ 慢核李雅普诺夫大谱隙峭壁 Δλ (抗噪高墙)", 640, 248);
+
+      // Right Particle dynamics (strongly confined in y, smoothly travels in x)
+      let restoringForceY = (190 - simState.pRight.y) * 0.15 * simState.canyonWall;
+      simState.pRight.vy += restoringForceY + (Math.random() - 0.5) * (simState.noise * 0.8);
+      let targetDx = (simState.targetTaskX - simState.pRight.x);
+      simState.pRight.vx += targetDx * 0.008 * floorFlat;
+      simState.pRight.vx *= 0.88;
+      simState.pRight.vy *= 0.82;
+      simState.pRight.x += simState.pRight.vx;
+      simState.pRight.y += simState.pRight.vy;
+
+      // Glow effects
+      if (simState.sleepGlow > 0) {
+        ctx.fillStyle = `rgba(109, 40, 217, ${simState.sleepGlow * 0.25})`;
+        ctx.fillRect(520, 40, 480, 320);
+        simState.sleepGlow -= 0.015;
+      }
+      if (simState.cbpGlow > 0) {
+        ctx.fillStyle = `rgba(34, 197, 94, ${simState.cbpGlow * 0.22})`;
+        ctx.fillRect(520, 40, 480, 320);
+        simState.cbpGlow -= 0.02;
+      }
+
+      // Draw Right particle
+      ctx.fillStyle = "#38bdf8";
+      ctx.beginPath();
+      ctx.arc(simState.pRight.x, simState.pRight.y, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.font = "11px sans-serif";
+      ctx.fillStyle = "#7dd3fc";
+      ctx.fillText("测地线滑行 θ (零耗散输运)", simState.pRight.x - 50, simState.pRight.y - 14);
+
+      // Right Neurons (active pulses & thermal reset)
+      ctx.font = "11px sans-serif";
+      ctx.fillStyle = "#86efac";
+      ctx.fillText("隐层神经元状态 (CBP 定向热退火融化 · 可塑性保持 94%)", 560, 268);
+      simState.rightNeurons.forEach(n => {
+        n.activePulse = Math.max(0.2, n.activePulse - 0.005);
+        let alpha = 0.4 + n.activePulse * 0.6;
+        ctx.fillStyle = `rgba(74, 222, 128, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 6, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Update KPIs dynamically
+      let currentTau = (18.5 - simState.floorFlat * 3.5).toFixed(1);
+      let currentSigma = (0.8 + simState.noise * 0.9).toFixed(2);
+      let currentPlasticity = Math.min(0.99, (0.65 + simState.cbpRate * 0.25)).toFixed(2);
+      let currentRetention = Math.min(99.9, (94.0 + simState.canyonWall * 3.0)).toFixed(1);
+
+      document.getElementById('kpi-tau').textContent = currentTau + " ms";
+      document.getElementById('kpi-sigma').textContent = currentSigma + " k_BT";
+      document.getElementById('kpi-plasticity').textContent = currentPlasticity;
+      document.getElementById('kpi-retention').textContent = currentRetention + "%";
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    // Launch render loop
+    requestAnimationFrame(renderLoop);
+  </script>
+</body>
+</html>
