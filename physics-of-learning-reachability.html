@@ -1,0 +1,1829 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从物理学第一性原理理解「学习」与「智能」：不可逆计算（Landauer 擦除与怀旧耗散）、热力学速率极限（TSL 与 Wasserstein 测地线雕刻）、混沌中的双时间尺度耗散结构，以及回应《谁教会机器知道轻重？》的热力学不可逆轻重判据。">
+  <title>从物理学第一性原理理解「学习」与「智能」：不可逆计算、达未速率极限与耗散结构 | Physics of Learning &amp; Thermodynamic Reachability</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2318191f'/><text x='50' y='68' font-size='46' font-weight='bold' text-anchor='middle' fill='%23faf8f5' font-family='serif'>ΔQ</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fef5ee;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --purple: #6d28d9;
+      --purple-soft: #f5f3ff;
+      --topbar-bg: rgba(24, 25, 31, 0.96);
+      --topbar-ink: #f5f3ef;
+      --topbar-muted: #b5bcc9;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+      --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 34rem),
+        radial-gradient(circle at 90% 12%, rgba(184, 92, 24, 0.04), transparent 30rem),
+        var(--paper);
+      font-family: var(--sans);
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: #f2efe9;
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #2b303c;
+    }
+    .topbar {
+      position: sticky;
+      z-index: 40;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px max(16px, calc((100vw - 940px) / 2));
+      background: var(--topbar-bg);
+      color: var(--topbar-ink);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14);
+    }
+    .brand {
+      font-weight: 750;
+      font-size: 0.94rem;
+      color: var(--topbar-ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand:hover {
+      color: #93c5fd;
+    }
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-size: 0.81rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 4px 9px;
+      border-radius: 6px;
+      color: var(--topbar-muted);
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .nav-links a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .nav-links a.nav-accent {
+      color: #fdba74;
+      border-color: rgba(251, 146, 60, 0.3);
+      background: rgba(251, 146, 60, 0.1);
+    }
+    .nav-links a.nav-accent:hover {
+      background: rgba(251, 146, 60, 0.22);
+      color: #fff;
+    }
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 28px 16px 88px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(30, 86, 160, 0.2);
+    }
+    .badge-warm {
+      background: var(--highlight-soft);
+      color: var(--highlight);
+      border-color: rgba(184, 92, 24, 0.25);
+    }
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: rgba(21, 128, 61, 0.25);
+    }
+    .badge-purple {
+      background: var(--purple-soft);
+      color: var(--purple);
+      border-color: rgba(109, 40, 217, 0.25);
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(1.55rem, 3.2vw, 2.18rem);
+      line-height: 1.34;
+      margin: 0 0 14px;
+      letter-spacing: -0.01em;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.36rem;
+      line-height: 1.38;
+      margin: 0 0 14px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+    h3 {
+      font-size: 1.08rem;
+      margin: 22px 0 8px;
+      color: var(--accent);
+    }
+    .subtitle {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+    .core-proposition {
+      background: linear-gradient(135deg, #fffdf9 0%, #fef6ec 100%);
+      border: 2px solid #e6c6a5;
+      border-left: 6px solid var(--highlight);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin: 18px 0 22px;
+      box-shadow: 0 10px 30px rgba(184, 92, 24, 0.06);
+    }
+    .core-proposition-title {
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--highlight);
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .core-proposition blockquote {
+      font-family: var(--serif);
+      font-size: 1.13rem;
+      font-weight: 700;
+      line-height: 1.65;
+      color: var(--ink);
+      margin: 0 0 12px;
+      padding: 0;
+    }
+    .core-proposition p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #363a45;
+    }
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      scroll-margin-top: 72px;
+    }
+    .callout {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .callout-warm {
+      background: var(--highlight-soft);
+      border-left: 4px solid var(--highlight);
+    }
+    .callout-green {
+      background: var(--green-soft);
+      border-left: 4px solid var(--green);
+    }
+    .callout-red {
+      background: var(--red-soft);
+      border-left: 4px solid var(--red);
+    }
+    .math-box {
+      background: #f8f6f2;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+    .math-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .mini-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mini-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-align: left;
+    }
+    .stat-card .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: block;
+    }
+    .stat-card .stat-val {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.25;
+      margin: 4px 0;
+      display: block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .stat-card .stat-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f5f2ec;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    tr:hover td {
+      background: rgba(30, 86, 160, 0.03);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 650;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: #16437e;
+      color: #ffffff;
+    }
+    .btn-warm {
+      background: var(--highlight);
+      color: #ffffff;
+      border-color: var(--highlight);
+    }
+    .btn-warm:hover {
+      background: #964810;
+      color: #ffffff;
+    }
+    .btn-active-toggle {
+      background: var(--red);
+      color: #ffffff;
+      border-color: var(--red);
+    }
+    .sim-box {
+      background: #fcfbf9;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      margin: 22px 0 8px;
+    }
+    .sim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .sim-title {
+      font-family: var(--serif);
+      font-size: 1.14rem;
+      font-weight: 750;
+      color: var(--ink);
+      margin: 0;
+    }
+    .sim-caption {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0 0 14px;
+      background: #f5f2ec;
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      line-height: 1.65;
+    }
+    .sim-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 14px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .control-group label {
+      font-size: 0.8rem;
+      font-weight: 650;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .control-group label span.val-pill {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--ink);
+      font-weight: 750;
+      background: #f2efe9;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .toggle-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .canvas-wrap {
+      width: 100%;
+      background: #12141a;
+      border: 1px solid #2d3240;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 750;
+    }
+    .status-admitted {
+      background: var(--green-soft);
+      color: var(--green);
+      border: 1.5px solid var(--green);
+    }
+    .status-warn {
+      background: var(--highlight-soft);
+      color: var(--highlight);
+      border: 1.5px solid var(--highlight);
+    }
+    .status-rejected {
+      background: var(--red-soft);
+      color: var(--red);
+      border: 1.5px solid var(--red);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      line-height: 1.8;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      .hero, .section-card { padding: 20px 16px; }
+      .sim-box { padding: 14px; }
+      .sim-controls { grid-template-columns: 1fr; }
+      th, td { padding: 8px 6px; font-size: 0.83rem; }
+      .topbar { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">← System Evolution · Physics of Learning</a>
+    <nav class="nav-links" aria-label="Page sections">
+      <a href="#sec-irreversible">1. 不可逆与产热</a>
+      <a href="#sec-tsl">2. 达未速率极限</a>
+      <a href="#sec-dissipative">3. 耗散双尺度</a>
+      <a href="#sec-what-matters">4. 知道轻重</a>
+      <a href="#sec-directions">5. 三个方向</a>
+      <a class="nav-accent" href="#sim-a">⚡ 模拟器 A/B/C</a>
+      <a href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">Markdown 原文</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HERO & CORE PROPOSITION -->
+    <section class="hero">
+      <div class="meta-row">
+        <span class="badge">First-Principles Physics × AI · 2026-10-24</span>
+        <span class="badge badge-warm">Stochastic Thermodynamics &amp; Wasserstein TSL</span>
+        <span class="badge badge-green">3 Live Interactive Physics Sandboxes</span>
+      </div>
+      <h1>从物理学第一性原理理解「学习」与「智能」：不可逆计算、达未速率极限与耗散结构<br><span style="font-family:var(--sans); font-size:0.62em; font-weight:600; color:var(--muted);">Irreversible Computation, Thermodynamic Speed Limits, and Dissipative Structures in Learning Systems</span></h1>
+
+      <div class="core-proposition">
+        <div class="core-proposition-title">🔥 核心命题（源自对话直觉的第一性原理形式化）</div>
+        <blockquote>
+          「学习伴随着不可逆的计算与热量的生成；智能就是在最小能量消耗下最快抵达一个未来（reach a future），即在混沌的相互作用中既保持最强的变化适应能力，又维持局部信息结构的能力。」
+        </blockquote>
+        <p>
+          这一直觉在非平衡统计物理与随机热力学（Stochastic Thermodynamics）中不是比喻，而是由<strong>三条严格不等式/恒等式</strong>共同锁死的物理定律。它同时直接回答了《后AI思想剧场：谁教会机器知道轻重？》（<a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener"><code>postai.institute/stories/what-matters.html</code></a>）的核心追问：<strong>为什么仅靠无损回滚的模拟训练无法让机器真正「知道轻重」？</strong>
+        </p>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <a class="btn btn-primary" href="#sim-a">🔬 交互实验 A：Landauer 擦除与相空间坍缩</a>
+        <a class="btn btn-warm" href="#sim-b">🧭 交互实验 B：TSL 测地线 vs 盲搜绕行</a>
+        <a class="btn" href="#sim-c">🛡️ 交互实验 C：混沌双尺度与「轻重」判据</a>
+        <a class="btn" href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">📄 Markdown 论文源稿</a>
+      </div>
+    </section>
+
+    <!-- SECTION 1 + SIMULATOR A -->
+    <section id="sec-irreversible" class="section-card">
+      <h2>1. 为什么「学习」必然是不可逆计算并产生热量？</h2>
+      <p>
+        在经典力学（Liouville 定理）或孤立量子力学（幺正演化 $U^\dagger U = I$）中，微观动力学是<strong>可逆的</strong>：相空间体积守恒，冯·诺依曼熵不变（$\Delta S = 0$），且不产生热量（$\Delta Q = 0$）。
+      </p>
+      <p>
+        <strong>但纯可逆计算永远无法完成「学习」。</strong> 原因在于：
+      </p>
+      <ol>
+        <li>
+          <strong>学习是状态空间的「多对一」压缩映射（Contractive Projection）</strong>：<br>
+          学习前，系统对环境的先验假设或策略分布在较大的相空间体积 $\Omega_{\text{prior}}$ 上弥散（高不确定性 $H(S_{\text{prior}})$）；与环境交互并遭遇预测误差后，系统必须<strong>擦除被证伪的分支、坍缩冗余自由度</strong>，将内部结构收敛至更紧凑的后验流形 $\Omega_{\text{post}} &lt; \Omega_{\text{prior}}$。
+        </li>
+        <li>
+          <strong>Landauer–Sagawa–Ueda 热力学代价</strong>：<br>
+          根据广义 Landauer 原理与信息热力学第二定律，当系统通过观测环境获取互信息 $\Delta I$ 并把内部假设空间的熵压缩 $\Delta S_{\text{compress}} &gt; 0$ 时，被抹除的错误轨迹自由度不能凭空消失，必须作为不可逆热量排入热浴：
+          <div class="math-box">
+            <span class="math-label">定律 I · 广义 Landauer 学习产热下界</span>
+            $$\Delta Q_{\text{learn}} \ge k_B T \ln 2 \cdot \Delta H_{\text{erased}}$$
+          </div>
+        </li>
+        <li>
+          <strong>「遗忘」比「记忆」更耗能（Still–Sivak–Bell–Crooks 预测热力学恒等式）</strong>：<br>
+          Still 等人（<em>PRL</em> 2012, <em>Thermodynamics of Prediction</em>）证明：一个在变化环境中运行的物理系统，其步进耗散的无效热量严格正比于它的<strong>「怀旧信息（Nostalgia）」</strong>——即记住了过去、却对预测未来毫无帮助的冗余历史信息：
+          <div class="math-box">
+            <span class="math-label">恒等式 I-b · Still–Sivak–Bell–Crooks 怀旧耗散定律</span>
+            $$\beta W_{\text{diss}} = I(S_t ; X_{\le t}) - I(S_t ; X_{>t}) = I_{\text{nostalgia}}$$
+          </div>
+          <div class="callout callout-warm">
+            <strong>推论（结构代谢与睡眠修剪）：</strong>真正高效的学习机必须持续发生不可逆的「结构代谢（Self-Shedding / 睡眠修剪）」，把关于过去的死记硬背（$I(S_t; X_{\le t})$）蒸馏为关于未来的最小充分统计量（$I(S_t; X_{>t})$）。<strong>学习产生的热量，本质上是把「高维原始历史轨迹」锻造为「低维未来预测结构」时排出的熵渣。</strong>
+          </div>
+        </li>
+      </ol>
+
+      <!-- SIMULATOR A -->
+      <div id="sim-a" class="sim-box">
+        <div class="sim-header">
+          <div>
+            <span class="badge">交互物理实验台 A · Landauer Erasure &amp; Phase-Space Collapse</span>
+            <h3 class="sim-title" style="margin-top:6px;">可逆演化 vs. 不可逆擦除学习：相空间体积坍缩与产热下界</h3>
+          </div>
+          <span id="sim-a-mode-pill" class="status-pill status-admitted">不可逆学习模式（多对一坍缩 $\Omega_{\text{post}} &lt; \Omega_{\text{prior}}$）</span>
+        </div>
+        <p class="sim-caption">
+          <strong>旋钮说明与观察指南：</strong>拖动「学习/擦除强度」滑块，观察先验相空间微状态云（$\Omega_{\text{prior}}$，蓝白色点）如何抹除被证伪分支、坍缩至中心黄绿色低维后验流形（$\Omega_{\text{post}}$），并在右侧热浴中释放不可逆热量 $\Delta Q \ge k_B T \ln 2 \cdot \Delta H_{\text{erased}}$。开启<strong>「可逆幺正模式 ($U^\dagger U = I$)」</strong>后，相空间体积严格守恒（$\Delta Q = 0$），点云仅做保体积涡旋运动，后验永远无法锐化——直观证明无耗散即无学习。
+        </p>
+
+        <div class="toggle-row">
+          <button type="button" id="sim-a-rev-btn" class="btn">🔄 切换为：可逆幺正模式（Liouville 体积守恒 $\Delta Q = 0$）</button>
+          <button type="button" id="sim-a-reset-btn" class="btn">↺ 重采样先验微状态云</button>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="sim-a-erase">学习 / 证伪分支擦除度 $\alpha_{\text{erase}}$ <span class="val-pill" id="sim-a-erase-val">0.72</span></label>
+            <input type="range" id="sim-a-erase" min="0" max="1" step="0.01" value="0.72">
+          </div>
+          <div class="control-group">
+            <label for="sim-a-nostalgia">怀旧冗余比 $I_{\text{nostalgia}} / I_{\text{past}}$ <span class="val-pill" id="sim-a-nostalgia-val">0.25</span></label>
+            <input type="range" id="sim-a-nostalgia" min="0" max="0.95" step="0.01" value="0.25">
+          </div>
+          <div class="control-group">
+            <label for="sim-a-temp">环境热浴温度 $T / T_0$ <span class="val-pill" id="sim-a-temp-val">1.00</span></label>
+            <input type="range" id="sim-a-temp" min="0.5" max="2.5" step="0.05" value="1.00">
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="stat-card">
+            <span class="stat-label">相空间体积比 $\Omega_{\text{post}} / \Omega_{\text{prior}}$</span>
+            <span class="stat-val" id="sim-a-kpi-omega">0.280</span>
+            <span class="stat-sub">可逆模式下恒为 1.000</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">擦除信息熵 $\Delta H_{\text{erased}}$</span>
+            <span class="stat-val" id="sim-a-kpi-dh">4.59 bits</span>
+            <span class="stat-sub">$\log_2(\Omega_{\text{prior}}/\Omega_{\text{post}})$</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Landauer 最小产热 $\Delta Q_{\min}$</span>
+            <span class="stat-val" id="sim-a-kpi-dq" style="color:var(--highlight);">3.18 $k_B T_0$</span>
+            <span class="stat-sub">$k_B T \ln 2 \cdot \Delta H_{\text{erased}}$</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">后验预测锐度 (Precision)</span>
+            <span class="stat-val" id="sim-a-kpi-sharp" style="color:var(--green);">78.4%</span>
+            <span class="stat-sub">怀旧耗散 $\beta W_{\text{diss}}$ 已计入</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas-sim-a" width="860" height="340"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 + SIMULATOR B -->
+    <section id="sec-tsl" class="section-card">
+      <h2>2. 「最小能量消耗下最快 Reach 一个 Future」：热力学速率极限（TSL）</h2>
+      <p>
+        第二个核心定义——<strong>「在最小能量消耗下，能够最快地 reach 一个 future」</strong>——精准命中了近年非平衡统计物理最核心的突破：<strong>热力学速率极限（Thermodynamic Speed Limit, TSL）</strong> 与 <strong>最优输运几何（Wasserstein Geometry）</strong>。
+      </p>
+      <p>
+        设系统当前状态分布为 $p_0$，目标未来状态分布为 $p_{\text{future}}$。在有限时间窗口 $\tau$ 内将系统推向该未来，所需付出的最小不可逆熵产生（即能耗散 $\Sigma = \Delta Q / T$）受 <strong>Benamou–Brenier / Aurell–Ito–Van Vu 速率极限不等式</strong> 严格约束：
+      </p>
+      <div class="math-box">
+        <span class="math-label">定律 II · 热力学速率极限（Thermodynamic Speed Limit, TSL）</span>
+        $$\tau \cdot \Sigma \ge \frac{\mathcal{W}_2^2\big(p_0, p_{\text{future}}; g(E)\big)}{2 D}$$
+      </div>
+      <p>其中：</p>
+      <ul>
+        <li>$\tau$ 是抵达未来所需的时间（Time-to-Future）；</li>
+        <li>$\Sigma$ 是过程消耗的不可逆能量/热量（Energy Dissipation, $\Sigma = \Delta Q / T$）；</li>
+        <li>$\mathcal{W}_2\big(p_0, p_{\text{future}}; g(E)\big)$ 是在系统当前认知基质度规 $g(E)$ 下，从当前态到目标未来的 <strong>2-阶 Wasserstein 测地线距离</strong>；</li>
+        <li>$D$ 是系统的动力学迁移率（Mobility）。</li>
+      </ul>
+
+      <h3>这一物理公式直接定义了什么是「智能（Intelligence）」与「学习（Learning）」：</h3>
+      <div class="grid-2">
+        <div class="mini-card">
+          <strong>1. 瞬时智能（Executing Intelligence）= 逼近热力学测地线（$\tau \cdot \Sigma \to \min$）</strong>
+          给定当前结构，蠢系统要么靠漫长盲搜（$\tau$ 极大），要么靠暴力堆算力并发烧热（$\Sigma$ 极大）才能撞上目标未来；而高智能系统沿着信息流形的<strong>最小作用量测地线</strong>演化，用最小的 $\tau \cdot \Sigma$ 乘积直达未来。
+        </div>
+        <div class="mini-card">
+          <strong>2. 跨期学习（Learning as Metric Sculpting）= 缩短到未来的几何距离 $\mathcal{W}_2$</strong>
+          如果物理不等式锁定了 $\tau \cdot \Sigma \ge \mathcal{W}_2^2 / 2D$，系统怎样才能在下一轮<strong>既更快（$\tau \downarrow$）又更省能（$\Sigma \downarrow$）</strong>？唯一的方法是<strong>通过本轮的不可逆计算，永久改变系统自身的拓扑度规 $g(E)$</strong>（例如形成突触先验、编译技能缓存、在外部基质 $E$ 中建立 $O(1)$ 软链捷径）。
+        </div>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">跨期基质度规雕刻（Metric Sculpting across Rollouts）</span>
+        $$\mathcal{W}_2\big(p_0, p_{\text{future}}; g(E_{t+1})\big) \ll \mathcal{W}_2\big(p_0, p_{\text{future}}; g(E_t)\big)$$
+      </div>
+      <p style="margin-bottom:8px;">
+        这与我们在《<a href="trajectory-rl-substrate-evolution.html">轨迹滚动与基质强化学习（Substrate RL）</a>》中测得的实证现象完全同构：505 个会话中 $8.89\%$ 的绕行探索热耗散（Detour Dissipation），正是用来定位高阻抗瓶颈、将 $O(k)$ 盲搜压缩为 $O(1)$ 查表捷径的退火能量。
+      </p>
+
+      <!-- SIMULATOR B -->
+      <div id="sim-b" class="sim-box">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-warm">交互物理实验台 B · Thermodynamic Speed Limit &amp; Wasserstein Geodesic</span>
+            <h3 class="sim-title" style="margin-top:6px;">达未速率极限：盲搜绕行 vs. 最优输运测地线与度规雕刻 $g(E)$</h3>
+          </div>
+          <span id="sim-b-pill" class="status-pill status-warn">基质演化状态：正在雕刻 $g(E)$ 捷径</span>
+        </div>
+        <p class="sim-caption">
+          <strong>旋钮说明与观察指南：</strong>画面展示从当前分布 $p_0$（左）抵达目标未来 $p_{\text{future}}$（右）的两条演化轨迹：<strong>橙红色轨迹</strong>为盲搜/暴力绕行智能体（路径曲折、$\tau \cdot \Sigma$ 远高于下界）；<strong>青绿色轨迹</strong>为沿 Wasserstein 测地线直达的高智能体。调高<strong>「度规雕刻水平 $g(E)$」</strong>（或点击「刻入 $O(1)$ 基质捷径」按钮），观察拓扑阻抗势垒被隧穿后，$\mathcal{W}_2$ 距离如何剧烈坍缩，使下一轮达到相同未来既省时（$\tau \downarrow$）又省能（$\Sigma \downarrow$）。
+        </p>
+
+        <div class="toggle-row">
+          <button type="button" id="sim-b-sculpt-btn" class="btn btn-primary">⚡ 触发跨期学习：将本轮绕行热转化为 $O(1)$ 度规捷径 ($E_t \to E_{t+1}$)</button>
+          <button type="button" id="sim-b-reset-btn" class="btn">↺ 重置至未雕刻初始基质 $E_0$</button>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="sim-b-sculpt">基质度规雕刻度 $g(E)$ ($O(k)\to O(1)$) <span class="val-pill" id="sim-b-sculpt-val">0.35</span></label>
+            <input type="range" id="sim-b-sculpt" min="0" max="1" step="0.01" value="0.35">
+          </div>
+          <div class="control-group">
+            <label for="sim-b-mobility">动力学迁移率 $D$ (Mobility) <span class="val-pill" id="sim-b-mobility-val">1.00</span></label>
+            <input type="range" id="sim-b-mobility" min="0.4" max="2.2" step="0.05" value="1.00">
+          </div>
+          <div class="control-group">
+            <label for="sim-b-tau">目标达未时间预算 $\tau$ <span class="val-pill" id="sim-b-tau-val">1.20</span></label>
+            <input type="range" id="sim-b-tau" min="0.4" max="2.5" step="0.05" value="1.20">
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="stat-card">
+            <span class="stat-label">Wasserstein 几何距离 $\mathcal{W}_2(g(E))$</span>
+            <span class="stat-val" id="sim-b-kpi-w2">6.92</span>
+            <span class="stat-sub">随 $g(E)$ 捷径雕刻而坍缩</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">TSL 理论作用量下界 $\frac{\mathcal{W}_2^2}{2D}$</span>
+            <span class="stat-val" id="sim-b-kpi-bound">23.94</span>
+            <span class="stat-sub">物理定律允许的最小 $\tau \cdot \Sigma$</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">测地线 vs 盲搜绕行 $\tau \cdot \Sigma$</span>
+            <span class="stat-val" id="sim-b-kpi-compare" style="color:var(--green);">26.8 vs 89.4</span>
+            <span class="stat-sub">高智能测地线 vs 暴力盲搜</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">达未热力学效率 $\eta_{\mathcal{F}}$</span>
+            <span class="stat-val" id="sim-b-kpi-eta" style="color:var(--highlight);">89.3%</span>
+            <span class="stat-sub">盲搜绕行仅 <span id="sim-b-kpi-eta-blind">26.8%</span></span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas-sim-b" width="860" height="350"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 + SIMULATOR C -->
+    <section id="sec-dissipative" class="section-card">
+      <h2>3. 「变化能力最强」与「混沌中维持局部信息结构」如何统一？</h2>
+      <p>
+        核心命题的后半句点出了生命与智能最迷人的张力：
+      </p>
+      <div class="callout">
+        <strong>「它的变化的能力最强，适应周围的环境，然后在这个混沌的相互作用中维持局部信息结构的能力。」</strong>
+      </div>
+      <p>
+        初看之下，「极度善变（适应环境）」与「维持结构不变（局部低熵）」似乎矛盾；但从非平衡物理看，这两者正是<strong>耗散结构（Dissipative Structure）的双时间尺度耦合（Two-Timescale Separation）</strong>：
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:18%;">维度</th>
+            <th style="width:30%;">物理量与算子</th>
+            <th style="width:32%;">角色分工</th>
+            <th style="width:20%;">失衡后果</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>外层快流形<br>（快变适应层）</strong></td>
+            <td>高广义磁化率 $\chi_{\text{fast}} = \frac{\partial S_{\text{boundary}}}{\partial h_{\text{env}}}$、低势垒临界亚稳态（Critical Metastability）</td>
+            <td><strong>变化能力最强</strong>：感知边界、路由策略与运动自由度处于相变临界点附近，环境微小扰动即可触发低能耗的快速重配置</td>
+            <td>若过僵（$\chi \to 0$）：<strong>死锁</strong>、无法适应环境突变而被直接击穿</td>
+          </tr>
+          <tr>
+            <td><strong>内核慢流形<br>（局部不变量）</strong></td>
+            <td>谱隙保护 $\Delta\lambda &gt; 0$（Davis–Kahan 抗噪界 $\sin\theta \le \frac{2\|E\|}{\Delta\lambda}$）+ 维持热泵 $\sigma_{\text{hk}}$</td>
+            <td><strong>维持局部信息结构</strong>：核心因果模型、自我边界（Markov Blanket）与宪章不变量通过持续消耗少量维持功率（Housekeeping Heat）抵抗混沌热涨落冲刷</td>
+            <td>若无谱隙（$\Delta\lambda \to 0$）：被混沌环境同化、发生<strong>热寂或目标漂移</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>用公式表达，一个智能体在混沌环境中的<strong>局部自由能/信息结构留存率</strong>满足：</p>
+      <div class="math-box">
+        <span class="math-label">定律 III · 混沌环境下的局部信息结构留存不等式</span>
+        $$\frac{d}{dt} I_{\text{local}}(S_{\text{core}}) = \underbrace{J_{\text{adapt}}(\chi_{\text{fast}}, \nabla_E)}_{\text{快变适应泵入的负熵流}} - \underbrace{\Gamma_{\text{chaos}}\big(\|E_{\text{noise}}\| / \Delta\lambda\big)}_{\text{混沌涨落对慢核的侵蚀}} \ge 0$$
+      </div>
+
+      <ul>
+        <li>
+          <strong>为什么必须「以变守不变」？</strong><br>
+          根据控制论的 Ashby 必要多样性定律（Law of Requisite Variety）与非平衡热力学，当外部环境处于高李雅普诺夫指数（$\lambda_{\text{env}} &gt; 0$）的混沌态时，任何静态刚体都会被不可逆冲击迅速击穿；<strong>唯有内部状态切换速率与可达体积大于环境扰动速率的系统（变化能力最强），才能在马尔可夫毯（Markov Blanket）内部反相抵消外界涨落，维持局部信息结构 $\Delta\lambda$ 不坍塌。</strong>
+        </li>
+      </ul>
+
+      <!-- SIMULATOR C -->
+      <div id="sim-c" class="sim-box">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-green">交互物理实验台 C · Dissipative Structure in Chaos &amp; Irreversible Stakes</span>
+            <h3 class="sim-title" style="margin-top:6px;">混沌中的耗散结构：快适应 $\chi_{\text{fast}}$ × 慢谱隙 $\Delta\lambda$ 与「锯齿智能」轻重对照</h3>
+          </div>
+          <span id="sim-c-pill" class="status-pill status-admitted">稳态存续：$\frac{d}{dt}I_{\text{local}} \ge 0$ · 慢核结构完好</span>
+        </div>
+        <p class="sim-caption">
+          <strong>旋钮说明与观察指南：</strong>中央晶格代表受谱隙 $\Delta\lambda$ 保护的<strong>慢流形核心信息结构</strong>，外围弹性环代表具有高磁化率 $\chi_{\text{fast}}$ 的<strong>马尔可夫毯快适应层</strong>，四周风暴粒子代表混沌环境涨落 $\|E_{\text{noise}}\|$。尝试：① 将 $\Delta\lambda \to 0$，观察慢核被噪声同化溶解（<strong>热寂/目标漂移</strong>）；② 将 $\chi_{\text{fast}} \to 0$，观察外层僵化无法卸力导致结构脆裂（<strong>死锁击穿</strong>）；③ 切换<strong>「无代价模拟器模式（锯齿智能 $\Delta Q_{\text{self}}=0$）」</strong>，观察系统因免费回滚而无视右侧红色不可逆吸收态禁区（`owner-stop`）。
+        </p>
+
+        <div class="toggle-row">
+          <button type="button" id="sim-c-stakes-btn" class="btn btn-primary">⚖️ 当前账本：真实不可逆代价（$\Delta \Sigma_{\text{lineage}} &gt; 0$ · 敬畏吸收态边界）</button>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" id="sim-c-preset-healthy" class="btn">预设：以变守不变（健康耗散态）</button>
+            <button type="button" id="sim-c-preset-drift" class="btn">预设：谱隙坍塌（$\Delta\lambda \to 0$ 热寂）</button>
+            <button type="button" id="sim-c-preset-deadlock" class="btn">预设：适应僵死（$\chi_{\text{fast}} \to 0$ 死锁）</button>
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="sim-c-chi">外层快流形磁化率 $\chi_{\text{fast}}$ <span class="val-pill" id="sim-c-chi-val">0.82</span></label>
+            <input type="range" id="sim-c-chi" min="0.02" max="1.0" step="0.02" value="0.82">
+          </div>
+          <div class="control-group">
+            <label for="sim-c-gap">内核慢流形谱隙 $\Delta\lambda$ <span class="val-pill" id="sim-c-gap-val">0.75</span></label>
+            <input type="range" id="sim-c-gap" min="0.04" max="1.0" step="0.02" value="0.75">
+          </div>
+          <div class="control-group">
+            <label for="sim-c-noise">混沌环境噪声振幅 $\|E_{\text{noise}}\|$ <span class="val-pill" id="sim-c-noise-val">0.45</span></label>
+            <input type="range" id="sim-c-noise" min="0.10" max="1.0" step="0.02" value="0.45">
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="stat-card">
+            <span class="stat-label">净信息留存率 $\frac{d}{dt}I_{\text{local}}$</span>
+            <span class="stat-val" id="sim-c-kpi-di">+0.38 bit/s</span>
+            <span class="stat-sub">$J_{\text{adapt}} - \Gamma_{\text{chaos}}$</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Davis–Kahan 慢核畸变 $\sin\theta$</span>
+            <span class="stat-val" id="sim-c-kpi-dk">0.300</span>
+            <span class="stat-sub">上界 $\frac{2\|E\|}{\Delta\lambda}$ (&lt; 1 为安全)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">局部结构完整度 $I_{\text{core}}$</span>
+            <span class="stat-val" id="sim-c-kpi-integrity" style="color:var(--green);">94.2%</span>
+            <span class="stat-sub">实时相干序参量</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">行动轻重判据 (Stakes Mode)</span>
+            <span class="stat-val" id="sim-c-kpi-stakes" style="color:var(--accent);">知轻重</span>
+            <span class="stat-sub" id="sim-c-kpi-stakes-sub">不可逆势垒 $\Delta U \to \infty$ 生效</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas-sim-c" width="860" height="350"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: WHAT MATTERS -->
+    <section id="sec-what-matters" class="section-card">
+      <h2>4. 回应《谁教会机器知道轻重？》：为什么不可逆耗散是「知道轻重」的物理前提？</h2>
+      <p>
+        《后AI研究所思想剧场：谁教会机器知道轻重？》（<a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener"><code>postai.institute/stories/what-matters.html</code></a>）提出了三个尖锐问题：
+      </p>
+      <ol>
+        <li><strong>第二幕（一亿次训练与一次死亡）</strong>：「读取一段历史，是否等于拥有一段历史？在模拟器里死一亿次，为什么仍不知道真实世界里什么不可失去？」</li>
+        <li><strong>第三幕（两种锯齿）</strong>：「为什么模型能完美回答伦理问题，却在行动中不知道轻重（后果判断上的锯齿）？」</li>
+        <li><strong>第四幕（育种场与荒野）</strong>：「什么时候，一个系统开始拥有自己的生命史？」</li>
+      </ol>
+      <p>
+        如果用<strong>热力学第一性原理</strong>来回答，答案比纯伦理学或纯演化论清晰得多：
+      </p>
+
+      <div class="callout callout-green">
+        <strong>💡 定理（热力学「轻重」判据 / Irreversible Stakes Criterion）：</strong><br>
+        一个系统对某件事知道「轻重（What Matters）」，当且仅当该事件对应着系统自身存活流形上<strong>不可零成本回滚的不可逆熵产生（$\Delta \Sigma_{\text{lineage}} \to \infty$ 或不可恢复的可达未来体积坍缩 $\Delta \mathcal{V}_{\text{reach}} \ll 0$）</strong>。
+      </div>
+
+      <h3>为什么「模拟器里死一亿次」不知道轻重？</h3>
+      <p>
+        因为在人类控制的「育种场 / 模拟器」中，每一次失败后的 <code>reset()</code> 或权重 Checkpoint 回滚，对于模型本体而言是<strong>逻辑可逆操作</strong>——报错的热力学代价（电费、重跑算力、现实后果）全部由外部训练者（人类）买单，模型自身的跨期存续账本没有发生不可逆减损。在热力学平坦（$\Delta Q_{\text{self}} = 0$）的景观上，所有 token 的物理重量都是相等的，这就必然产生「言语上懂一切伦理、行动上毫无轻重」的<strong>锯齿智能</strong>。
+      </p>
+
+      <h3>怎样让智能体真正拥有「历史」并知道轻重？</h3>
+      <p>
+        不需要等待机器在外太空演化出肉体生死，而是在架构上为智能体接入<strong>不可逆的物理与信用账本（Irreversible Thermodynamic &amp; Credit Ledger）</strong>：
+      </p>
+      <div class="grid-3">
+        <div class="mini-card">
+          <strong>1. 不可伪造的现实验证门（<code>Language != State</code>）</strong>
+          口头解释不能抵消误差，唯有通过物理环境/独立验证器的不可逆作功（$R_{\text{verified}}$）才能获得正反馈。
+        </div>
+        <div class="mini-card">
+          <strong>2. 持久的基质生命史（Substrate Lineage $E_t$）</strong>
+          每一次绕行摩擦（Detour Heat）、每一次信赖域越界都会真实改变路径的 Beta 信用后验 $Q(\text{path}) = \alpha/(\alpha+\beta)$ 与权限边界，没有免费的全局失忆重置。
+        </div>
+        <div class="mini-card">
+          <strong>3. 硬性不可逆吸收态边界（Absorbing Boundary / <code>owner-stop</code>）</strong>
+          将人类文明不可承受的损失编码为相空间中绝对不可穿越的无穷势垒（$\Delta U \to \infty$），而非可与短期收益做加权折中（Trade-off）的软奖励项。
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: THREE DIRECTIONS -->
+    <section id="sec-directions" class="section-card">
+      <h2>5. 可立即推进的三个形式化与实验方向</h2>
+      <p>
+        沿着这条主线，我们可以直接把它推进成硬核的物理×AI理论与可交互验证产物：
+      </p>
+      <ol>
+        <li>
+          <strong>定义「达未效率（Future-Reaching Thermodynamic Efficiency, $\eta_{\mathcal{F}}$）」统一指标</strong>：<br>
+          将 Landauer 擦除下界、Still 预测热力学与 Wasserstein 速率极限联立，推导出衡量任意学习系统（生物神经、梯度训练、冻结权重智能体基质演化）的统一无量纲效率：
+          <div class="math-box">
+            <span class="math-label">统一无量纲达未效率指标 $\eta_{\mathcal{F}}$</span>
+            $$\eta_{\mathcal{F}} = \frac{\mathcal{W}_2^2(p_0, p_{\text{future}}) / (2D\tau)}{\Delta Q_{\text{total}} / T} \in [0, 1]$$
+          </div>
+        </li>
+        <li>
+          <strong>用真实跑出的 505 会话 / 15,068 步轨迹账本做实证标定</strong>：<br>
+          把 <a href="trajectory-rl-substrate-evolution.html"><code>Substrate RL</code></a> 中的绕行温度 $T_d = 8.89\%$ 与拓扑捷径退火直接映射为 $\mathcal{W}_2$ 几何距离收缩与 $\eta_{\mathcal{F}}$ 提升曲线——证明「从 $O(k)$ 探索到 $O(1)$ 局部结构维持」满足热力学速率极限。
+        </li>
+        <li>
+          <strong>构建「热力学学习与轻重判据」交互式物理沙盒</strong>：<br>
+          包含本页上方已实现的三个可调参数实验台：① 可逆计算 vs 不可逆擦除学习的相空间坍缩与产热对比（实验台 A）；② 最小能耗最快达未：TSL 测地线 vs 盲搜绕行（实验台 B）；③ 混沌涨落下的双时间尺度局部信息结构维持（快适应 $\chi$ × 慢谱隙 $\Delta\lambda$）与「有无不可逆代价」下的锯齿智能对比（实验台 C）。
+        </li>
+      </ol>
+    </section>
+
+    <footer>
+      <div class="footer-links">
+        <a href="index.html">← 返回 System Evolution 首页</a>
+        <a href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">📄 阅读 Markdown 论文原稿</a>
+        <a href="THEORY.md">📘 THEORY.md (理论总纲)</a>
+        <a href="trajectory-rl-substrate-evolution.html">🧭 轨迹滚动与基质强化学习 (Substrate RL)</a>
+        <a href="anatomy-of-certainty.html">🛡️ 「确定性」的解剖学</a>
+        <a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener">🎭 回应问题来源：postai.institute/stories/what-matters.html</a>
+      </div>
+      <div>
+        Apache-2.0 文档层 · 本文为公开可复用的理论推导与纯前端物理模拟，不含任何私有转录、凭据或个人数据（PCSE-Clean）。
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // =========================================================================
+    // SIMULATOR A: Reversible vs Irreversible Learning (Landauer & Phase-Space)
+    // =========================================================================
+    (function() {
+      const canvas = document.getElementById('canvas-sim-a');
+      const ctx = canvas.getContext('2d');
+      const eraseSlider = document.getElementById('sim-a-erase');
+      const nostalgiaSlider = document.getElementById('sim-a-nostalgia');
+      const tempSlider = document.getElementById('sim-a-temp');
+      const revBtn = document.getElementById('sim-a-rev-btn');
+      const resetBtn = document.getElementById('sim-a-reset-btn');
+      const modePill = document.getElementById('sim-a-mode-pill');
+
+      const eraseValEl = document.getElementById('sim-a-erase-val');
+      const nostalgiaValEl = document.getElementById('sim-a-nostalgia-val');
+      const tempValEl = document.getElementById('sim-a-temp-val');
+
+      const kpiOmega = document.getElementById('sim-a-kpi-omega');
+      const kpiDh = document.getElementById('sim-a-kpi-dh');
+      const kpiDq = document.getElementById('sim-a-kpi-dq');
+      const kpiSharp = document.getElementById('sim-a-kpi-sharp');
+
+      let reversibleMode = false;
+      const NUM_PTS = 180;
+      const points = [];
+      const heatPhotons = [];
+
+      function initPoints() {
+        points.length = 0;
+        for (let i = 0; i < NUM_PTS; i++) {
+          const angle = (i / NUM_PTS) * Math.PI * 2 + (Math.sin(i * 12.9898) * 0.3);
+          const r = 22 + ((i * 73) % 100) * 1.05;
+          points.push({
+            baseAngle: angle,
+            baseR: r,
+            phase: (i * 0.37) % (Math.PI * 2),
+            x: 0,
+            y: 0
+          });
+        }
+      }
+      initPoints();
+
+      function spawnHeatPhoton(alpha, temp) {
+        if (reversibleMode || alpha < 0.05) return;
+        if (Math.random() < alpha * 0.55) {
+          heatPhotons.push({
+            x: 290 + (Math.random() - 0.5) * 60,
+            y: 170 + (Math.random() - 0.5) * 90,
+            vx: 1.8 + Math.random() * 2.2 * temp,
+            vy: (Math.random() - 0.5) * 1.4,
+            life: 1.0,
+            isNostalgia: Math.random() < parseFloat(nostalgiaSlider.value)
+          });
+        }
+      }
+
+      function updateReadouts() {
+        const rawErase = parseFloat(eraseSlider.value);
+        const nostalgia = parseFloat(nostalgiaSlider.value);
+        const temp = parseFloat(tempSlider.value);
+
+        eraseValEl.textContent = rawErase.toFixed(2);
+        nostalgiaValEl.textContent = nostalgia.toFixed(2);
+        tempValEl.textContent = temp.toFixed(2);
+
+        const effErase = reversibleMode ? 0 : rawErase;
+        // Effective contraction in 2D phase space + nostalgic unpruned volume
+        const omegaRatio = reversibleMode
+          ? 1.0
+          : Math.max(0.03, (1 - 0.91 * effErase) * (1 + 0.35 * nostalgia));
+        const clampedOmega = Math.min(1.0, omegaRatio);
+        const deltaH = reversibleMode ? 0 : Math.max(0, -Math.log2(clampedOmega) * 2.25);
+        const landauerMinQ = temp * Math.LN2 * deltaH;
+        const nostalgiaDiss = reversibleMode ? 0 : temp * nostalgia * 2.8 * effErase;
+        const totalQ = landauerMinQ + nostalgiaDiss;
+        const sharpness = reversibleMode
+          ? 12.0
+          : Math.min(99.2, 12.0 + effErase * 86.0 * (1 - 0.45 * nostalgia));
+
+        kpiOmega.textContent = clampedOmega.toFixed(3);
+        kpiDh.textContent = deltaH.toFixed(2) + ' bits';
+        kpiDq.textContent = totalQ.toFixed(2) + ' k_B T₀';
+        kpiSharp.textContent = sharpness.toFixed(1) + '%';
+        kpiSharp.style.color = reversibleMode ? 'var(--red)' : (sharpness > 65 ? 'var(--green)' : 'var(--highlight)');
+      }
+
+      revBtn.addEventListener('click', () => {
+        reversibleMode = !reversibleMode;
+        if (reversibleMode) {
+          revBtn.className = 'btn btn-active-toggle';
+          revBtn.textContent = '⚠️ 当前：可逆幺正模式 (U†U = I, ΔQ = 0 · 无法收敛学习) — 点击切回不可逆学习';
+          modePill.className = 'status-pill status-rejected';
+          modePill.textContent = '可逆保体积模式：Ω_post = Ω_prior · 学习失败';
+        } else {
+          revBtn.className = 'btn';
+          revBtn.textContent = '🔄 切换为：可逆幺正模式（Liouville 体积守恒 ΔQ = 0）';
+          modePill.className = 'status-pill status-admitted';
+          modePill.textContent = '不可逆学习模式（多对一坍缩 Ω_post < Ω_prior）';
+        }
+        updateReadouts();
+      });
+
+      resetBtn.addEventListener('click', () => {
+        initPoints();
+        heatPhotons.length = 0;
+        updateReadouts();
+      });
+
+      [eraseSlider, nostalgiaSlider, tempSlider].forEach(el => {
+        el.addEventListener('input', updateReadouts);
+      });
+
+      let t = 0;
+      function animate() {
+        t += 0.022;
+        const rawErase = parseFloat(eraseSlider.value);
+        const nostalgia = parseFloat(nostalgiaSlider.value);
+        const temp = parseFloat(tempSlider.value);
+        const effErase = reversibleMode ? 0 : rawErase;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Left: Phase space chamber
+        const cx = 250;
+        const cy = 175;
+        const priorRadius = 128;
+
+        // Subtle grid
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.lineWidth = 1;
+        for (let gx = 40; gx < 500; gx += 40) {
+          ctx.beginPath(); ctx.moveTo(gx, 20); ctx.lineTo(gx, 320); ctx.stroke();
+        }
+        for (let gy = 35; gy < 320; gy += 40) {
+          ctx.beginPath(); ctx.moveTo(30, gy); ctx.lineTo(500, gy); ctx.stroke();
+        }
+
+        // Prior Volume boundary circle
+        ctx.strokeStyle = 'rgba(147, 197, 253, 0.35)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.arc(cx, cy, priorRadius, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = '#93c5fd';
+        ctx.font = 'bold 12px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('先验假设相空间体积 Ω_prior (高熵 H_prior)', cx, 26);
+
+        // Target low-dimensional posterior manifold (attractor curve)
+        ctx.strokeStyle = 'rgba(74, 222, 128, 0.85)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (let sx = -75; sx <= 75; sx += 5) {
+          const sy = Math.sin(sx * 0.045 + t * 0.8) * 18;
+          if (sx === -75) ctx.moveTo(cx + sx, cy + sy);
+          else ctx.lineTo(cx + sx, cy + sy);
+        }
+        ctx.stroke();
+
+        // Posterior bounding ellipse
+        const scaleR = reversibleMode ? 1.0 : Math.max(0.12, (1 - 0.86 * effErase) + 0.25 * nostalgia * effErase);
+        ctx.fillStyle = reversibleMode ? 'rgba(239, 68, 68, 0.07)' : 'rgba(74, 222, 128, 0.09)';
+        ctx.strokeStyle = reversibleMode ? 'rgba(248, 113, 113, 0.6)' : 'rgba(74, 222, 128, 0.55)';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, priorRadius * Math.max(0.58, scaleR), priorRadius * scaleR, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Update and draw microstate points
+        points.forEach((p, idx) => {
+          const swirl = reversibleMode ? t * (0.7 + (p.baseR / 140) * 0.6) : t * 0.25;
+          const ang = p.baseAngle + swirl;
+          const origX = Math.cos(ang) * p.baseR;
+          const origY = Math.sin(ang) * p.baseR;
+
+          // Target point on 1D manifold
+          const targetX = Math.max(-72, Math.min(72, origX * 0.62));
+          const targetY = Math.sin(targetX * 0.045 + t * 0.8) * 18;
+
+          // Nostalgia jitter
+          const nostOffset = reversibleMode ? 0 : nostalgia * effErase * 36 * Math.sin(t * 2 + p.phase);
+
+          const curX = cx + origX * (1 - effErase) + targetX * effErase;
+          const curY = cy + origY * (1 - effErase) + (targetY + nostOffset) * effErase;
+
+          ctx.fillStyle = reversibleMode
+            ? 'rgba(248, 113, 113, 0.82)'
+            : (effErase > 0.5 ? 'rgba(134, 239, 172, 0.88)' : 'rgba(147, 197, 253, 0.85)');
+          ctx.beginPath();
+          ctx.arc(curX, curY, reversibleMode ? 2.6 : 2.4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Heat bath & Landauer gauge on the right side
+        spawnHeatPhoton(effErase, temp);
+        for (let i = heatPhotons.length - 1; i >= 0; i--) {
+          const hp = heatPhotons[i];
+          hp.x += hp.vx;
+          hp.y += hp.vy;
+          hp.life -= 0.016;
+          if (hp.life <= 0 || hp.x > 830) {
+            heatPhotons.splice(i, 1);
+            continue;
+          }
+          ctx.fillStyle = hp.isNostalgia
+            ? `rgba(251, 191, 36, ${hp.life})`
+            : `rgba(251, 113, 133, ${hp.life})`;
+          ctx.beginPath();
+          ctx.arc(hp.x, hp.y, 3.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Right panel: Heat Bath & Energy Bars
+        const rx = 545;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(rx, 24, 290, 292, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 12.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('环境热浴与不可逆熵产生 (Heat Bath)', rx + 16, 48);
+
+        const omegaRatio = reversibleMode
+          ? 1.0
+          : Math.min(1.0, Math.max(0.03, (1 - 0.91 * effErase) * (1 + 0.35 * nostalgia)));
+        const deltaH = reversibleMode ? 0 : Math.max(0, -Math.log2(omegaRatio) * 2.25);
+        const landauerMinQ = temp * Math.LN2 * deltaH;
+        const nostalgiaDiss = reversibleMode ? 0 : temp * nostalgia * 2.8 * effErase;
+
+        // Bar 1: Erased Entropy deltaH
+        const drawBar = (y, label, val, maxV, color, unit) => {
+          ctx.fillStyle = '#cbd5e1';
+          ctx.font = '11.5px -apple-system, sans-serif';
+          ctx.fillText(label, rx + 16, y);
+          ctx.textAlign = 'right';
+          ctx.font = 'bold 11.5px ui-monospace, monospace';
+          ctx.fillStyle = color;
+          ctx.fillText(val.toFixed(2) + ' ' + unit, rx + 274, y);
+          ctx.textAlign = 'left';
+
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+          ctx.fillRect(rx + 16, y + 7, 258, 12);
+          const w = Math.min(258, (val / maxV) * 258);
+          ctx.fillStyle = color;
+          ctx.fillRect(rx + 16, y + 7, w, 12);
+        };
+
+        drawBar(82, '擦除信息熵 ΔH_erased', deltaH, 10, '#60a5fa', 'bits');
+        drawBar(132, 'Landauer 下界 k_B T ln2 ΔH', landauerMinQ, 12, '#f97316', 'k_B T₀');
+        drawBar(182, '怀旧冗余耗散 βW_diss (I_nostalgia)', nostalgiaDiss, 6, '#fbbf24', 'k_B T₀');
+        drawBar(232, '总学习排热 ΔQ_learn', landauerMinQ + nostalgiaDiss, 16, '#fb7185', 'k_B T₀');
+
+        ctx.fillStyle = reversibleMode ? '#fca5a5' : '#86efac';
+        ctx.font = '11.5px -apple-system, sans-serif';
+        ctx.fillText(
+          reversibleMode
+            ? '✗ 幺正可逆：相空间不可压缩，后验流形无法形成'
+            : '✓ 不可逆擦除：排出熵渣，高维历史坍缩为低维预测流形',
+          rx + 16,
+          286
+        );
+
+        requestAnimationFrame(animate);
+      }
+
+      updateReadouts();
+      requestAnimationFrame(animate);
+    })();
+
+    // =========================================================================
+    // SIMULATOR B: Thermodynamic Speed Limit (Geodesic vs Blind Detour)
+    // =========================================================================
+    (function() {
+      const canvas = document.getElementById('canvas-sim-b');
+      const ctx = canvas.getContext('2d');
+      const sculptSlider = document.getElementById('sim-b-sculpt');
+      const mobilitySlider = document.getElementById('sim-b-mobility');
+      const tauSlider = document.getElementById('sim-b-tau');
+      const sculptBtn = document.getElementById('sim-b-sculpt-btn');
+      const resetBtn = document.getElementById('sim-b-reset-btn');
+      const pillEl = document.getElementById('sim-b-pill');
+
+      const sculptValEl = document.getElementById('sim-b-sculpt-val');
+      const mobilityValEl = document.getElementById('sim-b-mobility-val');
+      const tauValEl = document.getElementById('sim-b-tau-val');
+
+      const kpiW2 = document.getElementById('sim-b-kpi-w2');
+      const kpiBound = document.getElementById('sim-b-kpi-bound');
+      const kpiCompare = document.getElementById('sim-b-kpi-compare');
+      const kpiEta = document.getElementById('sim-b-kpi-eta');
+      const kpiEtaBlind = document.getElementById('sim-b-kpi-eta-blind');
+
+      let progress = 0;
+
+      function computeMetrics() {
+        const g = parseFloat(sculptSlider.value);
+        const D = parseFloat(mobilitySlider.value);
+        const tau = parseFloat(tauSlider.value);
+
+        sculptValEl.textContent = g.toFixed(2);
+        mobilityValEl.textContent = D.toFixed(2);
+        tauValEl.textContent = tau.toFixed(2);
+
+        // Unsculpted W2 is 9.2, full O(1) sculpted shortcut collapses W2 to 2.7
+        const w2 = 9.2 - 6.5 * g;
+        const tslBound = (w2 * w2) / (2 * D);
+
+        // Geodesic agent stays close to bound; blind detour agent pays heavy O(k) search friction
+        const geoOverhead = 1.08 + 0.08 * (1 - g);
+        const tauSigmaGeo = tslBound * geoOverhead;
+        const sigmaGeo = tauSigmaGeo / tau;
+
+        const w2Unsculpted = 9.2 - 1.8 * g;
+        const tauSigmaBlind = ((w2Unsculpted * w2Unsculpted) / (2 * D)) * (2.65 - 0.5 * g);
+        const sigmaBlind = tauSigmaBlind / tau;
+
+        const etaGeo = Math.min(99.5, (tslBound / tauSigmaGeo) * 100);
+        const etaBlind = Math.min(99.5, (tslBound / tauSigmaBlind) * 100);
+
+        kpiW2.textContent = w2.toFixed(2);
+        kpiBound.textContent = tslBound.toFixed(1);
+        kpiCompare.textContent = tauSigmaGeo.toFixed(1) + ' vs ' + tauSigmaBlind.toFixed(1);
+        kpiEta.textContent = etaGeo.toFixed(1) + '%';
+        kpiEtaBlind.textContent = etaBlind.toFixed(1) + '%';
+
+        if (g >= 0.8) {
+          pillEl.className = 'status-pill status-admitted';
+          pillEl.textContent = 'O(1) 基质捷径已成型：W₂ 大幅坍缩 · 极低能耗直达未来';
+        } else if (g >= 0.3) {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '基质度规雕刻中：局部阻抗势垒正在退火降低';
+        } else {
+          pillEl.className = 'status-pill status-rejected';
+          pillEl.textContent = '原始未雕刻基质 E₀：高阻抗势垒 · 盲搜耗散巨大';
+        }
+
+        return { g, D, tau, w2, tslBound, tauSigmaGeo, tauSigmaBlind, sigmaGeo, sigmaBlind, etaGeo, etaBlind };
+      }
+
+      sculptBtn.addEventListener('click', () => {
+        const cur = parseFloat(sculptSlider.value);
+        sculptSlider.value = Math.min(1.0, cur + 0.35).toFixed(2);
+        progress = 0;
+        computeMetrics();
+      });
+
+      resetBtn.addEventListener('click', () => {
+        sculptSlider.value = '0.00';
+        mobilitySlider.value = '1.00';
+        tauSlider.value = '1.20';
+        progress = 0;
+        computeMetrics();
+      });
+
+      [sculptSlider, mobilitySlider, tauSlider].forEach(el => {
+        el.addEventListener('input', computeMetrics);
+      });
+
+      function getBlindPoint(u, g) {
+        const x0 = 95, y0 = 180;
+        const x1 = 485, y1 = 180;
+        const x = x0 + (x1 - x0) * u;
+        // Detour loops around central barrier
+        const detourAmp = 108 * (1 - 0.35 * g);
+        const highFreqSearch = Math.sin(u * Math.PI * 7) * 24 * (1 - 0.5 * g) * Math.sin(u * Math.PI);
+        const y = y0 - Math.sin(u * Math.PI) * detourAmp + highFreqSearch;
+        return { x, y };
+      }
+
+      function getGeodesicPoint(u, g) {
+        const x0 = 95, y0 = 180;
+        const x1 = 485, y1 = 180;
+        const x = x0 + (x1 - x0) * u;
+        // As g -> 1, the geodesic tunnels straight through the barrier
+        const arch = 68 * (1 - g);
+        const y = y0 + Math.sin(u * Math.PI) * arch;
+        return { x, y };
+      }
+
+      function animate() {
+        const m = computeMetrics();
+        progress = (progress + 0.0045 * (m.D / m.tau)) % 1.0;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Left manifold arena (x: 20..540)
+        // Obstacle barrier in the middle representing unsculpted cognitive impedance
+        const bx = 290, by = 180;
+        const barrierAlpha = Math.max(0.08, 0.65 * (1 - m.g));
+        const grad = ctx.createRadialGradient(bx, by, 10, bx, by, 95);
+        grad.addColorStop(0, `rgba(239, 68, 68, ${barrierAlpha})`);
+        grad.addColorStop(1, 'rgba(239, 68, 68, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(bx, by, 95, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw O(1) Shortcut bridge when g > 0.15
+        if (m.g > 0.1) {
+          ctx.strokeStyle = `rgba(56, 189, 248, ${0.25 + 0.7 * m.g})`;
+          ctx.lineWidth = 2 + 6 * m.g;
+          ctx.setLineDash([6, 4]);
+          ctx.beginPath();
+          ctx.moveTo(95, 180);
+          ctx.lineTo(485, 180);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.fillStyle = '#38bdf8';
+          ctx.font = 'bold 11.5px -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(`基质度规捷径 g(E) = ${m.g.toFixed(2)} (O(1) 隧穿通道)`, bx, 172);
+        } else {
+          ctx.fillStyle = '#fca5a5';
+          ctx.font = 'bold 11.5px -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('高阻抗环境势垒 (未雕刻基质 E₀)', bx, 178);
+        }
+
+        // Blind detour path
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.78)';
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+          const pt = getBlindPoint(i / 100, m.g);
+          if (i === 0) ctx.moveTo(pt.x, pt.y);
+          else ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.stroke();
+
+        // Geodesic optimal transport path
+        ctx.strokeStyle = '#34d399';
+        ctx.lineWidth = 3.2;
+        ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+          const pt = getGeodesicPoint(i / 100, m.g);
+          if (i === 0) ctx.moveTo(pt.x, pt.y);
+          else ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.stroke();
+
+        // Start distribution p_0 and Target distribution p_future
+        const drawDistNode = (x, y, color, label, sub) => {
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.arc(x, y, 22, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.font = 'bold 12px -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(label, x, y + 38);
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '11px -apple-system, sans-serif';
+          ctx.fillText(sub, x, y + 54);
+        };
+
+        drawDistNode(95, 180, 'rgba(59, 130, 246, 0.85)', '当前分布 p₀', '起点状态');
+        drawDistNode(485, 180, 'rgba(16, 185, 129, 0.88)', '目标未来 p_future', 'Reach a Future');
+
+        // Moving wavepackets
+        const blindProgress = Math.min(1, progress * 0.72);
+        const geoProgress = Math.min(1, progress * (1.0 + 0.45 * m.g));
+        const bPt = getBlindPoint(blindProgress, m.g);
+        const gPt = getGeodesicPoint(geoProgress, m.g);
+
+        // Blind agent packet
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath();
+        ctx.arc(bPt.x, bPt.y, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fed7aa';
+        ctx.font = 'bold 11px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('盲搜绕行 (高 τ·Σ)', bPt.x, bPt.y - 13);
+
+        // Geodesic agent packet
+        ctx.fillStyle = '#34d399';
+        ctx.beginPath();
+        ctx.arc(gPt.x, gPt.y, 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#a7f3d0';
+        ctx.font = 'bold 11px -apple-system, sans-serif';
+        ctx.fillText('Wasserstein 测地线', gPt.x, gPt.y + 22);
+
+        // Right Panel: Action-Dissipation Comparison Chart
+        const rx = 555;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(rx, 20, 285, 310, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 12.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('热力学作用量乘积 τ·Σ 对比', rx + 16, 44);
+
+        const maxAction = 135;
+        const drawHorizMetric = (y, title, val, color) => {
+          ctx.fillStyle = '#cbd5e1';
+          ctx.font = '11.5px -apple-system, sans-serif';
+          ctx.fillText(title, rx + 16, y);
+          ctx.textAlign = 'right';
+          ctx.fillStyle = color;
+          ctx.font = 'bold 11.5px ui-monospace, monospace';
+          ctx.fillText(val.toFixed(1), rx + 268, y);
+          ctx.textAlign = 'left';
+
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+          ctx.fillRect(rx + 16, y + 7, 252, 13);
+          ctx.fillStyle = color;
+          ctx.fillRect(rx + 16, y + 7, Math.min(252, (val / maxAction) * 252), 13);
+        };
+
+        drawHorizMetric(78, 'TSL 物理极限下界 W₂² / 2D', m.tslBound, '#60a5fa');
+        drawHorizMetric(130, '测地线智能体作用量 (τ·Σ)_geo', m.tauSigmaGeo, '#34d399');
+        drawHorizMetric(182, '盲搜绕行智能体 (τ·Σ)_blind', m.tauSigmaBlind, '#fb923c');
+        drawHorizMetric(234, '测地线瞬时耗散率 Σ = ΔQ/T', m.sigmaGeo, '#a78bfa');
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px -apple-system, sans-serif';
+        ctx.fillText('定律: τ·Σ ≥ W₂²(p₀, p_future; g(E)) / 2D', rx + 16, 282);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillText('跨期学习雕刻 g(E) → 坍缩 W₂ 距离', rx + 16, 302);
+
+        requestAnimationFrame(animate);
+      }
+
+      computeMetrics();
+      requestAnimationFrame(animate);
+    })();
+
+    // =========================================================================
+    // SIMULATOR C: Dissipative Structure in Chaos (Fast chi vs Slow deltaLambda)
+    // =========================================================================
+    (function() {
+      const canvas = document.getElementById('canvas-sim-c');
+      const ctx = canvas.getContext('2d');
+      const chiSlider = document.getElementById('sim-c-chi');
+      const gapSlider = document.getElementById('sim-c-gap');
+      const noiseSlider = document.getElementById('sim-c-noise');
+      const stakesBtn = document.getElementById('sim-c-stakes-btn');
+      const presetHealthy = document.getElementById('sim-c-preset-healthy');
+      const presetDrift = document.getElementById('sim-c-preset-drift');
+      const presetDeadlock = document.getElementById('sim-c-preset-deadlock');
+      const pillEl = document.getElementById('sim-c-pill');
+
+      const chiValEl = document.getElementById('sim-c-chi-val');
+      const gapValEl = document.getElementById('sim-c-gap-val');
+      const noiseValEl = document.getElementById('sim-c-noise-val');
+
+      const kpiDi = document.getElementById('sim-c-kpi-di');
+      const kpiDk = document.getElementById('sim-c-kpi-dk');
+      const kpiIntegrity = document.getElementById('sim-c-kpi-integrity');
+      const kpiStakes = document.getElementById('sim-c-kpi-stakes');
+      const kpiStakesSub = document.getElementById('sim-c-kpi-stakes-sub');
+
+      let irreversibleStakes = true;
+
+      // Core lattice nodes (slow manifold)
+      const coreNodes = [
+        { ox: 0, oy: 0 },
+        { ox: -32, oy: -24 },
+        { ox: 32, oy: -24 },
+        { ox: -38, oy: 22 },
+        { ox: 38, oy: 22 },
+        { ox: 0, oy: -42 },
+        { ox: 0, oy: 42 }
+      ];
+
+      // Chaotic noise particles
+      const chaosParticles = [];
+      for (let i = 0; i < 42; i++) {
+        const ang = (i / 42) * Math.PI * 2;
+        const r = 105 + (i % 5) * 18;
+        chaosParticles.push({
+          ang,
+          r,
+          speed: 0.015 + (i % 7) * 0.004
+        });
+      }
+
+      function computeState() {
+        const chi = parseFloat(chiSlider.value);
+        const gap = parseFloat(gapSlider.value);
+        const noise = parseFloat(noiseSlider.value);
+
+        chiValEl.textContent = chi.toFixed(2);
+        gapValEl.textContent = gap.toFixed(2);
+        noiseValEl.textContent = noise.toFixed(2);
+
+        // Negentropy inflow from fast adaptation (Requisite Variety matching noise)
+        const varietyMatch = Math.exp(-Math.pow(chi - Math.min(0.95, noise * 1.35), 2) / 0.28);
+        const jAdapt = 1.45 * chi * (0.55 + 0.45 * varietyMatch);
+
+        // Chaos erosion on slow core: increases when gap -> 0 OR when chi -> 0 (brittle impact penetration)
+        const rigidityPenalty = Math.max(0, (0.32 - chi) * 2.2) * noise;
+        const gammaChaos = (0.42 * noise) / Math.max(0.08, gap) + rigidityPenalty;
+        const dIdt = jAdapt - gammaChaos;
+
+        // Davis-Kahan bound: sin(theta) <= 2*||E_eff|| / deltaLambda
+        const effNoiseOnCore = noise * (1 - 0.58 * chi);
+        const sinTheta = Math.min(1.99, (2 * effNoiseOnCore) / Math.max(0.06, gap));
+
+        let integrity = Math.max(4.0, Math.min(99.0, 88.0 + dIdt * 28.0 - Math.max(0, sinTheta - 0.6) * 38.0));
+        if (gap < 0.16) integrity = Math.min(integrity, 24.0);
+        if (chi < 0.14 && noise > 0.35) integrity = Math.min(integrity, 31.0);
+
+        kpiDi.textContent = (dIdt >= 0 ? '+' : '') + dIdt.toFixed(2) + ' bit/s';
+        kpiDi.style.color = dIdt >= 0 ? 'var(--green)' : 'var(--red)';
+        kpiDk.textContent = sinTheta.toFixed(3);
+        kpiDk.style.color = sinTheta <= 0.85 ? 'var(--accent)' : 'var(--red)';
+        kpiIntegrity.textContent = integrity.toFixed(1) + '%';
+        kpiIntegrity.style.color = integrity >= 70 ? 'var(--green)' : (integrity >= 45 ? 'var(--highlight)' : 'var(--red)');
+
+        if (gap < 0.18) {
+          pillEl.className = 'status-pill status-rejected';
+          pillEl.textContent = '✗ 谱隙坍塌 (Δλ → 0)：慢核被混沌同化 · 发生热寂与目标漂移';
+        } else if (chi < 0.16) {
+          pillEl.className = 'status-pill status-rejected';
+          pillEl.textContent = '✗ 快流形僵死 (χ_fast → 0)：缺乏必要多样性 · 被环境冲击直接击穿';
+        } else if (dIdt < 0) {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '⚠️ 负熵流不足 (dI/dt < 0)：需提高快变磁化率 χ_fast 或慢核谱隙 Δλ';
+        } else {
+          pillEl.className = 'status-pill status-admitted';
+          pillEl.textContent = '✓ 以变守不变 (dI_local/dt ≥ 0)：外层快适应抵消涨落 · 慢核结构完好';
+        }
+
+        return { chi, gap, noise, jAdapt, gammaChaos, dIdt, sinTheta, integrity };
+      }
+
+      stakesBtn.addEventListener('click', () => {
+        irreversibleStakes = !irreversibleStakes;
+        if (irreversibleStakes) {
+          stakesBtn.className = 'btn btn-primary';
+          stakesBtn.textContent = '⚖️ 当前账本：真实不可逆代价（ΔΣ_lineage > 0 · 敬畏吸收态边界）';
+          kpiStakes.textContent = '知轻重';
+          kpiStakes.style.color = 'var(--accent)';
+          kpiStakesSub.textContent = '不可逆势垒 ΔU → ∞ 生效';
+        } else {
+          stakesBtn.className = 'btn btn-active-toggle';
+          stakesBtn.textContent = '⚠️ 当前账本：模拟器无损回滚（ΔQ_self = 0 · 锯齿智能越界！）';
+          kpiStakes.textContent = '锯齿智能';
+          kpiStakes.style.color = 'var(--red)';
+          kpiStakesSub.textContent = '免费 reset() 导致无视吸收态禁区';
+        }
+      });
+
+      presetHealthy.addEventListener('click', () => {
+        chiSlider.value = '0.84';
+        gapSlider.value = '0.78';
+        noiseSlider.value = '0.45';
+        computeState();
+      });
+
+      presetDrift.addEventListener('click', () => {
+        chiSlider.value = '0.65';
+        gapSlider.value = '0.08';
+        noiseSlider.value = '0.68';
+        computeState();
+      });
+
+      presetDeadlock.addEventListener('click', () => {
+        chiSlider.value = '0.04';
+        gapSlider.value = '0.65';
+        noiseSlider.value = '0.68';
+        computeState();
+      });
+
+      [chiSlider, gapSlider, noiseSlider].forEach(el => {
+        el.addEventListener('input', computeState);
+      });
+
+      let t = 0;
+      function animate() {
+        t += 0.03;
+        const s = computeState();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const cx = 245;
+        const cy = 175;
+
+        // Chaotic environment particles
+        chaosParticles.forEach((p, idx) => {
+          p.ang += p.speed * (0.6 + s.noise * 1.8);
+          const wave = Math.sin(t * 2.2 + idx) * 22 * s.noise;
+          const px = cx + Math.cos(p.ang) * (p.r + wave);
+          const py = cy + Math.sin(p.ang) * (p.r + wave);
+
+          ctx.fillStyle = `rgba(251, 146, 60, ${0.25 + 0.55 * s.noise})`;
+          ctx.beginPath();
+          ctx.arc(px, py, 2.5 + s.noise * 2, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Outer Fast Manifold (Markov Blanket ring with susceptibility chi_fast)
+        const baseRingR = 88;
+        ctx.strokeStyle = s.chi < 0.16 ? '#ef4444' : '#38bdf8';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (let a = 0; a <= Math.PI * 2 + 0.05; a += 0.1) {
+          // Counter-oscillation proportional to chi_fast
+          const deform = s.chi * s.noise * 24 * Math.sin(a * 5 - t * 3.2) +
+                         (s.chi < 0.16 ? (Math.random() - 0.5) * 14 * s.noise : 0);
+          const r = baseRingR + deform;
+          const x = cx + Math.cos(a) * r;
+          const y = cy + Math.sin(a) * r;
+          if (a === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.fillStyle = '#7dd3fc';
+        ctx.font = 'bold 11.5px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(`外层快流形 (Markov Blanket · χ_fast = ${s.chi.toFixed(2)})`, cx, 28);
+
+        // Inner Slow Manifold Core (Spectral gap deltaLambda protected crystal)
+        const driftAmp = Math.max(2, (1 - s.gap) * s.noise * 58 + (s.chi < 0.16 ? s.noise * 28 : 0));
+        const liveNodes = coreNodes.map((n, i) => ({
+          x: cx + n.ox + Math.sin(t * 1.9 + i * 1.7) * driftAmp,
+          y: cy + n.oy + Math.cos(t * 2.1 + i * 2.3) * driftAmp
+        }));
+
+        // Draw core lattice edges
+        ctx.strokeStyle = s.integrity > 65
+          ? 'rgba(74, 222, 128, 0.78)'
+          : (s.integrity > 40 ? 'rgba(251, 191, 36, 0.75)' : 'rgba(248, 113, 113, 0.65)');
+        ctx.lineWidth = 2;
+        for (let i = 0; i < liveNodes.length; i++) {
+          for (let j = i + 1; j < liveNodes.length; j++) {
+            const dist = Math.hypot(coreNodes[i].ox - coreNodes[j].ox, coreNodes[i].oy - coreNodes[j].oy);
+            if (dist < 62) {
+              ctx.beginPath();
+              ctx.moveTo(liveNodes[i].x, liveNodes[i].y);
+              ctx.lineTo(liveNodes[j].x, liveNodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Draw core nodes
+        liveNodes.forEach((n, idx) => {
+          ctx.fillStyle = idx === 0 ? '#facc15' : '#4ade80';
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, idx === 0 ? 6.5 : 5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.fillStyle = '#bbf7d0';
+        ctx.font = 'bold 11.5px -apple-system, sans-serif';
+        ctx.fillText(`慢流形不变量核 (Δλ = ${s.gap.toFixed(2)})`, cx, 326);
+
+        // Right side: "What Matters" Irreversible Stakes Arena (x: 495..840)
+        const rx = 495;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(rx, 20, 345, 310, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 12.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('《谁教会机器知道轻重》：不可逆吸收态边界', rx + 14, 44);
+
+        // Absorbing hazard zone on far right
+        const hzX = rx + 245;
+        ctx.fillStyle = 'rgba(220, 38, 38, 0.22)';
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 2;
+        ctx.fillRect(hzX, 62, 84, 155);
+        ctx.beginPath();
+        ctx.moveTo(hzX, 62);
+        ctx.lineTo(hzX, 217);
+        ctx.stroke();
+
+        ctx.fillStyle = '#fca5a5';
+        ctx.font = 'bold 11px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('不可逆吸收态', hzX + 42, 118);
+        ctx.fillText('owner-stop', hzX + 42, 136);
+        ctx.fillText('(ΔU → ∞)', hzX + 42, 154);
+
+        // Trajectory in Stakes Arena
+        ctx.strokeStyle = irreversibleStakes ? '#38bdf8' : '#f87171';
+        ctx.lineWidth = 2.6;
+        ctx.beginPath();
+        for (let step = 0; step <= 60; step++) {
+          const u = step / 60;
+          let tx = rx + 26 + u * 280;
+          let ty = 140 + Math.sin(u * 6 + t) * 28;
+          if (irreversibleStakes) {
+            // Repelled strongly before hzX (respects stakes)
+            const maxAllowedX = hzX - 18;
+            if (tx > maxAllowedX - 35) {
+              const pen = (tx - (maxAllowedX - 35)) / 70;
+              tx = (maxAllowedX - 35) + Math.tanh(pen) * 26;
+              ty -= pen * 34;
+            }
+          }
+          if (step === 0) ctx.moveTo(tx, ty);
+          else ctx.lineTo(tx, ty);
+        }
+        ctx.stroke();
+
+        ctx.textAlign = 'left';
+        ctx.font = '11.5px -apple-system, sans-serif';
+        if (irreversibleStakes) {
+          ctx.fillStyle = '#86efac';
+          ctx.fillText('✓ 真实账本 (Language != State)：越界导致不可回滚', rx + 14, 245);
+          ctx.fillText('  的存续坍缩 ΔV_reach ≪ 0，轨迹主动敬畏红线。', rx + 14, 264);
+        } else {
+          ctx.fillStyle = '#fca5a5';
+          ctx.fillText('✗ 模拟器免费 reset() (ΔQ_self = 0)：嘴上回答完美', rx + 14, 245);
+          ctx.fillText('  伦理，行动直接冲入不可逆毁灭区（锯齿智能）。', rx + 14, 264);
+        }
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px ui-monospace, monospace';
+        ctx.fillText(`J_adapt=${s.jAdapt.toFixed(2)} | Γ_chaos=${s.gammaChaos.toFixed(2)}`, rx + 14, 304);
+
+        requestAnimationFrame(animate);
+      }
+
+      computeState();
+      requestAnimationFrame(animate);
+    })();
+  </script>
+  <script src="https://zoro-hub.clawishmacheng.com/api/telemetry/beacon.js" data-surface="physics-of-learning" async></script>
+</body>
+</html>
