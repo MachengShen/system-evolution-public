@@ -536,9 +536,10 @@
       <a href="#sec-irreversible">1. 不可逆与产热</a>
       <a href="#sec-tsl">2. 达未速率极限</a>
       <a href="#sec-dissipative">3. 耗散双尺度</a>
-      <a href="#sec-what-matters">4. 知道轻重</a>
-      <a href="#sec-directions">5. 三个方向</a>
-      <a class="nav-accent" href="#sim-a">⚡ 模拟器 A/B/C</a>
+      <a href="#sec-atlas">4. 具身安全区图册</a>
+      <a href="#sec-what-matters">5. 知道轻重</a>
+      <a href="#sec-directions">6. 四个方向</a>
+      <a class="nav-accent" href="#sim-d">⚡ 模拟器 A/B/C/D</a>
       <a href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">Markdown 原文</a>
     </nav>
   </header>
@@ -549,7 +550,7 @@
       <div class="meta-row">
         <span class="badge">First-Principles Physics × AI · 2026-10-24</span>
         <span class="badge badge-warm">Stochastic Thermodynamics &amp; Wasserstein TSL</span>
-        <span class="badge badge-green">3 Live Interactive Physics Sandboxes</span>
+        <span class="badge badge-green">4 Live Interactive Physics Sandboxes</span>
       </div>
       <h1>从物理学第一性原理理解「学习」与「智能」：不可逆计算、达未速率极限与耗散结构<br><span style="font-family:var(--sans); font-size:0.62em; font-weight:600; color:var(--muted);">Irreversible Computation, Thermodynamic Speed Limits, and Dissipative Structures in Learning Systems</span></h1>
 
@@ -559,7 +560,7 @@
           「学习伴随着不可逆的计算与热量的生成；智能就是在最小能量消耗下最快抵达一个未来（reach a future），即在混沌的相互作用中既保持最强的变化适应能力，又维持局部信息结构的能力。」
         </blockquote>
         <p>
-          这一直觉在非平衡统计物理与随机热力学（Stochastic Thermodynamics）中不是比喻，而是由<strong>三条严格不等式/恒等式</strong>共同锁死的物理定律。它同时直接回答了《后AI思想剧场：谁教会机器知道轻重？》（<a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener"><code>postai.institute/stories/what-matters.html</code></a>）的核心追问：<strong>为什么仅靠无损回滚的模拟训练无法让机器真正「知道轻重」？</strong>
+          这一直觉在非平衡统计物理与随机热力学（Stochastic Thermodynamics）中不是比喻，而是由<strong>严格不等式/恒等式</strong>共同锁死的物理定律。它同时直接回答了《后AI思想剧场：谁教会机器知道轻重？》（<a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener"><code>postai.institute/stories/what-matters.html</code></a>）的核心追问：<strong>为什么仅靠无损回滚的模拟训练无法让机器真正「知道轻重」？</strong>
         </p>
       </div>
 
@@ -567,6 +568,7 @@
         <a class="btn btn-primary" href="#sim-a">🔬 交互实验 A：Landauer 擦除与相空间坍缩</a>
         <a class="btn btn-warm" href="#sim-b">🧭 交互实验 B：TSL 测地线 vs 盲搜绕行</a>
         <a class="btn" href="#sim-c">🛡️ 交互实验 C：混沌双尺度与「轻重」判据</a>
+        <a class="btn" href="#sim-d">🗺️ 交互实验 D：具身安全区图册与抗遗忘</a>
         <a class="btn" href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">📄 Markdown 论文源稿</a>
       </div>
     </section>
@@ -888,9 +890,157 @@
       </div>
     </section>
 
-    <!-- SECTION 4: WHAT MATTERS -->
+    <!-- SECTION 4: GROUNDED LOW-ENTROPY ATLAS + SIMULATOR D -->
+    <section id="sec-atlas" class="section-card">
+      <h2>4. 智能不是孤立个体的点属性，而是「具身低熵安全区（Grounded Low-Entropy Regions）」的图册跃迁与抗灾难性遗忘</h2>
+      <div class="callout callout-warm">
+        <strong>核心推进（具身区域假说 / Grounded Region Hypothesis）：</strong><br>
+        「智能有可能不是一个局部的东西，它其实是在描述某种<strong>区域（Region）</strong>。你在这个区域里面就还挺安全的，你的信息结构不会出现类似于 <strong>Catastrophic Forgetting（灾难性遗忘）</strong> 的感觉。它不是说一个人或者一个机器特别智能，因为任何智能系统都是 <strong>Grounded（具身/扎根）</strong> 的。换句话说，更像是你不断地让自己处于不同的区域，而这个区域一直能够维持一个很低的信息熵结构、一个很好的结构。」
+      </div>
+      <p>
+        这一洞察直接把「个体计算主义（大脑/权重中心论）」翻转为了<strong>「具身规范场与流形图册论（Grounded Atlas of Low-Entropy Basins）」</strong>，从物理底层解开了神经网络与认知科学长达三十年的 <strong>稳定性—可塑性困境（Stability–Plasticity Dilemma / Catastrophic Forgetting）</strong>：
+      </p>
+
+      <h3>4.1 为什么脱离「区域（Grounded Region）」谈个体智能必然遭遇灾难性遗忘？</h3>
+      <p>
+        在传统机器学习中，人们试图把所有世界的知识塞进同一组全局共享的参数矩阵 $\theta$ 中。当系统从环境 $A$ 进入环境 $B$ 时，新任务的梯度 $\nabla_\theta \mathcal{L}_B$ 会直接覆盖旧任务的黑塞主轴（Hessian Eigen-directions），导致原信息结构崩塌（<strong>灾难性遗忘</strong>）。
+      </p>
+      <p>
+        从统计物理与 <strong>具身认知（Grounded Cognition）</strong> 看，这是因为<strong>不存在脱离外部耦合基质而孤立自持的低熵结构</strong>：
+      </p>
+      <ul>
+        <li>
+          任何有限智能体的低信息熵状态 $H(S \mid E_\alpha) \ll H_{\max}$，都不是靠大脑内部凭空硬扛的，而是由<strong>主体—环境—外部工具基质共同张成的局部耦合区域 $\mathcal{R}_\alpha = (S, E_\alpha)$</strong> 所提供的李雅普诺夫吸引势阱（Lyapunov Potential Basin $V_\alpha(x)$）锚定的。
+        </li>
+        <li>
+          只要系统处在这个 Grounded Region $\mathcal{R}_\alpha$ 内，环境的几何约束、外部记忆（如文件系统、身体先验、生态位）会自动对内部表征施加<strong>正交化恢复力（Orthogonal Restoring Force）</strong>，使局部信息结构处于热力学安全区，不会发生灾难性冲刷。
+        </li>
+      </ul>
+
+      <h3>4.2 从「孤立超级大脑」到「低熵区域图册（Atlas of Viability Basins）」</h3>
+      <p>
+        因此，「智能」的数学本体不再是一个点上的算力标量，而是覆盖状态流形 $\mathcal{M}$ 的一张<strong>低熵安全区图册（Atlas）</strong>：
+      </p>
+      <div class="math-box">
+        <span class="math-label">定律 IV · 具身低熵安全区图册（Grounded Atlas of Viability Basins）</span>
+        $$\mathcal{A} = \big\{ \big(\mathcal{R}_\alpha, \, V_\alpha(x; E_\alpha), \, \Delta\lambda_\alpha\big) \big\}_{\alpha \in \mathcal{I}}$$
+      </div>
+
+      <!-- Styled HTML/CSS Flow rendering the Treatise Mermaid Diagram -->
+      <div style="background:linear-gradient(135deg, #fff8f6 0%, #f7f5f0 100%); border:1.5px dashed rgba(185, 28, 28, 0.35); border-radius:14px; padding:18px 20px; margin:18px 0;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <span class="badge" style="background:var(--red-soft); color:var(--red); border-color:rgba(185,28,28,0.28);">外景：混沌高熵荒野 $\mathcal{M} \setminus \bigcup_\alpha \mathcal{R}_\alpha$（无锚定区：高热耗散 + 灾难性遗忘）</span>
+          <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">流形图册跃迁拓扑（Atlas Transition Flow）</span>
+        </div>
+        <div class="grid-3" style="margin:0; align-items:stretch;">
+          <div class="mini-card" style="border-left:4px solid var(--accent); background:#ffffff;">
+            <span class="badge" style="margin-bottom:6px;">安全区 $\mathcal{R}_\alpha$ (Grounded Niche A)</span>
+            <strong>局部低熵信息结构 $H(S \mid E_\alpha) \ll H_{\max}$</strong>
+            <span style="font-size:0.88rem; color:var(--muted); display:block;">正交门控保护（$\mathcal{P}_\alpha \perp \mathcal{P}_\beta$ · 零灾难性遗忘）</span>
+            <div style="margin-top:10px; padding-top:8px; border-top:1px dashed var(--line); font-size:0.82rem; font-weight:700; color:var(--accent);">
+              ⟹ 测地线跃迁 $\tau \cdot \Sigma \to \min$<br>
+              <span style="font-weight:500; color:var(--muted);">（最小能耗最快进入下一安全区 $\mathcal{R}_\beta$）</span>
+            </div>
+          </div>
+          <div class="mini-card" style="border-left:4px solid var(--green); background:#ffffff;">
+            <span class="badge badge-green" style="margin-bottom:6px;">安全区 $\mathcal{R}_\beta$ (Grounded Niche B)</span>
+            <strong>局部低熵信息结构 $H(S \mid E_\beta) \ll H_{\max}$</strong>
+            <span style="font-size:0.88rem; color:var(--muted); display:block;">外部基质势阱 $V_\beta(x; E_\beta)$ 锚定恢复力</span>
+            <div style="margin-top:10px; padding-top:8px; border-top:1px dashed var(--line); font-size:0.82rem; font-weight:700; color:var(--highlight);">
+              ⟹ 主动基质筑巢 $\nabla_E$<br>
+              <span style="font-weight:500; color:var(--muted);">（雕刻新区域边界，开辟 $\mathcal{R}_\gamma$）</span>
+            </div>
+          </div>
+          <div class="mini-card" style="border-left:4px solid var(--purple); background:#ffffff;">
+            <span class="badge badge-purple" style="margin-bottom:6px;">新建安全区 $\mathcal{R}_\gamma$ (Niche Construction)</span>
+            <strong>通过不可逆做功 $\Delta Q$ 开辟新落脚点</strong>
+            <span style="font-size:0.88rem; color:var(--muted); display:block;">在荒野中改造外部环境基质 $\Delta E$，就地构筑新吸引势阱 $V_\gamma(x; E_\gamma)$</span>
+          </div>
+        </div>
+      </div>
+
+      <p>在这幅物理图景下，智能体的全部动力学归结为两件事：</p>
+      <ol>
+        <li>
+          <strong>区内稳态（Intra-Region Safety &amp; Anti-Forgetting）</strong>：<br>
+          每个区域 $\mathcal{R}_\alpha$ 对应一组特定的外部环境锚点与上下文门控子空间（Context-Gated Orthogonal Subspace，$\mathcal{P}_\alpha \perp \mathcal{P}_\beta$）。当系统驻留于 $\mathcal{R}_\alpha$ 时，只有与当前具身基质 $E_\alpha$ 耦合的自由度被激活更新，其他区域的知识被基质边界物理隔离保护，从根源上消除 Catastrophic Forgetting。
+        </li>
+        <li>
+          <strong>跨区跃迁与筑巢（Inter-Region Geodesic Hopping &amp; Niche Construction）</strong>：<br>
+          所谓「适应环境、最快 Reach 一个 Future」，本质上是<strong>不要在混沌高熵的无锚定荒野（$\mathcal{M} \setminus \bigcup_\alpha \mathcal{R}_\alpha$）中久留</strong>——智能体要么沿着热力学速率极限测地线（$\tau \cdot \Sigma \to \min$），以最小能耗迅速把自己摆渡（Positioning）到下一个现成的低熵安全区 $\mathcal{R}_\beta$；要么通过不可逆计算耗散热量（$\Delta Q$），在荒野中改造外部环境基质 $\Delta E$，<strong>就地筑巢（Niche Construction）开辟出一个新的低熵安全区 $\mathcal{R}_\gamma$</strong>。
+        </li>
+      </ol>
+
+      <!-- SIMULATOR D -->
+      <div id="sim-d" class="sim-box">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-purple">交互物理实验台 D · Grounded Low-Entropy Atlas &amp; Anti-Catastrophic-Forgetting</span>
+            <h3 class="sim-title" style="margin-top:6px;">具身低熵安全区图册与抗灾难性遗忘（Grounded Low-Entropy Atlas &amp; Anti-Catastrophic-Forgetting Sandbox）</h3>
+          </div>
+          <span id="sim-d-pill" class="status-pill status-admitted">安全区稳态</span>
+        </div>
+
+        <div class="toggle-row">
+          <button type="button" id="sim-d-grounding-btn" class="btn btn-primary">⚓ 外部基质正交门控锚定 (Orthogonal Grounding P_α ⟂ P_β)：已启用（零灾难性遗忘）</button>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" id="sim-d-hop-btn" class="btn btn-warm">🧭 跨区测地线跃迁 R_α → R_β</button>
+            <button type="button" id="sim-d-niche-btn" class="btn">🏗️ 主动基质筑巢 (Niche Construction)</button>
+            <button type="button" id="sim-d-reset-btn" class="btn">↺ 重置图册</button>
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="sim-d-ortho">外部基质正交门控度 $\mathcal{P}_\alpha \perp \mathcal{P}_\beta$ <span class="val-pill" id="sim-d-ortho-val">1.00</span></label>
+            <input type="range" id="sim-d-ortho" min="0.00" max="1.00" step="0.02" value="1.00">
+          </div>
+          <div class="control-group">
+            <label for="sim-d-wild">荒野混沌热涨落强度 $T_{\text{wild}}$ <span class="val-pill" id="sim-d-wild-val">0.48</span></label>
+            <input type="range" id="sim-d-wild" min="0.15" max="1.00" step="0.02" value="0.48">
+          </div>
+          <div class="control-group">
+            <label for="sim-d-depth">区域势阱锚定深度 $V_0(E_\alpha)$ <span class="val-pill" id="sim-d-depth-val">0.85</span></label>
+            <input type="range" id="sim-d-depth" min="0.30" max="1.00" step="0.02" value="0.85">
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="stat-card">
+            <span class="stat-label">区域 $\mathcal{R}_\alpha$ 记忆留存率 $I_{\text{retain}}(\alpha)$</span>
+            <span class="stat-val" id="sim-d-kpi-ret-a" style="color:var(--green);">98.6%</span>
+            <span class="stat-sub" id="sim-d-kpi-ret-a-sub">正交门控保护 $V_\alpha$ 势阱完好</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">区域 $\mathcal{R}_\beta$ 记忆留存率 $I_{\text{retain}}(\beta)$</span>
+            <span class="stat-val" id="sim-d-kpi-ret-b" style="color:var(--green);">98.2%</span>
+            <span class="stat-sub" id="sim-d-kpi-ret-b-sub">外部基质 $E_\beta$ 独立锚定</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">当前条件信息熵 $H(S \mid E)$</span>
+            <span class="stat-val" id="sim-d-kpi-entropy" style="color:var(--accent);">0.42 bits</span>
+            <span class="stat-sub">安全区内满足 $H(S \mid E) \ll H_{\max}$</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">主动筑巢累计做功 $\Delta Q_{\text{niche}}$</span>
+            <span class="stat-val" id="sim-d-kpi-niche-q" style="color:var(--purple);">0.00 $k_B T_0$</span>
+            <span class="stat-sub" id="sim-d-kpi-niche-sub">点击「主动基质筑巢」开辟 $\mathcal{R}_\gamma$</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas-sim-d" width="860" height="360"></canvas>
+        </div>
+
+        <p class="sim-caption" style="margin:14px 0 0;">
+          <strong>旋钮说明与观察指南：</strong>① <strong>正交门控开启（$\mathcal{P}_\alpha \perp \mathcal{P}_\beta$）</strong>时，点击「跨区测地线跃迁 $\mathcal{R}_\alpha \to \mathcal{R}_\beta$」，智能体沿最小作用量测地线（$\tau\cdot\Sigma \to \min$）穿过混沌荒野进入 $\mathcal{R}_\beta$，原有安全区 $\mathcal{R}_\alpha$ 的势阱深度与 $I_{\text{retain}}(\alpha)$ 保持完好（<strong>零灾难性遗忘</strong>）；② <strong>关闭正交门控（模拟传统无锚定共享权重 $\theta$）</strong>后再跃迁至 $\mathcal{R}_\beta$，观察新梯度如何实时冲刷、填平 $\mathcal{R}_\alpha$ 的势阱，导致 $I_{\text{retain}}(\alpha)$ 断崖下跌（<strong>灾难性遗忘实时动画</strong>）；③ 点击<strong>「主动基质筑巢 (Niche Construction)」</strong>，消耗不可逆热量 $\Delta Q_{\text{niche}}$ 在右下方高熵荒野中雕刻出第三个具身低熵势阱 $\mathcal{R}_\gamma$。
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 5: WHAT MATTERS -->
     <section id="sec-what-matters" class="section-card">
-      <h2>4. 回应《谁教会机器知道轻重？》：为什么不可逆耗散是「知道轻重」的物理前提？</h2>
+      <h2>5. 回应《谁教会机器知道轻重？》：为什么不可逆耗散与具身区域是「知道轻重」的物理前提？</h2>
       <p>
         《后AI研究所思想剧场：谁教会机器知道轻重？》（<a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener"><code>postai.institute/stories/what-matters.html</code></a>）提出了三个尖锐问题：
       </p>
@@ -933,11 +1083,11 @@
       </div>
     </section>
 
-    <!-- SECTION 5: THREE DIRECTIONS -->
+    <!-- SECTION 6: FOUR DIRECTIONS -->
     <section id="sec-directions" class="section-card">
-      <h2>5. 可立即推进的三个形式化与实验方向</h2>
+      <h2>6. 可立即推进的四个形式化与实验方向</h2>
       <p>
-        沿着这条主线，我们可以直接把它推进成硬核的物理×AI理论与可交互验证产物：
+        沿着这条主线，我们推进四个核心物理×AI形式化方向与可交互验证产物：
       </p>
       <ol>
         <li>
@@ -953,8 +1103,12 @@
           把 <a href="trajectory-rl-substrate-evolution.html"><code>Substrate RL</code></a> 中的绕行温度 $T_d = 8.89\%$ 与拓扑捷径退火直接映射为 $\mathcal{W}_2$ 几何距离收缩与 $\eta_{\mathcal{F}}$ 提升曲线——证明「从 $O(k)$ 探索到 $O(1)$ 局部结构维持」满足热力学速率极限。
         </li>
         <li>
+          <strong>具身低熵图册与抗遗忘势阱测度</strong>：<br>
+          定量化不同 Grounded Region 的正交保持矩阵 $\mathcal{P}_\alpha$，度量跨区跃迁能量障壁 $\Delta F_{\alpha \to \beta}$ 与基质筑巢能耗率。
+        </li>
+        <li>
           <strong>构建「热力学学习与轻重判据」交互式物理沙盒</strong>：<br>
-          包含本页上方已实现的三个可调参数实验台：① 可逆计算 vs 不可逆擦除学习的相空间坍缩与产热对比（实验台 A）；② 最小能耗最快达未：TSL 测地线 vs 盲搜绕行（实验台 B）；③ 混沌涨落下的双时间尺度局部信息结构维持（快适应 $\chi$ × 慢谱隙 $\Delta\lambda$）与「有无不可逆代价」下的锯齿智能对比（实验台 C）。
+          包含本页上方已实现的四个可调参数实验台：① 可逆计算 vs 不可逆擦除学习的相空间坍缩与产热对比（实验台 A）；② 最小能耗最快达未：TSL 测地线 vs 盲搜绕行（实验台 B）；③ 混沌涨落下的双时间尺度局部信息结构维持（快适应 $\chi$ × 慢谱隙 $\Delta\lambda$）与「有无不可逆代价」下的锯齿智能对比（实验台 C）；④ 具身低熵图册跃迁与抗灾难性遗忘对比（实验台 D）。
         </li>
       </ol>
     </section>
@@ -969,7 +1123,7 @@
         <a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener">🎭 回应问题来源：postai.institute/stories/what-matters.html</a>
       </div>
       <div>
-        Apache-2.0 文档层 · 本文为公开可复用的理论推导与纯前端物理模拟，不含任何私有转录、凭据或个人数据（PCSE-Clean）。
+        Apache-2.0 文档层 · 全文共 6 节理论推导与 4 个纯前端交互式物理模拟器（Simulators A/B/C/D），不含任何私有转录、凭据或个人数据（PCSE-Clean）。
       </div>
     </footer>
   </main>
@@ -1821,6 +1975,503 @@
       }
 
       computeState();
+      requestAnimationFrame(animate);
+    })();
+
+    // =========================================================================
+    // SIMULATOR D: Grounded Low-Entropy Atlas & Anti-Catastrophic-Forgetting
+    // =========================================================================
+    (function() {
+      const canvas = document.getElementById('canvas-sim-d');
+      const ctx = canvas.getContext('2d');
+
+      const groundingBtn = document.getElementById('sim-d-grounding-btn');
+      const hopBtn = document.getElementById('sim-d-hop-btn');
+      const nicheBtn = document.getElementById('sim-d-niche-btn');
+      const resetBtn = document.getElementById('sim-d-reset-btn');
+      const pillEl = document.getElementById('sim-d-pill');
+
+      const orthoSlider = document.getElementById('sim-d-ortho');
+      const wildSlider = document.getElementById('sim-d-wild');
+      const depthSlider = document.getElementById('sim-d-depth');
+
+      const orthoValEl = document.getElementById('sim-d-ortho-val');
+      const wildValEl = document.getElementById('sim-d-wild-val');
+      const depthValEl = document.getElementById('sim-d-depth-val');
+
+      const kpiRetA = document.getElementById('sim-d-kpi-ret-a');
+      const kpiRetASub = document.getElementById('sim-d-kpi-ret-a-sub');
+      const kpiRetB = document.getElementById('sim-d-kpi-ret-b');
+      const kpiRetBSub = document.getElementById('sim-d-kpi-ret-b-sub');
+      const kpiEntropy = document.getElementById('sim-d-kpi-entropy');
+      const kpiNicheQ = document.getElementById('sim-d-kpi-niche-q');
+      const kpiNicheSub = document.getElementById('sim-d-kpi-niche-sub');
+
+      // Basin coordinates on left state-space manifold (x: 20..535, y: 20..340)
+      const basins = {
+        alpha: { x: 140, y: 145, r: 68, depth: 0.986, label: 'R_α (Grounded Niche A)', color: '#38bdf8' },
+        beta:  { x: 390, y: 135, r: 68, depth: 0.982, label: 'R_β (Grounded Niche B)', color: '#34d399' },
+        gamma: { x: 270, y: 268, r: 58, depth: 0.0,   label: 'R_γ (Niche Construction)', color: '#c084fc', active: false }
+      };
+
+      let orthogonalGrounding = true;
+      let currentBasin = 'alpha';
+      let targetBasin = 'alpha';
+      let hopProgress = 1.0; // 1.0 = settled in currentBasin
+      let hopStartPos = { x: basins.alpha.x, y: basins.alpha.y };
+      let agentPos = { x: basins.alpha.x, y: basins.alpha.y };
+      let nicheCarving = false;
+      let deltaQNiche = 0.0;
+
+      // Chaotic wilderness background particles
+      const wildParticles = [];
+      for (let i = 0; i < 65; i++) {
+        wildParticles.push({
+          x: 30 + ((i * 89) % 490),
+          y: 28 + ((i * 53) % 304),
+          vx: ((i % 5) - 2) * 0.65,
+          vy: ((i % 7) - 3) * 0.55,
+          phase: i * 0.41
+        });
+      }
+
+      function syncGroundingButton() {
+        const orthoVal = parseFloat(orthoSlider.value);
+        orthogonalGrounding = orthoVal >= 0.5;
+        if (orthogonalGrounding) {
+          groundingBtn.className = 'btn btn-primary';
+          groundingBtn.textContent = '⚓ 外部基质正交门控锚定 (Orthogonal Grounding P_α ⟂ P_β)：已启用（零灾难性遗忘）';
+        } else {
+          groundingBtn.className = 'btn btn-active-toggle';
+          groundingBtn.textContent = '⚠️ 外部基质正交门控锚定：已关闭（传统无锚定共享权重 θ · 跨区引发灾难性遗忘！）';
+        }
+      }
+
+      groundingBtn.addEventListener('click', () => {
+        orthogonalGrounding = !orthogonalGrounding;
+        orthoSlider.value = orthogonalGrounding ? '1.00' : '0.00';
+        orthoValEl.textContent = parseFloat(orthoSlider.value).toFixed(2);
+        if (orthogonalGrounding) {
+          // Restoring force from external substrate re-stabilizes wells
+          basins.alpha.depth = Math.max(basins.alpha.depth, 0.94);
+          basins.beta.depth = Math.max(basins.beta.depth, 0.94);
+        }
+        syncGroundingButton();
+      });
+
+      orthoSlider.addEventListener('input', () => {
+        orthoValEl.textContent = parseFloat(orthoSlider.value).toFixed(2);
+        syncGroundingButton();
+      });
+
+      wildSlider.addEventListener('input', () => {
+        wildValEl.textContent = parseFloat(wildSlider.value).toFixed(2);
+      });
+
+      depthSlider.addEventListener('input', () => {
+        depthValEl.textContent = parseFloat(depthSlider.value).toFixed(2);
+      });
+
+      hopBtn.addEventListener('click', () => {
+        nicheCarving = false;
+        hopStartPos = { x: agentPos.x, y: agentPos.y };
+        hopProgress = 0.0;
+        if (currentBasin === 'alpha') {
+          targetBasin = 'beta';
+          hopBtn.textContent = '🧭 跨区测地线跃迁 R_β → R_α';
+        } else {
+          targetBasin = 'alpha';
+          hopBtn.textContent = '🧭 跨区测地线跃迁 R_α → R_β';
+        }
+      });
+
+      nicheBtn.addEventListener('click', () => {
+        basins.gamma.active = true;
+        nicheCarving = true;
+        hopStartPos = { x: agentPos.x, y: agentPos.y };
+        targetBasin = 'gamma';
+        hopProgress = 0.0;
+      });
+
+      resetBtn.addEventListener('click', () => {
+        orthogonalGrounding = true;
+        orthoSlider.value = '1.00';
+        wildSlider.value = '0.48';
+        depthSlider.value = '0.85';
+        orthoValEl.textContent = '1.00';
+        wildValEl.textContent = '0.48';
+        depthValEl.textContent = '0.85';
+        basins.alpha.depth = 0.986;
+        basins.beta.depth = 0.982;
+        basins.gamma.depth = 0.0;
+        basins.gamma.active = false;
+        currentBasin = 'alpha';
+        targetBasin = 'alpha';
+        hopProgress = 1.0;
+        agentPos = { x: basins.alpha.x, y: basins.alpha.y };
+        nicheCarving = false;
+        deltaQNiche = 0.0;
+        hopBtn.textContent = '🧭 跨区测地线跃迁 R_α → R_β';
+        syncGroundingButton();
+      });
+
+      let t = 0;
+      function animate() {
+        t += 0.025;
+        const ortho = parseFloat(orthoSlider.value);
+        const wild = parseFloat(wildSlider.value);
+        const v0 = parseFloat(depthSlider.value);
+
+        // Geodesic hop interpolation (smooth minimum action trajectory)
+        const dest = basins[targetBasin];
+        if (hopProgress < 1.0) {
+          hopProgress = Math.min(1.0, hopProgress + 0.016);
+          const ease = hopProgress < 0.5
+            ? 2 * hopProgress * hopProgress
+            : 1 - Math.pow(-2 * hopProgress + 2, 2) / 2;
+          // Slight geodesic curvature
+          const midArc = Math.sin(hopProgress * Math.PI) * (-22);
+          agentPos.x = hopStartPos.x + (dest.x - hopStartPos.x) * ease;
+          agentPos.y = hopStartPos.y + (dest.y - hopStartPos.y) * ease + midArc;
+          if (hopProgress >= 1.0) {
+            currentBasin = targetBasin;
+          }
+        } else {
+          // Small orbital breathing inside grounded basin
+          agentPos.x = dest.x + Math.cos(t * 1.8) * 5 * (1 - 0.5 * v0);
+          agentPos.y = dest.y + Math.sin(t * 2.1) * 5 * (1 - 0.5 * v0);
+        }
+
+        // Niche construction work & well carving
+        if (nicheCarving && basins.gamma.depth < 0.95) {
+          basins.gamma.depth = Math.min(0.96, basins.gamma.depth + 0.011);
+          deltaQNiche += 0.14 * (1 + 0.5 * wild);
+          if (basins.gamma.depth >= 0.95 && hopProgress >= 1.0) {
+            nicheCarving = false;
+          }
+        }
+
+        // Anti-forgetting vs Catastrophic Forgetting dynamics
+        const activeRegion = hopProgress < 0.65 ? targetBasin : currentBasin;
+        if (ortho < 0.5) {
+          // Shared weights without orthogonal substrate grounding: active basin overwrites non-active basin!
+          const overwriteRate = (0.5 - ortho) * 0.014 * (0.7 + 0.6 * wild);
+          if (activeRegion === 'beta') {
+            basins.alpha.depth = Math.max(0.118, basins.alpha.depth - overwriteRate);
+            basins.beta.depth = Math.min(0.985, basins.beta.depth + 0.008);
+          } else if (activeRegion === 'alpha') {
+            basins.beta.depth = Math.max(0.124, basins.beta.depth - overwriteRate);
+            basins.alpha.depth = Math.min(0.986, basins.alpha.depth + 0.008);
+          } else if (activeRegion === 'gamma') {
+            basins.alpha.depth = Math.max(0.15, basins.alpha.depth - overwriteRate * 0.8);
+            basins.beta.depth = Math.max(0.15, basins.beta.depth - overwriteRate * 0.8);
+          }
+        } else {
+          // Orthogonal Restoring Force from external substrate E_alpha, E_beta preserves wells
+          const restoreRate = (ortho - 0.45) * 0.012 * v0;
+          basins.alpha.depth = Math.min(0.986, basins.alpha.depth + restoreRate * 0.4);
+          basins.beta.depth = Math.min(0.984, basins.beta.depth + restoreRate * 0.4);
+        }
+
+        // Compute Conditional Entropy H(S | E)
+        const inTransit = hopProgress < 0.96;
+        const transitFactor = inTransit ? Math.sin(hopProgress * Math.PI) : 0;
+        const forgettingPenalty = (1 - ortho) * (2.0 - basins.alpha.depth - basins.beta.depth) * 1.35;
+        const hCond = Math.min(
+          4.85,
+          0.32 + (1 - v0) * 0.45 + transitFactor * (1.25 + wild * 1.1) + forgettingPenalty
+        );
+
+        // Update KPI DOM cards
+        const retAPct = (basins.alpha.depth * 100).toFixed(1);
+        const retBPct = (basins.beta.depth * 100).toFixed(1);
+        kpiRetA.textContent = retAPct + '%';
+        kpiRetB.textContent = retBPct + '%';
+
+        kpiRetA.style.color = basins.alpha.depth > 0.75 ? 'var(--green)' : (basins.alpha.depth > 0.4 ? 'var(--highlight)' : 'var(--red)');
+        kpiRetB.style.color = basins.beta.depth > 0.75 ? 'var(--green)' : (basins.beta.depth > 0.4 ? 'var(--highlight)' : 'var(--red)');
+
+        kpiRetASub.textContent = basins.alpha.depth > 0.75
+          ? '正交门控保护 V_α 势阱完好'
+          : '✗ 遭遇新任务梯度覆盖 (灾难性遗忘)';
+        kpiRetBSub.textContent = basins.beta.depth > 0.75
+          ? '外部基质 E_β 独立锚定完好'
+          : '✗ 遭遇旧区域梯度冲刷 (灾难性遗忘)';
+
+        kpiEntropy.textContent = hCond.toFixed(2) + ' bits';
+        kpiEntropy.style.color = hCond < 1.1 ? 'var(--accent)' : (hCond < 2.2 ? 'var(--highlight)' : 'var(--red)');
+
+        kpiNicheQ.textContent = deltaQNiche.toFixed(2) + ' k_B T₀';
+        kpiNicheSub.textContent = basins.gamma.active
+          ? `新建安全区 R_γ 势阱深度 ${(basins.gamma.depth * 100).toFixed(0)}%`
+          : '点击「主动基质筑巢」开辟 R_γ';
+
+        // Status pill (must be one of the 4 exact states)
+        if (nicheCarving) {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '基质筑巢中';
+        } else if (hopProgress < 0.96) {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '跨区测地线跃迁中';
+        } else if (ortho < 0.5 && (basins.alpha.depth < 0.72 || basins.beta.depth < 0.72)) {
+          pillEl.className = 'status-pill status-rejected';
+          pillEl.textContent = '荒野无锚定遗忘中';
+        } else {
+          pillEl.className = 'status-pill status-admitted';
+          pillEl.textContent = '安全区稳态';
+        }
+
+        // ==================== CANVAS RENDER ====================
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Left arena: State-Space Manifold M (x: 16..535)
+        ctx.fillStyle = 'rgba(239, 68, 68, 0.03)';
+        ctx.fillRect(16, 18, 520, 324);
+
+        // Chaotic high-entropy wilderness particles
+        wildParticles.forEach((wp, idx) => {
+          wp.x += wp.vx * (0.6 + wild * 1.5);
+          wp.y += wp.vy * (0.6 + wild * 1.5);
+          if (wp.x < 24) wp.x = 528;
+          if (wp.x > 528) wp.x = 24;
+          if (wp.y < 26) wp.y = 334;
+          if (wp.y > 334) wp.y = 26;
+
+          // Repel wilderness noise from deep grounded basins
+          ['alpha', 'beta', 'gamma'].forEach(key => {
+            const b = basins[key];
+            if (key === 'gamma' && !b.active) return;
+            const dx = wp.x - b.x;
+            const dy = wp.y - b.y;
+            const dist = Math.hypot(dx, dy);
+            const effR = b.r * (0.4 + 0.6 * b.depth);
+            if (dist < effR && dist > 1) {
+              wp.x += (dx / dist) * 2.2;
+              wp.y += (dy / dist) * 2.2;
+            }
+          });
+
+          ctx.fillStyle = `rgba(251, 146, 60, ${0.18 + 0.35 * wild})`;
+          ctx.beginPath();
+          ctx.arc(wp.x, wp.y, 2.0 + wild * 1.4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.fillStyle = 'rgba(252, 165, 165, 0.78)';
+        ctx.font = 'bold 11.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('混沌高熵荒野 M \\ ∪R_α (无锚定区：高热涨落)', 26, 36);
+
+        // Draw TSL Geodesic bridge between R_alpha, R_beta, and R_gamma
+        const drawGeodesicLink = (b1, b2, isActiveHop) => {
+          ctx.strokeStyle = isActiveHop ? '#fbbf24' : 'rgba(148, 163, 184, 0.32)';
+          ctx.lineWidth = isActiveHop ? 2.8 : 1.6;
+          ctx.setLineDash([6, 4]);
+          ctx.beginPath();
+          ctx.moveTo(b1.x, b1.y);
+          const mx = (b1.x + b2.x) / 2;
+          const my = (b1.y + b2.y) / 2 - 18;
+          ctx.quadraticCurveTo(mx, my, b2.x, b2.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        };
+
+        drawGeodesicLink(basins.alpha, basins.beta, hopProgress < 1.0 && targetBasin !== 'gamma');
+        if (basins.gamma.active) {
+          drawGeodesicLink(basins.beta, basins.gamma, hopProgress < 1.0 && targetBasin === 'gamma');
+          drawGeodesicLink(basins.alpha, basins.gamma, false);
+        }
+
+        // Helper to draw a Grounded Potential Basin R_alpha / R_beta / R_gamma
+        const drawBasin = (b, rgbStr) => {
+          const effDepth = b.depth * v0;
+          const outerR = b.r * (0.42 + 0.58 * b.depth);
+
+          // Radial potential well glow
+          const grad = ctx.createRadialGradient(b.x, b.y, 6, b.x, b.y, outerR);
+          grad.addColorStop(0, `rgba(${rgbStr}, ${0.15 + 0.42 * effDepth})`);
+          grad.addColorStop(0.65, `rgba(${rgbStr}, ${0.06 + 0.18 * effDepth})`);
+          grad.addColorStop(1, `rgba(${rgbStr}, 0)`);
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, outerR, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Concentric equipotential contour rings
+          for (let ring = 1; ring <= 3; ring++) {
+            const rr = (outerR / 3) * ring;
+            ctx.strokeStyle = b.depth > 0.5
+              ? `rgba(${rgbStr}, ${0.75 - ring * 0.16})`
+              : `rgba(248, 113, 113, ${0.55 - ring * 0.12})`;
+            ctx.lineWidth = ring === 3 ? 2.0 : 1.1;
+            if (b.depth < 0.45) ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, rr, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
+
+          // Orthogonal Restoring Force arrows pointing inward when grounded
+          if (ortho >= 0.5 && b.depth > 0.6) {
+            for (let a = 0; a < 4; a++) {
+              const ang = a * (Math.PI / 2) + t * 0.35;
+              const rOut = outerR * 0.88;
+              const rIn = outerR * 0.62;
+              ctx.strokeStyle = `rgba(${rgbStr}, 0.65)`;
+              ctx.lineWidth = 1.5;
+              ctx.beginPath();
+              ctx.moveTo(b.x + Math.cos(ang) * rOut, b.y + Math.sin(ang) * rOut);
+              ctx.lineTo(b.x + Math.cos(ang) * rIn, b.y + Math.sin(ang) * rIn);
+              ctx.stroke();
+            }
+          }
+
+          // Basin label & retention tag
+          ctx.fillStyle = '#f8fafc';
+          ctx.font = 'bold 11.5px -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(b.label, b.x, b.y - outerR - 10);
+
+          ctx.fillStyle = b.depth > 0.65 ? '#86efac' : '#fca5a5';
+          ctx.font = 'bold 11px ui-monospace, monospace';
+          ctx.fillText(
+            b.depth > 0.65
+              ? `I_retain = ${(b.depth * 100).toFixed(1)}%`
+              : `⚠️ 遗忘坍塌 ${(b.depth * 100).toFixed(1)}%`,
+            b.x,
+            b.y + outerR + 15
+          );
+        };
+
+        drawBasin(basins.alpha, '56, 189, 248');
+        drawBasin(basins.beta, '52, 211, 153');
+        if (basins.gamma.active) {
+          drawBasin(basins.gamma, '192, 132, 252');
+        }
+
+        // Draw Agent Particle (with local info-structure micro-lattice)
+        ctx.save();
+        ctx.translate(agentPos.x, agentPos.y);
+        // Outer aura
+        ctx.fillStyle = 'rgba(250, 204, 21, 0.24)';
+        ctx.beginPath();
+        ctx.arc(0, 0, 17, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Coherent triad representing local info structure S
+        ctx.strokeStyle = '#fef08a';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        for (let k = 0; k < 3; k++) {
+          const ang = t * 2.2 + (k * Math.PI * 2) / 3;
+          const kx = Math.cos(ang) * 10;
+          const ky = Math.sin(ang) * 10;
+          if (k === 0) ctx.moveTo(kx, ky);
+          else ctx.lineTo(kx, ky);
+        }
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.fillStyle = '#facc15';
+        ctx.beginPath();
+        ctx.arc(0, 0, 6.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.fillStyle = '#fef08a';
+        ctx.font = 'bold 11px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('智能体局部结构 S', agentPos.x, agentPos.y - 22);
+
+        // ==================== RIGHT PANEL: 1D Potential Cross-Section V_alpha(x) ====================
+        const rx = 548;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(rx, 18, 294, 324, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 12.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('李雅普诺夫势阱截面 V(x; E_α)', rx + 14, 42);
+
+        // Plot 1D potential landscape curve V(x) showing wells alpha, beta, gamma
+        const plotTop = 74;
+        const plotBase = 185;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.beginPath();
+        ctx.moveTo(rx + 16, plotTop);
+        ctx.lineTo(rx + 278, plotTop);
+        ctx.stroke();
+
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let px = 0; px <= 260; px += 3) {
+          const u = px / 260;
+          // Well centers at u=0.22 (alpha), u=0.58 (beta), u=0.84 (gamma)
+          const wA = basins.alpha.depth * v0 * Math.exp(-Math.pow((u - 0.22) / 0.11, 2));
+          const wB = basins.beta.depth * v0 * Math.exp(-Math.pow((u - 0.58) / 0.11, 2));
+          const wG = (basins.gamma.active ? basins.gamma.depth : 0) * v0 * Math.exp(-Math.pow((u - 0.85) / 0.09, 2));
+          const wildRipples = Math.sin(u * 35 + t * 3) * 4 * wild * (1 - 0.8 * Math.max(wA, wB, wG));
+          const vy = plotTop + 8 + (wA + wB + wG) * 86 + wildRipples;
+          if (px === 0) ctx.moveTo(rx + 16 + px, vy);
+          else ctx.lineTo(rx + 16 + px, vy);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = '#7dd3fc';
+        ctx.font = 'bold 11px ui-monospace, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('V_α', rx + 16 + 0.22 * 260, plotBase + 12);
+        ctx.fillStyle = '#6ee7b7';
+        ctx.fillText('V_β', rx + 16 + 0.58 * 260, plotBase + 12);
+        if (basins.gamma.active) {
+          ctx.fillStyle = '#d8b4fe';
+          ctx.fillText('V_γ', rx + 16 + 0.85 * 260, plotBase + 12);
+        }
+
+        // Memory Retention Bars
+        const drawRetBar = (y, label, val, color) => {
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#cbd5e1';
+          ctx.font = '11.5px -apple-system, sans-serif';
+          ctx.fillText(label, rx + 16, y);
+          ctx.textAlign = 'right';
+          ctx.fillStyle = color;
+          ctx.font = 'bold 11.5px ui-monospace, monospace';
+          ctx.fillText((val * 100).toFixed(1) + '%', rx + 278, y);
+
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+          ctx.fillRect(rx + 16, y + 6, 262, 11);
+          ctx.fillStyle = color;
+          ctx.fillRect(rx + 16, y + 6, Math.max(4, val * 262), 11);
+        };
+
+        drawRetBar(222, '区域 R_α 记忆留存 I_retain(α)', basins.alpha.depth, basins.alpha.depth > 0.65 ? '#38bdf8' : '#ef4444');
+        drawRetBar(264, '区域 R_β 记忆留存 I_retain(β)', basins.beta.depth, basins.beta.depth > 0.65 ? '#34d399' : '#ef4444');
+
+        ctx.textAlign = 'left';
+        ctx.font = '11px -apple-system, sans-serif';
+        if (ortho >= 0.5) {
+          ctx.fillStyle = '#86efac';
+          ctx.fillText('✓ 正交基质锚定 (P_α ⟂ P_β)：跨区零遗忘', rx + 16, 308);
+          ctx.fillStyle = '#94a3b8';
+          ctx.fillText(`H(S|E)=${hCond.toFixed(2)} bits · ΔQ_niche=${deltaQNiche.toFixed(1)}`, rx + 16, 326);
+        } else {
+          ctx.fillStyle = '#fca5a5';
+          ctx.fillText('✗ 无外部基质正交门控：新梯度冲刷旧势阱！', rx + 16, 308);
+          ctx.fillStyle = '#fbbf24';
+          ctx.fillText(`灾难性遗忘发生中 · H(S|E)=${hCond.toFixed(2)} bits`, rx + 16, 326);
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      syncGroundingButton();
       requestAnimationFrame(animate);
     })();
   </script>
