@@ -539,8 +539,9 @@
       <a href="#sec-atlas">4. 具身安全区图册</a>
       <a href="#sec-what-matters">5. 知道轻重</a>
       <a href="#sec-roadmap">6. 物理具身化路线图</a>
-      <a href="#sec-directions">7. 四个方向</a>
-      <a class="nav-accent" href="#sim-e">⚡ 模拟器 A/B/C/D/E</a>
+      <a href="#sec-bounty">7. 悬赏验真协议</a>
+      <a href="#sec-directions">8. 五个方向</a>
+      <a class="nav-accent" href="#sim-f">⚡ 模拟器 A/B/C/D/E/F</a>
       <a href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">Markdown 原文</a>
     </nav>
   </header>
@@ -551,7 +552,7 @@
       <div class="meta-row">
         <span class="badge">First-Principles Physics × AI · 2026-10-24</span>
         <span class="badge badge-warm">Stochastic Thermodynamics &amp; Wasserstein TSL</span>
-        <span class="badge badge-green">5 Live Interactive Physics Sandboxes</span>
+        <span class="badge badge-green">6 Live Interactive Physics Sandboxes</span>
       </div>
       <h1>从物理学第一性原理理解「学习」与「智能」：不可逆计算、达未速率极限与耗散结构<br><span style="font-family:var(--sans); font-size:0.62em; font-weight:600; color:var(--muted);">Irreversible Computation, Thermodynamic Speed Limits, and Dissipative Structures in Learning Systems</span></h1>
 
@@ -571,6 +572,7 @@
         <a class="btn" href="#sim-c">🛡️ 交互实验 C：混沌双尺度与「轻重」判据</a>
         <a class="btn" href="#sim-d">🗺️ 交互实验 D：具身安全区图册与抗遗忘</a>
         <a class="btn" href="#sim-e">🤖 交互实验 E：物理具身制造与主动筑巢</a>
+        <a class="btn" href="#sim-f">⚖️ 交互实验 F：防 AI 灌水悬赏验真台</a>
         <a class="btn" href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">📄 Markdown 论文源稿</a>
       </div>
     </section>
@@ -1351,11 +1353,422 @@
       </div>
     </section>
 
-    <!-- SECTION 7: FOUR DIRECTIONS -->
-    <section id="sec-directions" class="section-card">
-      <h2>7. 可立即推进的四个形式化与实验方向</h2>
+    <!-- SECTION 7: EPISTEMIC BOUNTY MARKETPLACE + SIMULATOR F -->
+    <section id="sec-bounty" class="section-card">
+      <h2>7. 理论到现实的最大断层（Uncertainties）与「一线可验证事实」网络悬赏协议（Epistemic Bounty Marketplace）</h2>
+
+      <div class="callout callout-warm">
+        <strong>核心方法论转向（2026-10-24）：</strong><br>
+        「理论离现实肯定有很大差距，尤其是最后一块（物理具身化与生物/身体稳态耦合）。很多关键知识不在顶层学术论文里，而在专门领域的中层或基层技术人员（实验员、测试工程师、临床技师、产线调试员）手里。我们要找出这套理论最大的 Uncertainties 在哪里，用网络悬赏（Bounty）发布具体问题，按可验证事实（Verification）分级定价，把一线的 Expert Knowledge 买过来。」
+      </div>
+
       <p>
-        沿着这条主线，我们推进四个核心物理×AI形式化方向与可交互验证产物：
+        为什么学术论文看起来都通，一做物理实物就卡死？因为顶层论文往往隐去了<strong>边界损耗、寄生阻抗、材料疲劳与个体相空间漂移</strong>。这些「脏数据」恰好沉淀在实验室技师与产线测试员每天面对的示波器屏幕和故障日志里。
+      </p>
+      <p>
+        为了防止大模型生成的空洞套话骗取悬赏，我们直接复用本开源体系成熟的 <a href="CLAIM-RECEIPT.md"><code>Claim-Receipt</code></a> 凭证协议与 <code>Language != State</code> 物理门禁：<strong>纯文字空谈一律 $0 拒付；唯有附带仪器原始波形、未篡改时序日志、可复现反例或实测校准配方的「可验证事实（Verifiable Facts）」才触发三级悬赏定价结算。</strong>
+      </p>
+
+      <div class="callout" style="font-size:0.88rem; margin:12px 0 18px;">
+        <strong>协议说明（Protocol &amp; Design Specification Note）：</strong>本节为「一线可验证事实」网络悬赏协议的设计规范与验真标准说明；<strong>本静态页面不直接执行任何在线支付或自动打款</strong>（实测凭证包通过 GitHub Pull Request / Issue 自愿提报并经离线/CI <code>r-verify</code> 独立复现核验）。文中美金数额（$50 – $2,500）为三级可验证事实的参考定价标尺（Reference Pricing Rubric），不构成无条件自动要约。
+      </div>
+
+      <!-- Styled HTML/SVG Flow replacing Mermaid Submission -> Gate -> Pricing -->
+      <div class="math-box" style="padding:18px 20px; background:#fbfaf7;">
+        <span class="math-label">防 AI 灌水验真与三级定价结算流 · Submission → Language != State Gate → r-verify Settlement</span>
+        <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; margin-top:10px;">
+          <!-- Left: Submission Column -->
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="font-size:0.78rem; font-weight:750; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em;">① 外部提报（一线技术人员 / 实验员）</div>
+            <div style="background:var(--red-soft); border:1px solid rgba(185,28,28,0.28); border-radius:8px; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--red);">S1 · 纯 LLM 文本 / 空洞论文综述</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;">无仪器原始波形、无 SHA-256 时序日志</span>
+            </div>
+            <div style="background:var(--highlight-soft); border:1px solid rgba(184,92,24,0.28); border-radius:8px; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--highlight);">S2 · Tier 1：踩坑参数 / 示波器截屏</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;">具体器件型号 + 实测失效边界 + 仪器波形</span>
+            </div>
+            <div style="background:var(--accent-soft); border:1px solid rgba(30,86,160,0.28); border-radius:8px; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--accent);">S3 · Tier 2：原始时序 EDF/CSV + 复现脚本</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;">未裁剪原始数据 + SHA-256 + 相变验证脚本</span>
+            </div>
+            <div style="background:var(--green-soft); border:1px solid rgba(21,128,61,0.28); border-radius:8px; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--green);">S4 · Tier 3：盲测通过的锁相刺激配方 / STEP 固件</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;">可独立复现工程解法 + 盲测 $\eta_{\mathcal{F}}$ 达标</span>
+            </div>
+          </div>
+
+          <!-- Center: Gate -->
+          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px 12px; background:#18191f; color:#f5f3ef; border-radius:12px; border:2px solid var(--highlight); text-align:center; min-width:148px; box-shadow:0 8px 24px rgba(24,25,31,0.12);">
+            <span style="font-size:0.72rem; color:#fdba74; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">Physical Gate</span>
+            <strong style="font-size:0.95rem; margin:6px 0 4px; font-family:ui-monospace, monospace; color:#fff;">Language != State</strong>
+            <span style="font-size:0.78rem; color:#cbd5e1;">验真门禁<br><code>r-verify</code> CI</span>
+            <div style="margin-top:8px; font-size:0.72rem; color:#93c5fd; border-top:1px solid rgba(255,255,255,0.15); padding-top:6px;">
+              校验 SHA-256 · 波形信噪比 · 脚本复现
+            </div>
+          </div>
+
+          <!-- Right: Settlement Column -->
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="font-size:0.78rem; font-weight:750; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em;">② 自动化验真与参考定价结算 (r-verify)</div>
+            <div style="background:var(--red-soft); border-left:4px solid var(--red); border-radius:0 8px 8px 0; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--red);">无物理锚点 → $0 自动拒付拦截</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;">零熵减（$\Delta H = 0\%$），直接丢弃不入库</span>
+            </div>
+            <div style="background:var(--highlight-soft); border-left:4px solid var(--highlight); border-radius:0 8px 8px 0; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--highlight);">实测参数通过 → $50 – $150 结算</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;"><code>raw</code> $\to$ <code>speculative</code> 锚点，不确定性 $\Delta H\ -28\%$</span>
+            </div>
+            <div style="background:var(--accent-soft); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--accent);">时序复现通过 → $200 – $600 结算</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;"><code>survived-stress-test</code> 边，不确定性 $\Delta H\ -65\%$</span>
+            </div>
+            <div style="background:var(--green-soft); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:8px 12px; font-size:0.84rem;">
+              <strong style="color:var(--green);">盲测实操达标 → $800 – $2,500 结算</strong><br>
+              <span style="color:var(--muted); font-size:0.78rem;">权威知识入库（置信度 $\ge 0.85$），不确定性 $\Delta H\ -95\%$</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7.1 SEVEN BOUNTY CARDS GROUPED UNDER U4, U1, U2, U3 -->
+      <h3>7.1 四大具身支柱的「最大现实不确定性（Top Bench-Level Uncertainties）」悬赏清单（重点深挖支柱四）</h3>
+
+      <!-- Group U4 -->
+      <div style="margin:18px 0 10px;">
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px;">
+          <span class="badge badge-purple">重点悬赏区 U4 · 支柱四</span>
+          <strong style="font-size:1.02rem; color:var(--ink);">生物—数字混合与「身体稳态吸引域」直接物理对话（Somatic &amp; Bio-Electric Basin Steering）</strong>
+        </div>
+        <p style="font-size:0.92rem; color:var(--muted); margin:0 0 12px;">
+          这是理论中最具颠覆性、但现实生理耦合不确定性最高的一环。我们急需向<strong>声学物理治疗师、经皮迷走神经调控（taVNS/PEMF）临床技师、EEG/HRV 生物反馈工程师、MEA 脑类器官湿实验技术员</strong>定向收购以下实测事实：
+        </p>
+
+        <div class="grid-3">
+          <!-- Card #B4-01 -->
+          <div class="mini-card" style="border-top:4px solid var(--purple); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px;">
+                <span class="badge badge-purple">悬赏 #B4-01</span>
+                <span style="font-size:0.76rem; font-family:ui-monospace,monospace; color:var(--muted);">Saddle-Point Readout Latency</span>
+              </div>
+              <strong style="font-size:0.98rem; color:var(--ink); margin-bottom:8px;">跨越鞍点的最快非侵入物理读出指标与延迟断层</strong>
+              <p style="font-size:0.86rem; margin:0 0 8px;">
+                <strong>核心现实断层：</strong>当我们用特定共振声波或微弱电流刺激身体，试图把自主神经系统从「高熵应激/炎症吸引域 $\mathcal{R}_{\text{stress}}$」推回「低熵稳态吸引域 $\mathcal{R}_{\text{health}}$」时，<strong>能在 3–10 秒内反映系统真正越过相空间鞍点（Saddle Point）而非短暂感官掩蔽的最快物理指标是什么？</strong>（高频 HRV 相位相干性？皮肤电导微涨落指数？瞳孔微震颤频移？还是呼吸—心率相位锁定值 PLV？）
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 8px; color:#363a45;">
+                <strong>目标收购人群：</strong>自主神经生理测试员、临床多导睡眠/神经调控技师。
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 10px; color:#363a45;">
+                <strong>交付物凭证要求：</strong>同步采集的多通道生理原始时序文件（EDF/CSV + SHA-256 哈希）+ 刺激时间戳 + 能区分「真实跨区进入稳态」与「短暂感官放松」的信噪比与受试者盲测对比。
+              </p>
+            </div>
+            <div style="background:#f5f3ff; border:1px solid rgba(109,40,217,0.2); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:ui-monospace,monospace; font-weight:700; color:var(--purple);">
+              参考定价：Tier 1: $150 | Tier 2: $500 | Tier 3: $2,000
+            </div>
+          </div>
+
+          <!-- Card #B4-02 -->
+          <div class="mini-card" style="border-top:4px solid var(--purple); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px;">
+                <span class="badge badge-purple">悬赏 #B4-02</span>
+                <span style="font-size:0.76rem; font-family:ui-monospace,monospace; color:var(--muted);">Somatic Encoding Window</span>
+              </div>
+              <strong style="font-size:0.98rem; color:var(--ink); margin-bottom:8px;">声波/电磁场向组织编码的「相位窗口」与阻抗衰减表</strong>
+              <p style="font-size:0.86rem; margin:0 0 8px;">
+                <strong>核心现实断层：</strong>把控制信息编码为「身体听得懂的物理脉冲」时，声学机械波或微电场穿过皮肤、深层筋膜与颅骨时的真实频率依赖性衰减谱有多大？一线技师实操中发现的<strong>最佳呼吸/心动周期锁相注入窗口（如呼气末期呼气暂停 Phase vs 吸气峰值）</strong>能将诱发副交感神经激动的所需刺激能耗 $\Sigma$ 降低多少倍？
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 8px; color:#363a45;">
+                <strong>目标收购人群：</strong>体感声学工程师、穿戴式经颅/经皮刺激硬件调试员。
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 10px; color:#363a45;">
+                <strong>交付物凭证要求：</strong>不同呼吸相位/频段注入下的生理响应剂量曲线（Dose-Response Log）与多点实测声阻抗/电阻抗衰减矩阵。
+              </p>
+            </div>
+            <div style="background:#f5f3ff; border:1px solid rgba(109,40,217,0.2); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:ui-monospace,monospace; font-weight:700; color:var(--purple);">
+              参考定价：Tier 1: $120 | Tier 2: $450 | Tier 3: $1,800
+            </div>
+          </div>
+
+          <!-- Card #B4-03 -->
+          <div class="mini-card" style="border-top:4px solid var(--purple); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px;">
+                <span class="badge badge-purple">悬赏 #B4-03</span>
+                <span style="font-size:0.76rem; font-family:ui-monospace,monospace; color:var(--muted);">Wetware Habituation Reset</span>
+              </div>
+              <strong style="font-size:0.98rem; color:var(--ink); margin-bottom:8px;">活体类器官 / 生物神经网络的「习惯化漂移」与人工睡眠排熵配方</strong>
+              <p style="font-size:0.86rem; margin:0 0 8px;">
+                <strong>核心现实断层：</strong>在 MEA 多电极阵列上培养的人脑类器官（如 DishBrain / FinalSpark 湿件）中，连续高频闭环电刺激 2–4 小时后，突触受体会发生不可逆内吞与吸引域漂移导致学习停滞。一线湿实验员用什么具体的<strong>间歇静息占空比、化学微流控灌流或慢波同步电脉冲（人工慢波睡眠，用于洗脱怀旧熵 $I_{\text{nostalgia}}$）</strong>来恢复其基质学习率？
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 8px; color:#363a45;">
+                <strong>目标收购人群：</strong>神经电生理湿实验技术员、类器官芯片研发员。
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 10px; color:#363a45;">
+                <strong>交付物凭证要求：</strong>MEA 原始放电栅格数据（Spike Raster CSV）+ 刺激恢复前后的自由能极小化收敛曲线。
+              </p>
+            </div>
+            <div style="background:#f5f3ff; border:1px solid rgba(109,40,217,0.2); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:ui-monospace,monospace; font-weight:700; color:var(--purple);">
+              参考定价：Tier 1: $150 | Tier 2: $600 | Tier 3: $2,500
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group U1 -->
+      <div style="margin:22px 0 10px;">
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px;">
+          <span class="badge">悬赏区 U1 · 支柱一</span>
+          <strong style="font-size:1.02rem; color:var(--ink);">热力学采样芯片与焦耳热物理自学习网格（Thermodynamic &amp; Memristive Hardware）</strong>
+        </div>
+        <p style="font-size:0.92rem; color:var(--muted); margin:0 0 12px;">
+          面向 <strong>混合信号 IC 版图工程师、RRAM/PCM 晶圆测试员、模拟存算一体硬件调试员</strong>：
+        </p>
+
+        <div class="grid-2">
+          <!-- Card #B1-01 -->
+          <div class="mini-card" style="border-top:4px solid var(--accent); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px;">
+                <span class="badge">悬赏 #B1-01</span>
+                <span style="font-size:0.76rem; font-family:ui-monospace,monospace; color:var(--muted);">The Peripheral Energy Wall</span>
+              </div>
+              <strong style="font-size:0.98rem; color:var(--ink); margin-bottom:8px;">外围 ADC/DAC 功耗吞噬墙与寄生噪声红线</strong>
+              <p style="font-size:0.86rem; margin:0 0 8px;">
+                <strong>核心现实断层：</strong>理论上纳米 p-bit 核心热采样单次仅耗微焦/飞焦（$10^4\times$ 能效），但在流片实测中，<strong>外围高精度 ADC/DAC、锁相环与偏置温度补偿电路吃掉了多少比例的总系统功耗？</strong>阵列规模拓展到多大（$N \times N$）时，互连寄生 RC 与 $1/f$ 闪烁噪声会彻底破坏朗之万热力学测地线收敛？
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 8px; color:#363a45;">
+                <strong>目标收购人群：</strong>混合信号 IC 版图工程师、RRAM/PCM 晶圆测试员、模拟存算一体硬件调试员。
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 10px; color:#363a45;">
+                <strong>交付物凭证要求：</strong>实测芯片/PCB 功耗拆解表（Power Breakdown）或带版图寄生参数提取（PEX）的 SPICE 噪声仿真时域日志。
+              </p>
+            </div>
+            <div style="background:var(--accent-soft); border:1px solid rgba(30,86,160,0.2); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:ui-monospace,monospace; font-weight:700; color:var(--accent);">
+              参考定价：Tier 1: $100 | Tier 2: $400 | Tier 3: $1,500
+            </div>
+          </div>
+
+          <!-- Card #B1-02 -->
+          <div class="mini-card" style="border-top:4px solid var(--accent); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px;">
+                <span class="badge">悬赏 #B1-02</span>
+                <span style="font-size:0.76rem; font-family:ui-monospace,monospace; color:var(--muted);">Memristive Metric Endurance</span>
+              </div>
+              <strong style="font-size:0.98rem; color:var(--ink); margin-bottom:8px;">物理度规自退火的耐久极限与电导漂移</strong>
+              <p style="font-size:0.86rem; margin:0 0 8px;">
+                <strong>核心现实断层：</strong>用焦耳热不可逆改写忆阻器电导 $\Delta Q \to \Delta G_{ij}$ 进行无反向传播物理学习时，器件在多少次连续脉冲冲击后出现阻值卡死（Stuck-at Fault）？断电后其低阻测地线状态能保持多长时间？
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 8px; color:#363a45;">
+                <strong>目标收购人群：</strong>RRAM/PCM 晶圆测试员、非易失性存储器可靠性工程师、模拟存算一体硬件调试员。
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 10px; color:#363a45;">
+                <strong>交付物凭证要求：</strong>晶圆探针测试仪实测的 $10^6$ 次循环耐久度曲线与对数时间电导漂移实测数据集。
+              </p>
+            </div>
+            <div style="background:var(--accent-soft); border:1px solid rgba(30,86,160,0.2); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:ui-monospace,monospace; font-weight:700; color:var(--accent);">
+              参考定价：Tier 1: $80 | Tier 2: $350 | Tier 3: $1,200
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group U2 & U3 side by side -->
+      <div class="grid-2" style="margin:22px 0 14px;">
+        <!-- Group U2 (#B2-01) -->
+        <div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px;">
+            <span class="badge badge-warm">悬赏区 U2 · 支柱二</span>
+            <strong style="font-size:0.98rem; color:var(--ink);">形态计算与 3D 打印超材料身体（Morphological Computation &amp; Metamaterials）</strong>
+          </div>
+          <p style="font-size:0.88rem; color:var(--muted); margin:0 0 10px;">
+            面向 <strong>软体机器人制作技师、TPU/弹性体多材料 3D 打印工程师、机械臂执行器调试员</strong>：
+          </p>
+          <div class="mini-card" style="border-top:4px solid var(--highlight); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px;">
+                <span class="badge badge-warm">悬赏 #B2-01</span>
+                <span style="font-size:0.76rem; font-family:ui-monospace,monospace; color:var(--muted);">Viscoelastic Basin Drift</span>
+              </div>
+              <strong style="font-size:0.98rem; color:var(--ink); margin-bottom:8px;">高分子粘弹性蠕变导致的「势阱漂移」与硬化锁死工艺</strong>
+              <p style="font-size:0.86rem; margin:0 0 8px;">
+                <strong>核心现实断层：</strong>把低熵安全区 $V_\alpha(x)$ 浇筑进变刚度光固化/TPU 超材料关节后，经历 $10^4$ 次动态受压或环境温差 $\Delta T = 15^\circ\text{C}$，材料应力松弛会使机械鞍点偏移多少度？现场技师用什么嵌件（如凯夫拉编织限位鞘、金属玻璃双稳态簧片）锁死势阱边界？
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 8px; color:#363a45;">
+                <strong>目标收购人群：</strong>软体机器人制作技师、TPU/弹性体多材料 3D 打印工程师、机械臂执行器调试员。
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 10px; color:#363a45;">
+                <strong>交付物凭证要求：</strong>万次动态循环加载前后的力—位移滞后回线原始 CSV 与抗蠕变嵌件工程图纸（STEP/CAD）。
+              </p>
+            </div>
+            <div style="background:var(--highlight-soft); border:1px solid rgba(184,92,24,0.2); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:ui-monospace,monospace; font-weight:700; color:var(--highlight);">
+              参考定价：Tier 1: $80 | Tier 2: $300 | Tier 3: $1,000
+            </div>
+          </div>
+        </div>
+
+        <!-- Group U3 (#B3-01) -->
+        <div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px;">
+            <span class="badge badge-green">悬赏区 U3 · 支柱三</span>
+            <strong style="font-size:0.98rem; color:var(--ink);">硬件树突门控与主动物理筑巢机器人（Niche-Constructing Robotics）</strong>
+          </div>
+          <p style="font-size:0.88rem; color:var(--muted); margin:0 0 10px;">
+            面向 <strong>工业自动化现场实施工程师、家庭服务机器人 SLAM 落地调试员、仓储 AGV 系统集成商</strong>：
+          </p>
+          <div class="mini-card" style="border-top:4px solid var(--green); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px;">
+                <span class="badge badge-green">悬赏 #B3-01</span>
+                <span style="font-size:0.76rem; font-family:ui-monospace,monospace; color:var(--muted);">Niche Decay Rate</span>
+              </div>
+              <strong style="font-size:0.98rem; color:var(--ink); margin-bottom:8px;">人类真实共居环境中「物理筑巢区 $\mathcal{R}_\gamma$」的熵反扑半衰期</strong>
+              <p style="font-size:0.86rem; margin:0 0 8px;">
+                <strong>核心现实断层：</strong>机器人消耗物理功 $\Delta W$ 在杂乱房间布设好无源光学/射频信标、磁吸定位条后，在真实家庭活动（人流走动、吸尘震动、宠物玩耍、油污覆盖）冲击下，该低熵安全区的有效寿命（半衰期 $t_{1/2}$）是多少天？一线工程中最便宜耐操、贴上即忘的物理锚点 BOM 方案是什么？
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 8px; color:#363a45;">
+                <strong>目标收购人群：</strong>工业自动化现场实施工程师、家庭服务机器人 SLAM 落地调试员、仓储 AGV 系统集成商。
+              </p>
+              <p style="font-size:0.84rem; margin:0 0 10px; color:#363a45;">
+                <strong>交付物凭证要求：</strong>多场景部署的信标失效工单统计（MTBF）及物料成本清单（BOM）。
+              </p>
+            </div>
+            <div style="background:var(--green-soft); border:1px solid rgba(21,128,61,0.2); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:ui-monospace,monospace; font-weight:700; color:var(--green);">
+              参考定价：Tier 1: $60 | Tier 2: $250 | Tier 3: $800
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7.2 3-TIER VERIFIABLE PRICING RUBRIC TABLE -->
+      <h3>7.2 「只买可验证事实」的三级悬赏定价与防 AI 灌水验真机制（3-Tier Verifiable Pricing Rubric）</h3>
+      <p>
+        为了把预算精准付给真正懂行的一线技术人员、彻底拦截 AI 生成的二手综述，每张悬赏单绑定三级可验证凭证阶梯（结算须通过独立验证器 <code>r-verify</code> 与 <code>Claim-Receipt</code> 结构化校验）：
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:23%;">悬赏等级</th>
+            <th style="width:42%;">交付物硬性门槛（<code>Language != State</code> 验真标准）</th>
+            <th style="width:15%;">单题参考定价</th>
+            <th style="width:20%;"><code>cognitive_state</code> 标签</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tier 1 · 一线踩坑参数与失效边界单</strong><br><span style="font-size:0.8rem; color:var(--muted);"><em>(Bench Failure-Mode Receipt)</em></span></td>
+            <td>拒绝泛泛而谈；必须提供<strong>具体器件型号/生理协议参数、实测失效阈值区间、仪器截屏/示波器波形/现场实拍图</strong>及可证伪的一句话断层归因</td>
+            <td><strong>$50 – $150</strong></td>
+            <td><code>raw</code> $\to$ <code>speculative</code><br><span style="font-size:0.8rem; color:var(--muted);">（带一线实测锚点）</span></td>
+          </tr>
+          <tr>
+            <td><strong>Tier 2 · 原始实验数据集与可复现反例</strong><br><span style="font-size:0.8rem; color:var(--muted);"><em>(Reproducible Raw Log &amp; Counterexample)</em></span></td>
+            <td>附带<strong>未裁剪原始时序数据（CSV/EDF/HDF5 + SHA-256 哈希）</strong>、实验台架接线/采集配置说明，以及能直接跑出相变/漂移曲线的验证脚本</td>
+            <td><strong>$200 – $600</strong></td>
+            <td><code>survived-stress-test</code><br><span style="font-size:0.8rem; color:var(--muted);">（<code>reproduces</code> / <code>falsifies</code> 边）</span></td>
+          </tr>
+          <tr>
+            <td><strong>Tier 3 · 经盲测验证的校准协议或工程解法</strong><br><span style="font-size:0.8rem; color:var(--muted);"><em>(Verified Calibration Recipe / Bench Fix)</em></span></td>
+            <td>提供可独立复现的<strong>硬件改性配方、锁相刺激参数包或机械抗蠕变结构件文件（STEP/Gerber/Code）</strong>，并在我方盲测验证集上使目标效率 $\eta_{\mathcal{F}}$ 或稳态留存率达标</td>
+            <td><strong>$800 – $2,500</strong></td>
+            <td><code>survived-stress-test</code><br><span style="font-size:0.8rem; color:var(--muted);">（高置信度 $\ge 0.85$ 入库）</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 7.3 CLAIM-RECEIPT JSON FLOW -->
+      <h3>7.3 如何提报与结算：<code>Claim-Receipt</code> 结构化凭证流</h3>
+      <p>
+        任何拥有实测数据的技术人员，均可通过 GitHub Pull Request 或 Issue 提交符合 <a href="CLAIM-RECEIPT.md"><code>CLAIM-RECEIPT.md</code></a> 格式的结构化凭证包（以下为悬赏 <code>#B4-01</code> 的示例结构，其中 <code>sha256</code> 为截断示意占位符）：
+      </p>
+      <pre style="background:#18191f; color:#f5f3ef; padding:16px 20px; border-radius:12px; overflow-x:auto; font-size:0.86rem; line-height:1.6; border:1px solid #2d3240;"><code style="background:transparent; color:inherit; padding:0;">{
+  "claim_id": "claim-bounty-b4-01-hrv-latency",
+  "bounty_target": "#B4-01",
+  "tier_applied": "Tier-2",
+  "author_seat": "external-contributor",
+  "timestamp": "2026-10-24T12:00:00Z",
+  "verifiable_artifacts": [
+    {
+      "file": "data/20261024_taVNS_respiratory_phase_eeg_hrv.edf",
+      "sha256": "4a7d...3f21",
+      "instrument": "OpenBCI Cyton + Polar H10",
+      "sampling_rate_hz": 250
+    }
+  ],
+  "falsifiable_finding": "在呼气末期（Phase [π, 3π/2]）注入 25Hz/1.5mA taVNS，系统鞍点跃迁延迟从吸气期的 14.2s 缩短至 4.1s，PLV 达到 0.78 判定进入稳态，刺激总功耗降低 68%。",
+  "verification_script": "scripts/verify_b4_01_plv.py"
+}</code></pre>
+      <p style="font-size:0.93rem; color:var(--muted);">
+        自动化 CI 运行 <code>r-verify</code> 验证数据完整性（SHA-256 哈希与采样率校验）及复现脚本输出，确认无伪造后按三级参考定价完成链下/多链协议结算，并将该事实作为高置信度节点合并入公开演化知识库。
+      </p>
+
+      <!-- SIMULATOR F: ANTI-SLOP BOUNTY VERIFICATION & 3-TIER SETTLEMENT -->
+      <div id="sim-f" class="sim-box">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-purple">交互物理实验台 F · Anti-Slop Bounty Verification &amp; Epistemic Settlement</span>
+            <h3 class="sim-title" style="margin-top:6px;">防 AI 灌水悬赏验真台：Language != State 门禁与三级可验证定价结算（Anti-Slop Bounty Verification: Claim-Receipt Gate &amp; 3-Tier Settlement）</h3>
+          </div>
+          <span id="sim-f-pill" class="status-pill status-admitted">盲测达标·权威入库</span>
+        </div>
+
+        <div class="toggle-row">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" id="sim-f-btn-slop" class="btn btn-active-toggle">🤖 提报：纯 LLM 空谈文本</button>
+            <button type="button" id="sim-f-btn-t1" class="btn btn-warm">📟 提报：Tier1 踩坑参数+示波器截屏</button>
+            <button type="button" id="sim-f-btn-t2" class="btn btn-primary">📊 提报：Tier2 原始时序日志+复现脚本</button>
+            <button type="button" id="sim-f-btn-t3" class="btn" style="border-color:var(--green); color:var(--green); font-weight:750;">🏆 提报：Tier3 盲测锁相刺激配方/STEP固件</button>
+          </div>
+          <button type="button" id="sim-f-reset-btn" class="btn">↺ 重置知识库/不确定性</button>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="sim-f-strict">验真严格度阈值 (verification strictness) <span class="val-pill" id="sim-f-strict-val">0.65</span></label>
+            <input type="range" id="sim-f-strict" min="0.40" max="0.95" step="0.05" value="0.65">
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="stat-card">
+            <span class="stat-label">累计悬赏结算额 $</span>
+            <span class="stat-val" id="sim-f-kpi-payout" style="color:var(--green);">$0</span>
+            <span class="stat-sub" id="sim-f-kpi-payout-sub">仅对可验证物理事实结算</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">已拒付 AI 灌水次数</span>
+            <span class="stat-val" id="sim-f-kpi-slop" style="color:var(--red);">0 次 ($0)</span>
+            <span class="stat-sub" id="sim-f-kpi-slop-sub">Language != State 门禁自动拦截</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">知识库熵减 $\Delta H_{\text{total}}$ %</span>
+            <span class="stat-val" id="sim-f-kpi-dh" style="color:var(--accent);">0.0%</span>
+            <span class="stat-sub" id="sim-f-kpi-dh-sub">Tier1 -28% · Tier2 -65% · Tier3 -95%</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">剩余 Uncertainty 百分比</span>
+            <span class="stat-val" id="sim-f-kpi-unc" style="color:var(--highlight);">100.0%</span>
+            <span class="stat-sub" id="sim-f-kpi-unc-sub">点击上方四类提报按钮观察退火</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas-sim-f" width="860" height="360"></canvas>
+        </div>
+
+        <p class="sim-caption" style="margin:14px 0 0;">
+          <strong>验真门禁说明：</strong>纯 LLM 文本没有物理仪器锚点，在 <code>Language != State</code> 门禁处永远以 <strong>$0 拒付弹回（零熵减 $\Delta H = 0\%$，绝不污染知识库）</strong>；只有附带真实波形、原始时序（EDF/CSV + SHA-256）或盲测工程配方的可验证事实才能穿过门禁，按 Tier 1（$50–$150，$\Delta H\ -28\%$）、Tier 2（$200–$600，$\Delta H\ -65\%$）、Tier 3（$800–$2,500，$\Delta H\ -95\%$）触发结算并实质压低四大具身支柱的现实不确定性条形。调高「验真严格度阈值」将对临界 Tier 1 凭证执行更严苛的信噪比审查。
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 8: FIVE DIRECTIONS -->
+    <section id="sec-directions" class="section-card">
+      <h2>8. 可立即推进的五个形式化与实验方向</h2>
+      <p>
+        沿着这条主线，我们推进五个核心物理×AI形式化方向与可交互验证产物：
       </p>
       <ol>
         <li>
@@ -1376,7 +1789,11 @@
         </li>
         <li>
           <strong>构建「热力学学习与具身制造」交互式物理沙盒</strong>：<br>
-          包含本页上方已实现的五个可调参数实验台：① 可逆计算 vs 不可逆擦除学习的相空间坍缩与产热对比（实验台 A）；② 最小能耗最快达未：TSL 测地线 vs 盲搜绕行（实验台 B）；③ 混沌涨落下的双时间尺度局部信息结构维持（快适应 $\chi$ × 慢谱隙 $\Delta\lambda$）与「有无不可逆代价」下的锯齿智能对比（实验台 C）；④ 具身低熵图册跃迁与抗灾难性遗忘对比（实验台 D）；⑤ <strong>物理具身化制造对比</strong>：刚体高频伺服电机（发热、高功耗、碰撞失稳）vs 形态计算超材料被动势阱（零功耗自稳、鞍点微脉冲）+ 物理筑巢机器人（荒野盲搜 vs 改造环境后 $O(1)$ 运行）（实验台 E）。
+          包含本页上方已实现的六个可调参数实验台（A 至 F）：① 可逆计算 vs 不可逆擦除学习的相空间坍缩与产热对比（实验台 A）；② 最小能耗最快达未：TSL 测地线 vs 盲搜绕行（实验台 B）；③ 混沌涨落下的双时间尺度局部信息结构维持（快适应 $\chi$ × 慢谱隙 $\Delta\lambda$）与「有无不可逆代价」下的锯齿智能对比（实验台 C）；④ 具身低熵图册跃迁与抗灾难性遗忘对比（实验台 D）；⑤ 物理具身化制造对比：刚体高频伺服电机 vs 形态计算超材料被动势阱 + 物理筑巢机器人（实验台 E）；⑥ <strong>防 AI 灌水悬赏验真台</strong>：<code>Language != State</code> 门禁与三级可验证事实定价结算（实验台 F）。
+        </li>
+        <li>
+          <strong>网络悬赏事实注入与不确定性消除实证</strong>：<br>
+          将收购来的一线实测生理时序、忆阻耐久度与超材料蠕变参数导入物理仿真模型，校准纯数学假设，使物理具身化预测误差降低一个数量级。
         </li>
       </ol>
     </section>
@@ -1391,7 +1808,7 @@
         <a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener">🎭 回应问题来源：postai.institute/stories/what-matters.html</a>
       </div>
       <div>
-        Apache-2.0 文档层 · 全文共 7 节理论推导与 5 个纯前端交互式物理模拟器（Simulators A/B/C/D/E），不含任何私有转录、凭据或个人数据（PCSE-Clean）。
+        Apache-2.0 文档层 · 全文共 8 节理论推导与 6 个纯前端交互式物理模拟器（Simulators A/B/C/D/E/F），不含任何私有转录、凭据或个人数据（PCSE-Clean）。
       </div>
     </footer>
   </main>
@@ -3284,6 +3701,495 @@
       }
 
       syncButtons();
+      requestAnimationFrame(animate);
+    })();
+
+    // =========================================================================
+    // SIMULATOR F: Anti-Slop Bounty Verification (Language != State Gate & 3-Tier Settlement)
+    // =========================================================================
+    (function() {
+      const canvas = document.getElementById('canvas-sim-f');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const btnSlop = document.getElementById('sim-f-btn-slop');
+      const btnT1 = document.getElementById('sim-f-btn-t1');
+      const btnT2 = document.getElementById('sim-f-btn-t2');
+      const btnT3 = document.getElementById('sim-f-btn-t3');
+      const resetBtn = document.getElementById('sim-f-reset-btn');
+      const strictSlider = document.getElementById('sim-f-strict');
+      const strictValEl = document.getElementById('sim-f-strict-val');
+      const pillEl = document.getElementById('sim-f-pill');
+
+      const kpiPayout = document.getElementById('sim-f-kpi-payout');
+      const kpiPayoutSub = document.getElementById('sim-f-kpi-payout-sub');
+      const kpiSlop = document.getElementById('sim-f-kpi-slop');
+      const kpiSlopSub = document.getElementById('sim-f-kpi-slop-sub');
+      const kpiDh = document.getElementById('sim-f-kpi-dh');
+      const kpiDhSub = document.getElementById('sim-f-kpi-dh-sub');
+      const kpiUnc = document.getElementById('sim-f-kpi-unc');
+      const kpiUncSub = document.getElementById('sim-f-kpi-unc-sub');
+
+      let totalPayout = 0;
+      let rejectedSlopCount = 0;
+      let uncertaintyRemaining = 100.0; // starts at 100%
+      let pillarUnc = {
+        U4: 100.0, // #B4-01..03 Somatic
+        U1: 100.0, // #B1-01..02 Hardware
+        U2: 100.0, // #B2-01 Metamaterial
+        U3: 100.0  // #B3-01 Niche
+      };
+      const pillarKeys = ['U4', 'U1', 'U2', 'U3'];
+      let nextPillarIdx = 0;
+
+      const packets = [];
+      const gateSparks = [];
+      const kbNodes = [];
+      let gateFlash = { color: '#38bdf8', alpha: 0, verdictText: '待命：等待凭证提报' };
+
+      function updateKPIs() {
+        const strict = parseFloat(strictSlider.value);
+        strictValEl.textContent = strict.toFixed(2);
+
+        const dhTotal = Math.max(0, Math.min(95.0, 100.0 - uncertaintyRemaining));
+        kpiPayout.textContent = '$' + totalPayout.toLocaleString('en-US');
+        kpiSlop.textContent = rejectedSlopCount + ' 次 ($0)';
+        kpiDh.textContent = (dhTotal > 0 ? '-' : '') + dhTotal.toFixed(1) + '%';
+        kpiUnc.textContent = uncertaintyRemaining.toFixed(1) + '%';
+        kpiUnc.style.color = uncertaintyRemaining < 25 ? 'var(--green)' : (uncertaintyRemaining < 65 ? 'var(--accent)' : 'var(--highlight)');
+      }
+
+      function setPill(state) {
+        if (state === 'rejected') {
+          pillEl.className = 'status-pill status-rejected';
+          pillEl.textContent = '物理锚点缺失·拒付';
+        } else if (state === 'settling') {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '验真通过·结算中';
+        } else if (state === 'authoritative') {
+          pillEl.className = 'status-pill status-admitted';
+          pillEl.textContent = '盲测达标·权威入库';
+        } else if (state === 'reset') {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '知识库已重置';
+        }
+      }
+
+      function spawnClaim(type) {
+        const strict = parseFloat(strictSlider.value);
+        const targetPillar = pillarKeys[nextPillarIdx % pillarKeys.length];
+        if (type !== 'slop') nextPillarIdx++;
+
+        let label = '';
+        let bountyCode = '#B4-01';
+        if (targetPillar === 'U4') bountyCode = ['#B4-01', '#B4-02', '#B4-03'][nextPillarIdx % 3];
+        else if (targetPillar === 'U1') bountyCode = ['#B1-01', '#B1-02'][nextPillarIdx % 2];
+        else if (targetPillar === 'U2') bountyCode = '#B2-01';
+        else bountyCode = '#B3-01';
+
+        let payout = 0;
+        let dhCut = 0; // percentage cut applied
+        let willPass = true;
+        let color = '#38bdf8';
+        let cogTag = 'raw';
+
+        if (type === 'slop') {
+          label = '纯 LLM 空谈综述 (无波形/无哈希)';
+          willPass = false;
+          payout = 0;
+          dhCut = 0;
+          color = '#ef4444';
+          cogTag = 'rejected ($0)';
+        } else if (type === 't1') {
+          // Borderline Tier1 check against strictness slider
+          const snrScore = 0.78; // borderline bench screenshot score
+          if (strict > 0.80) {
+            label = `Tier1 临界截屏 (${bountyCode} · 低于严格度 ${strict.toFixed(2)})`;
+            willPass = false;
+            payout = 0;
+            dhCut = 0;
+            color = '#f97316';
+            cogTag = 'strict-rejected ($0)';
+          } else {
+            payout = Math.round(150 - (strict - 0.40) * 120); // $96 - $150 within $50-$150
+            dhCut = 28;
+            label = `Tier1 踩坑波形 (${bountyCode} · $${payout})`;
+            willPass = true;
+            color = '#fb923c';
+            cogTag = 'raw → speculative (-28%)';
+          }
+        } else if (type === 't2') {
+          payout = 500; // within $200-$600
+          dhCut = 65;
+          label = `Tier2 原始时序+脚本 (${bountyCode} · $${payout})`;
+          willPass = true;
+          color = '#38bdf8';
+          cogTag = 'survived-stress-test (-65%)';
+        } else if (type === 't3') {
+          payout = 2000; // within $800-$2500
+          dhCut = 95;
+          label = `Tier3 盲测配方/STEP (${bountyCode} · $${payout})`;
+          willPass = true;
+          color = '#34d399';
+          cogTag = 'authoritative ≥0.85 (-95%)';
+        }
+
+        packets.push({
+          type,
+          label,
+          bountyCode,
+          targetPillar,
+          payout,
+          dhCut,
+          willPass,
+          color,
+          cogTag,
+          x: 70,
+          y: 175 + (Math.random() - 0.5) * 36,
+          vx: 3.4,
+          vy: 0,
+          phase: 'approaching', // 'approaching' -> 'bounced' | 'admitted' -> 'done'
+          life: 1.0
+        });
+      }
+
+      btnSlop.addEventListener('click', () => spawnClaim('slop'));
+      btnT1.addEventListener('click', () => spawnClaim('t1'));
+      btnT2.addEventListener('click', () => spawnClaim('t2'));
+      btnT3.addEventListener('click', () => spawnClaim('t3'));
+
+      strictSlider.addEventListener('input', () => {
+        strictValEl.textContent = parseFloat(strictSlider.value).toFixed(2);
+      });
+
+      resetBtn.addEventListener('click', () => {
+        totalPayout = 0;
+        rejectedSlopCount = 0;
+        uncertaintyRemaining = 100.0;
+        pillarUnc = { U4: 100.0, U1: 100.0, U2: 100.0, U3: 100.0 };
+        packets.length = 0;
+        gateSparks.length = 0;
+        kbNodes.length = 0;
+        gateFlash = { color: '#fbbf24', alpha: 0.8, verdictText: '知识库与不确定性已重置 (Uncertainty = 100%)' };
+        setPill('reset');
+        kpiPayoutSub.textContent = '仅对可验证物理事实结算';
+        kpiSlopSub.textContent = 'Language != State 门禁自动拦截';
+        kpiDhSub.textContent = 'Tier1 -28% · Tier2 -65% · Tier3 -95%';
+        kpiUncSub.textContent = '知识库已重置，等待新提报';
+        updateKPIs();
+      });
+
+      const gateX = 335;
+      let t = 0;
+
+      function animate() {
+        t += 0.025;
+        const strict = parseFloat(strictSlider.value);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Background Grid
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.lineWidth = 1;
+        for (let gx = 30; gx < 530; gx += 45) {
+          ctx.beginPath(); ctx.moveTo(gx, 20); ctx.lineTo(gx, 340); ctx.stroke();
+        }
+        for (let gy = 30; gy < 340; gy += 45) {
+          ctx.beginPath(); ctx.moveTo(20, gy); ctx.lineTo(530, gy); ctx.stroke();
+        }
+
+        // Left Zone Header: Inbound Claim Lane
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = 'bold 12px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('① 外部凭证提报通道 (Inbound Claim-Receipt Stream)', 24, 36);
+
+        // Draw Conduit Track
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(24, 118, 495, 114, 12);
+        ctx.fill();
+        ctx.stroke();
+
+        // Center Gate: Language != State & r-verify Gate
+        const gateTop = 62, gateH = 226, gateW = 76;
+        ctx.fillStyle = '#1e2230';
+        ctx.strokeStyle = gateFlash.alpha > 0.05 ? gateFlash.color : '#f59e0b';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.roundRect(gateX - gateW / 2, gateTop, gateW, gateH, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        if (gateFlash.alpha > 0.01) {
+          ctx.fillStyle = gateFlash.color;
+          ctx.globalAlpha = gateFlash.alpha * 0.28;
+          ctx.beginPath();
+          ctx.roundRect(gateX - gateW / 2, gateTop, gateW, gateH, 10);
+          ctx.fill();
+          ctx.globalAlpha = 1.0;
+          gateFlash.alpha *= 0.94;
+        }
+
+        // Laser scanner inside gate
+        const scanY = gateTop + 30 + (Math.sin(t * 3.2) * 0.5 + 0.5) * (gateH - 60);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(gateX - gateW / 2 + 6, scanY);
+        ctx.lineTo(gateX + gateW / 2 - 6, scanY);
+        ctx.stroke();
+
+        ctx.fillStyle = '#fdba74';
+        ctx.font = 'bold 10px ui-monospace, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('GATE', gateX, gateTop + 20);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10.5px ui-monospace, monospace';
+        ctx.fillText('Language', gateX, gateTop + 95);
+        ctx.fillText('!= State', gateX, gateTop + 111);
+        ctx.fillStyle = '#93c5fd';
+        ctx.font = '10px ui-monospace, monospace';
+        ctx.fillText('r-verify', gateX, gateTop + 135);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '9.5px -apple-system, sans-serif';
+        ctx.fillText(`阈值 ${strict.toFixed(2)}`, gateX, gateTop + 208);
+
+        // Update & Draw Packets
+        for (let i = packets.length - 1; i >= 0; i--) {
+          const p = packets[i];
+          if (p.phase === 'approaching') {
+            p.x += p.vx;
+            if (p.x >= gateX - gateW / 2 - 18) {
+              // Gate inspection moment!
+              if (!p.willPass) {
+                p.phase = 'bounced';
+                p.vx = -3.2;
+                p.vy = (Math.random() - 0.5) * 2.2 - 1.2;
+                rejectedSlopCount++;
+                setPill('rejected');
+                gateFlash = {
+                  color: '#ef4444',
+                  alpha: 1.0,
+                  verdictText: p.type === 'slop'
+                    ? '✗ 拦截纯 LLM 文本：$0 自动拒付 · 零熵减 ΔH=0% 不入库'
+                    : `✗ Tier1 证据信噪比低于严格度阈值 (${strict.toFixed(2)}) · 退回补充原始数据`
+                };
+                kpiSlopSub.textContent = p.type === 'slop'
+                  ? '最近拦截：纯文本空谈无波形 ($0)'
+                  : `最近拦截：严格度 ${strict.toFixed(2)} 退回临界 Tier1`;
+                for (let s = 0; s < 16; s++) {
+                  gateSparks.push({
+                    x: gateX - gateW / 2,
+                    y: p.y,
+                    vx: -1.5 - Math.random() * 3.0,
+                    vy: (Math.random() - 0.5) * 4.0,
+                    color: '#f87171',
+                    life: 1.0
+                  });
+                }
+                updateKPIs();
+              } else {
+                p.phase = 'admitted';
+                p.vx = 3.6;
+                totalPayout += p.payout;
+                // Reduce pillar uncertainty and global uncertainty
+                const factor = 1 - (p.dhCut / 100);
+                pillarUnc[p.targetPillar] = Math.max(5.0, pillarUnc[p.targetPillar] * factor);
+                // Global uncertainty reflects both target tier entropy reduction (-28%, -65%, -95%) and cumulative annealing
+                const targetUnc = Math.min(uncertaintyRemaining * (1 - p.dhCut * 0.0055), 100 - p.dhCut);
+                uncertaintyRemaining = Math.max(5.0, targetUnc);
+
+                if (p.type === 't3') {
+                  setPill('authoritative');
+                } else {
+                  setPill('settling');
+                }
+
+                gateFlash = {
+                  color: p.color,
+                  alpha: 1.0,
+                  verdictText: `✓ 验真通过 (${p.bountyCode})：结算 $${p.payout} · 熵减 -${p.dhCut}% · 写入 ${p.cogTag}`
+                };
+                kpiPayoutSub.textContent = `最近结算：${p.bountyCode} (+$${p.payout})`;
+                kpiDhSub.textContent = `单题熵减 ΔH -${p.dhCut}% (${p.cogTag})`;
+                kpiUncSub.textContent = `${p.targetPillar} 支柱不确定性已退火下降`;
+
+                for (let s = 0; s < 14; s++) {
+                  gateSparks.push({
+                    x: gateX + gateW / 2,
+                    y: p.y,
+                    vx: 1.2 + Math.random() * 2.8,
+                    vy: (Math.random() - 0.5) * 3.4,
+                    color: p.color,
+                    life: 1.0
+                  });
+                }
+                updateKPIs();
+              }
+            }
+          } else if (p.phase === 'bounced') {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= 0.022;
+            if (p.life <= 0 || p.x < 20) {
+              packets.splice(i, 1);
+              continue;
+            }
+          } else if (p.phase === 'admitted') {
+            p.x += p.vx;
+            if (p.x >= 515) {
+              // Anneal into Knowledge Base node on the right
+              kbNodes.push({
+                bountyCode: p.bountyCode,
+                tier: p.type.toUpperCase(),
+                color: p.color,
+                payout: p.payout,
+                dhCut: p.dhCut,
+                born: t
+              });
+              if (kbNodes.length > 6) kbNodes.shift();
+              packets.splice(i, 1);
+              continue;
+            }
+          }
+
+          // Render Packet Box
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.life);
+          ctx.fillStyle = p.phase === 'bounced' ? 'rgba(239, 68, 68, 0.22)' : 'rgba(30, 41, 59, 0.92)';
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(p.x - 42, p.y - 20, 84, 40, 8);
+          ctx.fill();
+          ctx.stroke();
+
+          // Mini waveform or slop X inside packet
+          ctx.fillStyle = p.color;
+          ctx.font = 'bold 10px ui-monospace, monospace';
+          ctx.textAlign = 'center';
+          if (p.type === 'slop') {
+            ctx.fillText('LLM 空谈', p.x, p.y - 3);
+            ctx.fillStyle = '#fca5a5';
+            ctx.font = '9.5px -apple-system, sans-serif';
+            ctx.fillText('0 物理锚点', p.x, p.y + 12);
+          } else {
+            ctx.fillText(`${p.type.toUpperCase()} · ${p.bountyCode}`, p.x, p.y - 4);
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = '9.5px ui-monospace, monospace';
+            ctx.fillText(`$${p.payout} | -${p.dhCut}%`, p.x, p.y + 11);
+          }
+          ctx.restore();
+        }
+
+        // Update & Draw Gate Sparks
+        for (let i = gateSparks.length - 1; i >= 0; i--) {
+          const sp = gateSparks[i];
+          sp.x += sp.vx;
+          sp.y += sp.vy;
+          sp.life -= 0.035;
+          if (sp.life <= 0) {
+            gateSparks.splice(i, 1);
+            continue;
+          }
+          ctx.fillStyle = sp.color;
+          ctx.globalAlpha = sp.life;
+          ctx.beginPath();
+          ctx.arc(sp.x, sp.y, 2.8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1.0;
+        }
+
+        // Bottom Verdict Banner on Left/Center
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.beginPath();
+        ctx.roundRect(24, 302, 495, 38, 8);
+        ctx.fill();
+        ctx.fillStyle = gateFlash.color;
+        ctx.font = 'bold 11.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(gateFlash.verdictText, 36, 325);
+
+        // Right Panel: Epistemic Knowledge Base & Uncertainty Bars (x: 538..842)
+        const rx = 538;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(rx, 18, 304, 322, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 12.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('② 现实不确定性退火与权威知识库', rx + 14, 42);
+
+        // Draw 4 Pillar Uncertainty Bars
+        const drawUncBar = (y, code, title, val, color) => {
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#cbd5e1';
+          ctx.font = '11px -apple-system, sans-serif';
+          ctx.fillText(`${code} ${title}`, rx + 14, y);
+          ctx.textAlign = 'right';
+          ctx.fillStyle = color;
+          ctx.font = 'bold 11px ui-monospace, monospace';
+          ctx.fillText(`剩余 ${val.toFixed(0)}%`, rx + 288, y);
+
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+          ctx.fillRect(rx + 14, y + 6, 274, 10);
+          ctx.fillStyle = color;
+          ctx.fillRect(rx + 14, y + 6, Math.max(4, (val / 100) * 274), 10);
+        };
+
+        drawUncBar(68, 'U4', '生物稳态吸引域 (#B4-01..03)', pillarUnc.U4, '#a78bfa');
+        drawUncBar(106, 'U1', '热采样与忆阻耐久 (#B1-01..02)', pillarUnc.U1, '#38bdf8');
+        drawUncBar(144, 'U2', '超材料粘弹势阱漂移 (#B2-01)', pillarUnc.U2, '#fb923c');
+        drawUncBar(182, 'U3', '物理筑巢半衰期 BOM (#B3-01)', pillarUnc.U3, '#34d399');
+
+        // Admitted Knowledge Receipt Nodes
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = 'bold 11px -apple-system, sans-serif';
+        ctx.fillText('已入库可验证事实凭证 (Claim-Receipt Ledger):', rx + 14, 222);
+
+        if (kbNodes.length === 0) {
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.5)';
+          ctx.font = '11px -apple-system, sans-serif';
+          ctx.fillText('暂无入库凭证 — 点击上方 Tier 1/2/3 按钮提报实测事实', rx + 14, 256);
+        } else {
+          kbNodes.forEach((node, idx) => {
+            const col = idx % 2;
+            const row = Math.floor(idx / 2);
+            const nx = rx + 14 + col * 140;
+            const ny = 232 + row * 32;
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+            ctx.strokeStyle = node.color;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.roundRect(nx, ny, 132, 26, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = node.color;
+            ctx.font = 'bold 10px ui-monospace, monospace';
+            ctx.textAlign = 'left';
+            ctx.fillText(`${node.bountyCode} [${node.tier}]`, nx + 7, ny + 16);
+            ctx.textAlign = 'right';
+            ctx.fillStyle = '#e2e8f0';
+            ctx.fillText(`-$${node.payout}`, nx + 125, ny + 16);
+          });
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      // Initial demo packet so canvas is alive on load
+      updateKPIs();
+      spawnClaim('t3');
       requestAnimationFrame(animate);
     })();
   </script>
