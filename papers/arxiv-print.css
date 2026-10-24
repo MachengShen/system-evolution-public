@@ -1,0 +1,377 @@
+@import url('https://cdn.jsdelivr.net/npm/lm-webfont/style.css');
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm 24mm;
+}
+
+/* ==========================================================================
+   arXiv Open-Preprint Standalone Print Stylesheet (papers/arxiv-print.css)
+   Injected into interactive HTML treatises prior to Chromium page.pdf()
+   Scoped to body.print-mode to override interactive web chrome cleanly.
+   ========================================================================== */
+
+body.print-mode {
+  background: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  font-size: 10.5pt !important;
+  line-height: 1.5 !important;
+  text-align: justify !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Reset container and cards for continuous academic single-column layout */
+body.print-mode .container,
+body.print-mode main {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.print-mode .hero,
+body.print-mode .section-card,
+body.print-mode .mini-card,
+body.print-mode .stat-card {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 0 12pt 0 !important;
+}
+
+body.print-mode .mini-card,
+body.print-mode .stat-card {
+  border: 1px solid #cccccc !important;
+  padding: 8pt 10pt !important;
+  margin-bottom: 8pt !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Hide all interactive-only chrome when printing */
+body.print-mode .topbar,
+body.print-mode header.topbar,
+body.print-mode nav,
+body.print-mode .nav-links,
+body.print-mode .nav-actions,
+body.print-mode .btn,
+body.print-mode button,
+body.print-mode .lang-switch,
+body.print-mode input[type=range],
+body.print-mode input[type="range"],
+body.print-mode .sim-controls,
+body.print-mode .toggle-row,
+body.print-mode .hero > div:has(> .btn),
+body.print-mode .footer-links,
+body.print-mode script,
+body.print-mode noscript {
+  display: none !important;
+}
+
+/* Academic Typography */
+body.print-mode h1 {
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  font-size: 2.0rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  line-height: 1.25 !important;
+  color: #000000 !important;
+  margin: 0 0 12pt 0 !important;
+  letter-spacing: normal !important;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+body.print-mode h1 span {
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  color: #222222 !important;
+  display: block;
+  margin-top: 4pt;
+}
+
+body.print-mode h2 {
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  color: #000000 !important;
+  border-top: 1px solid #000000 !important;
+  border-bottom: none !important;
+  padding-top: 8pt !important;
+  padding-bottom: 0 !important;
+  margin: 18pt 0 8pt 0 !important;
+  text-align: left !important;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+body.print-mode h3 {
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  color: #000000 !important;
+  margin: 12pt 0 6pt 0 !important;
+  text-align: left !important;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+body.print-mode h4 {
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  font-size: 1.0rem !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  color: #000000 !important;
+  margin: 10pt 0 4pt 0 !important;
+  text-align: left !important;
+}
+
+body.print-mode p,
+body.print-mode li {
+  color: #000000 !important;
+  text-align: justify !important;
+  margin-top: 0 !important;
+  margin-bottom: 6pt !important;
+}
+
+body.print-mode a {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+/* Abstract, Callout, and Proposition Boxes */
+body.print-mode .lead-abstract,
+body.print-mode .thesis-box {
+  background: #fafafa !important;
+  border: 1px solid #888888 !important;
+  border-left: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 10pt 14pt !important;
+  margin: 12pt 16pt !important;
+  color: #000000 !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+body.print-mode .lead-abstract-label,
+body.print-mode .core-proposition-title,
+body.print-mode .math-label {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.print-mode .core-proposition,
+body.print-mode .callout,
+body.print-mode .callout-warm,
+body.print-mode .callout-green,
+body.print-mode .callout-red,
+body.print-mode .notice-box {
+  background: #fdfdfd !important;
+  border: 1px solid #bbbbbb !important;
+  border-left: 3px solid #222222 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 9pt 12pt !important;
+  margin: 10pt 0 !important;
+  color: #000000 !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Blockquote as indented italic with left rule */
+body.print-mode blockquote {
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 10.5pt !important;
+  color: #000000 !important;
+  margin: 8pt 18pt !important;
+  padding: 2pt 0 2pt 10pt !important;
+  border-left: 2px solid #000000 !important;
+  background: transparent !important;
+}
+
+/* Tables: thin black borders, light gray header row */
+body.print-mode table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  border: 1px solid #000000 !important;
+  margin: 10pt 0 !important;
+  font-size: 9.5pt !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  break-inside: auto;
+}
+
+body.print-mode tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+body.print-mode th,
+body.print-mode td {
+  border: 1px solid #000000 !important;
+  padding: 5pt 7pt !important;
+  color: #000000 !important;
+  text-align: left !important;
+  vertical-align: top !important;
+}
+
+body.print-mode th {
+  background: #eaeaea !important;
+  font-weight: 700 !important;
+}
+
+/* Code & Pre blocks in a light box with monospace */
+body.print-mode code,
+body.print-mode pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !important;
+  font-size: 8.8pt !important;
+  color: #000000 !important;
+  background: #f5f5f5 !important;
+}
+
+body.print-mode code {
+  padding: 1pt 4pt !important;
+  border: 1px solid #dddddd !important;
+  border-radius: 2px !important;
+}
+
+body.print-mode pre {
+  padding: 8pt 10pt !important;
+  border: 1px solid #cccccc !important;
+  border-radius: 2px !important;
+  overflow-x: auto !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  line-height: 1.4 !important;
+  margin: 8pt 0 !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+body.print-mode pre code {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Math & KaTeX left intact */
+body.print-mode .math-box {
+  background: #fafafa !important;
+  border: 1px solid #cccccc !important;
+  border-radius: 0 !important;
+  padding: 8pt 12pt !important;
+  margin: 10pt 0 !important;
+  color: #000000 !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+body.print-mode .katex,
+body.print-mode .katex-display {
+  color: #000000 !important;
+}
+
+/* Canvas Simulators: preserve last rendered frame as an academic figure */
+body.print-mode .sim-box {
+  background: #ffffff !important;
+  border: 1px solid #999999 !important;
+  border-radius: 0 !important;
+  padding: 10pt 12pt !important;
+  margin: 14pt 0 !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+body.print-mode .canvas-wrap {
+  background: #12141a !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 6pt 0 !important;
+}
+
+body.print-mode canvas,
+canvas {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bbb;
+  display: block;
+  margin: 0 auto;
+}
+
+body.print-mode .sim-caption,
+body.print-mode .figure-caption,
+body.print-mode figcaption {
+  font-family: 'Latin Modern Roman', 'Computer Modern Serif', 'Noto Serif CJK SC', 'Noto Serif', Georgia, 'DejaVu Serif', serif !important;
+  font-size: 9pt !important;
+  line-height: 1.4 !important;
+  color: #222222 !important;
+  background: transparent !important;
+  border: none !important;
+  border-left: 2px solid #666666 !important;
+  border-radius: 0 !important;
+  padding: 2pt 0 2pt 8pt !important;
+  margin: 6pt 0 !important;
+  text-align: justify !important;
+}
+
+/* Metadata Badges */
+body.print-mode .badge,
+body.print-mode .status-pill,
+body.print-mode .tag-pill {
+  background: #f2f2f2 !important;
+  color: #000000 !important;
+  border: 1px solid #888888 !important;
+  border-radius: 2px !important;
+  font-size: 8pt !important;
+  padding: 1pt 5pt !important;
+}
+
+/* Left Vertical arXiv Identifier Banner (repeated per page via fixed positioning) */
+.arxiv-banner,
+body.print-mode .arxiv-banner {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  position: fixed;
+  left: 4mm;
+  top: 30mm;
+  font-size: 8pt;
+  letter-spacing: 1px;
+  color: #444 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !important;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+/* How-to-Cite / BibTeX Box Style */
+.cite-box,
+.bibtex-box,
+body.print-mode .cite-box,
+body.print-mode .bibtex-box {
+  background: #f4f4f4 !important;
+  border: 1px solid #bdbdbd !important;
+  border-radius: 2px !important;
+  padding: 8pt 10pt !important;
+  margin: 10pt 0 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !important;
+  font-size: 8.2pt !important;
+  line-height: 1.38 !important;
+  color: #111111 !important;
+  white-space: pre-wrap !important;
+  word-break: break-all !important;
+  text-align: left !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}

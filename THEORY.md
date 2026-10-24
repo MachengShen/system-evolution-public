@@ -22,6 +22,7 @@ credit assignment, tools, rules and feedback.
 
 ## Start Here
 
+- 📄 **[Open Preprints (arXiv-style PDF series)](papers/index.html)** — every theory below also ships as a citable PDF with a stable `SE-YYYY.NNNNN` identifier, SHA-256, and BibTeX. Machine catalog: [`papers/catalog.json`](papers/catalog.json) · [`CITATION.cff`](CITATION.cff).
 - [AI-Assisted Foundational Physics Entry](essays/2026-05-29-ai-assisted-foundational-physics-entry.html)
 - [Agent-Readable Credit Transport Packet](essays/2026-05-26-agent-readable-credit-transport-packet.md)
 - [Propagation, Service Claims, and Distributed Credit](essays/2026-05-28-propagation-service-claims-distributed-credit.md)

@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="System Evolution Open Preprints (SE-YYYY.NNNNN): An open, self-hosted arXiv-style preprint series on the physics of learning, stochastic thermodynamics, substrate reinforcement learning, and cognitive architecture. BYOK, Apache-2.0.">
+  <title>System Evolution · Open Preprints (SE-YYYY.NNNNN)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23b31b1b'/><text x='50' y='66' font-size='44' font-weight='bold' text-anchor='middle' fill='%23ffffff' font-family='serif'>SE</text></svg>">
+  <script src="https://zoro-hub.clawishmacheng.com/api/telemetry/beacon.js" data-surface="papers-index" async></script>
+  <style>
+    :root {
+      --bg-paper: #faf8f5;
+      --bg-card: #ffffff;
+      --bg-subtle: #f3f0ea;
+      --ink: #16181d;
+      --muted: #525866;
+      --line: #dcd6cc;
+      --arxiv-red: #b31b1b;
+      --arxiv-red-soft: #fdf2f2;
+      --accent: #1b4d89;
+      --accent-soft: #edf3fa;
+      --mono-bg: #f6f4f0;
+      --serif: "Latin Modern Roman", "Computer Modern Serif", Georgia, "Times New Roman", "Noto Serif CJK SC", "Songti SC", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--arxiv-red);
+    }
+
+    /* Top Academic Banner */
+    .top-banner {
+      background: var(--bg-card);
+      border-bottom: 3px solid var(--arxiv-red);
+      padding: 20px 18px;
+    }
+
+    .top-banner-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-title {
+      font-family: var(--serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 4px 0;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      display: inline-block;
+      background: var(--arxiv-red);
+      color: #ffffff;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+
+    .brand-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .banner-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .banner-nav a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      background: var(--bg-paper);
+      color: var(--ink);
+      transition: all 0.15s ease;
+    }
+
+    .banner-nav a:hover {
+      border-color: var(--arxiv-red);
+      color: var(--arxiv-red);
+      background: var(--arxiv-red-soft);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+
+    /* Explanation Box: How to index / cite us */
+    .index-guide {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 30px;
+    }
+
+    .index-guide h2 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      margin: 0 0 8px 0;
+      color: var(--ink);
+    }
+
+    .index-guide p {
+      margin: 0 0 10px 0;
+      font-size: 0.94rem;
+      color: #2b303a;
+    }
+
+    .index-guide p:last-child {
+      margin-bottom: 0;
+    }
+
+    .index-guide code {
+      font-family: var(--mono);
+      font-size: 0.86em;
+      background: var(--mono-bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    /* Section Header */
+    .section-heading {
+      font-family: var(--serif);
+      font-size: 1.38rem;
+      font-weight: 700;
+      margin: 0 0 18px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-count {
+      font-family: var(--mono);
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Preprint Cards */
+    .paper-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .paper-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 24px 26px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
+    }
+
+    .paper-meta-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .meta-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preprint-id {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--arxiv-red-soft);
+      color: var(--arxiv-red);
+      border: 1px solid rgba(179, 27, 27, 0.3);
+      padding: 2px 9px;
+      border-radius: 3px;
+    }
+
+    .paper-date {
+      font-family: var(--mono);
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    .cat-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cat-tag {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(27, 77, 137, 0.22);
+      padding: 1px 7px;
+      border-radius: 3px;
+    }
+
+    .paper-title {
+      font-family: var(--serif);
+      font-size: 1.32rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 8px 0;
+    }
+
+    .paper-title a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .paper-title a:hover {
+      color: var(--arxiv-red);
+      text-decoration: underline;
+    }
+
+    .paper-authors {
+      font-size: 0.94rem;
+      color: var(--muted);
+      margin: 0 0 14px 0;
+    }
+
+    .paper-authors strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Action Buttons Row */
+    .action-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 5px 11px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      background: var(--bg-paper);
+      color: var(--ink);
+      transition: all 0.12s ease;
+    }
+
+    .btn-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .btn-pdf {
+      background: var(--arxiv-red);
+      color: #ffffff;
+      border-color: var(--arxiv-red);
+    }
+
+    .btn-pdf:hover {
+      background: #8e1414;
+      border-color: #8e1414;
+      color: #ffffff;
+    }
+
+    /* SHA-256 Verification Line */
+    .sha-box {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--bg-subtle);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 7px 11px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+
+    .sha-box strong {
+      color: var(--ink);
+    }
+
+    /* Copyable BibTeX Block */
+    .bibtex-wrap {
+      position: relative;
+      background: var(--mono-bg);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+    }
+
+    .bibtex-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 10px;
+      border-bottom: 1px solid var(--line);
+      background: #eeeae2;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .copy-btn {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 3px;
+      border: 1px solid #c5bfb3;
+      background: #ffffff;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .bibtex-pre {
+      margin: 0;
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: #1f2329;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .paper-card {
+        padding: 18px 16px;
+      }
+      .paper-title {
+        font-size: 1.16rem;
+      }
+      .top-banner-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-banner">
+    <div class="top-banner-inner">
+      <div>
+        <h1 class="brand-title">
+          <span class="brand-mark">arXiv-Style</span>
+          System Evolution · Open Preprints
+        </h1>
+        <p class="brand-desc">An open, self-hosted preprint series. BYOK, Apache-2.0. Cite us like arXiv.</p>
+      </div>
+      <nav class="banner-nav" aria-label="Repository Navigation">
+        <a href="../index.html">← Main Portal (index.html)</a>
+        <a href="../THEORY.md">THEORY.md</a>
+        <a href="catalog.json">catalog.json</a>
+        <a href="../CITATION.cff">CITATION.cff</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="index-guide" aria-labelledby="how-to-cite-heading">
+      <h2 id="how-to-cite-heading">How to index / cite us</h2>
+      <p>
+        <strong>System Evolution Open Preprints</strong> is an arXiv-style open-access preprint series with stable, permanent identifiers of the form <code>SE-YYYY.NNNNN</code>. Every paper in this series ships with a typeset archival <strong>PDF</strong> (compiled via <code>papers/arxiv-print.css</code>), an interactive first-principles <strong>HTML</strong> treatise with live numerical simulations, cryptographic <strong>SHA-256</strong> checksums for integrity verification, and a standard <strong>BibTeX</strong> citation record.
+      </p>
+      <p>
+        Automated indexers, academic crawlers, and AI agent clients can ingest our machine-readable catalog at <a href="catalog.json"><code>papers/catalog.json</code></a> and repository-level citation metadata at <a href="../CITATION.cff"><code>CITATION.cff</code></a> (alongside <a href="../llms.txt"><code>llms.txt</code></a>). All works are self-hosted and distributed under Apache-2.0 / CC-BY-4.0 open licenses.
+      </p>
+    </section>
+
+    <h2 class="section-heading">
+      <span>Preprint Archive (2026)</span>
+      <span class="section-count">5 Preprints · Series SE-2026</span>
+    </h2>
+
+    <div class="paper-list">
+
+      <!-- PAPER 1: SE-2026.10024 -->
+      <article class="paper-card" id="SE-2026.10024">
+        <div class="paper-meta-top">
+          <div class="meta-left">
+            <span class="preprint-id">SE-2026.10024</span>
+            <span class="paper-date">2026-10-24</span>
+          </div>
+          <div class="cat-tags">
+            <span class="cat-tag">cond-mat.stat-mech</span>
+            <span class="cat-tag">cs.AI</span>
+            <span class="cat-tag">cs.LG</span>
+          </div>
+        </div>
+        <h3 class="paper-title">
+          <a href="SE-2026.10024-physics-of-learning-en.pdf">The First-Principles Physics of Learning and Intelligence: Irreversible Computation, the Thermodynamic Speed Limit, and Grounded Dissipative Structure</a>
+        </h3>
+        <p class="paper-authors">Author: <strong>Macheng Shen</strong> · Published: 2026-10-24</p>
+        <div class="action-links">
+          <a class="btn-link btn-pdf" href="SE-2026.10024-physics-of-learning-en.pdf">[PDF EN]</a>
+          <a class="btn-link btn-pdf" href="SE-2026.10024-physics-of-learning-zh.pdf">[PDF ZH]</a>
+          <a class="btn-link" href="../physics-of-learning-reachability-en.html">[Interactive EN]</a>
+          <a class="btn-link" href="../physics-of-learning-reachability.html">[Interactive ZH]</a>
+        </div>
+        <div class="sha-box">
+          <div><strong>SHA-256 (EN PDF):</strong> <code>03f552ff426bd5d6c39d544d3de669a523f5a38f3cc0e66dd9f82e769c9abba9</code></div>
+          <div><strong>SHA-256 (ZH PDF):</strong> <code>0c626977d9b63431de6632b3db7bd7652a7f6ec1e6fb79c175990158a57e85b1</code></div>
+        </div>
+        <div class="bibtex-wrap">
+          <div class="bibtex-header">
+            <span>BibTeX · SE-2026.10024</span>
+            <button type="button" class="copy-btn" data-target="bib-10024">Copy</button>
+          </div>
+          <pre class="bibtex-pre" id="bib-10024">@techreport{shen2026physicslearning,
+  author       = {Macheng Shen},
+  title        = {The First-Principles Physics of Learning and Intelligence: Irreversible Computation, the Thermodynamic Speed Limit, and Grounded Dissipative Structure},
+  year         = {2026},
+  month        = oct,
+  number       = {SE-2026.10024},
+  institution  = {System Evolution Open Preprints},
+  note         = {System Evolution Preprint SE-2026.10024 [cond-mat.stat-mech, cs.AI, cs.LG]},
+  howpublished = {\url{https://machengshen.github.io/system-evolution-public/papers/SE-2026.10024-physics-of-learning-en.pdf}}
+}</pre>
+        </div>
+      </article>
+
+      <!-- PAPER 2: SE-2026.10022 -->
+      <article class="paper-card" id="SE-2026.10022">
+        <div class="paper-meta-top">
+          <div class="meta-left">
+            <span class="preprint-id">SE-2026.10022</span>
+            <span class="paper-date">2026-10-22</span>
+          </div>
+          <div class="cat-tags">
+            <span class="cat-tag">cs.AI</span>
+            <span class="cat-tag">cs.LG</span>
+            <span class="cat-tag">cond-mat.stat-mech</span>
+          </div>
+        </div>
+        <h3 class="paper-title">
+          <a href="SE-2026.10022-trajectory-substrate-rl-zh.pdf">Trajectory-Rollout Substrate RL: When Model Weights Freeze, Evolution Happens on the Environment Side</a>
+        </h3>
+        <p class="paper-authors">Author: <strong>Macheng Shen</strong> · Published: 2026-10-22</p>
+        <div class="action-links">
+          <a class="btn-link btn-pdf" href="SE-2026.10022-trajectory-substrate-rl-zh.pdf">[PDF ZH]</a>
+          <a class="btn-link" href="../trajectory-rl-substrate-evolution.html">[Interactive]</a>
+        </div>
+        <div class="sha-box">
+          <div><strong>SHA-256 (ZH PDF):</strong> <code>9c2dc2fabd880aa1ed06eacb47ddbd279ba13d7a10d3ea4a227a49bdf7ab83df</code></div>
+        </div>
+        <div class="bibtex-wrap">
+          <div class="bibtex-header">
+            <span>BibTeX · SE-2026.10022</span>
+            <button type="button" class="copy-btn" data-target="bib-10022">Copy</button>
+          </div>
+          <pre class="bibtex-pre" id="bib-10022">@techreport{shen2026substraterl,
+  author       = {Macheng Shen},
+  title        = {Trajectory-Rollout Substrate RL: When Model Weights Freeze, Evolution Happens on the Environment Side},
+  year         = {2026},
+  month        = oct,
+  number       = {SE-2026.10022},
+  institution  = {System Evolution Open Preprints},
+  note         = {System Evolution Preprint SE-2026.10022 [cs.AI, cs.LG, cond-mat.stat-mech]},
+  howpublished = {\url{https://machengshen.github.io/system-evolution-public/papers/SE-2026.10022-trajectory-substrate-rl-zh.pdf}}
+}</pre>
+        </div>
+      </article>
+
+      <!-- PAPER 3: SE-2026.10021 -->
+      <article class="paper-card" id="SE-2026.10021">
+        <div class="paper-meta-top">
+          <div class="meta-left">
+            <span class="preprint-id">SE-2026.10021</span>
+            <span class="paper-date">2026-10-21</span>
+          </div>
+          <div class="cat-tags">
+            <span class="cat-tag">cs.AI</span>
+            <span class="cat-tag">stat.ME</span>
+            <span class="cat-tag">econ.TH</span>
+          </div>
+        </div>
+        <h3 class="paper-title">
+          <a href="SE-2026.10021-anatomy-of-certainty-zh.pdf">The Anatomy of Certainty: Judgment as Kernel Engine, Monte Carlo as Physical Verification</a>
+        </h3>
+        <p class="paper-authors">Author: <strong>Macheng Shen</strong> · Published: 2026-10-21</p>
+        <div class="action-links">
+          <a class="btn-link btn-pdf" href="SE-2026.10021-anatomy-of-certainty-zh.pdf">[PDF ZH]</a>
+          <a class="btn-link" href="../anatomy-of-certainty.html">[Interactive]</a>
+        </div>
+        <div class="sha-box">
+          <div><strong>SHA-256 (ZH PDF):</strong> <code>c175865fc77cff7394311974300024390ff222f5402f6d3af72558e645d6c125</code></div>
+        </div>
+        <div class="bibtex-wrap">
+          <div class="bibtex-header">
+            <span>BibTeX · SE-2026.10021</span>
+            <button type="button" class="copy-btn" data-target="bib-10021">Copy</button>
+          </div>
+          <pre class="bibtex-pre" id="bib-10021">@techreport{shen2026anatomycertainty,
+  author       = {Macheng Shen},
+  title        = {The Anatomy of Certainty: Judgment as Kernel Engine, Monte Carlo as Physical Verification},
+  year         = {2026},
+  month        = oct,
+  number       = {SE-2026.10021},
+  institution  = {System Evolution Open Preprints},
+  note         = {System Evolution Preprint SE-2026.10021 [cs.AI, stat.ME, econ.TH]},
+  howpublished = {\url{https://machengshen.github.io/system-evolution-public/papers/SE-2026.10021-anatomy-of-certainty-zh.pdf}}
+}</pre>
+        </div>
+      </article>
+
+      <!-- PAPER 4: SE-2026.10019 -->
+      <article class="paper-card" id="SE-2026.10019">
+        <div class="paper-meta-top">
+          <div class="meta-left">
+            <span class="preprint-id">SE-2026.10019</span>
+            <span class="paper-date">2026-10-19</span>
+          </div>
+          <div class="cat-tags">
+            <span class="cat-tag">cond-mat.stat-mech</span>
+            <span class="cat-tag">quant-ph</span>
+            <span class="cat-tag">cs.AI</span>
+          </div>
+        </div>
+        <h3 class="paper-title">
+          <a href="SE-2026.10019-thermodynamic-ledger-dependent-origination-en.pdf">The Thermodynamic Ledger of Dependent Origination: Quantum Causal Indefiniteness, Interventional Backfire, and Self-Referential Cosmology</a>
+        </h3>
+        <p class="paper-authors">Author: <strong>Macheng Shen</strong> · Published: 2026-10-19</p>
+        <div class="action-links">
+          <a class="btn-link btn-pdf" href="SE-2026.10019-thermodynamic-ledger-dependent-origination-en.pdf">[PDF EN]</a>
+          <a class="btn-link btn-pdf" href="SE-2026.10019-thermodynamic-ledger-dependent-origination-zh.pdf">[PDF ZH]</a>
+          <a class="btn-link" href="../emptiness-causality-intervention-ledger-en.html">[Interactive EN]</a>
+          <a class="btn-link" href="../emptiness-causality-intervention-ledger-zh.html">[Interactive ZH]</a>
+        </div>
+        <div class="sha-box">
+          <div><strong>SHA-256 (EN PDF):</strong> <code>db2cda39f85873638033b56e0e71688346ad84538557eeabf55ebb80eb661e24</code></div>
+          <div><strong>SHA-256 (ZH PDF):</strong> <code>b192d2baa3bf58e2d2364904fb285efeccc81b8bfafbe57d331eccf7c13f2b45</code></div>
+        </div>
+        <div class="bibtex-wrap">
+          <div class="bibtex-header">
+            <span>BibTeX · SE-2026.10019</span>
+            <button type="button" class="copy-btn" data-target="bib-10019">Copy</button>
+          </div>
+          <pre class="bibtex-pre" id="bib-10019">@techreport{shen2026dependentorigination,
+  author       = {Macheng Shen},
+  title        = {The Thermodynamic Ledger of Dependent Origination: Quantum Causal Indefiniteness, Interventional Backfire, and Self-Referential Cosmology},
+  year         = {2026},
+  month        = oct,
+  number       = {SE-2026.10019},
+  institution  = {System Evolution Open Preprints},
+  note         = {System Evolution Preprint SE-2026.10019 [cond-mat.stat-mech, quant-ph, cs.AI]},
+  howpublished = {\url{https://machengshen.github.io/system-evolution-public/papers/SE-2026.10019-thermodynamic-ledger-dependent-origination-en.pdf}}
+}</pre>
+        </div>
+      </article>
+
+      <!-- PAPER 5: SE-2026.10016 -->
+      <article class="paper-card" id="SE-2026.10016">
+        <div class="paper-meta-top">
+          <div class="meta-left">
+            <span class="preprint-id">SE-2026.10016</span>
+            <span class="paper-date">2026-10-16</span>
+          </div>
+          <div class="cat-tags">
+            <span class="cat-tag">q-bio.NC</span>
+            <span class="cat-tag">cs.AI</span>
+            <span class="cat-tag">cond-mat.dis-nn</span>
+          </div>
+        </div>
+        <h3 class="paper-title">
+          <a href="SE-2026.10016-neural-oscillations-fleet-optimality-en.pdf">The Optimality of Oscillatory Propagation in Cognitive Substrates: From Whole-Brain Quantum-Like Connectomics to Multi-Agent Fleet Architecture</a>
+        </h3>
+        <p class="paper-authors">Author: <strong>Macheng Shen</strong> · Published: 2026-10-16</p>
+        <div class="action-links">
+          <a class="btn-link btn-pdf" href="SE-2026.10016-neural-oscillations-fleet-optimality-en.pdf">[PDF EN]</a>
+          <a class="btn-link" href="../essays/2026-10-16-neural-oscillations-and-agent-fleet-optimality.md">[Interactive / Source MD]</a>
+        </div>
+        <div class="sha-box">
+          <div><strong>SHA-256 (EN PDF):</strong> <code>8712bf31a5bb20ba5eb6e950f6a0df941cb5746711a59d07c16c189258026979</code></div>
+        </div>
+        <div class="bibtex-wrap">
+          <div class="bibtex-header">
+            <span>BibTeX · SE-2026.10016</span>
+            <button type="button" class="copy-btn" data-target="bib-10016">Copy</button>
+          </div>
+          <pre class="bibtex-pre" id="bib-10016">@techreport{shen2026oscillatorypropagation,
+  author       = {Macheng Shen},
+  title        = {The Optimality of Oscillatory Propagation in Cognitive Substrates: From Whole-Brain Quantum-Like Connectomics to Multi-Agent Fleet Architecture},
+  year         = {2026},
+  month        = oct,
+  number       = {SE-2026.10016},
+  institution  = {System Evolution Open Preprints},
+  note         = {System Evolution Preprint SE-2026.10016 [q-bio.NC, cs.AI, cond-mat.dis-nn]},
+  howpublished = {\url{https://machengshen.github.io/system-evolution-public/papers/SE-2026.10016-neural-oscillations-fleet-optimality-en.pdf}}
+}</pre>
+        </div>
+      </article>
+
+    </div>
+
+    <footer>
+      <div>System Evolution · Open Preprints · BYOK &amp; Self-Hosted · Apache-2.0</div>
+      <div>
+        <a href="../index.html">Home</a> ·
+        <a href="../THEORY.md">Theory</a> ·
+        <a href="catalog.json">Catalog JSON</a> ·
+        <a href="../CITATION.cff">CITATION.cff</a> ·
+        <a href="../llms.txt">llms.txt</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var buttons = document.querySelectorAll('.copy-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function () {
+          var btn = this;
+          var targetId = btn.getAttribute('data-target');
+          var pre = document.getElementById(targetId);
+          if (!pre || !navigator.clipboard) return;
+          navigator.clipboard.writeText(pre.textContent).then(function () {
+            var orig = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(function () {
+              btn.textContent = orig;
+            }, 1600);
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

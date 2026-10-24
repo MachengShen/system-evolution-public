@@ -1,0 +1,95 @@
+{
+  "series": "System Evolution Open Preprints",
+  "id_scheme": "SE-YYYY.NNNNN",
+  "license": "Apache-2.0",
+  "author": "Shen, Macheng",
+  "base_url": "https://machengshen.github.io/system-evolution-public",
+  "index_url": "https://machengshen.github.io/system-evolution-public/papers/index.html",
+  "generated_utc": "2026-10-24T05:50:33.325958Z",
+  "papers": [
+    {
+      "preprint_id": "SE-2026.10024v1",
+      "lang": "en",
+      "title": "The First-Principles Physics of Learning and Intelligence: Irreversible Computation, the Thermodynamic Speed Limit, and Grounded Dissipative Structure",
+      "categories": "cond-mat.stat-mech / cs.AI",
+      "date": "24 Oct 2026",
+      "pdf": "SE-2026.10024-physics-of-learning-en.pdf",
+      "pdf_url": "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10024-physics-of-learning-en.pdf",
+      "sha256": "03f552ff426bd5d6c39d544d3de669a523f5a38f3cc0e66dd9f82e769c9abba9",
+      "bytes": 1178235,
+      "bibtex_key": "shen2026physicslearning"
+    },
+    {
+      "preprint_id": "SE-2026.10024v1",
+      "lang": "zh",
+      "title": "从物理学第一性原理理解「学习」与「智能」：不可逆计算、达未速率极限与耗散结构",
+      "categories": "cond-mat.stat-mech / cs.AI",
+      "date": "24 Oct 2026",
+      "pdf": "SE-2026.10024-physics-of-learning-zh.pdf",
+      "pdf_url": "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10024-physics-of-learning-zh.pdf",
+      "sha256": "0c626977d9b63431de6632b3db7bd7652a7f6ec1e6fb79c175990158a57e85b1",
+      "bytes": 3222922,
+      "bibtex_key": "shen2026physicslearningzh"
+    },
+    {
+      "preprint_id": "SE-2026.10022v1",
+      "lang": "zh",
+      "title": "轨迹滚动与基质强化学习：模型权重冻结时，智能体进化发生在环境侧",
+      "categories": "cs.AI / cs.LG",
+      "date": "22 Oct 2026",
+      "pdf": "SE-2026.10022-trajectory-substrate-rl-zh.pdf",
+      "pdf_url": "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10022-trajectory-substrate-rl-zh.pdf",
+      "sha256": "9c2dc2fabd880aa1ed06eacb47ddbd279ba13d7a10d3ea4a227a49bdf7ab83df",
+      "bytes": 1899098,
+      "bibtex_key": "shen2026substraterl"
+    },
+    {
+      "preprint_id": "SE-2026.10021v1",
+      "lang": "zh",
+      "title": "「确定性」的解剖学：判断力是内核引擎，蒙特卡洛是物理验证",
+      "categories": "cs.AI / stat.ME / econ.TH",
+      "date": "21 Oct 2026",
+      "pdf": "SE-2026.10021-anatomy-of-certainty-zh.pdf",
+      "pdf_url": "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10021-anatomy-of-certainty-zh.pdf",
+      "sha256": "c175865fc77cff7394311974300024390ff222f5402f6d3af72558e645d6c125",
+      "bytes": 2272066,
+      "bibtex_key": "shen2026certainty"
+    },
+    {
+      "preprint_id": "SE-2026.10019v1",
+      "lang": "en",
+      "title": "The Thermodynamic Ledger of Dependent Origination: Quantum Causal Indefiniteness, Interventional Backfire, and Self-Referential Cosmology",
+      "categories": "cond-mat.stat-mech / quant-ph / cs.AI",
+      "date": "19 Oct 2026",
+      "pdf": "SE-2026.10019-thermodynamic-ledger-dependent-origination-en.pdf",
+      "pdf_url": "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10019-thermodynamic-ledger-dependent-origination-en.pdf",
+      "sha256": "db2cda39f85873638033b56e0e71688346ad84538557eeabf55ebb80eb661e24",
+      "bytes": 374643,
+      "bibtex_key": "shen2026ledger"
+    },
+    {
+      "preprint_id": "SE-2026.10019v1",
+      "lang": "zh",
+      "title": "缘起性空的热力学账本：量子因果、干预反噬与自指宇宙",
+      "categories": "cond-mat.stat-mech / quant-ph / cs.AI",
+      "date": "19 Oct 2026",
+      "pdf": "SE-2026.10019-thermodynamic-ledger-dependent-origination-zh.pdf",
+      "pdf_url": "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10019-thermodynamic-ledger-dependent-origination-zh.pdf",
+      "sha256": "b192d2baa3bf58e2d2364904fb285efeccc81b8bfafbe57d331eccf7c13f2b45",
+      "bytes": 2283224,
+      "bibtex_key": "shen2026ledgerzh"
+    },
+    {
+      "preprint_id": "SE-2026.10016v1",
+      "lang": "en",
+      "title": "The Optimality of Oscillatory Propagation in Cognitive Substrates: From Whole-Brain Quantum-Like Connectomics to Multi-Agent Fleet Architecture",
+      "categories": "q-bio.NC / cs.AI / cond-mat.dis-nn",
+      "date": "16 Oct 2026",
+      "pdf": "SE-2026.10016-neural-oscillations-fleet-optimality-en.pdf",
+      "pdf_url": "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10016-neural-oscillations-fleet-optimality-en.pdf",
+      "sha256": "8712bf31a5bb20ba5eb6e950f6a0df941cb5746711a59d07c16c189258026979",
+      "bytes": 430790,
+      "bibtex_key": "shen2026oscillations"
+    }
+  ]
+}

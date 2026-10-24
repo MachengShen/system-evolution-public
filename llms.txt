@@ -43,6 +43,7 @@ Epistemic state convention across all indexes:
 ## 2 · Core Repository Entrypoints (`system-evolution-public`)
 
 - [README.md](https://machengshen.github.io/system-evolution-public/README.md) — Repository overview, three-layer user-agency substrate boundary, and full essay directory.
+- [Open Preprints (`papers/index.html`)](https://machengshen.github.io/system-evolution-public/papers/index.html) — arXiv-style self-hosted preprint series; stable `SE-YYYY.NNNNN` identifiers, PDF + interactive HTML + SHA-256 + BibTeX per paper. Machine catalog: [`papers/catalog.json`](https://machengshen.github.io/system-evolution-public/papers/catalog.json) · citation metadata: [`CITATION.cff`](https://machengshen.github.io/system-evolution-public/CITATION.cff).
 - [THEORY.md](https://machengshen.github.io/system-evolution-public/THEORY.md) — Theory mainline index (2026-05 through 2026-10 iterations, confidence-tagged claims, and falsifiers).
 - [PRACTICE.md](https://machengshen.github.io/system-evolution-public/PRACTICE.md) — Engineering practice mainline: receipt-gated operations, sleep consolidation, and verification loops.
 - [OPEN-PROBLEMS-AGENT-SAFETY.md](https://machengshen.github.io/system-evolution-public/OPEN-PROBLEMS-AGENT-SAFETY.md) — Eleven open safety problems from a continuously running, multi-host, single-principal agent fleet.

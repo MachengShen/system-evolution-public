@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use or reference this work, please cite it using the metadata below. This is an open, self-hosted arXiv-style preprint series (Apache-2.0, BYOK)."
+title: "System Evolution: Open Preprint Series"
+abstract: >-
+  A self-hosted, open, arXiv-style preprint series on the first-principles
+  physics of learning and intelligence, substrate reinforcement learning,
+  thermodynamic ledgers of causality, oscillatory cognitive substrates, and the
+  verifiable-execution harness of a single-principal agent fleet. Every preprint
+  ships a PDF + interactive HTML + SHA-256 + BibTeX. Stable identifiers use the
+  scheme SE-YYYY.NNNNN.
+type: software
+authors:
+  - family-names: Shen
+    given-names: Macheng
+license: Apache-2.0
+repository-code: "https://github.com/MachengShen/system-evolution-public"
+url: "https://machengshen.github.io/system-evolution-public/papers/index.html"
+date-released: "2026-10-24"
+identifiers:
+  - type: other
+    value: "SE-2026.10024v1"
+    description: "The First-Principles Physics of Learning and Intelligence (flagship)"
+preferred-citation:
+  type: report
+  title: "The First-Principles Physics of Learning and Intelligence: Irreversible Computation, the Thermodynamic Speed Limit, and Grounded Dissipative Structure"
+  authors:
+    - family-names: Shen
+      given-names: Macheng
+  institution:
+    name: "System Evolution (self-hosted open preprint series)"
+  number: "SE-2026.10024v1"
+  year: 2026
+  month: 10
+  url: "https://machengshen.github.io/system-evolution-public/papers/SE-2026.10024-physics-of-learning-en.pdf"
