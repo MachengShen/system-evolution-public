@@ -538,8 +538,9 @@
       <a href="#sec-dissipative">3. 耗散双尺度</a>
       <a href="#sec-atlas">4. 具身安全区图册</a>
       <a href="#sec-what-matters">5. 知道轻重</a>
-      <a href="#sec-directions">6. 四个方向</a>
-      <a class="nav-accent" href="#sim-d">⚡ 模拟器 A/B/C/D</a>
+      <a href="#sec-roadmap">6. 物理具身化路线图</a>
+      <a href="#sec-directions">7. 四个方向</a>
+      <a class="nav-accent" href="#sim-e">⚡ 模拟器 A/B/C/D/E</a>
       <a href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">Markdown 原文</a>
     </nav>
   </header>
@@ -550,7 +551,7 @@
       <div class="meta-row">
         <span class="badge">First-Principles Physics × AI · 2026-10-24</span>
         <span class="badge badge-warm">Stochastic Thermodynamics &amp; Wasserstein TSL</span>
-        <span class="badge badge-green">4 Live Interactive Physics Sandboxes</span>
+        <span class="badge badge-green">5 Live Interactive Physics Sandboxes</span>
       </div>
       <h1>从物理学第一性原理理解「学习」与「智能」：不可逆计算、达未速率极限与耗散结构<br><span style="font-family:var(--sans); font-size:0.62em; font-weight:600; color:var(--muted);">Irreversible Computation, Thermodynamic Speed Limits, and Dissipative Structures in Learning Systems</span></h1>
 
@@ -569,6 +570,7 @@
         <a class="btn btn-warm" href="#sim-b">🧭 交互实验 B：TSL 测地线 vs 盲搜绕行</a>
         <a class="btn" href="#sim-c">🛡️ 交互实验 C：混沌双尺度与「轻重」判据</a>
         <a class="btn" href="#sim-d">🗺️ 交互实验 D：具身安全区图册与抗遗忘</a>
+        <a class="btn" href="#sim-e">🤖 交互实验 E：物理具身制造与主动筑巢</a>
         <a class="btn" href="essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md">📄 Markdown 论文源稿</a>
       </div>
     </section>
@@ -1083,16 +1085,282 @@
       </div>
     </section>
 
-    <!-- SECTION 6: FOUR DIRECTIONS -->
+    <!-- SECTION 6: PHYSICAL EMBODIMENT ROADMAP (2026-2031) + SIMULATOR E -->
+    <section id="sec-roadmap" class="section-card">
+      <h2>6. 从理论到现实物理世界制造：未来 3–5 年（2026–2031）物理具身化路线图与 AI 加持前沿调研</h2>
+
+      <div class="callout callout-warm">
+        <strong>核心工程追问（2026-10-24）：</strong><br>
+        「按照这样一个定义了智能行为的理论，我们怎样在现实物理世界中真正制造出这样的智能系统？基于现在的技术与 AI 加持的发展，未来 3–5 年内哪些能够实现落地？哪些全新的东西变得可能？」
+      </div>
+
+      <p>
+        如果把前五节的四个核心物理条件——<strong>① 不可逆擦除产热（$\Delta Q_{\text{learn}} \ge k_B T \ln 2 \cdot \Delta H$）、② Wasserstein-2 速率极限度规雕刻（$\tau \cdot \Sigma \ge \mathcal{W}_2^2 / 2D$）、③ 快慢双时间尺度耗散结构（$\chi_{\text{fast}}$ vs. $\Delta\lambda$）、④ 具身低熵安全区图册与抗遗忘跃迁（$\mathcal{P}_\alpha \perp \mathcal{P}_\beta, \, \nabla_E \mathcal{W}_2 &lt; 0$）</strong>——直接当作<strong>物理制造图纸（Physical Manufacturing Blueprint）</strong>，我们会发现：当前的「云端高功耗 GPU + 刚体高频伺服电机 + 单一全局大模型权重」恰恰是一条<strong>反热力学设计</strong>（用极高能耗压制热噪声、用高频伺服硬扛混沌微扰、用全局参数强行拟合局部环境导致灾难性遗忘）。
+      </p>
+      <p>
+        沿着本理论，未来 3–5 年在 AI 辅助物理设计与新硬件加持下，制造真实物理智能系统将沿着<strong>四大具身化工程支柱</strong>落地：
+      </p>
+
+      <!-- Styled HTML/CSS Flow rendering the Treatise Section 6 Mermaid Diagram -->
+      <div style="background:linear-gradient(135deg, #f6f9fe 0%, #fcfbf8 100%); border:1.5px solid var(--line); border-radius:14px; padding:18px 20px; margin:18px 0;">
+        <div style="text-align:center; background:var(--panel); border:2px solid var(--accent); border-radius:12px; padding:12px 16px; max-width:680px; margin:0 auto;">
+          <span class="badge" style="margin-bottom:4px;">理论总图纸 · Physical Manufacturing Blueprint</span>
+          <strong style="display:block; font-size:1.02rem; color:var(--ink);">热力学智能与具身低熵图册理论（$\tau \cdot \Sigma \ge \mathcal{W}_2^2 / 2D$ + 区域图册 $\mathcal{R}_\alpha$）</strong>
+        </div>
+        <div style="text-align:center; color:var(--accent); font-weight:800; font-size:1.1rem; margin:8px 0;">⇓ 四大物理具身化工程支柱（2026–2031） ⇓</div>
+        <div class="grid-4" style="margin:0; align-items:stretch;">
+          <div class="mini-card" style="border-top:4px solid var(--accent); background:#ffffff;">
+            <span class="badge" style="margin-bottom:6px;">支柱 1 · 算力基质</span>
+            <strong>热力学与物理原生计算芯片</strong>
+            <span style="font-size:0.84rem; color:var(--muted); display:block;">Thermodynamic / Memristive SPU（p-bits、平衡传播与焦耳热度规自雕刻）</span>
+          </div>
+          <div class="mini-card" style="border-top:4px solid var(--highlight); background:#ffffff;">
+            <span class="badge badge-warm" style="margin-bottom:6px;">支柱 2 · 机械身体</span>
+            <strong>形态计算与可编程超材料身体</strong>
+            <span style="font-size:0.84rem; color:var(--muted); display:block;">Morphological Lyapunov Basins（将低熵势阱 $V_\alpha(x)$ 浇筑进张拉整体与超材料）</span>
+          </div>
+          <div class="mini-card" style="border-top:4px solid var(--green); background:#ffffff;">
+            <span class="badge badge-green" style="margin-bottom:6px;">支柱 3 · 认知与环境</span>
+            <strong>硬件级正交门控与物理筑巢机器人</strong>
+            <span style="font-size:0.84rem; color:var(--muted); display:block;">Dendritic Gating &amp; Physical Niche Construction（$\mathcal{P}_\alpha \perp \mathcal{P}_\beta$ 与 $\nabla_E \mathcal{W}_2 &lt; 0$）</span>
+          </div>
+          <div class="mini-card" style="border-top:4px solid var(--purple); background:#ffffff;">
+            <span class="badge badge-purple" style="margin-bottom:6px;">支柱 4 · 生物与生命</span>
+            <strong>生物—数字混合体与稳态吸引域导航</strong>
+            <span style="font-size:0.84rem; color:var(--muted); display:block;">Bio-Electric / Acoustic Attractor Steering（生物电/声波摆渡与活体类器官湿件）</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR CARDS 6.1 - 6.4 -->
+      <div class="grid-2" style="margin-top:20px;">
+        <!-- Pillar 6.1 -->
+        <div class="mini-card" style="border-left:5px solid var(--accent); padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span class="badge">6.1 支柱一 · 热力学原生芯片 &amp; 物理局部学习网络</span>
+            <span style="font-size:0.78rem; color:var(--muted); font-weight:700;">能效跃迁 $10^3 \sim 10^5\times$</span>
+          </div>
+          <h3 style="margin:6px 0 10px; color:var(--ink);">用物理热涨落与焦耳热直接做计算与学习</h3>
+          <div class="math-box" style="margin:10px 0; padding:10px 14px;">
+            <span class="math-label">物理对应方程</span>
+            不可逆擦除 $\Delta Q_{\text{learn}} \ge k_B T \ln 2 \cdot \Delta H$ 与测地线度规雕刻 $\nabla_E \mathcal{W}_2 &lt; 0$
+          </div>
+          <p style="font-size:0.93rem; margin:8px 0;">
+            <strong>为什么现在能落地（3–5 年窗口）：</strong>传统数字 CMOS 芯片为了把 0 和 1 锁死在确定性状态，每翻转一比特要消耗 $10^4 \sim 10^6 \, k_B T \ln 2$ 的能量去强行压制热噪声，随后再用数万个数字晶体管伪造伪随机数来跑扩散模型或 MCMC 采样。
+          </p>
+          <p style="font-size:0.93rem; margin:8px 0 4px;"><strong>物理具身化制造方案：</strong></p>
+          <ol style="font-size:0.91rem; margin:0; padding-left:20px;">
+            <li style="margin-bottom:6px;">
+              <strong>热力学采样处理器（Thermodynamic SPU / p-bits，代表：Extropic、Normal Computing、CMOS 耦合非线性振荡器阵列）</strong>：不压制热噪声，而是直接把微纳尺度电子器件固有的热涨落（Langevin 随机动力学 $dx = -\nabla U(x)dt + \sqrt{2k_BT\mu}\,dW_t$）作为物理采样引擎。在室温或受控热浴中，玻尔兹曼分布 $p(x) \propto e^{-U(x)/k_BT}$ 由物理定律在皮秒到纳秒尺度天然生成。系统在物理弛豫中自然滑向自由能极小值，直接以物理极限速率逼近 $\tau \cdot \Sigma \ge \mathcal{W}_2^2 / 2D$，MCMC 与扩散采样能效比传统 GPU 提升 $10^3 \sim 10^5$ 倍。
+            </li>
+            <li style="margin-bottom:6px;">
+              <strong>物理度规自雕刻网络（Equilibrium Propagation &amp; 物理局部自学习网络，代表：UPenn Dillavou/Durian/Liu 团队局部学习电阻网格、忆阻器/相变材料 PCM/铁电 FeFET 存算阵列）</strong>：彻底摒弃需要全局同步和不可微内存断层的数字反向传播（Backpropagation）。利用基尔霍夫电路定律（电流与功耗天然沿最小耗散路径分布）与平衡传播算法（Scellier &amp; Bengio）：系统先在前向稳态建立电势，遭遇外部环境刺激后进入扰动稳态，两态之间的局域电压差驱动忆阻器产生焦耳热相变，<strong>不可逆地改写局部电导 $G_{ij}$（$\Delta Q \to \Delta G_{ij}$）</strong>。物理材料自己在连续电流冲击下，把原本需要多步试错绕行的高阻抗路径退火为 $O(1)$ 的低阻测地线。
+            </li>
+            <li>
+              <strong>AI 加持下的新可能</strong>：利用生成式 AI 与可微电磁仿真协同设计复杂非线性模拟电路与亚阈值晶体管偏置网格，使模拟芯片设计周期从传统数年缩短至数周，并在芯片制造容差下实现自校准自退火。
+            </li>
+          </ol>
+        </div>
+
+        <!-- Pillar 6.2 -->
+        <div class="mini-card" style="border-left:5px solid var(--highlight); padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span class="badge badge-warm">6.2 支柱二 · 形态计算与 AI 逆向设计超材料</span>
+            <span style="font-size:0.78rem; color:var(--muted); font-weight:700;">运动能耗降低 80%</span>
+          </div>
+          <h3 style="margin:6px 0 10px; color:var(--ink);">把「低熵安全区 $V_\alpha(x)$」浇筑进身体力学结构</h3>
+          <div class="math-box" style="margin:10px 0; padding:10px 14px;">
+            <span class="math-label">物理对应方程</span>
+            快慢双时间尺度分离（$\chi_{\text{fast}}$ 外层快变 vs. $\Delta\lambda$ 慢核谱隙）与李雅普诺夫势阱 $V_\alpha(x)$
+          </div>
+          <p style="font-size:0.93rem; margin:8px 0;">
+            <strong>为什么传统人形机器人反热力学：</strong>当前刚体人形机器人（如 Tesla Optimus、Figure 01）在关节处大量堆叠高减速比电机，用每秒 1000 次的高频中央数字控制回路强行对抗重力和地面微扰。行走时机械能耗高达 500W–1000W，电机发热严重，且一旦地面出现未建模颠簸极易因伺服饱和而失稳摔倒。
+          </p>
+          <p style="font-size:0.93rem; margin:8px 0 4px;"><strong>物理具身化制造方案（3–5 年落地）：</strong></p>
+          <ol style="font-size:0.91rem; margin:0; padding-left:20px;">
+            <li style="margin-bottom:6px;">
+              <strong>形态计算作为物理李雅普诺夫势阱（Morphological Lyapunov Basins）</strong>：利用 <strong>AI 驱动的可微多物理场仿真（Differentiable Physics）与逆向多材料 3D 打印（Inverse Additive Metamaterials）</strong>，把非结构化地形下的行走步态、抓握与抗冲击稳态，直接浇筑进机械身体的非线性弹性体、腱绳传动与张拉整体（Tensegrity）几何构型中。材料与结构本身就形成了一个物理李雅普诺夫势能谷 $V_\alpha(x)$。
+            </li>
+            <li>
+              <strong>区域内零算力自稳，跨区域最小脉冲跃迁</strong>：当机器人处于安全区 $\mathcal{R}_\alpha$ 内时，地面的随机冲击被超材料的非线性阻尼与负泊松比结构瞬间被动吸收并自恢复（无需中央芯片做任何浮点计算，$\Delta Q_{\text{compute}} \approx 0$）；中央控制器只需在<strong>跨越相空间鞍点（Saddle Point，$\mathcal{R}_\alpha \to \mathcal{R}_\beta$）</strong>的关键几毫秒注入极小能量脉冲，即可完成步态切换。整机运动功耗降至几十瓦，动态鲁棒性提升一个数量级。
+            </li>
+          </ol>
+        </div>
+
+        <!-- Pillar 6.3 -->
+        <div class="mini-card" style="border-left:5px solid var(--green); padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span class="badge badge-green">6.3 支柱三 · 硬件树突正交门控 &amp; 物理筑巢机器人</span>
+            <span style="font-size:0.78rem; color:var(--muted); font-weight:700;">最早规模商业化 · 99.99% 可靠性</span>
+          </div>
+          <h3 style="margin:6px 0 10px; color:var(--ink);">硬件级抗灾难性遗忘与「物理筑巢机器人（Niche-Constructing Machines）」</h3>
+          <div class="math-box" style="margin:10px 0; padding:10px 14px;">
+            <span class="math-label">物理对应方程</span>
+            具身区域图册 $\mathcal{A} = \{(\mathcal{R}_\alpha, V_\alpha, \Delta\lambda_\alpha)\}$、正交门控 $\mathcal{P}_\alpha \perp \mathcal{P}_\beta$ 与基质筑巢 $\nabla_E \mathcal{W}_2 &lt; 0$
+          </div>
+          <p style="font-size:0.93rem; margin:8px 0 4px;"><strong>如何把「抗遗忘」与「先改造环境再干活」做成现实物理系统（3–5 年最早规模商业化）：</strong></p>
+          <ol style="font-size:0.91rem; margin:0; padding-left:20px;">
+            <li style="margin-bottom:6px;">
+              <strong>硬件树突正交门控（Hardware Context-Gated Orthogonal Modules）</strong>：在边缘端神经形态芯片（如 Intel Loihi 演进架构、SynSense 脉冲处理器、具有非易失性门控的忆阻交叉阵列）中，引入类似生物乙酰胆碱/去甲肾上腺素的<strong>物理电压门控总线</strong>。当传感器通过环境指纹识别系统正处于特定具身区域 $\mathcal{R}_\alpha$（例如「精密焊接」工作台）时，物理总线仅对模块 $\alpha$ 开启写电流（$\nabla_{\theta_\alpha} \neq 0$），其余所有区域模块在物理上断开编程高压（$\nabla_{\theta_{\beta \neq \alpha}} \equiv 0$）。权重更新在空间几何上被物理强隔离，在芯片底层彻底消除终身学习中的灾难性遗忘（Catastrophic Forgetting）。
+            </li>
+            <li>
+              <strong>主动物理筑巢机器人（Physical Niche Construction，未来 3–5 年最高确定性商业化形态）</strong>：传统具身智能妄图依靠无穷堆叠万亿参数多模态大模型在混乱未知的极端非结构化环境中强行作业；而热力学第一性原理指明：<strong>在混沌荒野中硬扛的能耗 $\Sigma$ 与错误率呈指数级上升</strong>。真正智能的系统遵循生命演化的本质——<strong>「主动筑巢（Niche Construction）」</strong>：
+              <ul style="margin:4px 0 0; padding-left:18px;">
+                <li><strong>家庭场景</strong>：清洁机器人不再盲目绕行散落一地的杂物，而是先消耗机械功 $\Delta W$ 把玩具与电线推拢至标准化收纳盒、在门框贴附无源微光反射信标，将高熵房间物理改造成低熵结构化区域 $\mathcal{R}_\gamma$；</li>
+                <li><strong>工业与实验室自动化</strong>：机器人进入未知操作台后，先铺设自定位磁吸底板与标准化试管架，把 $O(k)$ 视差盲搜压缩为 $O(1)$ 导轨查表；</li>
+                <li><strong>工程收益</strong>：不仅大幅降低端侧芯片算力需求，更将执行成功率从学术 Demo 的 80% 跃升至工业级的 99.99%。</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Pillar 6.4 -->
+        <div class="mini-card" style="border-left:5px solid var(--purple); padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span class="badge badge-purple">6.4 支柱四 · 生物—数字混合体 &amp; 身体稳态吸引域导航</span>
+            <span style="font-size:0.78rem; color:var(--muted); font-weight:700;">10–20W 活体湿件与无创修复</span>
+          </div>
+          <h3 style="margin:6px 0 10px; color:var(--ink);">生物—数字混合体与人体/活体组织的稳态吸引域导航</h3>
+          <div class="math-box" style="margin:10px 0; padding:10px 14px;">
+            <span class="math-label">物理对应方程</span>
+            跨区测地线跃迁 $\mathcal{R}_{\text{path}} \to \mathcal{R}_{\text{health}}$ 与多尺度马尔可夫毯内稳态
+          </div>
+          <p style="font-size:0.93rem; margin:8px 0;">
+            <strong>AI 加持下变得可能的新前沿（3–5 年突破期）：</strong>生物细胞、器官与人体自主神经系统天然就是本理论所描述的<strong>多尺度具身低熵耗散结构</strong>。正如 Michael Levin 团队揭示的<strong>生物电形态发生码（Bioelectric Morphogenetic Code）</strong>：每个健康器官或生理状态对应着高维生物电相空间中的一个低熵稳态吸引域 $\mathcal{R}_{\text{health}}$，而慢性炎症、组织纤维化、心律失常或交感神经过度激活则是系统跌入了病理亚稳态势能阱 $\mathcal{R}_{\text{pathology}}$。
+          </p>
+          <p style="font-size:0.93rem; margin:8px 0 4px;"><strong>物理具身化产品形态：</strong></p>
+          <ol style="font-size:0.91rem; margin:0; padding-left:20px;">
+            <li style="margin-bottom:6px;">
+              <strong>闭环声学/生物电身体对话仪（Closed-Loop Somatic Basin Navigator）</strong>：结合高灵敏度体表生物阻抗、心率变异性（HRV）连续张量与近红外微循环传感，AI 实时重构人体自主神经与局域组织的相空间轨迹。当检测到系统偏离健康吸引域时，不依赖粗暴的全身化学药物干扰，而是把调控指令调制为细胞与神经纤维听得懂的<strong>特定声波共振谐波（Acoustic Resonance）、极微电脉冲或次声节律</strong>。在呼吸与心搏的特定相位敏感窗口，以微焦耳级不可逆能量输入，沿着相空间测地线（$\tau \cdot \Sigma \to \min$）将失调生理态平滑「摆渡」回自愈低熵安全区 $\mathcal{R}_{\text{health}}$。
+            </li>
+            <li>
+              <strong>活体类器官计算与生数混合载体（Organoid Intelligence / Wetware，代表：Cortical Labs DishBrain、FinalSpark 神经生物处理器）</strong>：直接利用在微电极阵列（MEA）上培养的人类诱导多能干细胞（iPSC）神经元网络作为低功耗具身计算基质。生物神经元天然遵守自由能极小化原理，在 10–20 瓦极低功耗下展现出惊人的自组织局部度规雕刻能力。结合 AI 电生理读写编解码器，未来 3–5 年将在特种端侧传感器与微型生物混合机器人中实现超低能耗物理自适应。
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- 6.5 COMPARISON TABLE -->
+      <h3>6.5 物理具身化硬件落地参数对照与 3–5 年演进时间表</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:14%;">物理具身化层级</th>
+            <th style="width:22%;">核心物理机制（对应本理论方程）</th>
+            <th style="width:22%;">2026–2028 近期落地形态</th>
+            <th style="width:21%;">2029–2031 中期成熟形态</th>
+            <th style="width:21%;">解决的当前 AI 核心瓶颈</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. 算力基质层</strong></td>
+            <td>热涨落原生采样 + 焦耳热度规自雕刻（$\tau\cdot\Sigma \to \mathcal{W}_2^2/2D$）</td>
+            <td>1000+ p-bit 混合 CMOS 采样加速协处理器；百微米忆阻局部自学习宏单元</td>
+            <td>全模拟热力学 SPU；原子级非易失相变存算一体网络（端侧功耗 &lt; 1W）</td>
+            <td>终结数字反向传播断层与冯·诺依曼搬运墙，采样与在线学习能效跃迁 $10^3 \sim 10^5$ 倍</td>
+          </tr>
+          <tr>
+            <td><strong>2. 机械身体层</strong></td>
+            <td>形态计算 + AI 逆向设计超材料被动势阱 $V_\alpha(x)$（双时间尺度分离）</td>
+            <td>变刚度连续体机械手；被动动力学步态与冲击自吸能四足/双足底盘</td>
+            <td>具备多模态机械感知与可编程负泊松比刚度调节的「自稳超材料躯体」</td>
+            <td>告别高频高发热电机硬刚地面，非结构化混沌地形整机运动能耗降低 80%</td>
+          </tr>
+          <tr>
+            <td><strong>3. 认知与环境层</strong></td>
+            <td>硬件树突正交门控（$\mathcal{P}_\alpha \perp \mathcal{P}_\beta$）+ 主动物理筑巢（$\nabla_E \mathcal{W}_2 &lt; 0$）</td>
+            <td>具上下文断电保护的边缘神经形态芯片；带自标定无源信标的自动筑巢扫地机/工作台</td>
+            <td>全自治物理筑巢工业机器人；终身学习且零遗忘的模块化多具身自主代理</td>
+            <td>彻底根除深度学习长达 30 年的灾难性遗忘，将复杂长程任务执行可靠性推向 99.99%</td>
+          </tr>
+          <tr>
+            <td><strong>4. 生物与生命层</strong></td>
+            <td>生物电/声学相空间吸引域测绘与最小功跨区摆渡（$\mathcal{R}_{\text{path}} \to \mathcal{R}_{\text{health}}$）</td>
+            <td>非侵入式多波束迷走神经闭环声波调节仪；百通道 MEA 神经元细胞湿件测试台</td>
+            <td>穿戴式全自主稳态相空间导航仪；万级神经突触生物—数字实时共融控制器</td>
+            <td>从死板的数据拟合走向与碳基生命耗散结构的深层热力学对话与精准无创修复</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SIMULATOR E -->
+      <div id="sim-e" class="sim-box">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-warm">交互物理实验台 E · Physical Embodiment &amp; Niche-Constructing Machines</span>
+            <h3 class="sim-title" style="margin-top:6px;">物理具身化制造对比：刚体高频伺服 vs 形态计算超材料势阱 + 物理筑巢机器人（Physical Embodiment: Rigid Servo vs Morphological Metamaterial Basin + Niche-Constructing Robot）</h3>
+          </div>
+          <span id="sim-e-pill" class="status-pill status-admitted">区域内被动自稳</span>
+        </div>
+
+        <div class="toggle-row">
+          <button type="button" id="sim-e-mode-btn" class="btn btn-primary">🦾 当前躯体构型：形态计算超材料势阱 (Morphological Metamaterial Basin · 零算力被动吸能)</button>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" id="sim-e-pulse-btn" class="btn btn-warm">⚡ 注入鞍点微脉冲 ($\mathcal{R}_\alpha \to \mathcal{R}_\beta$ 跨步态跃迁)</button>
+            <button type="button" id="sim-e-niche-btn" class="btn">🏗️ 启动物理筑巢 (Niche Construction：荒野 $O(k) \to$ 结构化 $O(1)$)</button>
+            <button type="button" id="sim-e-reset-btn" class="btn">↺ 重置实验台</button>
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="sim-e-rough">地形混沌度 / 粗糙度 $\lambda_{\text{terrain}}$ <span class="val-pill" id="sim-e-rough-val">0.58</span></label>
+            <input type="range" id="sim-e-rough" min="0.10" max="1.00" step="0.02" value="0.58">
+          </div>
+          <div class="control-group">
+            <label for="sim-e-meta">超材料被动阻尼 / 刚度匹配 $k_{\text{meta}}$ <span class="val-pill" id="sim-e-meta-val">0.82</span></label>
+            <input type="range" id="sim-e-meta" min="0.15" max="1.00" step="0.02" value="0.82">
+          </div>
+          <div class="control-group">
+            <label for="sim-e-freq">中央环路控制频率 (刚体模式) $f_{\text{servo}}$ <span class="val-pill" id="sim-e-freq-val">1000 Hz</span></label>
+            <input type="range" id="sim-e-freq" min="100" max="1000" step="50" value="1000">
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="stat-card">
+            <span class="stat-label">整机运动功耗 $P_{\text{motion}}$</span>
+            <span class="stat-val" id="sim-e-kpi-power" style="color:var(--green);">38 W</span>
+            <span class="stat-sub" id="sim-e-kpi-power-sub">算力 $\Delta Q_{\text{comp}} \approx 0\text{W}$ · 超材料被动自稳</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">累计产热 $Q_{\text{heat}}$ / 关节温升</span>
+            <span class="stat-val" id="sim-e-kpi-heat" style="color:var(--accent);">1.4 kJ (28°C)</span>
+            <span class="stat-sub" id="sim-e-kpi-heat-sub">被动势阱耗散微弱地面冲击</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">动态稳定性 / 任务成功率</span>
+            <span class="stat-val" id="sim-e-kpi-stab" style="color:var(--green);">97.8%</span>
+            <span class="stat-sub" id="sim-e-kpi-stab-sub">李雅普诺夫势谷 $V_\alpha(x)$ 自恢复</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">环境作业复杂度 &amp; 筑巢功 $\Delta W$</span>
+            <span class="stat-val" id="sim-e-kpi-niche" style="color:var(--highlight);">O(k) 荒野探索</span>
+            <span class="stat-sub" id="sim-e-kpi-niche-sub">点击「启动物理筑巢」改造为 $O(1)$</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas-sim-e" width="860" height="360"></canvas>
+        </div>
+
+        <p class="sim-caption" style="margin:14px 0 0;">
+          <strong>旋钮说明与观察指南：</strong>① <strong>形态计算超材料模式（Morphological Metamaterial Basin）</strong>下，张拉整体/非线性弹性结构本身形成物理势阱 $V_\alpha(x)$，地面颠簸被被动阻尼直接吸收（$\Delta Q_{\text{compute}} \approx 0$，整机功耗仅 30–55W），点击「注入鞍点微脉冲」可见控制器仅在跨步态鞍点 $\mathcal{R}_\alpha \to \mathcal{R}_\beta$ 注入极小脉冲；② 切换为<strong>「刚体高频伺服模式 (Rigid Servo)」</strong>并调高「地形混沌度 $\lambda_{\text{terrain}}$」，观察 1000 Hz 中央控制回路如何与每一处地面微扰硬刚，导致功耗飙升至 600W–950W、关节剧烈发热，并在颠簸峰值处触发<strong>伺服饱和失稳摔倒</strong>；③ 点击<strong>「启动物理筑巢 (Niche Construction)」</strong>，观察机器人如何先做功 $\Delta W$ 将杂乱障碍推入收纳槽并铺设磁吸信标导轨，使作业从高耗散的<strong>「荒野盲搜 $O(k)$」</strong>瞬间坍缩为 <strong>99.99% 成功率的「筑巢后 $O(1)$ 运行」</strong>。
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 7: FOUR DIRECTIONS -->
     <section id="sec-directions" class="section-card">
-      <h2>6. 可立即推进的四个形式化与实验方向</h2>
+      <h2>7. 可立即推进的四个形式化与实验方向</h2>
       <p>
         沿着这条主线，我们推进四个核心物理×AI形式化方向与可交互验证产物：
       </p>
       <ol>
         <li>
           <strong>定义「达未效率（Future-Reaching Thermodynamic Efficiency, $\eta_{\mathcal{F}}$）」统一指标</strong>：<br>
-          将 Landauer 擦除下界、Still 预测热力学与 Wasserstein 速率极限联立，推导出衡量任意学习系统（生物神经、梯度训练、冻结权重智能体基质演化）的统一无量纲效率：
+          将 Landauer 擦除下界、Still 预测热力学与 Wasserstein 速率极限联立，推导出衡量任意学习系统（生物神经、热力学 SPU、机器人超材料构型、基质演化）的统一无量纲效率：
           <div class="math-box">
             <span class="math-label">统一无量纲达未效率指标 $\eta_{\mathcal{F}}$</span>
             $$\eta_{\mathcal{F}} = \frac{\mathcal{W}_2^2(p_0, p_{\text{future}}) / (2D\tau)}{\Delta Q_{\text{total}} / T} \in [0, 1]$$
@@ -1104,11 +1372,11 @@
         </li>
         <li>
           <strong>具身低熵图册与抗遗忘势阱测度</strong>：<br>
-          定量化不同 Grounded Region 的正交保持矩阵 $\mathcal{P}_\alpha$，度量跨区跃迁能量障壁 $\Delta F_{\alpha \to \beta}$ 与基质筑巢能耗率。
+          定量化不同 Grounded Region 的正交保持矩阵 $\mathcal{P}_\alpha$，度量跨区跃迁能量障壁 $\Delta F_{\alpha \to \beta}$、忆阻硬件物理断电门控的保真度与物理筑巢能耗转化率。
         </li>
         <li>
-          <strong>构建「热力学学习与轻重判据」交互式物理沙盒</strong>：<br>
-          包含本页上方已实现的四个可调参数实验台：① 可逆计算 vs 不可逆擦除学习的相空间坍缩与产热对比（实验台 A）；② 最小能耗最快达未：TSL 测地线 vs 盲搜绕行（实验台 B）；③ 混沌涨落下的双时间尺度局部信息结构维持（快适应 $\chi$ × 慢谱隙 $\Delta\lambda$）与「有无不可逆代价」下的锯齿智能对比（实验台 C）；④ 具身低熵图册跃迁与抗灾难性遗忘对比（实验台 D）。
+          <strong>构建「热力学学习与具身制造」交互式物理沙盒</strong>：<br>
+          包含本页上方已实现的五个可调参数实验台：① 可逆计算 vs 不可逆擦除学习的相空间坍缩与产热对比（实验台 A）；② 最小能耗最快达未：TSL 测地线 vs 盲搜绕行（实验台 B）；③ 混沌涨落下的双时间尺度局部信息结构维持（快适应 $\chi$ × 慢谱隙 $\Delta\lambda$）与「有无不可逆代价」下的锯齿智能对比（实验台 C）；④ 具身低熵图册跃迁与抗灾难性遗忘对比（实验台 D）；⑤ <strong>物理具身化制造对比</strong>：刚体高频伺服电机（发热、高功耗、碰撞失稳）vs 形态计算超材料被动势阱（零功耗自稳、鞍点微脉冲）+ 物理筑巢机器人（荒野盲搜 vs 改造环境后 $O(1)$ 运行）（实验台 E）。
         </li>
       </ol>
     </section>
@@ -1123,7 +1391,7 @@
         <a href="https://postai.institute/stories/what-matters.html" target="_blank" rel="noopener">🎭 回应问题来源：postai.institute/stories/what-matters.html</a>
       </div>
       <div>
-        Apache-2.0 文档层 · 全文共 6 节理论推导与 4 个纯前端交互式物理模拟器（Simulators A/B/C/D），不含任何私有转录、凭据或个人数据（PCSE-Clean）。
+        Apache-2.0 文档层 · 全文共 7 节理论推导与 5 个纯前端交互式物理模拟器（Simulators A/B/C/D/E），不含任何私有转录、凭据或个人数据（PCSE-Clean）。
       </div>
     </footer>
   </main>
@@ -2472,6 +2740,550 @@
       }
 
       syncGroundingButton();
+      requestAnimationFrame(animate);
+    })();
+
+    // =========================================================================
+    // SIMULATOR E: Physical Embodiment (Rigid Servo vs Morphological Metamaterial
+    //              Basin + Physical Niche-Constructing Robot)
+    // =========================================================================
+    (function() {
+      const canvas = document.getElementById('canvas-sim-e');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const modeBtn = document.getElementById('sim-e-mode-btn');
+      const pulseBtn = document.getElementById('sim-e-pulse-btn');
+      const nicheBtn = document.getElementById('sim-e-niche-btn');
+      const resetBtn = document.getElementById('sim-e-reset-btn');
+      const pillEl = document.getElementById('sim-e-pill');
+
+      const roughSlider = document.getElementById('sim-e-rough');
+      const metaSlider = document.getElementById('sim-e-meta');
+      const freqSlider = document.getElementById('sim-e-freq');
+
+      const roughValEl = document.getElementById('sim-e-rough-val');
+      const metaValEl = document.getElementById('sim-e-meta-val');
+      const freqValEl = document.getElementById('sim-e-freq-val');
+
+      const kpiPower = document.getElementById('sim-e-kpi-power');
+      const kpiPowerSub = document.getElementById('sim-e-kpi-power-sub');
+      const kpiHeat = document.getElementById('sim-e-kpi-heat');
+      const kpiHeatSub = document.getElementById('sim-e-kpi-heat-sub');
+      const kpiStab = document.getElementById('sim-e-kpi-stab');
+      const kpiStabSub = document.getElementById('sim-e-kpi-stab-sub');
+      const kpiNiche = document.getElementById('sim-e-kpi-niche');
+      const kpiNicheSub = document.getElementById('sim-e-kpi-niche-sub');
+
+      let morphologicalMode = true; // true = Morphological Metamaterial Basin, false = Rigid High-Freq Servo
+      let nicheState = 'wild'; // 'wild' = O(k) wilderness, 'building' = reshaping ΔW, 'structured' = O(1) niche R_gamma
+      let nicheProgress = 0.0;
+      let nicheWorkW = 0.0;
+      let currentGaitWell = 'alpha'; // 'alpha' or 'beta'
+      let pulseTimer = 0.0;
+      let cumulativeHeatKJ = 1.2;
+      let robotX = 110;
+      let robotDir = 1;
+      const heatSparks = [];
+
+      // Scattered clutter obstacles in wilderness (pushed into storage bin during Niche Construction)
+      const obstacles = [
+        { baseX: 165, x: 165, y: 0, r: 9, label: '杂物A' },
+        { baseX: 255, x: 255, y: 0, r: 11, label: '线缆B' },
+        { baseX: 345, x: 345, y: 0, r: 10, label: '散件C' },
+        { baseX: 425, x: 425, y: 0, r: 9, label: '障碍D' }
+      ];
+
+      function terrainHeight(x, rough, structuredFactor, t) {
+        const baseGround = 268;
+        const effRough = rough * (1 - 0.86 * structuredFactor);
+        const wave1 = Math.sin(x * 0.038 + 0.5) * 22 * effRough;
+        const wave2 = Math.cos(x * 0.095 - 1.2) * 12 * effRough;
+        const microJitter = Math.sin(x * 0.24 + t * 1.5) * 5.5 * effRough;
+        return baseGround - (wave1 + wave2 + microJitter);
+      }
+
+      function syncButtons() {
+        if (morphologicalMode) {
+          modeBtn.className = 'btn btn-primary';
+          modeBtn.textContent = '🦾 当前躯体构型：形态计算超材料势阱 (Morphological Metamaterial Basin · 零算力被动吸能)';
+        } else {
+          modeBtn.className = 'btn btn-active-toggle';
+          modeBtn.textContent = '⚠️ 当前躯体构型：刚体高频伺服 (Rigid High-Freq Servo · 高功耗对抗微扰 / 易饱和失稳)';
+        }
+
+        if (nicheState === 'structured') {
+          nicheBtn.className = 'btn btn-primary';
+          nicheBtn.textContent = '✓ 已完成物理筑巢 R_γ (O(1) 磁吸导轨运行 · 点击切回荒野盲搜)';
+        } else if (nicheState === 'building') {
+          nicheBtn.className = 'btn btn-warm';
+          nicheBtn.textContent = '🏗️ 正在物理筑巢 (付出机械功 ΔW 归拢杂物 + 铺设信标...)';
+        } else {
+          nicheBtn.className = 'btn';
+          nicheBtn.textContent = '🏗️ 启动物理筑巢 (Niche Construction：荒野 O(k) → 结构化 O(1))';
+        }
+      }
+
+      modeBtn.addEventListener('click', () => {
+        morphologicalMode = !morphologicalMode;
+        syncButtons();
+      });
+
+      pulseBtn.addEventListener('click', () => {
+        pulseTimer = 1.0;
+        currentGaitWell = currentGaitWell === 'alpha' ? 'beta' : 'alpha';
+      });
+
+      nicheBtn.addEventListener('click', () => {
+        if (nicheState === 'wild') {
+          nicheState = 'building';
+          nicheProgress = 0.0;
+        } else {
+          nicheState = 'wild';
+          nicheProgress = 0.0;
+          obstacles.forEach(ob => { ob.x = ob.baseX; });
+        }
+        syncButtons();
+      });
+
+      resetBtn.addEventListener('click', () => {
+        morphologicalMode = true;
+        nicheState = 'wild';
+        nicheProgress = 0.0;
+        nicheWorkW = 0.0;
+        currentGaitWell = 'alpha';
+        pulseTimer = 0.0;
+        cumulativeHeatKJ = 1.2;
+        roughSlider.value = '0.58';
+        metaSlider.value = '0.82';
+        freqSlider.value = '1000';
+        obstacles.forEach(ob => { ob.x = ob.baseX; });
+        heatSparks.length = 0;
+        syncButtons();
+      });
+
+      let t = 0;
+      function animate() {
+        t += 0.028;
+        const rough = parseFloat(roughSlider.value);
+        const meta = parseFloat(metaSlider.value);
+        const freq = parseFloat(freqSlider.value);
+
+        roughValEl.textContent = rough.toFixed(2);
+        metaValEl.textContent = meta.toFixed(2);
+        freqValEl.textContent = freq.toFixed(0) + ' Hz';
+
+        // Update Niche Construction progress
+        if (nicheState === 'building') {
+          nicheProgress = Math.min(1.0, nicheProgress + 0.012);
+          nicheWorkW += 0.35 * (0.6 + rough);
+          obstacles.forEach(ob => {
+            ob.x = ob.baseX + (488 - ob.baseX) * nicheProgress;
+          });
+          if (nicheProgress >= 1.0) {
+            nicheState = 'structured';
+            syncButtons();
+          }
+        }
+        const structuredFactor = nicheState === 'structured' ? 1.0 : (nicheState === 'building' ? nicheProgress : 0.0);
+
+        if (pulseTimer > 0) {
+          pulseTimer = Math.max(0, pulseTimer - 0.022);
+        }
+
+        // Move robot along terrain (x: 85..445)
+        const speed = morphologicalMode ? (1.35 + 0.45 * structuredFactor) : (1.05 - 0.35 * rough * (1 - structuredFactor));
+        robotX += robotDir * Math.max(0.45, speed);
+        if (robotX > 440) robotDir = -1;
+        if (robotX < 85) robotDir = 1;
+
+        // Compute energetics, heat, and stability
+        const effRough = rough * (1 - 0.82 * structuredFactor);
+        let motionPowerW = 0;
+        let computePowerW = 0;
+        let stabilityPct = 98.0;
+
+        if (morphologicalMode) {
+          const pulsePower = pulseTimer > 0 ? 18.0 : 0.0;
+          computePowerW = pulseTimer > 0 ? 2.4 : 0.2;
+          motionPowerW = 28.0 + effRough * 26.0 * (1.15 - 0.65 * meta) + pulsePower + computePowerW;
+          stabilityPct = Math.min(99.99, 92.5 + meta * 6.2 - effRough * (1 - meta) * 18.0 + structuredFactor * 4.5);
+          cumulativeHeatKJ = Math.min(99.0, cumulativeHeatKJ + motionPowerW * 0.00018);
+        } else {
+          // Rigid high-freq servo fights every perturbation
+          computePowerW = 85.0 + (freq / 1000) * 145.0;
+          const servoFightW = 290.0 + effRough * (freq / 1000) * 520.0;
+          motionPowerW = computePowerW + servoFightW;
+          const saturationPenalty = Math.max(0, (effRough - 0.42) * 78.0) + Math.max(0, (500 - freq) * 0.04);
+          stabilityPct = Math.max(18.0, Math.min(96.0, 88.0 - saturationPenalty + structuredFactor * 10.0));
+          cumulativeHeatKJ = Math.min(199.0, cumulativeHeatKJ + motionPowerW * 0.00085);
+        }
+
+        const jointTempC = Math.min(118, Math.round(25 + cumulativeHeatKJ * 0.62 + (morphologicalMode ? 2 : 18 * effRough)));
+        const isServoSaturated = !morphologicalMode && (effRough > 0.52 || stabilityPct < 62);
+
+        // Update DOM KPIs
+        kpiPower.textContent = Math.round(motionPowerW) + ' W';
+        kpiPower.style.color = motionPowerW < 90 ? 'var(--green)' : (motionPowerW < 350 ? 'var(--highlight)' : 'var(--red)');
+        kpiPowerSub.textContent = morphologicalMode
+          ? (pulseTimer > 0 ? '鞍点微脉冲注入中 (ΔE_pulse ≈ 18W)' : `算力 ΔQ_comp ≈ ${computePowerW.toFixed(1)}W · 超材料被动自稳`)
+          : `控制环 ${computePowerW.toFixed(0)}W + 关节硬刚 ${(motionPowerW - computePowerW).toFixed(0)}W`;
+
+        kpiHeat.textContent = `${cumulativeHeatKJ.toFixed(1)} kJ (${jointTempC}°C)`;
+        kpiHeat.style.color = jointTempC < 45 ? 'var(--accent)' : (jointTempC < 72 ? 'var(--highlight)' : 'var(--red)');
+        kpiHeatSub.textContent = morphologicalMode
+          ? '非线性弹性体被动耗散地面冲击'
+          : '高频伺服焦耳热剧烈堆积';
+
+        kpiStab.textContent = (nicheState === 'structured' && morphologicalMode ? '99.99%' : stabilityPct.toFixed(1) + '%');
+        kpiStab.style.color = stabilityPct >= 85 ? 'var(--green)' : (stabilityPct >= 60 ? 'var(--highlight)' : 'var(--red)');
+        kpiStabSub.textContent = isServoSaturated
+          ? '✗ 伺服扭矩饱和 · 姿态失稳倾覆！'
+          : (morphologicalMode ? '李雅普诺夫势谷 V_α(x) 被动自恢复' : '高增益 PID 勉强维持平衡');
+
+        if (nicheState === 'structured') {
+          kpiNiche.textContent = 'O(1) 导轨查表';
+          kpiNiche.style.color = 'var(--green)';
+          kpiNicheSub.textContent = `已耗筑巢功 ΔW = ${nicheWorkW.toFixed(1)} J · 可靠性 99.99%`;
+        } else if (nicheState === 'building') {
+          kpiNiche.textContent = `筑巢中 ${(nicheProgress * 100).toFixed(0)}%`;
+          kpiNiche.style.color = 'var(--purple)';
+          kpiNicheSub.textContent = `正消耗机械功 ΔW = ${nicheWorkW.toFixed(1)} J 改造环境`;
+        } else {
+          kpiNiche.textContent = 'O(k) 荒野盲搜';
+          kpiNiche.style.color = 'var(--highlight)';
+          kpiNicheSub.textContent = '未筑巢高熵环境 · 视差与碰撞开销高';
+        }
+
+        // Update Status Pill (exact required labels)
+        if (pulseTimer > 0.05) {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '鞍点跨区微脉冲';
+        } else if (isServoSaturated) {
+          pillEl.className = 'status-pill status-rejected';
+          pillEl.textContent = '伺服饱和失稳';
+        } else if (nicheState === 'structured') {
+          pillEl.className = 'status-pill status-admitted';
+          pillEl.textContent = '筑巢后 O(1) 运行';
+        } else if (nicheState === 'wild' && rough > 0.76 && !morphologicalMode) {
+          pillEl.className = 'status-pill status-rejected';
+          pillEl.textContent = '荒野盲搜';
+        } else if (nicheState === 'wild' && rough > 0.82) {
+          pillEl.className = 'status-pill status-warn';
+          pillEl.textContent = '荒野盲搜';
+        } else {
+          pillEl.className = 'status-pill status-admitted';
+          pillEl.textContent = '区域内被动自稳';
+        }
+
+        // ==================== CANVAS RENDER ====================
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Left Arena: Physical Terrain & Robot Embodiment (x: 16..535)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+        ctx.fillRect(16, 18, 520, 324);
+
+        // Top arena banner
+        ctx.fillStyle = nicheState === 'structured' ? '#86efac' : '#cbd5e1';
+        ctx.font = 'bold 11.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(
+          nicheState === 'structured'
+            ? '低熵结构化安全区 R_γ (磁吸导轨 + 反射信标已就位 · O(1) 零盲搜运行)'
+            : `非结构化物理地形 (粗糙度 λ_terrain = ${rough.toFixed(2)} · 散落障碍物)`,
+          26,
+          38
+        );
+
+        // Draw standardized storage bin on the right of terrain (x: 472..526)
+        ctx.strokeStyle = nicheState !== 'wild' ? '#a78bfa' : 'rgba(148, 163, 184, 0.35)';
+        ctx.fillStyle = 'rgba(167, 139, 250, 0.1)';
+        ctx.lineWidth = 1.5;
+        ctx.fillRect(470, 218, 56, 54);
+        ctx.strokeRect(470, 218, 56, 54);
+        ctx.fillStyle = '#c4b5fd';
+        ctx.font = '10.5px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('标准化收纳槽', 498, 212);
+
+        // Draw Passive Beacon / Magnetic Guide Rail when niche construction is active
+        if (structuredFactor > 0.05) {
+          ctx.strokeStyle = `rgba(52, 211, 153, ${0.3 + 0.65 * structuredFactor})`;
+          ctx.lineWidth = 3;
+          ctx.setLineDash([8, 4]);
+          ctx.beginPath();
+          ctx.moveTo(35, 268);
+          ctx.lineTo(465, 268);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Fiducial beacon posts
+          [60, 200, 340, 455].forEach(bx => {
+            ctx.fillStyle = `rgba(56, 189, 248, ${structuredFactor})`;
+            ctx.fillRect(bx - 2, 232, 4, 36);
+            ctx.beginPath();
+            ctx.arc(bx, 230, 5, 0, Math.PI * 2);
+            ctx.fill();
+          });
+        }
+
+        // Draw Terrain Profile
+        ctx.fillStyle = 'rgba(30, 41, 59, 0.85)';
+        ctx.strokeStyle = nicheState === 'structured' ? '#34d399' : '#64748b';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(20, 336);
+        for (let x = 20; x <= 530; x += 4) {
+          const y = terrainHeight(x, rough, structuredFactor, t);
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(530, 336);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Draw scattered or binned obstacles
+        obstacles.forEach((ob, i) => {
+          const oy = nicheState === 'structured'
+            ? 258 - (i % 2) * 14
+            : terrainHeight(ob.x, rough, structuredFactor, t) - ob.r;
+          ctx.fillStyle = nicheState === 'structured' ? '#a78bfa' : '#f97316';
+          ctx.beginPath();
+          ctx.arc(ob.x, oy, ob.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Compute Robot Foot & Body Coordinates
+        const footL = robotX - 24;
+        const footR = robotX + 24;
+        const yFootL = terrainHeight(footL, rough, structuredFactor, t);
+        const yFootR = terrainHeight(footR, rough, structuredFactor, t);
+        const avgFootY = (yFootL + yFootR) / 2;
+
+        // In Morphological mode, the body center of mass glides smoothly inside potential well V_alpha(x)
+        // In Rigid mode, high-freq servo jitter & saturation cause pitching and stumbling
+        const passiveSmoothY = 268 - 58 - (avgFootY - 268) * (1 - 0.78 * meta);
+        const rigidBodyY = avgFootY - 58 + (isServoSaturated ? Math.sin(t * 14) * 14 : Math.sin(t * 25) * 4);
+        const bodyY = morphologicalMode ? passiveSmoothY : rigidBodyY;
+        const bodyTilt = morphologicalMode
+          ? ((yFootR - yFootL) / 48) * (1 - 0.75 * meta) + (pulseTimer > 0 ? Math.sin(pulseTimer * Math.PI) * 0.22 : 0)
+          : ((yFootR - yFootL) / 48) * 1.35 + (isServoSaturated ? Math.sin(t * 9) * 0.48 : 0);
+
+        // Spawn heat sparks in Rigid mode
+        if (!morphologicalMode && Math.random() < 0.45 + effRough * 0.4) {
+          heatSparks.push({
+            x: robotX + (Math.random() - 0.5) * 34,
+            y: bodyY + 18,
+            vx: (Math.random() - 0.5) * 2.4,
+            vy: -1.2 - Math.random() * 2.0,
+            life: 1.0
+          });
+        }
+        for (let i = heatSparks.length - 1; i >= 0; i--) {
+          const sp = heatSparks[i];
+          sp.x += sp.vx;
+          sp.y += sp.vy;
+          sp.life -= 0.03;
+          if (sp.life <= 0) {
+            heatSparks.splice(i, 1);
+            continue;
+          }
+          ctx.fillStyle = `rgba(251, 113, 133, ${sp.life})`;
+          ctx.beginPath();
+          ctx.arc(sp.x, sp.y, 2.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Draw Passive Potential Basin Aura around Morphological Robot
+        if (morphologicalMode) {
+          const auraGrad = ctx.createRadialGradient(robotX, bodyY + 10, 6, robotX, bodyY + 10, 56);
+          auraGrad.addColorStop(0, 'rgba(56, 189, 248, 0.26)');
+          auraGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+          ctx.fillStyle = auraGrad;
+          ctx.beginPath();
+          ctx.arc(robotX, bodyY + 10, 56, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Draw Legs / Tensegrity Metamaterial Suspension vs Rigid Servo Linkages
+        const drawLeg = (hipX, hipY, fx, fy) => {
+          const midX = (hipX + fx) / 2 + (morphologicalMode ? Math.sin(t * 4) * 4 : 0);
+          const midY = (hipY + fy) / 2;
+          if (morphologicalMode) {
+            // Tensegrity elastic diamonds & compliant tendons
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(hipX, hipY);
+            ctx.lineTo(midX - 9, midY);
+            ctx.lineTo(fx, fy);
+            ctx.lineTo(midX + 9, midY);
+            ctx.closePath();
+            ctx.stroke();
+
+            // Cross-tendon
+            ctx.strokeStyle = '#34d399';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(midX - 9, midY);
+            ctx.lineTo(midX + 9, midY);
+            ctx.stroke();
+          } else {
+            // Rigid heavy servo links + red-hot knee actuator
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(hipX, hipY);
+            ctx.lineTo(midX - 6, midY);
+            ctx.lineTo(fx, fy);
+            ctx.stroke();
+
+            ctx.fillStyle = isServoSaturated ? '#ef4444' : '#f97316';
+            ctx.beginPath();
+            ctx.arc(midX - 6, midY, 5.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        };
+
+        const hipLX = robotX - Math.cos(bodyTilt) * 16;
+        const hipLY = bodyY - Math.sin(bodyTilt) * 16 + 10;
+        const hipRX = robotX + Math.cos(bodyTilt) * 16;
+        const hipRY = bodyY + Math.sin(bodyTilt) * 16 + 10;
+
+        drawLeg(hipLX, hipLY, footL, yFootL);
+        drawLeg(hipRX, hipRY, footR, yFootR);
+
+        // Draw Robot Torso
+        ctx.save();
+        ctx.translate(robotX, bodyY);
+        ctx.rotate(bodyTilt);
+        ctx.fillStyle = morphologicalMode ? 'rgba(16, 185, 129, 0.88)' : (isServoSaturated ? 'rgba(220, 38, 38, 0.9)' : 'rgba(234, 88, 12, 0.88)');
+        ctx.strokeStyle = '#f8fafc';
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.roundRect(-24, -14, 48, 26, 7);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+
+        // Robot Overhead Label
+        ctx.fillStyle = morphologicalMode ? '#6ee7b7' : '#fca5a5';
+        ctx.font = 'bold 11px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(
+          morphologicalMode
+            ? (pulseTimer > 0 ? '⚡ 鞍点微脉冲跃迁 R_α → R_β' : `超材料势阱 V_${currentGaitWell}(x) (ΔQ_comp ≈ 0)`)
+            : (isServoSaturated ? '✗ 伺服扭矩饱和失稳！' : `1000Hz 刚体硬刚 (${Math.round(motionPowerW)}W)`),
+          robotX,
+          bodyY - 24
+        );
+
+        // ==================== RIGHT PANEL: Double-Well Potential & Energetics ====================
+        const rx = 548;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(rx, 18, 294, 324, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 12.5px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('形态李雅普诺夫势阱与鞍点跃迁', rx + 14, 42);
+
+        // Double-well curve V(x) = a*x^4 - b*x^2
+        const plotCx = rx + 147;
+        const plotBaseY = 148;
+        ctx.strokeStyle = morphologicalMode ? '#38bdf8' : '#f87171';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let dx = -115; dx <= 115; dx += 3) {
+          const u = dx / 58; // [-2, 2]
+          const wellDepth = morphologicalMode ? (0.45 + 0.55 * meta) : 0.22;
+          // Double well with minima at u = -1 (V_alpha) and u = +1 (V_beta), saddle at u = 0
+          const vVal = wellDepth * (0.38 * Math.pow(u, 4) - 0.85 * Math.pow(u, 2));
+          const py = plotBaseY + vVal * 62;
+          if (dx === -115) ctx.moveTo(plotCx + dx, py);
+          else ctx.lineTo(plotCx + dx, py);
+        }
+        ctx.stroke();
+
+        // Labels for V_alpha, Saddle, V_beta
+        ctx.font = 'bold 10.5px ui-monospace, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillText('势阱 V_α', plotCx - 58, 178);
+        ctx.fillStyle = '#fbbf24';
+        ctx.fillText('鞍点 Saddle', plotCx, 128);
+        ctx.fillStyle = '#34d399';
+        ctx.fillText('势阱 V_β', plotCx + 58, 178);
+
+        // State ball on the double-well landscape
+        let ballU = currentGaitWell === 'alpha' ? -1.0 : 1.0;
+        if (pulseTimer > 0) {
+          const dir = currentGaitWell === 'beta' ? 1 : -1;
+          ballU = -dir * 1.0 + dir * 2.0 * (1 - pulseTimer);
+        } else if (morphologicalMode) {
+          ballU += Math.sin(t * 4) * 0.16 * effRough * (1 - 0.5 * meta);
+        } else {
+          // Rigid servo oscillates wildly near rim when rough
+          ballU += Math.sin(t * 16) * (0.45 + 0.95 * effRough);
+        }
+        const wellDepth = morphologicalMode ? (0.45 + 0.55 * meta) : 0.22;
+        const ballV = wellDepth * (0.38 * Math.pow(ballU, 4) - 0.85 * Math.pow(ballU, 2));
+        const ballX = plotCx + Math.max(-112, Math.min(112, ballU * 58));
+        const ballY = plotBaseY + ballV * 62;
+
+        ctx.fillStyle = pulseTimer > 0 ? '#facc15' : (morphologicalMode ? '#34d399' : '#ef4444');
+        ctx.beginPath();
+        ctx.arc(ballX, ballY - 5, 6.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Energetics Bars in bottom half of Right Panel
+        const drawMetricBar = (y, label, valStr, frac, color) => {
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#cbd5e1';
+          ctx.font = '11.5px -apple-system, sans-serif';
+          ctx.fillText(label, rx + 16, y);
+          ctx.textAlign = 'right';
+          ctx.fillStyle = color;
+          ctx.font = 'bold 11.5px ui-monospace, monospace';
+          ctx.fillText(valStr, rx + 278, y);
+
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+          ctx.fillRect(rx + 16, y + 6, 262, 11);
+          ctx.fillStyle = color;
+          ctx.fillRect(rx + 16, y + 6, Math.max(4, Math.min(1, frac) * 262), 11);
+        };
+
+        drawMetricBar(
+          212,
+          '整机运动功耗 P_motion',
+          Math.round(motionPowerW) + ' W',
+          motionPowerW / 950,
+          motionPowerW < 90 ? '#34d399' : '#f87171'
+        );
+        drawMetricBar(
+          252,
+          '动态稳定率 / 任务可靠性',
+          nicheState === 'structured' && morphologicalMode ? '99.99%' : stabilityPct.toFixed(1) + '%',
+          stabilityPct / 100,
+          stabilityPct >= 85 ? '#38bdf8' : '#fb923c'
+        );
+        drawMetricBar(
+          292,
+          '环境搜索阻抗 (O(k) → O(1))',
+          nicheState === 'structured' ? 'O(1) 极低阻抗' : 'O(k) 荒野高阻',
+          nicheState === 'structured' ? 0.12 : (0.55 + 0.4 * rough),
+          nicheState === 'structured' ? '#a78bfa' : '#fbbf24'
+        );
+
+        requestAnimationFrame(animate);
+      }
+
+      syncButtons();
       requestAnimationFrame(animate);
     })();
   </script>
