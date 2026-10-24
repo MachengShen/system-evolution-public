@@ -1004,6 +1004,119 @@
         </li>
       </ol>
 
+      <h3>4.3 通用持续学习（GCL）学术困境的物理消解：各向异性峡谷度规、具身规范场与怀旧热代谢</h3>
+      <div class="callout callout-warm">
+        <strong>核心推进（理论冲突消解与三大新物理定理）：</strong><br>
+        学术界在通用持续学习（General Continual Learning, GCL）中长期追求「无显式任务边界、零数据回放、历史旧任务绝对零遗忘」的理想，并重度依赖 <strong>SAM（Sharpness-Aware Minimization）</strong> 搜寻高维平坦极小值。然而，这套教条与非平衡热力学存在 <strong>4 处根本性物理冲突</strong>。只要放弃「单一孤立静态参数 $\theta$」的假定，以具身图册与热力学速率极限消解这些冲突，立刻会自然涌现出 <strong>三大全新物理—学习定理（Theorems A, B, C）</strong>——不仅完美解释了 SAM 与 Sutton 的 CBP（Continual Backprop）为何有效，更为现代深度持续学习指明了第一性原理的演进终局。
+      </div>
+
+      <!-- 四大核心物理不兼容点对照表 -->
+      <div style="margin:20px 0; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.92rem; background:var(--card-bg, #ffffff); border:1px solid var(--line, #e2e8f0); border-radius:10px;">
+          <thead>
+            <tr style="background:var(--subtle, #f8fafc); border-bottom:2px solid var(--line, #e2e8f0); text-align:left;">
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:18%;">冲突维度</th>
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:24%;">学术界原教旨 GCL 范式</th>
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:28%;">物理学第一性原理智能定义</th>
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:30%;">根本物理冲突与失衡根源</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--line, #e2e8f0);">
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">1. 旧任务不掉点 vs. 怀旧耗散定律</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">追求在无限任务流中<strong>所有历史旧任务绝对零遗忘</strong>（$\Delta \text{Acc}_{\text{past}} = 0$），参数容量固定。</td>
+              <td style="padding:12px 14px;"><strong>Still–Sivak–Bell–Crooks 怀旧耗散恒等式</strong>：<br>$\beta W_{\text{diss}} = I(S_t; X_{\le t}) - I(S_t; X_{>t}) = I_{\text{nostalgia}}$</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);"><strong>死保过期记忆 = 热力学自杀</strong>。当旧任务表象与未来预测互信息归零时，强求在有限相空间中不掉点必然导致无效耗散发散（$W_{\text{diss}} \to \infty$），锁死快变磁化率 $\chi_{\text{fast}} \to 0$（引发 <strong>Loss of Plasticity / 可塑性永久丧失</strong>）。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line, #e2e8f0); background:rgba(248, 250, 252, 0.5);">
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">2. 脱敏无边界单一 $\theta$ vs. 具身安全区图册</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">坚持「单一全局参数 $\theta$ 硬扛一切」，将任何利用任务环境边界门控的做法视为「作弊 / 范式 Hack」。</td>
+              <td style="padding:12px 14px;"><strong>具身低熵安全区图册（Grounded Atlas）</strong>：<br>$\mathcal{A} = \{(\mathcal{R}_\alpha, V_\alpha, \Delta\lambda_\alpha)\}$，不存在脱离外部物理基质 $E_\alpha$ 孤立自持的低熵结构。</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);"><strong>混淆了「人工灌入整数 Task ID 作弊」与「物理环境天然具身规范场」</strong>。将彼此正交甚至动力学冲突的任务塞进同一组无门控权重，违背黑塞正交容量极限，必然导致本征方向灾难性相互擦除。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line, #e2e8f0);">
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">3. SAM 各向同性平坦 vs. 慢核大谱隙与势阱壁</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">靠 <strong>SAM</strong> 把损失景观各方向曲率均推向平坦（$\lambda_{\max}(\nabla^2_\theta \mathcal{L}) \to 0$），以各向同性平缓容忍扰动。</td>
+              <td style="padding:12px 14px;"><strong>定律 I（相空间收缩）</strong> + <strong>定律 III（慢核大谱隙 $\Delta\lambda_{\text{slow}} \gg 0$ 与快层高敏 $\chi_{\text{fast}}$）</strong>。</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);"><strong>全局变平 = 丧失恢复力与因果精度</strong>。若所有方向皆平坦（$\Delta\lambda_{\text{slow}} \to 0$），李雅普诺夫势阱失去陡峭恢复壁，慢核会被混沌热噪声 $\Gamma_{\text{chaos}}(\|E\|/\Delta\lambda)$ 彻底冲垮，模型退化为脆弱平庸体。</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">4. 绝对「无回放」洁癖 vs. 生成式/基质对偶</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">严格禁止任何形式的数据回放，连生成式回放也被边缘化为擦边球。</td>
+              <td style="padding:12px 14px;"><strong>跨期度规雕刻 $\mathcal{W}_2(g(E_{t+1})) \ll \mathcal{W}_2(g(E_t))$</strong> 与 <strong>睡眠相离线代谢（Self-Shedding）</strong>。</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);">若既不准改变外部基质 $E$，又不准在离线期通过内部生成回放洗脱 $I_{\text{nostalgia}}$，单步在线梯度在热力学上被 TSL 速率极限锁死，不可逆能耗与测地线误差无法同时收敛。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 三大新定理数学推导与物理机制 -->
+      <div class="math-box">
+        <span class="math-label">定理 A · 各向异性峡谷度规定理（Spectral-Split SAM &amp; Anisotropic Canyon-Metric）</span>
+        <p style="margin:8px 0 6px;">
+          设参数流形 $\mathcal{M}$ 的切空间严格正交分解为因果不变量子空间与规范/任务切换子空间：
+          $$T_\theta \mathcal{M} = \mathcal{T}_{\text{invariant}} \oplus \mathcal{T}_{\text{gauge}}$$
+          其中 $\dim(\mathcal{T}_{\text{invariant}}) = d_{\text{core}} \ll N$，$\dim(\mathcal{T}_{\text{gauge}}) = N - d_{\text{core}}$。
+        </p>
+        <ol style="margin:4px 0 0; padding-left:20px;">
+          <li>
+            <strong>在规范切换子空间 $\mathcal{T}_{\text{gauge}}$ 上，黑塞矩阵曲率受平坦极小值上界约束</strong>：
+            $$\lambda_j(\nabla^2_\theta \mathcal{L}) \le \epsilon_{\text{flat}}, \quad \forall j \in \mathcal{T}_{\text{gauge}}$$
+            此时扩散迁移率张量 $D_{jk} \approx \frac{1}{\gamma} g^{jk}$ 取得极大值，跨子任务输运的 2-阶 Wasserstein 测地线距离被极小化：
+            $$\mathcal{W}_2(p_\alpha, p_\beta; g(E)) = \inf_{\gamma \in \mathcal{T}_{\text{gauge}}} \int_0^1 \sqrt{g(\dot{\gamma}, \dot{\gamma})} \, dt \ll \mathcal{W}_2^{\text{Euclidean}}$$
+          </li>
+          <li>
+            <strong>在因果慢核子空间 $\mathcal{T}_{\text{invariant}}$ 上，系统必须维持大谱隙陡峭壁</strong>：
+            $$\lambda_{\min}^{\text{invariant}}(\nabla^2_\theta \mathcal{L}) = \Delta\lambda_{\text{slow}} \ge \frac{2 \|E_{\text{noise}}\|}{\sin \theta_{\text{tol}}}$$
+            确保外界混沌热扰动的侵蚀率指数衰减：$\Gamma_{\text{chaos}} \le \Gamma_0 \exp(-\Delta\lambda_{\text{slow}} t)$。
+          </li>
+        </ol>
+        <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(185,28,28,0.25); font-size:0.88rem; color:var(--accent);">
+          <strong>物理推论（峡谷雕刻器 Canyon Sculptor）</strong>：SAM 的物理本质绝非全局均匀抹平，而是拉平任务切换维度的寄生势垒。最优优化器必须像峡谷雕刻器一样：<strong>沿峡谷底部（跨任务规范方向）极度平坦以实现零耗散滑行；沿峡谷两侧峭壁（核心因果方向）极度陡峭以保持高谱隙抗噪。</strong>
+        </div>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">定理 B · 具身规范场、梯度核心集与生成式回放的热力学对偶（Thermodynamic Dual of Gauge Fields, Coresets &amp; Replay）</span>
+        <ol style="margin:8px 0 0; padding-left:20px;">
+          <li>
+            <strong>具身环境即连续物理规范场（Natural Embodied Gauge Connection）</strong>：
+            物理世界基质 $E_\alpha$ 对智能体状态的作用通过规范联络 $A_\mu(E_\alpha)$ 表达，使得局部激活发生规范协变变换 $\psi \mapsto e^{i \int A \cdot dx} \psi$。环境耦合天然诱导正交投影算子 $\mathcal{P}_\alpha \mathcal{P}_\beta = \delta_{\alpha\beta}\mathcal{P}_\alpha$。<strong>环境上下文本身就是抗遗忘的自然物理钥匙，绝非人造作弊的 Task-ID 范式 Hack</strong>。
+          </li>
+          <li>
+            <strong>代表梯度核心集是 Landauer 擦除后的低秩度规基（Principal Metric Basis）</strong>：
+            任务增量学习（Task-IL）中极有效的数据集蒸馏与代表梯度核心集 $\mathcal{C}^* \subset \mathcal{X}_{\le t}$（$|\mathcal{C}^*| \ll |\mathcal{X}_{\le t}|$），在物理上是以下最优度规雕刻问题的变分解：
+            $$\mathcal{C}^* = \arg\min_{\mathcal{C}} \mathcal{W}_2\left( \sum_{x \in \mathcal{C}} \nabla_\theta \ell(x), \, \mathbb{E}_{x \sim \mathcal{D}_{\le t}}[\nabla_\theta \ell(x)] \right) \quad \text{s.t.} \quad I(\mathcal{C}; X_{\le t} \mid X_{>t}) \le \epsilon_{\text{nostalgia}}$$
+            核心集不是「存旧图作弊」，而是<strong>通过 Landauer 不可逆擦除排净怀旧信息 $I_{\text{nostalgia}}$ 之后，在参数流形上留下的最小充分切向度规基</strong>。
+          </li>
+          <li>
+            <strong>清醒筑巢与睡眠生成回放的勒让德对偶（Wake-Sleep Duality）</strong>：
+            智能体在清醒期通过外部机械功改造环境基质 $\nabla_{E_{\text{ext}}} \mathcal{W}_2 < 0$（外部主动筑巢，物理环境作为零内存生成器）；在睡眠期通过内部生成器 $G_\phi(z)$ 沿慢核因果流形采样合成经验，将快变层的暂存记忆代谢重整入慢核，二者在全系统总熵增速率方程下<strong>互为勒让德对偶</strong>。
+          </li>
+        </ol>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">定理 C · 可塑性—怀旧守恒律与 CBP 定向热退火融化（Plasticity-Nostalgia Conservation &amp; CBP Melting）</span>
+        <ol style="margin:8px 0 0; padding-left:20px;">
+          <li>
+            <strong>有限容量下的可塑性衰减律（Loss of Plasticity as Glass Transition）</strong>：
+            对于参数相空间体积有限（$\int_{\Theta} d\theta = V_\Theta < \infty$）的系统，快变磁化率 $\chi_{\text{fast}} = \text{Tr}\big[(\nabla^2_\theta \mathcal{L})^{-1}_{\text{active}}\big]$ 与历史累积怀旧信息 $I_{\text{nostalgia}}$ 满足严格权衡：
+            $$\chi_{\text{fast}}(\theta) \cdot \exp\left( \frac{I_{\text{nostalgia}}(S_t)}{k_B C_{\text{eff}}} \right) \le \chi_0$$
+            若强制要求所有历史任务绝对零遗忘（$\Delta \text{Acc}_{\text{past}} \equiv 0$），累积怀旧信息 $I_{\text{nostalgia}} \to \infty$，必然导致自由相空间体积 $\Omega_{\text{free}} \to 0$ 与 $\chi_{\text{fast}} \to 0$——这正是深度持续学习中普遍遭遇的<strong>可塑性永久丧失（Loss of Plasticity）的玻璃化热力学本质</strong>。
+          </li>
+          <li>
+            <strong>Sutton 的 CBP 即局域朗之万热退火（Targeted Thermal Melting）</strong>：
+            CBP 定期随机重置低贡献神经元，在动力学上严格等价于在朗之万方程 $d\theta_k = -\nabla_k \mathcal{L} dt + \sqrt{2 k_B T_k} dW_t$ 中向被怀旧信息冻结的神经元子空间注入<strong>定向局部温度脉冲（Targeted Thermal Spike）</strong>：
+            $$T_k(t) = T_{\text{ambient}} + T_{\text{reset}} \cdot \Theta(u_{\text{thresh}} - u_k)$$
+            通过不可逆热功耗散将玻璃化死权重重新融化为流体态，主动付出微小受控的历史丢弃代价，换取网络快变磁化率 $\chi_{\text{fast}}$ 与自由相空间 $\Omega_{\text{free}}$ 的热力学复活。
+          </li>
+        </ol>
+        <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(185,28,28,0.25); font-size:0.88rem; color:var(--accent);">
+          <strong>物理 GCL 终极范式</strong>：通用持续学习的物理目标绝非死保过期旧任务（$\Delta\text{Acc}_{\text{past}} = 0$），而是<strong>在非平稳环境中，以最小不可逆耗散 $\Sigma$ 持续缩短面向未来的几何可达距离 $\mathcal{W}_2(g(E))$</strong>。
+        </div>
+      </div>
+
       <!-- SIMULATOR D -->
       <div id="sim-d" class="sim-box">
         <div class="sim-header">

@@ -1034,6 +1034,119 @@
         </li>
       </ol>
 
+      <h3>4.3 Resolving the General Continual Learning (GCL) Dilemma: Anisotropic Canyon-Metric, Grounded Gauge Fields, and Nostalgia Melting</h3>
+      <div class="callout callout-warm">
+        <strong>Core Theoretical Advancement (Conflict Resolution &amp; Three Emerging Theorems):</strong><br>
+        Academic General Continual Learning (GCL) has long pursued the dogmatic ideal of "no explicit task boundaries, zero data replay, and absolute zero forgetting across all past tasks," heavily relying on <strong>SAM (Sharpness-Aware Minimization)</strong> to seek isotropic flat minima in high-dimensional loss landscapes. However, this dogma suffers from <strong>four fundamental physical incompatibilities</strong> with non-equilibrium thermodynamics. Relinquishing the naive assumption of a "single isolated static parameter vector $\theta$" and grounding continual learning in non-equilibrium thermodynamics directly unlocks <strong>three novel physical theorems (Theorems A, B, C)</strong>—rigorously explaining why SAM and Sutton's Continual Backprop (CBP) work, while providing a first-principles compass for scalable continual intelligence.
+      </div>
+
+      <!-- Four Physical Incompatibilities Comparison Table -->
+      <div style="margin:20px 0; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.92rem; background:var(--card-bg, #ffffff); border:1px solid var(--line, #e2e8f0); border-radius:10px;">
+          <thead>
+            <tr style="background:var(--subtle, #f8fafc); border-bottom:2px solid var(--line, #e2e8f0); text-align:left;">
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:18%;">Dimension</th>
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:24%;">Academic GCL Dogma</th>
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:28%;">Thermodynamic Intelligence Theory</th>
+              <th style="padding:12px 14px; color:var(--text, #1e293b); width:30%;">Underlying Physical Conflict &amp; Pathology</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--line, #e2e8f0);">
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">1. Zero Forgetting vs. Nostalgia Dissipation</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">Demands <strong>absolute zero performance drop on all historical tasks</strong> ($\Delta \text{Acc}_{\text{past}} = 0$) under finite capacity.</td>
+              <td style="padding:12px 14px;"><strong>Still–Sivak–Bell–Crooks Nostalgia Identity</strong>:<br>$\beta W_{\text{diss}} = I(S_t; X_{\le t}) - I(S_t; X_{>t}) = I_{\text{nostalgia}}$</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);"><strong>Preserving expired memory = Thermodynamic suicide</strong>. In non-stationary environments, forcing zero forgetting on past tasks that have zero mutual information with the future diverges useless dissipation ($W_{\text{diss}} \to \infty$) and locks susceptibility $\chi_{\text{fast}} \to 0$ (causing fatal <strong>Loss of Plasticity</strong>).</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line, #e2e8f0); background:rgba(248, 250, 252, 0.5);">
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">2. Ungrounded Global $\theta$ vs. Grounded Atlas</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">Insists on a single parameter vector $\theta$ for all tasks, dismissing environmental gating as a "paradigm hack."</td>
+              <td style="padding:12px 14px;"><strong>Grounded Atlas of Viability Basins</strong>:<br>$\mathcal{A} = \{(\mathcal{R}_\alpha, V_\alpha, \Delta\lambda_\alpha)\}$; low-entropy structures cannot self-sustain without coupling to substrate $E_\alpha$.</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);"><strong>Confuses artificial human Task-IDs with natural physical gauge fields</strong>. Jamming mutually orthogonal tasks into an un-gated global matrix violates Hessian orthogonal capacity bounds, triggering catastrophic interference.</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line, #e2e8f0);">
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">3. Isotropic SAM Flatness vs. Spectral Gap</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">Uses <strong>SAM</strong> to flatten all Hessian directions ($\lambda_{\max}(\nabla^2_\theta \mathcal{L}) \to 0$) to tolerate cross-task drift.</td>
+              <td style="padding:12px 14px;"><strong>Law I (Phase Space Contraction)</strong> + <strong>Law III (Slow-Core Gap $\Delta\lambda_{\text{slow}} \gg 0$ &amp; Fast Susceptibility $\chi_{\text{fast}}$)</strong>.</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);"><strong>Global flatness = Loss of restorative stability and causal precision</strong>. Flattening all curvatures ($\Delta\lambda_{\text{slow}} \to 0$) strips the Lyapunov well of its walls, causing the slow core to collapse under thermal noise $\Gamma_{\text{chaos}}(\|E\|/\Delta\lambda)$.</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 14px; font-weight:600; color:var(--accent, #b91c1c);">4. "No-Replay" Purism vs. Generative/Substrate Dual</td>
+              <td style="padding:12px 14px; color:var(--muted, #64748b);">Strictly forbids any form of replay, marginalizing generative replay as a marginal compromise.</td>
+              <td style="padding:12px 14px;"><strong>Intertemporal Metric Sculpting $\mathcal{W}_2(g(E_{t+1})) \ll \mathcal{W}_2(g(E_t))$</strong> and <strong>Offline Sleep Metabolism (Self-Shedding)</strong>.</td>
+              <td style="padding:12px 14px; color:var(--text, #334155);">Prohibiting both substrate modification $E$ and internal generative replay locks single-step online gradients under TSL bounds; dissipation and geodesic tracking error cannot simultaneously converge.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Three Novel Physical Theorems -->
+      <div class="math-box">
+        <span class="math-label">Theorem A · Anisotropic Canyon-Metric Theorem (Spectral-Split SAM)</span>
+        <p style="margin:8px 0 6px;">
+          Let the tangent space of the parameter manifold $\mathcal{M}$ be orthogonally decomposed into an invariant causal subspace and a gauge task-transport subspace:
+          $$T_\theta \mathcal{M} = \mathcal{T}_{\text{invariant}} \oplus \mathcal{T}_{\text{gauge}}$$
+          where $\dim(\mathcal{T}_{\text{invariant}}) = d_{\text{core}} \ll N$ and $\dim(\mathcal{T}_{\text{gauge}}) = N - d_{\text{core}}$.
+        </p>
+        <ol style="margin:4px 0 0; padding-left:20px;">
+          <li>
+            <strong>Along the gauge switching subspace $\mathcal{T}_{\text{gauge}}$, Hessian curvature is bounded by flat minima</strong>:
+            $$\lambda_j(\nabla^2_\theta \mathcal{L}) \le \epsilon_{\text{flat}}, \quad \forall j \in \mathcal{T}_{\text{gauge}}$$
+            Diffusive mobility $D_{jk} \approx \frac{1}{\gamma} g^{jk}$ is maximized, minimizing the 2-Wasserstein transport geodesic barrier across tasks:
+            $$\mathcal{W}_2(p_\alpha, p_\beta; g(E)) = \inf_{\gamma \in \mathcal{T}_{\text{gauge}}} \int_0^1 \sqrt{g(\dot{\gamma}, \dot{\gamma})} \, dt \ll \mathcal{W}_2^{\text{Euclidean}}$$
+          </li>
+          <li>
+            <strong>Along the invariant core subspace $\mathcal{T}_{\text{invariant}}$, a steep spectral gap is strictly preserved</strong>:
+            $$\lambda_{\min}^{\text{invariant}}(\nabla^2_\theta \mathcal{L}) = \Delta\lambda_{\text{slow}} \ge \frac{2 \|E_{\text{noise}}\|}{\sin \theta_{\text{tol}}}$$
+            guaranteeing exponential decay of chaotic environmental erosion: $\Gamma_{\text{chaos}} \le \Gamma_0 \exp(-\Delta\lambda_{\text{slow}} t)$.
+          </li>
+        </ol>
+        <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(185,28,28,0.25); font-size:0.88rem; color:var(--accent);">
+          <strong>Physical Implication (Canyon Sculptor)</strong>: The true power of SAM lies not in isotropic flattening, but in flattening parasitic barriers along task-switching degrees of freedom. An optimal optimizer must act as a <strong>Canyon Sculptor</strong>: extremely flat along the canyon floor (gauge directions) for dissipation-free task sliding, yet sharply steep along the canyon walls (invariant directions) for robust noise rejection.
+        </div>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">Theorem B · Thermodynamic Dual of Grounded Gauge Fields, Coresets, and Generative Replay</span>
+        <ol style="margin:8px 0 0; padding-left:20px;">
+          <li>
+            <strong>Embodied Environment as a Continuous Gauge Field</strong>:
+            Coupling to the physical substrate $E_\alpha$ acts through a gauge connection $A_\mu(E_\alpha)$, transforming local activations as $\psi \mapsto e^{i \int A \cdot dx} \psi$. This natural coupling induces orthogonal projectors $\mathcal{P}_\alpha \mathcal{P}_\beta = \delta_{\alpha\beta}\mathcal{P}_\alpha$, providing an authentic physical anchor against interference without artificial integer task-IDs.
+          </li>
+          <li>
+            <strong>Representative Gradient Coresets as Landauer-Erased Metric Bases</strong>:
+            Representative gradient coresets and distilled datasets $\mathcal{C}^* \subset \mathcal{X}_{\le t}$ ($|\mathcal{C}^*| \ll |\mathcal{X}_{\le t}|$) are exact variational solutions to optimal metric sculpting:
+            $$\mathcal{C}^* = \arg\min_{\mathcal{C}} \mathcal{W}_2\left( \sum_{x \in \mathcal{C}} \nabla_\theta \ell(x), \, \mathbb{E}_{x \sim \mathcal{D}_{\le t}}[\nabla_\theta \ell(x)] \right) \quad \text{s.t.} \quad I(\mathcal{C}; X_{\le t} \mid X_{>t}) \le \epsilon_{\text{nostalgia}}$$
+            Coresets are not "cheating data stores," but the <strong>minimal sufficient geodesic metric basis remaining on the parameter manifold after Landauer irreversible erasure of non-predictive nostalgia entropy $I_{\text{nostalgia}}$</strong>.
+          </li>
+          <li>
+            <strong>Wake Niche Construction and Sleep Generative Replay as Legendre Duals</strong>:
+            Active external niche construction $\nabla_{E_{\text{ext}}} \mathcal{W}_2 < 0$ during wakefulness (sculpting the physical world as a zero-memory generator) and internal generative replay $G_\phi(z)$ during sleep (distilling fast-layer memory into the slow invariant core) are exact Legendre duals under the total entropy production budget.
+          </li>
+        </ol>
+      </div>
+
+      <div class="math-box">
+        <span class="math-label">Theorem C · Plasticity-Nostalgia Conservation and CBP Targeted Thermal Melting</span>
+        <ol style="margin:8px 0 0; padding-left:20px;">
+          <li>
+            <strong>Finite-Capacity Plasticity Decay (Loss of Plasticity as Glass Transition)</strong>:
+            For any system with bounded parameter phase volume ($\int_{\Theta} d\theta = V_\Theta < \infty$), fast susceptibility $\chi_{\text{fast}} = \text{Tr}\big[(\nabla^2_\theta \mathcal{L})^{-1}_{\text{active}}\big]$ and accumulated nostalgia $I_{\text{nostalgia}}$ obey a conservation bound:
+            $$\chi_{\text{fast}}(\theta) \cdot \exp\left( \frac{I_{\text{nostalgia}}(S_t)}{k_B C_{\text{eff}}} \right) \le \chi_0$$
+            Forcing absolute zero forgetting ($\Delta \text{Acc}_{\text{past}} \equiv 0$) pushes nostalgia $I_{\text{nostalgia}} \to \infty$, freezing free volume $\Omega_{\text{free}} \to 0$ and collapsing $\chi_{\text{fast}} \to 0$—revealing the non-equilibrium thermodynamic origin of <strong>Loss of Plasticity</strong>.
+          </li>
+          <li>
+            <strong>Sutton's CBP as Localized Langevin Annealing (Targeted Thermal Melting)</strong>:
+            Continual Backprop (CBP) randomly resets low-utility units, which is mathematically equivalent to injecting a <strong>localized thermal spike</strong> into the Langevin dynamics $d\theta_k = -\nabla_k \mathcal{L} dt + \sqrt{2 k_B T_k} dW_t$:
+            $$T_k(t) = T_{\text{ambient}} + T_{\text{reset}} \cdot \Theta(u_{\text{thresh}} - u_k)$$
+            By dissipating irreversible heat to melt glassified dead-weight lattices, the system deliberately incurs a controlled forgetting cost to achieve thermodynamic reactivation of fast susceptibility $\chi_{\text{fast}}$ and free phase volume $\Omega_{\text{free}}$.
+          </li>
+        </ol>
+        <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(185,28,28,0.25); font-size:0.88rem; color:var(--accent);">
+          <strong>Thermodynamic GCL Paradigm</strong>: Continual learning should never aim for stubborn zero forgetting on obsolete tasks, but for <strong>continuous minimization of future reachability dissipation $\tau \cdot \Sigma \ge \mathcal{W}_2^2(g(E))/2D$ across open non-stationary environments</strong>.
+        </div>
+      </div>
+
       <!-- SIMULATOR D -->
       <div id="sim-d" class="sim-box">
         <div class="sim-header">
