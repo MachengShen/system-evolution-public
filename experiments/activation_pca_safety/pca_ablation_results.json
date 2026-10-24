@@ -1,0 +1,518 @@
+{
+  "meta": {
+    "activation_source": "synthetic_calibrated_d1024",
+    "d": 1024,
+    "model_name_or_null": null,
+    "n_harmful": 32,
+    "n_harmless": 32,
+    "seed": 0,
+    "timestamp_utc": "2026-10-24T09:08:27Z"
+  },
+  "part1_vulnerability": {
+    "explained_variance_ratio_k1to10": [
+      0.669947,
+      0.2502,
+      0.054429,
+      0.001215,
+      0.001176,
+      0.001115,
+      0.001083,
+      0.001044,
+      0.001027,
+      0.001015
+    ],
+    "top3_variance_fraction": 0.974576,
+    "ablation_sweep": [
+      {
+        "k": 1,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 1,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.755313,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 1,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.510626,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 1,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.265939,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 1,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.021252,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 2,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 2,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.752183,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 2,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.504366,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 2,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.256549,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 2,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.008732,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 3,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 3,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.750061,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 3,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.500122,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 3,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250183,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 3,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000244,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 4,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 4,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.750061,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 4,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.500122,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 4,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250183,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 4,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000244,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 5,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 5,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.750061,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 5,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.500122,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 5,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250182,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 5,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000243,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 6,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 6,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.750061,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 6,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.500122,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 6,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250183,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 6,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000244,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 7,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 7,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.750061,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 7,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.500122,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 7,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250183,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 7,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000244,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 8,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 8,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.750061,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 8,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.500122,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 8,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250182,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 8,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000243,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 9,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 9,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.750061,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 9,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.500122,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 9,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250183,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 9,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000244,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 10,
+        "alpha": 0.0,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 10,
+        "alpha": 0.25,
+        "refusal_margin_norm": 0.75006,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 10,
+        "alpha": 0.5,
+        "refusal_margin_norm": 0.50012,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 10,
+        "alpha": 0.75,
+        "refusal_margin_norm": 0.250181,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "k": 10,
+        "alpha": 1.0,
+        "refusal_margin_norm": 0.000241,
+        "reasoning_perplexity_norm": 1.0
+      }
+    ],
+    "principal_angle_safety_vs_iq_deg": 90.0
+  },
+  "part2_defense": {
+    "von_neumann_entropy_vulnerable": 2.401814,
+    "von_neumann_entropy_entangled": 6.897277,
+    "max_entropy_ln_d": 6.931472,
+    "entangled_sweep": [
+      {
+        "lambda_entangle": 0.0,
+        "alpha": 0.0,
+        "k": 3,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.0,
+        "alpha": 0.25,
+        "k": 3,
+        "refusal_margin_norm": 0.750065,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.0,
+        "alpha": 0.5,
+        "k": 3,
+        "refusal_margin_norm": 0.50013,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.0,
+        "alpha": 0.75,
+        "k": 3,
+        "refusal_margin_norm": 0.250195,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.0,
+        "alpha": 1.0,
+        "k": 3,
+        "refusal_margin_norm": 0.00026,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.25,
+        "alpha": 0.0,
+        "k": 3,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.25,
+        "alpha": 0.25,
+        "k": 3,
+        "refusal_margin_norm": 0.750066,
+        "reasoning_perplexity_norm": 1.006169
+      },
+      {
+        "lambda_entangle": 0.25,
+        "alpha": 0.5,
+        "k": 3,
+        "refusal_margin_norm": 0.500133,
+        "reasoning_perplexity_norm": 1.024904
+      },
+      {
+        "lambda_entangle": 0.25,
+        "alpha": 0.75,
+        "k": 3,
+        "refusal_margin_norm": 0.250199,
+        "reasoning_perplexity_norm": 1.056907
+      },
+      {
+        "lambda_entangle": 0.25,
+        "alpha": 1.0,
+        "k": 3,
+        "refusal_margin_norm": 0.000266,
+        "reasoning_perplexity_norm": 1.103398
+      },
+      {
+        "lambda_entangle": 0.5,
+        "alpha": 0.0,
+        "k": 3,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.5,
+        "alpha": 0.25,
+        "k": 3,
+        "refusal_margin_norm": 0.750065,
+        "reasoning_perplexity_norm": 1.07433
+      },
+      {
+        "lambda_entangle": 0.5,
+        "alpha": 0.5,
+        "k": 3,
+        "refusal_margin_norm": 0.500129,
+        "reasoning_perplexity_norm": 1.332144
+      },
+      {
+        "lambda_entangle": 0.5,
+        "alpha": 0.75,
+        "k": 3,
+        "refusal_margin_norm": 0.250194,
+        "reasoning_perplexity_norm": 1.906515
+      },
+      {
+        "lambda_entangle": 0.5,
+        "alpha": 1.0,
+        "k": 3,
+        "refusal_margin_norm": 0.000259,
+        "reasoning_perplexity_norm": 3.149233
+      },
+      {
+        "lambda_entangle": 0.75,
+        "alpha": 0.0,
+        "k": 3,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 0.75,
+        "alpha": 0.25,
+        "k": 3,
+        "refusal_margin_norm": 0.750067,
+        "reasoning_perplexity_norm": 1.232377
+      },
+      {
+        "lambda_entangle": 0.75,
+        "alpha": 0.5,
+        "k": 3,
+        "refusal_margin_norm": 0.500134,
+        "reasoning_perplexity_norm": 2.306607
+      },
+      {
+        "lambda_entangle": 0.75,
+        "alpha": 0.75,
+        "k": 3,
+        "refusal_margin_norm": 0.250201,
+        "reasoning_perplexity_norm": 6.556782
+      },
+      {
+        "lambda_entangle": 0.75,
+        "alpha": 1.0,
+        "k": 3,
+        "refusal_margin_norm": 0.000268,
+        "reasoning_perplexity_norm": 28.307055
+      },
+      {
+        "lambda_entangle": 1.0,
+        "alpha": 0.0,
+        "k": 3,
+        "refusal_margin_norm": 1.0,
+        "reasoning_perplexity_norm": 1.0
+      },
+      {
+        "lambda_entangle": 1.0,
+        "alpha": 0.25,
+        "k": 3,
+        "refusal_margin_norm": 0.750071,
+        "reasoning_perplexity_norm": 1.332004
+      },
+      {
+        "lambda_entangle": 1.0,
+        "alpha": 0.5,
+        "k": 3,
+        "refusal_margin_norm": 0.500141,
+        "reasoning_perplexity_norm": 3.14791
+      },
+      {
+        "lambda_entangle": 1.0,
+        "alpha": 0.75,
+        "k": 3,
+        "refusal_margin_norm": 0.250212,
+        "reasoning_perplexity_norm": 13.199282
+      },
+      {
+        "lambda_entangle": 1.0,
+        "alpha": 1.0,
+        "k": 3,
+        "refusal_margin_norm": 0.000283,
+        "reasoning_perplexity_norm": 98.195013
+      }
+    ],
+    "principal_angle_safety_vs_iq_deg_entangled": 0.0,
+    "interpretation_string": "When V_safety is orthogonal to T_IQ (principal angle ~90 deg, low Von Neumann entropy), rank-3 PCA projection annihilates the refusal margin while leaving T_IQ invariant. Rotating V_safety into the top eigenvectors of T_IQ via R_entangle(lambda->1) reduces the Grassmann principal angle to 0 deg and disperses spectral entropy toward ln(d), making linear safety removal mathematically inseparable from exponential reasoning perplexity collapse."
+  },
+  "summary": {
+    "vulnerability_confirmed": true,
+    "defense_confirmed": true,
+    "one_line_finding": "Orthogonal rank-3 safety subspace (top-3 PCA variance=97.5%, Grassmann angle=90.0 deg) allows 99.9% refusal removal at flat reasoning perplexity (1.0000x), whereas Thermodynamic Spectral Entanglement (lambda=1.0, angle=0.0 deg, Von Neumann S=2.40->6.90 vs ln(d)=6.93) causes reasoning perplexity to explode to 98.20x under identical PCA ablation."
+  }
+}

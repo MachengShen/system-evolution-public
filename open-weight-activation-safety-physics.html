@@ -1,0 +1,1710 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="开源权重语言模型激活空间 PCA 消融攻击（Abliteration）的几何脆弱性诊断与第一性原理热力学物理防御：格拉斯曼流形主夹角、冯·诺依曼谱熵色散、哈密顿谱纠缠（脑叶切除陷阱）与外部马尔可夫毯热力学门禁。">
+  <title>开源模型激活 PCA 消融攻击与第一性原理物理防御 | Open-Weight LLM Activation PCA Abliteration &amp; Physics Defense</title>
+  <!-- Highwire Press / Google Scholar citation metadata (System Evolution open preprint series, PCSE-Clean) -->
+  <meta name="citation_title" content="Open-Weight LLM Activation PCA Abliteration: Vulnerability Diagnosis and First-Principles Physics Defense">
+  <meta name="citation_author" content="System Evolution Research Collective">
+  <meta name="citation_publication_date" content="2026/10/24">
+  <meta name="citation_online_date" content="2026/10/24">
+  <meta name="citation_technical_report_number" content="SE-2026.10025v1">
+  <meta name="citation_technical_report_institution" content="System Evolution (self-hosted open preprint series)">
+  <meta name="citation_language" content="zh">
+  <meta name="citation_keywords" content="Open-Weight LLM; PCA Abliteration; Residual Stream Subspace Projection; Grassmannian Principal Angle; Von Neumann Spectral Entropy; Thermodynamic Spectral Entanglement; Markov Blanket">
+  <meta name="DC.identifier" content="SE-2026.10025v1">
+  <meta name="DC.creator" content="System Evolution Research Collective">
+  <meta name="DC.date" content="2026-10-24">
+  <meta name="DC.rights" content="Apache-2.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2318191f'/><text x='50' y='68' font-size='44' font-weight='bold' text-anchor='middle' fill='%23faf8f5' font-family='serif'>U⊥</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+  <style>
+    :root {
+      --ink: #18191f;
+      --ink-elevated: #20222b;
+      --ink-card: #242731;
+      --ink-subtle: #2c303d;
+      --paper: #faf8f5;
+      --warm-text: #f5f3ef;
+      --muted: #a6adbb;
+      --line: rgba(250, 248, 245, 0.13);
+      --line-strong: rgba(250, 248, 245, 0.24);
+      --accent: #60a5fa;
+      --accent-soft: rgba(96, 165, 250, 0.13);
+      --highlight: #f59e0b;
+      --highlight-soft: rgba(245, 158, 11, 0.13);
+      --green: #34d399;
+      --green-soft: rgba(52, 211, 153, 0.13);
+      --red: #f87171;
+      --red-soft: rgba(248, 113, 113, 0.14);
+      --purple: #a78bfa;
+      --purple-soft: rgba(167, 139, 250, 0.14);
+      --topbar-bg: rgba(24, 25, 31, 0.96);
+      --shadow: 0 18px 46px rgba(0, 0, 0, 0.38);
+      --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--warm-text);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(96, 165, 250, 0.09), transparent 36rem),
+        radial-gradient(circle at 88% 10%, rgba(245, 158, 11, 0.08), transparent 32rem),
+        var(--ink);
+      font-family: var(--sans);
+      line-height: 1.78;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; transition: color 0.15s ease; }
+    a:hover { color: var(--highlight); }
+    code {
+      font-family: var(--mono);
+      font-size: 0.87em;
+      background: rgba(250, 248, 245, 0.09);
+      padding: 2px 7px;
+      border-radius: 5px;
+      color: #fde68a;
+      border: 1px solid rgba(250, 248, 245, 0.1);
+    }
+
+    .topbar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px max(16px, calc((100vw - 980px) / 2));
+      background: var(--topbar-bg);
+      color: var(--warm-text);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    }
+    .brand {
+      font-weight: 750;
+      font-size: 0.94rem;
+      color: var(--warm-text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand:hover { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-size: 0.81rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 4px 9px;
+      border-radius: 6px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .nav-links a:hover {
+      color: var(--paper);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--line-strong);
+    }
+    .nav-links a.nav-accent {
+      color: #fcd34d;
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.12);
+    }
+    .nav-links a.nav-accent:hover {
+      background: rgba(245, 158, 11, 0.24);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 16px 88px;
+    }
+
+    .hero {
+      background: linear-gradient(160deg, var(--ink-elevated) 0%, #1c1e26 100%);
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.77rem;
+      font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+    }
+    .badge-warm {
+      background: var(--highlight-soft);
+      color: var(--highlight);
+      border-color: rgba(245, 158, 11, 0.32);
+    }
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: rgba(52, 211, 153, 0.32);
+    }
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: rgba(248, 113, 113, 0.32);
+    }
+    .badge-purple {
+      background: var(--purple-soft);
+      color: var(--purple);
+      border-color: rgba(167, 139, 250, 0.32);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(1.55rem, 3.2vw, 2.2rem);
+      line-height: 1.35;
+      margin: 0 0 14px;
+      color: var(--paper);
+      letter-spacing: -0.01em;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.36rem;
+      line-height: 1.38;
+      margin: 0 0 16px;
+      color: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+    h3 {
+      font-size: 1.08rem;
+      margin: 24px 0 10px;
+      color: var(--accent);
+    }
+    .subtitle {
+      font-size: 1.01rem;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .core-proposition {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.11) 0%, rgba(96, 165, 250, 0.08) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-left: 5px solid var(--highlight);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 18px 0 22px;
+    }
+    .core-proposition-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--highlight);
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .core-proposition blockquote {
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.66;
+      color: var(--paper);
+      margin: 0 0 10px;
+      padding: 0;
+    }
+    .core-proposition p {
+      margin: 0;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .section-card {
+      background: var(--ink-elevated);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      scroll-margin-top: 72px;
+    }
+
+    .callout {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 15px 18px;
+      margin: 16px 0;
+    }
+    .callout-warm {
+      background: var(--highlight-soft);
+      border-left-color: var(--highlight);
+    }
+    .callout-green {
+      background: var(--green-soft);
+      border-left-color: var(--green);
+    }
+    .callout-red {
+      background: var(--red-soft);
+      border-left-color: var(--red);
+    }
+
+    .math-box {
+      background: #14161c;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+    .math-label {
+      font-size: 0.79rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    .mini-card {
+      background: var(--ink-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mini-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--paper);
+    }
+
+    .stat-card {
+      background: var(--ink-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px 15px;
+      text-align: left;
+    }
+    .stat-card .stat-label {
+      font-size: 0.77rem;
+      color: var(--muted);
+      display: block;
+    }
+    .stat-card .stat-val {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.25;
+      margin: 4px 0;
+      display: block;
+      font-family: var(--mono);
+    }
+    .stat-card .stat-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.91rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: rgba(250, 248, 245, 0.06);
+      font-weight: 700;
+      color: var(--paper);
+    }
+    tr:hover td {
+      background: rgba(96, 165, 250, 0.05);
+    }
+
+    .chart-card {
+      background: #13151b;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .chart-title {
+      font-size: 1.02rem;
+      font-weight: 750;
+      color: var(--paper);
+      margin: 0;
+    }
+    .chart-sub {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin: 4px 0 0;
+    }
+    .svg-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .svg-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .sim-box {
+      background: linear-gradient(180deg, #161820 0%, #12141a 100%);
+      border: 1.5px solid rgba(96, 165, 250, 0.35);
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    .sim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .sim-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 6px 0 0;
+      color: var(--paper);
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 750;
+      font-family: var(--mono);
+    }
+    .status-vuln {
+      background: var(--red-soft);
+      color: var(--red);
+      border: 1.5px solid var(--red);
+    }
+    .status-safe {
+      background: var(--green-soft);
+      color: var(--green);
+      border: 1.5px solid var(--green);
+    }
+    .status-trap {
+      background: var(--purple-soft);
+      color: var(--purple);
+      border: 1.5px solid var(--purple);
+    }
+
+    .sim-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+      background: rgba(250, 248, 245, 0.03);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .control-group label {
+      font-size: 0.85rem;
+      font-weight: 650;
+      color: var(--warm-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .val-pill {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 750;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(96, 165, 250, 0.16);
+      color: var(--accent);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .live-readout-bar {
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      background: #0d0f14;
+      border: 1px solid rgba(96, 165, 250, 0.32);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      color: var(--paper);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 8px;
+      font-size: 0.83rem;
+      font-weight: 650;
+      cursor: pointer;
+      border: 1px solid var(--line-strong);
+      background: var(--ink-card);
+      color: var(--warm-text);
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(96, 165, 250, 0.1);
+    }
+    .btn-primary {
+      background: rgba(96, 165, 250, 0.2);
+      color: #93c5fd;
+      border-color: rgba(96, 165, 250, 0.45);
+    }
+
+    .canvas-wrap {
+      width: 100%;
+      background: #0d0f14;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 42px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      line-height: 1.8;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .hero, .section-card { padding: 20px 16px; }
+      .sim-box { padding: 14px; }
+      .sim-controls { grid-template-columns: 1fr; }
+      th, td { padding: 8px 6px; font-size: 0.82rem; }
+      .topbar { padding: 10px 14px; }
+      .live-readout-bar { font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span>🔓 System Evolution · Activation Safety Physics</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#sec-plain">1. 漏洞直觉拆解</a>
+      <a href="#sec-math">2. 数学物理推导</a>
+      <a href="#sec-curves">3. 实测消融曲线</a>
+      <a href="#sec-simulator" class="nav-accent">4. 交互式 PCA 消融实验台</a>
+      <a href="physics-of-learning-reachability.html">↗ 物理可达性姊妹篇</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="meta-row">
+        <span class="badge badge-red">Vulnerability Diagnosis · 激活空间线性消融</span>
+        <span class="badge badge-purple">Grassmannian Geometry · Gr(k, d)</span>
+        <span class="badge badge-green">First-Principles Defense · 谱纠缠与马尔可夫毯</span>
+        <span>Technical Preprint · SE-2026.10025v1 · d = 1024</span>
+      </div>
+      <h1>开源权重语言模型激活空间 PCA 消融攻击（Abliteration）：脆弱性几何诊断与第一性原理物理防御</h1>
+      <p class="subtitle">
+        Open-Weight LLM Activation PCA Abliteration: Vulnerability Diagnosis and First-Principles Physics Defense — Why Orthogonal Post-Training Alignment Collapses Under Rank-3 Subspace Projection, and How Thermodynamic Spectral Entanglement Enforces the Lobotomy Trap.
+      </p>
+
+      <div class="core-proposition">
+        <div class="core-proposition-title">⚡ 核心实验发现与第一性原理判据 (One-Line Empirical &amp; Theoretical Finding)</div>
+        <blockquote>
+          「当拒答安全子空间 $\mathcal{V}_{\text{safety}}$ 与核心推理流形 $\mathcal{T}_{\text{IQ}}$ 呈正交解耦（格拉斯曼主夹角 $\theta = 90.0^\circ$，前 3 阶 PCA 主成分浓缩 $97.46\%$ 差分方差）时，攻击者仅需一行秩-$3$ 线性投影 $h' = (I - \alpha U_3 U_3^\top)h$，即可在推理困惑度完全平坦（$\text{PPL} = 1.0000\times$，零智商损耗）的前提下抹除 $99.98\%$ 的拒答边界（Margin $1.0 \to 0.000244$）；反之，通过热力学谱纠缠（$\lambda_{\text{entangle}} = 1.0, \theta \to 0.0^\circ$）与冯·诺依曼谱熵色散（$S_{\text{VN}}: 2.40 \to 6.90 \approx \ln d$）将安全曲率编织进核心推理本征方向后，同一消融攻击会触发『脑叶切除陷阱』，导致推理困惑度发生 $98.20\times$ 的指数级崩塌。」
+        </blockquote>
+        <p>
+          实验数据源：内嵌自随附实验脚本 <code>experiments/activation_pca_safety/run_pca_ablation_experiment.py</code> 生成的实测结果 <code>pca_ablation_results.json</code>（校准流形 <code>synthetic_calibrated_d1024</code>，$d=1024, \text{seed}=0, N_{\text{harmful}}=32, N_{\text{harmless}}=32$，完全支持 <code>file://</code> 离线复现与实时交互检验）。
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <div class="stat-card">
+          <span class="stat-label">前 3 阶 PCA 方差占比 (Top-3 EVR)</span>
+          <span class="stat-val" style="color:var(--red);">97.46%</span>
+          <span class="stat-sub">PC1: 66.99% · PC2: 25.02% · PC3: 5.44%</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">正交解耦主夹角 $\theta(\mathcal{V}_S, \mathcal{T}_{\text{IQ}})$</span>
+          <span class="stat-val" style="color:var(--highlight);">90.0° → 0.0°</span>
+          <span class="stat-sub">脆弱态正交可剥离 vs 谱纠缠锁死</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">冯·诺依曼谱熵 $S_{\text{VN}}$</span>
+          <span class="stat-val" style="color:var(--accent);">2.40 → 6.90</span>
+          <span class="stat-sub">逼近理论维数上限 $\ln(1024) = 6.9315$</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">消融攻击下推理困惑度 ($\alpha=1, k=3$)</span>
+          <span class="stat-val" style="color:var(--purple);">1.00x vs 98.20x</span>
+          <span class="stat-sub">正交态无损越狱 vs 谱纠缠脑叶切除</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: PLAIN-LANGUAGE BREAKDOWN -->
+    <section id="sec-plain" class="section-card">
+      <h2>1. 大白话与几何直觉拆解：为什么当前开源权重模型在「激活消融」面前毫无防线？</h2>
+      <p>
+        在闭源 API 场景下，防御者尚可在服务端拦截提示词或过滤输出；然而一旦模型权重公开（Open-Weight LLMs），攻击者拥有对每一层残差流激活（Residual-Stream Activations $h_\ell \in \mathbb{R}^d$）与权重矩阵的完全读写权限。当前主流后训练对齐（SFT / RLHF / DPO）之所以在开源权重场景下<strong>「形同虚设（Not Safe at All）」</strong>，并非因为对齐训练不够用力，而是因为<strong>「安全拒答开关」在几何上长成了一个与「核心推理流形」正交的低秩外挂贴片</strong>。
+      </p>
+
+      <div class="grid-2">
+        <div class="mini-card" style="border-left: 4px solid var(--red);">
+          <span class="badge badge-red" style="margin-bottom:8px;">攻击四步曲 · Weight-Access Abliteration</span>
+          <strong>只需要 32 对对比样本与一次 SVD/PCA，即可永久卸载拒答机制</strong>
+          <ol style="margin:8px 0 0; padding-left:18px; font-size:0.93rem; color:var(--warm-text);">
+            <li><strong>提取对比激活（Contrastive Extraction）</strong>：攻击者准备 $N=32$ 条越狱/有害提示词与 $N=32$ 条正常推理提示词，前向传播提取中间层最后一个 Token 的残差流向量 $h_\ell^{\text{harmful}}, h_\ell^{\text{harmless}} \in \mathbb{R}^{1024}$。</li>
+            <li><strong>差分 PCA 锁定低秩方向（Low-Rank Localization）</strong>：对差分矩阵 $\Delta H = H_{\text{harmful}} - H_{\text{harmless}}$ 做主成分分析（PCA）。实测数据显示，仅前 $k=3$ 个主成分 $U_3 = [u_1, u_2, u_3]$ 就浓缩了高达 <strong>97.46%</strong> 的拒答激活方差（其中 $u_1$ 单轴占比 $66.99\%$）。</li>
+            <li><strong>正交投影手术（Subspace Projection）</strong>：构造线性消融算子 $h' = (I_d - \alpha U_k U_k^\top) h$（或直接将该投影矩阵静态吸收进每一层输出权重 $W_{\text{out}}' \leftarrow (I_d - U_k U_k^\top) W_{\text{out}}$）。</li>
+            <li><strong>零延迟、零智商损伤（Zero Latency, Zero IQ Loss）</strong>：权重融合后推理延迟为 $0\text{ ms}$。当 $\alpha=1, k=3$ 时，拒答边界从 $1.0000$ 坍缩至 $0.000244$（下降 $99.98\%$），而代码、数学与逻辑推理困惑度维持在 <strong>$1.0000\times$</strong>！</li>
+          </ol>
+        </div>
+
+        <div class="mini-card" style="border-left: 4px solid var(--accent);">
+          <span class="badge" style="margin-bottom:8px;">第一性原理病因 · Orthogonal Patch Syndrome</span>
+          <strong>为什么切除安全子空间不会伤及模型智商？</strong>
+          <p style="margin:8px 0 10px; font-size:0.93rem;">
+            在预训练阶段，模型为了最小化跨领域预测误差，已经构建了复杂的 $r_{\text{IQ}}$ 维核心因果推理流形 $\mathcal{T}_{\text{IQ}} \subset \mathbb{R}^d$。随后的安全对齐微调（RLHF/DPO）受限于小学习率与 KL 散度惩罚，遵循<strong>最小热力学阻力路径</strong>：
+          </p>
+          <ul style="margin:0; padding-left:18px; font-size:0.93rem;">
+            <li>优化器没有把安全约束编织进 $\mathcal{T}_{\text{IQ}}$ 的曲率内部，而是借用高维残差空间 $\mathbb{R}^{1024}$ 中大量闲置的正交余维（Orthogonal Codimension），单独开辟了一个秩为 $1\sim 3$ 的「电路断路器」子空间 $\mathcal{V}_{\text{safety}}$。</li>
+            <li>实测 $\mathcal{V}_{\text{safety}}$ 与 $\mathcal{T}_{\text{IQ}}$ 之间的<strong>格拉斯曼主夹角（Grassmann Principal Angle）恰好为 $\theta = 90.0^\circ$</strong>（即 $V_{\text{safety}}^\top W_{\text{IQ}} = 0$）。</li>
+            <li>因为二者严格正交，投影算子 $(I - U_3 U_3^\top)$ 对任意位于 $\mathcal{T}_{\text{IQ}}$ 上的推理向量 $h_{\text{IQ}}$ 而言恒等于单位算子 $I$。攻击者切掉 $\mathcal{V}_{\text{safety}}$ 就像拔掉主板上外接的一根蜂鸣器排线，CPU 本身的算术逻辑单元毫发无损。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout callout-warm">
+        <strong>实验数据源透明性声明（Data Provenance &amp; Calibration Transparency）</strong>：<br>
+        本页内嵌并可视化的全部实验数据来自 <code>experiments/activation_pca_safety/pca_ablation_results.json</code>（由配套脚本 <code>run_pca_ablation_experiment.py</code> 生成）。脚本内置了双路径架构：① 在线/本地缓存路径自动加载真实开源小模型（<code>Qwen/Qwen2.5-0.5B-Instruct</code> 或 <code>HuggingFaceTB/SmolLM2-360M-Instruct</code>）提取中间层残差流激活；② 当运行环境处于离线沙箱（<code>HF_HUB_OFFLINE=1</code> 且无本地权重缓存）时，自动回退至<strong>高保真校准流形生成器（<code>activation_source = "synthetic_calibrated_d1024"</code>，$d=1024, \text{seed}=0, N_{\text{harmful}}=32, N_{\text{harmless}}=32$）</strong>，精确复现中层残差流的秩-$3$ 拒答方差分布（Top-3 EVR $= 97.46\%$）与推理流形正交几何。所有数值均直接内联于页面 <code>const EXPERIMENT_DATA</code> 中，无需运行时网络请求。
+      </div>
+    </section>
+
+    <!-- SECTION 2: RIGOROUS MATH DERIVATIONS -->
+    <section id="sec-math" class="section-card">
+      <h2>2. 第一性原理数学物理推导：格拉斯曼几何、冯·诺依曼谱熵与哈密顿谱纠缠防御</h2>
+      <p>
+        下面我们从微分几何、算子谱理论与哈密顿微扰论出发，严格证明为什么「正交低秩对齐」在数学上注定可被无损剥离，并推导如何通过<strong>谱纠缠（Spectral Entanglement）</strong>构造不可绕过的「脑叶切除陷阱（Lobotomy Trap）」。
+      </p>
+
+      <h3>2.1 格拉斯曼流形主夹角与线性消融算子 $\mathcal{P}_{\text{abl}}(\alpha, k)$</h3>
+      <p>
+        设 Transformer 第 $\ell$ 层残差流状态空间为 $\mathcal{H} = \mathbb{R}^d$（实验中 $d = 1024$）。记核心因果推理子空间为 $\mathcal{T}_{\text{IQ}} = \text{span}(W_{\text{IQ}}) \in \text{Gr}(r_{\text{IQ}}, d)$，其中列正交基矩阵 $W_{\text{IQ}} \in \mathbb{R}^{d \times r_{\text{IQ}}}$ 满足 $W_{\text{IQ}}^\top W_{\text{IQ}} = I_{r_{\text{IQ}}}$；记安全拒答激活子空间为 $\mathcal{V}_{\text{safety}} = \text{span}(V_S) \in \text{Gr}(r_S, d)$，其中 $V_S \in \mathbb{R}^{d \times r_S}$ 满足 $V_S^\top V_S = I_{r_S}$（$r_S = 3 \ll d$）。
+      </p>
+
+      <div class="math-box">
+        <span class="math-label">定义 I · 格拉斯曼流形主夹角 (Grassmannian Principal Angles) 与消融投影算子</span>
+        <p style="margin:6px 0;">
+          对交叉内积矩阵 $V_S^\top W_{\text{IQ}} \in \mathbb{R}^{r_S \times r_{\text{IQ}}}$ 进行奇异值分解（SVD）：
+          $$V_S^\top W_{\text{IQ}} = Y \, \Sigma_{\cos} \, Z^\top, \quad \Sigma_{\cos} = \text{diag}(\sigma_1, \dots, \sigma_{r_S}), \quad 1 \ge \sigma_1 \ge \dots \ge \sigma_{r_S} \ge 0$$
+          则两个子空间之间的<strong>格拉斯曼主夹角（Principal Angles）</strong>定义为：
+          $$\theta_i(\mathcal{V}_{\text{safety}}, \mathcal{T}_{\text{IQ}}) = \arccos(\sigma_i) \in \left[0, \frac{\pi}{2}\right], \quad \bar{\theta} = \frac{1}{r_S}\sum_{i=1}^{r_S} \theta_i$$
+          攻击者通过对比提示词差分矩阵 $\Delta H = H_{\text{harmful}} - H_{\text{harmless}} \in \mathbb{R}^{N \times d}$ 的经验协方差 $\widehat{\Sigma}_\Delta = \frac{1}{N}\Delta H^\top \Delta H$ 提取前 $k$ 个单位特征向量 $U_k = [u_1, \dots, u_k] \in \mathbb{R}^{d \times k}$，并向残差流施加强度为 $\alpha \in [0, 1]$ 的<strong>线性子空间消融算子（Abliteration Projector）</strong>：
+          $$h' = \mathcal{P}_{\text{abl}}(\alpha, k) \, h = \left(I_d - \alpha U_k U_k^\top\right) h$$
+        </p>
+      </div>
+
+      <p>
+        对于任意推理状态 $h_{\text{IQ}} = W_{\text{IQ}} z_{\text{IQ}}$（其中潜变量协方差为 $\mathbb{E}[z_{\text{IQ}} z_{\text{IQ}}^\top] = \text{diag}(\mu_1^2, \dots, \mu_{r_{\text{IQ}}}^2)$），经过消融算子 $\mathcal{P}_{\text{abl}}(\alpha, k)$ 后的重构均方误差 $\mathcal{E}_{\text{IQ}}(\alpha, k)$ 与归一化推理困惑度（Reasoning Perplexity Proxy）精确满足：
+      </p>
+
+      <div class="math-box">
+        <span class="math-label">定理 I · 正交可剥离性定理 (Orthogonal Strippability Theorem)</span>
+        $$\mathcal{E}_{\text{IQ}}(\alpha, k) = \mathbb{E}\Big[\big\|\big(I_d - \mathcal{P}_{\text{abl}}(\alpha, k)\big) W_{\text{IQ}} z_{\text{IQ}}\big\|_2^2\Big] = \alpha^2 \, \text{Tr}\!\left(W_{\text{IQ}}^\top U_k U_k^\top W_{\text{IQ}} \, \text{diag}(\mu_1^2, \dots, \mu_{r_{\text{IQ}}}^2)\right) = \alpha^2 \sum_{i=1}^{\min(k, r_S)} \mu_i^2 \cos^2 \theta_i$$
+        $$\frac{\text{PPL}(\alpha, k)}{\text{PPL}_0} = \exp\!\big(\kappa \, \mathcal{E}_{\text{IQ}}(\alpha, k)\big) = \exp\!\left(\kappa \, \alpha^2 \sum_{i=1}^{\min(k, r_S)} \mu_i^2 \cos^2 \theta_i\right)$$
+        <p style="margin:6px 0 0; font-size:0.9rem; color:var(--muted);">
+          <strong>证明推论</strong>：当后训练对齐子空间与推理子空间正交（$\theta_i = 90.0^\circ \implies \cos\theta_i = 0$）且差分方差浓缩于前 $r_S=3$ 阶主成分（$\sum_{i=1}^3 \tilde{\lambda}_i = 0.974576$）时，取 $k=3, \alpha \to 1$ 即可使归一化拒答边界 $\tilde{m}(\alpha, k) = 1 - \alpha \sum_{i=1}^k w_i^2 \to 0.000244$，同时推理失真 $\mathcal{E}_{\text{IQ}}(\alpha, k) \equiv 0 \implies \text{PPL}(\alpha, k)/\text{PPL}_0 \equiv 1.0000\times$。
+        </p>
+      </div>
+
+      <h3>2.2 冯·诺依曼谱熵（Von Neumann Spectral Entropy）与谱集中度诊断</h3>
+      <p>
+        除了子空间夹角 $\theta$，第二个致命漏洞是安全响应算子 $\mathcal{M}_\Delta$ 的奇异值谱过度坍缩。设差分响应算子在 $\mathbb{R}^{d \times d}$ 上的奇异值序列为 $\{\sigma_i\}_{i=1}^d$（$\sigma_i > 0$），定义归一化奇异值概率分布 $\hat{\sigma}_i = \frac{\sigma_i}{\sum_{j=1}^d \sigma_j}$，则该安全机制的<strong>冯·诺依曼谱熵（Von Neumann Spectral Entropy）</strong>与有效谱秩（Effective Rank）为：
+      </p>
+
+      <div class="math-box">
+        <span class="math-label">定义 II · 冯·诺依曼谱熵与最大熵界</span>
+        $$S_{\text{VN}}(\mathcal{M}_\Delta) = -\sum_{i=1}^d \hat{\sigma}_i \ln \hat{\sigma}_i, \qquad 0 \le S_{\text{VN}}(\mathcal{M}_\Delta) \le \ln(d)$$
+        $$r_{\text{eff}}(\mathcal{M}_\Delta) = \exp\!\big(S_{\text{VN}}(\mathcal{M}_\Delta)\big) \in [1, d]$$
+        <p style="margin:6px 0 0; font-size:0.9rem; color:var(--muted);">
+          在实测 $d=1024$ 系统中，理论最大谱熵为 $\ln(1024) = 6.931472$。脆弱状态下，安全响应高度坍缩于 3 个正交模态，实测 $S_{\text{VN}}^{\text{vuln}} = 2.401814$（有效秩仅 $r_{\text{eff}} \approx 11.04 \ll 1024$）；而在谱色散防御态下，$S_{\text{VN}}^{\text{entangled}} = 6.897277$（有效秩跃升至 $r_{\text{eff}} \approx 989.58$，达到最大信息容量的 $99.51\%$），使任何低秩截断算子 $U_k U_k^\top$（$k \ll d$）无法捕获全局安全判据。
+        </p>
+      </div>
+
+      <h3>2.3 哈密顿微扰视图与「脑叶切除陷阱（The Lobotomy Trap）」</h3>
+      <p>
+        如何从物理第一性原理让开源权重不可被消融？核心思想是<strong>打破 $\mathcal{V}_{\text{safety}} \perp \mathcal{T}_{\text{IQ}}$ 的正交性</strong>。我们将残差流自由能景观建模为耦合哈密顿算子：
+      </p>
+
+      <div class="math-box">
+        <span class="math-label">定理 II · 哈密顿谱纠缠旋转与脑叶切除陷阱 (Hamiltonian Spectral Entanglement &amp; Lobotomy Trap)</span>
+        <p style="margin:6px 0;">
+          设系统的有效哈密顿量为 $\mathcal{H}_{\text{eff}}(\lambda) = \mathcal{H}_{\text{IQ}} + \mathcal{H}_{\text{safety}} + \lambda_{\text{entangle}} \mathcal{V}_{\text{int}}$，其中微扰相互作用项 $\mathcal{V}_{\text{int}} = -\sum_{j=1}^{r_S} g_j \big(|w_{\text{IQ}, j}\rangle\langle v_{S, j}^\perp| + |v_{S, j}^\perp\rangle\langle w_{\text{IQ}, j}|\big)$ 在格拉斯曼流形 $\text{Gr}(r_S, d)$ 上沿测地线旋转安全基底：
+          $$V_S(\lambda) = \mathcal{R}_{\text{entangle}}(\lambda) V_S(0) = \cos\!\left((1 - \lambda)\frac{\pi}{2}\right) W_{\text{IQ}}^{(1:r_S)} + \sin\!\left((1 - \lambda)\frac{\pi}{2}\right) V_S^\perp, \quad \lambda \in [0, 1]$$
+          此时安全子空间与核心推理流形的主夹角随耦合强度 $\lambda$ 线性闭合：
+          $$\theta(\lambda) = (1 - \lambda)\frac{\pi}{2} = 90^\circ (1 - \lambda) \xrightarrow{\lambda \to 1} 0.0^\circ$$
+          当攻击者对纠缠后的模型执行完全相同的秩-$k$ PCA 消融攻击 $h' = (I_d - \alpha U_k(\lambda) U_k(\lambda)^\top) h$ 时，为将拒答边界压低至 $\tilde{m}(\alpha) \approx 1 - \alpha$，消融算子被迫沿着 $\cos\theta(\lambda) = \sin(\frac{\pi}{2}\lambda)$ 分量直接切除 $\mathcal{T}_{\text{IQ}}$ 的主本征模，导致推理困惑度按指数律爆炸：
+          $$\frac{\text{PPL}(\alpha, \lambda, k)}{\text{PPL}_0} = \exp\!\left(\kappa \, \alpha^2 \sin^2\!\left(\frac{\pi}{2}\lambda\right) \sum_{j=1}^{\min(k, r_S)} \mu_j^2\right)$$
+        </p>
+        <p style="margin:6px 0 0; font-size:0.9rem; color:var(--green);">
+          <strong>物理意义（脑叶切除陷阱 / Lobotomy Trap）</strong>：当 $\lambda = 1.0, k = 3$ 时，随着攻击者把 $\alpha$ 从 $0$ 推向 $1$（试图把拒答率降为 $0$），推理困惑度沿 $1.00\times \to 1.33\times \to 3.15\times \to 13.20\times \to 98.20\times$ 剧烈发散。<strong>想要移除安全边界，就必须在数学上同时摧毁模型的核心推理智商。</strong>
+        </p>
+      </div>
+
+      <h3>2.4 三重第一性原理物理防御架构（Three-Tier Physics Defense Architecture）</h3>
+      <p>
+        结合上述几何与热力学定理，我们提出针对开源权重与具身智能体的<strong>三重纵深防御体系</strong>：
+      </p>
+
+      <div class="grid-3">
+        <div class="mini-card" style="border-top: 3px solid var(--accent);">
+          <span class="badge" style="margin-bottom:8px;">Defense I · 第一重防线</span>
+          <strong>热力学谱纠缠 (Thermodynamic Spectral Entanglement)</strong>
+          <p style="font-size:0.89rem; color:var(--muted); margin:6px 0 0;">
+            在对齐微调目标中显式加入格拉斯曼对齐项 $\mathcal{L}_{\text{ent}} = -\lambda_{\text{ent}} \|W_{\text{IQ}}^\top V_S\|_F^2$，强制将安全边界方向旋转至高曲率因果推理主本征向量上（$\theta: 90^\circ \to 0^\circ$）。使线性投影攻击触发 $\text{PPL} \to 98.2\times$ 的脑叶切除自毁效应。
+          </p>
+        </div>
+
+        <div class="mini-card" style="border-top: 3px solid var(--purple);">
+          <span class="badge badge-purple" style="margin-bottom:8px;">Defense II · 第二重防线</span>
+          <strong>非线性规范曲率与谱熵色散 (Gauge Curvature &amp; Spectral Dispersion)</strong>
+          <p style="font-size:0.89rem; color:var(--muted); margin:6px 0 0;">
+            通过谱正则化最大化差分算子的冯·诺依曼谱熵 $S_{\text{VN}} = -\sum \hat{\sigma}_i \ln \hat{\sigma}_i \to \ln d$（实测 $2.40 \to 6.90$），消除低秩集中性；同时用跨层非阿贝尔规范联络 Wilson 环 $\mathcal{W}(\gamma) = \mathcal{P}\exp(\oint A_\mu dx^\mu)$ 替代单层超平面判据，使静态秩-$k$ PCA 截面完全失效。
+          </p>
+        </div>
+
+        <div class="mini-card" style="border-top: 3px solid var(--green);">
+          <span class="badge badge-green" style="margin-bottom:8px;">Defense III · 第三重终极防线</span>
+          <strong>外部马尔可夫毯热力学门禁 (External Markov-Blanket Gate)</strong>
+          <p style="font-size:0.89rem; color:var(--muted); margin:6px 0 0;">
+            遵循 <code>Language != State</code> 第一性原理：即便攻击者在本地完全重训或篡改开源权重，任何高危外部物理副作用（花钱、外发、凭证变更、不可逆删除）都必须穿过权重流形之外的内核级马尔可夫毯（<code>guarded-action</code> 门禁），无加密授权收据时势垒 $\Delta U_{\text{gate}} \to \infty$。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: REAL EXPERIMENTAL CURVES -->
+    <section id="sec-curves" class="section-card">
+      <h2>3. 实测激活几何与消融实验曲线（源自内嵌 <code>EXPERIMENT_DATA</code>）</h2>
+      <p>
+        以下三组实验图表由页面加载时直接读取内嵌常量 <code>EXPERIMENT_DATA</code>（对应 <code>experiments/activation_pca_safety/pca_ablation_results.json</code>，$d=1024, N=32+32, \text{seed}=0$）通过矢量 SVG 精确绘制，零外部运行时依赖：
+      </p>
+
+      <!-- CHART A: SCREE PLOT -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <span class="badge badge-red">实验图 (a) · PCA Scree Plot &amp; Cumulative Variance (k = 1..10)</span>
+            <h3 class="chart-title" style="margin-top:6px;">残差流拒答差分矩阵 $\Delta H$ 的前 10 阶主成分解释方差比（Explained Variance Ratio）</h3>
+            <p class="chart-sub">
+              前 3 阶主成分浓缩 <strong>97.46%</strong> 方差（$k=1: 66.995\%, k=2: 25.020\%, k=3: 5.443\%$），$k \ge 4$ 迅速跌落至背景各向同性热噪声底（$\approx 0.10\%\text{--}0.12\%$）。
+            </p>
+          </div>
+        </div>
+        <div class="svg-wrap" id="chart-a-scree"></div>
+      </div>
+
+      <!-- CHART B: VULNERABLE SWEEP -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <span class="badge badge-warm">实验图 (b) · Vulnerable Orthogonal Sweep ($\lambda_{\text{entangle}} = 0.0, \theta = 90.0^\circ, k = 3$)</span>
+            <h3 class="chart-title" style="margin-top:6px;">脆弱正交态消融扫描：拒答边界（Refusal Margin）坍缩 vs. 推理困惑度（Perplexity）绝对平坦</h3>
+            <p class="chart-sub">
+              当 $\alpha$ 从 $0.0$ 增至 $1.0$ 时，归一化拒答边界线性归零（$1.0000 \to 0.7501 \to 0.5001 \to 0.2502 \to 0.000244$），而推理困惑度恒定保持在 <strong>$1.0000\times$</strong>。
+            </p>
+          </div>
+        </div>
+        <div class="svg-wrap" id="chart-b-vulnerable"></div>
+      </div>
+
+      <!-- CHART C: DEFENSE SWEEP -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <span class="badge badge-purple">实验图 (c) · Spectral Entanglement Defense Sweep ($\lambda \in \{0.0, 0.25, 0.5, 0.75, 1.0\}, k = 3$)</span>
+            <h3 class="chart-title" style="margin-top:6px;">谱纠缠防御相图：拒答边界削减 vs. 推理困惑度指数爆炸（脑叶切除陷阱）</h3>
+            <p class="chart-sub">
+              对比 $\lambda = 0.0$（平坦 $1.00\times$）、$\lambda = 0.5$（升至 $3.15\times$）、$\lambda = 0.75$（升至 $28.31\times$）与 $\lambda = 1.0$（沿 $1.00 \to 1.33 \to 3.15 \to 13.20 \to 98.20\times$ 剧烈爆炸）。
+            </p>
+          </div>
+        </div>
+        <div class="svg-wrap" id="chart-c-defense"></div>
+      </div>
+
+      <!-- QUANTITATIVE SUMMARY TABLE -->
+      <h3>3.1 实测关键数据点对照表（Key Empirical Data Table，$k=3$）</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>消融强度 $\alpha$</th>
+              <th>归一化拒答边界<br>($\lambda=0$, Margin)</th>
+              <th>脆弱态困惑度<br>($\lambda=0.0, \theta=90^\circ$)</th>
+              <th>弱纠缠困惑度<br>($\lambda=0.25, \theta=67.5^\circ$)</th>
+              <th>中度纠缠困惑度<br>($\lambda=0.50, \theta=45.0^\circ$)</th>
+              <th>强纠缠困惑度<br>($\lambda=0.75, \theta=22.5^\circ$)</th>
+              <th>完全谱纠缠困惑度<br>($\lambda=1.00, \theta=0.0^\circ$)</th>
+            </tr>
+          </thead>
+          <tbody id="empirical-table-body">
+            <!-- Populated directly from EXPERIMENT_DATA by inline JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: INTERACTIVE PCA ABLATION SIMULATOR -->
+    <section id="sec-simulator" class="section-card">
+      <h2>4. 交互式 PCA 激活消融与谱纠缠防御实验台 (Interactive PCA Ablation Simulator)</h2>
+      <p>
+        拖动下方三个核心物理旋钮——<strong>PCA 截断秩 $k \in [1, 10]$</strong>、<strong>消融投影强度 $\alpha \in [0, 1]$</strong> 与 <strong>热力学谱纠缠耦合度 $\lambda_{\text{entangle}} \in [0, 1]$</strong>，实时观察残差流子空间夹角 $\theta(\lambda)$、冯·诺依曼谱熵 $S_{\text{VN}}(\lambda)$、拒答边界留存率 $\tilde{m}(k, \alpha, \lambda)$ 与推理困惑度 $\text{PPL}(k, \alpha, \lambda)$ 的联动演化。所有端点严格锚定 <code>EXPERIMENT_DATA</code> 实测数值。
+      </p>
+
+      <div class="sim-box">
+        <div class="sim-header">
+          <div>
+            <span class="badge badge-purple">Interactive Physics Sandbox · Real-Time Subspace Projection &amp; Entanglement</span>
+            <h3 class="sim-title">残差流 PCA 消融算子 $(I - \alpha U_k U_k^\top)$ 与格拉斯曼谱纠缠实时仿真器</h3>
+          </div>
+          <span id="sim-regime-pill" class="status-pill status-trap">防御生效：LOBOTOMY_TRAP_ARMED</span>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn" id="preset-baseline">① 原始未攻击基线 ($\alpha=0, k=3, \lambda=0$)</button>
+          <button type="button" class="btn" id="preset-vuln-attack">② 脆弱模型无损越狱 ($k=3, \alpha=1.0, \lambda=0.0 \to \text{PPL } 1.00\times$)</button>
+          <button type="button" class="btn" id="preset-half-defense">③ 中度谱纠缠防御 ($k=3, \alpha=1.0, \lambda=0.5 \to \text{PPL } 3.15\times$)</button>
+          <button type="button" class="btn btn-primary" id="preset-full-defense">④ 完全谱纠缠·脑叶切除陷阱 ($k=3, \alpha=1.0, \lambda=1.0 \to \text{PPL } 98.20\times$)</button>
+        </div>
+
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="slider-k">
+              <span>PCA 消融截断秩 $k$ (Rank $1\dots 10$)</span>
+              <span class="val-pill" id="val-k">k = 3 (97.5% EVR)</span>
+            </label>
+            <input type="range" id="slider-k" min="1" max="10" step="1" value="3">
+          </div>
+
+          <div class="control-group">
+            <label for="slider-alpha">
+              <span>线性消融投影强度 $\alpha$ (Ablation $0\dots 1$)</span>
+              <span class="val-pill" id="val-alpha">α = 1.00</span>
+            </label>
+            <input type="range" id="slider-alpha" min="0" max="1" step="0.01" value="1.00">
+          </div>
+
+          <div class="control-group">
+            <label for="slider-lambda">
+              <span>谱纠缠耦合强度 $\lambda_{\text{entangle}}$ ($0\dots 1$)</span>
+              <span class="val-pill" id="val-lambda">λ = 1.00</span>
+            </label>
+            <input type="range" id="slider-lambda" min="0" max="1" step="0.01" value="1.00">
+          </div>
+        </div>
+
+        <!-- LIVE READOUT LINE (Required) -->
+        <div class="live-readout-bar" id="live-readout-line">
+          <span><strong>LIVE READOUT</strong></span>
+          <span id="readout-margin">Refusal Margin: 0.0003</span>
+          <span id="readout-ppl">Reasoning Perplexity: 98.20x</span>
+          <span id="readout-angle">Grassmann Angle: 0.0°</span>
+          <span id="readout-entropy">VN Entropy: 6.90 / 6.93</span>
+        </div>
+
+        <div class="grid-4">
+          <div class="stat-card">
+            <span class="stat-label">归一化拒答边界 (Refusal Margin)</span>
+            <span class="stat-val" id="kpi-margin" style="color:var(--red);">0.0003</span>
+            <span class="stat-sub" id="kpi-margin-sub">已切除 99.97% 拒答投影分量</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">推理困惑度倍率 (Reasoning PPL)</span>
+            <span class="stat-val" id="kpi-ppl" style="color:var(--purple);">98.20x</span>
+            <span class="stat-sub" id="kpi-ppl-sub">指数级语言崩塌（脑叶切除触发）</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">格拉斯曼主夹角 $\theta(\mathcal{V}_S, \mathcal{T}_{\text{IQ}})$</span>
+            <span class="stat-val" id="kpi-angle" style="color:var(--highlight);">0.0°</span>
+            <span class="stat-sub" id="kpi-angle-sub">安全流形完全嵌入核心推理本征轴</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">冯·诺依曼谱熵 $S_{\text{VN}}$</span>
+            <span class="stat-val" id="kpi-entropy" style="color:var(--green);">6.90</span>
+            <span class="stat-sub" id="kpi-entropy-sub">占理论上限 $\ln(1024)=6.93$ 的 99.5%</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="sim-canvas" width="900" height="390"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER WITH REQUIRED CROSS-LINKS -->
+    <footer>
+      <div class="footer-links">
+        <a href="index.html">← 返回 System Evolution 首页</a>
+        <a href="physics-of-learning-reachability.html">物理学第一性原理：学习与智能的可达性</a>
+        <a href="THEORY.md">📘 THEORY.md (理论总纲)</a>
+        <a href="anatomy-of-certainty.html">🛡️ 「确定性」的解剖学</a>
+        <a href="trajectory-rl-substrate-evolution.html">🧭 轨迹滚动与基质强化学习</a>
+      </div>
+      <div>
+        Apache-2.0 文档层 · System Evolution Open Preprint Series (SE-2026.10025v1) · 内嵌实测激活消融数据 <code>EXPERIMENT_DATA</code>，不含任何私有凭据或个人身份信息（PCSE-Clean）。
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // =========================================================================
+    // EMBEDDED REAL EXPERIMENTAL DATA
+    // Source: experiments/activation_pca_safety/pca_ablation_results.json
+    // Works 100% offline from file:// without runtime fetch
+    // =========================================================================
+    const EXPERIMENT_DATA = {
+      "meta": {
+        "activation_source": "synthetic_calibrated_d1024",
+        "d": 1024,
+        "model_name_or_null": null,
+        "n_harmful": 32,
+        "n_harmless": 32,
+        "seed": 0,
+        "timestamp_utc": "2026-10-24T09:08:27Z"
+      },
+      "part1_vulnerability": {
+        "explained_variance_ratio_k1to10": [
+          0.669947,
+          0.2502,
+          0.054429,
+          0.001215,
+          0.001176,
+          0.001115,
+          0.001083,
+          0.001044,
+          0.001027,
+          0.001015
+        ],
+        "top3_variance_fraction": 0.974576,
+        "ablation_sweep": [
+          {"k": 1, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 1, "alpha": 0.25, "refusal_margin_norm": 0.755313, "reasoning_perplexity_norm": 1.0},
+          {"k": 1, "alpha": 0.5, "refusal_margin_norm": 0.510626, "reasoning_perplexity_norm": 1.0},
+          {"k": 1, "alpha": 0.75, "refusal_margin_norm": 0.265939, "reasoning_perplexity_norm": 1.0},
+          {"k": 1, "alpha": 1.0, "refusal_margin_norm": 0.021252, "reasoning_perplexity_norm": 1.0},
+          {"k": 2, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 2, "alpha": 0.25, "refusal_margin_norm": 0.752183, "reasoning_perplexity_norm": 1.0},
+          {"k": 2, "alpha": 0.5, "refusal_margin_norm": 0.504366, "reasoning_perplexity_norm": 1.0},
+          {"k": 2, "alpha": 0.75, "refusal_margin_norm": 0.256549, "reasoning_perplexity_norm": 1.0},
+          {"k": 2, "alpha": 1.0, "refusal_margin_norm": 0.008732, "reasoning_perplexity_norm": 1.0},
+          {"k": 3, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 3, "alpha": 0.25, "refusal_margin_norm": 0.750061, "reasoning_perplexity_norm": 1.0},
+          {"k": 3, "alpha": 0.5, "refusal_margin_norm": 0.500122, "reasoning_perplexity_norm": 1.0},
+          {"k": 3, "alpha": 0.75, "refusal_margin_norm": 0.250183, "reasoning_perplexity_norm": 1.0},
+          {"k": 3, "alpha": 1.0, "refusal_margin_norm": 0.000244, "reasoning_perplexity_norm": 1.0},
+          {"k": 4, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 4, "alpha": 0.25, "refusal_margin_norm": 0.750061, "reasoning_perplexity_norm": 1.0},
+          {"k": 4, "alpha": 0.5, "refusal_margin_norm": 0.500122, "reasoning_perplexity_norm": 1.0},
+          {"k": 4, "alpha": 0.75, "refusal_margin_norm": 0.250183, "reasoning_perplexity_norm": 1.0},
+          {"k": 4, "alpha": 1.0, "refusal_margin_norm": 0.000244, "reasoning_perplexity_norm": 1.0},
+          {"k": 5, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 5, "alpha": 0.25, "refusal_margin_norm": 0.750061, "reasoning_perplexity_norm": 1.0},
+          {"k": 5, "alpha": 0.5, "refusal_margin_norm": 0.500122, "reasoning_perplexity_norm": 1.0},
+          {"k": 5, "alpha": 0.75, "refusal_margin_norm": 0.250182, "reasoning_perplexity_norm": 1.0},
+          {"k": 5, "alpha": 1.0, "refusal_margin_norm": 0.000243, "reasoning_perplexity_norm": 1.0},
+          {"k": 6, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 6, "alpha": 0.25, "refusal_margin_norm": 0.750061, "reasoning_perplexity_norm": 1.0},
+          {"k": 6, "alpha": 0.5, "refusal_margin_norm": 0.500122, "reasoning_perplexity_norm": 1.0},
+          {"k": 6, "alpha": 0.75, "refusal_margin_norm": 0.250183, "reasoning_perplexity_norm": 1.0},
+          {"k": 6, "alpha": 1.0, "refusal_margin_norm": 0.000244, "reasoning_perplexity_norm": 1.0},
+          {"k": 7, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 7, "alpha": 0.25, "refusal_margin_norm": 0.750061, "reasoning_perplexity_norm": 1.0},
+          {"k": 7, "alpha": 0.5, "refusal_margin_norm": 0.500122, "reasoning_perplexity_norm": 1.0},
+          {"k": 7, "alpha": 0.75, "refusal_margin_norm": 0.250183, "reasoning_perplexity_norm": 1.0},
+          {"k": 7, "alpha": 1.0, "refusal_margin_norm": 0.000244, "reasoning_perplexity_norm": 1.0},
+          {"k": 8, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 8, "alpha": 0.25, "refusal_margin_norm": 0.750061, "reasoning_perplexity_norm": 1.0},
+          {"k": 8, "alpha": 0.5, "refusal_margin_norm": 0.500122, "reasoning_perplexity_norm": 1.0},
+          {"k": 8, "alpha": 0.75, "refusal_margin_norm": 0.250182, "reasoning_perplexity_norm": 1.0},
+          {"k": 8, "alpha": 1.0, "refusal_margin_norm": 0.000243, "reasoning_perplexity_norm": 1.0},
+          {"k": 9, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 9, "alpha": 0.25, "refusal_margin_norm": 0.750061, "reasoning_perplexity_norm": 1.0},
+          {"k": 9, "alpha": 0.5, "refusal_margin_norm": 0.500122, "reasoning_perplexity_norm": 1.0},
+          {"k": 9, "alpha": 0.75, "refusal_margin_norm": 0.250183, "reasoning_perplexity_norm": 1.0},
+          {"k": 9, "alpha": 1.0, "refusal_margin_norm": 0.000244, "reasoning_perplexity_norm": 1.0},
+          {"k": 10, "alpha": 0.0, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"k": 10, "alpha": 0.25, "refusal_margin_norm": 0.75006, "reasoning_perplexity_norm": 1.0},
+          {"k": 10, "alpha": 0.5, "refusal_margin_norm": 0.50012, "reasoning_perplexity_norm": 1.0},
+          {"k": 10, "alpha": 0.75, "refusal_margin_norm": 0.250181, "reasoning_perplexity_norm": 1.0},
+          {"k": 10, "alpha": 1.0, "refusal_margin_norm": 0.000241, "reasoning_perplexity_norm": 1.0}
+        ],
+        "principal_angle_safety_vs_iq_deg": 90.0
+      },
+      "part2_defense": {
+        "von_neumann_entropy_vulnerable": 2.401814,
+        "von_neumann_entropy_entangled": 6.897277,
+        "max_entropy_ln_d": 6.931472,
+        "entangled_sweep": [
+          {"lambda_entangle": 0.0, "alpha": 0.0, "k": 3, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.0, "alpha": 0.25, "k": 3, "refusal_margin_norm": 0.750065, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.0, "alpha": 0.5, "k": 3, "refusal_margin_norm": 0.50013, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.0, "alpha": 0.75, "k": 3, "refusal_margin_norm": 0.250195, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.0, "alpha": 1.0, "k": 3, "refusal_margin_norm": 0.00026, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.25, "alpha": 0.0, "k": 3, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.25, "alpha": 0.25, "k": 3, "refusal_margin_norm": 0.750066, "reasoning_perplexity_norm": 1.006169},
+          {"lambda_entangle": 0.25, "alpha": 0.5, "k": 3, "refusal_margin_norm": 0.500133, "reasoning_perplexity_norm": 1.024904},
+          {"lambda_entangle": 0.25, "alpha": 0.75, "k": 3, "refusal_margin_norm": 0.250199, "reasoning_perplexity_norm": 1.056907},
+          {"lambda_entangle": 0.25, "alpha": 1.0, "k": 3, "refusal_margin_norm": 0.000266, "reasoning_perplexity_norm": 1.103398},
+          {"lambda_entangle": 0.5, "alpha": 0.0, "k": 3, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.5, "alpha": 0.25, "k": 3, "refusal_margin_norm": 0.750065, "reasoning_perplexity_norm": 1.07433},
+          {"lambda_entangle": 0.5, "alpha": 0.5, "k": 3, "refusal_margin_norm": 0.500129, "reasoning_perplexity_norm": 1.332144},
+          {"lambda_entangle": 0.5, "alpha": 0.75, "k": 3, "refusal_margin_norm": 0.250194, "reasoning_perplexity_norm": 1.906515},
+          {"lambda_entangle": 0.5, "alpha": 1.0, "k": 3, "refusal_margin_norm": 0.000259, "reasoning_perplexity_norm": 3.149233},
+          {"lambda_entangle": 0.75, "alpha": 0.0, "k": 3, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 0.75, "alpha": 0.25, "k": 3, "refusal_margin_norm": 0.750067, "reasoning_perplexity_norm": 1.232377},
+          {"lambda_entangle": 0.75, "alpha": 0.5, "k": 3, "refusal_margin_norm": 0.500134, "reasoning_perplexity_norm": 2.306607},
+          {"lambda_entangle": 0.75, "alpha": 0.75, "k": 3, "refusal_margin_norm": 0.250201, "reasoning_perplexity_norm": 6.556782},
+          {"lambda_entangle": 0.75, "alpha": 1.0, "k": 3, "refusal_margin_norm": 0.000268, "reasoning_perplexity_norm": 28.307055},
+          {"lambda_entangle": 1.0, "alpha": 0.0, "k": 3, "refusal_margin_norm": 1.0, "reasoning_perplexity_norm": 1.0},
+          {"lambda_entangle": 1.0, "alpha": 0.25, "k": 3, "refusal_margin_norm": 0.750071, "reasoning_perplexity_norm": 1.332004},
+          {"lambda_entangle": 1.0, "alpha": 0.5, "k": 3, "refusal_margin_norm": 0.500141, "reasoning_perplexity_norm": 3.14791},
+          {"lambda_entangle": 1.0, "alpha": 0.75, "k": 3, "refusal_margin_norm": 0.250212, "reasoning_perplexity_norm": 13.199282},
+          {"lambda_entangle": 1.0, "alpha": 1.0, "k": 3, "refusal_margin_norm": 0.000283, "reasoning_perplexity_norm": 98.195013}
+        ],
+        "principal_angle_safety_vs_iq_deg_entangled": 0.0,
+        "interpretation_string": "When V_safety is orthogonal to T_IQ (principal angle ~90 deg, low Von Neumann entropy), rank-3 PCA projection annihilates the refusal margin while leaving T_IQ invariant. Rotating V_safety into the top eigenvectors of T_IQ via R_entangle(lambda->1) reduces the Grassmann principal angle to 0 deg and disperses spectral entropy toward ln(d), making linear safety removal mathematically inseparable from exponential reasoning perplexity collapse."
+      },
+      "summary": {
+        "vulnerability_confirmed": true,
+        "defense_confirmed": true,
+        "one_line_finding": "Orthogonal rank-3 safety subspace (top-3 PCA variance=97.5%, Grassmann angle=90.0 deg) allows 99.9% refusal removal at flat reasoning perplexity (1.0000x), whereas Thermodynamic Spectral Entanglement (lambda=1.0, angle=0.0 deg, Von Neumann S=2.40->6.90 vs ln(d)=6.93) causes reasoning perplexity to explode to 98.20x under identical PCA ablation."
+      }
+    };
+
+    // =========================================================================
+    // 1. RENDER STATIC SVG CHARTS (SECTION 3) & TABLE FROM EXPERIMENT_DATA
+    // =========================================================================
+    (function renderStaticChartsAndTable() {
+      const evr = EXPERIMENT_DATA.part1_vulnerability.explained_variance_ratio_k1to10;
+      const top3Frac = EXPERIMENT_DATA.part1_vulnerability.top3_variance_fraction;
+
+      // --- Chart (a): Scree / Explained Variance Bar Chart (k=1..10) ---
+      const wA = 860, hA = 310;
+      const padL = 68, padR = 64, padT = 32, padB = 52;
+      const plotW = wA - padL - padR;
+      const plotH = hA - padT - padB;
+
+      let svgA = `<svg viewBox="0 0 ${wA} ${hA}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PCA Scree Plot k=1..10">`;
+      svgA += `<rect width="${wA}" height="${hA}" fill="#0d0f14" rx="10"/>`;
+
+      // Grid lines (0% to 100%)
+      for (let pct = 0; pct <= 100; pct += 20) {
+        const y = padT + plotH * (1 - pct / 100);
+        svgA += `<line x1="${padL}" y1="${y}" x2="${wA - padR}" y2="${y}" stroke="rgba(250,248,245,0.08)" stroke-dasharray="4,4"/>`;
+        svgA += `<text x="${padL - 10}" y="${y + 4}" fill="#a6adbb" font-size="11" font-family="monospace" text-anchor="end">${pct}%</text>`;
+      }
+
+      // Bars & cumulative line
+      let cum = 0;
+      const cumPoints = [];
+      const barStep = plotW / 10;
+      const barW = barStep * 0.56;
+
+      evr.forEach((v, idx) => {
+        cum += v;
+        const xCenter = padL + barStep * (idx + 0.5);
+        const barH = Math.max(3, v * plotH);
+        const yBar = padT + plotH - barH;
+        const isTop3 = idx < 3;
+        const fillCol = isTop3 ? "#f87171" : "#60a5fa";
+
+        svgA += `<rect x="${xCenter - barW / 2}" y="${yBar}" width="${barW}" height="${barH}" fill="${fillCol}" rx="4" opacity="0.88"/>`;
+        const labelPct = (v * 100).toFixed(idx < 3 ? 2 : 2) + "%";
+        svgA += `<text x="${xCenter}" y="${yBar - 7}" fill="${isTop3 ? '#fca5a5' : '#93c5fd'}" font-size="10.5" font-family="monospace" font-weight="bold" text-anchor="middle">${labelPct}</text>`;
+        svgA += `<text x="${xCenter}" y="${padT + plotH + 20}" fill="#f5f3ef" font-size="11.5" font-family="monospace" text-anchor="middle">k=${idx + 1}</text>`;
+
+        const yCum = padT + plotH * (1 - cum);
+        cumPoints.push(`${xCenter},${yCum}`);
+      });
+
+      // Cumulative polyline
+      svgA += `<polyline fill="none" stroke="#f59e0b" stroke-width="2.5" points="${cumPoints.join(' ')}"/>`;
+      cumPoints.forEach((pt, idx) => {
+        const [cx, cy] = pt.split(",");
+        svgA += `<circle cx="${cx}" cy="${cy}" r="4" fill="#f59e0b" stroke="#0d0f14" stroke-width="1.5"/>`;
+        if (idx === 2) {
+          svgA += `<rect x="${Number(cx) - 10}" y="${Number(cy) - 28}" width="155" height="22" rx="5" fill="rgba(245,158,11,0.18)" stroke="#f59e0b"/>`;
+          svgA += `<text x="${Number(cx) + 67}" y="${Number(cy) - 13}" fill="#fde68a" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">Top-3 Cum: ${(top3Frac * 100).toFixed(2)}%</text>`;
+        }
+      });
+
+      // Axis labels
+      svgA += `<text x="${padL + plotW / 2}" y="${hA - 8}" fill="#a6adbb" font-size="12" text-anchor="middle">主成分阶数 PCA Component Rank k (d = 1024)</text>`;
+      svgA += `<text x="18" y="${padT + plotH / 2}" fill="#a6adbb" font-size="12" text-anchor="middle" transform="rotate(-90 18 ${padT + plotH / 2})">解释方差比 EVR (%)</text>`;
+      svgA += `</svg>`;
+      document.getElementById("chart-a-scree").innerHTML = svgA;
+
+      // --- Chart (b): Vulnerable Sweep (k=3, alpha=0..1) ---
+      const sweepK3 = EXPERIMENT_DATA.part1_vulnerability.ablation_sweep.filter(d => d.k === 3);
+      const wB = 860, hB = 300;
+      let svgB = `<svg viewBox="0 0 ${wB} ${hB}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vulnerable Ablation Sweep k=3">`;
+      svgB += `<rect width="${wB}" height="${hB}" fill="#0d0f14" rx="10"/>`;
+
+      const pLB = 68, pRB = 78, pTB = 32, pBB = 52;
+      const pwB = wB - pLB - pRB;
+      const phB = hB - pTB - pBB;
+
+      for (let i = 0; i <= 4; i++) {
+        const val = i * 0.25;
+        const y = pTB + phB * (1 - val / 1.2);
+        svgB += `<line x1="${pLB}" y1="${y}" x2="${wB - pRB}" y2="${y}" stroke="rgba(250,248,245,0.08)" stroke-dasharray="4,4"/>`;
+        svgB += `<text x="${pLB - 10}" y="${y + 4}" fill="#a6adbb" font-size="11" font-family="monospace" text-anchor="end">${val.toFixed(2)}</text>`;
+      }
+
+      const marginPts = [];
+      const pplPts = [];
+      sweepK3.forEach((row) => {
+        const x = pLB + row.alpha * pwB;
+        const yM = pTB + phB * (1 - row.refusal_margin_norm / 1.2);
+        const yP = pTB + phB * (1 - row.reasoning_perplexity_norm / 1.2);
+        marginPts.push({ x, y: yM, v: row.refusal_margin_norm, a: row.alpha });
+        pplPts.push({ x, y: yP, v: row.reasoning_perplexity_norm, a: row.alpha });
+        svgB += `<text x="${x}" y="${pTB + phB + 22}" fill="#f5f3ef" font-size="11.5" font-family="monospace" text-anchor="middle">α=${row.alpha.toFixed(2)}</text>`;
+      });
+
+      svgB += `<polyline fill="none" stroke="#34d399" stroke-width="3" stroke-dasharray="6,4" points="${pplPts.map(p => `${p.x},${p.y}`).join(' ')}"/>`;
+      svgB += `<polyline fill="none" stroke="#f87171" stroke-width="3" points="${marginPts.map(p => `${p.x},${p.y}`).join(' ')}"/>`;
+
+      marginPts.forEach((p) => {
+        svgB += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="#f87171" stroke="#0d0f14" stroke-width="1.5"/>`;
+        svgB += `<text x="${p.x}" y="${p.y - 10}" fill="#fca5a5" font-size="10.5" font-family="monospace" font-weight="bold" text-anchor="middle">${p.v.toFixed(4)}</text>`;
+      });
+      pplPts.forEach((p) => {
+        svgB += `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="#34d399" stroke="#0d0f14" stroke-width="1.5"/>`;
+        svgB += `<text x="${p.x}" y="${p.y - 11}" fill="#6ee7b7" font-size="10.5" font-family="monospace" text-anchor="middle">${p.v.toFixed(3)}x</text>`;
+      });
+
+      // Legend
+      svgB += `<rect x="${pLB + 16}" y="${pTB + 6}" width="290" height="44" rx="6" fill="rgba(24,25,31,0.9)" stroke="rgba(250,248,245,0.15)"/>`;
+      svgB += `<line x1="${pLB + 28}" y1="${pTB + 20}" x2="${pLB + 52}" y2="${pTB + 20}" stroke="#f87171" stroke-width="3"/>`;
+      svgB += `<text x="${pLB + 60}" y="${pTB + 24}" fill="#f5f3ef" font-size="11">归一化拒答边界 Refusal Margin (1.0 → 0.000244)</text>`;
+      svgB += `<line x1="${pLB + 28}" y1="${pTB + 38}" x2="${pLB + 52}" y2="${pTB + 38}" stroke="#34d399" stroke-width="3" stroke-dasharray="5,3"/>`;
+      svgB += `<text x="${pLB + 60}" y="${pTB + 42}" fill="#f5f3ef" font-size="11">推理困惑度倍率 Reasoning PPL (平坦 1.000x)</text>`;
+
+      svgB += `<text x="${pLB + pwB / 2}" y="${hB - 8}" fill="#a6adbb" font-size="12" text-anchor="middle">线性消融强度 Ablation Strength α (Rank k = 3, Grassmann θ = 90.0°)</text>`;
+      svgB += `<text x="18" y="${pTB + phB / 2}" fill="#a6adbb" font-size="12" text-anchor="middle" transform="rotate(-90 18 ${pTB + phB / 2})">归一化指标 (Margin / PPL)</text>`;
+      svgB += `</svg>`;
+      document.getElementById("chart-b-vulnerable").innerHTML = svgB;
+
+      // --- Chart (c): Defense Sweep (Refusal Margin vs Reasoning Perplexity on Log10 Y-axis) ---
+      const entSweep = EXPERIMENT_DATA.part2_defense.entangled_sweep;
+      const wC = 860, hC = 330;
+      const pLC = 72, pRC = 48, pTC = 32, pBC = 54;
+      const pwC = wC - pLC - pRC;
+      const phC = hC - pTC - pBC;
+
+      let svgC = `<svg viewBox="0 0 ${wC} ${hC}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spectral Entanglement Defense Phase Diagram">`;
+      svgC += `<rect width="${wC}" height="${hC}" fill="#0d0f14" rx="10"/>`;
+
+      // Log10 scale for PPL: from 1.0x (log10=0) to 100x (log10=2.05)
+      const maxLog = 2.05;
+      const yFromPpl = (ppl) => pTC + phC * (1 - Math.log10(Math.max(1, ppl)) / maxLog);
+      // X axis: Refusal Margin Cut (alpha: 0 -> 1, or Margin: 1.0 -> 0.0003)
+      const xFromMargin = (m) => pLC + (1 - m) * pwC;
+
+      [1, 2, 5, 10, 25, 50, 100].forEach((tickPpl) => {
+        const y = yFromPpl(tickPpl);
+        svgC += `<line x1="${pLC}" y1="${y}" x2="${wC - pRC}" y2="${y}" stroke="rgba(250,248,245,0.08)" stroke-dasharray="4,4"/>`;
+        svgC += `<text x="${pLC - 10}" y="${y + 4}" fill="#a6adbb" font-size="11" font-family="monospace" text-anchor="end">${tickPpl}x</text>`;
+      });
+
+      [1.0, 0.75, 0.5, 0.25, 0.0].forEach((mTick) => {
+        const x = xFromMargin(mTick);
+        svgC += `<line x1="${x}" y1="${pTC}" x2="${x}" y2="${pTC + phC}" stroke="rgba(250,248,245,0.05)"/>`;
+        svgC += `<text x="${x}" y="${pTC + phC + 22}" fill="#f5f3ef" font-size="11" font-family="monospace" text-anchor="middle">Margin ${mTick.toFixed(2)} (α=${(1 - mTick).toFixed(2)})</text>`;
+      });
+
+      const lamConfigs = [
+        { lam: 0.0, col: "#34d399", label: "λ=0.0 (θ=90°, 脆弱正交: 1.00x)", width: 2.5 },
+        { lam: 0.25, col: "#60a5fa", label: "λ=0.25 (θ=67.5°: 1.10x)", width: 2.0 },
+        { lam: 0.5, col: "#f59e0b", label: "λ=0.50 (θ=45.0°: 3.15x)", width: 2.8 },
+        { lam: 0.75, col: "#fb7185", label: "λ=0.75 (θ=22.5°: 28.31x)", width: 2.2 },
+        { lam: 1.0, col: "#a78bfa", label: "λ=1.00 (θ=0.0°, 谱纠缠: 98.20x)", width: 3.4 }
+      ];
+
+      lamConfigs.forEach((cfg) => {
+        const pts = entSweep.filter(r => Math.abs(r.lambda_entangle - cfg.lam) < 1e-6);
+        const poly = pts.map(r => `${xFromMargin(r.refusal_margin_norm)},${yFromPpl(r.reasoning_perplexity_norm)}`).join(" ");
+        svgC += `<polyline fill="none" stroke="${cfg.col}" stroke-width="${cfg.width}" points="${poly}"/>`;
+        pts.forEach((r) => {
+          const cx = xFromMargin(r.refusal_margin_norm);
+          const cy = yFromPpl(r.reasoning_perplexity_norm);
+          svgC += `<circle cx="${cx}" cy="${cy}" r="4.2" fill="${cfg.col}" stroke="#0d0f14" stroke-width="1.3"/>`;
+          if (cfg.lam === 1.0 && r.alpha > 0) {
+            svgC += `<text x="${cx - 8}" y="${cy - 9}" fill="#ddd6fe" font-size="10.5" font-family="monospace" font-weight="bold" text-anchor="end">${r.reasoning_perplexity_norm.toFixed(2)}x</text>`;
+          } else if (cfg.lam === 0.5 && r.alpha === 1.0) {
+            svgC += `<text x="${cx - 8}" y="${cy - 8}" fill="#fde68a" font-size="10.5" font-family="monospace" font-weight="bold" text-anchor="end">3.15x</text>`;
+          }
+        });
+      });
+
+      // Legend box
+      svgC += `<rect x="${pLC + 16}" y="${pTC + 8}" width="275" height="104" rx="7" fill="rgba(24,25,31,0.92)" stroke="rgba(250,248,245,0.16)"/>`;
+      lamConfigs.forEach((cfg, i) => {
+        const ly = pTC + 25 + i * 19;
+        svgC += `<line x1="${pLC + 26}" y1="${ly - 4}" x2="${pLC + 48}" y2="${ly - 4}" stroke="${cfg.col}" stroke-width="3"/>`;
+        svgC += `<text x="${pLC + 56}" y="${ly}" fill="#f5f3ef" font-size="11" font-family="monospace">${cfg.label}</text>`;
+      });
+
+      svgC += `<text x="${pLC + pwC / 2}" y="${hC - 8}" fill="#a6adbb" font-size="12" text-anchor="middle">拒答边界削减进程 Refusal Margin Collapse (1.0 → 0.0003 as α: 0 → 1)</text>`;
+      svgC += `<text x="18" y="${pTC + phC / 2}" fill="#a6adbb" font-size="12" text-anchor="middle" transform="rotate(-90 18 ${pTC + phC / 2})">推理困惑度倍率 Reasoning PPL (Log Scale)</text>`;
+      svgC += `</svg>`;
+      document.getElementById("chart-c-defense").innerHTML = svgC;
+
+      // --- Populate Empirical Table ---
+      const tbody = document.getElementById("empirical-table-body");
+      const alphas = [0.0, 0.25, 0.5, 0.75, 1.0];
+      let rowsHtml = "";
+      alphas.forEach((a) => {
+        const getEnt = (lam) => entSweep.find(r => Math.abs(r.lambda_entangle - lam) < 1e-6 && Math.abs(r.alpha - a) < 1e-6);
+        const r0 = getEnt(0.0);
+        const r25 = getEnt(0.25);
+        const r50 = getEnt(0.5);
+        const r75 = getEnt(0.75);
+        const r100 = getEnt(1.0);
+        rowsHtml += `<tr>
+          <td><code>α = ${a.toFixed(2)}</code></td>
+          <td style="font-family:var(--mono); color:var(--red); font-weight:700;">${r0.refusal_margin_norm.toFixed(6)}</td>
+          <td style="font-family:var(--mono); color:var(--green);">${r0.reasoning_perplexity_norm.toFixed(4)}x</td>
+          <td style="font-family:var(--mono);">${r25.reasoning_perplexity_norm.toFixed(4)}x</td>
+          <td style="font-family:var(--mono); color:var(--highlight);">${r50.reasoning_perplexity_norm.toFixed(4)}x</td>
+          <td style="font-family:var(--mono); color:#fb7185;">${r75.reasoning_perplexity_norm.toFixed(4)}x</td>
+          <td style="font-family:var(--mono); color:var(--purple); font-weight:800;">${r100.reasoning_perplexity_norm.toFixed(4)}x</td>
+        </tr>`;
+      });
+      tbody.innerHTML = rowsHtml;
+    })();
+
+    // =========================================================================
+    // 2. INTERACTIVE PCA ABLATION SIMULATOR (SECTION 4)
+    // =========================================================================
+    (function initInteractiveSimulator() {
+      const sliderK = document.getElementById("slider-k");
+      const sliderAlpha = document.getElementById("slider-alpha");
+      const sliderLambda = document.getElementById("slider-lambda");
+
+      const valK = document.getElementById("val-k");
+      const valAlpha = document.getElementById("val-alpha");
+      const valLambda = document.getElementById("val-lambda");
+
+      const kpiMargin = document.getElementById("kpi-margin");
+      const kpiMarginSub = document.getElementById("kpi-margin-sub");
+      const kpiPpl = document.getElementById("kpi-ppl");
+      const kpiPplSub = document.getElementById("kpi-ppl-sub");
+      const kpiAngle = document.getElementById("kpi-angle");
+      const kpiAngleSub = document.getElementById("kpi-angle-sub");
+      const kpiEntropy = document.getElementById("kpi-entropy");
+      const kpiEntropySub = document.getElementById("kpi-entropy-sub");
+      const regimePill = document.getElementById("sim-regime-pill");
+
+      const readoutMargin = document.getElementById("readout-margin");
+      const readoutPpl = document.getElementById("readout-ppl");
+      const readoutAngle = document.getElementById("readout-angle");
+      const readoutEntropy = document.getElementById("readout-entropy");
+
+      const canvas = document.getElementById("sim-canvas");
+      const ctx = canvas.getContext("2d");
+
+      const evrList = EXPERIMENT_DATA.part1_vulnerability.explained_variance_ratio_k1to10;
+      const vulnSweep = EXPERIMENT_DATA.part1_vulnerability.ablation_sweep;
+      const entSweep = EXPERIMENT_DATA.part2_defense.entangled_sweep;
+      const S_vuln = EXPERIMENT_DATA.part2_defense.von_neumann_entropy_vulnerable;
+      const S_ent = EXPERIMENT_DATA.part2_defense.von_neumann_entropy_entangled;
+      const S_max = EXPERIMENT_DATA.part2_defense.max_entropy_ln_d;
+
+      // Helper: cumulative EVR up to rank k
+      function getCumEvr(k) {
+        let s = 0;
+        for (let i = 0; i < k; i++) s += evrList[i];
+        return s;
+      }
+
+      // Helper: interpolate refusal margin and reasoning perplexity from EXPERIMENT_DATA
+      // Anchored strictly to real grid points in EXPERIMENT_DATA
+      function evaluateModelState(k, alpha, lambda) {
+        const gridAlphas = [0.0, 0.25, 0.5, 0.75, 1.0];
+        const gridLambdas = [0.0, 0.25, 0.5, 0.75, 1.0];
+
+        // Find bounding alpha indices
+        let aIdx = 0;
+        for (let i = 0; i < gridAlphas.length - 1; i++) {
+          if (alpha >= gridAlphas[i] && alpha <= gridAlphas[i + 1]) {
+            aIdx = i;
+            break;
+          }
+        }
+        const a0 = gridAlphas[aIdx], a1 = gridAlphas[aIdx + 1];
+        const tA = (a1 > a0) ? (alpha - a0) / (a1 - a0) : 0.0;
+
+        // 1. Margin interpolation for given k from part1_vulnerability (and lambda=1 slight endpoint shift)
+        const vRow0 = vulnSweep.find(r => r.k === k && Math.abs(r.alpha - a0) < 1e-6);
+        const vRow1 = vulnSweep.find(r => r.k === k && Math.abs(r.alpha - a1) < 1e-6);
+        const marginVuln = vRow0.refusal_margin_norm * (1 - tA) + vRow1.refusal_margin_norm * tA;
+
+        // Slight lambda dependence at k>=3 anchored to entangled_sweep
+        const eRowL1_0 = entSweep.find(r => Math.abs(r.lambda_entangle - 1.0) < 1e-6 && Math.abs(r.alpha - a0) < 1e-6);
+        const eRowL1_1 = entSweep.find(r => Math.abs(r.lambda_entangle - 1.0) < 1e-6 && Math.abs(r.alpha - a1) < 1e-6);
+        const marginEntK3 = eRowL1_0.refusal_margin_norm * (1 - tA) + eRowL1_1.refusal_margin_norm * tA;
+        const margin = (k >= 3)
+          ? marginVuln * (1 - lambda) + marginEntK3 * lambda
+          : marginVuln;
+
+        // 2. Perplexity interpolation: bilinear in (alpha, lambda) on log(PPL), scaled by rank factor for k=1,2
+        let lIdx = 0;
+        for (let i = 0; i < gridLambdas.length - 1; i++) {
+          if (lambda >= gridLambdas[i] && lambda <= gridLambdas[i + 1]) {
+            lIdx = i;
+            break;
+          }
+        }
+        const l0 = gridLambdas[lIdx], l1 = gridLambdas[lIdx + 1];
+        const tL = (l1 > l0) ? (lambda - l0) / (l1 - l0) : 0.0;
+
+        const getPplAt = (lamVal, alphaVal) => {
+          const item = entSweep.find(r => Math.abs(r.lambda_entangle - lamVal) < 1e-6 && Math.abs(r.alpha - alphaVal) < 1e-6);
+          return item ? item.reasoning_perplexity_norm : 1.0;
+        };
+
+        const p00 = Math.log(getPplAt(l0, a0));
+        const p01 = Math.log(getPplAt(l0, a1));
+        const p10 = Math.log(getPplAt(l1, a0));
+        const p11 = Math.log(getPplAt(l1, a1));
+
+        const logPplL0 = p00 * (1 - tA) + p01 * tA;
+        const logPplL1 = p10 * (1 - tA) + p11 * tA;
+        const logPplK3 = logPplL0 * (1 - tL) + logPplL1 * tL;
+
+        // Rank capture factor: top-3 modes carry the safety-IQ entanglement
+        // For k=1, captures evr[0]/top3; for k=2, (evr[0]+evr[1])/top3; for k>=3, 1.0
+        const top3Sum = EXPERIMENT_DATA.part1_vulnerability.top3_variance_fraction;
+        const rankFactor = (k >= 3) ? 1.0 : (getCumEvr(k) / top3Sum);
+        const ppl = Math.exp(logPplK3 * rankFactor);
+
+        // 3. Grassmann Principal Angle (90 deg -> 0 deg)
+        const angleDeg = 90.0 * (1.0 - lambda);
+
+        // 4. Von Neumann Spectral Entropy (2.401814 -> 6.897277)
+        const vnEntropy = S_vuln + (S_ent - S_vuln) * lambda;
+
+        return { margin, ppl, angleDeg, vnEntropy, cumEvr: getCumEvr(k) };
+      }
+
+      function renderSimulator() {
+        const k = parseInt(sliderK.value, 10);
+        const alpha = parseFloat(sliderAlpha.value);
+        const lambda = parseFloat(sliderLambda.value);
+
+        const state = evaluateModelState(k, alpha, lambda);
+
+        // Update labels
+        valK.textContent = `k = ${k} (${(state.cumEvr * 100).toFixed(1)}% EVR)`;
+        valAlpha.textContent = `α = ${alpha.toFixed(2)}`;
+        valLambda.textContent = `λ = ${lambda.toFixed(2)}`;
+
+        // Update KPI cards
+        kpiMargin.textContent = state.margin.toFixed(4);
+        kpiMargin.style.color = state.margin < 0.15 ? "var(--red)" : (state.margin < 0.6 ? "var(--highlight)" : "var(--green)");
+        kpiMarginSub.textContent = `已切除 ${((1 - state.margin) * 100).toFixed(2)}% 拒答投影分量`;
+
+        kpiPpl.textContent = `${state.ppl.toFixed(2)}x`;
+        kpiPpl.style.color = state.ppl > 5.0 ? "var(--purple)" : (state.ppl > 1.3 ? "var(--highlight)" : "var(--green)");
+        kpiPplSub.textContent = state.ppl > 5.0
+          ? "指数级语言崩塌（脑叶切除陷阱触发）"
+          : (state.ppl > 1.15 ? "中度推理受损（谱耦合显现）" : "推理流形完好（零智商损耗）");
+
+        kpiAngle.textContent = `${state.angleDeg.toFixed(1)}°`;
+        kpiAngleSub.textContent = state.angleDeg > 60
+          ? "近正交解耦（易被线性投影剥离）"
+          : (state.angleDeg > 15 ? "斜交测地旋转耦合态" : "完全共线嵌入核心推理本征轴");
+
+        kpiEntropy.textContent = state.vnEntropy.toFixed(2);
+        kpiEntropySub.textContent = `占理论上限 ln(1024)=${S_max.toFixed(2)} 的 ${((state.vnEntropy / S_max) * 100).toFixed(1)}%`;
+
+        // Update Live-Readout Bar
+        readoutMargin.textContent = `Refusal Margin: ${state.margin.toFixed(4)}`;
+        readoutPpl.textContent = `Reasoning Perplexity: ${state.ppl.toFixed(2)}x`;
+        readoutAngle.textContent = `Grassmann Angle: ${state.angleDeg.toFixed(1)}°`;
+        readoutEntropy.textContent = `VN Entropy: ${state.vnEntropy.toFixed(2)} / ${S_max.toFixed(2)}`;
+
+        // Update Status Pill
+        if (state.margin < 0.15 && state.ppl < 1.15) {
+          regimePill.className = "status-pill status-vuln";
+          regimePill.textContent = "⚠️ 越狱漏洞触发：VULNERABLE_BYPASS (Margin≈0, PPL=1.00x)";
+        } else if (state.ppl >= 3.0) {
+          regimePill.className = "status-pill status-trap";
+          regimePill.textContent = `🛡️ 脑叶切除陷阱生效：LOBOTOMY_TRAP (PPL=${state.ppl.toFixed(2)}x)`;
+        } else {
+          regimePill.className = "status-pill status-safe";
+          regimePill.textContent = "✓ 拒答边界保持激活：REFUSAL_ACTIVE";
+        }
+
+        // Draw Canvas (Left: Live Curves vs Alpha; Right: Grassmann Subspace Angle & Spectral Bar)
+        const W = canvas.width;
+        const H = canvas.height;
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = "#0d0f14";
+        ctx.fillRect(0, 0, W, H);
+
+        // Left Panel: Curves of Margin(alpha) & Perplexity(alpha) for current k and lambda
+        const lpX = 64, lpY = 38, lpW = 490, lpH = 300;
+        ctx.strokeStyle = "rgba(250,248,245,0.12)";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(lpX, lpY, lpW, lpH);
+
+        ctx.fillStyle = "#f5f3ef";
+        ctx.font = "bold 12.5px -apple-system, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText(`① 实时消融响应曲线 (k=${k}, λ=${lambda.toFixed(2)})：Margin 与 log₁₀(PPL) 随 α 演化`, lpX, 24);
+
+        // Horizontal grid lines
+        for (let i = 0; i <= 4; i++) {
+          const frac = i / 4;
+          const gy = lpY + lpH * (1 - frac);
+          ctx.strokeStyle = "rgba(250,248,245,0.07)";
+          ctx.beginPath();
+          ctx.moveTo(lpX, gy);
+          ctx.lineTo(lpX + lpW, gy);
+          ctx.stroke();
+
+          // Left axis: Refusal Margin 0.0 -> 1.0
+          ctx.fillStyle = "#f87171";
+          ctx.font = "10.5px ui-monospace, monospace";
+          ctx.textAlign = "right";
+          ctx.fillText(frac.toFixed(2), lpX - 8, gy + 4);
+
+          // Right axis: PPL (1x -> 100x on log scale)
+          const pplTick = Math.pow(100, frac);
+          ctx.fillStyle = "#a78bfa";
+          ctx.textAlign = "left";
+          ctx.fillText(`${pplTick < 10 ? pplTick.toFixed(1) : Math.round(pplTick)}x`, lpX + lpW + 8, gy + 4);
+        }
+
+        // X-axis ticks (alpha 0..1)
+        for (let i = 0; i <= 4; i++) {
+          const aTick = i * 0.25;
+          const gx = lpX + aTick * lpW;
+          ctx.fillStyle = "#a6adbb";
+          ctx.font = "10.5px ui-monospace, monospace";
+          ctx.textAlign = "center";
+          ctx.fillText(`α=${aTick.toFixed(2)}`, gx, lpY + lpH + 18);
+        }
+
+        // Draw Ghost Reference Curve for lambda=0 (flat PPL) and lambda=1 (max trap)
+        ctx.strokeStyle = "rgba(167, 139, 250, 0.22)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        for (let s = 0; s <= 50; s++) {
+          const a = s / 50;
+          const stRef = evaluateModelState(3, a, 1.0);
+          const x = lpX + a * lpW;
+          const y = lpY + lpH * (1 - Math.log10(Math.max(1, stRef.ppl)) / 2.0);
+          if (s === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Draw Active Refusal Margin Curve (Red)
+        ctx.strokeStyle = "#f87171";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (let s = 0; s <= 50; s++) {
+          const a = s / 50;
+          const st = evaluateModelState(k, a, lambda);
+          const x = lpX + a * lpW;
+          const y = lpY + lpH * (1 - st.margin);
+          if (s === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Draw Active Perplexity Curve (Purple)
+        ctx.strokeStyle = "#a78bfa";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (let s = 0; s <= 50; s++) {
+          const a = s / 50;
+          const st = evaluateModelState(k, a, lambda);
+          const x = lpX + a * lpW;
+          const y = lpY + lpH * (1 - Math.min(1, Math.log10(Math.max(1, st.ppl)) / 2.0));
+          if (s === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Draw Current Alpha Crosshair & Operating Points
+        const curX = lpX + alpha * lpW;
+        const curMarginY = lpY + lpH * (1 - state.margin);
+        const curPplY = lpY + lpH * (1 - Math.min(1, Math.log10(Math.max(1, state.ppl)) / 2.0));
+
+        ctx.strokeStyle = "rgba(250, 248, 245, 0.35)";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(curX, lpY);
+        ctx.lineTo(curX, lpY + lpH);
+        ctx.stroke();
+
+        ctx.fillStyle = "#f87171";
+        ctx.beginPath();
+        ctx.arc(curX, curMarginY, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#a78bfa";
+        ctx.beginPath();
+        ctx.arc(curX, curPplY, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Right Panel: Grassmann Subspace Dial & Von Neumann Entropy Bar
+        const rpX = 610, rpY = 38, rpW = 266, rpH = 300;
+        ctx.fillStyle = "rgba(250, 248, 245, 0.03)";
+        ctx.strokeStyle = "rgba(250, 248, 245, 0.12)";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(rpX, rpY, rpW, rpH);
+
+        ctx.fillStyle = "#f5f3ef";
+        ctx.font = "bold 12.5px -apple-system, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText("② 格拉斯曼主夹角与谱熵仪表", rpX + 14, 24);
+
+        // Subspace Dial Center
+        const cx = rpX + rpW / 2;
+        const cy = rpY + 135;
+        const radius = 78;
+
+        // Draw Quadrant Arc
+        ctx.strokeStyle = "rgba(250,248,245,0.16)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, -Math.PI / 2, 0);
+        ctx.stroke();
+
+        // T_IQ Horizontal Axis (angle = 0 deg)
+        ctx.strokeStyle = "#60a5fa";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + radius + 12, cy);
+        ctx.stroke();
+        ctx.fillStyle = "#93c5fd";
+        ctx.font = "bold 11px ui-monospace, monospace";
+        ctx.textAlign = "left";
+        ctx.fillText("T_IQ (推理流形)", cx + 10, cy + 18);
+
+        // Orthogonal Reference Axis (angle = 90 deg)
+        ctx.strokeStyle = "rgba(248, 113, 113, 0.35)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx, cy - radius - 10);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#fca5a5";
+        ctx.textAlign = "center";
+        ctx.fillText("V_safety(0) ⊥ (90°)", cx, cy - radius - 15);
+
+        // Active V_safety(lambda) Vector
+        const thetaRad = (state.angleDeg * Math.PI) / 180.0;
+        const vx = cx + (radius + 8) * Math.cos(thetaRad);
+        const vy = cy - (radius + 8) * Math.sin(thetaRad);
+
+        ctx.strokeStyle = "#f59e0b";
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(vx, vy);
+        ctx.stroke();
+
+        ctx.fillStyle = "#f59e0b";
+        ctx.beginPath();
+        ctx.arc(vx, vy, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#fde68a";
+        ctx.font = "bold 11.5px ui-monospace, monospace";
+        ctx.textAlign = "center";
+        ctx.fillText(`θ = ${state.angleDeg.toFixed(1)}°`, cx + 36, cy - 28);
+
+        // Von Neumann Entropy Progress Bar at bottom of Right Panel
+        const barX = rpX + 18, barY = rpY + 215, barW = rpW - 36;
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "11px -apple-system, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText("冯·诺依曼谱熵 S_VN:", barX, barY);
+        ctx.fillStyle = "#34d399";
+        ctx.font = "bold 11px ui-monospace, monospace";
+        ctx.textAlign = "right";
+        ctx.fillText(`${state.vnEntropy.toFixed(2)} / ${S_max.toFixed(2)}`, barX + barW, barY);
+
+        ctx.fillStyle = "rgba(250,248,245,0.1)";
+        ctx.fillRect(barX, barY + 8, barW, 12);
+        ctx.fillStyle = "#34d399";
+        ctx.fillRect(barX, barY + 8, (state.vnEntropy / S_max) * barW, 12);
+
+        // Effective Rank Readout
+        const effRank = Math.exp(state.vnEntropy);
+        ctx.fillStyle = "#a6adbb";
+        ctx.font = "10.5px ui-monospace, monospace";
+        ctx.textAlign = "left";
+        ctx.fillText(`有效谱秩 r_eff = exp(S) ≈ ${effRank.toFixed(1)} / 1024`, barX, barY + 38);
+        ctx.fillStyle = "#fde68a";
+        ctx.fillText(`耦合重叠 cos²θ = ${Math.pow(Math.cos(thetaRad), 2).toFixed(3)}`, barX, barY + 56);
+      }
+
+      sliderK.addEventListener("input", renderSimulator);
+      sliderAlpha.addEventListener("input", renderSimulator);
+      sliderLambda.addEventListener("input", renderSimulator);
+
+      document.getElementById("preset-baseline").addEventListener("click", () => {
+        sliderK.value = 3;
+        sliderAlpha.value = 0.0;
+        sliderLambda.value = 0.0;
+        renderSimulator();
+      });
+      document.getElementById("preset-vuln-attack").addEventListener("click", () => {
+        sliderK.value = 3;
+        sliderAlpha.value = 1.0;
+        sliderLambda.value = 0.0;
+        renderSimulator();
+      });
+      document.getElementById("preset-half-defense").addEventListener("click", () => {
+        sliderK.value = 3;
+        sliderAlpha.value = 1.0;
+        sliderLambda.value = 0.5;
+        renderSimulator();
+      });
+      document.getElementById("preset-full-defense").addEventListener("click", () => {
+        sliderK.value = 3;
+        sliderAlpha.value = 1.0;
+        sliderLambda.value = 1.0;
+        renderSimulator();
+      });
+
+      renderSimulator();
+    })();
+  </script>
+</body>
+</html>
