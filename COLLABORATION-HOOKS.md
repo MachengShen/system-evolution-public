@@ -114,6 +114,8 @@ must contribute a reusable audit primitive, schema, test, or falsifier.
 **Start here:**
 
 - [Physics of Learning Interactive Reader & Epistemic Bounty Board](physics-of-learning-reachability.html#sec-bounty)
+- [Physics of Learning — English Interactive Edition & Bounty Board](physics-of-learning-reachability-en.html#sec-bounty)
+- [Treatise §7 (EN): Epistemic Bounty Marketplace Protocol](essays/2026-10-24-physics-of-learning-thermodynamic-reachability-en.md#7-the-largest-theory-to-reality-uncertainties-and-a-network-bounty-protocol-for-verifiable-bench-level-facts-epistemic-bounty-marketplace)
 - [Treatise §7: Epistemic Bounty Marketplace Protocol](essays/2026-10-24-physics-of-learning-thermodynamic-reachability-zh.md#7-理论到现实的最大断层uncertainties与一线可验证事实网络悬赏协议epistemic-bounty-marketplace)
 - [Claim-Receipt Schema](CLAIM-RECEIPT.md)
 
