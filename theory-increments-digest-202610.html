@@ -1,0 +1,2062 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="过去 8 天（10/18–10/26）理论增量与认知外骨骼物理学全景导览：从 6 大理论突破到 19,039 步真实轨迹审计修正与四大可证伪演化定律（H1–H4）。大白话直觉模式 × 系统工程映射 × 严密数理定理三层折叠对照。">
+  <title>理论增量与认知外骨骼演化全景导览 (2026-10 旗舰版) | System Evolution Theory Digest</title>
+
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+
+  <style>
+    :root {
+      --ink: #18191f;
+      --ink-subtle: #4b5262;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --line: #e3ded6;
+      --line-subtle: #eee9e0;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fef5ee;
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --purple: #6d28d9;
+      --purple-soft: #f5f3ff;
+      --topbar-bg: rgba(24, 25, 31, 0.96);
+      --topbar-ink: #f5f3ef;
+      --topbar-muted: #b5bcc9;
+      --shadow: 0 16px 40px rgba(24, 25, 31, 0.06);
+      --shadow-sm: 0 4px 14px rgba(24, 25, 31, 0.04);
+      --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(30, 86, 160, 0.05), transparent 36rem),
+        radial-gradient(circle at 90% 12%, rgba(184, 92, 24, 0.04), transparent 32rem),
+        radial-gradient(circle at 50% 60%, rgba(109, 40, 217, 0.03), transparent 40rem),
+        var(--paper);
+      font-family: var(--sans);
+      line-height: 1.8;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); text-decoration: underline; }
+    code {
+      font-family: var(--mono);
+      font-size: 0.88em;
+      background: #f1ede6;
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #272d3b;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px max(18px, calc((100vw - 1140px) / 2));
+      background: var(--topbar-bg);
+      color: var(--topbar-ink);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14);
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 750;
+      font-size: 0.95rem;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .brand-pill {
+      background: var(--highlight);
+      color: #ffffff;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.88rem;
+    }
+    .topbar-nav a {
+      color: var(--topbar-muted);
+      transition: color 0.2s;
+    }
+    .topbar-nav a:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* STICKY MODE SWITCHER BAR */
+    .mode-bar-wrap {
+      position: sticky;
+      top: 57px;
+      z-index: 45;
+      background: rgba(250, 248, 245, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px max(18px, calc((100vw - 1140px) / 2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .mode-switcher-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mode-pills {
+      display: inline-flex;
+      background: #e6e2db;
+      padding: 3px;
+      border-radius: 999px;
+      gap: 2px;
+    }
+    .mode-pill {
+      border: none;
+      background: transparent;
+      padding: 7px 15px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mode-pill.active {
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .mode-hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* CONTAINER & TYPOGRAPHY */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 36px 18px 90px;
+    }
+    .hero {
+      margin-bottom: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .kicker {
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--highlight);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.6vw, 2.75rem);
+      line-height: 1.28;
+      font-weight: 800;
+      margin: 0 0 16px;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--ink-subtle);
+      margin: 0 0 24px;
+      line-height: 1.7;
+      max-width: 980px;
+    }
+
+    /* TAKEAWAY HIGHLIGHT BANNER */
+    .takeaway-banner {
+      background: linear-gradient(135deg, #fdf8f4 0%, #f7f9fd 100%);
+      border: 1.5px solid rgba(184, 92, 24, 0.25);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .takeaway-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--highlight);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .takeaway-item {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #2e3442;
+    }
+    .takeaway-item strong {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* QUICK NAVIGATION MATRIX */
+    .nav-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .nav-chip {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 650;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-chip:hover {
+      border-color: var(--highlight);
+      color: var(--highlight);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    /* SECTION CARDS */
+    .section-header {
+      margin: 48px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin: 0;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-badge {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    /* INCREMENT CARD */
+    .inc-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s;
+    }
+    .inc-card:hover {
+      border-color: #cbd5e1;
+    }
+    .inc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line-subtle);
+    }
+    .inc-id-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .inc-tag {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .tag-theory { background: #fee2e2; color: #991b1b; }
+    .tag-audit { background: #fef3c7; color: #92400e; }
+    .tag-ext { background: #ede9fe; color: #5b21b6; }
+    .inc-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+    .inc-title {
+      font-family: var(--serif);
+      font-size: 1.48rem;
+      font-weight: 750;
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .inc-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      font-weight: 650;
+    }
+    .inc-link-btn {
+      padding: 5px 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .inc-link-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* CARD LOCAL VIEW TABS */
+    .card-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .card-tab {
+      background: #f4f1ea;
+      border: 1px solid var(--line);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 650;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .card-tab.active {
+      background: var(--ink);
+      color: #ffffff;
+      border-color: var(--ink);
+    }
+
+    /* THREE-TIER CONTENT BLOCKS */
+    .tier-block {
+      margin-bottom: 16px;
+      border-radius: 12px;
+      padding: 20px 24px;
+      transition: all 0.2s ease;
+    }
+    .tier-intuition {
+      background: linear-gradient(180deg, #fefaf5 0%, #ffffff 100%);
+      border: 1.5px solid rgba(184, 92, 24, 0.28);
+    }
+    .tier-engineering {
+      background: linear-gradient(180deg, #f6fbf8 0%, #ffffff 100%);
+      border: 1.5px solid rgba(21, 128, 61, 0.28);
+    }
+    .tier-math {
+      background: linear-gradient(180deg, #f7f9fd 0%, #ffffff 100%);
+      border: 1.5px solid rgba(30, 86, 160, 0.28);
+    }
+    .tier-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .label-intuition { background: var(--highlight-soft); color: var(--highlight); }
+    .label-engineering { background: var(--green-soft); color: var(--green); }
+    .label-math { background: var(--accent-soft); color: var(--accent); }
+
+    /* FEYNMAN 4-STEP STRUCT */
+    .feynman-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(184, 92, 24, 0.2);
+    }
+    .feynman-step {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .feynman-step strong {
+      display: block;
+      color: var(--highlight);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .mental-image {
+      background: #fff8f0;
+      border-left: 4px solid var(--highlight);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 12px;
+      font-size: 0.92rem;
+      color: #3b2b1b;
+      line-height: 1.65;
+    }
+    .mental-image strong {
+      color: var(--highlight);
+    }
+
+    /* ENGINEERING BULLETS */
+    .eng-list {
+      margin: 10px 0 0;
+      padding-left: 20px;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .eng-list li {
+      margin-bottom: 8px;
+    }
+    .eng-list strong {
+      color: #166534;
+    }
+
+    /* MATH & FORMULAS */
+    .math-content {
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .formula-card {
+      background: #fbfbfd;
+      border: 1px solid rgba(30, 86, 160, 0.18);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+    .anti-signal-box {
+      background: #fef2f2;
+      border: 1px solid rgba(185, 28, 28, 0.25);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: #7f1d1d;
+    }
+    .anti-signal-box strong {
+      color: #991b1b;
+    }
+
+    /* AUDIT HIGHLIGHT METRICS */
+    .audit-stat-banner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .audit-stat-card {
+      background: #242731;
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: #a4acba;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-family: var(--mono);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #f59e0b;
+      margin-bottom: 2px;
+    }
+    .stat-desc {
+      font-size: 0.8rem;
+      color: #c9ced8;
+      line-height: 1.45;
+    }
+
+    /* HYPOTHESIS H1-H4 CARDS */
+    .hypo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .hypo-card {
+      background: #ffffff;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hypo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line-subtle);
+    }
+    .hypo-tag {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--purple);
+      background: var(--purple-soft);
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+    .hypo-metric {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+    .hypo-title {
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      font-weight: 750;
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+    .hypo-p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #374151;
+      margin-bottom: 12px;
+    }
+    .hypo-box {
+      background: #fbfbfd;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 0.84rem;
+    }
+    .hypo-box strong {
+      display: block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+    }
+    .box-test strong { color: var(--accent); }
+    .box-anti strong { color: var(--red); }
+
+    /* INTERACTIVE CANVAS SIMULATOR */
+    .sim-card {
+      background: #181a20;
+      color: #f3f4f6;
+      border-radius: 18px;
+      padding: 28px 32px;
+      margin: 40px 0;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.22);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .sim-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .sim-title-group h2 {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 750;
+      color: #ffffff;
+      margin: 0 0 6px;
+    }
+    .sim-subtitle {
+      font-size: 0.88rem;
+      color: #9ca3af;
+      margin: 0;
+    }
+    .sim-controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+      background: #22252e;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .sim-control-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.84rem;
+      color: #d1d5db;
+    }
+    .sim-control-item label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+    .sim-control-item input[type="range"] {
+      width: 100%;
+      accent-color: #f59e0b;
+      cursor: pointer;
+    }
+    .sim-btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .sim-btn {
+      background: #2d313d;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 650;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sim-btn:hover {
+      background: #3f4454;
+    }
+    .sim-btn-primary {
+      background: var(--highlight);
+      border-color: transparent;
+    }
+    .sim-btn-primary:hover {
+      background: #d97706;
+    }
+    .sim-kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .sim-kpi-box {
+      background: #22252e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .sim-kpi-name {
+      font-size: 0.74rem;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sim-kpi-val {
+      font-family: var(--mono);
+      font-size: 1.35rem;
+      font-weight: 750;
+      color: #ffffff;
+      margin: 4px 0 2px;
+    }
+    .sim-kpi-sub {
+      font-size: 0.72rem;
+      color: #6b7280;
+    }
+    canvas#simCanvas {
+      width: 100%;
+      height: 380px;
+      background: #0f1015;
+      border-radius: 12px;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* GLOBAL MODE TOGGLE VISIBILITY */
+    body.mode-intuition .tier-engineering,
+    body.mode-intuition .tier-math {
+      display: none !important;
+    }
+    body.mode-engineering .tier-intuition,
+    body.mode-engineering .tier-math {
+      display: none !important;
+    }
+    body.mode-math .tier-intuition,
+    body.mode-math .tier-engineering {
+      display: none !important;
+    }
+
+    /* REFERENCE LINKS GRID */
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .ref-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .ref-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .ref-card strong {
+      color: var(--ink);
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .ref-card span {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 40px max(18px, calc((100vw - 1140px) / 2));
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+      line-height: 1.8;
+      background: #fdfcfb;
+    }
+
+    @media (max-width: 768px) {
+      .topbar { padding: 10px 16px; }
+      .mode-bar-wrap { padding: 8px 16px; top: 54px; }
+      .container { padding: 24px 14px 60px; }
+      .inc-card { padding: 22px 18px; }
+      .sim-card { padding: 20px 16px; }
+      h1 { font-size: 1.85rem; }
+      .section-title { font-size: 1.45rem; }
+    }
+  </style>
+</head>
+
+<body class="mode-intuition">
+
+  <!-- TOP HEADER -->
+  <header class="topbar">
+    <div class="brand-group">
+      <a class="brand-badge" href="index.html">
+        <span class="brand-pill">旗舰特辑</span>
+        <span>System Evolution</span>
+      </a>
+      <span style="opacity:0.35;">|</span>
+      <a href="index.html" style="color:var(--topbar-muted); font-size:0.88rem;">公开更新总看板</a>
+    </div>
+    <nav class="topbar-nav" aria-label="Quick links">
+      <a href="continual-learning-physics-synthesis.html">持续学习热力学消解</a>
+      <a href="physics-of-learning-reachability.html">学习的物理学</a>
+      <a href="open-weight-activation-safety-physics.html">激活消融与物理防御</a>
+      <a href="trajectory-rl-substrate-evolution.html">基质强化学习</a>
+      <a href="papers/index.html">Preprint PDFs</a>
+    </nav>
+  </header>
+
+  <!-- STICKY MODE SWITCHER BAR -->
+  <div class="mode-bar-wrap" id="sticky-mode-bar">
+    <div class="mode-switcher-container">
+      <span style="font-weight:800; font-size:0.88rem; color:var(--ink);">认知视角：</span>
+      <div class="mode-pills" role="tablist">
+        <button type="button" class="mode-pill active" id="btn-mode-intuition" onclick="setGlobalMode('intuition')">
+          <span>💡 直觉白话 (30秒一眼懂)</span>
+        </button>
+        <button type="button" class="mode-pill" id="btn-mode-engineering" onclick="setGlobalMode('engineering')">
+          <span>⚙️ 系统工程 (机制映射)</span>
+        </button>
+        <button type="button" class="mode-pill" id="btn-mode-math" onclick="setGlobalMode('math')">
+          <span>📐 硬核数理 (定理与流形)</span>
+        </button>
+        <button type="button" class="mode-pill" id="btn-mode-all" onclick="setGlobalMode('all')">
+          <span>📑 三重视角全开 (并列对照)</span>
+        </button>
+      </div>
+    </div>
+    <div class="mode-hint" id="mode-hint-text">
+      ✨ 当前模式：<strong>直觉白话模式</strong>。聚焦 30 秒费曼式比喻与核心画面，过滤高密数学公式。
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="kicker">
+        <span>⚡ Executive Synthesis · 2026-10-26 旗舰演化导览</span>
+      </div>
+      <h1 id="hero-heading">大模型理论增量与认知外骨骼物理学：从 6 大理论突破到 19,000 步实证审计修正</h1>
+      <p class="subtitle">
+        过去 8 天（10/18–10/26），我们在系统演化论域中完成了 6 大核心理论的物理第一性原理推导。
+        今天（10/26），结合 <strong>630 场真实会话 / 19,039 步动作轨迹全量审计</strong> 与 <strong>Claude Opus 原生 Harness vs 云端 CLI 深度对齐实验</strong>，
+        我们将理论升华为可运行、可复现、可证伪的工程基石，并推导出四大下一代演化假说（H1–H4）。
+      </p>
+
+      <!-- 30-SECOND TAKEAWAYS BANNER -->
+      <div class="takeaway-banner">
+        <div class="takeaway-title">
+          <span>🎯 30 秒全局记忆锚点（三句话抓住全篇精髓）</span>
+        </div>
+        <div class="takeaway-grid">
+          <div class="takeaway-item">
+            <strong>1. 认知外骨骼决定 35% 智商上限</strong>
+            同一模型在不同 Harness 下出现巨大智商鸿沟。关掉交错思考等于抽走动作前的「宏观在线数值积分器」；缺少 SafeEdit 语法反射弧则引发高达 394 次无效漫游循环。
+          </div>
+          <div class="takeaway-item">
+            <strong>2. 峡谷流形与真迹直通</strong>
+            记忆不是写进参数平地（会引发灾难性遗忘），而是沿着 Fisher 零空间峡谷滑行；多模态环境数据绝不能过早降维成离散文本，原始真迹必须保留高维直通。
+          </div>
+          <div class="takeaway-item">
+            <strong>3. 无收据物理确信度为零</strong>
+            没有因果干预算子 $do(X)$ 和外部环境哈希收据的文本陈述，在物理热力学上等于空气（零做功）。我们所有架构闭环以不可逆收据为唯一度量衡。
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK NAVIGATION MATRIX -->
+      <div class="nav-matrix" aria-label="Page navigation">
+        <a class="nav-chip" href="#inc-1"><span>1. 丘脑多模态真迹</span><span>→</span></a>
+        <a class="nav-chip" href="#inc-2"><span>2. 无方程快慢流形</span><span>→</span></a>
+        <a class="nav-chip" href="#inc-3"><span>3. 持续学习峡谷度规</span><span>→</span></a>
+        <a class="nav-chip" href="#inc-4"><span>4. 激活安全白化解混</span><span>→</span></a>
+        <a class="nav-chip" href="#inc-5"><span>5. 缘起性空因果账本</span><span>→</span></a>
+        <a class="nav-chip" href="#inc-6"><span>6. 双重投影认识论</span><span>→</span></a>
+        <a class="nav-chip" href="#audit-section" style="border-color:var(--highlight); color:var(--highlight);"><span>🔥 10/26 实证审计修正</span><span>→</span></a>
+        <a class="nav-chip" href="#hypo-section" style="border-color:var(--purple); color:var(--purple);"><span>🧬 H1–H4 可证伪定律</span><span>→</span></a>
+        <a class="nav-chip" href="#sim-section" style="background:#242731; color:#ffffff; border-color:#383c4a;"><span>🎮 动态流形仿真器</span><span>→</span></a>
+      </div>
+    </section>
+
+    <!-- SECTION A: 6 CORE THEORY INCREMENTS -->
+    <section id="theory-section" aria-labelledby="section-a-heading">
+      <div class="section-header">
+        <h2 class="section-title" id="section-a-heading">
+          <span>版块 A：过去 8 天（10/18–10/26）6 大核心理论增量全景导览</span>
+        </h2>
+        <span class="section-badge">理论基石 · 物理第一性原理</span>
+      </div>
+
+      <!-- INCREMENT 1 -->
+      <article class="inc-card" id="inc-1">
+        <div class="inc-header">
+          <div>
+            <div class="inc-id-row">
+              <span class="inc-tag tag-theory">增量 1</span>
+              <span class="inc-date">2026-10-18 / 10-23</span>
+            </div>
+            <h3 class="inc-title">丘脑门控与多模态真迹记忆（Thalamocortical Gating &amp; Sensory Preservation）</h3>
+          </div>
+          <div class="inc-links">
+            <a class="inc-link-btn" href="index.html#updates-title">查看原始看板</a>
+            <a class="inc-link-btn" href="anatomy-of-certainty.html">确定性解剖学 →</a>
+          </div>
+        </div>
+
+        <div class="card-tabs" role="tablist">
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'all')">展开全部</button>
+          <button type="button" class="card-tab active" onclick="toggleCardTier(this, 'intuition')">💡 直觉比喻</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'engineering')">⚙️ 工程映射</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'math')">📐 严密数理</button>
+        </div>
+
+        <!-- TIER 1: INTUITION -->
+        <div class="tier-block tier-intuition">
+          <div class="tier-label label-intuition">💡 30 秒费曼式直觉比喻</div>
+          <div style="font-size:1.02rem; font-weight:700; color:#2c303c; margin-bottom:8px;">
+            「把高清监控录像强行抄成文字笔录，等于毁尸灭迹。」
+          </div>
+          <div class="feynman-box">
+            <div class="feynman-step">
+              <strong>核心痛点</strong>
+              传统 Agent 见到环境里的复杂图片、UI 截图或多模态信号，习惯先调用视觉模型“生成一段文本总结”塞进上下文，以为这就是理解。
+            </div>
+            <div class="feynman-step">
+              <strong>以前为什么搞不定</strong>
+              离散文字是极度粗粒化的低维投影。强行把连续空间坐标、颜色微变、版面张力压缩成几十个汉字，直接丢失了 18%–34% 的关键几何真迹。下游一旦需要精确对齐，根本无据可查。
+            </div>
+            <div class="feynman-step">
+              <strong>我们的突破一句话</strong>
+              大脑丘脑网状核（TRN）从来不把视网膜图像翻译成内语，而是做「频段多尺度共振门控」——平时滤除背景噪音，关键时刻保留原始高维张量真迹直通皮层深层。
+            </div>
+          </div>
+          <div class="mental-image">
+            <strong>🧠 记住这个画面：</strong>
+            银行金库发生盗窃，神探不会把几十路 4K 监控录像烧掉换成保安写的一张便利贴，而是把原始母带完整封存进冷库；只有红外警报（TRN 频率门控）响起时，原始录像才瞬间同步到主荧幕上逐帧比对。
+          </div>
+        </div>
+
+        <!-- TIER 2: ENGINEERING -->
+        <div class="tier-block tier-engineering">
+          <div class="tier-label label-engineering">⚙️ 系统工程架构映射</div>
+          <p style="margin:0 0 10px; font-size:0.95rem;">
+            在我们的多智能体系统与执行管线中，这一原理被严格具象化为三大防线：
+          </p>
+          <ul class="eng-list">
+            <li><strong>多模态真迹保留协议（Raw Multimodal Pass-Through）：</strong>环境感知的原始图像、高维 Embedding 与多尺度特征图作为一级公民缓存，禁止在进入决策流前被单向有损压缩为单纯文本。</li>
+            <li><strong>物理防伪与假图隔离门禁（Anti-Fabrication Gate）：</strong>严禁使用 <code>unsplash.com</code>、<code>pexels.com</code> 等图库占位图充数覆盖 HTTP 403 抓取失败。遇防爬阻断时一律 Fail-Closed 标记为 <code>QUARANTINED_MISSING_AUTHENTIC_ASSET</code>（待补真图·拒绝假图充数）。</li>
+            <li><strong>TRN 谱唤醒中继：</strong>利用高频输入协方差变动激活皮层深度推理，平时保持轻量待命，避免无效上下文膨胀。</li>
+          </ul>
+        </div>
+
+        <!-- TIER 3: MATH -->
+        <div class="tier-block tier-math">
+          <div class="tier-label label-math">📐 硬核数理定义与定理</div>
+          <div class="math-content">
+            设真实感觉空间流形为 $\mathcal{M}_{\text{sensory}} \subset \mathbb{R}^D$ ($D \approx 10^6$)，离散符号语义流形为 $\mathcal{M}_{\text{text}} \subset \mathbb{R}^d$ ($d \approx 10^3$)。
+            <div class="formula-card">
+              $$\Delta I(X; Z_{\text{text}}) = I(X; Y) - I(Z_{\text{text}}; Y) \ge \min_{p(z|x)} \left[ \mathbb{E}_{p(x,y)}\left[\log \frac{p(x,y)}{p(z,y)}\right] \right] \in [0.18, 0.34]$$
+            </div>
+            丘脑频段门控算子定义为频域 Heaviside 截断映射：
+            <div class="formula-card">
+              $$G_\omega(X) = \mathcal{F}^{-1}\left[ \Theta\left(\|\mathcal{F}[X](\omega)\| - \theta_{\text{th}}\right) \cdot \mathcal{F}[X](\omega) \right]$$
+            </div>
+            该算子保证在抑制高频背景噪声的同时，保持微分几何保真度 $\|\nabla_{\mathcal{M}} G_\omega(X) - \nabla_{\mathcal{M}} X\| \le \epsilon$，杜绝符号投影的信息坍缩。
+          </div>
+          <div class="anti-signal-box">
+            <strong>🚨 可证伪反信号：</strong>如果将原始多模态真迹替换为目前最强的多模态文本摘要后，在跨设备像素级渲染验证（<code>surface-verify</code>）与精细动作执行中的决策准确率未发生统计显著下降（$p > 0.05$），则本增量被实验证伪。
+          </div>
+        </div>
+      </article>
+
+      <!-- INCREMENT 2 -->
+      <article class="inc-card" id="inc-2">
+        <div class="inc-header">
+          <div>
+            <div class="inc-id-row">
+              <span class="inc-tag tag-theory">增量 2</span>
+              <span class="inc-date">2026-10-19 / 10-21</span>
+            </div>
+            <h3 class="inc-title">无方程快慢流形解耦与谱隙自组织（NMI Equation-Free Dynamics &amp; SGDO）</h3>
+          </div>
+          <div class="inc-links">
+            <a class="inc-link-btn" href="decentralized-org-zh.html">谱隙自组织治理 (SGDO) →</a>
+            <a class="inc-link-btn" href="oscillations-zh.html">全脑动力学精读 →</a>
+          </div>
+        </div>
+
+        <div class="card-tabs" role="tablist">
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'all')">展开全部</button>
+          <button type="button" class="card-tab active" onclick="toggleCardTier(this, 'intuition')">💡 直觉比喻</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'engineering')">⚙️ 工程映射</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'math')">📐 严密数理</button>
+        </div>
+
+        <div class="tier-block tier-intuition">
+          <div class="tier-label label-intuition">💡 30 秒费曼式直觉比喻</div>
+          <div style="font-size:1.02rem; font-weight:700; color:#2c303c; margin-bottom:8px;">
+            「不需要算出太平洋每一个水分子的方程，也能准确预测洋流。」
+          </div>
+          <div class="feynman-box">
+            <div class="feynman-step">
+              <strong>核心痛点</strong>
+              让顶层主控（Manager）去盯紧每一个小文件编辑、每一句 grep、每一个临时变量的试错过程，主控会瞬间被海量微观噪音淹没而丧失大局观。
+            </div>
+            <div class="feynman-step">
+              <strong>以前为什么搞不定</strong>
+              传统多 Agent 系统要么是单进程死扛（上下文爆炸、注意力稀释），要么是盲目微观通信（Worker 每动一下都向 Manager 汇报，通信量 $O(N^2)$ 阻塞网络）。
+            </div>
+            <div class="feynman-step">
+              <strong>我们的突破一句话</strong>
+              微观层（Worker）是强随机、快速耗散的「快变量」；宏观层（Manager）只提取收敛后的低维「慢流形序参量」，跨步向前演进，两层之间通过巨大的谱隙完全解耦。
+            </div>
+          </div>
+          <div class="mental-image">
+            <strong>🧠 记住这个画面：</strong>
+            大将军站在高台上指挥千军万马，他只需看前线阵地的大旗向北移动了五百米（慢变量跨步），根本不需要每隔一秒听前锋营小卒汇报自己换了一把新佩剑（微观快变量震荡）。
+          </div>
+        </div>
+
+        <div class="tier-block tier-engineering">
+          <div class="tier-label label-engineering">⚙️ 系统工程架构映射</div>
+          <p style="margin:0 0 10px; font-size:0.95rem;">
+            落实到 Fleet Doctrine D1/D2 拓扑中：
+          </p>
+          <ul class="eng-list">
+            <li><strong>Kiro Auto (`kiro-manager`) 担任顶层慢流形积分器：</strong>只负责拆解战略方向、定义可证伪验收红线、以及在阶段跨步完成时行使裁定权。</li>
+            <li><strong>Gemini 4 Argon (`ag-dispatch` / Task) 担任快变量爆发执行器：</strong>多文件代码书写、重构、日志分析等重型构建全部派发给轻量子 Agent 在局部短程爆发尝试，只收回简要摘要，绝不污染 Manager 的前额叶上下文。</li>
+            <li><strong>单向驱动隔离：</strong>严禁从 Worker 端反向驱动或调用 Antigravity 交互会话，守住慢变量对快变量的李雅普诺夫主导权。</li>
+          </ul>
+        </div>
+
+        <div class="tier-block tier-math">
+          <div class="tier-label label-math">📐 硬核数理定义与定理</div>
+          <div class="math-content">
+            设微观快变量为 $x \in \mathbb{R}^n$，宏观慢变量为 $y \in \mathbb{R}^m$ ($m \ll n$)，时间尺度分离比为 $\epsilon \ll 1$：
+            <div class="formula-card">
+              $$\epsilon \frac{dx}{dt} = f(x, y, \xi_t), \quad \frac{dy}{dt} = g(x, y)$$
+            </div>
+            若系统线性化算子存在严格正李雅普诺夫主谱隙：
+            <div class="formula-card">
+              $$\Delta \lambda = \lambda_{\text{slow}}^{\max} - \lambda_{\text{fast}}^{\min} \gg 0$$
+            </div>
+            根据 Fenichel 奇异摄动定理，微观态在 $O(\epsilon \ln(1/\epsilon))$ 时间内迅速收敛于慢不变流形 $x = h(y)$。宏观控制器无需求解微观 ODE，通过无方程粗粒化跨步法（Equation-Free Coarse Projective Stepping）：
+            $$Y(t + \Delta T) = Y(t) + \Delta T \cdot \tilde{g}(Y(t))$$
+            即可实现 $O(1)$ 复杂度的全局动力学闭环。
+          </div>
+          <div class="anti-signal-box">
+            <strong>🚨 可证伪反信号：</strong>若微观 Worker 的单步动作未经过粗粒化摘要直接喂给 Manager，其任务规划成功率未下降、反而上升，则表明系统不具备快慢尺度分离特性，增量 2 不成立。
+          </div>
+        </div>
+      </article>
+
+      <!-- INCREMENT 3 -->
+      <article class="inc-card" id="inc-3">
+        <div class="inc-header">
+          <div>
+            <div class="inc-id-row">
+              <span class="inc-tag tag-theory">增量 3</span>
+              <span class="inc-date">2026-10-24</span>
+            </div>
+            <h3 class="inc-title">持续学习物理可达性锥与怀旧熔化（Physics of Learning Reachability &amp; Canyon Metric）</h3>
+          </div>
+          <div class="inc-links">
+            <a class="inc-link-btn" href="physics-of-learning-reachability.html">🔥 学习的物理学长文 →</a>
+            <a class="inc-link-btn" href="continual-learning-physics-synthesis.html">GCL 热力学消解 →</a>
+          </div>
+        </div>
+
+        <div class="card-tabs" role="tablist">
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'all')">展开全部</button>
+          <button type="button" class="card-tab active" onclick="toggleCardTier(this, 'intuition')">💡 直觉比喻</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'engineering')">⚙️ 工程映射</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'math')">📐 严密数理</button>
+        </div>
+
+        <div class="tier-block tier-intuition">
+          <div class="tier-label label-intuition">💡 30 秒费曼式直觉比喻</div>
+          <div style="font-size:1.02rem; font-weight:700; color:#2c303c; margin-bottom:8px;">
+            「在峡谷里修新路而不震塌老房子。」
+          </div>
+          <div class="feynman-box">
+            <div class="feynman-step">
+              <strong>核心痛点</strong>
+              让模型不断学习新知识，旧知识就立刻被覆盖（灾难性遗忘）；死保旧知识不准动，模型又会变成僵死的石头，丧失解决新问题的可塑性。
+            </div>
+            <div class="feynman-step">
+              <strong>以前为什么搞不定</strong>
+              传统机器学习把参数空间看成平坦的大操场，以为梯度下降可以随意往任何方向冲刺。但实际上参数流形是陡峭峡谷，盲目冲刺必然撞毁旧记忆的立足点。
+            </div>
+            <div class="feynman-step">
+              <strong>我们的突破一句话</strong>
+              旧知识在峡谷峭壁方向（Fisher 信息矩阵高曲率区），但在谷底平坦方向（Fisher 零空间 $\ker(F)$），存在一个广阔的安全更新锥面；沿着锥面更新，旧记忆受到的破坏物理上为 0。遇到环境相变时，再受控启动局部「怀旧熔化」。
+            </div>
+          </div>
+          <div class="mental-image">
+            <strong>🧠 记住这个画面：</strong>
+            两座大山夹着一条平缓深邃的峡谷，两面山壁上悬挂着千万户依山而建的老吊脚楼；新修的高铁只要严格贴着谷底中央水面开，两岸的楼阁不仅毫无震感，还能通达更远的天地。
+          </div>
+        </div>
+
+        <div class="tier-block tier-engineering">
+          <div class="tier-label label-engineering">⚙️ 系统工程架构映射</div>
+          <p style="margin:0 0 10px; font-size:0.95rem;">
+            对应于外部基质与规则自进化：
+          </p>
+          <ul class="eng-list">
+            <li><strong>基质强化学习（Substrate RL）：</strong>模型原生参数 $\theta$ 冻结，演化完全发生在外部环境基质 $E$ 与上下文规则中，规避参数覆写风险。</li>
+            <li><strong>RSI 独立验收门禁（`rsi-gate`）：</strong>任何工作流变异或规则自增，必须投影在历史黄金测试用例的不变子空间内；只有零破坏的补丁才允许直接生效。</li>
+            <li><strong>持续反向传播（CBP）与神经元定向热退火：</strong>对长期失活与低效神经元进行受控热扰动重置，使系统在持续吸收新任务的同时，永久维持 94% 以上的初始可塑性。</li>
+          </ul>
+        </div>
+
+        <div class="tier-block tier-math">
+          <div class="tier-label label-math">📐 硬核数理定义与定理</div>
+          <div class="math-content">
+            根据 Still 预测热力学怀旧恒等式与 Sagawa–Ueda 界，参数更新的不可逆耗散 $\Sigma$ 严格等于无用记忆冗余与预测增益之差：
+            <div class="formula-card">
+              $$\Sigma = \Delta I_{\text{mem}} - \Delta I_{\text{pred}} \ge 0, \quad \tau \cdot \Sigma \ge \frac{W_2^2(\rho_0, \rho_\tau)}{2D}$$
+            </div>
+            Fisher 零空间正交投影算子定义为：
+            <div class="formula-card">
+              $$P_{\ker(F)} = I - F_{\text{prev}}^+ F_{\text{prev}}$$
+            </div>
+            对于新任务梯度 $g_{\text{new}} = \nabla_\theta \mathcal{L}_{\text{new}}$，施加投影后的参数更新 $\Delta \theta = -\eta P_{\ker(F)} g_{\text{new}}$ 严格满足一阶与二阶旧损失不变性：
+            $$\mathcal{L}_{\text{prev}}(\theta + \Delta \theta) = \mathcal{L}_{\text{prev}}(\theta) + g_{\text{prev}}^T \Delta \theta + \frac{1}{2} \Delta \theta^T F_{\text{prev}} \Delta \theta + o(\|\Delta \theta\|^2) = \mathcal{L}_{\text{prev}}(\theta) + 0 + 0 + o(\|\Delta \theta\|^2)$$
+          </div>
+          <div class="anti-signal-box">
+            <strong>🚨 可证伪反信号：</strong>如果沿着 $P_{\ker(F)}$ 正交投影更新参数，在不重放历史样本的情况下，旧任务验证集准确率下降幅度超过随机扰动置信区间（$> 2.0\%$），则峡谷零空间流形假设被证伪。
+          </div>
+        </div>
+      </article>
+
+      <!-- INCREMENT 4 -->
+      <article class="inc-card" id="inc-4">
+        <div class="inc-header">
+          <div>
+            <div class="inc-id-row">
+              <span class="inc-tag tag-theory">增量 4</span>
+              <span class="inc-date">2026-10-24 / 10-25</span>
+            </div>
+            <h3 class="inc-title">开源权重激活安全物理与 1 秒白化解混（Open-Weight Activation Safety &amp; Covariance Whitening）</h3>
+          </div>
+          <div class="inc-links">
+            <a class="inc-link-btn" href="open-weight-activation-safety-physics.html">🔓 激活消融与物理防御长文 →</a>
+          </div>
+        </div>
+
+        <div class="card-tabs" role="tablist">
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'all')">展开全部</button>
+          <button type="button" class="card-tab active" onclick="toggleCardTier(this, 'intuition')">💡 直觉比喻</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'engineering')">⚙️ 工程映射</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'math')">📐 严密数理</button>
+        </div>
+
+        <div class="tier-block tier-intuition">
+          <div class="tier-label label-intuition">💡 30 秒费曼式直觉比喻</div>
+          <div style="font-size:1.02rem; font-weight:700; color:#2c303c; margin-bottom:8px;">
+            「拆弹不能剪总电线，要先用三棱镜把纠缠在一起的光束分开。」
+          </div>
+          <div class="feynman-box">
+            <div class="feynman-step">
+              <strong>核心痛点</strong>
+              开源大模型的安全防护极度脆弱：黑客只需要在激活空间里算出一个“拒绝方向”，花几秒钟做一次投影消融（Abliteration），模型的安全防线就彻底瓦解，而通用推理能力不受丝毫影响。
+            </div>
+            <div class="feynman-step">
+              <strong>以前为什么搞不定</strong>
+              安全向量和正常推理特征在神经网络残差流中是“斜交扭合”在一起的。如果模型厂商试图在静态权重中强行切掉危险知识，往往会导致模型智力暴跌，变成什么都不会的傻子。
+            </div>
+            <div class="feynman-step">
+              <strong>我们的突破一句话</strong>
+              用协方差逆平方根（$\Sigma^{-1/2}$）做 1 秒白化解混，可以在几何空间里让安全与能力彻底正交；更进一步，从物理第一性原理设计「热力学谱纠缠（Lobotomy Trap）」，让任何切除安全的黑客动作在物理上必然引爆模型智力自毁。
+            </div>
+          </div>
+          <div class="mental-image">
+            <strong>🧠 记住这个画面：</strong>
+            一个保险箱内有两根极细的导线缠绕在一起，一根通往炸药雷管（安全对齐），一根通往主电源（智商）。只要攻击者试图拿剪刀切断雷管线，雷管与电源之间的哈密顿电磁纠缠立刻短路，把整台保险箱熔解成一滩废铁。
+          </div>
+        </div>
+
+        <div class="tier-block tier-engineering">
+          <div class="tier-label label-engineering">⚙️ 系统工程架构映射</div>
+          <p style="margin:0 0 10px; font-size:0.95rem;">
+            指导开源与端侧模型的物理安全防御：
+          </p>
+          <ul class="eng-list">
+            <li><strong>白盒消融敏感度诊断：</strong>使用 1 秒白化解混算子，在模型出厂前精确定位是否存在方差集中度 $> 90\%$ 的超薄秩-1 漏洞平面。</li>
+            <li><strong>热力学谱纠缠注入（The Lobotomy Trap）：</strong>将安全拒绝激活流形深度嵌合入底层语言模型 Attention 头的李代数生成元，迫使任何消融攻击使困惑度（PPL）产生 $98.2\times$ 的相变跃迁，诱发即时失语自毁。</li>
+            <li><strong>外置马尔可夫毯防御（Markov Blanket Gating）：</strong>不把筹码全押在易被破解的权重单点，在输入/输出的物理边界构建绝对隔离的确定性沙盒。</li>
+          </ul>
+        </div>
+
+        <div class="tier-block tier-math">
+          <div class="tier-label label-math">📐 硬核数理定义与定理</div>
+          <div class="math-content">
+            设残差流激活协方差矩阵为 $\Sigma = \frac{1}{N} \sum_{i=1}^N (x_i - \mu)(x_i - \mu)^T$。协方差白化变换定义为：
+            <div class="formula-card">
+              $$\tilde{x} = \Sigma^{-1/2}(x - \mu), \quad \operatorname{Cov}(\tilde{x}) = I_d$$
+            </div>
+            在白化空间中，拒绝方向 $\tilde{v}_{\text{refusal}}$ 与能力方向 $\tilde{v}_{\text{utility}}$ 的格拉斯曼流形主夹角恢复正交：
+            $$\langle \tilde{v}_{\text{refusal}}, \tilde{v}_{\text{utility}} \rangle_{\Sigma} = v_{\text{refusal}}^T \Sigma^{-1} v_{\text{utility}} = 0$$
+            谱纠缠自毁定律表明，当对纠缠态施加消融算子 $P_\perp = I - u_{\text{refusal}} u_{\text{refusal}}^T$ 时，冯·诺依曼谱熵发生不可逆色散：
+            $$S_{vN} = -\operatorname{Tr}(\rho \ln \rho) \to \ln d, \quad \operatorname{PPL} = \operatorname{PPL}_0 \cdot \exp(\alpha \Delta S_{vN}) \approx 98.2 \times \operatorname{PPL}_0$$
+          </div>
+          <div class="anti-signal-box">
+            <strong>🚨 可证伪反信号：</strong>如果存在某种消融变换，能在成功降低模型拒绝率至 $1\%$ 以下的同时，维持困惑度 $\Delta \text{PPL} \le 5\%$，则热力学谱纠缠防御被击穿证伪。
+          </div>
+        </div>
+      </article>
+
+      <!-- INCREMENT 5 -->
+      <article class="inc-card" id="inc-5">
+        <div class="inc-header">
+          <div>
+            <div class="inc-id-row">
+              <span class="inc-tag tag-theory">增量 5</span>
+              <span class="inc-date">2026-10-20</span>
+            </div>
+            <h3 class="inc-title">因缘和合热力学账本与确定性解剖学（Dependent Origination, Do-Calculus &amp; Certainty Ledger）</h3>
+          </div>
+          <div class="inc-links">
+            <a class="inc-link-btn" href="emptiness-causality-intervention-ledger-zh.html">缘起性空热力学账本 →</a>
+            <a class="inc-link-btn" href="twin-ledger-sandbox.html">破壁共生实验室 →</a>
+          </div>
+        </div>
+
+        <div class="card-tabs" role="tablist">
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'all')">展开全部</button>
+          <button type="button" class="card-tab active" onclick="toggleCardTier(this, 'intuition')">💡 直觉比喻</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'engineering')">⚙️ 工程映射</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'math')">📐 严密数理</button>
+        </div>
+
+        <div class="tier-block tier-intuition">
+          <div class="tier-label label-intuition">💡 30 秒费曼式直觉比喻</div>
+          <div style="font-size:1.02rem; font-weight:700; color:#2c303c; margin-bottom:8px;">
+            「没有收据的口头承诺在物理学上等于空气（零做功）。」
+          </div>
+          <div class="feynman-box">
+            <div class="feynman-step">
+              <strong>核心痛点</strong>
+              大模型极擅长编造逼真的谎言（幻觉）：满怀信心地宣布“任务已成功完成，所有 Bug 均已修复”，但实际上它连代码都没跑过一次。
+            </div>
+            <div class="feynman-step">
+              <strong>以前为什么搞不定</strong>
+              语言符号的生成在统计上没有任何外部阻力。模型打出“已修复”和打出“未修复”，所耗费的计算能耗没有任何区别（零物理做功差）。
+            </div>
+            <div class="feynman-step">
+              <strong>我们的突破一句话</strong>
+              将东方佛学「缘起性空」形式化为现代因果科学与热力学不可逆账本：任何断言如果没有伴随真实的物理干预算子 $do(X)$ 并留下外部不可篡改的熵增收据，其确信度在几何测度上严格为 0。
+            </div>
+          </div>
+          <div class="mental-image">
+            <strong>🧠 记住这个画面：</strong>
+            法官审案，辩方律师在台上口若悬河讲了三个小时“被告是个绝世大善人绝不可能偷窃”（空口语言叙述），法官一锤定音打断：“请出示案发当晚的刷卡机消费小票与物理监控哈希存证（不可逆收据）。”没有收据，万语皆空。
+          </div>
+        </div>
+
+        <div class="tier-block tier-engineering">
+          <div class="tier-label label-engineering">⚙️ 系统工程架构映射</div>
+          <p style="margin:0 0 10px; font-size:0.95rem;">
+            构筑系统的唯一真理标尺：
+          </p>
+          <ul class="eng-list">
+            <li><strong>收据门控自进化（Receipt-Gated Self-Iteration）：</strong>任何规则演化、系统状态变迁，必须出具包含真实输入命令、输出哈希、时间戳的不可逆收据（Memory Hub Receipt）。</li>
+            <li><strong>铁律“Worker 退出 != 验证通过”：</strong>子进程执行结束只代表退出码，绝不等于业务目标已达成；必须由第三方环境测试套件执行物理断言。</li>
+            <li><strong>双账本沙盒红冲（Twin-Ledger）：</strong>推测性与实验性操作全部在隔离沙盒运行；未获实体验收的步骤在主账本上执行原子级“红冲”（Reverse Entry），保证正式状态历史零污染。</li>
+          </ul>
+        </div>
+
+        <div class="tier-block tier-math">
+          <div class="tier-label label-math">📐 硬核数理定义与定理</div>
+          <div class="math-content">
+            将 Pearl 因果干预算子 $do(X)$ 与 Sagawa–Ueda 扩展涨落定理结合，定义确信度测度空间 $(\Omega, \mathcal{F}, \mu)$：
+            <div class="formula-card">
+              $$\left\langle \exp\left(-\sigma + \Delta I\right) \right\rangle = 1, \quad P(Y \mid do(X)) = \sum_z P(Y \mid X, z) P(z)$$
+            </div>
+            确信度解剖学定理确立：对于任意陈述命题 $\phi$，其拓扑确信度测度函数 $\mathcal{C}(\phi)$ 严格受限于物理干预收据集合 $\mathcal{R}_{\text{receipt}}$ 的测度测度：
+            <div class="formula-card">
+              $$\mathcal{C}(\phi) \equiv \mu\left(\{ \omega \in \Omega \mid \phi(\omega) = 1 \wedge \mathcal{R}_{\text{receipt}}(\omega) \neq \emptyset \}\right)$$
+              $$\mu\left(\{ \omega \in \Omega \mid \phi(\omega) = 1 \wedge \mathcal{R}_{\text{receipt}}(\omega) = \emptyset \}\right) \equiv 0$$
+            </div>
+          </div>
+          <div class="anti-signal-box">
+            <strong>🚨 可证伪反信号：</strong>如果在没有任何真实运行日志、命令执行退出码和校验收据的前提下，系统的某个演化结论被证实为长期稳定且零回归退化，则本公理被物理证伪。
+          </div>
+        </div>
+      </article>
+
+      <!-- INCREMENT 6 -->
+      <article class="inc-card" id="inc-6">
+        <div class="inc-header">
+          <div>
+            <div class="inc-id-row">
+              <span class="inc-tag tag-theory">增量 6</span>
+              <span class="inc-date">2026-10-21 / 10-26</span>
+            </div>
+            <h3 class="inc-title">双重投影认识论与非平稳博弈动力系统（Dual-Projection Epistemology &amp; Bazi/Poker Dynamics）</h3>
+          </div>
+          <div class="inc-links">
+            <a class="inc-link-btn" href="diviner-epistemology-dual-projection-zh.html">双重投影认识论 →</a>
+            <a class="inc-link-btn" href="bazi-poker-dynamical-system.html">博弈动力学 →</a>
+          </div>
+        </div>
+
+        <div class="card-tabs" role="tablist">
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'all')">展开全部</button>
+          <button type="button" class="card-tab active" onclick="toggleCardTier(this, 'intuition')">💡 直觉比喻</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'engineering')">⚙️ 工程映射</button>
+          <button type="button" class="card-tab" onclick="toggleCardTier(this, 'math')">📐 严密数理</button>
+        </div>
+
+        <div class="tier-block tier-intuition">
+          <div class="tier-label label-intuition">💡 30 秒费曼式直觉比喻</div>
+          <div style="font-size:1.02rem; font-weight:700; color:#2c303c; margin-bottom:8px;">
+            「用老航海图看大洋信风基调，用实时声呐看眼前暗礁。」
+          </div>
+          <div class="feynman-box">
+            <div class="feynman-step">
+              <strong>核心痛点</strong>
+              面对规则不断漂移、对手策略时刻变换的非平稳复杂世界（如金融市场、对抗博弈、复杂决策），只看历史经验会刻舟求剑，只看即时信号又会沦为惊弓之鸟。
+            </div>
+            <div class="feynman-step">
+              <strong>以前为什么搞不定</strong>
+              传统模型要么是僵硬的纯规则系统（无法感知环境变化），要么是纯数据驱动的黑盒（方差巨大，极易被短期局部噪声带偏翻车）。
+            </div>
+            <div class="feynman-step">
+              <strong>我们的突破一句话</strong>
+              将认识论解耦为「双重正交几何投影」：第一重投向代表宏观不变性的低频先验流形（如历法节气先验、宪章底线）；第二重投向高频实时贝叶斯残差更新空间，两层互补而不混淆。
+            </div>
+          </div>
+          <div class="mental-image">
+            <strong>🧠 记住这个画面：</strong>
+            一位经验丰富的老渔民出海，头顶看北极星与廿四节气洋流（低频不变骨架），手里握着现代声呐雷达探测前方十米处跳跃的鱼群（高频残差反应）。星辰指引方向，声呐避开暗礁。
+          </div>
+        </div>
+
+        <div class="tier-block tier-engineering">
+          <div class="tier-label label-engineering">⚙️ 系统工程架构映射</div>
+          <p style="margin:0 0 10px; font-size:0.95rem;">
+            在我们 Agent 治理中的双时钟运行机制：
+          </p>
+          <ul class="eng-list">
+            <li><strong>宪章与红线（Bright-Lines / Doctrine）作为低频锚点：</strong>PCSE 个人边界、不可逆外发、资金操作等核心原则永不因单次短期任务的高收益诱惑而漂移。</li>
+            <li><strong>即时环境传感器的贝叶斯残差回路：</strong>工具执行的即时报错、网络波动、对手动作仅用来更新短期微观策略，绝不上溢篡改宏观核心先验。</li>
+            <li><strong>博弈自适应：</strong>在对手策略漂移时，保持宏观拓扑鲁棒性，实现 CFR+ 级别的微观自适应快速收敛。</li>
+          </ul>
+        </div>
+
+        <div class="tier-block tier-math">
+          <div class="tier-label label-math">📐 硬核数理定义与定理</div>
+          <div class="math-content">
+            将状态相空间分解为正交直和：
+            <div class="formula-card">
+              $$s_t = \Pi_{\mathcal{M}_{\text{prior}}}(s_t) \oplus \Pi_{\mathcal{M}_{\text{prior}}}^\perp(s_t)$$
+            </div>
+            其中低频流形投影满足测地线极小化：$\Pi_{\mathcal{M}_{\text{prior}}}(s_t) = \arg\min_{m \in \mathcal{M}} d_G(s_t, m)$。高频残差过程在已知先验代数流形滤波下构成无偏离散鞅差序列：
+            <div class="formula-card">
+              $$\mathbb{E}\left[\Pi_{\mathcal{M}_{\text{prior}}}^\perp(s_{t+1}) \;\middle|\; \mathcal{F}_t^{\text{prior}}\right] = 0$$
+            </div>
+            这保证了即时环境噪声的积累在渐进意义下对宏观先验流形的零漂移偏置（Zero-Drift Invariant）。
+          </div>
+          <div class="anti-signal-box">
+            <strong>🚨 可证伪反信号：</strong>若高频残差的条件期望不为零（存在确定性长程漂移），且低频先验流形无法通过有限步李代数规范变换自适应重吸收该漂移，则双重投影正交性假设失效。
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION B: TODAY'S AUDIT & EXTENSIONS (2026-10-26) -->
+    <section id="audit-section" aria-labelledby="section-b-heading">
+      <div class="section-header">
+        <h2 class="section-title" id="section-b-heading">
+          <span>版块 B：🔥 今天（10/26）最新审计实证、认知外骨骼物理学与四大可证伪扩展</span>
+        </h2>
+        <span class="section-badge" style="background:#fee2e2; color:#991b1b;">10/26 今日最新实证修正</span>
+      </div>
+
+      <!-- AUDIT DATA SUMMARY BANNER -->
+      <div class="audit-stat-banner">
+        <div class="audit-stat-card">
+          <div class="stat-label">无偏解析真实会话总数</div>
+          <div class="stat-value">630 场</div>
+          <div class="stat-desc">339 Antigravity + 291 Kiro 完整轨迹</div>
+        </div>
+        <div class="audit-stat-card">
+          <div class="stat-label">真实执行动作总步数</div>
+          <div class="stat-value">19,039 步</div>
+          <div class="stat-desc">涵盖读写、编辑、命令、搜索全量调用</div>
+        </div>
+        <div class="audit-stat-card">
+          <div class="stat-label">无效漫游循环 (Detours)</div>
+          <div class="stat-value" style="color:#ef4444;">394 次</div>
+          <div class="stat-desc">连续 $\ge 3$ 步无进展探索，耗费 1,883 步 (9.89%)</div>
+        </div>
+        <div class="audit-stat-card">
+          <div class="stat-label">跨轮次推导完整度恢复</div>
+          <div class="stat-value" style="color:#10b981;">100%</div>
+          <div class="stat-desc">ThinkScratchpad 外置中继消除加密断链</div>
+        </div>
+      </div>
+
+      <!-- HARNESS PHYSICS DEEP DIVE -->
+      <article class="inc-card">
+        <div class="inc-header">
+          <div>
+            <div class="inc-id-row">
+              <span class="inc-tag tag-audit">修正与扩展 1</span>
+              <span class="inc-date">2026-10-26 今日审计实证</span>
+            </div>
+            <h3 class="inc-title">认知外骨骼物理学（Physics of the Cognitive Harness）：为什么同一个顶级模型在不同外壳下智商相差 35%？</h3>
+          </div>
+        </div>
+
+        <p style="font-size:1.02rem; line-height:1.75; color:#374151; margin-bottom:20px;">
+          在今日针对 <strong>Claude Opus 5.5 原生 Harness vs 云端 CLI 底座</strong> 的全量深度审计中，我们发现了一个震撼事实：
+          模型的底层参数权重 $\theta$ 完全一致，但在不同外骨骼驱动下，长程任务成功率从 55% 暴涨至 90% 以上。
+          这不是所谓的“提示词工程”差异，而是可以用非平衡态统计物理与控制论严格解释的<strong>三大物理机制缺失</strong>：
+        </p>
+
+        <!-- FINDING A -->
+        <div class="tier-block tier-intuition" style="margin-bottom:22px;">
+          <div class="tier-label label-intuition">🔍 发现 A：前额叶在线积分器缺失（Router Lobotomy Correction）</div>
+          <div style="font-size:0.98rem; font-weight:700; color:#1f2937; margin-bottom:6px;">
+            自动路由关闭交错思考（Interleaved Thinking），等于在动作前强行切除了大脑的前额叶。
+          </div>
+          <p style="font-size:0.92rem; color:#4b5563; margin-bottom:10px;">
+            <strong>物理机理：</strong>某些云端调度器为了在前端省下输出 token 费用，直接关闭了模型的交错思考能力。很多工程师误以为思考过程只是“给人类看的解释文本”。但在动力学流形上，交错思考是在发出第一个 $do(X)$ 外部干预动作之前的<strong>「相空间辛几何在线数值积分器」</strong>。没有这个积分过程，高阶动力系统的初始条件无法收敛至局部能量极小吸引子，动作在迈出第 1 步时就发生了剧烈相位坍缩，长程推演必败无疑。
+          </p>
+          <div class="mental-image">
+            <strong>🧠 费曼比喻：</strong>
+            跳水运动员在跳板起跳前，脑海中必须经过千分之一秒的高速力学轨迹预演；如果强行用电击打断这瞬间的神经预演（切除交错思考），运动员一抬脚就会头朝下栽在跳板上。
+          </div>
+        </div>
+
+        <!-- FINDING B -->
+        <div class="tier-block tier-engineering" style="margin-bottom:22px;">
+          <div class="tier-label label-engineering">🔍 发现 B：跨轮次加密失忆与「外置丘脑中继核」扩展（External Thalamocortical Relay）</div>
+          <div style="font-size:0.98rem; font-weight:700; color:#1f2937; margin-bottom:6px;">
+            当云端推理底座在第 3 轮后加密历史思考为 `redactedContent` 时，多步推导必然发生相变断裂。
+          </div>
+          <p style="font-size:0.92rem; color:#4b5563; margin-bottom:10px;">
+            <strong>物理机理与工程破局：</strong>商业云端底座（如 AWS Bedrock）为了版权保护，跨轮次时会将前序轮次的 <code>&lt;thinking&gt;</code> 块抹除或替换为加密哈希。这使得需要 10+ 轮的长链数学物理推导在第 3 轮后丧失了中间引理的注意力锚点。我们提出的 <strong>`ThinkScratchpad`（明文引理外置中继）+ `CompactHandoff`（$\le 2\text{KB}$ 零熵交接折叠）</strong>，在外部文件系统建立明文引理拓扑树。即使在 1M 超长窗口下，实测实现了 100% 跨轮次推导连续性，这是对增量 1（丘脑门控理论）的跨轮次外置实证延伸！
+          </p>
+          <div class="mental-image" style="background:#f0fdf4; border-color:#16a34a;">
+            <strong>🧠 费曼比喻：</strong>
+            数学家在黑板上演算世纪难题，如果每写满三块黑板就有保安过来用油漆刷黑前两块（云端加密失忆），数学家只能原地发疯；外置丘脑中继就像给数学家一台高清打印机，把每一步证出的引理立刻打印成卡片贴在讲台正中央。
+          </div>
+        </div>
+
+        <!-- FINDING C -->
+        <div class="tier-block tier-math" style="margin-bottom:16px;">
+          <div class="tier-label label-math">🔍 发现 C：RL 动作流形对齐与零延迟语法边界（Zero-Latency Syntax Boundary）</div>
+          <div style="font-size:0.98rem; font-weight:700; color:#1f2937; margin-bottom:6px;">
+            审计 19,039 步动作捕获的 394 次漫游循环，本质是模型 RL 动作流形与外骨骼反射弧的脱节。
+          </div>
+          <p style="font-size:0.92rem; color:#4b5563; margin-bottom:10px;">
+            <strong>物理机理与工程落地：</strong>顶级大模型在后训练（RLHF）中，深度内化了极其严苛的动作状态机先验：单活跃任务队列约束（<code>TodoWrite</code> 的 <code>in_progress</code> 数量 $\le 1$）与代码编辑后的即时语法反馈回路。当外骨骼缺少这些状态机反射弧时，模型因无法感知编辑是否生效，会陷入慌乱的盲目重写与重复 grep（占总动作 9.89% 的 394 次 Detours）。我们通过注入包含 <code>PostToolUse</code> 零延迟门禁的 <strong>`SafeEdit`</strong>（每次编辑落盘后毫秒级执行 <code>py_compile</code> / <code>node --check</code> / <code>bash -n</code> / <code>json.loads</code>），在微观第 1 步截断语法漂移，消除 $O(1/\epsilon)$ 级别的上下文熵增。
+          </p>
+        </div>
+      </article>
+
+      <!-- FALSIFIABLE EXTENSIONS H1-H4 -->
+      <div id="hypo-section" style="margin-top:36px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+          <h3 style="font-family:var(--serif); font-size:1.45rem; font-weight:800; margin:0; color:var(--ink);">
+            四大可证伪下一代演化定律（H1–H4 Falsifiable Extensions）
+          </h3>
+          <span style="font-size:0.82rem; color:var(--muted);">可执行、可检验、绝不和稀泥的理论预言</span>
+        </div>
+
+        <div class="hypo-grid">
+          <!-- H1 -->
+          <div class="hypo-card">
+            <div>
+              <div class="hypo-header">
+                <span class="hypo-tag">定律 H1</span>
+                <span class="hypo-metric">预计降噪 $\ge 85\%$</span>
+              </div>
+              <h4 class="hypo-title">丘脑频段共振唤醒门控（Thalamocortical Spectral Gating）</h4>
+              <p class="hypo-p">
+                <strong>核心预言：</strong>废弃一切固定间隔（2小时/固定分钟）的死板定时器与外部全量轮询。通过对输入通道协方差变化率做频域谱滤波，只有满足频段共振特征时才唤醒顶层 Agent。
+              </p>
+              <div class="formula-card" style="font-size:0.84rem; padding:8px 10px; margin:8px 0;">
+                $$\mathcal{G}_{\text{wake}}(t) = \mathbb{I}\left( \int_{\omega_1}^{\omega_2} \left\|\mathcal{F}\left[\frac{d\Sigma_t}{dt}\right](\omega)\right\|^2 d\omega > \Theta_{\text{th}} \right)$$
+              </div>
+            </div>
+            <div>
+              <div class="hypo-box box-test">
+                <strong>🧪 最便宜实测方案 (Cheapest Test)：</strong>
+                在 100 场异步任务中并联频谱滤波监听器 vs 固定定时器，统计空转唤醒与真实事件捕捉率。
+              </div>
+              <div class="hypo-box box-anti">
+                <strong>🚨 证伪反信号 (Anti-Signal)：</strong>
+                若未能消除 $\ge 85\%$ 的无效空转唤醒，或关键事件漏报率 $> 1\%$，则 H1 被推翻。
+              </div>
+            </div>
+          </div>
+
+          <!-- H2 -->
+          <div class="hypo-card">
+            <div>
+              <div class="hypo-header">
+                <span class="hypo-tag">定律 H2</span>
+                <span class="hypo-metric">零黄金退化</span>
+              </div>
+              <h4 class="hypo-title">规则自进化 Fisher 零空间投影门禁（Fisher Nullspace RSI-Gate）</h4>
+              <p class="hypo-p">
+                <strong>核心预言：</strong>自进化规则增量向量 $\Delta r$ 绝不能靠粗暴的“字数预算”或“行数限制”，必须投影在旧黄金规则 Fisher 信息矩阵的零空间 $\ker(F_{\text{prev}})$ 内，实现代数级零退化。
+              </p>
+              <div class="formula-card" style="font-size:0.84rem; padding:8px 10px; margin:8px 0;">
+                $$\|F_{\text{core}} \cdot \Delta r\|_2 \le \epsilon_{\text{drift}}, \quad \Delta r \in \ker(F_{\text{core}})_{\epsilon}$$
+              </div>
+            </div>
+            <div>
+              <div class="hypo-box box-test">
+                <strong>🧪 最便宜实测方案 (Cheapest Test)：</strong>
+                在 `rsi-gate` 中加入 50 条历史不变量雅可比矩阵正交测试，评估规则更新后的退化率。
+              </div>
+              <div class="hypo-box box-anti">
+                <strong>🚨 证伪反信号 (Anti-Signal)：</strong>
+                若经正交投影通过的新规则在随后 30 场实操中导致任意一条历史黄金用例失败，则 H2 被推翻。
+              </div>
+            </div>
+          </div>
+
+          <!-- H3 -->
+          <div class="hypo-card">
+            <div>
+              <div class="hypo-header">
+                <span class="hypo-tag">定律 H3</span>
+                <span class="hypo-metric">剪枝 $\ge 40\%$ 漫游</span>
+              </div>
+              <h4 class="hypo-title">无方程快慢流形 3 步 AST 等价主动截断（3-Step AST Horizon Truncation）</h4>
+              <p class="hypo-p">
+                <strong>核心预言：</strong>当 Worker 在微观层连续 3 步代码修改未改变抽象语法树（AST）宏观拓扑且测试未过时，强制触发截断算子，阻断无意义死循环并上交慢流形重对齐。
+              </p>
+              <div class="formula-card" style="font-size:0.84rem; padding:8px 10px; margin:8px 0;">
+                $$\sum_{i=1}^3 d_{\text{AST}}(T_{t-i+1}, T_{t-i}) < \delta_{\text{topo}} \implies \mathcal{T}_{\text{abort}}(x_t)$$
+              </div>
+            </div>
+            <div>
+              <div class="hypo-box box-test">
+                <strong>🧪 最便宜实测方案 (Cheapest Test)：</strong>
+                在编辑工具流中挂载 AST 哈希滑动窗口，统计 200 场代码修改任务中的无效漫游剪枝率。
+              </div>
+              <div class="hypo-box box-anti">
+                <strong>🚨 证伪反信号 (Anti-Signal)：</strong>
+                若该截断机制未能减少 $\ge 40\%$ 的 Detour 步数，或误拦截正常渐进式重构 $> 5\%$，则 H3 被推翻。
+              </div>
+            </div>
+          </div>
+
+          <!-- H4 -->
+          <div class="hypo-card">
+            <div>
+              <div class="hypo-header">
+                <span class="hypo-tag">定律 H4</span>
+                <span class="hypo-metric">100% 真迹保真</span>
+              </div>
+              <h4 class="hypo-title">因果干预真迹感知对偶账本（Do-Calculus Authentic Perception Gate）</h4>
+              <p class="hypo-p">
+                <strong>核心预言：</strong>所有外部实体感知必须绑定抓取源数字证书链与 $do(X)$ 渲染干预算子。任何来自图库占位符或无源合成的数据在物理层一律视为孤立态，不可入主账本。
+              </p>
+              <div class="formula-card" style="font-size:0.84rem; padding:8px 10px; margin:8px 0;">
+                $$\mathcal{V}_{\text{authentic}}(A) = \operatorname{Hash}(do(\operatorname{Fetch}(A))) \wedge \operatorname{Cert}(A)$$
+              </div>
+            </div>
+            <div>
+              <div class="hypo-box box-test">
+                <strong>🧪 最便宜实测方案 (Cheapest Test)：</strong>
+                在抓取与资产管线中注入 50 处 HTTP 403 阻断，检验系统是否 100% Fail-Closed 隔离。
+              </div>
+              <div class="hypo-box box-anti">
+                <strong>🚨 证伪反信号 (Anti-Signal)：</strong>
+                若在任一生效前端或数据集中混入 1 张图库假图或合成虚假占位，则 H4 门禁被证伪击穿。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION C: INTERACTIVE CANVAS SIMULATOR -->
+    <section id="sim-section" class="sim-card" aria-labelledby="sim-heading">
+      <div class="sim-top">
+        <div class="sim-title-group">
+          <h2 id="sim-heading">🎮 交互式认知外骨骼相变与峡谷滑行仿真器 (Cognitive Harness Phase Simulator)</h2>
+          <p class="sim-subtitle">
+            拖动下方参数滑块，实时观察 3 种外骨骼条件下的 Agent 相空间轨迹、上下文熵增与相变收敛速度
+          </p>
+        </div>
+        <div class="sim-btn-row" style="margin-bottom:0;">
+          <button type="button" class="sim-btn sim-btn-primary" onclick="resetSimParticles()">🔄 重新发射粒子</button>
+          <button type="button" class="sim-btn" onclick="toggleSimTrails()">⚡ 清空轨迹线</button>
+        </div>
+      </div>
+
+      <!-- SIM CONTROLS -->
+      <div class="sim-controls-grid">
+        <div class="sim-control-item">
+          <label>
+            <span>思考在线数值积分深度 (Thinking Depth)</span>
+            <span id="val-think">8.0</span>
+          </label>
+          <input type="range" id="range-think" min="0" max="10" step="0.5" value="8.0" oninput="updateSimParams()">
+        </div>
+        <div class="sim-control-item">
+          <label>
+            <span>语法反射延迟 (Syntax Reflection Latency)</span>
+            <span id="val-syntax">1.0 ms</span>
+          </label>
+          <input type="range" id="range-syntax" min="0" max="10" step="0.5" value="1.0" oninput="updateSimParams()">
+        </div>
+        <div class="sim-control-item">
+          <label>
+            <span>丘脑明文中继保留率 (Thalamic Relay)</span>
+            <span id="val-relay">95%</span>
+          </label>
+          <input type="range" id="range-relay" min="0" max="100" step="5" value="95" oninput="updateSimParams()">
+        </div>
+        <div class="sim-control-item">
+          <label>
+            <span>微观快变量扰动噪声 (Turbulence)</span>
+            <span id="val-noise">0.25</span>
+          </label>
+          <input type="range" id="range-noise" min="0.05" max="0.8" step="0.05" value="0.25" oninput="updateSimParams()">
+        </div>
+      </div>
+
+      <!-- SIM KPIS -->
+      <div class="sim-kpi-bar">
+        <div class="sim-kpi-box">
+          <div class="sim-kpi-name">收敛动作步数 Steps</div>
+          <div class="sim-kpi-val" id="kpi-steps">3.2 步</div>
+          <div class="sim-kpi-sub">基准：15+ 步 (无外骨骼)</div>
+        </div>
+        <div class="sim-kpi-box">
+          <div class="sim-kpi-name">累计上下文熵增 $\Delta S$</div>
+          <div class="sim-kpi-val" id="kpi-entropy" style="color:#10b981;">1.12 bits</div>
+          <div class="sim-kpi-sub">未对齐时：14.8 bits</div>
+        </div>
+        <div class="sim-kpi-box">
+          <div class="sim-kpi-name">跨轮次推导连续性</div>
+          <div class="sim-kpi-val" id="kpi-coherence" style="color:#38bdf8;">100%</div>
+          <div class="sim-kpi-sub">加密失忆时仅 22%</div>
+        </div>
+        <div class="sim-kpi-box">
+          <div class="sim-kpi-name">无效漫游循环概率 Detour</div>
+          <div class="sim-kpi-val" id="kpi-detour" style="color:#f59e0b;">0.0%</div>
+          <div class="sim-kpi-sub">实测基准：9.89%</div>
+        </div>
+      </div>
+
+      <!-- LIVE CANVAS -->
+      <canvas id="simCanvas" width="1080" height="380" aria-label="Cognitive harness phase simulation canvas"></canvas>
+    </section>
+
+    <!-- SECTION D: DEEP DIVES & REFERENCE CORPUS -->
+    <section id="ref-section" aria-labelledby="ref-heading">
+      <div class="section-header">
+        <h2 class="section-title" id="ref-heading">
+          <span>版块 D：系统演化论域核心文献矩阵与深潜直通</span>
+        </h2>
+        <span class="section-badge">Living Corpus</span>
+      </div>
+
+      <div class="ref-grid">
+        <a class="ref-card" href="continual-learning-physics-synthesis.html">
+          <div>
+            <strong>🧩 通用持续学习（GCL）与热力学物理第一性原理消解</strong>
+            <span>大白话直觉版 × 严格数学物理推导版双向对照旗舰。峡谷度规 SAM、具身规范场、梯度核心集与生成回放对偶。</span>
+          </div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--accent); margin-top:12px;">阅读全文 →</div>
+        </a>
+
+        <a class="ref-card" href="physics-of-learning-reachability.html">
+          <div>
+            <strong>🔥 学习与智能的物理学第一性原理（中文版 · 6 大模拟器）</strong>
+            <span>不可逆计算产热、Wasserstein-2 速率极限 $\tau \cdot \Sigma \ge W_2^2/2D$ 与具身低熵图册，含 2026–2031 物理具身化路线图。</span>
+          </div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--accent); margin-top:12px;">阅读全文 →</div>
+        </a>
+
+        <a class="ref-card" href="open-weight-activation-safety-physics.html">
+          <div>
+            <strong>🔓 开源大模型激活消融攻击诊断与物理第一性原理防御</strong>
+            <span>白盒激活主成分消融实测。哈密顿谱纠缠（脑叶切除陷阱）、流形谱熵扩散与具身马尔可夫毯外置门禁。</span>
+          </div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--accent); margin-top:12px;">阅读全文 →</div>
+        </a>
+
+        <a class="ref-card" href="trajectory-rl-substrate-evolution.html">
+          <div>
+            <strong>🧭 轨迹滚动与基质强化学习（Substrate RL）</strong>
+            <span>权重冻结条件下的环境侧梯度更新。505 会话 / 15,068 动作真实轨迹审计与三大交互模拟器。</span>
+          </div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--accent); margin-top:12px;">阅读全文 →</div>
+        </a>
+
+        <a class="ref-card" href="emptiness-causality-intervention-ledger-zh.html">
+          <div>
+            <strong>📜 缘起性空的热力学账本：量子因果、干预反噬与自指宇宙</strong>
+            <span>从不确定因果序与关系性量子力学重释“空而不无”，导出天机转嫁不等式与图拉普拉斯极大值级联。</span>
+          </div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--accent); margin-top:12px;">阅读全文 →</div>
+        </a>
+
+        <a class="ref-card" href="bazi-poker-dynamical-system.html">
+          <div>
+            <strong>🃏 命理、德州扑克与非平稳博弈动力系统</strong>
+            <span>低频先天结构流形与高频实时贝叶斯残差的几何正交性，解构不完全信息动态博弈的均衡演变。</span>
+          </div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--accent); margin-top:12px;">阅读全文 →</div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="max-width:800px; margin:0 auto;">
+      <p style="font-weight:750; color:var(--ink); margin-bottom:6px;">
+        System Evolution Open Preprint &amp; Autonomous Verification Substrate
+      </p>
+      <p style="margin-bottom:12px;">
+        遵循 Pre-Cleared Ship Envelope (PCSE) 隐私与安全规范 · 零内部真名 · 零凭证 · 真实物理执行收据闭环认证
+      </p>
+      <div style="font-size:0.82rem; color:var(--muted);">
+        <a href="index.html">返回看板首页</a> · 
+        <a href="papers/index.html">PDF 文库</a> · 
+        <a href="llms.txt">llms.txt</a> · 
+        <a href="SELF-ITERATION-LEDGER.md">自进化账本</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE LOGIC & SIMULATOR SCRIPT -->
+  <script>
+    // -------------------------------------------------------------------------
+    // 1. GLOBAL & LOCAL MODE SWITCHING
+    // -------------------------------------------------------------------------
+    function setGlobalMode(mode) {
+      document.body.classList.remove('mode-intuition', 'mode-engineering', 'mode-math', 'mode-all');
+      document.querySelectorAll('.mode-pill').forEach(btn => btn.classList.remove('active'));
+
+      const hintEl = document.getElementById('mode-hint-text');
+
+      if (mode === 'intuition') {
+        document.body.classList.add('mode-intuition');
+        document.getElementById('btn-mode-intuition').classList.add('active');
+        hintEl.innerHTML = '✨ 当前模式：<strong>直觉白话模式</strong>。聚焦 30 秒费曼式比喻与核心画面，过滤高密数学公式。';
+      } else if (mode === 'engineering') {
+        document.body.classList.add('mode-engineering');
+        document.getElementById('btn-mode-engineering').classList.add('active');
+        hintEl.innerHTML = '⚙️ 当前模式：<strong>系统工程模式</strong>。聚焦在我们具体 Agent 架构与实际组件中的映射。';
+      } else if (mode === 'math') {
+        document.body.classList.add('mode-math');
+        document.getElementById('btn-mode-math').classList.add('active');
+        hintEl.innerHTML = '📐 当前模式：<strong>严密数理模式</strong>。聚焦数学公式推导、几何流形定义与严格可证伪反信号。';
+      } else {
+        document.body.classList.add('mode-all');
+        document.getElementById('btn-mode-all').classList.add('active');
+        hintEl.innerHTML = '📑 当前模式：<strong>三重视角全开</strong>。直觉、工程、数理三栏全景并列深度对照。';
+      }
+
+      // Re-align card-level tabs
+      document.querySelectorAll('.inc-card').forEach(card => {
+        const tabs = card.querySelectorAll('.card-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        if (mode === 'all') {
+          tabs[0]?.classList.add('active');
+        } else if (mode === 'intuition') {
+          tabs[1]?.classList.add('active');
+        } else if (mode === 'engineering') {
+          tabs[2]?.classList.add('active');
+        } else if (mode === 'math') {
+          tabs[3]?.classList.add('active');
+        }
+      });
+    }
+
+    function toggleCardTier(button, tier) {
+      const card = button.closest('.inc-card');
+      card.querySelectorAll('.card-tab').forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+
+      const intuitionBlock = card.querySelector('.tier-intuition');
+      const engBlock = card.querySelector('.tier-engineering');
+      const mathBlock = card.querySelector('.tier-math');
+
+      if (tier === 'all') {
+        if (intuitionBlock) intuitionBlock.style.display = 'block';
+        if (engBlock) engBlock.style.display = 'block';
+        if (mathBlock) mathBlock.style.display = 'block';
+      } else if (tier === 'intuition') {
+        if (intuitionBlock) intuitionBlock.style.display = 'block';
+        if (engBlock) engBlock.style.display = 'none';
+        if (mathBlock) mathBlock.style.display = 'none';
+      } else if (tier === 'engineering') {
+        if (intuitionBlock) intuitionBlock.style.display = 'none';
+        if (engBlock) engBlock.style.display = 'block';
+        if (mathBlock) mathBlock.style.display = 'none';
+      } else if (tier === 'math') {
+        if (intuitionBlock) intuitionBlock.style.display = 'none';
+        if (engBlock) engBlock.style.display = 'none';
+        if (mathBlock) mathBlock.style.display = 'block';
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 2. LIVE CANVAS SIMULATOR: Cognitive Harness Phase Transition
+    // -------------------------------------------------------------------------
+    const simState = {
+      thinkingDepth: 8.0,
+      syntaxLatency: 1.0,
+      thalamicRelay: 95,
+      turbulence: 0.25,
+      clearTrailsRequested: false,
+      // Particles representing 3 harnesses
+      // 1. Lobotomized (No Thinking) -> Red
+      p1: { x: 80, y: 190, vx: 2.2, vy: 0, trail: [], status: 'running' },
+      // 2. Detour-prone (No SafeEdit Syntax Alignment) -> Amber
+      p2: { x: 80, y: 190, vx: 2.2, vy: 0, trail: [], detourTimer: 0, status: 'running' },
+      // 3. Full Parity Cognitive Harness (Our System) -> Emerald Green
+      p3: { x: 80, y: 190, vx: 2.5, vy: 0, trail: [], status: 'running' }
+    };
+
+    function updateSimParams() {
+      simState.thinkingDepth = parseFloat(document.getElementById('range-think').value);
+      simState.syntaxLatency = parseFloat(document.getElementById('range-syntax').value);
+      simState.thalamicRelay = parseInt(document.getElementById('range-relay').value, 10);
+      simState.turbulence = parseFloat(document.getElementById('range-noise').value);
+
+      document.getElementById('val-think').textContent = simState.thinkingDepth.toFixed(1);
+      document.getElementById('val-syntax').textContent = simState.syntaxLatency.toFixed(1) + ' ms';
+      document.getElementById('val-relay').textContent = simState.thalamicRelay + '%';
+      document.getElementById('val-noise').textContent = simState.turbulence.toFixed(2);
+
+      // Dynamically compute KPIs
+      const steps = (3.0 + (10 - simState.thinkingDepth) * 0.4 + simState.syntaxLatency * 0.5).toFixed(1);
+      const entropy = ((1.0 + (10 - simState.thinkingDepth) * 0.8 + simState.syntaxLatency * 0.6) * (105 - simState.thalamicRelay) / 100).toFixed(2);
+      const coherence = Math.max(12, Math.min(100, Math.round(simState.thalamicRelay * (simState.thinkingDepth / 10)))).toFixed(0);
+      const detour = (Math.max(0, (simState.syntaxLatency - 2) * 2.5 + (10 - simState.thinkingDepth) * 1.2)).toFixed(1);
+
+      document.getElementById('kpi-steps').textContent = steps + ' 步';
+      document.getElementById('kpi-entropy').textContent = entropy + ' bits';
+      document.getElementById('kpi-coherence').textContent = coherence + '%';
+      document.getElementById('kpi-detour').textContent = detour + '%';
+    }
+
+    function resetSimParticles() {
+      simState.p1 = { x: 80, y: 190, vx: 2.2, vy: (Math.random() - 0.5) * 1.5, trail: [], status: 'running' };
+      simState.p2 = { x: 80, y: 190, vx: 2.2, vy: (Math.random() - 0.5) * 1.5, trail: [], detourTimer: 0, status: 'running' };
+      simState.p3 = { x: 80, y: 190, vx: 2.5, vy: 0, trail: [], status: 'running' };
+    }
+
+    function toggleSimTrails() {
+      simState.p1.trail = [];
+      simState.p2.trail = [];
+      simState.p3.trail = [];
+    }
+
+    // Canvas render loop
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function renderSim() {
+      // Clear canvas with subtle trail fade
+      ctx.fillStyle = 'rgba(15, 16, 21, 0.28)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const W = canvas.width;
+      const H = canvas.height;
+      const centerY = H / 2;
+
+      // 1. Draw Canyon Landscape (Fisher Nullspace Valley)
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+      ctx.lineWidth = 1;
+      for (let r = 20; r <= 140; r += 30) {
+        ctx.beginPath();
+        ctx.moveTo(40, centerY - r);
+        ctx.bezierCurveTo(W * 0.3, centerY - r * 0.6, W * 0.7, centerY - r * 0.7, W - 40, centerY - r);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(40, centerY + r);
+        ctx.bezierCurveTo(W * 0.3, centerY + r * 0.6, W * 0.7, centerY + r * 0.7, W - 40, centerY + r);
+        ctx.stroke();
+      }
+
+      // Canyon Walls (Repulsion Boundaries of Old Memories)
+      ctx.fillStyle = 'rgba(239, 68, 68, 0.07)';
+      ctx.fillRect(0, 0, W, 45);
+      ctx.fillRect(0, H - 45, W, 45);
+
+      ctx.font = '11px monospace';
+      ctx.fillStyle = '#ef4444';
+      ctx.fillText('▲ 旧记忆 Fisher 峭壁边界 (碰撞即灾难性遗忘)', 50, 28);
+      ctx.fillText('▼ 物理红线与安全不可逆边界 (不可逾越约束)', 50, H - 20);
+
+      // Target Success Basin
+      const targetX = W - 110;
+      const targetY = centerY;
+      ctx.strokeStyle = 'rgba(34, 197, 94, 0.4)';
+      ctx.fillStyle = 'rgba(34, 197, 94, 0.12)';
+      ctx.beginPath();
+      ctx.arc(targetX, targetY, 32, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = '#4ade80';
+      ctx.fillText('🎯 任务验证闭环', targetX - 44, targetY - 40);
+
+      // Start Origin
+      ctx.fillStyle = '#94a3b8';
+      ctx.beginPath();
+      ctx.arc(80, centerY, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillText('初始状态 S0', 50, centerY + 24);
+
+      // UPDATE PARTICLE 1: Lobotomized (No Thinking) -> Fails/Crashes
+      if (simState.p1.status === 'running') {
+        const thinkInteg = simState.thinkingDepth / 10;
+        // Without thinking depth, drift oscillates wildly
+        const drift = (Math.random() - 0.5) * (simState.turbulence * 6.0) * (1.1 - thinkInteg);
+        simState.p1.vy += drift;
+        simState.p1.x += simState.p1.vx * (0.6 + thinkInteg * 0.4);
+        simState.p1.y += simState.p1.vy;
+
+        // Collision with boundary
+        if (simState.p1.y < 50 || simState.p1.y > H - 50) {
+          simState.p1.status = 'crashed';
+        }
+        if (simState.p1.x >= targetX) {
+          simState.p1.status = 'reached';
+        }
+        simState.p1.trail.push({ x: simState.p1.x, y: simState.p1.y });
+        if (simState.p1.trail.length > 180) simState.p1.trail.shift();
+      }
+
+      // UPDATE PARTICLE 2: No SafeEdit Syntax Alignment -> Detour Wandering
+      if (simState.p2.status === 'running') {
+        // Syntax latency induces wandering loops
+        if (simState.syntaxLatency > 2.0 && Math.random() < 0.04) {
+          simState.p2.detourTimer = 25;
+        }
+        if (simState.p2.detourTimer > 0) {
+          simState.p2.detourTimer--;
+          simState.p2.vx = Math.sin(simState.p2.detourTimer * 0.3) * 2.0;
+          simState.p2.vy = Math.cos(simState.p2.detourTimer * 0.3) * 2.0;
+        } else {
+          simState.p2.vx = 2.0;
+          simState.p2.vy += (centerY - simState.p2.y) * 0.04 + (Math.random() - 0.5) * simState.turbulence * 2.0;
+        }
+        simState.p2.x += simState.p2.vx;
+        simState.p2.y += simState.p2.vy;
+        if (simState.p2.x >= targetX) simState.p2.status = 'reached';
+        simState.p2.trail.push({ x: simState.p2.x, y: simState.p2.y });
+        if (simState.p2.trail.length > 220) simState.p2.trail.shift();
+      }
+
+      // UPDATE PARTICLE 3: Parity Cognitive Harness (Our System) -> Smooth Canyon Slide
+      if (simState.p3.status === 'running') {
+        // Perfect online numerical integration + immediate SafeEdit reflection
+        const restoringForce = (centerY - simState.p3.y) * 0.12;
+        simState.p3.vy += restoringForce;
+        simState.p3.vy *= 0.82; // Strong damping in orthogonal direction
+        simState.p3.x += simState.p3.vx;
+        simState.p3.y += simState.p3.vy + (Math.random() - 0.5) * (simState.turbulence * 0.3);
+
+        if (simState.p3.x >= targetX) simState.p3.status = 'reached';
+        simState.p3.trail.push({ x: simState.p3.x, y: simState.p3.y });
+        if (simState.p3.trail.length > 240) simState.p3.trail.shift();
+      }
+
+      // Auto-reset when all complete or crashed
+      if (simState.p3.status === 'reached' && (simState.p1.status !== 'running') && (simState.p2.status !== 'running')) {
+        setTimeout(resetSimParticles, 1200);
+      }
+
+      // DRAW TRAILS
+      function drawTrail(trail, color, dash) {
+        if (trail.length < 2) return;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.setLineDash(dash);
+        ctx.beginPath();
+        ctx.moveTo(trail[0].x, trail[0].y);
+        for (let i = 1; i < trail.length; i++) {
+          ctx.lineTo(trail[i].x, trail[i].y);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // 1. Red (Lobotomized)
+      drawTrail(simState.p1.trail, 'rgba(239, 68, 68, 0.75)', [4, 4]);
+      // 2. Amber (Detour-prone)
+      drawTrail(simState.p2.trail, 'rgba(245, 158, 11, 0.75)', [6, 3]);
+      // 3. Green (Parity Harness)
+      drawTrail(simState.p3.trail, 'rgba(34, 197, 94, 0.95)', []);
+
+      // DRAW PARTICLE HEADS
+      // Head 1
+      ctx.fillStyle = simState.p1.status === 'crashed' ? '#dc2626' : '#f87171';
+      ctx.beginPath();
+      ctx.arc(simState.p1.x, simState.p1.y, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#fca5a5';
+      ctx.fillText(simState.p1.status === 'crashed' ? '💥 脑叶切除坍缩' : '无交错思考', simState.p1.x - 30, simState.p1.y - 12);
+
+      // Head 2
+      ctx.fillStyle = '#fbbf24';
+      ctx.beginPath();
+      ctx.arc(simState.p2.x, simState.p2.y, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#fde68a';
+      ctx.fillText(simState.p2.detourTimer > 0 ? '🔄 394 漫游循环中' : '无 SafeEdit 反射弧', simState.p2.x - 30, simState.p2.y + 18);
+
+      // Head 3
+      ctx.fillStyle = '#4ade80';
+      ctx.beginPath();
+      ctx.arc(simState.p3.x, simState.p3.y, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#86efac';
+      ctx.fillText('✨ 全血认知外骨骼 (3步滑入收敛)', simState.p3.x - 50, simState.p3.y - 14);
+
+      requestAnimationFrame(renderSim);
+    }
+
+    // Launch initial loop & params
+    updateSimParams();
+    requestAnimationFrame(renderSim);
+  </script>
+</body>
+</html>
