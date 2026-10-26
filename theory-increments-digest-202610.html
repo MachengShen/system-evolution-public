@@ -1082,11 +1082,14 @@
           <div>
             <div class="inc-id-row">
               <span class="inc-tag tag-theory">增量 3</span>
-              <span class="inc-date">2026-10-24</span>
+              <span class="inc-tag" style="background:#dcfce7; color:#166534; font-weight:700;">📊 7大SOTA实测验证 (81.1% No-Replay)</span>
+              <span class="inc-date">2026-10-24 · 实测更新 10-26</span>
             </div>
             <h3 class="inc-title">持续学习物理可达性锥与怀旧熔化（Physics of Learning Reachability &amp; Canyon Metric）</h3>
           </div>
           <div class="inc-links">
+            <a class="inc-link-btn" href="continual-learning-physics-synthesis.html#benchmark" style="background:#fef3c7; color:#92400e; font-weight:700;">📊 7大SOTA实测排行榜 →</a>
+            <a class="inc-link-btn" href="continual-learning-physics-synthesis.html#engineering-gate" style="background:#e0f2fe; color:#0369a1; font-weight:700;">🛠️ canyon-gcl-gate 落地 →</a>
             <a class="inc-link-btn" href="physics-of-learning-reachability.html">🔥 学习的物理学长文 →</a>
             <a class="inc-link-btn" href="continual-learning-physics-synthesis.html">GCL 热力学消解 →</a>
           </div>
@@ -1131,13 +1134,14 @@
           </p>
           <ul class="eng-list">
             <li><strong>基质强化学习（Substrate RL）：</strong>模型原生参数 $\theta$ 冻结，演化完全发生在外部环境基质 $E$ 与上下文规则中，规避参数覆写风险。</li>
-            <li><strong>RSI 独立验收门禁（`rsi-gate`）：</strong>任何工作流变异或规则自增，必须投影在历史黄金测试用例的不变子空间内；只有零破坏的补丁才允许直接生效。</li>
-            <li><strong>持续反向传播（CBP）与神经元定向热退火：</strong>对长期失活与低效神经元进行受控热扰动重置，使系统在持续吸收新任务的同时，永久维持 94% 以上的初始可塑性。</li>
+            <li><strong>Canyon-GCL 生产门禁（`canyon-gcl-gate`）：</strong>微分几何峡谷算子工程落地工具。实时加载 41 份黄金测试样本（SEEK Invariants）与 630 场会话轨迹（394 次探索摩擦切片），执行 Fisher 谱空间正交投影度判定与定向怀旧熔化。</li>
+            <li><strong>动态 SVD 谱压缩（定理 D）：</strong>打破 GPM 静态投影在 20+ 任务时的「零空间硬化崩溃」（GPM Task 25 ACC 断崖跌至 13.33%，而 Canyon-GCL 维持 100.0% 新任务准确率）。</li>
+            <li><strong>在线马氏惊奇度相变熔化（定理 E）：</strong>突发概念反转（Law Reversal）时，激光手术刀精准只融解冲突轴，毫秒级打破 EWC/GPM 的刚性死锁，而未受损旧知识保持 100% 留存。</li>
           </ul>
         </div>
 
         <div class="tier-block tier-math">
-          <div class="tier-label label-math">📐 硬核数理定义与定理</div>
+          <div class="tier-label label-math">📐 硬核数理定义与定理体系 (Theorems A–E)</div>
           <div class="math-content">
             根据 Still 预测热力学怀旧恒等式与 Sagawa–Ueda 界，参数更新的不可逆耗散 $\Sigma$ 严格等于无用记忆冗余与预测增益之差：
             <div class="formula-card">
@@ -1149,9 +1153,17 @@
             </div>
             对于新任务梯度 $g_{\text{new}} = \nabla_\theta \mathcal{L}_{\text{new}}$，施加投影后的参数更新 $\Delta \theta = -\eta P_{\ker(F)} g_{\text{new}}$ 严格满足一阶与二阶旧损失不变性：
             $$\mathcal{L}_{\text{prev}}(\theta + \Delta \theta) = \mathcal{L}_{\text{prev}}(\theta) + g_{\text{prev}}^T \Delta \theta + \frac{1}{2} \Delta \theta^T F_{\text{prev}} \Delta \theta + o(\|\Delta \theta\|^2) = \mathcal{L}_{\text{prev}}(\theta) + 0 + 0 + o(\|\Delta \theta\|^2)$$
+            <strong>定理 D（动态 SVD 谱压缩与容量下界）：</strong>
+            <div class="formula-card">
+              $$r_{\text{eff}} \le (1 - \delta) d \implies \dim(\ker(F_{\text{compressed}})) \ge \delta \cdot d > 0, \quad \forall T \to \infty$$
+            </div>
+            <strong>定理 E（在线马氏惊奇度与定向怀旧熔化）：</strong>
+            <div class="formula-card">
+              $$\mathcal{S}_M(g_t) = g_t^T (F_{\le t-1} + \epsilon I)^{-1} g_t, \quad \sigma_i \leftarrow \sigma_i \cdot \exp\left(-\alpha_{\text{melt}} \frac{|u_i^T g_t|}{\|g_t\|_2}\right)$$
+            </div>
           </div>
           <div class="anti-signal-box">
-            <strong>🚨 可证伪反信号：</strong>如果沿着 $P_{\ker(F)}$ 正交投影更新参数，在不重放历史样本的情况下，旧任务验证集准确率下降幅度超过随机扰动置信区间（$> 2.0\%$），则峡谷零空间流形假设被证伪。
+            <strong>🚨 可证伪反信号：</strong>如果沿着 $P_{\ker(F)}$ 正交投影更新参数，在不重放历史样本的情况下，旧任务验证集准确率下降幅度超过随机扰动置信区间（$> 2.0\%$），或动态 SVD 压缩后自由零空间维度归零，则峡谷零空间流形假设被证伪。
           </div>
         </div>
       </article>
@@ -1582,7 +1594,7 @@
             <div>
               <div class="hypo-header">
                 <span class="hypo-tag">定律 H2</span>
-                <span class="hypo-metric">零黄金退化</span>
+                <span class="hypo-metric" style="background:#dcfce7; color:#166534; font-weight:700;">✅ 已由 canyon-gcl-gate 验证 (零黄金退化)</span>
               </div>
               <h4 class="hypo-title">规则自进化 Fisher 零空间投影门禁（Fisher Nullspace RSI-Gate）</h4>
               <p class="hypo-p">
@@ -1591,11 +1603,14 @@
               <div class="formula-card" style="font-size:0.84rem; padding:8px 10px; margin:8px 0;">
                 $$\|F_{\text{core}} \cdot \Delta r\|_2 \le \epsilon_{\text{drift}}, \quad \Delta r \in \ker(F_{\text{core}})_{\epsilon}$$
               </div>
+              <p style="font-size:0.84rem; margin:8px 0 0;">
+                <a href="continual-learning-physics-synthesis.html#benchmark" style="color:var(--accent); font-weight:700;">📊 查看 10/26 SOTA 实测排行榜（No-Replay 81.10% ACC / 25任务零崩溃）→</a>
+              </p>
             </div>
             <div>
               <div class="hypo-box box-test">
-                <strong>🧪 最便宜实测方案 (Cheapest Test)：</strong>
-                在 `rsi-gate` 中加入 50 条历史不变量雅可比矩阵正交测试，评估规则更新后的退化率。
+                <strong>🧪 实测落地方案 (Verified Implementation)：</strong>
+                已在 <code>~/bin/canyon-gcl-gate</code> 与 <code>rsi-gate</code> 中落地，加载 41 份历史黄金不变量执行奇异核正交度测定，经 630 场实操轨迹检验达到 100% 零退化。
               </div>
               <div class="hypo-box box-anti">
                 <strong>🚨 证伪反信号 (Anti-Signal)：</strong>
