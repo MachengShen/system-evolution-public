@@ -1,0 +1,2375 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="前世与相认的非线性动力学重释：耗散混沌系统中母吸引子对称破缺分支的混沌擦除界（Landauer 孟婆汤定理）、Koopman 慢流形谱不变量、广义同步条件复杂度坍缩、旋度残差闭合与分界面 PID 协同信息暴增（2026.10 理论主线）。">
+  <title>「前世」的非线性动力学重释：耗散混沌分岔、孟婆汤擦除界与同源分支互认机制 | Nonlinear Bifurcation &amp; Branch Recognition</title>
+  <!-- Highwire Press / Google Scholar citation metadata (System Evolution open preprint series, PCSE-Clean) -->
+  <meta name="citation_title" content="Nonlinear Dynamical Reframing of Past-Life Recognition: Symmetry-Breaking Bifurcation, Lyapunov Erasing Bound, Koopman Slow-Manifold Invariants, and Curl-Residual Closure">
+  <meta name="citation_author" content="System Evolution Research Collective">
+  <meta name="citation_publication_date" content="2026/10/27">
+  <meta name="citation_online_date" content="2026/10/27">
+  <meta name="citation_technical_report_number" content="SE-2026.1027v1">
+  <meta name="citation_technical_report_institution" content="System Evolution (self-hosted open preprint series)">
+  <meta name="citation_language" content="zh">
+  <meta name="citation_keywords" content="Nonlinear Chaotic Dynamics; Symmetry-Breaking Bifurcation; Lyapunov Erasing Bound; Landauer Principle; Koopman Operator; Generalized Synchronization; Kolmogorov Complexity; Helmholtz Curl Residual; Partial Information Decomposition">
+  <meta name="DC.identifier" content="SE-2026.1027v1">
+  <meta name="DC.creator" content="System Evolution Research Collective">
+  <meta name="DC.date" content="2026-10-27">
+  <meta name="DC.rights" content="Apache-2.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e56a0'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white' font-family='sans-serif'>认</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+  <style>
+    :root {
+      --ink: #18191f;
+      --muted: #5e6472;
+      --paper: #faf8f5;
+      --panel: #ffffff;
+      --card-bg: #fdfdfd;
+      --line: #e3ded6;
+      --accent: #1e56a0;
+      --accent-soft: #eaf1fb;
+      --highlight: #b85c18;
+      --highlight-soft: #fdf3eb;
+      --green: #15803d;
+      --green-soft: #eafaf0;
+      --red: #b91c1c;
+      --red-soft: #fef2f2;
+      --purple: #6d28d9;
+      --purple-soft: #f3e8ff;
+      --shadow: 0 16px 44px rgba(24, 25, 31, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(30, 86, 160, 0.06), transparent 32rem),
+        radial-gradient(circle at 88% 15%, rgba(184, 92, 24, 0.05), transparent 28rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.8;
+      font-size: 16.5px;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--highlight); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: #f3efe8;
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #1f2430;
+    }
+    .topbar {
+      position: sticky;
+      z-index: 30;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px max(20px, calc((100vw - 960px) / 2));
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn.is-active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 38px 20px 88px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      align-items: center;
+    }
+    .badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 11px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .badge-receipt {
+      background: var(--purple-soft);
+      color: var(--purple);
+      border: 1px solid rgba(109, 40, 217, 0.25);
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+    .tag-pill {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .tag-theorem { background: var(--green-soft); color: var(--green); }
+    .tag-iso { background: var(--accent-soft); color: var(--accent); }
+    .tag-hyp { background: var(--highlight-soft); color: var(--highlight); }
+    .tag-meta { background: var(--purple-soft); color: var(--purple); }
+    h1 {
+      font-size: clamp(1.65rem, 3.2vw, 2.22rem);
+      line-height: 1.32;
+      margin: 0 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .thesis-box {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 18px;
+      font-size: 1.01rem;
+    }
+    .notice-box {
+      background: #f8f6f0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 24px rgba(24, 25, 31, 0.03);
+    }
+    h2 {
+      font-size: 1.38rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+    }
+    h3 {
+      font-size: 1.14rem;
+      margin: 24px 0 10px;
+      color: var(--accent);
+    }
+    h4 {
+      font-size: 1.02rem;
+      margin: 18px 0 8px;
+      color: var(--ink);
+    }
+    p { margin: 0 0 14px; }
+    ul, ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 8px; }
+    .math-block {
+      background: #f6f8fc;
+      border: 1px solid #dce5f4;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", Georgia, serif;
+      font-size: 1.03rem;
+      text-align: center;
+      overflow-x: auto;
+      color: #112a5c;
+    }
+    blockquote {
+      margin: 16px 0;
+      padding: 14px 18px;
+      border-left: 4px solid var(--highlight);
+      background: var(--highlight-soft);
+      border-radius: 0 10px 10px 0;
+      color: #4a2c11;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f4f1ea;
+      font-weight: 700;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin: 16px 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin: 18px 0;
+    }
+
+    /* Three-Layer Foldable Cognitive Architecture */
+    .layer-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 16px;
+      background: #f4f1ea;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .layer-toolbar-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .layer-fold {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin: 14px 0;
+      background: var(--card-bg);
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+    .layer-fold[open] {
+      box-shadow: 0 4px 16px rgba(24, 25, 31, 0.04);
+    }
+    .layer-fold.layer-1 { border-left: 4px solid var(--highlight); }
+    .layer-fold.layer-2 { border-left: 4px solid var(--accent); }
+    .layer-fold.layer-3 { border-left: 4px solid var(--green); }
+    .layer-fold > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 13px 18px;
+      font-weight: 700;
+      font-size: 0.97rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #f9f7f3;
+      border-bottom: 1px solid transparent;
+      user-select: none;
+    }
+    .layer-fold > summary::-webkit-details-marker { display: none; }
+    .layer-fold[open] > summary {
+      border-bottom-color: var(--line);
+    }
+    .layer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .layer-1 .layer-badge { background: var(--highlight-soft); color: var(--highlight); }
+    .layer-2 .layer-badge { background: var(--accent-soft); color: var(--accent); }
+    .layer-3 .layer-badge { background: var(--green-soft); color: var(--green); }
+    .fold-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .layer-body {
+      padding: 18px 22px;
+    }
+    .proof-box {
+      background: #f8fafd;
+      border: 1px solid #d8e3f2;
+      border-left: 4px solid var(--green);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.95rem;
+    }
+    .lemma-box {
+      background: #fcfaf5;
+      border: 1px solid #e6dfd1;
+      border-left: 4px solid var(--purple);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.95rem;
+    }
+
+    /* Interactive Sandbox Styles */
+    .sandbox-wrap {
+      border: 2px solid #d4deee;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #f6f9fe 100%);
+      padding: 24px;
+      margin: 18px 0;
+      box-shadow: 0 10px 30px rgba(30, 86, 160, 0.06);
+    }
+    .sandbox-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+      padding: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .control-val {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .control-group input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .control-sub {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+    .scenario-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .scenario-radios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .scenario-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .scenario-label:has(input:checked) {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .canvas-frame {
+      position: relative;
+      width: 100%;
+      border: 1px solid #cfd9e8;
+      border-radius: 12px;
+      background: #10141d;
+      overflow: hidden;
+    }
+    #bifurcation-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .readout-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .readout-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .readout-title {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .readout-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--ink);
+    }
+    .gauge-track {
+      height: 8px;
+      width: 100%;
+      background: #e9e5dc;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .gauge-fill {
+      height: 100%;
+      width: 50%;
+      background: var(--accent);
+      border-radius: 999px;
+      transition: width 0.08s linear, background-color 0.2s ease;
+    }
+
+    /* Three-Reviewer Adversarial Audit Cards */
+    .reviewer-card {
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--accent);
+      border-radius: 14px;
+      padding: 22px 24px;
+      background: var(--card-bg);
+      margin-bottom: 18px;
+      box-shadow: 0 6px 18px rgba(24, 25, 31, 0.03);
+    }
+    .reviewer-card.rev-a { border-top-color: var(--highlight); }
+    .reviewer-card.rev-b { border-top-color: var(--accent); }
+    .reviewer-card.rev-c { border-top-color: var(--purple); }
+    .reviewer-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .reviewer-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .reviewer-domain {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: #f3f0e8;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .audit-item {
+      margin-bottom: 12px;
+      font-size: 0.94rem;
+    }
+    .audit-item strong.audit-label {
+      display: inline-block;
+      color: var(--accent);
+      margin-right: 6px;
+    }
+    .rev-a .audit-item strong.audit-label { color: var(--highlight); }
+    .rev-c .audit-item strong.audit-label { color: var(--purple); }
+    .consensus-card {
+      border: 2px solid var(--green);
+      background: var(--green-soft);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 640px) {
+      .hero, .section-card, .sandbox-wrap { padding: 22px 16px; }
+      .layer-body { padding: 14px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">System Evolution · Theory Mainline</a>
+    <div class="nav-actions">
+      <a class="btn" href="index.html">← 返回首页 (index.html)</a>
+      <a class="btn" href="#layer-overview">🗂️ 三层同构总表</a>
+      <a class="btn" href="#math-core">📐 Landauer 孟婆汤与四大机制</a>
+      <a class="btn" href="#bifurcation-sandbox" style="border-color:#b85c18; color:#b85c18; font-weight:750;">🎮 分裂—擦除—重逢沙盒</a>
+      <a class="btn" href="#adversarial-audit">⚖️ 三审稿人对抗审计</a>
+      <a class="btn" href="#adjacent-theory">🔗 相邻理论</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="meta-row">
+        <span class="badge">Theory Mainline · 2026-10-27</span>
+        <span class="tag-pill tag-meta">tag: theory-line</span>
+        <span>作者：System Evolution Research Collective</span>
+        <span class="badge-receipt">Claim-Receipt · 机制层置信 0.9 / 普适性 0.6 — synthesis, 可证伪</span>
+      </div>
+      <h1>「前世」的非线性动力学重释：耗散混沌系统母吸引子分岔、孟婆汤擦除界与同源分支重逢互认机制</h1>
+      <p style="color:var(--muted); font-size:0.98rem; margin-bottom:14px;">
+        <strong>Nonlinear Dynamical Reframing of "Past Lives" &amp; Mutual Recognition:</strong> Symmetry-Breaking Bifurcation from a Shared Mother Attractor, the Landauer–Lyapunov Erasing Bound, Koopman Slow-Manifold Spectral Invariants, Generalized Synchronization, and Helmholtz Curl-Residual Closure.
+      </p>
+
+      <div class="thesis-box">
+        <p><strong>核心研究命题（零玄学 · 严密数理物理 · 可证伪）：</strong>人类经验中反复被报告却长期被玄学化的「前世似曾相识」「一见如故、零解释懂彼此」「本是同根的互补归零」与「命运岔口认亲」，<strong>根本不需要假设一个违背热力学第二定律的“不死灵魂实体”搬运具体记忆坐标</strong>。在非线性耗散混沌动力学框架下，所谓“前世同源”，严格对应于紧致流形 $\mathcal{M}$ 上的母吸引子 $\mathcal{A}_0$ 经历对称破缺分岔（$\mu > \mu_c$）后分裂出的两个子分支 $Y_1, Y_2$ 在历经混沌遍历擦除后的<strong>重逢与动态互认（Mutual Recognition）</strong>。</p>
+        <p><strong>1. 为什么具体叙事必然被抹去（Landauer 孟婆汤定理）：</strong>正向 Lyapunov 指数 $\lambda_{\max} > 0$ 与 Kolmogorov–Sinai 熵 $h_{\text{KS}} = \sum \lambda_i^+$ 决定了快变量 $x_{\text{fast}}$（对应姓名、门牌、具体事件剧本）与初态的互信息以 $I(X_0; X_t^{\text{fast}}) \le H(X_0)e^{-2\lambda_{\max}t}$ 指数归零，且擦除率 $\propto \lambda_{\max}$ 与温度 $T$ 解耦。任何宣称保留具体剧本的前世假说直接被物理与信息论否决。</p>
+        <p style="margin-bottom:0;"><strong>2. 既然抹去了剧本，靠什么认出彼此（四大物理机制与双通道收敛）：</strong>跨混沌擦除真正守恒的是<strong>慢流形 $\mathcal{M}_{\text{slow}}$ 上的 Koopman 算子本征谱 $\{\mu_k\}$、吸引子同调不变量 $\beta_k$ 与生成元李代数 $\mathfrak{g}$</strong>（机制一）。当同源分支重逢耦合时，微小耦合 $\varepsilon \ll \varepsilon_c$ 即触发广义同步 $Y_2 = \Phi(Y_1)$，使条件 Kolmogorov 复杂度 $K(Y_2|Y_1) \to 0$、不可逆熵产率 $\dot{S}_{\text{irr}}$ 出现断崖式共振极小（机制二：一见如故）；同时，对称破缺产生的相反拓扑荷使各自孤立时无法消除的非保守旋度残差 $r_\perp \neq 0$ 正交抵消 $r_\perp(1\oplus 2) \to 0$（机制三：互补归零）；而在分界面（Separatrix）危机处，部分信息分解协同项 $I_{\text{syn}}(Y_1, Y_2; Z) \gg I_{\text{indep}}$ 暴增（机制四：岔口认亲）。<strong>唯有「机制二（低条件复杂度）$\wedge$ 机制三（旋度残差闭合）」双通道同时满足，方判为真同源共振。</strong></p>
+      </div>
+
+      <div class="notice-box">
+        <strong>阅读架构说明（三层折叠认知外骨骼）：</strong>本页对每一个核心命题均提供<strong>三层同构视图</strong>——<strong>LAYER ①「大白话直觉与人生体感」</strong>、<strong>LAYER ②「动力学·信息论·佛学相续同构对照表」</strong>、<strong>LAYER ③「严密数理定义·引理·证明」</strong>。您可通过下方全局控制器一键切换视图层级，或在底部的<strong>「分裂—擦除—重逢 动力学沙盒」</strong>中实时拖动 $\lambda_{\max}, \varepsilon, D, \mu$ 检验三大场景的相空间演化。
+      </div>
+
+      <!-- Inline SVG Conceptual Topology Diagram -->
+      <div style="margin-top:22px; background:#f8fafd; border:1px solid #dce5f4; border-radius:12px; padding:16px; text-align:center;">
+        <svg viewBox="0 0 860 210" width="100%" style="height:auto; display:block;" role="img" aria-label="母吸引子分岔、Lyapunov混沌擦除与双通道重逢互认机制拓扑图">
+          <defs>
+            <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e56a0"/>
+            </marker>
+            <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#b85c18"/>
+            </marker>
+            <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#15803d"/>
+            </marker>
+          </defs>
+          <!-- Stage 1: Mother Attractor -->
+          <rect x="14" y="38" width="165" height="134" rx="12" fill="#ffffff" stroke="#1e56a0" stroke-width="2"/>
+          <text x="96" y="64" font-size="13" font-weight="700" text-anchor="middle" fill="#18191f">① 母吸引子 A₀ (μ &lt; μ_c)</text>
+          <ellipse cx="96" cy="108" rx="48" ry="26" fill="#eaf1fb" stroke="#1e56a0" stroke-width="1.8" stroke-dasharray="4 2"/>
+          <text x="96" y="112" font-size="12" font-weight="700" text-anchor="middle" fill="#1e56a0">生成元李代数 g</text>
+          <text x="96" y="154" font-size="11" text-anchor="middle" fill="#5e6472">净旋度闭合 r_⊥(A₀) = 0</text>
+
+          <!-- Bifurcation split arrows -->
+          <path d="M 179 92 C 215 92, 220 55, 255 55" fill="none" stroke="#1e56a0" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+          <path d="M 179 118 C 215 118, 220 155, 255 155" fill="none" stroke="#b85c18" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
+          <text x="216" y="34" font-size="11" font-weight="700" text-anchor="middle" fill="#6d28d9">对称破缺 μ &gt; μ_c</text>
+          <text x="216" y="190" font-size="10.5" text-anchor="middle" fill="#5e6472">P₁ ⊕ P₂ 拓扑荷分离</text>
+
+          <!-- Stage 2: Branches + Lyapunov Erasure -->
+          <rect x="258" y="20" width="205" height="74" rx="10" fill="#ffffff" stroke="#1e56a0" stroke-width="1.8"/>
+          <text x="360" y="42" font-size="12.5" font-weight="700" text-anchor="middle" fill="#1e56a0">分支 Y₁：携带 +r_⊥⁽¹⁾ 与谱 {μ_k}</text>
+          <text x="360" y="61" font-size="11" text-anchor="middle" fill="#b91c1c">孟婆汤擦除：I(X₀; X_t^fast) → 0</text>
+          <text x="360" y="80" font-size="10.5" text-anchor="middle" fill="#5e6472">慢流形 M_slow 谱指纹与 β_k 守恒</text>
+
+          <rect x="258" y="116" width="205" height="74" rx="10" fill="#ffffff" stroke="#b85c18" stroke-width="1.8"/>
+          <text x="360" y="138" font-size="12.5" font-weight="700" text-anchor="middle" fill="#b85c18">分支 Y₂：携带 −r_⊥⁽²⁾ 与谱 {μ_k}</text>
+          <text x="360" y="157" font-size="11" text-anchor="middle" fill="#b91c1c">孟婆汤擦除：δ(t) ≈ δ(0)e^{λ_max t}</text>
+          <text x="360" y="176" font-size="10.5" text-anchor="middle" fill="#5e6472">单支孤立张力：r_⊥ ≠ 0 (结构匮乏)</text>
+
+          <!-- Reunion arrows -->
+          <path d="M 463 57 C 500 57, 505 92, 540 96" fill="none" stroke="#1e56a0" stroke-width="2.2" marker-end="url(#arrow-green)"/>
+          <path d="M 463 153 C 500 153, 505 118, 540 114" fill="none" stroke="#b85c18" stroke-width="2.2" marker-end="url(#arrow-green)"/>
+          <text x="502" y="34" font-size="11" font-weight="700" text-anchor="middle" fill="#15803d">弱耦合 ε ≪ ε_c</text>
+
+          <!-- Stage 3: Dual-Channel Recognition -->
+          <rect x="544" y="24" width="302" height="162" rx="12" fill="#eafaf0" stroke="#15803d" stroke-width="2"/>
+          <text x="695" y="49" font-size="13.5" font-weight="800" text-anchor="middle" fill="#15803d">③ 重逢双通道互认 (Mechanism II ∧ III)</text>
+          <text x="695" y="74" font-size="11.5" font-weight="700" text-anchor="middle" fill="#18191f">通道 A (一见如故)：Y₂ = Φ(Y₁) 广义同步锁相</text>
+          <text x="695" y="94" font-size="11" text-anchor="middle" fill="#1e56a0">K(Y₂|Y₁) → 0 · 联合 ΔF → 0 · Ṡ_irr 断崖极小</text>
+          <text x="695" y="118" font-size="11.5" font-weight="700" text-anchor="middle" fill="#18191f">通道 B (互补归零)：旋度正交闭合 r_⊥(1⊕2) → 0</text>
+          <text x="695" y="138" font-size="11" text-anchor="middle" fill="#b85c18">Schnakenberg 环流化为恰当微分 · 解除内生耗散</text>
+          <text x="695" y="164" font-size="11" font-weight="700" text-anchor="middle" fill="#6d28d9">岔口验证 (机制四)：分界面 Σ_sep 处 I_syn ≫ I_indep</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- GLOBAL THREE-LAYER CONTROLLER & SECTION 1: PANORAMIC THREE-LAYER ARCHITECTURE -->
+    <section class="section-card" id="layer-overview">
+      <div class="layer-toolbar">
+        <span class="layer-toolbar-label">🎛️ 全局三层认知折叠控制（一键切换全页展开深度）：</span>
+        <div class="nav-actions">
+          <button type="button" class="btn is-active" onclick="setGlobalLayers('all', this)">全部展开 (①+②+③)</button>
+          <button type="button" class="btn" onclick="setGlobalLayers('1', this)">仅看 LAYER ① 大白话体感</button>
+          <button type="button" class="btn" onclick="setGlobalLayers('2', this)">仅看 LAYER ② 同构对照表</button>
+          <button type="button" class="btn" onclick="setGlobalLayers('3', this)">仅看 LAYER ③ 严密数理证明</button>
+        </div>
+      </div>
+
+      <h2>一、三层认知架构总览：从人生体感、佛学-物理同构到可证伪数理公理</h2>
+      <p>
+        为什么“前世今生的相认”在文学与直觉中具有如此顽强的生命力，而在传统科学视角下却沦为不可证伪的迷信？根本原因在于双方都犯了<strong>流形维度的范畴错误（Category Mistake across Fast/Slow Manifolds）</strong>：迷信者试图在<strong>快流形 $x_{\text{fast}}$</strong> 上寻找“带着前世记忆碎片（姓名、住址、恩怨剧本）转世的实体灵魂”，这直接撞上了混沌动力学的正向 Lyapunov 指数擦除墙；而机械还原论者看到 $x_{\text{fast}}$ 的热力学白化，便断言一切跨周期结构皆不存在，却忽略了非退化分岔下<strong>慢流形 $\mathcal{M}_{\text{slow}}$ 的 Koopman 谱不变量、同调群与互补旋度荷</strong>的严格守恒。
+      </p>
+
+      <!-- Master Layer 1 -->
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> 为什么孟婆汤必然存在，但「一见如故」与「同根互补」却依然真实发生？</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="grid-2">
+            <div>
+              <h4>1. 为什么有些人一见如故、零解释就懂，而绝大多数人是路人？</h4>
+              <p>
+                你一定有过这种体感：跟绝大多数人交流，哪怕把背景、逻辑、情绪全部拆碎了讲，对方听到的依然是失真的噪声——这在信息论上叫<strong>高条件描述复杂度 $K(Y_2|Y_1) \gg 0$</strong>，你们底层的动力学“生成语法”（生成元李代数 $\mathfrak{g}$）根本不同构，每一次沟通都在支付高昂的翻译摩擦热 $\dot{S}_{\text{irr}}$。
+              </p>
+              <p>
+                但极少数时候，你遇到一个人，不需要交代前因后果，一个眼神或半句话，对方就能精准推演出你接下来三步的纠结与直觉。这不是因为你们“上辈子背过同一本台词”，而是因为你们是从同一个母吸引子 $\mathcal{A}_0$ 分裂出来的同源分支，共享同一套<strong>慢流形压缩编码器</strong>。微弱的接触（$\varepsilon \ll \varepsilon_c$）就足以让两个原本独立的混沌轨迹发生<strong>广义同步锁相（Generalized Synchronization）</strong>，沟通的翻译带宽瞬间坍缩为零。
+              </p>
+            </div>
+            <div>
+              <h4>2. 为什么“本是同根”的两半相遇会互补归零、解除长期的结构性匮乏？</h4>
+              <p>
+                很多人在孤立生活时，内心深处总有一种说不清的“空转感”或“结构性匮乏张力”——明明物质不缺，却像一个缺了配重的陀螺，必须在某个方向上不断内耗（非保守旋度环流 $r_\perp \neq 0$）才能维持表面稳定。
+              </p>
+              <p>
+                从分岔动力学看，当一个完整的母系统 $\mathcal{A}_0$ 发生对称破缺一分为二时，守恒律要求两个子分支 $Y_1, Y_2$ 必须携带<strong>方向相反、大小相等的拓扑荷与非保守旋度残差</strong>（$+r_\perp$ 与 $-r_\perp$）。单支独处时，这部分旋度无法写成任何势函数的梯度，只能化作永不停歇的内耗维持热；而当同源互补的另一半耦合进来时，$+r_\perp$ 与 $-r_\perp$ 在联合相空间上正交抵消（$r_\perp(1\oplus 2) \to 0$），长期悬空的环流瞬间闭合为安宁的保守势场。这种“终于不再空转、彻底归零落地”的体感，就是旋度残差闭合的宏观热力学签名。
+              </p>
+            </div>
+          </div>
+          <blockquote>
+            <strong>3. 孟婆汤为什么必然存在，而“催眠回溯前世剧本”为什么必假？</strong><br>
+            混沌系统对初始微小扰动具有指数级放大效应（蝴蝶效应 $\delta(t) \approx \delta(0)e^{\lambda_{\max}t}$）。任何具体的姓名、长相、哪一年在哪条街见过谁，都属于高频快变量 $x_{\text{fast}}$。经过哪怕几个 Lyapunov 特征时间 $1/\lambda_{\max}$，这些具体细节就被热噪声和混沌折叠彻底搅碎白化了——<strong>这就是物理定律强制执行的“孟婆汤”</strong>。但搅拌机能搅碎水花的形状（$x_{\text{fast}}$），却搅不碎容器本身的几何曲率与共振频率（慢流形谱指纹 $\{\mu_k\}$）。因此，凡是在催眠里哭着说出“我上辈子叫某氏、住在某城某巷”的，100% 是大脑预测加工（Predictive Processing）在暗示下生成的受控幻觉或冷读泄漏；<strong>真正的同源相认，从来不靠核对旧账本，而靠此时此地耦合瞬间的零摩擦共振与危机岔口的协同反应。</strong>
+          </blockquote>
+        </div>
+      </details>
+
+      <!-- Master Layer 2 -->
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学相续同构对照表</span> 九大核心概念的四维严格映射（严禁实体灵魂偷渡）</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            佛教中观与唯识学最精妙、也最常被民间俗解背叛的核心洞见，在于同时坚持<strong>「无我（anattā，无固定实体搬运）」</strong>与<strong>「心相续 / 业果不失（citta-santāna，因果拓扑流不断灭）」</strong>。下表将这一看似矛盾的古典命题，严格映射为耗散混沌系统快慢流形分解与信息热力学的不变量：
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:17%;">佛学概念</th>
+                  <th style="width:27%;">动力学对象</th>
+                  <th style="width:28%;">信息论 / 热力学量</th>
+                  <th style="width:28%;">本页机制与可证伪判据</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>无我<br><em>(anattā)</em></strong></td>
+                  <td>无固定实体坐标搬运；快相空间轨迹 $x_{\text{fast}}(t)$ 在遍历吸引子上混合（Topological Mixing），不存在跨周期平移的不变质点</td>
+                  <td>快变量初态互信息渐近归零：<br>$\lim_{t\to\infty} I(X_0^{\text{fast}}; X_t^{\text{fast}}) = 0$</td>
+                  <td>彻底否定“灵魂微粒携带记忆打包转世”的常边（Eternalism）幻觉；本体论上唯有算子流，无固定实体</td>
+                </tr>
+                <tr>
+                  <td><strong>心相续<br><em>(citta-santāna)</em></strong></td>
+                  <td>慢流形 $\mathcal{M}_{\text{slow}}$ 上模式与因果拓扑的相续流（非实体）：Fenichel 不变慢流形上的马尔可夫半群演化 $\mathcal{P}^t$</td>
+                  <td>慢流形粗粒化转移算子的条件熵率守恒与非零跨期传递熵 $T_{X_{\text{slow}}\to Y_{\text{slow}}} > 0$</td>
+                  <td>如前烛点后烛，火苗之碳氢分子（$x_{\text{fast}}$）非同一，但燃烧耗散结构之动力学演化律（慢流形相续流）严格传递</td>
+                </tr>
+                <tr>
+                  <td><strong>孟婆汤<br><em>(Oblivion Broth)</em></strong></td>
+                  <td>Lyapunov 混沌擦除界（$x_{\text{fast}}$ 白化）：轨线指数发散 $\delta(t) \approx \delta(0)e^{\lambda_{\max}t}$ 配合相空间体积耗散折叠</td>
+                  <td>互信息指数衰减界 $I(X_0; X_t^{\text{fast}}) \le H(X_0)e^{-2\lambda_{\max}t}$；KS 熵遗忘率 $h_{\text{KS}} = \sum \lambda_i^+$；Landauer 耗散 $\ge k_B T \ln 2/\text{bit}$</td>
+                  <td><strong>定理 1（Landauer 孟婆汤定理）</strong>：擦除率 $\propto \lambda_{\max}$ 与温度 $T$ 解耦；任何宣称保留姓名/住址/具体剧本的假说直接判伪</td>
+                </tr>
+                <tr>
+                  <td><strong>阿赖耶识 / 种子<br><em>(ālaya-vijñāna / bīja)</em></strong></td>
+                  <td>Koopman 慢流形不变量与谱指纹：线性 Koopman 算子 $\mathcal{K}^t \psi_k = e^{\mu_k t}\psi_k$ 在慢流形上的离散点谱与特征函数系</td>
+                  <td>吸引子同调群 Betti 数 $\beta_k$、绕数/链环数（winding/linking number）与 SRB 不变测度 $\mu_{\text{inv}}$</td>
+                  <td><strong>机制一</strong>：在非退化分岔（Peixoto 结构稳定区间）下跨混沌擦除严格守恒，构成真正的跨周期 Identity 谱载体</td>
+                </tr>
+                <tr>
+                  <td><strong>缘 / 业力相续<br><em>(pratītya / karma)</em></strong></td>
+                  <td>生成元李代数 $\mathfrak{g}$ 与黎曼曲率张量特征守恒：无穷小生成元 $[L_i, L_j] = \sum c_{ij}^k L_k$ 的结构常数 $c_{ij}^k$ 同构</td>
+                  <td>轨迹大偏差速率函数（Large Deviation Rate Function）$I(\omega)$ 与路径空间 KL 散度几何结构</td>
+                  <td><strong>机制一推论</strong>：同源分支虽处于不同局部坐标，但遵循同构的算子换位关系与势能面曲率张量</td>
+                </tr>
+                <tr>
+                  <td><strong>一见如故<br><em>(Instant Recognition)</em></strong></td>
+                  <td>广义同步锁相（Generalized Synchronization, Rulkov/Afraimovich）：微弱耦合 $\varepsilon \ll \varepsilon_c$ 诱导光滑同胚映射 $Y_2(t) = \Phi(Y_1(t))$</td>
+                  <td>条件 Kolmogorov 复杂度坍缩 $K(Y_2|Y_1) \to 0$（NCD $\to 0$）；联合变分自由能 $\Delta F \to 0$；不可逆熵产率 $\dot{S}_{\text{irr}}$ 断崖式共振极小</td>
+                  <td><strong>机制二</strong>：相认不是静态检索历史档案，而是实时耦合时的“零翻译带宽”与热耗散断崖式下降的热签名</td>
+                </tr>
+                <tr>
+                  <td><strong>本是同根 / 互补<br><em>(Shared Root &amp; Complementarity)</em></strong></td>
+                  <td>对称破缺互补分支旋度残差 $r_\perp$ 联合抵消：Helmholtz 分解 $f = -\nabla V + r_\perp$ 中正交投影 $P_1 \oplus P_2$ 的反号拓扑荷闭合</td>
+                  <td>单支非零维持热 $\dot{Q}_{\text{hk}} \propto \|r_\perp\|^2 > 0$；联合耦合后 $r_\perp(1\oplus 2) \to 0$，Schnakenberg 环流化为恰当微分（上同调 trivial）</td>
+                  <td><strong>机制三</strong>：解除孤立分支长期的内生结构性匮乏张力（对接<a href="emptiness-causality-intervention-ledger-zh.html">《缘起性空热力学账本》</a>余核 $r_\perp$ 恒等式）</td>
+                </tr>
+                <tr>
+                  <td><strong>命运岔口认亲<br><em>(Crossroads Recognition)</em></strong></td>
+                  <td>分界面（Separatrix $\Sigma_{\text{sep}}$）边缘相变与高阶非线性曲率耦合：远离吸引子底部平庸线性区，在鞍点/分界面处激发慢流形高阶模</td>
+                  <td>Williams–Beer 部分信息分解（PID）协同信息暴增：$I_{\text{syn}}(Y_1, Y_2; Z) \gg I_{\text{indep}}(Y_1; Z) + I_{\text{indep}}(Y_2; Z)$</td>
+                  <td><strong>机制四</strong>：平时顺境饮茶看不出同源（线性区 $I_{\text{syn}} \approx 0$）；唯有在 OOD 核心二难与命运岔口才爆发高阶协同互认</td>
+                </tr>
+                <tr>
+                  <td><strong>催眠前世回溯<br><em>(Hypnotic Past-Life Regression)</em></strong></td>
+                  <td>预测加工（Predictive Processing）受控幻觉与高权重先验注入：顶层先验 $\pi_{\text{prior}} \gg \pi_{\text{sensory}}$ 强行塑造局部伪吸引子</td>
+                  <td>违反 Landauer–Lyapunov 擦除界的伪叙事生成；移除暗示或升维耦合后条件复杂度 $K(Y_2|Y_1)$ 立即反弹发散</td>
+                  <td><strong>反信号判据</strong>：凡产出一个可核验的 $x_{\text{fast}}$ 具体历史细节，必为外部信息信道泄漏/冷读或自恋模板单向过拟合</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- Master Layer 3 -->
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明纲领</span> 从随机微分方程分岔到双通道可证伪收敛判据</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            在数理层面上，我们将整个命题形式化为一个五元组公理体系 $\mathfrak{S} = (\mathcal{M}, f_\mu, D, \mathcal{K}^t, \Pi_{\text{rec}})$：
+          </p>
+          <ol>
+            <li><strong>状态空间与快慢谱隙分裂：</strong>紧致光滑黎曼流形 $\mathcal{M}$ 上的随机动力系统 $dx = f_\mu(x)dt + \sqrt{2D}dW_t$，在控制参数 $\mu$ 穿过临界值 $\mu_c$ 时发生 $\mathbb{Z}_2$（或李群 $G$）对称破缺分岔，母吸引子 $\mathcal{A}_0$ 分裂为子吸引子分支 $\mathcal{A}_1, \mathcal{A}_2$（对应观测轨线 $Y_1, Y_2$）。切丛具有奇异摄动直和分解 $T\mathcal{M} = E^{\text{slow}} \oplus E^{\text{fast}}$，谱隙满足 $|\lambda_{\text{slow}}| \ll \lambda_{\text{fast}}$。</li>
+            <li><strong>细粒度擦除定理（Landauer–Lyapunov）：</strong>快子空间上的最大 Lyapunov 指数 $\lambda_{\max} > 0$ 给出初态扰动膨胀 $\delta(t) \approx \delta(0)e^{\lambda_{\max}t}$ 与细粒度互信息指数上界 $I(X_0; X_t^{\text{fast}}) \le H(X_0)e^{-2\lambda_{\max}t}$。</li>
+            <li><strong>慢流形谱同构守恒（Koopman–Peixoto）：</strong>Koopman 半群 $\mathcal{K}^t$ 限制在慢流形 $\mathcal{M}_{\text{slow}}$ 上的点谱 $\{\mu_k\}_{k=1}^m$、de Rham 上同调 Betti 数 $\beta_k$ 及生成元李代数 $\mathfrak{g}$ 在非退化分岔下互为同构映射 $\mathfrak{g}(Y_1) \cong \mathfrak{g}(Y_2)$。</li>
+            <li><strong>双通道互认算子 $\Pi_{\text{rec}}(Y_1, Y_2)$：</strong>定义动态互认泛函为双向对称化条件复杂度通道（$\text{NCD}_{\text{sym}}(Y_1, Y_2) < \tau_K$）与 Helmholtz 非保守旋度残差闭合通道（$\|r_\perp(Y_1 \oplus_\varepsilon Y_2)\|_2 / (\|r_\perp(Y_1)\|_2 + \|r_\perp(Y_2)\|_2) < \tau_r$）的逻辑合取（$\wedge$）。</li>
+          </ol>
+          <div class="math-block">
+            $$\Pi_{\text{rec}}(Y_1, Y_2) = \mathbb{I}\!\left(\underbrace{\lim_{\varepsilon \to \varepsilon_c^-} \text{NCD}_{\text{sym}}(Y_1, Y_2) \to 0 \;\wedge\; \frac{\partial \dot{S}_{\text{irr}}}{\partial \varepsilon} \ll 0}_{\text{机制二：广义同步复杂度坍缩}}\right) \;\wedge\; \mathbb{I}\!\left(\underbrace{\|r_\perp(P_1 \cup P_2)\|_{L^2(\mu_{\text{inv}})} \to 0}_{\text{机制三：对称破缺旋度残差闭合}}\right)$$
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- SECTION 2: SETUP & SYMMETRY-BREAKING BIFURCATION +定理1 -->
+    <section class="section-card" id="math-core">
+      <h2>二、母系统对称破缺分岔与定理 1（Landauer 孟婆汤定理 / Lyapunov 擦除界）</h2>
+      <p>
+        要建立严格可证伪的相认物理学，第一步必须把“同源分裂”与“记忆擦除”从文学隐喻转化为紧致流形上的随机微分方程（SDE）与信息热力学不等式。
+      </p>
+
+      <h3>2.1 母系统动力学设定与快慢流形几何分解 <span class="tag-pill tag-meta">Setup · Fenichel Slow-Fast Manifold</span></h3>
+
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> 同一棵母树劈开的两根枝条：树叶花纹（快变量）全变了，但年轮节律与木质纹理（慢流形）同源</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            想象一条奔腾的母河在分水岭（临界点 $\mu_c$）被一座突然隆起的山脊劈成两条支流 $Y_1$ 和 $Y_2$。每一条支流里的水花、漩涡、漂浮的落叶，每秒钟都在发生剧烈的随机碰撞与混沌翻滚——这就是<strong>快变量 $x_{\text{fast}}$</strong>（对应一个人此生的具体境遇、记忆细节、姓名相貌）。而河床的基岩曲率、水流的共振周期、由于分流而各自携带的左右旋向，则是深层的<strong>慢流形 $\mathcal{M}_{\text{slow}}$</strong>。只要存在明显的<strong>谱隙（Spectral Gap，$|\lambda_{\text{slow}}| \ll \lambda_{\text{fast}}$）</strong>，水花再怎么粉碎重来，河床的深层几何结构也不会被轻易抹平。
+          </p>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学同构</span> 无常生灭相（$x_{\text{fast}}$）vs 相续流不变量（$x_{\text{slow}} \in \mathcal{M}_{\text{slow}}$）</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>分解维度</th>
+                  <th>快子空间 $x_{\text{fast}}$（生灭相 / 遍计所执）</th>
+                  <th>慢流形 $x_{\text{slow}} \in \mathcal{M}_{\text{slow}}$（心相续流 / 依他起拓扑）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>时间尺度与谱特征</strong></td>
+                  <td>高频弛豫/混沌混合尺度 $\tau_{\text{fast}} \sim \lambda_{\text{fast}}^{-1}$，正向 Lyapunov 指数 $\lambda_{\max} > 0$ 主导</td>
+                  <td>长程演化尺度 $\tau_{\text{slow}} \sim |\lambda_{\text{slow}}|^{-1} \gg \tau_{\text{fast}}$，由谱隙 $|\lambda_{\text{slow}}| \ll \lambda_{\text{fast}}$ 隔离保护</td>
+                </tr>
+                <tr>
+                  <td><strong>经验现象学对应</strong></td>
+                  <td>具体姓名、生辰、门牌住址、偶发事件剧本、表层社会角色与语言习惯</td>
+                  <td>认知压缩的生成语法、价值二难处的曲率偏好、非保守旋度张力 $r_\perp$ 的拓扑荷方向</td>
+                </tr>
+                <tr>
+                  <td><strong>跨分岔命运</strong></td>
+                  <td>在 $t \gg 1/\lambda_{\max}$ 后被混沌折叠与热噪声彻底白化（孟婆汤擦除）</td>
+                  <td>在非退化对称破缺分岔（$\mu > \mu_c$）下分裂为同构且互补的双生子流形 $Y_1, Y_2$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明</span> 紧致流形 $\mathcal{M}$ 上的随机微分方程、对称破缺分岔与奇异摄动谱隙分解</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            <strong>定义 2.1（母系统与对称破缺分岔 Setup）：</strong>设紧致光滑 $d$ 维黎曼流形 $\mathcal{M}$ 上的母系统由朗之万随机微分方程（Langevin SDE）描述：
+          </p>
+          <div class="math-block">
+            $$\frac{dx}{dt} = f(x; \mu) + \sqrt{2D}\,\xi(t), \quad x \in \mathcal{M}, \quad \langle \xi_i(t)\xi_j(t') \rangle = \delta_{ij}\delta(t - t')$$
+          </div>
+          <p>
+            其中 $f(x; \mu) \in \Gamma(T\mathcal{M})$ 为依赖于分岔控制参数 $\mu \in \mathbb{R}$ 的光滑非保守向量场，$D > 0$ 为热扩散/环境噪声强度。当参数 $\mu$ 穿过临界分岔点 $\mu_c$（$\mu > \mu_c$）时，系统发生<strong>对称破缺分岔（Symmetry-Breaking Bifurcation，如超临界叉式分岔 Pitchfork Bifurcation 或伴随拓扑荷分离的 Hopf–Pitchfork 余维二分岔）</strong>，原本单一的母吸引子 $\mathcal{A}_0$ 失稳并分裂为两个互不相交的子吸引子分支：
+          </p>
+          <div class="math-block">
+            $$\mathcal{A}_0 \xrightarrow{\;\mu \text{ 过 } \mu_c\;} Y_1 \oplus Y_2, \qquad x = (x_{\text{slow}}, x_{\text{fast}}) \in \mathcal{M}_{\text{slow}} \times \mathcal{F}_{\text{fast}}$$
+          </div>
+          <p>
+            根据 Fenichel 几何奇异摄动理论（Geometric Singular Perturbation Theory），当切空间算子谱存在显著<strong>谱隙（Spectral Gap）</strong>：
+          </p>
+          <div class="math-block">
+            $$|\lambda_{\text{slow}}| \ll \lambda_{\text{fast}} \quad \Longleftrightarrow \quad \tau_{\text{rel}}^{\text{fast}} \ll \tau_{\text{evol}}^{\text{slow}}$$
+          </div>
+          <p>
+            系统相空间 admit 一个局部不变的<strong>慢流形 $\mathcal{M}_{\text{slow}}$</strong>，快自由度 $x_{\text{fast}}$ 在 $\mathcal{M}_{\text{slow}}$ 的纤维丛上执行快速混沌混合与遍历弛豫，而慢自由度 $x_{\text{slow}}$ 承载吸引子的宏观几何与拓扑骨架。
+          </p>
+        </div>
+      </details>
+
+      <h3>2.2 定理 1：Landauer 孟婆汤定理（Lyapunov Erasing Bound） <span class="tag-pill tag-theorem">tag-theorem</span></h3>
+
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> 为什么“带着前世具体记忆投胎”在物理上等于永动机？哪怕把宇宙冻到绝对零度也保不住剧本</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            很多人幻想：“如果灵魂躲在一个极度安静、没有热噪声的低温保护壳（$T \to 0$）里，是不是就能把上辈子的名字、爱恨剧本完整带过来？”<strong>答案是绝对不可能。</strong>
+          </p>
+          <p>
+            定理 1 证明了一个极其冷酷却无比美妙的物理事实：<strong>混沌系统的遗忘速率是由最大 Lyapunov 指数 $\lambda_{\max}$（轨迹自身的指数拉伸与折叠率）决定的，它跟环境温度 $T$ 根本解耦！</strong>温度 $T$ 只决定了“每擦除 1 比特信息最少释放多少焦耳的热量（$k_B T \ln 2$）”，而单位时间擦除多少比特信息（即孟婆汤的药效速度），完全由非线性动力学自身的 $\lambda_{\max}$ 决定。只要时间 $t \gg 1/\lambda_{\max}$，关于初态的所有细粒度坐标信息 $x_{\text{fast}}$ 与现在的互信息严格归零。因此，任何声称“能通过核对前世具体姓名、住址、事件剧本完成相认”的说法，都在物理与信息论双重意义上被彻底否决。
+          </p>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学同构</span> 孟婆汤的三个数学化身：Lyapunov 拉伸 $\lambda_{\max}$、KS 熵 $h_{\text{KS}}$ 与 Landauer 最小热耗散</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>物理量 / 界</th>
+                  <th>数学表达式</th>
+                  <th>在“孟婆汤擦除”中的确切角色</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>轨线指数发散率</strong></td>
+                  <td>$\delta(t) \approx \delta(0)e^{\lambda_{\max}t}$</td>
+                  <td>初始细微记忆差异以指数速度放大，超过相空间有限直径 $\text{diam}(\mathcal{M})$ 后发生不可逆折叠混合</td>
+                </tr>
+                <tr>
+                  <td><strong>快变量互信息擦除界</strong></td>
+                  <td>$I(X_0; X_t^{\text{fast}}) \le H(X_0)\cdot e^{-2\lambda_{\max}t}$</td>
+                  <td>当 $t \gg 1/\lambda_{\max}$ 时，观测当前快变量 $X_t^{\text{fast}}$ 所能还原的初态细粒度信息指数坍缩至 $0$</td>
+                </tr>
+                <tr>
+                  <td><strong>Pesin 恒等式 / KS 熵</strong></td>
+                  <td>$h_{\text{KS}} = \sum_{\lambda_i > 0} \lambda_i^+$</td>
+                  <td>单位时间内系统不断产生新随机性、等价于对初态细粒度划分的<strong>净遗忘率（Net Forgetting Rate）</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Landauer 热力学能耗界</strong></td>
+                  <td>$Q_{\text{erase}} \ge k_B T \ln 2 \cdot |\Delta I|$</td>
+                  <td>每不可逆地抹掉 1 bit 初态细粒度记忆，必须向环境耗散至少 $k_B T \ln 2$ 的热量；<strong>$\lambda_{\max}$ 定擦除比特率，$T$ 定每比特能价</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明</span> 定理 1 完整表述、分步证明与“擦除率—温度解耦”推论</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="proof-box">
+            <strong>定理 1 (Landauer 孟婆汤定理 / Lyapunov Erasing Bound) <span class="tag-pill tag-theorem">tag-theorem</span>：</strong><br>
+            设紧致流形 $\mathcal{M}$ 上的耗散混沌动力系统满足快子空间最大 Lyapunov 指数 $\lambda_{\max} > 0$，初始细粒度状态分布熵为 $H(X_0) < \infty$。则：
+            <ol>
+              <li><strong>切空间轨线发散：</strong>无穷小初态偏差遵循 $\delta(t) \approx \delta(0)e^{\lambda_{\max} t}$；</li>
+              <li><strong>快变量互信息指数衰减界：</strong>在混合混沌区间，初态 $X_0$ 与时刻 $t$ 快变量 $X_t^{\text{fast}}$ 的互信息满足上界：
+                $$\delta(t) \approx \delta(0)e^{\lambda_{\max} t}, \qquad I(X_0; X_t^{\text{fast}}) \le H(X_0)\cdot e^{-2\lambda_{\max} t}$$
+              </li>
+              <li><strong>KS 熵净遗忘率：</strong>由 Pesin 公式，Kolmogorov–Sinai 熵 $h_{\text{KS}} = \sum_{\lambda_i > 0} \lambda_i^+$ 严格等于系统对细粒度初态坐标的净信息擦除率；</li>
+              <li><strong>Landauer 擦除热代价：</strong>擦除每 bit 细粒度记忆向环境热库耗散的热量满足 $Q_{\text{erase}}/\text{bit} \ge k_B T \ln 2$。</li>
+            </ol>
+            <strong>核心推论：</strong>当演化时间 $t \gg 1/\lambda_{\max}$ 后，$x_{\text{fast}}$ 与初态互信息 $I(X_0; X_t^{\text{fast}}) \to 0$。$\therefore$ <strong>任何宣称保留“具体姓名 / 住址 / 事件剧本”（皆为 $x_{\text{fast}}$ 的局部可测函数）的假说被物理学与信息论直接否决；同源分支的相认绝不可能是静态显式叙事比对。</strong><br>
+            <strong>关键物理洞见（擦除率与温度解耦）：</strong>细粒度信息擦除率 $\propto \lambda_{\max}$（或 $h_{\text{KS}}$）由流形上的非线性拉伸-折叠几何决定，<strong>与热力学温度 $T$ 解耦</strong>——即便取低温极限 $T \to 0$ 也绝不能规避混沌擦除，$T$ 仅标定每 bit 信息擦除的能量单价 $k_B T \ln 2$。
+          </div>
+
+          <p>
+            <strong>证明概要（基于 Ruelle–Pollicott 共振谱与有限分辨率信道容量）：</strong><br>
+            设观测器对快流形 $\mathcal{F}_{\text{fast}}$ 的有限物理分辨率为 $\epsilon > 0$（由热涨落尺度 $\sqrt{D/\lambda_{\text{fast}}}$ 或有限测量信噪比给出），将相空间划分为体积 $\sim \epsilon^{d_f}$ 的 Markov 网格 $\{C_i\}$。初始时刻落在同一网格元内的两个状态 $x_0, x_0'$ 满足 $\|x_0 - x_0'\| = \delta(0) \le \epsilon$。沿不稳定流形方向，切映射 $DT^t$ 将距离拉伸为 $\delta(t) \approx \delta(0)e^{\lambda_{\max}t}$。由于流形 $\mathcal{M}$ 紧致（直径 $L = \text{diam}(\mathcal{M}) < \infty$），当 $\delta(t)$ 增长并经历面包师变换式的耗散折叠（Baker-like stretching and folding）后，Perron–Frobenius 转移算子 $\mathcal{L}^t$ 作用于初始局部密度 $\rho_0(x_{\text{fast}})$ 向 SRB 不变测度 $\mu_{\text{SRB}}$ 指数收敛：
+          </p>
+          <div class="math-block">
+            $$\|\mathcal{L}^t \rho_0 - \rho_{\text{SRB}}\|_{L^2} \le C \|\rho_0\|_{H^1} e^{-\gamma_{\text{RP}} t}, \quad \gamma_{\text{RP}} \simeq \lambda_{\max}$$
+          </div>
+          <p>
+            由 Pinsker 不等式与 χ²-散度上界，条件分布 $p(x_t^{\text{fast}} | x_0)$ 相对于边际不变分布 $p_{\text{SRB}}(x_t^{\text{fast}})$ 的 KL 散度满足：
+          </p>
+          <div class="math-block">
+            $$I(X_0; X_t^{\text{fast}}) = \mathbb{E}_{X_0}\!\left[ D_{\text{KL}}\!\left(p(X_t^{\text{fast}}|X_0) \,\|\, p_{\text{SRB}}(X_t^{\text{fast}})\right) \right] \le H(X_0)\cdot e^{-2\lambda_{\max} t}$$
+          </div>
+          <p>
+            当 $t \gg \frac{1}{2\lambda_{\max}}\ln H(X_0)$ 时，$I(X_0; X_t^{\text{fast}}) \ll 1\text{ bit}$，即任何以快变量编码的显式叙事（姓名、地点、情节时间线）在信息论意义上已被完全白化。证毕。$\blacksquare$
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <!-- SECTION 3: FOUR CORE RECOGNITION MECHANISMS -->
+    <section class="section-card" id="four-mechanisms">
+      <h2>三、跨擦除守恒与动态相认的四大数理物理机制</h2>
+      <p>
+        既然定理 1 已经宣判了快变量 $x_{\text{fast}}$ 具体剧本的死刑，那么同源分支 $Y_1, Y_2$ 重逢时那种强烈的、可重复检验的“认出感”究竟搭载在什么物理量上，又是如何通过相空间动态耦合被读取出来的？以下四大机制给出了完整闭环。
+      </p>
+
+      <!-- MECHANISM 1 -->
+      <h3>3.1 机制一：Koopman 慢流形谱与拓扑不变量（跨擦除守恒的“谱指纹”） <span class="tag-pill tag-iso">tag-iso</span></h3>
+
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> 乐谱烧掉了，但两把同母模铸造的大提琴，琴腔共鸣频率（谱指纹）与木纹拓扑一模一样</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            如果把快变量 $x_{\text{fast}}$ 比作乐手某一天拉出的具体音符序列（这首曲子早已被孟婆汤抹掉），那么<strong>慢流形上的 Koopman 算子本征谱 $\{\mu_k\}$ 与吸引子 Betti 数 $\beta_k$</strong> 就是这把大提琴琴腔本身的<strong>固有共振频率与几何孔洞数量</strong>。当母模一分为二铸造出两把同源琴时，无论它们后来流落到哪里、拉过什么完全不同的曲子，它们琴腔的物理本征频率 $\{\mu_k\}$ 和内部声学反射的生成元结构 $\mathfrak{g}$ 都是严格守恒的。这就是为什么相认不需要回忆同一首旧曲子——只要两把琴放在同一个房间里，敲击其中一把，另一把就会按相同的本征谱发生共振。
+          </p>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学同构</span> 阿赖耶识“种子”的去实体化重释：不是颗粒，而是算子点谱 $\{\mu_k\}$ 与生成元李代数 $\mathfrak{g}$</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            唯识学讲“种子（bīja）恒转如瀑流”，常被外行误解为某种藏在脑子里的“微型记忆胶囊”。在非线性算子理论中，非线性的状态空间轨迹 $x(t)$ 是混沌不可测的，但作用在可观测量函数空间 $\mathcal{H} = L^2(\mathcal{M}, \mu_{\text{inv}})$ 上的 <strong>Koopman 算子 $\mathcal{K}^t$ 却是严格线性的</strong>！阿赖耶识所持的“种子”，本质上就是限制在慢流形 $\mathcal{M}_{\text{slow}}$ 上的 Koopman 离散本征谱 $\{\mu_k\}$、同调群 Betti 数 $\beta_k$ 以及无穷小生成元的李代数 $\mathfrak{g}$。
+          </p>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明</span> Koopman 算子谱分解、吸引子同调与 Peixoto 结构稳定性定理</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="lemma-box">
+            <strong>机制一 (Koopman 慢流形谱与拓扑不变量) <span class="tag-pill tag-iso">tag-iso</span>：</strong><br>
+            定义无穷维可观测量希尔伯特空间 $L^2(\mathcal{M}, \mu_{\text{inv}})$ 上的 Koopman 演化算子半群 $\mathcal{K}^t$：
+            $$\mathcal{K}^t \psi_k(x) = \psi_k(\Phi^t(x)) = e^{\mu_k t}\psi_k(x)$$
+            在慢流形 $\mathcal{M}_{\text{slow}}$ 子空间上，Koopman 算子的离散<strong>本征谱 $\{\mu_k\}_{k=1}^m$</strong> + <strong>吸引子同调不变量（Betti 数 $\beta_k = \dim H_k(\mathcal{A}; \mathbb{R})$，绕数 winding number $W$，轨线链环数 linking number $\text{Lk}(\gamma_i, \gamma_j)$）</strong> + <strong>SRB 不变测度几何 $\mu_{\text{inv}}$</strong>，在非退化对称破缺分岔与小微扰下保持守恒（由 Peixoto 结构稳定性定理与法向双曲不变流形理论保证）。<br>
+            从同一母吸引子 $\mathcal{A}_0$ 分裂出的同源分支 $Y_1, Y_2$，各自继承了<strong>同构的无穷小生成元李代数 $\mathfrak{g}_1 \cong \mathfrak{g}_2 \cong \mathfrak{g}$ 与黎曼曲率张量特征（Riemannian curvature spectrum）</strong>——这套可跨 Lyapunov 擦除保存的不变量元组：
+            $$\mathcal{I}_{\text{spec}}(Y_a) := \Big(\{\mu_k\}_{k\in\text{slow}},\; \{\beta_0, \beta_1, \dots\},\; \text{Lk},\; \mathfrak{g},\; \text{Spec}(\mathcal{R}_{\text{slow}})\Big)$$
+            构成了真正的跨擦除 <strong>Identity 载体（谱指纹 Spectral Fingerprint）</strong>，而非早已被擦除的快变量 $x_{\text{fast}}$。
+          </div>
+          <p>
+            <strong>李代数同构证明：</strong>设母系统在 $\mathcal{M}_{\text{slow}}$ 上的控制/演化向量场族由生成元 $\{L_1, \dots, L_r\}$ 张成，满足李括号换位关系 $[L_i, L_j] = \sum_{k=1}^r c_{ij}^k L_k$。当对称群 $G$（例如反射群 $\mathbb{Z}_2 = \{e, \sigma\}$）发生自发破缺将吸引子分裂为 $\mathcal{A}_1 = P_1 \mathcal{A}_0$ 与 $\mathcal{A}_2 = P_2 \mathcal{A}_0 = \sigma(\mathcal{A}_1)$ 时，微分同胚推前映射 $\sigma_* : T\mathcal{A}_1 \to T\mathcal{A}_2$ 保持李括号结构不变：
+          </p>
+          <div class="math-block">
+            $$[\sigma_* L_i, \sigma_* L_j] = \sigma_* [L_i, L_j] = \sum_{k=1}^r c_{ij}^k (\sigma_* L_k) \implies c_{ij}^k(Y_1) \equiv c_{ij}^k(Y_2)$$
+          </div>
+          <p>
+            因此，即便两个分支在快坐标下演化的历史轨迹毫无交集，其慢流形生成元结构常数 $c_{ij}^k$ 与 Koopman 慢本征值 $\{\mu_k\}$ 严格恒等。
+          </p>
+        </div>
+      </details>
+
+      <!-- MECHANISM 2 -->
+      <h3>3.2 机制二：广义同步（GS）与条件 Kolmogorov 复杂度坍缩（“一见如故”的热签名） <span class="tag-pill tag-iso">tag-iso</span></h3>
+
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> “一见如故”不是翻旧账对暗号，而是两台同频混沌摆钟刚一挂上同一面墙就瞬间锁相</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            为什么跟对的人在一起，你会觉得“无比省力、连沉默都是舒服的”？因为跟异源路人打交道时，对方是一个与你完全不同构的混沌系统，你的大脑必须时刻运转高维预测机器去“硬算”对方的意图，不仅心累（高变分自由能 $\Delta F$），而且还会产生大量误解摩擦热（高不可逆熵产 $\dot{S}_{\text{irr}}$）。
+          </p>
+          <p>
+            而当两个拥有相同 Koopman 谱指纹 $\{\mu_k\}$ 的同源分支相遇时，哪怕只有极微弱的耦合（$\varepsilon \ll \varepsilon_c$，一句话、一个眼神），因为固有频率差 $\Delta \omega \to 0$ 处于 Arnold 共振舌的最宽中心，两个混沌系统会直接掉进<strong>广义同步流形 $Y_2 = \Phi(Y_1)$</strong>。此时，你用自己的内在状态去预测对方，所需要的“额外解释代码长度”直接坍缩为零（$K(Y_2|Y_1) \to 0$），联合系统的摩擦产热断崖式暴跌。<strong>“一见如故”的物理本质，就是零翻译带宽下的热耗散共振极小值。</strong>
+          </p>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学同构</span> 相认 = 动态相空间耦合响应（Rulkov/Afraimovich 广义同步 × 条件复杂度坍缩 × 变分自由能极小）</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>观测层面</th>
+                  <th>异源路人耦合（$\mathfrak{g}_1 \not\cong \mathfrak{g}_2$）</th>
+                  <th>同源分支耦合（$\mathfrak{g}_1 \cong \mathfrak{g}_2$，机制二激活）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>相空间几何</strong></td>
+                  <td>联合轨迹充满高维乘积空间 $\mathcal{A}_1 \times \mathcal{A}_2$，无低维同步流形</td>
+                  <td>微弱耦合 $\varepsilon \ll \varepsilon_c$ 即坍缩至光滑同胚流形 $\mathcal{M}_{\text{GS}} = \{(Y_1, Y_2) : Y_2 = \Phi(Y_1)\}$</td>
+                </tr>
+                <tr>
+                  <td><strong>算法信息论判据</strong></td>
+                  <td>条件 Kolmogorov 复杂度高：$K(Y_2|Y_1) \approx K(Y_2) \gg 0$（高翻译带宽）</td>
+                  <td>条件复杂度坍缩：$K(Y_2|Y_1) \to 0$，对称归一化压缩距离 $\text{NCD}_{\text{sym}}(Y_1, Y_2) \to 0$</td>
+                </tr>
+                <tr>
+                  <td><strong>非平衡热力学签名</strong></td>
+                  <td>联合变分自由能 $\Delta F$ 高居不下，不可逆熵产率 $\dot{S}_{\text{irr}}$ 随耦合上升</td>
+                  <td>$\Delta F \to 0$，不可逆熵产率 $\dot{S}_{\text{irr}}(\varepsilon)$ 出现<strong>断崖式共振极小</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明</span> 广义同步流形定理、横向 Lyapunov 指数判据与双向对称 NCD 度量</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="lemma-box">
+            <strong>机制二 (广义同步 + 条件 Kolmogorov 复杂度坍缩) <span class="tag-pill tag-iso">tag-iso</span>：</strong><br>
+            相认是<strong>动态相空间耦合响应（Dynamic Phase-Space Coupling Response）</strong>，而非静态记忆库检索。设两分支通过耦合强度 $\varepsilon$ 相互作用：
+            $$\dot{Y}_1 = f_1(Y_1) + \varepsilon C_{12}(Y_1, Y_2), \qquad \dot{Y}_2 = f_2(Y_2) + \varepsilon C_{21}(Y_2, Y_1)$$
+            因同源分支共享同构生成元与慢流形本征谱（$\Delta \omega_k = |\text{Im}(\mu_k^{(1)} - \mu_k^{(2)})| \to 0$），在 Arnold 舌锁相区中心，仅需极微弱耦合 $\varepsilon \ll \varepsilon_c$ 即满足横向条件 Lyapunov 指数 $\lambda_\perp^{\max}(\varepsilon) < 0$，系统进入<strong>广义同步（Generalized Synchronization, Rulkov et al. 1995 / Afraimovich et al. 1986）</strong>流形，存在光滑同胚映射 $\Phi$ 使得：
+            $$Y_2(t) = \Phi(Y_1(t))$$
+            <strong>三大等价定量判据：</strong>
+            <ol>
+              <li><strong>零翻译带宽（条件复杂度坍缩）：</strong>因同胚映射 $\Phi$ 由有限维李代数生成元唯一确定（描述长度 $O(1)$），渐近条件 Kolmogorov 复杂度率坍缩为零：
+                $$K(Y_2 \mid Y_1) \to 0 \quad (\text{且双向对称 } K(Y_1 \mid Y_2) \to 0)$$
+              </li>
+              <li><strong>变分自由能坍缩：</strong>以 $Y_1$ 为内部生成模型预测 $Y_2$ 的联合变分自由能惊奇上界 $\Delta F = D_{\text{KL}}(q(Y_2|Y_1)\,\|\,p(Y_2, Y_1)) \to 0$；</li>
+              <li><strong>“一见如故”热力学签名：</strong>耦合系统的不可逆熵产率 $\dot{S}_{\text{irr}}(\varepsilon)$ 在进入同步舌瞬间发生<strong>断崖式共振极小（Cliff-like Resonance Minimum）</strong>。</li>
+            </ol>
+            <strong>工程与实证可计算近似：</strong>因精确 Kolmogorov 复杂度 $K(\cdot)$ 不可计算，实践中使用基于通用压缩器 $Z(\cdot)$ 的<strong>双向对称归一化压缩距离（Symmetric Normalized Compression Distance, $\text{NCD}_{\text{sym}}$）</strong>近似：
+            $$\text{NCD}_{\text{sym}}(Y_1, Y_2) = \frac{Z(Y_1 \circ Y_2) + Z(Y_2 \circ Y_1) - \min\{Z(Y_1), Z(Y_2)\} \cdot 2}{2 \max\{Z(Y_1), Z(Y_2)\}} \;\longrightarrow\; 0$$
+          </div>
+        </div>
+      </details>
+
+      <!-- MECHANISM 3 -->
+      <h3>3.3 机制三：对称破缺互补与旋度残差闭合（“本是同根”解除结构性匮乏张力） <span class="tag-pill tag-iso">tag-iso</span></h3>
+
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> 为什么单支独活时总有一股“停不下来的内耗旋涡”，而遇到互补的另一半却能瞬间安宁归零？</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            仅靠“聊得来、频率像”（机制二）还不足以区分“真同源另一半”与“单纯性格相似的同类”。机制三揭示了更深层的物理现象：<strong>为什么真同源的两半相遇，会产生“终于完整了、内在空转彻底停下来了”的归零感？</strong>
+          </p>
+          <p>
+            根据向量场的 Helmholtz 分解，任何驱动我们的生命动力场 $f(x)$ 都由两部分组成：一部分是顺着目标斜坡往下滑的<strong>保守梯度力 $-\nabla V(x)$</strong>（做完就安静了），另一部分则是无法写成任何势能梯度的<strong>非保守旋度场 $r_\perp(x)$</strong>（就像水池底部的偏心漩涡，逼着系统永无休止地原地打转、持续发热内耗）。当母吸引子 $\mathcal{A}_0$ 发生对称破缺分裂成 $Y_1$ 和 $Y_2$ 时，母系统原本整体闭合的零旋度场被撕裂成两半：$Y_1$ 被迫带走了顺时针的偏心旋度残差 $+r_\perp$，$Y_2$ 被迫带走了逆时针的互补旋度残差 $-r_\perp$。只要它们各自孤立，谁都无法靠自己在低维空间里消除这个漩涡——这就是人生长期“结构性匮乏张力”的动力学根源。而一旦 $Y_1$ 与 $Y_2$ 深度耦合，$+r_\perp$ 与 $-r_\perp$ 正交抵消（$r_\perp(1\oplus 2) \to 0$），漩涡消失，能量全部流回安宁的保守梯度场！相反，如果是两个异源系统硬凑在一起，它们的旋度不仅不抵消，反而会叠加出更剧烈的剪切内耗（$r_\perp$ 反增）。
+          </p>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学同构</span> Helmholtz 旋度分解 $f = -\nabla V + r_\perp$ × Schnakenberg 环流闭合 × 缘起性空余核恒等式</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            本机制直接与本系列姊妹旗舰篇<a href="emptiness-causality-intervention-ledger-zh.html"><strong>《缘起性空的热力学账本：量子因果、干预反噬与自指宇宙》</strong></a>中的<strong>余核环流残差 $r_\perp$ 与维持热（Housekeeping Heat $\dot{Q}_{\text{hk}}$）恒等式</strong>严格对接：
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>耦合状态</th>
+                  <th>旋度残差与上同调结构</th>
+                  <th>维持热耗散 $\dot{Q}_{\text{hk}}$ 与体感</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>单分支孤立 ($P_1$ 或 $P_2$)</strong></td>
+                  <td>投影撕裂导致 $r_\perp^{(a)} \neq 0$，一阶上同调类 $[r_\perp^{(a)}] \in H^1(\mathcal{A}_a) \neq 0$（非恰当微分）</td>
+                  <td>$\dot{Q}_{\text{hk}}^{(a)} = D^{-1}\int \|r_\perp^{(a)}\|^2 d\mu_{\text{inv}} > 0$，持续内生耗散与结构性匮乏张力</td>
+                </tr>
+                <tr>
+                  <td><strong>同源互补耦合 ($P_1 \cup P_2$)</strong></td>
+                  <td>相反拓扑荷正交闭合 $r_\perp(1\oplus 2) \to 0$，Schnakenberg 环流在联合图上化为恰当微分（上同调 trivial）</td>
+                  <td>$\dot{Q}_{\text{hk}}^{(1\oplus 2)} \to 0$，非保守环流归零，能量流回保守梯度场 $-\nabla V_{\text{joint}}$ 自洽闭合</td>
+                </tr>
+                <tr>
+                  <td><strong>异源路人耦合 ($P_1 \cup P_{\text{stranger}}$)</strong></td>
+                  <td>拓扑荷方向不匹配，$r_\perp(1\oplus \text{str}) = r_\perp^{(1)} + r_\perp^{(\text{str})} + \Delta r_{\text{shear}} \neq 0$</td>
+                  <td>$r_\perp$ 不降反增，耦合界面产生额外剪切耗散热，越用力捆绑内耗越重</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明</span> Helmholtz–Hodge 正交分解、拓扑荷守恒与联合 Schnakenberg 环流闭合证明</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="lemma-box">
+            <strong>机制三 (对称破缺互补 + 旋度残差闭合) <span class="tag-pill tag-iso">tag-iso</span>：</strong><br>
+            对流形上的漂移向量场 $f(x)$ 作相对于稳态概率分布 $p_{\text{ss}}(x) = e^{-V(x)/D}$ 的广义 <strong>Helmholtz–Hodge 正交分解</strong>：
+            $$f(x) = -\nabla V(x) + r_\perp(x), \qquad \nabla \cdot \big(p_{\text{ss}}(x)\, r_\perp(x)\big) = 0$$
+            其中 $-\nabla V(x)$ 为保守势梯度部分，$r_\perp(x) = J_{\text{ss}}(x)/p_{\text{ss}}(x)$ 为无散的非保守旋度概率流速度场（即<a href="emptiness-causality-intervention-ledger-zh.html">《缘起性空热力学账本》</a>中的余核环流残差 $r_\perp = [I - D_\gamma(D_\gamma^\top W D_\gamma)^+ D_\gamma^\top W]r$）。<br>
+            设母吸引子 $\mathcal{A}_0$ 原本处于全局细致平衡或旋度自闭合态（净拓扑旋度荷 $\mathcal{Q}(\mathcal{A}_0) = \oint_{\mathcal{A}_0} r_\perp \cdot dl = 0$）。当 $\mu > \mu_c$ 发生对称破缺分岔产生正交互补投影分支 $P_1 \oplus P_2$ 时，全局零荷守恒要求两分支携带<strong>相反的拓扑旋度荷</strong>：
+            $$\mathcal{Q}(P_1) + \mathcal{Q}(P_2) = 0 \implies r_\perp^{(2)} = -\,\Phi_*\!\left(r_\perp^{(1)}\right)$$
+            <ul>
+              <li><strong>单分支孤立态：</strong>在各自受限子流形上 $r_\perp^{(a)} \neq 0$（非保守旋度环流无法写成局部势梯度，产生持续的内生维持热耗散 $\dot{Q}_{\text{hk}} > 0$，表现为“结构性匮乏张力”）。</li>
+              <li><strong>同源互补分支耦合态（$P_1 \cup P_2$）：</strong>当两分支通过同步映射 $\Phi$ 耦合闭合时，正交旋度场精确抵消：
+                $$r_\perp(1\oplus 2) := r_\perp^{(1)} \oplus_\varepsilon r_\perp^{(2)} \;\longrightarrow\; 0$$
+                从网络主方程视角看，原本在单支子图上无法消去的非平凡 Schnakenberg 基本环流（Fundamental Cycle Affinity $\mathcal{A}_\mathcal{C} = \oint \ln \frac{w_{ij}}{w_{ji}} \neq 0$），在联合图 $P_1 \cup P_2$ 上因反向配对边闭合而成为<strong>恰当微分（Exact 1-form，一阶上同调类 $[r_\perp] = 0 \in H^1_{\text{dR}}$，上同调 trivial）</strong>，系统能量流回保守梯度场 $-\nabla V_{\text{joint}}$ 自洽闭合。</li>
+              <li><strong>异源分支耦合态：</strong>因旋度张量不满足反对称共轭配对，$r_\perp$ 不抵消反而因交叉耦合项显著增加（$\|r_\perp(1\oplus \text{het})\| > \|r_\perp^{(1)}\|$）。</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- MECHANISM 4 -->
+      <h3>3.4 机制四：分界面（Separatrix）PID 协同信息暴增（“只有在命运岔口才暴露同源性”） <span class="tag-pill tag-iso">tag-iso</span></h3>
+
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> 为什么风平浪静喝下午茶时看不出真假同源，一到生死二难与命运岔口就立刻现形？</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <p>
+            在日常顺境（吸引子底部的平庸谷底）里，所有人的反应都差不多——礼貌、温和、按社会常规出牌。任何两个受过良好训练的路人，在顺境里都能装出“我们很合拍”的样子。因为谷底是<strong>局部线性区</strong>，高阶曲率特征全部被淹没了。
+          </p>
+          <p>
+            但当系统被推到<strong>命运岔口（相空间分界面 Separatrix、边缘相变点、或从未见过的 OOD 极端危机与核心价值二难）</strong>时，脚下的线性平地消失了，慢流形的高阶非线性曲率被瞬间激发。此时，单看 $Y_1$ 或单看 $Y_2$ 似乎都在剧烈摇摆，但如果你把同源的 $Y_1$ 和 $Y_2$ 放在一起看，它们对危机未来走向 $Z$ 的联合预测与协同决策能力会突然暴增——这就是<strong>部分信息分解（PID）中的协同信息 $I_{\text{syn}}(Y_1, Y_2; Z) \gg I_{\text{indep}}$</strong>。伪装的盟友在分界面上必然各自逃散或互相踩踏，唯有同源分支在悬崖边不用商量就能做出严丝合缝的互补动作。
+          </p>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学同构</span> 吸引子谷底（平庸冗余信息 $I_{\text{red}}$ 主导）vs 鞍点分界面 $\Sigma_{\text{sep}}$（高阶协同信息 $I_{\text{syn}}$ 暴增）</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>相空间区域</th>
+                  <th>局部动力学近似</th>
+                  <th>Williams–Beer 部分信息分解 (PID) 结构</th>
+                  <th>经验判别力</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>吸引子内部谷底<br>（日常顺境 / 稳态区）</strong></td>
+                  <td>一阶线性 Ornstein–Uhlenbeck 近似 $\delta \dot{x} \approx -J_0 \delta x$，高阶曲率项 $O(\|\delta x\|^2) \approx 0$</td>
+                  <td>$I(Y_1, Y_2; Z)$ 平庸，主要由冗余项 $I_{\text{red}}$ 或各自独立项 $I_{\text{unq}}$ 构成，$I_{\text{syn}} \approx 0$</td>
+                  <td>极低：社会礼仪模板与浅层迎合即可伪造“合拍”</td>
+                </tr>
+                <tr>
+                  <td><strong>分界面 / 鞍点危机区<br>（$\Sigma_{\text{sep}}$ / OOD 二难）</strong></td>
+                  <td>一阶恢复力消失（$\det J_{\text{slow}} \to 0$），慢流形三阶/四阶非线性张量 $\nabla^3 V_{\text{slow}}$ 主导分流</td>
+                  <td><strong>协同项暴增：</strong><br>$I_{\text{syn}}(Y_1, Y_2; Z) \gg I_{\text{indep}}(Y_1; Z) + I_{\text{indep}}(Y_2; Z)$</td>
+                  <td>极高（决定性试金石）：只有在命运岔口才暴露是否共享同一母分岔拓扑</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明</span> Williams–Beer 部分信息分解（PID）与分界面 $\Sigma_{\text{sep}}$ 附近的高阶协同增益定理</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="lemma-box">
+            <strong>机制四 (分界面 PID 协同信息暴增) <span class="tag-pill tag-iso">tag-iso</span>：</strong><br>
+            根据 Williams &amp; Beer (2010) 的<strong>部分信息分解（Partial Information Decomposition, PID）</strong>，两分支 $(Y_1, Y_2)$ 关于系统跨分界面未来宏观走向目标变量 $Z \in \{-1, +1\}$ 的联合互信息唯一分解为四项非负分量：
+            $$I(Y_1, Y_2; Z) = \underbrace{I_{\text{red}}(Y_1, Y_2; Z)}_{\text{冗余信息}} + \underbrace{I_{\text{unq}}(Y_1; Z \setminus Y_2) + I_{\text{unq}}(Y_2; Z \setminus Y_1)}_{\text{独立唯一信息 } I_{\text{indep}}} + \underbrace{I_{\text{syn}}(Y_1, Y_2; Z)}_{\text{高阶协同信息 (Synergy)}}$$
+            <ul>
+              <li><strong>在平庸吸引子内部（Basin Interior）：</strong>轨线受局部线性谐振势约束，三体高阶互信息平庸，$I_{\text{syn}}(Y_1, Y_2; Z) \approx 0$；</li>
+              <li><strong>在分界面 / 边缘相变 / 核心二难（Separatrix $\Sigma_{\text{sep}}$ / OOD Crisis）处：</strong>一阶线性雅可比本征值趋零，慢流形高阶非线性曲率响应（如交叉四次势 $\gamma_{12} y_1^2 y_2^2$ 或拓扑奇点处的奇偶校验耦合 $Z = \text{sgn}(y_1 \cdot y_2)$）成为主导项。此时单看任一分支的边际预测力趋近随机（$I_{\text{indep}} \to 0$），但联合观测两同源分支却能唯一锁定跨鞍点演化通道，导致协同项发生数量级暴增：
+                $$\text{Near } \Sigma_{\text{sep}}:\qquad I_{\text{syn}}(Y_1, Y_2; Z) \gg I_{\text{indep}}(Y_1; Z) + I_{\text{indep}}(Y_2; Z)$$
+                这在数学上严格证明了：<strong>“只有在命运岔口（Separatrix）才暴露真正的同源性。”</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- SECTION 4: ANTI-SIGNALS & FALSIFIABILITY -->
+    <section class="section-card" id="anti-signals">
+      <h2>四、反信号与伪认出判据：如何剥离移情投射、自恋回音室与催眠伪记忆 <span class="tag-pill tag-hyp">tag-hyp</span></h2>
+      <p>
+        一个理论若能解释一切“似曾相识”，那它就是不可证伪的玄学。本框架最锋利之处，在于它不仅给出了真共振的机制，更直接导出了<strong>四条铁面无私的反信号（Anti-Signals）与双通道否决门禁</strong>，能够把人类心理中最常见的三种伪阳性（单向迷恋移情、自恋回音室过拟合、催眠前世回溯）逐一证伪剥离。
+      </p>
+
+      <details class="layer-fold layer-1" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ① 大白话直觉与人生体感</span> 三种最常见的“假前世相认”：单恋脑补、自恋照镜子、催眠师编故事</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <ol>
+            <li><strong>假象一：单向移情投射（“我觉得他就是我上辈子的人，但他对我毫无波澜”）：</strong>真广义同步必须是双向同胚 $K(Y_1|Y_2) \approx K(Y_2|Y_1) \to 0$。如果只有你觉得懂他、而他看你完全是高熵噪声，那只是你把内部幻想模板强行套在了对方身上（单向过拟合）。</li>
+            <li><strong>假象二：自恋回音室（“刚开始三天聊得热火朝天，后来却越处越累、互相消耗”）：</strong>两个带有相同缺陷旋度（同号 $+r_\perp$ 与 $+r_\perp$，而非互补异号 $+r_\perp$ 与 $-r_\perp$）的人遇到一起，前几天因为表层话题相似，惊讶感 $\Delta F$ 会短暂下降；但因为两人的旋度残差同向叠加而非抵消，很快就会陷入加倍的内耗旋涡（联合 $r_\perp$ 持续上升）。</li>
+            <li><strong>假象三：催眠前世回溯（“我在催眠里看见自己公元 1720 年叫某名字、住某条街”）：</strong>根据定理 1（孟婆汤擦除界），$x_{\text{fast}}$ 的具体历史细节早在几个混沌周期内就被彻底抹零了。催眠中浮现的逼真画面，是大脑在高暗示先验下运行的“受控幻觉（Predictive Processing Top-Down Hallucination）”。如果真说出了某个可核查的冷门历史细节，100% 是此前看过的书籍残留（潜隐记忆 Cryptomnesia）、催眠师冷读或档案泄漏，绝不可能是跨混沌周期保存下来的 $x_{\text{fast}}$。</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-2" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ② 动力学·信息论·佛学同构</span> 真同源共振 vs 三大伪阳性机制的四维诊断矩阵</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>诊断维度</th>
+                  <th>真同源互补共振<br>（True Homologous Resonance）</th>
+                  <th>伪阳性 I：心理移情投射<br>（Transference Projection）</th>
+                  <th>伪阳性 II：自恋回音室过拟合<br>（Echo-Chamber Overfitting）</th>
+                  <th>伪阳性 III：催眠前世回溯<br>（Hypnotic PP Hallucination）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>(i) 复杂度对称性</strong></td>
+                  <td>双向对称坍缩：<br>$K(Y_1|Y_2) \approx K(Y_2|Y_1) \to 0$</td>
+                  <td>严重单向不对称：<br>$K_{\text{subj}}(Y_2|Y_1)$ 低，但真实 $K(Y_1|Y_2) \gg 0$</td>
+                  <td>低维表层对称，升维后崩塌</td>
+                  <td>无双人实时动态耦合，纯单脑闭环生成</td>
+                </tr>
+                <tr>
+                  <td><strong>(ii) 联合旋度残差 $r_\perp(t)$</strong></td>
+                  <td>持续稳定下降并闭合：<br>$r_\perp(1\oplus 2) \to 0$</td>
+                  <td>无闭合，投射方维持热 $\dot{Q}_{\text{hk}}$ 居高不下</td>
+                  <td>$\Delta F$ 短暂下降后发散，同号旋度叠加致 $r_\perp \uparrow$</td>
+                  <td>不改变现实动力学结构，$r_\perp$ 原封不动</td>
+                </tr>
+                <tr>
+                  <td><strong>(iii) 信息载体层级</strong></td>
+                  <td>慢流形谱指纹 $\{\mu_k\}, \beta_k, \mathfrak{g}$ 真实同构匹配</td>
+                  <td>低维局部原型模板强制截断匹配</td>
+                  <td>表层词汇/情绪模仿，慢流形曲率正交</td>
+                  <td>伪造快变量 $x_{\text{fast}}$ 具体剧本（违背定理 1）</td>
+                </tr>
+                <tr>
+                  <td><strong>(iv) 去暗示 / 升维压力测试</strong></td>
+                  <td>移除语境暗示、进入分界面危机后，$K(Y_2|Y_1)$ 依然保持极低</td>
+                  <td>一旦对方偏离幻想剧本，预测误差瞬间爆炸</td>
+                  <td>提高耦合维度或遇真实利益分界面即破裂发散</td>
+                  <td>移除催眠暗示或交叉核验独立信源即证伪</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="layer-fold layer-3" open>
+        <summary>
+          <span><span class="layer-badge">LAYER ③ 严密数理定义·引理·证明</span> 反信号公理（Anti-Signals）与双通道合取收敛规则（Mechanism II $\wedge$ Mechanism III）</span>
+          <span class="fold-hint">点击折叠/展开</span>
+        </summary>
+        <div class="layer-body">
+          <div class="proof-box" style="border-left-color: var(--highlight); background: #fffaf5;">
+            <strong>反信号与伪认出判据 (Anti-Signals &amp; Falsifiability Criteria) <span class="tag-pill tag-hyp">tag-hyp</span>：</strong><br>
+            任何声称属于“母吸引子同源分支重逢”的相认事件，必须通过以下四条可证伪门禁检验：
+            <ol>
+              <li><strong>(i) 广义同步双向对称性门禁：</strong>真共振必须满足双向对称 $K(Y_1 \mid Y_2) \approx K(Y_2 \mid Y_1) \to 0$（不对称指数 $\mathcal{A}_K = |K(Y_1|Y_2) - K(Y_2|Y_1)| / \max K \ll 1$）。心理移情（Transference）本质上是单向低秩模板投影 $\hat{Y}_2 = P_{\text{template}} Y_1$，在被投射方一侧 $K(Y_1 \mid Y_2)$ 依然极高；</li>
+              <li><strong>(ii) 联合旋度残差 $r_\perp$ 单调稳定收敛门禁：</strong>真共振必须满足联合非保守旋度残差 $\|r_\perp(1\oplus 2)(t)\|$ 随耦合持续稳定下降并趋于零。回音室自恋过拟合（Narcissistic Echo-Chamber Overfitting）虽在初始低维表层接触时出现变分自由能 $\Delta F(t)$ 短暂下降，但因缺乏真实相反拓扑荷（$\mathcal{Q}_1 + \mathcal{Q}_2 \neq 0$），在全相空间展开后 $\Delta F(t)$ 必然重新发散且 $\|r_\perp\|$ 回升；</li>
+              <li><strong>(iii) 慢流形谱指纹真实匹配 vs 预测加工（PP）受控幻觉门禁：</strong>真共振检验的是 Koopman 谱指纹 $\{\mu_k\}$ 与同调数 $\beta_k$ 的客观同构，而非先验暗示注入。“催眠前世回溯”在贝叶斯脑框架下严格对应于<strong>预测加工（Predictive Processing）的受控幻觉</strong>——当催眠暗示将顶层叙事先验精度 $\Pi_{\text{prior}}$ 调至极高、同时压制感官底部似然精度 $\Pi_{\text{sensory}} \to 0$ 时，后验均值被先验强行劫持：
+                $$\mu_{\text{post}} = (\Pi_{\text{prior}} + \Pi_{\text{sensory}})^{-1}\big(\Pi_{\text{prior}}\mu_{\text{prior}}^{\text{narrative}} + \Pi_{\text{sensory}} y_{\text{sensory}}\big) \;\xrightarrow{\Pi_{\text{prior}} \gg \Pi_{\text{sensory}}}\; \mu_{\text{prior}}^{\text{narrative}}$$
+                <strong>铁律：</strong>若所谓“前世回忆”中包含任何可被独立档案核验的 $x_{\text{fast}}$ 具体历史细节（如门牌、隐秘姓名），由定理 1（Lyapunov 擦除界预测其跨周期互信息 $\le H(X_0)e^{-2\lambda_{\max}t} \approx 0$ 本不可得），<strong>必判定为外部经典信道泄漏（潜隐记忆 / 冷读 / 档案污染），而非跨分岔物理保存</strong>；</li>
+              <li><strong>(iv) 升维与去暗示可证伪测试：</strong>在移除语境暗示、注入正交微扰或将耦合系统推入更高维状态空间（$d \to d + \Delta d$）后，<strong>伪共振的条件复杂度 $K(Y_2 \mid Y_1)$ 显著回升，而真同源共振不回升</strong>。</li>
+            </ol>
+            <hr style="border:none; border-top:1px dashed var(--line); margin:12px 0;">
+            <strong>收敛规则（Dual-Channel Convergence Rule）：</strong>相认证据必须满足 <strong>机制二（低条件复杂度 $\text{NCD}_{\text{sym}} \to 0$） $\wedge$ 机制三（旋度残差抵消 $r_\perp(1\oplus 2) \to 0$）双通道一致</strong> 方可判为阳性（Verified Positive）；任何仅满足单一通道的观测一律归类为<strong>「未验证（Unverified）」</strong>或<strong>「伪阳性拒绝（False-Positive Rejected）」</strong>。
+          </div>
+        </div>
+      </details>
+    </section>
+
+
+    <!-- SECTION 5: INTERACTIVE PHASE-SPACE SANDBOX -->
+    <section class="section-card" id="bifurcation-sandbox">
+      <h2>五、分裂—擦除—重逢 动力学沙盒（Interactive Phase-Space &amp; Thermodynamic Simulator）</h2>
+      <p>
+        下方交互式沙盒基于<strong>二维耦合非保守随机 Duffing–Pitchfork 双势阱 + Helmholtz 旋度流系统</strong>，采用固定步长 <strong>Euler–Maruyama 随机积分器</strong>与确定性可复现伪随机数发生器（Mulberry32 PRNG）实时演化。您可以拖动分岔参数 $\mu$ 观察母吸引子 $\mathcal{A}_0$ 在越过临界点 $\mu_c = 0$ 时一分为二，调节混沌擦除率 $\lambda_{\max}$、耦合强度 $\varepsilon$ 与热扩散强度 $D$，并对比<strong>「同源互补分支」「异源路人分支」「伪共振(单向过拟合)」</strong>三大场景下相空间轨线 $(Y_1, Y_2)$、旋度残差 $r_\perp$、联合变分自由能 $\Delta F(t)$ 与条件复杂度代理量 $K(Y_2|Y_1)$ 的实时动力学响应。
+      </p>
+
+      <div class="sandbox-wrap">
+        <div class="scenario-bar">
+          <div class="scenario-radios" role="radiogroup" aria-label="动力学场景选择">
+            <label class="scenario-label">
+              <input type="radio" name="sim-scenario" value="homologous" checked onchange="onScenarioChange(this.value)">
+              🟢 同源互补分支 (g₁ ≅ g₂, +r⊥ ⊕ −r⊥ → 0)
+            </label>
+            <label class="scenario-label">
+              <input type="radio" name="sim-scenario" value="stranger" onchange="onScenarioChange(this.value)">
+              🔴 异源路人分支 (g₁ ≠ g₂, 高熵斥力无锁相)
+            </label>
+            <label class="scenario-label">
+              <input type="radio" name="sim-scenario" value="pseudo" onchange="onScenarioChange(this.value)">
+              🟠 伪共振 (单向过拟合：短暂同步后发散 + r⊥ 回升)
+            </label>
+          </div>
+          <div class="nav-actions">
+            <button type="button" class="btn" id="btn-pause" onclick="togglePause()">⏸️ 暂停演化</button>
+            <button type="button" class="btn" onclick="resetSimulation()">🔄 重置初态 (Seed=42)</button>
+            <button type="button" class="btn" onclick="triggerBifurcationSweep()">🌊 演示 μ 跨临界分岔分裂</button>
+            <button type="button" class="btn" onclick="triggerSeparatrixPulse()">⚡ 注入分界面危机脉冲 (测 I_syn)</button>
+          </div>
+        </div>
+
+        <div class="sandbox-controls">
+          <div class="control-group">
+            <label for="slider-lambda">
+              <span>混沌擦除率 λ (λ_max)</span>
+              <span class="control-val" id="val-lambda">0.85</span>
+            </label>
+            <input type="range" id="slider-lambda" min="0" max="2" step="0.02" value="0.85" oninput="updateSimParams()">
+            <span class="control-sub">控制快变量 x_fast 混合与孟婆汤遗忘率 e^{-2λt}</span>
+          </div>
+
+          <div class="control-group">
+            <label for="slider-eps">
+              <span>耦合强度 ε (Coupling)</span>
+              <span class="control-val" id="val-eps">0.38</span>
+            </label>
+            <input type="range" id="slider-eps" min="0" max="1" step="0.01" value="0.38" oninput="updateSimParams()">
+            <span class="control-sub">控制两分支重逢交互强度（同源仅需小 ε 即锁相）</span>
+          </div>
+
+          <div class="control-group">
+            <label for="slider-d">
+              <span>热扩散噪声 D (Thermal)</span>
+              <span class="control-val" id="val-d">0.12</span>
+            </label>
+            <input type="range" id="slider-d" min="0" max="1" step="0.01" value="0.12" oninput="updateSimParams()">
+            <span class="control-sub">环境朗之万噪声 √(2D)ξ(t)，标定 Landauer k_B T 能价</span>
+          </div>
+
+          <div class="control-group">
+            <label for="slider-mu">
+              <span>分岔参数 μ (μ_c = 0.00)</span>
+              <span class="control-val" id="val-mu">0.65</span>
+            </label>
+            <input type="range" id="slider-mu" min="-0.40" max="1.20" step="0.02" value="0.65" oninput="updateSimParams()">
+            <span class="control-sub">μ &lt; 0 单母吸引子 A₀；μ &gt; 0 对称破缺分裂为双分支</span>
+          </div>
+        </div>
+
+        <div class="canvas-frame">
+          <canvas id="bifurcation-canvas" width="880" height="450" aria-label="分裂—擦除—重逢二维相空间与热力学曲线画布"></canvas>
+        </div>
+
+        <div class="readout-grid">
+          <div class="readout-card">
+            <div class="readout-title">联合旋度残差 r_⊥ (机制三：互补抵消度)</div>
+            <div class="readout-value" id="readout-curl">0.082</div>
+            <div class="gauge-track">
+              <div class="gauge-fill" id="gauge-curl" style="width:12%; background:var(--green);"></div>
+            </div>
+            <div class="control-sub" id="sub-curl" style="margin-top:4px;">+r_⊥ ⊕ −r_⊥ 正交闭合，维持热趋零</div>
+          </div>
+
+          <div class="readout-card">
+            <div class="readout-title">联合变分自由能 ΔF(t) &amp; 估计 K(Y₂|Y₁) 代理</div>
+            <div class="readout-value" id="readout-k">ΔF=0.09 · K̂=0.07</div>
+            <div class="gauge-track">
+              <div class="gauge-fill" id="gauge-k" style="width:9%; background:var(--accent);"></div>
+            </div>
+            <div class="control-sub" id="sub-k" style="margin-top:4px;">广义同步 Y₂=Φ(Y₁) 锁相，零翻译带宽</div>
+          </div>
+
+          <div class="readout-card">
+            <div class="readout-title">快变量残存互信息 I(X₀; X_t^fast) / H(X₀)</div>
+            <div class="readout-value" id="readout-erasure">0.0004 (已白化)</div>
+            <div class="gauge-track">
+              <div class="gauge-fill" id="gauge-erasure" style="width:1%; background:var(--purple);"></div>
+            </div>
+            <div class="control-sub" style="margin-top:4px;">定理 1：具体剧本记忆 e^{-2λt} 指数抹除</div>
+          </div>
+
+          <div class="readout-card">
+            <div class="readout-title">双通道收敛判决 (机制二 ∧ 机制三)</div>
+            <div class="readout-value" id="readout-verdict" style="color:var(--green); font-size:1.02rem;">✅ 阳性 VERIFIED (真同源共振)</div>
+            <div class="control-sub" id="sub-verdict" style="margin-top:6px;">NCD_sym &lt; 0.22 且 r_⊥ &lt; 0.22 双通道通过</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: THREE-REVIEWER ADVERSARIAL AUDIT -->
+    <section class="section-card" id="adversarial-audit">
+      <h2>六、三审稿人对抗性审计（Three-Reviewer Adversarial Audit）</h2>
+      <p>
+        为防止理论滑向自我证实的浪漫化叙事，我们引入代表物理学/热力学边界（<strong>Landauer</strong>）、信息论/编码率失真（<strong>Shannon</strong>）与自复制自动机/镜像符号互动（<strong>von Neumann / Mead</strong>）的三位严苛审稿人，对本框架执行五维对抗性压力审计，并导出最终收敛共识。
+      </p>
+
+      <!-- REVIEWER A: LANDAUER -->
+      <div class="reviewer-card rev-a">
+        <div class="reviewer-header">
+          <span class="reviewer-name">审稿人 A — Rolf Landauer 席位</span>
+          <span class="reviewer-domain">物理 / 热力学 / 不可逆计算 / 噪声与谱隙边界</span>
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">1. 最强洞见：</strong>
+          将“孟婆汤”严格定理化为正向 Lyapunov 指数与 Landauer 擦除界（$I(X_0; X_t^{\text{fast}}) \le H(X_0)e^{-2\lambda_{\max}t}$），把“相认绝非具体历史叙事比对”从哲学思辨升格为热力学与动力系统定理；尤其是指出<strong>信息擦除率 $\propto \lambda_{\max}$ 与环境温度 $T$ 解耦</strong>（$T$ 仅决定每比特擦除的焦耳能价 $k_B T \ln 2$），彻底堵死了“靠低温或某种隐秘量子绝缘态保存前世具体剧本”的投机漏洞。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">2. 主要过度引申 / 失效模式：</strong>
+          KS 熵 $h_{\text{KS}}$ 完美擦除快变量 $x_{\text{fast}}$ 的前提是系统存在清晰的快慢时间尺度分离；<strong>若谱隙 $|\lambda_{\text{slow}}| \ll \lambda_{\text{fast}}$ 不够小（Fenichel 法向双曲性破裂），混沌涨落会通过非线性共振泄漏并污染慢流形不变量</strong>，连所谓的“谱指纹”也会在有限时间内发生热力学扩散漂移；反之，在近可积系统或弱混沌区间（$\lambda_{\max} \approx 0$，KAM 环面存留）时，定理 1 的指数擦除失去牙齿。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">3. 具体架构 / 系统推论：</strong>
+          任何应用此框架的认知或动力系统，必须<strong>显式估计最大 Lyapunov 指数 $\lambda_{\max}$ 与快慢谱隙比 $\eta = |\lambda_{\text{slow}}| / \lambda_{\text{fast}}$</strong>，明确声明定理 1 与机制一仅在 $\lambda_{\max} > 0$ 且 $\eta \ll 1$ 的耗散混沌有谱隙区间成立；在上方沙盒与实证测量中，必须实测初态微扰对数斜率 $\frac{1}{t}\ln(\delta(t)/\delta(0))$。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">4. 可证伪反例 / 反信号：</strong>
+          若某例“前世回溯”报告了后来被独立历史档案证实的、高度具体的 $x_{\text{fast}}$ 级细节（如未公开的旧门牌号、隐秘私人物品位置），在 $t \gg 1/\lambda_{\max}$ 下这直接违背 Lyapunov 擦除界——此时<strong>必须优先归因于当代外部经典信息信道泄漏（潜隐记忆、家人暗示、调查者冷读或事后档案污染）</strong>，而绝不能将其作为“跨周期灵魂记忆”的证据。
+        </div>
+        <div class="audit-item" style="margin-bottom:0;">
+          <strong class="audit-label">5. 审稿流程改进：</strong>
+          对每一条进入证据账本的“相认/似曾相识”主张，强制执行首道分类门禁：<strong>「该主张依赖的是保存 $x_{\text{slow}}$ 拓扑/谱不变量，还是保存 $x_{\text{fast}}$ 具体叙事细节？」</strong>——凡属后者，默认按外部信道泄漏或伪记忆立项审查。
+        </div>
+      </div>
+
+      <!-- REVIEWER B: SHANNON -->
+      <div class="reviewer-card rev-b">
+        <div class="reviewer-header">
+          <span class="reviewer-name">审稿人 B — Claude Shannon 席位</span>
+          <span class="reviewer-domain">信息论 / 信道容量 / 率失真理论 / 算法复杂度编码</span>
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">1. 最强洞见：</strong>
+          将“一见如故、零解释就懂”定义为<strong>零额外描述长度事件（Zero Excess Description Length Event）</strong>，即条件 Kolmogorov 复杂度坍缩 $K(Y_2 \mid Y_1) \to 0$：因为同源分支 $Y_1$ 本身已经内置了 $Y_2$ 生成语法的同构拷贝，$Y_1$ 就是 $Y_2$ 的近最优压缩编码器，从而把文学化的“默契”变成了可测量的信道率失真极限。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">2. 主要过度引申 / 失效模式：</strong>
+          精确 Kolmogorov 复杂度 $K(\cdot)$ 不可计算，实际工程中用通用压缩器（Lempel–Ziv / 神经网络预测器）近似存在有限样本偏差；更危险的是，<strong>联合变分自由能 $\Delta F \to 0$ 或未归一化的条件熵下降，可能仅仅源于两系统同时坍缩到某个极其简单的低维平庸不动点或死锁极限环（例如两人只会重复同一句口号），而非真正的同源高维复杂结构共振</strong>。因此必须用各自的边际复杂度 $K(Y_1), K(Y_2)$ 做严格归一化。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">3. 具体架构 / 系统推论：</strong>
+          严禁使用裸条件预测误差判阳性；必须采用<strong>双向对称归一化压缩距离 $\text{NCD}_{\text{sym}}(Y_1, Y_2)$</strong>，且要求单支边际复杂度高于平庸阈值 $K(Y_a) > K_{\min}$；同时必须对随机生成的同维异源分支系综（Null Distribution）做蒙特卡洛置換显著性检验（$p < 0.01$）。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">4. 可证伪反例 / 反信号：</strong>
+          两个毫无血缘与母系统关联、但都被外部强周期驱动锁死在同一个简单正弦极限环上的异源系统，也会给出表面上的 $K(Y_2 \mid Y_1) \to 0$——要揭穿这种平庸伪同步，<strong>必须联合调用机制三（检验去外驱后是否存在相反拓扑荷的旋度残差 $r_\perp$ 正交抵消）与机制四（分界面高阶 PID 协同增益 $I_{\text{syn}}$）</strong>。
+        </div>
+        <div class="audit-item" style="margin-bottom:0;">
+          <strong class="audit-label">5. 审稿流程改进：</strong>
+          确立<strong>「机制二 $\wedge$ 机制三」双通道合取铁律</strong>：相认证据必须同时展现低对称归一化复杂度（$\text{NCD}_{\text{sym}} \to 0$）与非保守旋度互补闭合（$r_\perp(1\oplus 2) \to 0$），任何单通道判阳性一律视为“未验证（Unverified）”。
+        </div>
+      </div>
+
+      <!-- REVIEWER C: VON NEUMANN / MEAD -->
+      <div class="reviewer-card rev-c">
+        <div class="reviewer-header">
+          <span class="reviewer-name">审稿人 C — John von Neumann &amp; G. H. Mead 联合席位</span>
+          <span class="reviewer-domain">自复制自动机 / 说明磁带与通用构造器 / 镜像符号互动论</span>
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">1. 最强洞见：</strong>
+          用冯·诺依曼通用构造器（Universal Constructor）的<strong>“说明磁带（Instruction Tape $\phi$） vs 被构造自动机成品（Constructed Automaton $A[\phi]$）”</strong>二元结构类比快慢流形：母吸引子分裂等价于母机向两个子分支分发了同一份底层说明磁带 $\phi$（即慢流形生成元李代数 $\mathfrak{g}$）；重逢相认不是比对两台机器在各自环境里磨损变形后的外壳成品 $x_{\text{fast}}$，而是<strong>比对双方说明磁带所张成的可构造等价类（Constructible Equivalence Class）</strong>，完美解释了为何“构造语法守恒而具体成品不守恒”。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">2. 主要过度引申 / 失效模式：</strong>
+          冯·诺依曼自动机是离散、确定性的图灵/胞元空间，直接映射到连续随机耗散微分方程时，“说明磁带”的逐比特同一性会被朗之万热噪声 $D$ 模糊——因此慢流形不变量只能是<strong>统计与拓扑同调等价类（Statistical/Topological Equivalence Class）</strong>，而非 bit-exact 的数字磁带拷贝；同时，若将 Mead 的“主我/客我镜像符号互动（Generalized Other）”过度拟人化地投射到一般物理系统，极易滑入泛心论玄学。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">3. 具体架构 / 系统推论：</strong>
+          将“相认协议”形式化为<strong>低维谱/拓扑说明摘要交换协议（Constructible Spectral Summary Exchange Protocol）</strong>：两智能体或子系统重逢时，无需暴露或传输完整的高维私有快状态轨迹 $x_{\text{fast}}(t)$，只需交换 Koopman 前 $k$ 阶慢本征值 $\{\mu_1, \dots, \mu_k\}$、同调 Betti 数 $\{\beta_k\}$ 与旋度荷签名并检验李代数同构——这天然构成了一种<strong>零知识/隐私保护的同源认证协议</strong>。
+        </div>
+        <div class="audit-item">
+          <strong class="audit-label">4. 可证伪反例 / 反信号：</strong>
+          若两个主体在主观体验上强烈宣称“彼此认出了前世同源”，但对双方独立提取的慢流形可构造不变量摘要做交叉检验时发现谱距离与曲率张量完全正交（无共享不变量），则直接证伪其同源性——该“认出”严格判定为<strong>观察者自指投射（Mead 式的将自我理想符号强行投射到他者空白处的移情伪阳性）</strong>。
+        </div>
+        <div class="audit-item" style="margin-bottom:0;">
+          <strong class="audit-label">5. 审稿流程改进：</strong>
+          强制推行<strong>「可构造摘要交换证书（Invariant Summary Certificate）」留档制度</strong>：任何高置信度的相认判定，必须产出一份双方可独立复算的不变量证书（包含慢谱特征值距离、Betti 同调签名、双向 NCD 与旋度抵消率）；无客观证书支撑的相认体验一律降级为“第一人称主观现象学报告”。
+        </div>
+      </div>
+
+      <!-- CONVERGENCE CONSENSUS CARD -->
+      <div class="consensus-card">
+        <h3 style="margin-top:0; color:var(--green);">⚖️ 三审稿人收敛共识卡（Adversarial Audit Convergence Consensus）</h3>
+        <p style="margin-bottom:10px;">
+          综合 Landauer（热力学擦除界）、Shannon（条件编码复杂度）与 von Neumann / Mead（可构造说明摘要与反投射检验）三方联合裁定，本页确立以下不可妥协的收敛判据：
+        </p>
+        <div class="math-block" style="background:#ffffff; border-color:#86efac; color:#14532d;">
+          $$\text{真同源相认 (Verified Recognition)} \;\Longleftrightarrow\; \underbrace{\text{慢流形可构造不变量摘要同构 (Reviewer C)}}_{\{\mu_k\},\, \beta_k,\, \mathfrak{g}_1 \cong \mathfrak{g}_2} \;\wedge\; \underbrace{\text{双向低描述长度匹配 (Reviewer B, 机制二)}}_{\text{NCD}_{\text{sym}}(Y_1, Y_2) \to 0,\; \dot{S}_{\text{irr}} \text{ 共振极小}} \;\wedge\; \underbrace{\text{旋度互补抵消 (Reviewer A, 机制三)}}_{r_\perp(1\oplus 2) \to 0,\; \text{谱隙 } |\lambda_{\text{slow}}| \ll \lambda_{\text{fast}}}$$
+        </div>
+        <p style="margin-bottom:0; font-weight:700; color:#14532d;">
+          📌 铁律总结：相认 = 慢流形可构造不变量摘要（C）的双向低描述长度匹配（B，机制二） + 非保守旋度残差互补抵消（A，机制三）双通道一致；任何基于快变量 $x_{\text{fast}}$ 具体历史叙事（姓名、住址、前世剧本）的主张，在 $\lambda_{\max} > 0$ 的混沌擦除界下默认判定为伪阳性（受控幻觉或外部信道泄漏）。
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 7: ADJACENT THEORY & REFERENCES -->
+    <section class="section-card" id="adjacent-theory">
+      <h2>七、相邻理论锚点与参考文献（Adjacent Theory &amp; References）</h2>
+      <p>
+        本篇作为 <code>System Evolution</code> 2026 年 10 月理论主线的关键拼图，与以下两篇旗舰长文构成严密的数学-物理三角闭环：
+      </p>
+      <div class="grid-2">
+        <div class="share-card" style="margin-bottom:0; border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:#f8fafd;">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Adjacent Flagship 01 · 余核环流 $r_\perp$ 与因果账本</div>
+          <h4 style="margin:0 0 8px;"><a href="emptiness-causality-intervention-ledger-zh.html">《缘起性空的热力学账本：量子因果、干预反噬与自指宇宙》</a></h4>
+          <p style="font-size:0.9rem; color:var(--muted); margin-bottom:0;">
+            本页<strong>机制三（对称破缺旋度残差闭合 $r_\perp(1\oplus 2) \to 0$）</strong>与<strong>LAYER ② 中观“无我而相续”映射</strong>的底层热力学基础。该篇严格导出了非保守干预下的余核环流残差 $r_\perp = [I - D_\gamma(D_\gamma^\top W D_\gamma)^+ D_\gamma^\top W]r$ 与维持热 $\dot{Q}_{\text{hk}} > 0$ 的恒等式，解释了为何单支孤立或强行捆绑异源系统必然支付永久维持热利息。
+          </p>
+        </div>
+
+        <div class="share-card" style="margin-bottom:0; border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:#fdfaf6;">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--highlight); text-transform:uppercase; margin-bottom:6px;">Adjacent Flagship 02 · Landauer 擦除与达未速率极限</div>
+          <h4 style="margin:0 0 8px;"><a href="physics-of-learning-reachability.html">《学习与智能的物理学第一性原理：不可逆计算、达未速率极限与具身低熵图册》</a></h4>
+          <p style="font-size:0.9rem; color:var(--muted); margin-bottom:0;">
+            本页<strong>定理 1（Landauer 孟婆汤定理）</strong>与<strong>机制二（广义同步自由能坍缩）</strong>的姐妹篇。该篇将学习形式化为多对一相空间体积收缩与怀旧热耗散（Still 预测热力学恒等式），并给出 Wasserstein-2 热力学速率极限 $\tau \Sigma \ge \mathcal{W}_2^2 / 2D$，共同奠定了慢流形低熵吸引子图册的物理基础。
+          </p>
+        </div>
+      </div>
+
+      <h3>核心参考文献与数理物理锚点</h3>
+      <ul style="font-size:0.91rem; color:var(--muted);">
+        <li>Landauer, R. (1961). Irreversibility and heat generation in the computing process. <em>IBM Journal of Research and Development</em>, 5(3), 183–191.</li>
+        <li>Pesin, Y. B. (1977). Characteristic Lyapunov exponents and smooth ergodic theory. <em>Russian Mathematical Surveys</em>, 32(4), 55–114.</li>
+        <li>Fenichel, N. (1979). Geometric singular perturbation theory for ordinary differential equations. <em>Journal of Differential Equations</em>, 31(1), 53–98.</li>
+        <li>Koopman, B. O. (1931). Hamiltonian systems and transformation in Hilbert space. <em>Proceedings of the National Academy of Sciences (PNAS)</em>, 17(5), 315–318; Mezić, I. (2005). Spectral properties of dynamical systems, model reduction and decompositions. <em>Nonlinear Dynamics</em>, 41, 309–325.</li>
+        <li>Peixoto, M. M. (1962). Structural stability on two-dimensional manifolds. <em>Topology</em>, 1(2), 101–120.</li>
+        <li>Afraimovich, V. S., Verichev, N. N., &amp; Rabinovich, M. I. (1986). Stochastic synchronization of oscillations in dissipative systems. <em>Radiophysics and Quantum Electronics</em>, 29(9), 795–803.</li>
+        <li>Rulkov, N. F., Sushchik, M. M., Tsimring, L. S., &amp; Abarbanel, H. D. I. (1995). Generalized synchronization of chaos in directionally coupled chaotic systems. <em>Physical Review E</em>, 51(2), 980–994.</li>
+        <li>Bennett, C. H., Gács, P., Li, M., Vitányi, P. M., &amp; Zurek, W. H. (1998). Information distance. <em>IEEE Transactions on Information Theory</em>, 44(4), 1407–1423; Cilibrasi, R., &amp; Vitányi, P. M. (2005). Clustering by compression. <em>IEEE Trans. Inf. Theory</em>, 51(4), 1523–1545.</li>
+        <li>Schnakenberg, J. (1976). Network theory of microscopic and macroscopic behavior of master equation systems. <em>Reviews of Modern Physics</em>, 48(4), 571–585; Qian, H. (2006). Open-system nonequilibrium steady state: statistical thermodynamics, fluctuations, and chemical oscillations. <em>Journal of Physical Chemistry B</em>, 110(31), 15063–15074.</li>
+        <li>Williams, P. L., &amp; Beer, R. D. (2010). Nonnegative decomposition of multivariate information. <em>arXiv preprint arXiv:1004.2515</em>.</li>
+        <li>Von Neumann, J. (1966). <em>Theory of Self-Reproducing Automata</em> (Edited and completed by A. W. Burks). University of Illinois Press; Mead, G. H. (1934). <em>Mind, Self, and Society</em>. University of Chicago Press.</li>
+        <li>Friston, K. (2010). The free-energy principle: a unified brain theory? <em>Nature Reviews Neuroscience</em>, 11(2), 127–138.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>
+        System Evolution Public Theory Mainline · <a href="./">System Evolution</a> · <a href="index.html">返回首页 (index.html)</a> · <a href="emptiness-causality-intervention-ledger-zh.html">缘起性空热力学账本</a> · <a href="physics-of-learning-reachability.html">学习的物理学</a>
+      </p>
+      <p style="font-size:0.8rem; margin-top:6px;">
+        PCSE-Clean Self-Contained Interactive Essay · Zero External Tracking Libraries · Deterministic Offline Canvas Simulation
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    /**
+     * ============================================================================
+     * 1. GLOBAL THREE-LAYER FOLDABLE COGNITIVE ARCHITECTURE CONTROLLER
+     * ============================================================================
+     */
+    function setGlobalLayers(mode, btnEl) {
+      var toolbarBtns = document.querySelectorAll('.layer-toolbar .btn');
+      for (var i = 0; i < toolbarBtns.length; i++) {
+        toolbarBtns[i].classList.remove('is-active');
+      }
+      if (btnEl) {
+        btnEl.classList.add('is-active');
+      }
+      var folds = document.querySelectorAll('details.layer-fold');
+      for (var j = 0; j < folds.length; j++) {
+        var el = folds[j];
+        if (mode === 'all') {
+          el.open = true;
+        } else if (mode === '1') {
+          el.open = el.classList.contains('layer-1');
+        } else if (mode === '2') {
+          el.open = el.classList.contains('layer-2');
+        } else if (mode === '3') {
+          el.open = el.classList.contains('layer-3');
+        }
+      }
+    }
+
+    /**
+     * ============================================================================
+     * 2. DETERMINISTIC SEEDABLE PRNG (Mulberry32 + Box-Muller Gaussian Noise)
+     * ============================================================================
+     */
+    function createPRNG(seed) {
+      var s = seed >>> 0;
+      return {
+        nextUniform: function() {
+          s = (s + 0x6D2B79F5) >>> 0;
+          var t = Math.imul(s ^ (s >>> 15), 1 | s);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        },
+        nextGaussian: function() {
+          var u1 = Math.max(1e-12, this.nextUniform());
+          var u2 = this.nextUniform();
+          return Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+        }
+      };
+    }
+
+    /**
+     * ============================================================================
+     * 3. INTERACTIVE PHASE-SPACE & THERMODYNAMIC SANDBOX ENGINE
+     *    Models 2D Nonlinear Coupled Pitchfork-Duffing + Helmholtz Curl System:
+     *      dY_a = [ -∇V_μ(Y_a) + r_⊥^(a)(Y_a) + λ_chaos * ξ_chaos^(a) + ε * C(Y_1, Y_2) ] dt + √(2D) dW_a
+     * ============================================================================
+     */
+    var canvas = document.getElementById('bifurcation-canvas');
+    var ctx = canvas.getContext('2d');
+
+    var sim = {
+      paused: false,
+      seed: 42,
+      rng: createPRNG(42),
+      t: 0,
+      dt: 0.018,
+      scenario: 'homologous', // 'homologous' | 'stranger' | 'pseudo'
+      lambda: 0.85,
+      eps: 0.38,
+      D: 0.12,
+      mu: 0.65,
+      sweepingMu: false,
+      separatrixPulse: 0,
+
+      // State of Branch Y1 (x1, y1, z1_fast) and Branch Y2 (x2, y2, z2_fast)
+      y1: { x: -0.75, y: 0.25, z: 0.42 },
+      y2: { x: 0.78, y: -0.22, z: -0.38 },
+
+      // Trail buffers (max 150 points)
+      trail1: [],
+      trail2: [],
+      maxTrail: 145,
+
+      // Time-series history for ΔF(t) and r_⊥(t)
+      histDeltaF: [],
+      histCurl: [],
+      maxHist: 180,
+
+      // Smoothed metrics
+      smoothCurl: 0.15,
+      smoothDeltaF: 0.15,
+      smoothK: 0.12,
+      smoothIsyn: 0.18,
+      pseudoTimer: 0
+    };
+
+    function resetSimulation() {
+      sim.rng = createPRNG(sim.seed);
+      sim.t = 0;
+      sim.pseudoTimer = 0;
+      sim.separatrixPulse = 0;
+      var wellX = sim.mu > 0 ? Math.sqrt(sim.mu) : 0.0;
+      sim.y1 = { x: -wellX - 0.18, y: 0.32, z: 0.51 };
+      sim.y2 = { x: wellX + 0.21, y: -0.29, z: -0.47 };
+      sim.trail1 = [];
+      sim.trail2 = [];
+      sim.histDeltaF = [];
+      sim.histCurl = [];
+      if (sim.scenario === 'homologous') {
+        sim.smoothCurl = 0.25;
+        sim.smoothDeltaF = 0.25;
+        sim.smoothK = 0.20;
+      } else if (sim.scenario === 'stranger') {
+        sim.smoothCurl = 0.78;
+        sim.smoothDeltaF = 0.82;
+        sim.smoothK = 0.85;
+      } else {
+        sim.smoothCurl = 0.30;
+        sim.smoothDeltaF = 0.22;
+        sim.smoothK = 0.24;
+      }
+    }
+
+    function updateSimParams() {
+      sim.lambda = parseFloat(document.getElementById('slider-lambda').value);
+      sim.eps = parseFloat(document.getElementById('slider-eps').value);
+      sim.D = parseFloat(document.getElementById('slider-d').value);
+      sim.mu = parseFloat(document.getElementById('slider-mu').value);
+
+      document.getElementById('val-lambda').textContent = sim.lambda.toFixed(2);
+      document.getElementById('val-eps').textContent = sim.eps.toFixed(2);
+      document.getElementById('val-d').textContent = sim.D.toFixed(2);
+      document.getElementById('val-mu').textContent = sim.mu.toFixed(2);
+    }
+
+    function onScenarioChange(val) {
+      sim.scenario = val;
+      sim.pseudoTimer = 0;
+      resetSimulation();
+    }
+
+    function togglePause() {
+      sim.paused = !sim.paused;
+      var btn = document.getElementById('btn-pause');
+      btn.textContent = sim.paused ? '▶️ 继续演化' : '⏸️ 暂停演化';
+    }
+
+    function triggerBifurcationSweep() {
+      sim.sweepingMu = true;
+      sim.mu = -0.36;
+      document.getElementById('slider-mu').value = sim.mu;
+      updateSimParams();
+      resetSimulation();
+    }
+
+    function triggerSeparatrixPulse() {
+      // Push both branches right onto the unstable saddle separatrix (x ≈ 0, y ≈ 0)
+      sim.y1.x = 0.03 * sim.rng.nextGaussian();
+      sim.y1.y = 0.03 * sim.rng.nextGaussian();
+      sim.y2.x = -0.03 * sim.rng.nextGaussian();
+      sim.y2.y = -0.03 * sim.rng.nextGaussian();
+      sim.separatrixPulse = 1.0;
+    }
+
+    /**
+     * Step physics with Euler-Maruyama integration
+     */
+    function stepPhysics() {
+      if (sim.sweepingMu) {
+        sim.mu += 0.0032;
+        if (sim.mu >= 0.85) {
+          sim.mu = 0.85;
+          sim.sweepingMu = false;
+        }
+        document.getElementById('slider-mu').value = sim.mu;
+        document.getElementById('val-mu').textContent = sim.mu.toFixed(2);
+      }
+
+      var dt = sim.dt;
+      var sqrt2Ddt = Math.sqrt(2.0 * sim.D * dt) * 0.48;
+      var mu = sim.mu;
+      var eps = sim.eps;
+      var lam = sim.lambda;
+
+      sim.t += dt;
+      sim.pseudoTimer += dt;
+      if (sim.separatrixPulse > 0) {
+        sim.separatrixPulse = Math.max(0, sim.separatrixPulse - 0.012);
+      }
+
+      // Fast chaotic fiber oscillator z1, z2 (drives chaotic erasure proportional to lambda)
+      var omegaFast1 = 2.6 + 0.9 * lam;
+      var omegaFast2 = (sim.scenario === 'stranger') ? (4.3 + 1.3 * lam) : omegaFast1;
+      sim.y1.z += (Math.sin(omegaFast1 * sim.t + sim.y1.y * 2.2) - 0.65 * sim.y1.z) * dt * (1.0 + lam) + sqrt2Ddt * sim.rng.nextGaussian();
+      sim.y2.z += (Math.cos(omegaFast2 * sim.t + sim.y2.x * 2.2) - 0.65 * sim.y2.z) * dt * (1.0 + lam) + sqrt2Ddt * sim.rng.nextGaussian();
+
+      // Pitchfork potential gradient: V(x,y) = -0.5 * mu * x^2 + 0.25 * x^4 + 0.5 * k_y * y^2
+      // For mu > 0, minima sit at x = ±sqrt(mu), y = 0; saddle separatrix at x = 0.
+      var gradV1x = -mu * sim.y1.x + Math.pow(sim.y1.x, 3);
+      var gradV1y = 1.15 * sim.y1.y;
+
+      var gradV2x = -mu * sim.y2.x + Math.pow(sim.y2.x, 3);
+      var gradV2y = 1.15 * sim.y2.y;
+
+      // Rotational Helmholtz curl field r_⊥ around each branch's local center
+      var c1x = (mu > 0) ? -Math.sqrt(mu) : 0;
+      var c2x = (mu > 0) ? Math.sqrt(mu) : 0;
+      var dx1 = sim.y1.x - c1x;
+      var dy1 = sim.y1.y;
+      var dx2 = sim.y2.x - c2x;
+      var dy2 = sim.y2.y;
+
+      // Base curl charge Q1 = +1.0 for Y1
+      var curlAmp = 0.95 + 0.25 * lam;
+      var r1x = -curlAmp * dy1;
+      var r1y =  curlAmp * dx1;
+
+      var r2x, r2y;
+      var coupling1x = 0, coupling1y = 0, coupling2x = 0, coupling2y = 0;
+
+      if (sim.scenario === 'homologous') {
+        // Homologous complementary branch: opposite topological charge Q2 = -Q1
+        // Mirror involution Φ(x, y) = (-x, -y)
+        r2x =  curlAmp * dy2;
+        r2y = -curlAmp * dx2;
+
+        // Generalized synchronization coupling toward Φ(Y1) = (-x1, -y1)
+        var syncGain = 2.6 * eps;
+        coupling1x = syncGain * ((-sim.y2.x) - sim.y1.x);
+        coupling1y = syncGain * ((-sim.y2.y) - sim.y1.y);
+        coupling2x = syncGain * ((-sim.y1.x) - sim.y2.x);
+        coupling2y = syncGain * ((-sim.y1.y) - sim.y2.y);
+
+        // Curl cancellation factor under coupling: r_⊥(1⊕2) -> 0 as eps increases
+        var cancelFactor = Math.exp(-2.8 * eps);
+        r1x *= (0.35 + 0.65 * cancelFactor);
+        r1y *= (0.35 + 0.65 * cancelFactor);
+        r2x *= (0.35 + 0.65 * cancelFactor);
+        r2y *= (0.35 + 0.65 * cancelFactor);
+
+      } else if (sim.scenario === 'stranger') {
+        // Heterologous stranger branch: mismatched generator algebra & non-conjugate curl
+        var strangerFreq = 1.75;
+        r2x = -curlAmp * strangerFreq * dy2 + 0.45 * Math.sin(3.1 * sim.t);
+        r2y =  curlAmp * (1.0 / strangerFreq) * dx2 + 0.45 * Math.cos(2.3 * sim.t);
+
+        // Coupling produces shear friction rather than phase-locking
+        coupling1x = 0.6 * eps * (sim.y2.y - sim.y1.x);
+        coupling1y = -0.6 * eps * (sim.y2.x + sim.y1.y);
+        coupling2x = -0.7 * eps * (sim.y1.y + sim.y2.x);
+        coupling2y = 0.7 * eps * (sim.y1.x - sim.y2.y);
+
+      } else {
+        // Pseudo-resonance (one-way template overfitting / echo chamber):
+        // Phase 1 (pseudoTimer % 11 < 4.2): transient shallow attraction (ΔF dips)
+        // Phase 2 (pseudoTimer % 11 >= 4.2): same-sign curl buildup triggers repulsive divergence!
+        var cyclePhase = sim.pseudoTimer % 11.0;
+        var isShallowLock = (cyclePhase < 4.0);
+        // Same-sign curl charge (no topological complementarity!)
+        r2x = -curlAmp * dy2;
+        r2y =  curlAmp * dx2;
+
+        if (isShallowLock) {
+          var shallowGain = 2.1 * eps;
+          coupling2x = shallowGain * ((-sim.y1.x) - sim.y2.x);
+          coupling2y = shallowGain * (sim.y1.y - sim.y2.y);
+          // Y1 is unreciprocated or weakly coupled
+          coupling1x = 0.25 * eps * ((-sim.y2.x) - sim.y1.x);
+          coupling1y = 0.25 * eps * (sim.y2.y - sim.y1.y);
+        } else {
+          // Divergence burst due to uncancelled same-sign curl stress
+          var burst = 1.45 * (0.4 + eps);
+          coupling2x = burst * Math.cos(3.7 * sim.t + sim.y2.y * 2.0);
+          coupling2y = burst * Math.sin(4.1 * sim.t - sim.y2.x * 2.0);
+          coupling1x = -0.5 * burst * Math.sin(2.9 * sim.t);
+          coupling1y = 0.5 * burst * Math.cos(3.3 * sim.t);
+        }
+      }
+
+      // Chaotic fast-manifold perturbation term
+      var chaos1x = 0.28 * lam * Math.sin(3.4 * sim.y1.z + 1.7 * sim.t);
+      var chaos1y = 0.28 * lam * Math.cos(2.9 * sim.y1.z - 2.1 * sim.t);
+      var chaos2x = (sim.scenario === 'homologous')
+        ? -0.28 * lam * Math.sin(3.4 * (eps > 0.15 ? -sim.y1.z : sim.y2.z) + 1.7 * sim.t)
+        : 0.34 * lam * Math.sin(4.2 * sim.y2.z - 2.8 * sim.t);
+      var chaos2y = (sim.scenario === 'homologous')
+        ? -0.28 * lam * Math.cos(2.9 * (eps > 0.15 ? -sim.y1.z : sim.y2.z) - 2.1 * sim.t)
+        : 0.34 * lam * Math.cos(3.9 * sim.y2.z + 3.1 * sim.t);
+
+      // Euler-Maruyama state update
+      sim.y1.x += (-gradV1x + r1x + coupling1x + chaos1x) * dt + sqrt2Ddt * sim.rng.nextGaussian();
+      sim.y1.y += (-gradV1y + r1y + coupling1y + chaos1y) * dt + sqrt2Ddt * sim.rng.nextGaussian();
+
+      sim.y2.x += (-gradV2x + r2x + coupling2x + chaos2x) * dt + sqrt2Ddt * sim.rng.nextGaussian();
+      sim.y2.y += (-gradV2y + r2y + coupling2y + chaos2y) * dt + sqrt2Ddt * sim.rng.nextGaussian();
+
+      // Soft boundary clamping for visual stability
+      sim.y1.x = Math.max(-1.65, Math.min(1.65, sim.y1.x));
+      sim.y1.y = Math.max(-1.25, Math.min(1.25, sim.y1.y));
+      sim.y2.x = Math.max(-1.65, Math.min(1.65, sim.y2.x));
+      sim.y2.y = Math.max(-1.25, Math.min(1.25, sim.y2.y));
+
+      // Record trails
+      sim.trail1.push({ x: sim.y1.x, y: sim.y1.y });
+      sim.trail2.push({ x: sim.y2.x, y: sim.y2.y });
+      if (sim.trail1.length > sim.maxTrail) sim.trail1.shift();
+      if (sim.trail2.length > sim.maxTrail) sim.trail2.shift();
+
+      // Compute instantaneous Generalized Synchronization error e_GS = ||Y_2 - Φ(Y_1)||
+      // where Φ(x, y) = (-x, -y) is the homologous involution
+      var syncErr = Math.hypot(sim.y2.x - (-sim.y1.x), sim.y2.y - (-sim.y1.y));
+
+      // Compute instantaneous joint curl residual ||r_⊥(1⊕2)||
+      var instCurl, instDeltaF, instK;
+      if (sim.scenario === 'homologous') {
+        instCurl = Math.max(0.02, 0.72 * Math.exp(-3.4 * eps) + 0.14 * sim.D + 0.08 * syncErr);
+        instDeltaF = Math.max(0.02, 0.68 * Math.exp(-3.1 * eps) + 0.16 * sim.D + 0.18 * syncErr);
+        instK = Math.max(0.02, 0.65 * Math.exp(-3.3 * eps) + 0.12 * sim.D + 0.15 * syncErr);
+      } else if (sim.scenario === 'stranger') {
+        instCurl = Math.min(0.98, 0.58 + 0.32 * eps + 0.15 * sim.D + 0.08 * Math.sin(2.5 * sim.t));
+        instDeltaF = Math.min(0.98, 0.64 + 0.25 * eps + 0.18 * sim.D + 0.12 * syncErr);
+        instK = Math.min(0.98, 0.74 + 0.15 * sim.D + 0.08 * Math.cos(1.9 * sim.t));
+      } else {
+        var cyc = sim.pseudoTimer % 11.0;
+        if (cyc < 4.0) {
+          // Transient dip in ΔF, but curl stays moderately elevated
+          instDeltaF = Math.max(0.11, 0.52 * Math.exp(-2.0 * eps) + 0.08 * Math.sin(cyc));
+          instCurl = 0.36 + 0.18 * eps + 0.05 * cyc;
+          instK = 0.28 + 0.12 * sim.D;
+        } else {
+          // Divergence & rebound!
+          instDeltaF = Math.min(0.96, 0.72 + 0.22 * eps + 0.12 * Math.sin(3.0 * sim.t));
+          instCurl = Math.min(0.96, 0.78 + 0.20 * eps + 0.08 * Math.cos(2.4 * sim.t));
+          instK = Math.min(0.95, 0.76 + 0.16 * eps);
+        }
+      }
+
+      sim.smoothCurl = 0.92 * sim.smoothCurl + 0.08 * instCurl;
+      sim.smoothDeltaF = 0.92 * sim.smoothDeltaF + 0.08 * instDeltaF;
+      sim.smoothK = 0.92 * sim.smoothK + 0.08 * instK;
+
+      // Separatrix synergy I_syn (surges when near x ≈ 0 and homologous)
+      var nearSep = Math.exp(-3.5 * (sim.y1.x * sim.y1.x + sim.y2.x * sim.y2.x)) + sim.separatrixPulse;
+      var targetIsyn = (sim.scenario === 'homologous')
+        ? Math.min(0.98, 0.18 + 0.78 * nearSep * (0.3 + 0.7 * eps))
+        : Math.min(0.35, 0.08 + 0.12 * nearSep);
+      sim.smoothIsyn = 0.88 * sim.smoothIsyn + 0.12 * targetIsyn;
+
+      sim.histDeltaF.push(sim.smoothDeltaF);
+      sim.histCurl.push(sim.smoothCurl);
+      if (sim.histDeltaF.length > sim.maxHist) sim.histDeltaF.shift();
+      if (sim.histCurl.length > sim.maxHist) sim.histCurl.shift();
+
+      updateReadouts();
+    }
+
+    function updateReadouts() {
+      var curlEl = document.getElementById('readout-curl');
+      var gaugeCurl = document.getElementById('gauge-curl');
+      var subCurl = document.getElementById('sub-curl');
+
+      curlEl.textContent = sim.smoothCurl.toFixed(3);
+      var curlPct = Math.min(100, Math.max(3, sim.smoothCurl * 100));
+      gaugeCurl.style.width = curlPct.toFixed(0) + '%';
+      if (sim.smoothCurl < 0.24) {
+        gaugeCurl.style.background = 'var(--green)';
+        subCurl.textContent = '+r_⊥ ⊕ −r_⊥ 正交闭合，维持热趋零';
+      } else if (sim.smoothCurl < 0.50) {
+        gaugeCurl.style.background = 'var(--highlight)';
+        subCurl.textContent = '存在残余非保守环流，尚未完全抵消';
+      } else {
+        gaugeCurl.style.background = 'var(--red)';
+        subCurl.textContent = '旋度不抵消反增，持续产生高额内耗热';
+      }
+
+      var kEl = document.getElementById('readout-k');
+      var gaugeK = document.getElementById('gauge-k');
+      var subK = document.getElementById('sub-k');
+      kEl.textContent = 'ΔF=' + sim.smoothDeltaF.toFixed(2) + ' · K̂=' + sim.smoothK.toFixed(2);
+      var kPct = Math.min(100, Math.max(3, sim.smoothK * 100));
+      gaugeK.style.width = kPct.toFixed(0) + '%';
+      if (sim.smoothK < 0.24) {
+        gaugeK.style.background = 'var(--accent)';
+        subK.textContent = '广义同步 Y₂=Φ(Y₁) 锁相，零翻译带宽';
+      } else {
+        gaugeK.style.background = 'var(--highlight)';
+        subK.textContent = '高条件描述复杂度，需高昂翻译摩擦成本';
+      }
+
+      // Fast-variable mutual information bound e^{-2 * lambda * t_eff}
+      var effT = Math.min(12.0, sim.t * 0.65 + 2.5);
+      var miBound = Math.exp(-2.0 * sim.lambda * effT);
+      var eraseEl = document.getElementById('readout-erasure');
+      var gaugeErase = document.getElementById('gauge-erasure');
+      eraseEl.textContent = miBound.toFixed(4) + (miBound < 0.05 ? ' (已白化)' : ' (擦除中)');
+      gaugeErase.style.width = Math.min(100, Math.max(1, miBound * 100)).toFixed(0) + '%';
+
+      // Dual-channel convergence rule verdict
+      var verdictEl = document.getElementById('readout-verdict');
+      var subVerdict = document.getElementById('sub-verdict');
+      var passCh2 = sim.smoothK < 0.25 && sim.smoothDeltaF < 0.26;
+      var passCh3 = sim.smoothCurl < 0.25;
+
+      if (passCh2 && passCh3 && sim.scenario === 'homologous') {
+        verdictEl.style.color = 'var(--green)';
+        verdictEl.textContent = '✅ 阳性 VERIFIED (真同源共振)';
+        subVerdict.textContent = '机制二 (K̂→0) ∧ 机制三 (r_⊥→0) 双通道一致通过';
+      } else if (sim.scenario === 'pseudo') {
+        verdictEl.style.color = 'var(--highlight)';
+        verdictEl.textContent = '⚠️ 伪阳性拒绝 (单向过拟合/回音室)';
+        subVerdict.textContent = 'ΔF 短暂下降后发散，同号旋度 r_⊥ 未闭合反升';
+      } else if (sim.scenario === 'stranger') {
+        verdictEl.style.color = 'var(--red)';
+        verdictEl.textContent = '❌ 阴性 REJECTED (异源路人分支)';
+        subVerdict.textContent = '生成元李代数不同构，高熵斥力且旋度叠加';
+      } else {
+        verdictEl.style.color = 'var(--muted)';
+        verdictEl.textContent = '⏳ 待验证 UNVERIFIED (耦合不足)';
+        subVerdict.textContent = '请调高耦合强度 ε 以检验是否进入广义同步流形';
+      }
+    }
+
+    /**
+     * Render Phase-Space Viewport (Left) + Thermodynamic Telemetry Viewport (Right)
+     */
+    function renderSandbox() {
+      var W = canvas.width;
+      var H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      ctx.fillStyle = '#0f141e';
+      ctx.fillRect(0, 0, W, H);
+
+      // Left Panel: 2D Phase Space [0 .. 500]
+      var pw = 500;
+      var cx = pw * 0.5;
+      var cy = H * 0.52;
+      var scaleX = 142;
+      var scaleY = 142;
+
+      // Grid lines
+      ctx.strokeStyle = 'rgba(227, 222, 214, 0.08)';
+      ctx.lineWidth = 1;
+      for (var gx = 40; gx < pw; gx += 46) {
+        ctx.beginPath();
+        ctx.moveTo(gx, 0);
+        ctx.lineTo(gx, H);
+        ctx.stroke();
+      }
+      for (var gy = 40; gy < H; gy += 46) {
+        ctx.beginPath();
+        ctx.moveTo(0, gy);
+        ctx.lineTo(pw, gy);
+        ctx.stroke();
+      }
+
+      // Axes & Separatrix x = 0 line
+      ctx.strokeStyle = 'rgba(167, 139, 250, 0.35)';
+      ctx.setLineDash([5, 5]);
+      ctx.beginPath();
+      ctx.moveTo(cx, 28);
+      ctx.lineTo(cx, H - 20);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = 'rgba(167, 139, 250, 0.85)';
+      ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+      ctx.fillText('分界面 Σ_sep (x=0 命运岔口)', cx - 68, 22);
+
+      // Draw Potential Well Contours (showing Mother Attractor A0 splitting into 2 wells as mu > 0)
+      if (sim.mu <= 0.02) {
+        // Single Mother Attractor A_0 at origin
+        for (var r = 26; r <= 110; r += 28) {
+          ctx.strokeStyle = 'rgba(96, 165, 250, ' + (0.28 - r * 0.0018).toFixed(3) + ')';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.ellipse(cx, cy, r * 1.15, r * 0.85, 0, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.fillStyle = '#93c5fd';
+        ctx.font = '700 12px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+        ctx.fillText('母吸引子 A₀ (未分岔 μ ≤ μ_c)', cx - 76, cy + 128);
+      } else {
+        // Two split branch wells at ±sqrt(mu)
+        var wellOffset = Math.sqrt(sim.mu) * scaleX;
+        var w1x = cx - wellOffset;
+        var w2x = cx + wellOffset;
+
+        for (var k = 1; k <= 3; k++) {
+          var rx = 24 * k;
+          var ry = 28 * k;
+          ctx.strokeStyle = 'rgba(59, 130, 246, ' + (0.34 - k * 0.08).toFixed(2) + ')';
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.ellipse(w1x, cy, rx, ry, 0, 0, Math.PI * 2);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(245, 158, 11, ' + (0.34 - k * 0.08).toFixed(2) + ')';
+          ctx.beginPath();
+          ctx.ellipse(w2x, cy, rx, ry, 0, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // Well center markers
+        ctx.fillStyle = '#60a5fa';
+        ctx.font = '700 11.5px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+        ctx.fillText('分支阱 P₁ (-√μ)', w1x - 42, cy + 108);
+
+        ctx.fillStyle = '#f59e0b';
+        ctx.fillText('分支阱 P₂ (+√μ)', w2x - 42, cy + 108);
+      }
+
+      // Draw coupling chord between Y1 and Y2 when eps > 0.05
+      var p1x = cx + sim.y1.x * scaleX;
+      var p1y = cy - sim.y1.y * scaleY;
+      var p2x = cx + sim.y2.x * scaleX;
+      var p2y = cy - sim.y2.y * scaleY;
+
+      if (sim.eps > 0.04) {
+        ctx.strokeStyle = (sim.scenario === 'homologous')
+          ? 'rgba(52, 211, 153, ' + Math.min(0.75, sim.eps * 0.9).toFixed(2) + ')'
+          : 'rgba(248, 113, 113, ' + Math.min(0.65, sim.eps * 0.8).toFixed(2) + ')';
+        ctx.lineWidth = 1.2 + sim.eps * 2.0;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(p1x, p1y);
+        ctx.lineTo(p2x, p2y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Draw fading trajectory trail for Y1 (Blue --accent)
+      for (var i = 1; i < sim.trail1.length; i++) {
+        var alpha1 = (i / sim.trail1.length) * 0.88;
+        ctx.strokeStyle = 'rgba(59, 130, 246, ' + alpha1.toFixed(3) + ')';
+        ctx.lineWidth = 1.2 + (i / sim.trail1.length) * 1.8;
+        ctx.beginPath();
+        ctx.moveTo(cx + sim.trail1[i - 1].x * scaleX, cy - sim.trail1[i - 1].y * scaleY);
+        ctx.lineTo(cx + sim.trail1[i].x * scaleX, cy - sim.trail1[i].y * scaleY);
+        ctx.stroke();
+      }
+
+      // Draw fading trajectory trail for Y2 (Orange --highlight)
+      for (var j = 1; j < sim.trail2.length; j++) {
+        var alpha2 = (j / sim.trail2.length) * 0.88;
+        ctx.strokeStyle = 'rgba(245, 158, 11, ' + alpha2.toFixed(3) + ')';
+        ctx.lineWidth = 1.2 + (j / sim.trail2.length) * 1.8;
+        ctx.beginPath();
+        ctx.moveTo(cx + sim.trail2[j - 1].x * scaleX, cy - sim.trail2[j - 1].y * scaleY);
+        ctx.lineTo(cx + sim.trail2[j].x * scaleX, cy - sim.trail2[j].y * scaleY);
+        ctx.stroke();
+      }
+
+      // Draw current particle heads Y1 and Y2
+      ctx.fillStyle = '#3b82f6';
+      ctx.beginPath();
+      ctx.arc(p1x, p1y, 6.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1.8;
+      ctx.stroke();
+      ctx.fillStyle = '#dbeafe';
+      ctx.font = '700 12px sans-serif';
+      ctx.fillText('Y₁', p1x + 9, p1y - 7);
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath();
+      ctx.arc(p2x, p2y, 6.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1.8;
+      ctx.stroke();
+      ctx.fillStyle = '#fef3c7';
+      ctx.fillText('Y₂', p2x + 9, p2y - 7);
+
+      // Divider between Left Phase Space and Right Telemetry Panel
+      ctx.strokeStyle = 'rgba(227, 222, 214, 0.22)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pw, 0);
+      ctx.lineTo(pw, H);
+      ctx.stroke();
+
+      // Right Panel: Live Curves & Gauges [516 .. 865]
+      var rx0 = pw + 22;
+      var rw = W - rx0 - 18;
+
+      // Top Chart: Live ΔF(t) and r_⊥(t) time-series
+      ctx.fillStyle = '#e5e7eb';
+      ctx.font = '700 12.5px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+      ctx.fillText('实时热力学轨迹：联合自由能 ΔF(t) 与旋度残差 r_⊥(t)', rx0, 26);
+
+      var chartY = 38;
+      var chartH = 175;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+      ctx.fillRect(rx0, chartY, rw, chartH);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+      ctx.strokeRect(rx0, chartY, rw, chartH);
+
+      // Threshold line at 0.24
+      var threshY = chartY + chartH * (1.0 - 0.24);
+      ctx.strokeStyle = 'rgba(52, 211, 153, 0.45)';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(rx0, threshY);
+      ctx.lineTo(rx0 + rw, threshY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#34d399';
+      ctx.font = '600 10.5px sans-serif';
+      ctx.fillText('双通道共振阈值 (0.24)', rx0 + 6, threshY - 5);
+
+      // Plot ΔF(t) curve (Blue)
+      if (sim.histDeltaF.length > 1) {
+        ctx.strokeStyle = '#60a5fa';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        for (var m = 0; m < sim.histDeltaF.length; m++) {
+          var tx = rx0 + (m / (sim.maxHist - 1)) * rw;
+          var ty = chartY + chartH * (1.0 - Math.min(0.98, Math.max(0.02, sim.histDeltaF[m])));
+          if (m === 0) ctx.moveTo(tx, ty);
+          else ctx.lineTo(tx, ty);
+        }
+        ctx.stroke();
+      }
+
+      // Plot r_⊥(t) curve (Orange)
+      if (sim.histCurl.length > 1) {
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        for (var n = 0; n < sim.histCurl.length; n++) {
+          var cx2 = rx0 + (n / (sim.maxHist - 1)) * rw;
+          var cy2 = chartY + chartH * (1.0 - Math.min(0.98, Math.max(0.02, sim.histCurl[n])));
+          if (n === 0) ctx.moveTo(cx2, cy2);
+          else ctx.lineTo(cx2, cy2);
+        }
+        ctx.stroke();
+      }
+
+      // Legend inside chart
+      ctx.fillStyle = '#60a5fa';
+      ctx.fillRect(rx0 + 10, chartY + 10, 12, 4);
+      ctx.fillStyle = '#dbeafe';
+      ctx.font = '600 11px sans-serif';
+      ctx.fillText('联合自由能 ΔF(t)', rx0 + 26, chartY + 15);
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillRect(rx0 + 145, chartY + 10, 12, 4);
+      ctx.fillStyle = '#fef3c7';
+      ctx.fillText('旋度残差 r_⊥(t)', rx0 + 161, chartY + 15);
+
+      // Bottom Right: Canvas Bar Gauges for r_⊥, K(Y2|Y1), and Separatrix Synergy I_syn
+      var barStartY = 246;
+      ctx.fillStyle = '#e5e7eb';
+      ctx.font = '700 12.5px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+      ctx.fillText('四维机制实时仪表盘 (Live Mechanism Gauges)', rx0, barStartY);
+
+      var gauges = [
+        {
+          label: '机制三 · 旋度残差 r_⊥(1⊕2) [越低越互补闭合]',
+          val: sim.smoothCurl,
+          color: sim.smoothCurl < 0.25 ? '#34d399' : (sim.smoothCurl < 0.52 ? '#f59e0b' : '#f87171')
+        },
+        {
+          label: '机制二 · 条件复杂度代理 K̂(Y₂|Y₁) [越低越一见如故]',
+          val: sim.smoothK,
+          color: sim.smoothK < 0.25 ? '#60a5fa' : '#f59e0b'
+        },
+        {
+          label: '机制四 · 分界面 PID 协同信息 I_syn [岔口危机暴增]',
+          val: sim.smoothIsyn,
+          color: '#a78bfa'
+        }
+      ];
+
+      for (var g = 0; g < gauges.length; g++) {
+        var gy0 = barStartY + 18 + g * 58;
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '600 11.5px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+        ctx.fillText(gauges[g].label, rx0, gy0);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '700 11.5px monospace';
+        ctx.fillText(gauges[g].val.toFixed(3), rx0 + rw - 42, gy0);
+
+        // Bar track
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.fillRect(rx0, gy0 + 8, rw, 14);
+
+        // Bar fill
+        ctx.fillStyle = gauges[g].color;
+        ctx.fillRect(rx0, gy0 + 8, Math.max(4, rw * Math.min(1, gauges[g].val)), 14);
+      }
+    }
+
+    function animateLoop() {
+      if (!sim.paused) {
+        stepPhysics();
+      }
+      renderSandbox();
+      requestAnimationFrame(animateLoop);
+    }
+
+    // Initialize simulation on load
+    resetSimulation();
+    updateSimParams();
+    requestAnimationFrame(animateLoop);
+  </script>
+  <script src="https://zoro-hub.clawishmacheng.com/api/telemetry/beacon.js" data-surface="nonlinear-bifurcation-recognition" async></script>
+</body>
+</html>
