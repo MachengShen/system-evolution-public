@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>能力租借商业生态 · 机制设计沙盘 v0.2</title>
+  <link rel="icon" href="data:," />
   <style>
     :root {
       --bg: #0b0f17;
@@ -601,6 +602,8 @@
       <a href="#sim-canary">3. 金丝雀抽检与 Slashing 模拟器 (#sim-canary)</a>
       <a href="#arch">4. 三层架构与冷启动 (#arch)</a>
       <a href="#audit">5. Opus 审计轨迹 (#audit)</a>
+      <a href="#ru-dao">6. 《儒道》身股制映射 (#ru-dao)</a>
+      <a href="#invite">7. 致唐仪老师邀请 (#invite)</a>
     </nav>
   </header>
 
@@ -1362,6 +1365,82 @@
             <li><strong>基座模型共模故障：</strong>上游大模型版本更新或 API 故障会导致 C 类承保出现高度正相关的尾部集中赔付（不能仅用正态或独立 VaR 估算担保池 <code>B</code>）。</li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: #ru-dao & #invite -->
+    <section id="ru-dao" class="panel">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-id">#ru-dao</span>
+          制度经济学与《儒道》身股制映射：从晋商「东家出本、掌柜出能」到 AI 时代的「能力租借契约」
+        </h2>
+        <span class="section-sub">对照唐仪老师（Tony Tong）《儒道》商道智慧 · 激励相容、商可争不可欺与防掏空机制</span>
+      </div>
+
+      <div class="calc-grid">
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>一、身股制 vs 工时雇佣：AI 时代能力的「资本化」</span>
+            <span class="tag tag-c">激励相容</span>
+          </div>
+          <div class="theory-box" style="margin-bottom:12px;">
+            <p><strong>历史制度映射：</strong>明清晋商首创「银股」与「身股」双轨治理。东家出银两本金（银股），大掌柜与核心伙计以个人经营才能、信用、商路眼光入股（身股）。掌柜不领死工资，而在三至四年大账期与东家同比例分红（提成 Carry）。</p>
+            <p style="margin-top:6px;"><strong>AI 生态映射：</strong>当前 SaaS 与 API 市场按 Token 或工时月租计费，本质是传统雇佣工时制。但在高阶智能体生态中，<strong>静态 Prompt / 套壳模型如同普通脚夫（低边际成本、可零代价替换）；真正稀缺的是「黑盒审美决策、私有非平稳反爬对抗、线下稀疏履约调度」</strong>。这类能力无法拆解为标准工时度量，必须采用「身股制」：能力节点质押保证金入场，凭借已验证履约结果 <code>R_verified</code> 享有生态分润（Carry），实现能力资本与承保资本的双向捆绑。</p>
+          </div>
+          <ul class="audit-list">
+            <li><strong>银股（资本/承保池 <code>B</code>）：</strong>东家提供真金白银的风险兜底资本，承担尾部黑天鹅亏损，收取基础席位费与保费。</li>
+            <li><strong>身股（黑盒能力节点 <code>E</code>）：</strong>掌柜出租自身判断力与执行权，零租金或低底薪，完全靠交付确定的结果质量获利。</li>
+            <li><strong>防出工不出力：</strong>若按工时计费，掌柜倾向于刷 Token、磨洋工；身股制让掌柜的收益与最终商行盈利深度绑定。</li>
+          </ul>
+        </div>
+
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>二、「商可争，不可欺」：阿克洛夫柠檬市场的制度解</span>
+            <span class="tag tag-b">契约诚信</span>
+          </div>
+          <div class="theory-box" style="margin-bottom:12px;">
+            <p><strong>《儒道》商训：</strong>「商可争，不可争利而丧德；商不可欺，欺人者必自绝于商道。」商道可以有激烈的价格竞争、效率竞争，但底线是契约真实与零信息欺诈。</p>
+            <p style="margin-top:6px;"><strong>机制设计解构：</strong>GPT Store 和传统 Prompt 市场之所以彻底沦为「柠檬市场」，正是因为<strong>欺诈无成本、劣币驱逐良币</strong>。供给方虚标 99% 胜率，买方在事前无法甄别信息不对称，最终导致优质开发者离场。</p>
+          </div>
+          <ul class="audit-list">
+            <li><strong>将「不可欺」固化为数学约束：</strong>通过质押保证金 <code>S*</code>、连续金丝雀抽检算子 <code>Canary V(T)</code> 与自动 Slashing 罚没，把道德誓言变为严格占优的经济纳什均衡。</li>
+            <li><strong>作弊者的自绝机制：</strong>一旦金丝雀检出降级或偷工减料，质押金被自动打入赔付池，且解绑期锁定防止卷款跑路，在博弈论上实现分离均衡（诚实方期望收益 &gt; 0，作弊方期望收益严格 &lt; 0）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub-panel" style="margin-top:14px;">
+        <div class="sub-title">
+          <span>三、东家与掌柜的「防掏空与利益制衡」：防止二房东转租与外部套利</span>
+          <span class="tag tag-a">制度防掏空</span>
+        </div>
+        <div class="theory-box">
+          <p><strong>晋商治理死穴：</strong>掌柜在外天高皇帝远，最容易出现「另立门户、私设小金库、转手倒卖东家货物（二房东套利）」。晋商通过「连带责任、号规家法、身股后代抚恤与宗族信用」构建了极高违约成本。</p>
+          <p style="margin-top:6px;"><strong>沙盘中的三大防掏空机制：</strong></p>
+          <ol style="margin-left:18px; margin-top:6px; line-height:1.7;">
+            <li><strong>凸担保定价（Convex Underwriting Pricing）：</strong>承保费率随担保敞口平方递增 <code>(γ·π / 2B)·E²</code>。单个掌柜或二房东若想包圆转卖、聚合大额流量，其边际担保成本呈超线性爆炸，物理上消灭套利空间。</li>
+            <li><strong>灵魂绑定履约凭证（Soulbound Receipts）：</strong>所有已验证结果绑定调用方身份与任务上下文签名，不可无缝转售给未经认证的第三方，杜绝「一人租借、万人转租」。</li>
+            <li><strong>裁定与分润权绝对分立：</strong>平台不能既做裁决者又拿罚没金（避免东家诬陷掌柜吞其身股），罚没款 100% 用于赔付受损客户或打入公共蓄水池，裁决交由独立 C-Gate 多方异构验证节点执行。</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- 配套话术 -->
+      <div id="invite" class="sub-panel" style="margin-top:14px; border: 1px solid var(--accent); background: rgba(56, 189, 248, 0.04);">
+        <div class="sub-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="color:var(--accent); font-weight:700;">致唐仪老师（Tony Tong）探讨交流话术 · 一键复制</span>
+          <button id="copy-invite-btn" class="ctrl-btn" style="padding:4px 12px; font-size:12px; background:var(--accent); color:#000; border:none; border-radius:4px; cursor:pointer; font-weight:600;">📋 复制邀请微信</button>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">说明：得体、零内部技术黑话，将《儒道》身股制制度经济学与 AI 智能体生态结合，可直接发送。</p>
+        <div id="invite-text-block" style="background:var(--bg-input); border:1px solid var(--border); border-radius:6px; padding:12px; font-size:13px; line-height:1.65; color:var(--text); white-space:pre-wrap; font-family:var(--sans);">唐老师好！最近拜读学习您的《儒道》商道智慧，其中关于明清晋商「身股制（东家出本、掌柜出能，以黑盒经营才能入股而非工时雇佣）」以及「商可争，不可欺」的论述，给了我们极大的制度经济学启发。
+
+当下 AI 智能体与软件生态正面临类似当年钱庄与商业扩张的痛点：传统按月租或按工时买 Prompt 的模式全军覆没（陷入劣币驱逐良币的阿克洛夫柠檬市场）。我们基于您《儒道》中「身股激励相容、商可争不可欺、东家与掌柜防掏空」的核心哲理，用现代机制设计推演了一套面向下一代 AI 智能体的「能力租借商业生态沙盘」（含抗蒸馏壁垒、担保定价与连续金丝雀质押契约）：
+
+🔗 交互式沙盘：https://machengshen.github.io/system-evolution-public/capability-rental-ecosystem.html#ru-dao
+
+里面专门梳理了一节《儒道》身股制映射，非常期待能向您当面或电话请教，探讨如何将中华优秀传统商业制度智慧，真正落地转化为 AI 时代的下一代商业基础设施与契约范式！</div>
       </div>
     </section>
 
@@ -2128,6 +2207,24 @@
       updateDistill();
       updateLease();
       updateCanary();
+
+      // Copy invite button listener
+      const copyBtn = document.getElementById("copy-invite-btn");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function () {
+          const textBlock = document.getElementById("invite-text-block");
+          if (textBlock) {
+            navigator.clipboard.writeText(textBlock.innerText).then(function () {
+              copyBtn.innerText = "✅ 已复制到剪贴板";
+              setTimeout(function () {
+                copyBtn.innerText = "📋 复制邀请微信";
+              }, 2500);
+            }).catch(function () {
+              copyBtn.innerText = "❌ 复制失败，请手动选择复制";
+            });
+          }
+        });
+      }
     })();
   </script>
 </body>
