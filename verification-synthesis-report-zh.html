@@ -902,6 +902,11 @@
           <span class="toc-title">四大断层 (F1–F4) 与四层架构 (L0–L3)</span>
           <span class="toc-desc">`Worker Exit != Verified`、Kiro 捕获 `r-verify` 漏洞、TLC 99 状态检验、交互式门禁仿真台</span>
         </a>
+        <a class="toc-item" href="#interlude-tla-vs-mc">
+          <span class="toc-num">Interlude · 对齐裁定</span>
+          <span class="toc-title">TLA+/TLC vs. 蒙特卡洛沙盒与清算担保</span>
+          <span class="toc-desc">维度差异与正交分层：L0 形式穷举 (~10%) vs 业务层统计置信 99.99% + 尾部风险定价 (~90%)</span>
+        </a>
         <a class="toc-item" href="#thread-4">
           <span class="toc-num">Thread 04 · 制度与商业</span>
           <span class="toc-title">「确定性的解剖学」与四线总缝合</span>
@@ -1781,6 +1786,107 @@
       🔗 <strong>从 Thread 3 到 Thread 4 的终极缝合：</strong>
       至此，我们在理论层明确了「忠实模拟鸿沟 $\Delta_{\text{sim}}$」（Thread 1），在规格层打造了「强类型可解析声明」（Thread 2），并在多智能体工程层建成了「L0–L3 防伪验证机器」（Thread 3）。最后一个问题直指商业与制度的终局：<strong>在开放市场与真实物理世界里，这套强大的验证机器到底如何创造不可复制的商业壁垒？当我们要担保的不是一段确定性代码，而是充满隐藏暗雷的复杂现实交易（`co-NP` 全称安全问题）时，如何把高昂的物理验证成本压低一到两个数量级并规模化变现？</strong> 这正是第四章《确定性的解剖学》所完成的制度闭环。
     </div>
+
+    <!-- ===================================================================== -->
+    <!-- INTERLUDE: ALIGNMENT VERDICT (TLA+/TLC VS. MONTE-CARLO SANDBOX)       -->
+    <!-- ===================================================================== -->
+    <section class="section-card" id="interlude-tla-vs-mc">
+      <div class="thread-header">
+        <div>
+          <span class="thread-kicker">Interlude · Alignment Verdict (TLA+/TLC vs. Monte-Carlo Sandbox)</span>
+          <h2>插曲 · 对齐裁定：TLA+/TLC 形式化状态机验证 vs. 商业化 Agent 蒙特卡洛沙盒与清算担保 —— 维度差异与正交分层</h2>
+        </div>
+        <span class="badge-warm">🟡 跨线对齐裁定 (0.8) · 正交分层非替代</span>
+      </div>
+
+      <h3>1. 缘起与核心裁定</h3>
+      <p>
+        有同行建议：「让 AI 用 TLA+/TLC 对软件项目做形式化验证建模，以减少测试复杂度。」<strong>本节裁定：该建议本身是正确的，但与我们的商业化主战场不在同一个维度——两者属于正交分层关系（Orthogonal Layering），而非替代关系。</strong>
+      </p>
+
+      <h3>2. 他们解决的维度：TLA+/TLC 在封闭有限协议层的恰当定位</h3>
+      <p>
+        TLA+/TLC 针对的是<strong>封闭、离散、有限状态的底层协议层</strong>（例如并发互斥锁、账本状态跃迁、主备故障接管与 <code>owner-stop</code> 吸收态），通过对 $\Pi_1$ Safety 不变量做有界状态空间穷举（Model Checking）来压缩并发与交错组合测试的指数级爆炸。这恰恰对应本报告 Thread 3 中的 <strong>L0 形式模型检验层</strong>。需要明确强调：<strong>这是我们已经在生产控制平面中实际使用的基础设施（见 2026-09-13 的内部研究留档，99 个可达状态穷举 0 违背），绝不是我们反对的东西。</strong>
+      </p>
+
+      <h3>3. TLA+ 的两大根本盲区：为什么形式状态机无法覆盖全部验证主战场？</h3>
+      <ul>
+        <li>
+          <strong>① Spec-to-Code 鸿沟（规格与实现的语义断层）：</strong>
+          凭直觉（vibe）写出的 TLA+ 模型只是真实生产代码的一个高度抽象影子；<strong>模型无 bug $\neq$ 真实代码无 bug</strong>——除非额外支付极高昂的代价完成机械化的<strong>精化证明（Refinement Proof）</strong>，将高层抽象规格与底层可执行实现逐层双射对应。模型检验本身验证的只是「形式规格自身的一致性」，这种一致性并不会自动传递到「真实代码实现的正确性」。若将这一点显式缝回 Thread 1 的 <strong>Rice 定理与「带证书的检查（Proof-Carrying Code, PCC）」</strong>：精化证明（Refinement Proof）恰恰就是那张把抽象状态机与真实代码焊接在一起、造价极为昂贵的形式化证书。
+        </li>
+        <li>
+          <strong>② 无法对开放世界高维语义与商业意图建模：</strong>
+          面向真实用户的商业化场景充斥着诸如「这家餐厅的图片是不是假图 / 照骗」「推荐的酒店是不是货不对板」「Agent 的动作是否符合用户的真实意图」等判断。这些本质上是<strong>开放世界的高维连续 / 随机语义问题</strong>，根本无法被抽象成有限的离散 TLA+ 状态转移方程。TLC 的穷举威力恰恰止步于它能将世界干净离散化为有限状态机的地方。
+        </li>
+      </ul>
+
+      <h3>4. 我们的真实需求：为什么 ~90% 主战场是蒙特卡洛 Sampling + 意图接地 + 清算所外壳？</h3>
+      <ul>
+        <li>
+          <strong>从 100% 封闭穷举到 99.99% 开放世界统计置信度 + 尾部风险定价：</strong>
+          商业化 Agent 与开放物理及市场世界的交互服从高维连续与长尾随机分布。因此，业务层的核心目标不是封闭协议的 100% 形式化穷举，而是<strong>高统计置信度（例如目标并不要求 100% 绝对无误，达到 $99.99\%$ 的尾部安全线即完全满足商业可用性）叠加尾部风险精算定价</strong>。
+        </li>
+        <li>
+          <strong>直接对位 Thread 4 的精算与清算闭环：</strong>
+          这正与即将展开的 Thread 4 严密咬合——用条件互信息判断力 $\alpha$ 驱动的<strong>重要性采样 + 多保真度蒙特卡洛沙盒</strong>，将 $\text{co-NP}$ 式「证明所有分支无隐藏暗雷」的昂贵物理试错成本压低一到两个数量级，再通过<strong>中央对手方清算所（CCP）外壳</strong>把这份统计确定性规模化变现。
+        </li>
+        <li>
+          <strong>维度选择而非标准妥协：</strong>
+          必须显式指出，<strong>「追求 $99.99\%$ 的统计置信度而非 $100\%$ 的形式化穷举」是一个计算维度上的清醒选择，而不是降低工程标准</strong>——因为在非平稳的开放物理与商业世界里，世界本身不是有限离散状态机，$100\%$ 形式化穷举在计算理论上根本不可达。
+        </li>
+      </ul>
+
+      <h3>5. 正交分层对照矩阵：L0 形式模型检验 (~10%) vs. L1–L3 业务与清算层 (~90%)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>对比维度</th>
+              <th>TLA+/TLC 形式化模型检验 (L0 · ~10%)</th>
+              <th>蒙特卡洛沙盒 + 契约门禁 + CCP 清算 (L1–L3 业务层 · ~90%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>适用对象</strong></td>
+              <td>封闭、离散、有限状态的底层控制协议（并发锁、账本状态跃迁、主备切换协议）</td>
+              <td>开放世界高维连续 / 随机交互（多模态资产核验、商业履约避雷、复杂用户意图对齐）</td>
+            </tr>
+            <tr>
+              <td><strong>验证问题类型</strong></td>
+              <td>$\Pi_1$ Safety 不变量状态空间穷举（证明有界转换图内坏事永不发生）</td>
+              <td>尾部风险统计置信度估计（$\text{co-NP} / \text{\#P}$ 风险积分缩减）+ 真实世界意图接地</td>
+            </tr>
+            <tr>
+              <td><strong>准确率目标</strong></td>
+              <td>$100\%$ 形式化状态穷举（在给定抽象模型边界内零反例）</td>
+              <td>$99.99\%$ 统计置信安全线 + 剩余尾部风险的精算定价与赔付兜底</td>
+            </tr>
+            <tr>
+              <td><strong>主要盲区被谁补</strong></td>
+              <td>存在 Spec-to-Code 精化鸿沟且对开放语义失明；需靠 L1–L3 真实探针与契约门禁补齐物理接地</td>
+              <td>面对全称分支无法做 $100\%$ 形式穷举的组合爆炸；靠重要性采样 + 多保真度蒙特卡洛方差缩减兜住</td>
+            </tr>
+            <tr>
+              <td><strong>在本报告中的层位</strong></td>
+              <td><strong>Thread 3 · L0 层</strong>（形式模型检验与语法锁底层）</td>
+              <td><strong>Thread 3 · L1–L3 层 + Thread 4</strong>（契约防伪、表面真实性门禁与确定性清算所）</td>
+            </tr>
+            <tr>
+              <td><strong>我们的实证</strong></td>
+              <td>2026-09-13 内部研究留档亲自跑通 TLC：穷尽 <strong>99 个可达状态</strong>，验证 <code>owner-stop</code> 吸收态与 shadow ledger <strong>0 违背</strong></td>
+              <td>Stay 防柠檬、Tabelog-Eye、EAZO 的 F2/F3/F4 瓶颈靠<strong>蒙特卡洛沙盒采样 + <code>surface-verify</code> 多模态真实性门禁 + CCP 担保赔付清算</strong>闭环</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="callout-green">
+        <strong>🟢 一句话收束（正交互补裁定）：</strong>
+        我们不是不用 TLC——TLC 是 L0 防篡改底层的恰当工具；我们是清楚界定：面向用户的商业层核心瓶颈是 <strong>F2（声明可解析性）/ F3（裁判完整性）/ F4（意图接地）</strong>，这三者无法被形式化状态机穷举，必须靠<strong>蒙特卡洛沙盒采样 + 多模态真实性门禁 + 中央对手方清算所担保赔付</strong>来兜住。形式化验证与统计验证是正交互补的两条腿，缺一不可。
+      </aside>
+    </section>
 
     <!-- ===================================================================== -->
     <!-- THREAD 4: ANATOMY OF CERTAINTY & COMMERCIAL/INSTITUTIONAL CLOSURE     -->
