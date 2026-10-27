@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>First-Party Lived-Experience Oracle · 第一方亲历真值神谕与防扒库按次计费服务</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>" />
+  <style>
+    :root {
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-elevated: #1b2438;
+      --bg-glass: rgba(17, 24, 39, 0.85);
+      --border-subtle: rgba(148, 163, 184, 0.16);
+      --border-highlight: rgba(56, 189, 248, 0.42);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-red: #ef4444;
+      --shadow-lg: 0 18px 40px -15px rgba(0, 0, 0, 0.65);
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 15% 0%, #172554 0%, var(--bg-base) 42%), var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.55;
+      min-height: 100vh;
+      padding-bottom: 64px;
+    }
+
+    #oracle-root {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 20px;
+    }
+
+    /* Header & Thesis Banner */
+    .hero-header {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      border: 1px solid var(--border-highlight);
+      border-radius: var(--radius-lg);
+      padding: 28px 30px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 4px 11px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    .badge-cyan {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .badge-emerald {
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--accent-emerald);
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+
+    .badge-amber {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--accent-amber);
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+
+    .badge-red {
+      background: rgba(239, 68, 68, 0.18);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .hero-title {
+      font-size: clamp(22px, 3vw, 31px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 980px;
+      margin-bottom: 18px;
+    }
+
+    .thesis-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .thesis-step {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+    }
+
+    .thesis-step-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .thesis-step-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Section Layout */
+    .section-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      margin-bottom: 26px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-title-group h2 {
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffffff;
+    }
+
+    .section-title-group p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Section 1: Live Query Demo */
+    .query-controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg-elevated);
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 16px;
+    }
+
+    .preset-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      background: #1e293b;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--accent-cyan);
+      background: #26354d;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #4f46e5);
+      border-color: rgba(125, 211, 252, 0.4);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0369a1, #4338ca);
+      border-color: #7dd3fc;
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #059669, #0d9488);
+      border-color: rgba(52, 211, 153, 0.4);
+      color: #ffffff;
+    }
+
+    .btn-emerald:hover {
+      background: linear-gradient(135deg, #047857, #0f766e);
+    }
+
+    .selection-alert {
+      font-size: 13px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .selection-alert.show {
+      display: flex;
+    }
+
+    .selection-alert.warn {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      color: #fecaca;
+    }
+
+    .selection-alert.info {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bae6fd;
+    }
+
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .venue-option {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    .venue-option:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .venue-option.selected {
+      background: rgba(14, 116, 144, 0.22);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 1px var(--accent-cyan);
+    }
+
+    .venue-option-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .venue-option-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .venue-option-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Verdict Output Area */
+    .verdict-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+
+    .verdict-stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 16px;
+    }
+
+    .verdict-card {
+      background: linear-gradient(180deg, #162033 0%, #0f172a 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .verdict-card.rank-1 {
+      border-color: rgba(52, 211, 153, 0.55);
+    }
+
+    .verdict-card.vetoed {
+      border-color: rgba(239, 68, 68, 0.65);
+      background: linear-gradient(180deg, rgba(69, 10, 10, 0.35) 0%, #0f172a 100%);
+    }
+
+    .verdict-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .rank-pill {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--accent-cyan);
+    }
+
+    .veto-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(239, 68, 68, 0.22);
+      border: 1px solid #ef4444;
+      color: #fecaca;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .score-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .score-box {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 9px 12px;
+    }
+
+    .score-box-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .score-box-val {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .sensory-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: rgba(9, 13, 22, 0.6);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .sensory-cell {
+      font-size: 11px;
+    }
+
+    .sensory-cell-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .sensory-bar-track {
+      height: 5px;
+      background: #1e293b;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sensory-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+    }
+
+    .tips-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tips-list li {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      background: rgba(30, 41, 59, 0.55);
+      border-left: 3px solid var(--accent-cyan);
+      padding: 6px 10px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .canary-footer {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(9, 13, 22, 0.8);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px dashed rgba(148, 163, 184, 0.25);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Section 2: Ingest Pipeline */
+    .pipeline-svg-wrap {
+      background: #0b111e;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+    }
+
+    .redaction-compare-grid {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .redaction-compare-grid.open {
+      display: grid;
+    }
+
+    .code-pane {
+      background: #090d16;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      overflow-x: auto;
+    }
+
+    .code-pane-title {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .redacted-tag {
+      background: rgba(239, 68, 68, 0.22);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .kept-tag {
+      background: rgba(52, 211, 153, 0.16);
+      color: #6ee7b7;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* Section 3: Economic Proof */
+    .econ-layout {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 920px) {
+      .econ-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .econ-controls {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .slider-val {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
+    }
+
+    .econ-kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .econ-kpi {
+      background: rgba(9, 13, 22, 0.72);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .econ-kpi-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .econ-kpi-value {
+      font-family: var(--font-mono);
+      font-size: 15.5px;
+      font-weight: 800;
+      margin-top: 3px;
+      color: var(--text-primary);
+    }
+
+    .econ-verdict-banner {
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .econ-verdict-banner.safe {
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(52, 211, 153, 0.55);
+      color: #6ee7b7;
+    }
+
+    .econ-verdict-banner.danger {
+      background: rgba(239, 68, 68, 0.18);
+      border: 1px solid rgba(239, 68, 68, 0.6);
+      color: #fca5a5;
+    }
+
+    .chart-box {
+      background: #0b111e;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .takeaway-strip {
+      margin-top: 12px;
+      background: rgba(56, 189, 248, 0.1);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    /* Section 4: Ledger */
+    .ledger-top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .ledger-totals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .ledger-stat-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+
+    .ledger-stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .ledger-stat-val {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    th {
+      background: #0f172a;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      color: var(--text-secondary);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .mono-cell {
+      font-family: var(--font-mono);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.55; }
+      50% { opacity: 1; }
+    }
+
+    .pulse-dot {
+      animation: pulseGlow 2.2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <main id="oracle-root">
+    <!-- HEADER: BUSINESS THESIS -->
+    <header class="hero-header">
+      <div class="hero-badges">
+        <span class="badge badge-cyan">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+          </svg>
+          DOUBLE-LAYER FUNNEL · 公域排雷 × 私域神谕
+        </span>
+        <span class="badge badge-emerald">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          PCSE ZERO-PII SANITIZED · 零原始行导出
+        </span>
+        <span class="badge badge-amber">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/>
+          </svg>
+          HTTP 402 / MCP METERED ORACLE · K &gt;&gt; P 防扒库凸定价
+        </span>
+      </div>
+
+      <h1 class="hero-title">First-Party Lived-Experience Oracle · 第一方亲历真值神谕与防扒库按次计费服务</h1>
+      <p class="hero-subtitle">
+        Business Thesis (商业母题): 将高密度第一方亲历旅行与餐饮资产（Google Maps 标记、奢华酒店入住水单、私藏红黑榜）封装为<strong>零隐私泄露的按次计费黑盒神谕（Metered Blackbox Oracle）</strong>。调用方仅能提交受限候选集（≤3 家）获取相对排序、一票否决硬伤排雷与高信息增益行动指南，<strong>严禁复制粘贴或遍历蒸馏底层原始库</strong>，通过「Tier-1 微额查询路桥费 ($0.50–$2.00 USD) + Tier-2 高价值履约分润 (12% GMV USD)」实现持久变现。
+      </p>
+
+      <div class="thesis-strip">
+        <div class="thesis-step">
+          <div class="thesis-step-label">01 · First-Party Lived Experience</div>
+          <div class="thesis-step-text">多源摄入 Google Takeout 坐标与住店餐饮实测，经 PCSE 脱敏剥离一切姓名、同伴、日期与订单号。</div>
+        </div>
+        <div class="thesis-step">
+          <div class="thesis-step-label">02 · Double-Layer Funnel Verdict</div>
+          <div class="thesis-step-text">下层公域排雷过滤水军与 7 大居住硬伤（Akerlof Floor），上层私域 12 维感官向量给出神谕天花板（Oracle Ceiling）。</div>
+        </div>
+        <div class="thesis-step">
+          <div class="thesis-step-label">03 · Convex Anti-Distillation Wall</div>
+          <div class="thesis-step-text">正常决策查询保持低价线性区；一旦检测广度遍历，二次方凸惩罚 C(E)=πE+aE² 令扒库成本 K &gt;&gt; P。</div>
+        </div>
+        <div class="thesis-step">
+          <div class="thesis-step-label">04 · Two-Tier Protocol Revenue</div>
+          <div class="thesis-step-text">每次决策查询收取 $0.50–$2.00 USD 微额路桥费；触发礼宾谈心升级或稀缺餐位代订收取 12% GMV USD 佣金。</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: LIVE QUERY DEMO -->
+    <section class="section-card" id="section-live-query">
+      <div class="section-header">
+        <div class="section-title-group">
+          <h2>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            1. Live Query Demo · 双层漏斗神谕决策查询（Bounded Input ≤ 3 Venues）
+          </h2>
+          <p>从 8 座城市 10 家合成标的中任选最多 3 家候选（Stay + Dining 混排），点击 Query Oracle 生成 Oracle Verdict 并自动计入实时美元账本。</p>
+        </div>
+        <span class="badge badge-cyan" id="selected-counter-badge">已选 3 / 3 家候选标的</span>
+      </div>
+
+      <div class="query-controls-bar">
+        <div class="preset-group">
+          <span style="font-size:12.5px;color:var(--text-muted);font-weight:600;">快速预设场景：</span>
+          <button type="button" class="btn" id="preset-chongqing">重庆江景奢华酒店对决 (Stay vs Spa)</button>
+          <button type="button" class="btn" id="preset-kyoto-fukuoka">京都·福冈私藏住宿餐饮排雷</button>
+          <button type="button" class="btn" id="preset-asia-mix">曼谷·上海·东京跨城盲测</button>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button type="button" class="btn" id="btn-clear-venues">清空选择</button>
+          <button type="button" class="btn btn-primary" id="btn-query-oracle">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            Query Oracle · 执行神谕裁决
+          </button>
+        </div>
+      </div>
+
+      <div id="selection-alert" class="selection-alert" role="status" aria-live="polite"></div>
+
+      <!-- 10 Synthetic Venues Grid -->
+      <div class="venue-grid" id="venue-selector-grid"></div>
+
+      <!-- Verdict Header & Cards -->
+      <div class="verdict-header-bar">
+        <div>
+          <strong style="color:#ffffff;font-size:15px;">Oracle Verdict · 神谕裁决输出栈</strong>
+          <span style="font-size:12.5px;color:var(--text-muted);margin-left:10px;">
+            排序规则：一票否决硬伤（VETO）强制沉底 → 综合私域神谕分（Oracle Ceiling）与公域排雷分（Anti-Lemon Floor）排序
+          </span>
+        </div>
+        <span class="badge badge-emerald" id="zero-raw-proof-badge">
+          ZERO RAW DATA ROWS RETURNED (raw_rows_returned: 0)
+        </span>
+      </div>
+
+      <div class="verdict-stack" id="oracle-verdict-container"></div>
+    </section>
+
+    <!-- SECTION 2: ZERO-PII INGEST PIPELINE -->
+    <section class="section-card" id="section-ingest-pipeline">
+      <div class="section-header">
+        <div class="section-title-group">
+          <h2>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            2. Zero-PII Ingest Pipeline Visualization · 零隐私入库与 PCSE 脱敏流水线
+          </h2>
+          <p>原始账单、同伴备注与精确时间戳永不出盒（Local Enclave Only）；对外神谕仅暴露场所实体、12 维感官向量与去身份化行动建议。</p>
+        </div>
+        <button type="button" class="btn btn-emerald" id="btn-toggle-redaction">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          <span id="toggle-redaction-label">Show What Gets Stripped · 展开脱敏前后对比</span>
+        </button>
+      </div>
+
+      <div class="pipeline-svg-wrap">
+        <svg viewBox="0 0 1080 210" width="100%" height="210" role="img" aria-label="PCSE Zero-PII Sanitization Pipeline">
+          <defs>
+            <linearGradient id="boxGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e293b"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="boxGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#064e3b"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="boxGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e3a8a"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <marker id="arrowCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+            </marker>
+          </defs>
+
+          <!-- Enclave Boundary Box -->
+          <rect x="14" y="12" width="690" height="186" rx="14" fill="rgba(239,68,68,0.04)" stroke="rgba(248,113,113,0.45)" stroke-dasharray="6 4" stroke-width="1.5"/>
+          <text x="30" y="34" fill="#fca5a5" font-size="11.5" font-weight="700" font-family="monospace">
+            LOCAL ENCLAVE BOUNDARY · 原始凭证与私人轨迹永不出盒 (NEVER LEAVES THE BOX)
+          </text>
+
+          <!-- Stage 1 -->
+          <rect x="30" y="48" width="295" height="132" rx="10" fill="url(#boxGrad1)" stroke="#475569" stroke-width="1.5"/>
+          <circle cx="52" cy="72" r="10" fill="rgba(248,113,113,0.2)" stroke="#f87171"/>
+          <text x="48" y="76" fill="#fca5a5" font-size="11" font-weight="700">1</text>
+          <text x="70" y="76" fill="#f8fafc" font-size="13.5" font-weight="700">Raw First-Party Ingest Sources</text>
+          <text x="46" y="102" fill="#cbd5e1" font-size="12">• Google Takeout JSON / GeoJSON / CSV</text>
+          <text x="46" y="124" fill="#cbd5e1" font-size="12">• FHR / Luxury Stay &amp; Dining Receipts</text>
+          <text x="46" y="146" fill="#fca5a5" font-size="11.5">Contains: companion_ref, stay_date, order_id</text>
+          <text x="46" y="166" fill="#94a3b8" font-size="11">Benchmark Nightly Rate: $580 USD / RMB 4,200</text>
+
+          <!-- Connector 1 -> 2 -->
+          <line x1="325" y1="114" x2="385" y2="114" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrowCyan)"/>
+          <circle cx="355" cy="114" r="5" fill="#38bdf8" class="pulse-dot"/>
+
+          <!-- Stage 2 -->
+          <rect x="390" y="48" width="295" height="132" rx="10" fill="url(#boxGrad2)" stroke="#10b981" stroke-width="1.5"/>
+          <circle cx="412" cy="72" r="10" fill="rgba(16,185,129,0.25)" stroke="#34d399"/>
+          <text x="408" y="76" fill="#6ee7b7" font-size="11" font-weight="700">2</text>
+          <text x="430" y="76" fill="#f8fafc" font-size="13.5" font-weight="700">PCSE Sanitizer (Zero-PII Gate)</text>
+          <text x="406" y="102" fill="#a7f3d0" font-size="12">• Strip names, companion_ref, emails</text>
+          <text x="406" y="124" fill="#a7f3d0" font-size="12">• Strip exact stay_date &amp; order_id</text>
+          <text x="406" y="146" fill="#a7f3d0" font-size="12">• Coarsen GPS precision &amp; drop raw prose</text>
+          <text x="406" y="166" fill="#34d399" font-size="11" font-family="monospace">PCSE Audit: PASS (0 PII / 0 Raw Dump)</text>
+
+          <!-- Connector 2 -> 3 -->
+          <line x1="685" y1="114" x2="755" y2="114" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrowCyan)"/>
+          <circle cx="720" cy="114" r="5" fill="#34d399" class="pulse-dot"/>
+
+          <!-- Stage 3 -->
+          <rect x="760" y="48" width="300" height="132" rx="10" fill="url(#boxGrad3)" stroke="#38bdf8" stroke-width="1.5"/>
+          <circle cx="782" cy="72" r="10" fill="rgba(56,189,248,0.25)" stroke="#38bdf8"/>
+          <text x="778" y="76" fill="#7dd3fc" font-size="11" font-weight="700">3</text>
+          <text x="800" y="76" fill="#f8fafc" font-size="13.5" font-weight="700">Served Oracle Verdict Only</text>
+          <text x="776" y="102" fill="#bae6fd" font-size="12">• 12-Dim Sensory Vector [0.00 - 1.00]</text>
+          <text x="776" y="124" fill="#bae6fd" font-size="12">• Fatal-Flaw VETO + Anti-Lemon Score</text>
+          <text x="776" y="146" fill="#bae6fd" font-size="12">• Actionable Room/Dish Tips + Canary</text>
+          <text x="776" y="166" fill="#38bdf8" font-size="11" font-family="monospace">Metered API Toll: $0.50 - $2.00 USD</text>
+        </svg>
+      </div>
+
+      <!-- Toggleable Redaction Diff -->
+      <div class="redaction-compare-grid open" id="redaction-diff-panel">
+        <div class="code-pane">
+          <div class="code-pane-title">
+            <span style="color:#fca5a5;">LEFT · Raw Ingest Record (Enclave-Only · 严禁出盒)</span>
+            <span class="badge badge-red">NEVER LEAVES THE BOX</span>
+          </div>
+<pre style="color:#cbd5e1;line-height:1.6;white-space:pre-wrap;">{
+  "venue_id": "cq_skyline_conrad_01",
+  "venue_entity": "Chongqing Yunling Sky-Tower Hotel (重庆云岭高空江景酒店)",
+  "reference_rate": "RMB 3,450 / night ($480 USD equivalent)",
+  "owner_note": <span class="redacted-tag">"[REDACTED · STRIPPED BY PCSE]"</span>,
+  "companion_ref": <span class="redacted-tag">"[REDACTED · ZERO PRIVATE NAMES]"</span>,
+  "stay_date": <span class="redacted-tag">"[REDACTED · EXACT TIMESTAMP REMOVED]"</span>,
+  "order_id": <span class="redacted-tag">"[REDACTED · RECEIPT ID REMOVED]"</span>,
+  "email": <span class="redacted-tag">"[REDACTED · ACCOUNT PII REMOVED]"</span>,
+  "exact_gps_trace": <span class="redacted-tag">"[REDACTED · COARSENED TO CITY ZONE]"</span>,
+  "raw_review_text": <span class="redacted-tag">"[REDACTED · PROSE BLOCKED TO PREVENT COPY-PASTE]"</span>
+}</pre>
+        </div>
+
+        <div class="code-pane">
+          <div class="code-pane-title">
+            <span style="color:#6ee7b7;">RIGHT · Served Oracle Record (对外按次计费神谕载荷)</span>
+            <span class="badge badge-emerald">PCSE CLEARED SURFACE</span>
+          </div>
+<pre style="color:#cbd5e1;line-height:1.6;white-space:pre-wrap;">{
+  "venue_entity": <span class="kept-tag">"Chongqing Yunling Sky-Tower Hotel (重庆云岭高空江景酒店)"</span>,
+  "city": <span class="kept-tag">"Chongqing"</span>,
+  "category": <span class="kept-tag">"Stay · Skyscraper Sanctuary"</span>,
+  "sensory_vector_12d": <span class="kept-tag">[0.94, 0.91, 0.96, 0.95, 0.92, 0.89, 0.93, 0.88, 0.90, 0.94, 0.91, 0.95]</span>,
+  "anti_lemon_floor": <span class="kept-tag">0.93</span>,
+  "oracle_ceiling": <span class="kept-tag">0.95</span>,
+  "fatal_flags": <span class="kept-tag">[]</span>,
+  "actionable_tips": <span class="kept-tag">[
+    "Request 52F+ ending in 06/08 away from elevator core for <28dB silence.",
+    "High-density lumbar mattress verified; skip lobby lounge and book 54F breakfast."
+  ]</span>,
+  "raw_rows_returned": <span class="kept-tag">0</span>
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ANTI-DISTILLATION ECONOMIC PROOF -->
+    <section class="section-card" id="section-economic-proof">
+      <div class="section-header">
+        <div class="section-title-group">
+          <h2>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            3. Anti-Distillation Economic Proof · 防扒库凸定价经济学证明 (K &gt;&gt; P)
+          </h2>
+          <p>调节客户端查询广度 E 与单次路桥费 p_q ($0.50–$2.00 USD)，实时观测正常决策用户（线性低价区）与爬虫蒸馏者（二次方凸惩罚墙 C(E)=πE+aE²）的成本分化。</p>
+        </div>
+        <span class="badge badge-amber">Theorem: K(ε) = p_q · Q(ε) + a · E² &gt;&gt; P</span>
+      </div>
+
+      <div class="econ-layout">
+        <div class="econ-controls">
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label for="slider-breadth">Client Query Breadth (查询标的广度 E)</label>
+              <span class="slider-val" id="label-breadth-val">240 venues</span>
+            </div>
+            <input type="range" id="slider-breadth" min="3" max="300" step="1" value="240" />
+            <span style="font-size:11.5px;color:var(--text-muted);">
+              正常旅行者单次仅查 1–6 家；扒库者需遍历 E ≥ 150 家以重构私域图谱。
+            </span>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label for="slider-toll">Per-Query Base Toll p_q (单次基础路桥费)</label>
+              <span class="slider-val" id="label-toll-val">$1.25 USD</span>
+            </div>
+            <input type="range" id="slider-toll" min="0.50" max="2.00" step="0.05" value="1.25" />
+            <span style="font-size:11.5px;color:var(--text-muted);">
+              基础微额计费区间：$0.50 USD – $2.00 USD / query（外加广度超限时的凸惩罚项 a·E²）。
+            </span>
+          </div>
+
+          <div class="econ-kpi-grid">
+            <div class="econ-kpi">
+              <div class="econ-kpi-label">Q_needed (重构全库所需查询数)</div>
+              <div class="econ-kpi-value" id="kpi-q-needed">1,680 queries</div>
+            </div>
+            <div class="econ-kpi">
+              <div class="econ-kpi-label">Legit User Cost (3 Queries)</div>
+              <div class="econ-kpi-value" id="kpi-legit-cost">$3.75 USD</div>
+            </div>
+            <div class="econ-kpi">
+              <div class="econ-kpi-label">K_total (爬虫蒸馏总成本)</div>
+              <div class="econ-kpi-value" id="kpi-k-total" style="color:var(--accent-rose);">$28,020.00 USD</div>
+            </div>
+            <div class="econ-kpi">
+              <div class="econ-kpi-label">P (数据库重置估值上限)</div>
+              <div class="econ-kpi-value" id="kpi-p-value" style="color:var(--accent-emerald);">$4,500.00 USD</div>
+            </div>
+          </div>
+
+          <div id="econ-verdict-box" class="econ-verdict-banner safe">
+            <span id="econ-verdict-text">VERDICT: K >> P (distillation uneconomical · 扒库在经济学上彻底破产)</span>
+            <span id="econ-ratio-pill" style="font-family:var(--font-mono);font-size:12px;">K / P = 6.23x</span>
+          </div>
+        </div>
+
+        <div class="chart-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:13px;font-weight:700;color:#ffffff;">
+              Cumulative Cost vs. Query Breadth E · 线性决策区 vs. 二次方防扒库凸墙 (USD)
+            </span>
+            <div style="display:flex;gap:14px;font-size:12px;">
+              <span style="color:#34d399;">● Legit Decision User (Linear π·E)</span>
+              <span style="color:#fb7185;">● Crawler / Distiller (Convex C(E)=πE+aE²)</span>
+              <span style="color:#fbbf24;">-- DB Value P ($4,500 USD)</span>
+            </div>
+          </div>
+
+          <svg id="econ-svg-chart" viewBox="0 0 680 265" width="100%" height="265" role="img" aria-label="Anti-Distillation Convex Cost Curve"></svg>
+
+          <div class="takeaway-strip">
+            <strong>Plain-Language Takeaway:</strong> Bounded decision queries are cheap ($1.25–$3.75 USD); bulk copy-paste distillation is quadratically punished (K &gt;&gt; P).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: REAL-TIME TOLL / COMMISSION LEDGER -->
+    <section class="section-card" id="section-live-ledger">
+      <div class="section-header">
+        <div class="section-title-group">
+          <h2>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-indigo)" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            4. Real-Time Toll / Commission Ledger · 双层实时路桥费与履约佣金账本 (USD)
+          </h2>
+          <p>Tier-1 按次收取微额查询费（含高频扒库凸附加费）；Tier-2 在触发高价值礼宾升房或稀缺席位代订时按 τ = 12% GMV 收取履约佣金。</p>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <select id="fulfillment-preset-select" class="btn" style="background:#0f172a;">
+            <option value="stay_conrad">重庆云岭江景套房礼宾升房 (Stay GMV $1,200.00 USD · Nightly $600 USD)</option>
+            <option value="kyoto_ryokan">京都岚山私汤旅馆席位锁定 (Stay GMV $1,850.00 USD · Nightly $925 USD)</option>
+            <option value="tokyo_omakase">东京银座隐秘主厨割烹双人席 (Dining GMV $680.00 USD)</option>
+          </select>
+          <button type="button" class="btn btn-emerald" id="btn-simulate-fulfillment">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            Simulate fulfillment (concierge upgrade / rare-table booking)
+          </button>
+        </div>
+      </div>
+
+      <div class="ledger-totals-grid">
+        <div class="ledger-stat-card">
+          <div class="ledger-stat-label">Tier 1 · Micro-Toll Revenue (按次查询路桥费累计)</div>
+          <div class="ledger-stat-val" id="ledger-tier1-total" style="color:var(--accent-cyan);">$0.00 USD</div>
+        </div>
+        <div class="ledger-stat-card">
+          <div class="ledger-stat-label">Tier 2 · Fulfillment Commission (τ = 12% GMV 履约分润累计)</div>
+          <div class="ledger-stat-val" id="ledger-tier2-total" style="color:var(--accent-emerald);">$0.00 USD</div>
+        </div>
+        <div class="ledger-stat-card">
+          <div class="ledger-stat-label">Combined Protocol Gross Revenue (神谕协议总营收)</div>
+          <div class="ledger-stat-val" id="ledger-grand-total" style="color:var(--accent-amber);">$0.00 USD</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Timestamp (UTC)</th>
+              <th>Type (Tier)</th>
+              <th>Client / Agent Seat</th>
+              <th>Action &amp; Metered Detail</th>
+              <th>USD Amount</th>
+              <th>Running Total (USD)</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // 12 Sensory Dimensions Labels
+      var SENSORY_DIMS = [
+        "Acoustic Silence (隔音)",
+        "HVAC Quietness (空调静谧)",
+        "Plumbing Seal (防返味)",
+        "Lumbar Support (床垫支撑)",
+        "Water Pressure (水压恒温)",
+        "Concierge IQ (礼宾响应)",
+        "View Authenticity (景观真值)",
+        "Broth/Wok Hei (火候汤底)",
+        "No-Chili Adapt (免辣友好)",
+        "Ingredient Purity (食材本味)",
+        "Privacy Buffer (私密动线)",
+        "Value-to-Hype (去网红溢价)"
+      ];
+
+      // 10 Synthetic Venues across 8 Cities (Chongqing, Kyoto, Fukuoka, Bangkok, Shanghai, Hong Kong, Bali, Tokyo)
+      // Zero real person names, zero PII, all nightly rates >= $400 USD / >= 1,500 RMB with explicit currency anchors
+      var VENUES = [
+        {
+          id: "cq_conrad_sky",
+          name: "Chongqing Yunling Sky-Tower Hotel · 重庆云岭高空江景酒店",
+          city: "Chongqing",
+          type: "Stay",
+          rateLabel: "Reference Rate: RMB 3,450 / night ($480 USD)",
+          antiLemonFloor: 0.93,
+          oracleCeiling: 0.95,
+          fatalFlags: [],
+          vector: [0.95, 0.92, 0.96, 0.96, 0.94, 0.90, 0.97, 0.88, 0.93, 0.91, 0.94, 0.95],
+          tips: [
+            "锁定 52F 以上 06/08 尾号高空江景房，远离电梯井低频共振，夜间实测低于 27dB。",
+            "床垫高密度独立袋装弹簧腰部支撑极佳；早餐必点现熬清汤抄手（可免辣定制）。"
+          ]
+        },
+        {
+          id: "cq_riverside_ mirage",
+          name: "Chongqing Liangjiang Neon Mirage Hotel · 重庆两江霓虹幻影酒店",
+          city: "Chongqing",
+          type: "Stay",
+          rateLabel: "Reference Rate: RMB 3,750 / night ($520 USD)",
+          antiLemonFloor: 0.41,
+          oracleCeiling: 0.62,
+          fatalFlags: [
+            "FATAL VETO: Severe Plumbing Odor & Low-Freq HVAC Resonance (排水管反味 + 江景侧幕墙风机 48Hz 低频嗡鸣，仅适合餐饮/SPA，严禁过夜入住)"
+          ],
+          vector: [0.42, 0.35, 0.28, 0.74, 0.81, 0.68, 0.95, 0.91, 0.86, 0.89, 0.55, 0.40],
+          tips: [
+            "一票否决过夜入住：低区与中区客房普遍存在地漏返味及空调风管共振，公域好评系旅拍赠礼刷榜。",
+            "仅建议单独预约其 7F 江景露台酒吧或日间 SPA，切勿预订过夜房型。"
+          ]
+        },
+        {
+          id: "kyoto_kamo_sanctuary",
+          name: "Kyoto Kamogawa Cedar Ryokan · 京都鸭川古杉私汤旅宿",
+          city: "Kyoto",
+          type: "Stay",
+          rateLabel: "Reference Rate: JPY 98,000 / night ($650 USD)",
+          antiLemonFloor: 0.96,
+          oracleCeiling: 0.97,
+          fatalFlags: [],
+          vector: [0.98, 0.96, 0.97, 0.94, 0.95, 0.97, 0.94, 0.96, 0.98, 0.99, 0.98, 0.96],
+          tips: [
+            "指名二楼东侧「松风」角房，独享鸭川晨雾视角且完全规避玄关木屐脚步声。",
+            "怀石晚餐的高汤使用利尻昆布冷萃，提前 48 小时通过礼宾备注免辛辣与生食替换。"
+          ]
+        },
+        {
+          id: "kyoto_gion_dashi",
+          name: "Kyoto Gion Shirakawa Kappo · 京都祇园白川出汁割烹",
+          city: "Kyoto",
+          type: "Dining",
+          rateLabel: "Reference Tasting: JPY 66,000 / 2 seats ($440 USD)",
+          antiLemonFloor: 0.92,
+          oracleCeiling: 0.94,
+          fatalFlags: [],
+          vector: [0.93, 0.91, 0.95, 0.88, 0.90, 0.94, 0.89, 0.99, 0.97, 0.98, 0.92, 0.94],
+          tips: [
+            "仅设 8 席桧木吧台，必选首轮 17:30 入席，此时一番出汁香气最盛且炭火温度最稳。",
+            "甘鲷鳞烧配圣护院芜菁泥为镇店之作，拒绝第三方代订加价，可走神谕礼宾直联。"
+          ]
+        },
+        {
+          id: "fukuoka_hakata_atai",
+          name: "Fukuoka Yakuin Charcoal & Broth Lab · 福冈药院备长炭清汤研究所",
+          city: "Fukuoka",
+          type: "Dining",
+          rateLabel: "Reference Omakase: JPY 63,000 / private table ($420 USD)",
+          antiLemonFloor: 0.90,
+          oracleCeiling: 0.92,
+          fatalFlags: [],
+          vector: [0.89, 0.90, 0.93, 0.85, 0.88, 0.91, 0.84, 0.97, 0.96, 0.96, 0.90, 0.95],
+          tips: [
+            "主厨可将传统九州柚子胡椒完全剥离于清鸡汤之外，彻底满足零辣椒素胃肠耐受需求。",
+            "必点天草大王地鸡一夜干与土锅牛蒡饭，避开周末晚间 20:00 后的散客拼桌时段。"
+          ]
+        },
+        {
+          id: "bangkok_chao_phraya_villa",
+          name: "Bangkok Chao Phraya Teak Courtyard · 曼谷湄南河柚木庭院酒店",
+          city: "Bangkok",
+          type: "Stay",
+          rateLabel: "Reference Rate: $540 USD / night (RMB 3,880)",
+          antiLemonFloor: 0.91,
+          oracleCeiling: 0.93,
+          fatalFlags: [],
+          vector: [0.92, 0.94, 0.91, 0.93, 0.92, 0.95, 0.94, 0.90, 0.94, 0.92, 0.95, 0.91],
+          tips: [
+            "务必选择内庭莲池翼（Lotus Wing），避开临河主航道夜间长尾船柴油机低频噪音。",
+            "泰式厨房拥有独立无辣炒锅通道（Zero-Chili Wok Line），河虾冬阴功可改清椰奶高良姜底。"
+          ]
+        },
+        {
+          id: "shanghai_bund_artdeco",
+          name: "Shanghai Waitan Heritage Velvet Club · 上海外滩源复古丝绒公馆",
+          city: "Shanghai",
+          type: "Stay",
+          rateLabel: "Reference Rate: RMB 3,280 / night ($460 USD)",
+          antiLemonFloor: 0.36,
+          oracleCeiling: 0.54,
+          fatalFlags: [
+            "FATAL VETO: Hollow Timber Floor Acoustic Failure & Mattress Sag (百年老楼木龙骨隔音崩塌 + 软塌床垫导致严重腰椎悬空)"
+          ],
+          vector: [0.25, 0.52, 0.60, 0.30, 0.58, 0.64, 0.88, 0.78, 0.82, 0.80, 0.45, 0.32],
+          tips: [
+            "一票否决：楼上住客走动声直传床头，且羽毛软垫毫无腰部承托，长住必引发腰肌劳损。",
+            "公域高分源于下午茶网红打卡控评；若追求安静睡眠请改订浦东陆家嘴高层现代钢构酒店。"
+          ]
+        },
+        {
+          id: "hk_victoria_harbour_crest",
+          name: "Hong Kong Admiralty Peak Sanctuary · 香港金钟半山云顶居舍",
+          city: "Hong Kong",
+          type: "Stay",
+          rateLabel: "Reference Rate: $690 USD / night (RMB 4,950)",
+          antiLemonFloor: 0.94,
+          oracleCeiling: 0.96,
+          fatalFlags: [],
+          vector: [0.96, 0.95, 0.97, 0.95, 0.98, 0.94, 0.96, 0.92, 0.95, 0.94, 0.97, 0.93],
+          tips: [
+            "45F 以上东翼 Studio 70 房型兼具维港全景与山景静谧，淋浴水压恒定 3.8 bar。",
+            "礼宾部可直通大馆及中环私房粤菜名厨席位，入住前发送神谕谈心模板可稳升海景角房。"
+          ]
+        },
+        {
+          id: "bali_uluwatu_cliff_echo",
+          name: "Bali Uluwatu Cliff Glass Pool Villa · 巴厘岛乌鲁瓦图悬崖玻璃泳池别墅",
+          city: "Bali",
+          type: "Stay",
+          rateLabel: "Reference Rate: $780 USD / night (RMB 5,600)",
+          antiLemonFloor: 0.39,
+          oracleCeiling: 0.58,
+          fatalFlags: [
+            "FATAL VETO: Hype-Over-Substance HVAC Overload & Desalination Water Odor (全玻璃暴晒导致正午空调失效 + 海水淡化管网异味)"
+          ],
+          vector: [0.68, 0.24, 0.38, 0.72, 0.35, 0.52, 0.97, 0.65, 0.78, 0.70, 0.62, 0.29],
+          tips: [
+            "一票否决：正午 12:00-16:00 室内温度升至 29°C 空调无法压制，洗漱用水带明显咸涩氯味。",
+            "典型视觉修图大于居住实质的公域营销陷阱，仅适合日落航拍，绝不值得高昂过夜溢价。"
+          ]
+        },
+        {
+          id: "tokyo_azabudai_hinoki",
+          name: "Tokyo Toranomon Hinoki Counter & Stay · 东京虎之门桧木静谧行馆",
+          city: "Tokyo",
+          type: "Stay",
+          rateLabel: "Reference Rate: JPY 115,000 / night ($760 USD)",
+          antiLemonFloor: 0.95,
+          oracleCeiling: 0.96,
+          fatalFlags: [],
+          vector: [0.97, 0.96, 0.98, 0.96, 0.97, 0.95, 0.93, 0.96, 0.95, 0.97, 0.96, 0.95],
+          tips: [
+            "三层中空夹胶声学玻璃彻底隔绝都心车流，定制高支撑硬质床垫对腰椎极度友好。",
+            "住客专属 B1 炭火割烹每晚预留 2 席免排队名额，清汤河豚白子与和牛菲力零踩雷。"
+          ]
+        }
+      ];
+
+      // Selected venue IDs (default 3)
+      var selectedIds = ["cq_conrad_sky", "cq_riverside_ mirage", "kyoto_kamo_sanctuary"];
+      var queryCounter = 1;
+
+      // Ledger State (USD)
+      var ledgerEntries = [];
+      var tier1TotalUSD = 0;
+      var tier2TotalUSD = 0;
+
+      // DOM Elements
+      var venueGridEl = document.getElementById("venue-selector-grid");
+      var selectedBadgeEl = document.getElementById("selected-counter-badge");
+      var alertEl = document.getElementById("selection-alert");
+      var verdictContainerEl = document.getElementById("oracle-verdict-container");
+      var ledgerTbodyEl = document.getElementById("ledger-tbody");
+      var tier1TotalEl = document.getElementById("ledger-tier1-total");
+      var tier2TotalEl = document.getElementById("ledger-tier2-total");
+      var grandTotalEl = document.getElementById("ledger-grand-total");
+
+      function showAlert(msg, level) {
+        alertEl.textContent = msg;
+        alertEl.className = "selection-alert show " + (level || "info");
+      }
+
+      function hideAlert() {
+        alertEl.className = "selection-alert";
+      }
+
+      function renderVenueSelector() {
+        venueGridEl.innerHTML = "";
+        for (var i = 0; i < VENUES.length; i++) {
+          (function (venue) {
+            var isSelected = selectedIds.indexOf(venue.id) !== -1;
+            var hasVeto = venue.fatalFlags && venue.fatalFlags.length > 0;
+            var card = document.createElement("div");
+            card.className = "venue-option" + (isSelected ? " selected" : "");
+            card.setAttribute("data-venue-id", venue.id);
+
+            card.innerHTML =
+              '<div class="venue-option-top">' +
+                '<span>' + venue.city + ' · ' + venue.type + '</span>' +
+                '<span style="color:' + (hasVeto ? '#fca5a5' : '#6ee7b7') + ';font-weight:700;">' +
+                  (hasVeto ? '⚠ Hard Flaw Detected' : '✓ Verified Pool') +
+                '</span>' +
+              '</div>' +
+              '<div class="venue-option-name">' + venue.name + '</div>' +
+              '<div class="venue-option-meta">' +
+                '<span style="font-size:11px;color:var(--text-muted);">' + venue.rateLabel + '</span>' +
+              '</div>';
+
+            card.addEventListener("click", function () {
+              var idx = selectedIds.indexOf(venue.id);
+              if (idx !== -1) {
+                selectedIds.splice(idx, 1);
+                hideAlert();
+              } else {
+                if (selectedIds.length >= 3) {
+                  showAlert(
+                    "BOUNDED QUERY GATE: 单次神谕查询最多允许选择 3 家候选标的（Max 3 venues enforced to prevent bulk scraping）。请先取消一家再选。",
+                    "warn"
+                  );
+                  return;
+                }
+                selectedIds.push(venue.id);
+                hideAlert();
+              }
+              renderVenueSelector();
+            });
+
+            venueGridEl.appendChild(card);
+          })(VENUES[i]);
+        }
+        selectedBadgeEl.textContent = "已选 " + selectedIds.length + " / 3 家候选标的";
+      }
+
+      function computeCanaryToken(ids, seq) {
+        var str = ids.join("|") + "#seq=" + seq + "#salt=PCSE-ORACLE-2026";
+        var hash = 2166136261;
+        for (var i = 0; i < str.length; i++) {
+          hash ^= str.charCodeAt(i);
+          hash = Math.imul(hash, 16777619);
+        }
+        var hex = (hash >>> 0).toString(16).toUpperCase();
+        while (hex.length < 8) {
+          hex = "0" + hex;
+        }
+        return "CANARY-WM-" + hex + "-Q" + seq;
+      }
+
+      function appendLedgerRow(type, client, detail, amountUSD) {
+        var now = new Date();
+        var ts =
+          now.getUTCFullYear() + "-" +
+          String(now.getUTCMonth() + 1).padStart(2, "0") + "-" +
+          String(now.getUTCDate()).padStart(2, "0") + " " +
+          String(now.getUTCHours()).padStart(2, "0") + ":" +
+          String(now.getUTCMinutes()).padStart(2, "0") + ":" +
+          String(now.getUTCSeconds()).padStart(2, "0");
+
+        if (type === "micro-toll") {
+          tier1TotalUSD += amountUSD;
+        } else {
+          tier2TotalUSD += amountUSD;
+        }
+        var runningTotal = tier1TotalUSD + tier2TotalUSD;
+
+        ledgerEntries.unshift({
+          ts: ts,
+          type: type,
+          client: client,
+          detail: detail,
+          amountUSD: amountUSD,
+          runningTotal: runningTotal
+        });
+
+        renderLedgerTable();
+      }
+
+      function renderLedgerTable() {
+        ledgerTbodyEl.innerHTML = "";
+        for (var i = 0; i < ledgerEntries.length; i++) {
+          var row = ledgerEntries[i];
+          var tr = document.createElement("tr");
+          var badgeHtml =
+            row.type === "micro-toll"
+              ? '<span class="badge badge-cyan">micro-toll (Tier 1)</span>'
+              : '<span class="badge badge-emerald">commission (Tier 2 · 12% GMV)</span>';
+
+          tr.innerHTML =
+            '<td class="mono-cell">' + row.ts + '</td>' +
+            '<td>' + badgeHtml + '</td>' +
+            '<td class="mono-cell" style="color:var(--text-primary);">' + row.client + '</td>' +
+            '<td>' + row.detail + '</td>' +
+            '<td class="mono-cell" style="color:var(--accent-emerald);font-weight:700;">+$' + row.amountUSD.toFixed(2) + ' USD</td>' +
+            '<td class="mono-cell" style="color:var(--accent-amber);font-weight:700;">$' + row.runningTotal.toFixed(2) + ' USD</td>';
+          ledgerTbodyEl.appendChild(tr);
+        }
+
+        tier1TotalEl.textContent = "$" + tier1TotalUSD.toFixed(2) + " USD";
+        tier2TotalEl.textContent = "$" + tier2TotalUSD.toFixed(2) + " USD";
+        grandTotalEl.textContent = "$" + (tier1TotalUSD + tier2TotalUSD).toFixed(2) + " USD";
+      }
+
+      function executeOracleQuery(recordToLedger) {
+        if (selectedIds.length === 0) {
+          showAlert("请至少选择 1 家候选标的（最多 3 家）以生成神谕裁决。", "warn");
+          return;
+        }
+
+        var picked = [];
+        for (var i = 0; i < selectedIds.length; i++) {
+          for (var j = 0; j < VENUES.length; j++) {
+            if (VENUES[j].id === selectedIds[i]) {
+              picked.push(VENUES[j]);
+              break;
+            }
+          }
+        }
+
+        // Sort: VETOed venues sink to bottom; non-vetoed ranked by combined (0.6*oracleCeiling + 0.4*antiLemonFloor)
+        picked.sort(function (a, b) {
+          var aVeto = a.fatalFlags && a.fatalFlags.length > 0 ? 1 : 0;
+          var bVeto = b.fatalFlags && b.fatalFlags.length > 0 ? 1 : 0;
+          if (aVeto !== bVeto) {
+            return aVeto - bVeto;
+          }
+          var aCombined = 0.6 * a.oracleCeiling + 0.4 * a.antiLemonFloor;
+          var bCombined = 0.6 * b.oracleCeiling + 0.4 * b.antiLemonFloor;
+          return bCombined - aCombined;
+        });
+
+        var seq = queryCounter++;
+        var canary = computeCanaryToken(selectedIds, seq);
+        verdictContainerEl.innerHTML = "";
+
+        for (var k = 0; k < picked.length; k++) {
+          var v = picked[k];
+          var isVeto = v.fatalFlags && v.fatalFlags.length > 0;
+          var card = document.createElement("article");
+          card.className = "verdict-card " + (isVeto ? "vetoed" : k === 0 ? "rank-1" : "");
+
+          var statusBadgeHtml = isVeto
+            ? '<span class="veto-badge">⛔ FATAL-FLAW VETO · 沉底排雷</span>'
+            : '<span class="rank-pill">Oracle Rank #' + (k + 1) + (k === 0 ? ' · 首选推荐' : '') + '</span>';
+
+          var vetoReasonHtml = isVeto
+            ? '<div style="background:rgba(239,68,68,0.18);border:1px solid rgba(239,68,68,0.5);color:#fecaca;padding:8px 10px;border-radius:6px;font-size:12px;font-weight:600;">' +
+                v.fatalFlags[0] +
+              '</div>'
+            : '';
+
+          // Render 6 key dimensions out of the 12-dim sensory vector + summary of all 12
+          var sensoryCellsHtml = "";
+          for (var d = 0; d < 6; d++) {
+            var val = v.vector[d];
+            var pct = Math.round(val * 100);
+            sensoryCellsHtml +=
+              '<div class="sensory-cell">' +
+                '<div class="sensory-cell-top">' +
+                  '<span>' + SENSORY_DIMS[d].split(" ")[0] + '</span>' +
+                  '<span style="font-family:var(--font-mono);">' + val.toFixed(2) + '</span>' +
+                '</div>' +
+                '<div class="sensory-bar-track">' +
+                  '<div class="sensory-bar-fill" style="width:' + pct + '%;background:' + (val < 0.5 ? '#ef4444' : '') + ';"></div>' +
+                '</div>' +
+              '</div>';
+          }
+
+          var tipsHtml = "";
+          var maxTips = Math.min(2, v.tips.length);
+          for (var t = 0; t < maxTips; t++) {
+            tipsHtml += "<li>" + v.tips[t] + "</li>";
+          }
+
+          card.innerHTML =
+            '<div class="verdict-card-head">' +
+              '<div>' +
+                '<div style="font-size:11.5px;color:var(--text-muted);">' + v.city + ' · ' + v.type + ' · ' + v.rateLabel + '</div>' +
+                '<h3 style="font-size:16px;font-weight:700;color:#ffffff;margin-top:2px;">' + v.name + '</h3>' +
+              '</div>' +
+              statusBadgeHtml +
+            '</div>' +
+            vetoReasonHtml +
+            '<div class="score-pair">' +
+              '<div class="score-box">' +
+                '<div class="score-box-label">Oracle Ceiling Score (私域神谕上限)</div>' +
+                '<div class="score-box-val" style="color:var(--accent-cyan);">' + (v.oracleCeiling * 100).toFixed(1) + ' / 100</div>' +
+              '</div>' +
+              '<div class="score-box">' +
+                '<div class="score-box-label">Anti-Lemon Floor Score (公域排雷底线)</div>' +
+                '<div class="score-box-val" style="color:' + (isVeto ? '#f87171' : 'var(--accent-emerald)') + ';">' + (v.antiLemonFloor * 100).toFixed(1) + ' / 100</div>' +
+              '</div>' +
+            '</div>' +
+            '<div>' +
+              '<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;display:flex;justify-content:space-between;">' +
+                '<span>12-Dim Sensory Vector Projection (12维感官真值向量)</span>' +
+                '<span style="font-family:var(--font-mono);">dim=12 | norm=L2</span>' +
+              '</div>' +
+              '<div class="sensory-mini-grid">' + sensoryCellsHtml + '</div>' +
+            '</div>' +
+            '<div>' +
+              '<div style="font-size:11.5px;font-weight:700;color:var(--text-secondary);margin-bottom:5px;">Actionable Lived-Experience Tips (最多 2 条高信息增益建议):</div>' +
+              '<ul class="tips-list">' + tipsHtml + '</ul>' +
+            '</div>' +
+            '<div class="canary-footer">' +
+              '<span>Canary: ' + canary + '-' + (k + 1) + '</span>' +
+              '<span style="color:var(--accent-emerald);">raw_rows_returned: 0</span>' +
+            '</div>';
+
+          verdictContainerEl.appendChild(card);
+        }
+
+        if (recordToLedger) {
+          var currentToll = parseFloat(document.getElementById("slider-toll").value) || 1.25;
+          var queryFee = Number((currentToll * picked.length).toFixed(2));
+          appendLedgerRow(
+            "micro-toll",
+            "agent-client-0x7F",
+            "Bounded Oracle Verdict (" + picked.length + " venues, canary " + canary + ", $0 raw dump, base $" + currentToll.toFixed(2) + " USD/venue)",
+            queryFee
+          );
+        }
+      }
+
+      // Preset buttons
+      document.getElementById("preset-chongqing").addEventListener("click", function () {
+        selectedIds = ["cq_conrad_sky", "cq_riverside_ mirage", "hk_victoria_harbour_crest"];
+        hideAlert();
+        renderVenueSelector();
+        executeOracleQuery(true);
+      });
+
+      document.getElementById("preset-kyoto-fukuoka").addEventListener("click", function () {
+        selectedIds = ["kyoto_kamo_sanctuary", "kyoto_gion_dashi", "fukuoka_hakata_atai"];
+        hideAlert();
+        renderVenueSelector();
+        executeOracleQuery(true);
+      });
+
+      document.getElementById("preset-asia-mix").addEventListener("click", function () {
+        selectedIds = ["bangkok_chao_phraya_villa", "shanghai_bund_artdeco", "tokyo_azabudai_hinoki"];
+        hideAlert();
+        renderVenueSelector();
+        executeOracleQuery(true);
+      });
+
+      document.getElementById("btn-clear-venues").addEventListener("click", function () {
+        selectedIds = [];
+        hideAlert();
+        renderVenueSelector();
+      });
+
+      document.getElementById("btn-query-oracle").addEventListener("click", function () {
+        executeOracleQuery(true);
+      });
+
+      // Section 2: Toggle Redaction Panel
+      var redactionPanelEl = document.getElementById("redaction-diff-panel");
+      var toggleRedactionLabelEl = document.getElementById("toggle-redaction-label");
+      document.getElementById("btn-toggle-redaction").addEventListener("click", function () {
+        var isOpen = redactionPanelEl.classList.toggle("open");
+        toggleRedactionLabelEl.textContent = isOpen
+          ? "Hide Stripped Fields · 收起脱敏前后对比"
+          : "Show What Gets Stripped · 展开脱敏前后对比";
+      });
+
+      // Section 3: Anti-Distillation Economic Proof
+      var sliderBreadthEl = document.getElementById("slider-breadth");
+      var sliderTollEl = document.getElementById("slider-toll");
+      var labelBreadthValEl = document.getElementById("label-breadth-val");
+      var labelTollValEl = document.getElementById("label-toll-val");
+      var kpiQNeededEl = document.getElementById("kpi-q-needed");
+      var kpiLegitCostEl = document.getElementById("kpi-legit-cost");
+      var kpiKTotalEl = document.getElementById("kpi-k-total");
+      var kpiPValueEl = document.getElementById("kpi-p-value");
+      var econVerdictBoxEl = document.getElementById("econ-verdict-box");
+      var econVerdictTextEl = document.getElementById("econ-verdict-text");
+      var econRatioPillEl = document.getElementById("econ-ratio-pill");
+      var econSvgEl = document.getElementById("econ-svg-chart");
+
+      var DB_REPLACEMENT_VALUE_P = 4500.0; // $4,500.00 USD
+      var CONVEX_COEFF_A = 0.45; // $0.45 USD * E^2 surcharge
+
+      function updateEconomicProof() {
+        var E = parseInt(sliderBreadthEl.value, 10);
+        var pq = parseFloat(sliderTollEl.value);
+
+        labelBreadthValEl.textContent = E + " venues";
+        labelTollValEl.textContent = "$" + pq.toFixed(2) + " USD";
+
+        // Coupon collector + multi-constraint probes to reconstruct 12-dim vectors
+        var qNeeded = Math.round(E * 7);
+        var legitCost = pq * Math.min(E, 3);
+        var convexSurcharge = E > 6 ? CONVEX_COEFF_A * Math.pow(E - 6, 2) : 0;
+        var kTotal = pq * qNeeded + convexSurcharge;
+
+        kpiQNeededEl.textContent = qNeeded.toLocaleString() + " queries";
+        kpiLegitCostEl.textContent = "$" + legitCost.toFixed(2) + " USD";
+        kpiKTotalEl.textContent = "$" + kTotal.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " USD";
+        kpiPValueEl.textContent = "$" + DB_REPLACEMENT_VALUE_P.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " USD";
+
+        var ratio = kTotal / DB_REPLACEMENT_VALUE_P;
+        econRatioPillEl.textContent = "K / P = " + ratio.toFixed(2) + "x";
+
+        if (kTotal > DB_REPLACEMENT_VALUE_P * 1.2) {
+          econVerdictBoxEl.className = "econ-verdict-banner safe";
+          econVerdictTextEl.textContent = "VERDICT: K >> P (distillation uneconomical · 扒库蒸馏在经济学上彻底无利可图)";
+        } else {
+          econVerdictBoxEl.className = "econ-verdict-banner danger";
+          econVerdictTextEl.textContent = "WARNING: Low Breadth Regime (尚未触发高频扒库凸惩罚墙 · K >> P triggers at E >= 95)";
+        }
+
+        drawEconomicChart(E, pq, kTotal);
+      }
+
+      function drawEconomicChart(currentE, pq, currentK) {
+        var w = 680;
+        var h = 265;
+        var padL = 68;
+        var padR = 26;
+        var padT = 22;
+        var padB = 36;
+        var plotW = w - padL - padR;
+        var plotH = h - padT - padB;
+
+        var maxE = 300;
+        var maxCost = pq * (maxE * 7) + CONVEX_COEFF_A * Math.pow(maxE - 6, 2);
+        if (maxCost < 12000) maxCost = 12000;
+
+        function xScale(eVal) {
+          return padL + (eVal / maxE) * plotW;
+        }
+        function yScale(cVal) {
+          var clamped = Math.min(Math.max(cVal, 0), maxCost);
+          return padT + plotH - (clamped / maxCost) * plotH;
+        }
+
+        // Build polyline points
+        var linearPts = [];
+        var convexPts = [];
+        for (var e = 3; e <= maxE; e += 6) {
+          var cLin = pq * e;
+          var cConv = pq * (e * 7) + (e > 6 ? CONVEX_COEFF_A * Math.pow(e - 6, 2) : 0);
+          linearPts.push(xScale(e).toFixed(1) + "," + yScale(cLin).toFixed(1));
+          convexPts.push(xScale(e).toFixed(1) + "," + yScale(cConv).toFixed(1));
+        }
+
+        var yP = yScale(DB_REPLACEMENT_VALUE_P);
+        var curX = xScale(currentE);
+        var curY = yScale(currentK);
+
+        var gridLines = "";
+        var yTicks = [0, 0.25, 0.5, 0.75, 1.0];
+        for (var i = 0; i < yTicks.length; i++) {
+          var val = maxCost * yTicks[i];
+          var yPos = yScale(val);
+          gridLines +=
+            '<line x1="' + padL + '" y1="' + yPos.toFixed(1) + '" x2="' + (w - padR) + '" y2="' + yPos.toFixed(1) + '" stroke="rgba(148,163,184,0.14)" stroke-width="1"/>' +
+            '<text x="' + (padL - 8) + '" y="' + (yPos + 4).toFixed(1) + '" text-anchor="end" fill="#94a3b8" font-size="10.5" font-family="monospace">$' + Math.round(val / 1000) + 'k</text>';
+        }
+
+        var xTicks = [3, 60, 120, 180, 240, 300];
+        for (var j = 0; j < xTicks.length; j++) {
+          var xPos = xScale(xTicks[j]);
+          gridLines +=
+            '<text x="' + xPos.toFixed(1) + '" y="' + (h - 10) + '" text-anchor="middle" fill="#94a3b8" font-size="10.5" font-family="monospace">E=' + xTicks[j] + '</text>';
+        }
+
+        econSvgEl.innerHTML =
+          gridLines +
+          // DB Replacement Value P horizontal line
+          '<line x1="' + padL + '" y1="' + yP.toFixed(1) + '" x2="' + (w - padR) + '" y2="' + yP.toFixed(1) + '" stroke="#fbbf24" stroke-width="1.8" stroke-dasharray="6 4"/>' +
+          '<text x="' + (padL + 10) + '" y="' + (yP - 6).toFixed(1) + '" fill="#fbbf24" font-size="11" font-weight="700" font-family="monospace">DB Replacement Value P = $4,500 USD</text>' +
+          // Linear decision user curve
+          '<polyline fill="none" stroke="#34d399" stroke-width="2.6" points="' + linearPts.join(" ") + '"/>' +
+          // Convex crawler curve
+          '<polyline fill="none" stroke="#fb7185" stroke-width="3" points="' + convexPts.join(" ") + '"/>' +
+          // Current E operating point
+          '<line x1="' + curX.toFixed(1) + '" y1="' + padT + '" x2="' + curX.toFixed(1) + '" y2="' + (padT + plotH) + '" stroke="rgba(56,189,248,0.45)" stroke-dasharray="3 3"/>' +
+          '<circle cx="' + curX.toFixed(1) + '" cy="' + curY.toFixed(1) + '" r="6" fill="#fb7185" stroke="#ffffff" stroke-width="2"/>' +
+          '<text x="' + Math.min(curX + 10, w - 185).toFixed(1) + '" y="' + Math.max(curY - 10, padT + 14).toFixed(1) + '" fill="#fecaca" font-size="11.5" font-weight="700" font-family="monospace">K(E=' + currentE + ') = $' + Math.round(currentK).toLocaleString() + ' USD</text>';
+      }
+
+      sliderBreadthEl.addEventListener("input", updateEconomicProof);
+      sliderTollEl.addEventListener("input", updateEconomicProof);
+
+      // Section 4: Simulate Fulfillment Button
+      var fulfillmentSelectEl = document.getElementById("fulfillment-preset-select");
+      document.getElementById("btn-simulate-fulfillment").addEventListener("click", function () {
+        var mode = fulfillmentSelectEl.value;
+        var tau = 0.12;
+        if (mode === "stay_conrad") {
+          var gmv1 = 1200.0;
+          var comm1 = Number((gmv1 * tau).toFixed(2));
+          appendLedgerRow(
+            "commission",
+            "vip-traveler-concierge",
+            "Concierge Upgrade Fulfillment: 重庆云岭江景套房 2晚连住升房锁定 (GMV $1,200.00 USD @ Nightly $600 USD, τ=12%)",
+            comm1
+          );
+        } else if (mode === "kyoto_ryokan") {
+          var gmv2 = 1850.0;
+          var comm2 = Number((gmv2 * tau).toFixed(2));
+          appendLedgerRow(
+            "commission",
+            "kyoto-private-desk",
+            "Rare-Room Guarantee: 京都鸭川古杉私汤旅宿「松风」角房代订与免辣怀石定制 (GMV $1,850.00 USD @ Nightly $925 USD, τ=12%)",
+            comm2
+          );
+        } else {
+          var gmv3 = 680.0;
+          var comm3 = Number((gmv3 * tau).toFixed(2));
+          appendLedgerRow(
+            "commission",
+            "ginza-table-hunter",
+            "Rare-Table Booking Assist: 东京虎之门桧木割烹主厨吧台双人席位锁定 (GMV $680.00 USD, τ=12%)",
+            comm3
+          );
+        }
+      });
+
+      // Initialize Seed Ledger Entries & Initial Render
+      appendLedgerRow(
+        "micro-toll",
+        "mcp-travel-planner-01",
+        "Bounded Oracle Query (3 venues: Kyoto & Fukuoka stay+dining, canary CANARY-WM-89A1F02C-Q0)",
+        3.75
+      );
+      appendLedgerRow(
+        "commission",
+        "fhr-concierge-bridge",
+        "Concierge Upgrade Fulfillment: 香港金钟半山云顶居舍海景角房升房代办 (GMV $1,380.00 USD @ Nightly $690 USD, τ=12%)",
+        165.60
+      );
+
+      renderVenueSelector();
+      executeOracleQuery(true);
+      updateEconomicProof();
+    })();
+  </script>
+</body>
+</html>
