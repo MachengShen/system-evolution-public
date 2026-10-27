@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>能力租借商业生态 · 机制设计沙盘 v0.2</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --bg-panel: #111827;
+      --bg-card: #161f30;
+      --bg-input: #0d1320;
+      --border: #263248;
+      --border-hi: #3b4d6b;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --accent: #38bdf8;
+      --accent-dim: rgba(56, 189, 248, 0.14);
+      --ok: #34d399;
+      --ok-bg: rgba(52, 211, 153, 0.12);
+      --warn: #fbbf24;
+      --warn-bg: rgba(251, 191, 36, 0.14);
+      --danger: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.14);
+      --purple: #a78bfa;
+      --purple-bg: rgba(167, 139, 250, 0.14);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(56, 189, 248, 0.5);
+    }
+    a:hover {
+      border-bottom-style: solid;
+    }
+
+    code, .mono {
+      font-family: var(--mono);
+      font-size: 0.92em;
+    }
+
+    /* Sticky Top Banner */
+    .top-banner {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 23, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+    }
+
+    .banner-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 16px;
+    }
+
+    .banner-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .banner-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #f9fafb;
+    }
+
+    .badge-persist {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .audit-status {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .audit-pill {
+      background: var(--ok-bg);
+      color: var(--ok);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      padding: 1px 8px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .nav-bar {
+      max-width: 1360px;
+      margin: 8px auto 0;
+      padding-top: 6px;
+      border-top: 1px solid rgba(38, 50, 72, 0.6);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      font-size: 12.5px;
+    }
+    .nav-bar a {
+      color: var(--text-muted);
+      border-bottom: none;
+    }
+    .nav-bar a:hover {
+      color: var(--accent);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* Core Thesis Box */
+    .thesis-box {
+      background: linear-gradient(135deg, rgba(22, 31, 48, 0.95), rgba(17, 24, 39, 0.98));
+      border: 1px solid var(--border-hi);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .thesis-label {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .thesis-text {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .thesis-text strong {
+      color: #fff;
+      background: rgba(56, 189, 248, 0.12);
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    /* Section Card */
+    section.panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f3f4f6;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-id {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .section-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* Tables */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--bg-card);
+      color: #d1d5db;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(22, 31, 48, 0.4);
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tag-a { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .tag-b { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.35); }
+    .tag-c { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); }
+    .tag-d { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.35); }
+    .tag-die { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(248, 113, 113, 0.35); }
+    .tag-ok { background: var(--ok-bg); color: var(--ok); border: 1px solid rgba(52, 211, 153, 0.35); }
+    .tag-warn { background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(251, 191, 36, 0.35); }
+
+    /* Must-die list */
+    .must-die-box {
+      background: rgba(248, 113, 113, 0.06);
+      border: 1px solid rgba(248, 113, 113, 0.28);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+
+    .must-die-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--danger);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .must-die-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .must-die-grid li {
+      background: var(--bg-input);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Grid layouts for calculators */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .sub-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .sub-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    /* Controls / Inputs */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 10px;
+    }
+
+    .control-item {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .control-item label {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .control-item label .sym {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .input-pair {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-pair input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+      min-width: 60px;
+    }
+
+    .input-pair input[type="number"] {
+      width: 78px;
+      background: var(--bg-panel);
+      color: var(--text);
+      border: 1px solid var(--border-hi);
+      border-radius: 4px;
+      padding: 3px 6px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      text-align: right;
+    }
+
+    .input-pair input[type="number"]:focus {
+      outline: 1px solid var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* KPI / Verdict Cards */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .kpi-card {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 9px 11px;
+    }
+
+    .kpi-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .kpi-val {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .verdict-banner {
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13.5px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .verdict-ok {
+      background: var(--ok-bg);
+      color: var(--ok);
+      border: 1px solid rgba(52, 211, 153, 0.45);
+    }
+    .verdict-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid rgba(248, 113, 113, 0.45);
+    }
+    .verdict-warn {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+    }
+
+    .svg-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      width: 100%;
+    }
+
+    .svg-box svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .formula-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(13, 19, 32, 0.7);
+      border-left: 3px solid var(--border-hi);
+      padding: 7px 10px;
+      margin-top: 8px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .row-profitable td {
+      background: rgba(248, 113, 113, 0.16) !important;
+      color: #fca5a5;
+      font-weight: 600;
+    }
+
+    .row-safe td {
+      color: var(--text-muted);
+    }
+
+    /* 3-Stage Cold Start Cards */
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .stage-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .stage-card h4 {
+      font-size: 13.5px;
+      color: #fff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stage-card p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .kill-list, .boundary-list, .audit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .kill-list li, .boundary-list li, .audit-list li {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 11px;
+      font-size: 12.5px;
+    }
+
+    .kill-list li {
+      border-left: 3px solid var(--danger);
+    }
+
+    .audit-list li {
+      border-left: 3px solid var(--ok);
+    }
+
+    .boundary-list li {
+      border-left: 3px solid var(--warn);
+    }
+
+    @media (max-width: 860px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-banner {
+        padding: 8px 10px;
+      }
+      .container {
+        padding: 10px;
+      }
+      section.panel {
+        padding: 12px;
+      }
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-title-row">
+        <h1 class="banner-title">能力租借商业生态 · 机制设计沙盘 v0.2</h1>
+        <span class="badge-persist" title="所有数值均为理论模型可调参数，非真实业务实测数据">⚠️ 参数示例 · 非实测</span>
+      </div>
+      <div class="audit-status">
+        <span class="audit-pill">Claude Opus 独立审计 R1+R2: PASS-WITH-FIXES（R1 7 blocking + R2 N1–N3/O1–O4 已吸收）</span>
+        <span>规格与审计文档：<a href="SPEC.md">SPEC.md</a> · <a href="AUDIT-OPUS.md">AUDIT-OPUS.md</a></span>
+      </div>
+    </div>
+    <nav class="nav-bar" aria-label="章节导航">
+      <a href="#matrix">1. 抗蒸馏 vs 必死矩阵 (#matrix)</a>
+      <a href="#calc-distill">1b. 蒸馏判据计算器 (#calc-distill)</a>
+      <a href="#calc-lease">2. 租约定价与担保计算器 (#calc-lease)</a>
+      <a href="#sim-canary">3. 金丝雀抽检与 Slashing 模拟器 (#sim-canary)</a>
+      <a href="#arch">4. 三层架构与冷启动 (#arch)</a>
+      <a href="#audit">5. Opus 审计轨迹 (#audit)</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- SPEC §0 总判词 -->
+    <div class="thesis-box" role="region" aria-label="总判词">
+      <div class="thesis-label">SPEC §0 · 总判词（Source of Truth）</div>
+      <p class="thesis-text">
+        能力租借生态<strong>在模型内可以成立，但只对一类能力成立</strong>：其价值不在输出 transcript 里，而在
+        (i) 持续漂移的私有状态、(ii) rival 的物理履约权、(iii) 资本背书的赔付责任、(iv) 不公开且随租借增长的反例库；
+        <strong>并且</strong>可触达的转售面 <code>N</code> 被身份绑定 / rival 输出限制住。
+        静态函数型能力（prompt/GPT 套壳、风格模型、公开数据 RAG）的死因是<strong>蒸馏成本 K 一次付清、可被无限下游摊销</strong>。
+        模型预测：平台若不做「已验证结果计量 + 身份绑定担保 + 质押/金丝雀/罚没（含解绑期）+ 裁定与 carry 分权」，会出现柠檬化。
+        <span style="color:var(--text-muted)">（充分性在模型内论证；必要性未证。）</span>
+      </p>
+    </div>
+
+    <!-- SECTION 1: #matrix & #calc-distill -->
+    <section id="matrix" class="panel">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-id">#matrix</span>
+          反例 1 · 抗蒸馏四类 vs 必死矩阵（Arrow 信息悖论）
+        </h2>
+        <span class="section-sub">核心判据：<code>[r·K(ε) + λ·K_inc(ε)] / N + L(ε) &lt; P</code> · 飞轮：<code>K′(M)·α &gt; β</code></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>类别标签</th>
+              <th>机制</th>
+              <th>为何难蒸馏</th>
+              <th>结构性弱点与工程边界（v0.2 修正）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-a">Class A · 私有非平稳状态流</span></td>
+              <td>实时私有状态（空位、新鲜品味判断）</td>
+              <td>漂移率 <code>λ</code> 大，副本在 <code>1/λ</code> 时间内过期</td>
+              <td>按频率 <code>≥λ</code> 轮询的爬虫成本 <code>≈ p·λ·|state|</code> 可被 <code>N</code> 摊销（须限速+身份绑定）；金丝雀难做，需事后实地核验（<code>κ_A ∝ λ</code>）</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-b">Class B · 物理稀疏履约权</span></td>
+              <td>一次真实履约（订位、到场、独占时段）</td>
+              <td>rival 排他权利，<code>copy transcript ≠ copy 权利</code></td>
+              <td>只有权利本身 <code>K = ∞</code>；其上的「智能」仍可被蒸馏，能收的租金上界 = 权利 margin；黄牛转售归反例 2 处理</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-c">Class C · 带赔付池的确定性承保</span></td>
+              <td>出错时以资本池 <code>B</code> 赔付</td>
+              <td>复制输出不复制负债；自建需 <code>ρB</code> 资金成本 + 损失历史</td>
+              <td>基座模型更新等共模故障使尾部风险高度相关（偿付能力须用 <code>ES_97.5%</code> + 共模压力情景，不能只用 VaR）</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-d">Class D · 私有反例库 C-Gate 核验器</span></td>
+              <td>只卖 <code>pass/fail + 证书</code>（不暴露测试集）</td>
+              <td>测试集公开即 Goodhart；每次失败沉淀新反例</td>
+              <td>自适应 holdout 泄漏（Blum–Hardt ladder 攻击：<code>O(|testset|)</code> 次自适应查询可过拟合）⇒ 必须限速 + Thresholdout/加噪 + 反例轮换</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Must-die list -->
+      <div class="must-die-box">
+        <div class="must-die-title">
+          <span class="tag tag-die">MUST-DIE 必死清单</span>
+          <span>静态函数型能力（特征：<code>K</code> 小、转售面 <code>N → ∞</code>、状态漂移 <code>λ ≈ 0</code>）</span>
+        </div>
+        <ul class="must-die-grid">
+          <li><span class="tag tag-die">必死 #1</span> Prompt 模板 / GPTs 套壳</li>
+          <li><span class="tag tag-die">必死 #2</span> 风格 LoRA / 人格 Agent</li>
+          <li><span class="tag tag-die">必死 #3</span> 公开数据 RAG 知识库</li>
+          <li><span class="tag tag-die">必死 #4</span> 通用翻译与摘要服务</li>
+          <li><span class="tag tag-die">必死 #5</span> 静态分类 API</li>
+          <li><span class="tag tag-die">必死 #6</span> 工作流脚本模板</li>
+          <li><span class="tag tag-die">必死 #7</span> 单次代码生成器</li>
+        </ul>
+      </div>
+
+      <!-- #calc-distill -->
+      <div id="calc-distill" class="sub-panel">
+        <div class="sub-title">
+          <span><span class="section-id">#calc-distill</span> 蒸馏不等式交互计算器（含贴现 r、下游摊销 N、增量刷新 K_inc、质量损失 L）</span>
+          <span class="badge-persist">参数示例 · 非实测</span>
+        </div>
+
+        <div class="calc-grid">
+          <div class="controls-grid">
+            <div class="control-item">
+              <label for="d-P"><span>每期租金单价</span><span class="sym">P</span></label>
+              <div class="input-pair">
+                <label for="d-P-range" class="sr-only">d-P-range 调节滑块</label><input type="range" id="d-P-range" min="1" max="500" step="1" value="60" />
+                <input type="number" id="d-P" min="0.1" max="10000" step="1" value="60" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="d-K"><span>首次蒸馏成本</span><span class="sym">K(ε)</span></label>
+              <div class="input-pair">
+                <label for="d-K-range" class="sr-only">d-K-range 调节滑块</label><input type="range" id="d-K-range" min="50" max="10000" step="50" value="1200" />
+                <input type="number" id="d-K" min="0" max="1000000" step="50" value="1200" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="d-Kinc"><span>增量刷新成本</span><span class="sym">K_inc(ε)</span></label>
+              <div class="input-pair">
+                <label for="d-Kinc-range" class="sr-only">d-Kinc-range 调节滑块</label><input type="range" id="d-Kinc-range" min="0" max="5000" step="25" value="400" />
+                <input type="number" id="d-Kinc" min="0" max="1000000" step="25" value="400" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="d-lambda"><span>隐状态漂移率 / 期</span><span class="sym">λ</span></label>
+              <div class="input-pair">
+                <label for="d-lambda-range" class="sr-only">d-lambda-range 调节滑块</label><input type="range" id="d-lambda-range" min="0" max="2" step="0.02" value="0.35" />
+                <input type="number" id="d-lambda" min="0" max="50" step="0.02" value="0.35" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="d-r"><span>每期贴现率</span><span class="sym">r</span></label>
+              <div class="input-pair">
+                <label for="d-r-range" class="sr-only">d-r-range 调节滑块</label><input type="range" id="d-r-range" min="0.005" max="0.5" step="0.005" value="0.05" />
+                <input type="number" id="d-r" min="0" max="5" step="0.005" value="0.05" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="d-N"><span>可触达转售下游数</span><span class="sym">N</span></label>
+              <div class="input-pair">
+                <label for="d-N-range" class="sr-only">d-N-range 调节滑块</label><input type="range" id="d-N-range" min="1" max="500" step="1" value="3" />
+                <input type="number" id="d-N" min="1" max="1000000" step="1" value="3" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="d-L"><span>副本质量损失</span><span class="sym">L(ε)</span></label>
+              <div class="input-pair">
+                <label for="d-L-range" class="sr-only">d-L-range 调节滑块</label><input type="range" id="d-L-range" min="0" max="200" step="1" value="12" />
+                <input type="number" id="d-L" min="0" max="10000" step="1" value="12" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div id="distill-verdict" class="verdict-banner verdict-ok">
+              <span id="distill-verdict-text">可租（抗蒸馏成立：LHS ≥ P）</span>
+              <span id="distill-verdict-sub" class="mono"></span>
+            </div>
+
+            <div class="kpi-row">
+              <div class="kpi-card">
+                <div class="kpi-label">摊销后蒸馏成本 LHS</div>
+                <div class="kpi-val" id="d-out-lhs">--</div>
+                <div class="kpi-sub"><code>(rK + λK_inc)/N + L</code></div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">每期租金 P</div>
+                <div class="kpi-val" id="d-out-p">--</div>
+                <div class="kpi-sub">租用正版每期单价</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">临界转售规模 N*</div>
+                <div class="kpi-val" id="d-out-nstar">--</div>
+                <div class="kpi-sub">当 <code>N &gt; N*</code> 时必被蒸馏</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">单用户全量特例</div>
+                <div class="kpi-val" id="d-out-single">--</div>
+                <div class="kpi-sub"><code>(r+λ)K + L</code> (N=1, K_inc=K)</div>
+              </div>
+            </div>
+
+            <div class="svg-box">
+              <svg id="svg-distill" viewBox="0 0 560 220" role="img" aria-label="摊销蒸馏成本 LHS 随下游用户数 N (log10) 变化曲线"></svg>
+            </div>
+            <div class="formula-note">
+              <strong>Opus B1/F1/F2 修正说明：</strong>即使 <code>λ = 0</code>，若 <code>N = 1</code> 且 <code>rK + L ≥ P</code> 仍可租；静态能力真正的死因是 <code>K</code> 一次付清后被 <code>N → ∞</code> 摊销使 <code>(rK + λK_inc)/N → 0</code>。故必须同时满足 <code>λ</code> 足够大 <strong>且</strong> 以身份绑定/rival 履约锁死 <code>N</code>。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: #calc-lease -->
+    <section id="calc-lease" class="panel">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-id">#calc-lease</span>
+          反例 2 · 租约定价与担保计算器（防二房东聚合与 Sybil 拆单）
+        </h2>
+        <span class="section-sub">三个计量原语：<code>R_verified</code> 结果计量 + <code>SBT-lease</code> 灵魂绑定 + 边际担保敞口凸定价 <code>C(E) = πE + aE²</code></span>
+      </div>
+
+      <div class="calc-grid">
+        <!-- Left column: inputs -->
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>凸担保敞口与 Sybil 防御参数</span>
+            <span class="mono" style="font-size:11.5px;color:var(--text-muted)">a = γπ / (2B)</span>
+          </div>
+          <div class="controls-grid">
+            <div class="control-item">
+              <label for="l-pi"><span>基础费率</span><span class="sym">π</span></label>
+              <div class="input-pair">
+                <label for="l-pi-range" class="sr-only">l-pi-range 调节滑块</label><input type="range" id="l-pi-range" min="0.005" max="0.2" step="0.005" value="0.04" />
+                <input type="number" id="l-pi" min="0.001" max="5" step="0.005" value="0.04" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-gamma"><span>凸度风险厌恶系数</span><span class="sym">γ</span></label>
+              <div class="input-pair">
+                <label for="l-gamma-range" class="sr-only">l-gamma-range 调节滑块</label><input type="range" id="l-gamma-range" min="0.5" max="20" step="0.5" value="6" />
+                <input type="number" id="l-gamma" min="0.1" max="100" step="0.5" value="6" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-B"><span>担保池规模</span><span class="sym">B</span></label>
+              <div class="input-pair">
+                <label for="l-B-range" class="sr-only">l-B-range 调节滑块</label><input type="range" id="l-B-range" min="1000" max="100000" step="1000" value="10000" />
+                <input type="number" id="l-B" min="100" max="10000000" step="500" value="10000" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-E"><span>当前总担保敞口</span><span class="sym">E</span></label>
+              <div class="input-pair">
+                <label for="l-E-range" class="sr-only">l-E-range 调节滑块</label><input type="range" id="l-E-range" min="100" max="10000" step="100" value="2500" />
+                <input type="number" id="l-E" min="10" max="1000000" step="100" value="2500" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-Emax"><span>单身份敞口申报上限</span><span class="sym">E_max</span></label>
+              <div class="input-pair">
+                <label for="l-Emax-range" class="sr-only">l-Emax-range 调节滑块</label><input type="range" id="l-Emax-range" min="500" max="20000" step="250" value="3000" />
+                <input type="number" id="l-Emax" min="50" max="1000000" step="250" value="3000" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-k"><span>二房东聚合用户数</span><span class="sym">k</span></label>
+              <div class="input-pair">
+                <label for="l-k-range" class="sr-only">l-k-range 调节滑块</label><input type="range" id="l-k-range" min="1" max="50" step="1" value="8" />
+                <input type="number" id="l-k" min="1" max="10000" step="1" value="8" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-e"><span>单终端用户敞口</span><span class="sym">e</span></label>
+              <div class="input-pair">
+                <label for="l-e-range" class="sr-only">l-e-range 调节滑块</label><input type="range" id="l-e-range" min="10" max="2000" step="10" value="300" />
+                <input type="number" id="l-e" min="1" max="100000" step="10" value="300" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-m"><span>Sybil 拆分身份数</span><span class="sym">m</span></label>
+              <div class="input-pair">
+                <label for="l-m-range" class="sr-only">l-m-range 调节滑块</label><input type="range" id="l-m-range" min="2" max="20" step="1" value="4" />
+                <input type="number" id="l-m" min="2" max="100" step="1" value="4" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-S0"><span>单身份准入质押</span><span class="sym">S₀</span></label>
+              <div class="input-pair">
+                <label for="l-S0-range" class="sr-only">l-S0-range 调节滑块</label><input type="range" id="l-S0-range" min="0" max="2000" step="10" value="600" />
+                <input type="number" id="l-S0" min="0" max="1000000" step="10" value="600" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-rho"><span>每期资金成本率</span><span class="sym">ρ</span></label>
+              <div class="input-pair">
+                <label for="l-rho-range" class="sr-only">l-rho-range 调节滑块</label><input type="range" id="l-rho-range" min="0.005" max="0.25" step="0.005" value="0.05" />
+                <input type="number" id="l-rho" min="0.001" max="2" step="0.005" value="0.05" />
+              </div>
+            </div>
+          </div>
+
+          <!-- R_verified Resale Calculator Inputs -->
+          <div class="sub-title" style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);">
+            <span>原语 1 · <code>R_verified</code> 二房东转售与缓存复用计算</span>
+            <span class="mono" style="font-size:11.5px;color:var(--text-muted)">利润 = k·p_resale − (k/h)·p_v − opex</span>
+          </div>
+          <div class="controls-grid">
+            <div class="control-item">
+              <label for="l-pResale"><span>二房东转售单价</span><span class="sym">p_resale</span></label>
+              <div class="input-pair">
+                <label for="l-pResale-range" class="sr-only">l-pResale-range 调节滑块</label><input type="range" id="l-pResale-range" min="1" max="100" step="1" value="18" />
+                <input type="number" id="l-pResale" min="0" max="10000" step="1" value="18" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-pv"><span>平台验证结果单价</span><span class="sym">p_v</span></label>
+              <div class="input-pair">
+                <label for="l-pv-range" class="sr-only">l-pv-range 调节滑块</label><input type="range" id="l-pv-range" min="1" max="100" step="1" value="15" />
+                <input type="number" id="l-pv" min="0" max="10000" step="1" value="15" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-h"><span>结果缓存复用倍数</span><span class="sym">h</span></label>
+              <div class="input-pair">
+                <label for="l-h-range" class="sr-only">l-h-range 调节滑块</label><input type="range" id="l-h-range" min="1" max="20" step="0.2" value="1.0" />
+                <input type="number" id="l-h" min="1" max="1000" step="0.2" value="1.0" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="l-opex"><span>二房东运营成本</span><span class="sym">opex</span></label>
+              <div class="input-pair">
+                <label for="l-opex-range" class="sr-only">l-opex-range 调节滑块</label><input type="range" id="l-opex-range" min="0" max="200" step="5" value="25" />
+                <input type="number" id="l-opex" min="0" max="100000" step="5" value="25" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: outputs & m=2..10 table -->
+        <div class="sub-panel">
+          <div id="lease-s0-verdict" class="verdict-banner verdict-ok">
+            <span id="lease-s0-verdict-text">防 Sybil 准入质押充足</span>
+            <span id="lease-s0-verdict-sub" class="mono"></span>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-card">
+              <div class="kpi-label">敞口保费 C(E)</div>
+              <div class="kpi-val" id="l-out-ce">--</div>
+              <div class="kpi-sub"><code>πE + aE²</code></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">二房东聚合惩罚</div>
+              <div class="kpi-val" id="l-out-agg">--</div>
+              <div class="kpi-sub"><code>C(ke) − kC(e) = ae²k(k−1)</code></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">防拆单最小准入 S₀_min</div>
+              <div class="kpi-val" id="l-out-s0min">--</div>
+              <div class="kpi-sub"><code>γπE_max² / (4Bρ)</code> (m=2 最紧)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">当前 m 拆单净收益</div>
+              <div class="kpi-val" id="l-out-mnet">--</div>
+              <div class="kpi-sub"><code>节省 − (m−1)S₀ρ</code></div>
+            </div>
+          </div>
+
+          <div class="sub-title" style="margin-top:8px;">
+            <span>Sybil 拆单检验表（m = 2 .. 10，针对当前敞口 E）</span>
+            <span style="font-size:12px;color:var(--text-muted)">高亮行 = 拆单有利可图（节省 &gt; 质押资金成本）</span>
+          </div>
+          <div class="table-wrap" style="margin-bottom:12px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>拆分份数 m</th>
+                  <th>单份敞口 E/m</th>
+                  <th>凸保费节省 <code>aE²(1−1/m)</code></th>
+                  <th>新增身份成本 <code>(m−1)S₀ρ</code></th>
+                  <th>净套利收益</th>
+                  <th>判定</th>
+                </tr>
+              </thead>
+              <tbody id="sybil-table-body"></tbody>
+            </table>
+          </div>
+
+          <!-- R_verified Resale Verdict -->
+          <div id="resale-verdict" class="verdict-banner verdict-ok">
+            <span id="resale-verdict-text">h ≈ 1 → 增值分销</span>
+            <span id="resale-verdict-sub" class="mono"></span>
+          </div>
+          <div class="formula-note">
+            <strong>Opus B4 / N1 / N2 边界：</strong>
+            (1) 仅当 <code>h ≈ 1</code>（结果个性化/新鲜状态/rival 不可复用）时，二房东转售退化为增值分销；若查询重叠高（<code>h ≫ 1</code>），二房东缓存一次结果转卖 <code>k</code> 次仍可套利。
+            (2) 凸定价只约束<strong>带担保</strong>敞口（由 <code>SBT-lease</code> 剥离无担保转售的赔付权）；敞口按 KYC 关联簇计，<code>S₀(Ē)</code> 按申报上限分档。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: #sim-canary -->
+    <section id="sim-canary" class="panel">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-id">#sim-canary</span>
+          反例 3 · 金丝雀抽检与 Slashing 动态模拟器（预防 Akerlof 柠檬化与反向柠檬化）
+        </h2>
+        <span class="section-sub">IC 精确式：<code>S* = nΔc / (δ^Lag · D)</code> · 每次调用摩擦：<code>F(ν) = κ_m + κν + (ρ + α_w)S*(ν)/n</code></span>
+      </div>
+
+      <div class="calc-grid">
+        <!-- Left: Controls -->
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>金丝雀、质押与市场参数</span>
+            <span class="badge-persist">参数示例 · 非实测</span>
+          </div>
+          <div class="controls-grid">
+            <div class="control-item">
+              <label for="c-n"><span>每期调用次数</span><span class="sym">n</span></label>
+              <div class="input-pair">
+                <label for="c-n-range" class="sr-only">c-n-range 调节滑块</label><input type="range" id="c-n-range" min="5" max="1000" step="5" value="120" />
+                <input type="number" id="c-n" min="1" max="100000" step="5" value="120" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-nu"><span>金丝雀抽检率</span><span class="sym">ν</span></label>
+              <div class="input-pair">
+                <label for="c-nu-range" class="sr-only">c-nu-range 调节滑块</label><input type="range" id="c-nu-range" min="0.001" max="0.5" step="0.002" value="0.04" />
+                <input type="number" id="c-nu" min="0.0001" max="1" step="0.002" value="0.04" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-f"><span>作弊方故障率</span><span class="sym">f</span></label>
+              <div class="input-pair">
+                <label for="c-f-range" class="sr-only">c-f-range 调节滑块</label><input type="range" id="c-f-range" min="0.02" max="0.8" step="0.01" value="0.20" />
+                <input type="number" id="c-f" min="0.005" max="1" step="0.01" value="0.20" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-fH"><span>诚实方基础故障率</span><span class="sym">f_H</span></label>
+              <div class="input-pair">
+                <label for="c-fH-range" class="sr-only">c-fH-range 调节滑块</label><input type="range" id="c-fH-range" min="0" max="0.2" step="0.005" value="0.02" />
+                <input type="number" id="c-fH" min="0" max="0.9" step="0.005" value="0.02" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-dc"><span>单次作弊节省成本</span><span class="sym">Δc</span></label>
+              <div class="input-pair">
+                <label for="c-dc-range" class="sr-only">c-dc-range 调节滑块</label><input type="range" id="c-dc-range" min="0.2" max="20" step="0.2" value="3.0" />
+                <input type="number" id="c-dc" min="0.05" max="1000" step="0.2" value="3.0" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-rho"><span>每期质押资金成本</span><span class="sym">ρ</span></label>
+              <div class="input-pair">
+                <label for="c-rho-range" class="sr-only">c-rho-range 调节滑块</label><input type="range" id="c-rho-range" min="0.005" max="0.2" step="0.005" value="0.03" />
+                <input type="number" id="c-rho" min="0.001" max="1" step="0.005" value="0.03" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-kappa"><span>单次金丝雀成本 (≥p)</span><span class="sym">κ</span></label>
+              <div class="input-pair">
+                <label for="c-kappa-range" class="sr-only">c-kappa-range 调节滑块</label><input type="range" id="c-kappa-range" min="1" max="100" step="1" value="18" />
+                <input type="number" id="c-kappa" min="0.1" max="10000" step="1" value="18" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-kappaM"><span>每次计费核验成本</span><span class="sym">κ_m</span></label>
+              <div class="input-pair">
+                <label for="c-kappaM-range" class="sr-only">c-kappaM-range 调节滑块</label><input type="range" id="c-kappaM-range" min="0" max="10" step="0.1" value="0.5" />
+                <input type="number" id="c-kappaM" min="0" max="1000" step="0.1" value="0.5" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-alphaW"><span>诚实方每期误罚率</span><span class="sym">α_w</span></label>
+              <div class="input-pair">
+                <label for="c-alphaW-range" class="sr-only">c-alphaW-range 调节滑块</label><input type="range" id="c-alphaW-range" min="0" max="0.05" step="0.001" value="0.005" />
+                <input type="number" id="c-alphaW" min="0" max="0.5" step="0.001" value="0.005" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-delta"><span>每期贴现因子</span><span class="sym">δ</span></label>
+              <div class="input-pair">
+                <label for="c-delta-range" class="sr-only">c-delta-range 调节滑块</label><input type="range" id="c-delta-range" min="0.85" max="1.0" step="0.01" value="0.98" />
+                <input type="number" id="c-delta" min="0.5" max="1.0" step="0.01" value="0.98" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-Lag"><span>检测+申诉延迟期数</span><span class="sym">Lag</span></label>
+              <div class="input-pair">
+                <label for="c-Lag-range" class="sr-only">c-Lag-range 调节滑块</label><input type="range" id="c-Lag-range" min="0" max="10" step="1" value="2" />
+                <input type="number" id="c-Lag" min="0" max="50" step="1" value="2" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-theta0"><span>初始高质量占比</span><span class="sym">θ₀</span></label>
+              <div class="input-pair">
+                <label for="c-theta0-range" class="sr-only">c-theta0-range 调节滑块</label><input type="range" id="c-theta0-range" min="0.05" max="0.95" step="0.05" value="0.55" />
+                <input type="number" id="c-theta0" min="0.01" max="0.99" step="0.05" value="0.55" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-p"><span>单次调用市价</span><span class="sym">p</span></label>
+              <div class="input-pair">
+                <label for="c-p-range" class="sr-only">c-p-range 调节滑块</label><input type="range" id="c-p-range" min="2" max="80" step="1" value="15" />
+                <input type="number" id="c-p" min="0.5" max="1000" step="1" value="15" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-cH"><span>诚实高质量单次成本</span><span class="sym">c_H</span></label>
+              <div class="input-pair">
+                <label for="c-cH-range" class="sr-only">c-cH-range 调节滑块</label><input type="range" id="c-cH-range" min="1" max="60" step="0.5" value="10" />
+                <input type="number" id="c-cH" min="0.1" max="1000" step="0.5" value="10" />
+              </div>
+            </div>
+            <div class="control-item">
+              <label for="c-seed"><span>确定性模拟 PRNG 种子</span><span class="sym">seed</span></label>
+              <div class="input-pair">
+                <label for="c-seed-range" class="sr-only">c-seed-range 调节滑块</label><input type="range" id="c-seed-range" min="1" max="999" step="1" value="42" />
+                <input type="number" id="c-seed" min="1" max="999999" step="1" value="42" />
+              </div>
+            </div>
+          </div>
+
+          <div class="formula-note" style="margin-top:12px;">
+            <strong>解绑期硬约束（Opus B7）：</strong>质押退出解绑期必须满足 <code>T_unbond ≥ Lag + 申诉期</code>（当前至少 <code>≥ <span id="c-out-unbond">2</span> 期</code>），否则「当期作弊 → 立即撤押」严格占优。
+          </div>
+        </div>
+
+        <!-- Right: Outputs & Plots -->
+        <div class="sub-panel">
+          <div id="canary-viability-verdict" class="verdict-banner verdict-ok">
+            <span id="canary-viability-text">市场可行：诚实毛利 p − c_H ≥ min F(ν)</span>
+            <span id="canary-viability-sub" class="mono"></span>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-card">
+              <div class="kpi-label">单期检出概率 D</div>
+              <div class="kpi-val" id="c-out-D">--</div>
+              <div class="kpi-sub"><code>1 − (1 − νf)^n</code></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">精确所需质押 S*(ν)</div>
+              <div class="kpi-val" id="c-out-sstar">--</div>
+              <div class="kpi-sub"><code>nΔc / (δ^Lag · D)</code></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Bernoulli 下界 (低估!)</div>
+              <div class="kpi-val" id="c-out-sbound" style="color:var(--warn)">--</div>
+              <div class="kpi-sub"><strong>下界</strong> <code>Δc / (νf) ≤ S*</code></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">数值最优 ν* / min F</div>
+              <div class="kpi-val" id="c-out-numopt">--</div>
+              <div class="kpi-sub" id="c-out-closedopt">--</div>
+            </div>
+          </div>
+
+          <!-- Plot 1: Friction F(nu) over log nu -->
+          <div class="sub-title" style="margin-top:6px;">
+            <span>每次调用摩擦 <code>F(ν)</code> 曲线（log₁₀ ν ∈ [10⁻⁵, 1]，400 点网格）</span>
+            <span id="c-closed-flag" class="tag tag-ok">nν*f &lt; 0.1 闭式有效</span>
+          </div>
+          <div class="svg-box" style="margin-bottom:12px;">
+            <svg id="svg-friction" viewBox="0 0 580 225" role="img" aria-label="摩擦函数 F(nu) 随抽检率 nu 变化曲线"></svg>
+          </div>
+
+          <!-- Plot 2: Posterior V(T) for T=0..50 -->
+          <div class="sub-title">
+            <span>历史清白后验信誉算子 <code>V(T)</code>（T = 0..50 期）</span>
+            <span class="tag tag-warn">⚠️ 仅展示，不得用于降低 S 或 ν（防「养号再收割」）</span>
+          </div>
+          <div class="svg-box" style="margin-bottom:12px;">
+            <svg id="svg-posterior" viewBox="0 0 580 185" role="img" aria-label="后验信誉算子 V(T) 随清白期数 T 变化曲线"></svg>
+          </div>
+
+          <!-- Plot 3: Deterministic Agent-Based Market Simulation -->
+          <div class="sub-title">
+            <span>确定性 Agent 市场演化（200 供给者 × 40 期）：无机制 (a) vs 有机制 (b)</span>
+            <span id="sim-seed-badge" class="badge-persist">确定性模拟 · 种子 42 · 非实测</span>
+          </div>
+          <div class="svg-box">
+            <svg id="svg-abm" viewBox="0 0 580 215" role="img" aria-label="无机制与有机制下高质量供给者占比随期数演化对比"></svg>
+          </div>
+          <div class="formula-note" id="abm-summary-note">
+            --
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: #arch -->
+    <section id="arch" class="panel">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-id">#arch</span>
+          反例 4 · 三层架构、数据闭环与冷启动飞轮
+        </h2>
+        <span class="section-sub">L1 Tabelog·Eye (Class A) → L2 StarShard C-Gate (Class D) → L3 SGDAO (Class B+C) · 裁定权与 Carry 分权</span>
+      </div>
+
+      <!-- Inline Architecture SVG -->
+      <div class="svg-box" style="margin-bottom:16px;">
+        <svg id="arch-svg" viewBox="0 0 960 320" role="img" aria-label="三层架构与数据流闭环图">
+          <defs>
+            <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+            </marker>
+            <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399" />
+            </marker>
+            <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
+            </marker>
+          </defs>
+
+          <!-- Background Grid Accent -->
+          <rect x="8" y="8" width="944" height="304" rx="10" fill="#0d1320" stroke="#263248" />
+
+          <!-- L1 Box -->
+          <g transform="translate(30, 38)">
+            <rect width="260" height="165" rx="8" fill="#161f30" stroke="#38bdf8" stroke-width="1.8" />
+            <rect x="12" y="12" width="68" height="22" rx="4" fill="rgba(56,189,248,0.18)" />
+            <text x="46" y="27" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="middle" font-family="monospace">L1 · Class A</text>
+            <text x="90" y="27" fill="#f9fafb" font-size="14" font-weight="700">Tabelog·Eye</text>
+            <text x="14" y="54" fill="#d1d5db" font-size="12">资产：品味判断 + 实时私有状态 API</text>
+            <text x="14" y="76" fill="#34d399" font-size="12" font-weight="600">计量：履约回执确认的被采纳推荐</text>
+            <text x="14" y="98" fill="#9ca3af" font-size="11.5">角色：免费高频入口，产生私有状态与反馈</text>
+            <rect x="12" y="112" width="236" height="40" rx="4" fill="rgba(248,113,113,0.12)" stroke="rgba(248,113,113,0.35)" />
+            <text x="20" y="129" fill="#fca5a5" font-size="11">Opus B5 边界：A 类须事后实地核验</text>
+            <text x="20" y="144" fill="#fca5a5" font-size="11">κ_A ≈ 履约成本 且 ∝ λ（不可离线金丝雀）</text>
+          </g>
+
+          <!-- L2 Box -->
+          <g transform="translate(350, 38)">
+            <rect width="260" height="165" rx="8" fill="#161f30" stroke="#a78bfa" stroke-width="1.8" />
+            <rect x="12" y="12" width="68" height="22" rx="4" fill="rgba(167,139,250,0.18)" />
+            <text x="46" y="27" fill="#a78bfa" font-size="12" font-weight="700" text-anchor="middle" font-family="monospace">L2 · Class D</text>
+            <text x="90" y="27" fill="#f9fafb" font-size="14" font-weight="700">StarShard C-Gate</text>
+            <text x="14" y="54" fill="#d1d5db" font-size="12">资产：异构核验器 + 私有反例库</text>
+            <text x="14" y="76" fill="#34d399" font-size="12" font-weight="600">计量：每张核验证书 (Pass/Fail)</text>
+            <text x="14" y="98" fill="#9ca3af" font-size="11.5">角色：离线可判定能力(D/部分C)的金丝雀算子</text>
+            <rect x="12" y="112" width="236" height="40" rx="4" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.35)" />
+            <text x="20" y="129" fill="#ddd6fe" font-size="11">防 Blum–Hardt 泄漏：查询限速 +</text>
+            <text x="20" y="144" fill="#ddd6fe" font-size="11">Thresholdout 加噪 + 失败样本沉淀轮换</text>
+          </g>
+
+          <!-- L3 Box -->
+          <g transform="translate(670, 38)">
+            <rect width="260" height="165" rx="8" fill="#161f30" stroke="#fbbf24" stroke-width="1.8" />
+            <rect x="12" y="12" width="78" height="22" rx="4" fill="rgba(251,191,36,0.18)" />
+            <text x="51" y="27" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle" font-family="monospace">L3 · Class B+C</text>
+            <text x="98" y="27" fill="#f9fafb" font-size="14" font-weight="700">SGDAO</text>
+            <text x="14" y="54" fill="#d1d5db" font-size="12">资产：物理稀疏履约权 + 资本担保池 B</text>
+            <text x="14" y="76" fill="#34d399" font-size="12" font-weight="600">计量：履约费 + 凸敞口保费 C(E)</text>
+            <text x="14" y="98" fill="#9ca3af" font-size="11.5">角色：承保与履约；Carry 盈余分成来源</text>
+            <rect x="12" y="112" width="236" height="40" rx="4" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.35)" />
+            <text x="20" y="129" fill="#6ee7b7" font-size="11">Opus B6 分权：理赔/罚没裁定权在独立核验方</text>
+            <text x="20" y="144" fill="#6ee7b7" font-size="11">罚没款赔付受害租户或销毁，绝不进 Carry 基数</text>
+          </g>
+
+          <!-- Forward Arrows: L1 -> L2 -> L3 -->
+          <line x1="290" y1="105" x2="346" y2="105" stroke="#38bdf8" stroke-width="2.2" marker-end="url(#arrow-cyan)" />
+          <text x="318" y="95" fill="#38bdf8" font-size="11" text-anchor="middle">需求与状态</text>
+
+          <line x1="610" y1="105" x2="666" y2="105" stroke="#38bdf8" stroke-width="2.2" marker-end="url(#arrow-cyan)" />
+          <text x="638" y="95" fill="#38bdf8" font-size="11" text-anchor="middle">证书+反例</text>
+
+          <!-- Feedback Loop Arrow: L3 -> L2 & L1 -->
+          <path d="M 800 205 L 800 268 L 160 268 L 160 207" fill="none" stroke="#34d399" stroke-width="2.2" stroke-dasharray="5,3" marker-end="url(#arrow-green)" />
+          <line x1="480" y1="268" x2="480" y2="207" stroke="#34d399" stroke-width="2.2" stroke-dasharray="5,3" marker-end="url(#arrow-green)" />
+          <rect x="265" y="252" width="430" height="28" rx="5" fill="#111827" stroke="#34d399" />
+          <text x="480" y="270" fill="#34d399" font-size="12" font-weight="600" text-anchor="middle">
+            闭环回灌：真实赔付记录 + 物理履约回执 → 回灌 L2 反例库与 L1 R_verified 计量
+          </text>
+        </svg>
+      </div>
+
+      <!-- 3-Stage Cold Start Cards -->
+      <div class="stage-grid">
+        <div class="stage-card">
+          <h4><span>阶段 1 · 单人工具期</span><span class="tag tag-a">L1 自用</span></h4>
+          <p>自有场景为唯一用户，只开 L1；验证<strong>履约回执计量</strong>，<strong>实测状态漂移率 λ</strong>；组织红队实测蒸馏成本 <code>K</code>。</p>
+          <p style="color:var(--warn);font-size:12px;">边界（Opus N9）：只有 1 个用户，此阶段测不出 <code>κ / f / D</code>。</p>
+        </div>
+        <div class="stage-card">
+          <h4><span>阶段 2 · 核验即服务期</span><span class="tag tag-d">L2 C-Gate</span></h4>
+          <p>L2 C-Gate 作为审计方卖证书给外部供给者；白名单 + 质押；<strong>植入已知作弊者实测检出功效 D</strong>。</p>
+          <p style="color:var(--warn);font-size:12px;">冷启动解法：买方初期不认证书 ⇒ 先在自有 L1/L3 采购中强制要求证书。</p>
+        </div>
+        <div class="stage-card">
+          <h4><span>阶段 3 · 承保租借市场期</span><span class="tag tag-c">L3 SGDAO</span></h4>
+          <p>开放 L3 担保池与物理履约，启用 <code>take-rate τ + carry χ</code>（裁定权与 carry 严格分权），开放完整 <code>stake / canary / slash</code> 市场。</p>
+          <p style="color:var(--ok);font-size:12px;">偿付约束：<code>B ≥ ES_97.5%（当期赔付）+ 共模压力情景</code>。</p>
+        </div>
+      </div>
+
+      <!-- Kill Conditions & Unit Economics -->
+      <div class="calc-grid" style="margin-top:16px;">
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>5 条硬性停机条件（Kill-Conditions）</span>
+            <span class="tag tag-die">Fail-Closed</span>
+          </div>
+          <ul class="kill-list">
+            <li><strong>Kill 1（抗蒸馏证伪）：</strong>实测蒸馏判据成立（L1 状态可被下游摊销蒸馏 <code>(rK+λK_inc)/N + L &lt; P</code>）⇒ <strong>L1 降级为纯获客工具</strong>。</li>
+            <li><strong>Kill 2（核验摩擦过高）：</strong>实测 <code>κ / κ_m</code> 使 <code>p − c_H &lt; min F(ν)</code> ⇒ <strong>不开外部市场，只做自营</strong>。</li>
+            <li><strong>Kill 3（A 类实地核验过贵）：</strong>实测 <code>κ_A</code> 使 A 类能力不可行 ⇒ <strong>A 类不入租借市场</strong>。</li>
+            <li><strong>Kill 4（金丝雀可被识别）：</strong>阶段 2 植入已知作弊者测得 <code>D ≪ 模型预测</code> ⇒ <strong>退回阶段 2 重构金丝雀不可区分性</strong>。</li>
+            <li><strong>Kill 5（担保池穿仓风险）：</strong>综合成本率 <code>(赔付+费用)/保费</code> 持续 &gt; 阈值（参数示例 <code>0.8</code>）或 <code>B &lt; ES_97.5%</code> ⇒ <strong>立即停止新承保</strong>。</li>
+          </ul>
+        </div>
+
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>平台单位经济模型（Unit Economics）与分权约束</span>
+            <span class="tag tag-ok">Take-rate + Carry</span>
+          </div>
+          <div class="kpi-card" style="margin-bottom:10px;">
+            <div class="kpi-label">平台每期净毛利公式（SPEC §4）</div>
+            <div class="kpi-val" style="font-size:0.95rem;color:var(--accent);">
+              NetMargin/期 = GMV·τ + carry + 证书收入 − κ·抽检量 − κ_m·计费量 − compute
+            </div>
+          </div>
+          <div class="kpi-card" style="margin-bottom:10px;">
+            <div class="kpi-label">平台收入与核验融资约束（SPEC §3）</div>
+            <div class="kpi-val" style="font-size:0.92rem;">
+              Revenue = τ·GMV + χ·max(0, 保费 − 赔付 − 准备金) ，且 τ·p ≥ κ·ν + κ_m
+            </div>
+          </div>
+          <div class="formula-note">
+            <strong>战略铁律：</strong>优先走「免费高频工具 (L1) → 高毛利履约/承保 (L3)」，不做低频 C 端前置付费 SaaS。<br/>
+            <strong>Carry 四条分权铁律（Opus B6）：</strong>
+            (a) 理赔与罚没由独立核验方（或多方 C-Gate 多数决）裁定；
+            (b) 罚没款赔付受害租户或销毁，<strong>绝不进 carry 计算基</strong>；
+            (c) 设高水位线 + 多期 clawback；
+            (d) 平台私人最优 <code>ν &lt; ν*</code>，必须将 <code>ν</code> 下限写入协议规则。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: #audit -->
+    <section id="audit" class="panel">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-id">#audit</span>
+          Claude Opus 独立对抗审计轨迹（B1–B7 阻断项修复与已知边界）
+        </h2>
+        <span class="section-sub">审计结论：<code>PASS-WITH-FIXES</code> · 详见 <a href="AUDIT-OPUS.md">AUDIT-OPUS.md</a>、<a href="AUDIT-OPUS-R2.md">AUDIT-OPUS-R2.md</a> 与 <a href="SPEC.md">SPEC.md</a></span>
+      </div>
+
+      <div class="calc-grid">
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>7 个 Blocking 缺陷：问题 → v0.2 修复（R1–R12 已吸收）</span>
+            <span class="tag tag-ok">7 / 7 Fixed</span>
+          </div>
+          <ul class="audit-list">
+            <li><strong>B1（蒸馏判据漏贴现与 N 摊销）：</strong>原判据 <code>λK &lt; P</code> 忽略下游转售摊销与贴现 → <strong>v0.2 修复：</strong>改为 <code>[r·K(ε) + λ·K_inc(ε)] / N + L(ε) &lt; P</code>，指明静态能力死因是 <code>K</code> 一次付清被 <code>N→∞</code> 摊销，且 A 类同样需防爬虫轮询摊销。</li>
+            <li><strong>B2（罚没 IC 近似方向标反）：</strong>原将 <code>Δc/(νf)</code> 当作近似值（实为 Bernoulli 下界，系统性低估质押） → <strong>v0.2 修复：</strong>定质押强制用精确式 <code>S* = nΔc / (δ^L · D)</code>，明确标注 <code>Δc/(νf)</code> 为下界，并说明大 <code>n</code> 区域摩擦有下限 <code>≈ ρΔc</code>。</li>
+            <li><strong>B3（漏算诚实方误罚税与反向柠檬化）：</strong>原 <code>F*</code> 忽略 <code>f_H &gt; 0</code> 时诚实方被误罚损失 <code>α_w·S*</code> → <strong>v0.2 修复：</strong>摩擦加入 <code>α_w·S*(ν)/n</code>，明确市场可行条件 <code>p − c_H ≥ min_ν F(ν)</code>，否则触发「反向柠檬化」。</li>
+            <li><strong>B4（R_verified 计量悖论与缓存套利）：</strong>按结果计费需每次核验（成本 <code>κ_m</code>），且二房东可缓存复用 <code>h</code> 次 → <strong>v0.2 修复：</strong>摩擦显式加上 <code>κ_m</code>，转售利润改为 <code>k·p_resale − (k/h)·p_v − opex</code>（仅 <code>h≈1</code> 退化为分销），并用履约回执防买方「看后拒采」。</li>
+            <li><strong>B5（A 类私有状态与离线金丝雀结构冲突）：</strong>A 类价值在外部不可见的私有状态，L2 无法离线低成本抽检 → <strong>v0.2 修复：</strong>限定 L2 仅对可离线判定能力（D、部分 C）做金丝雀；A 类须事后实地核验（<code>κ_A ≈ 履约成本 ∝ λ</code>）并单列 Kill-Condition。</li>
+            <li><strong>B6（Carry 与裁定合一导致拒赔/多罚利益冲突）：</strong>平台既做裁定又拿担保池盈余 carry 会诱导拒赔与滥罚 → <strong>v0.2 修复：</strong>裁定权剥离给独立核验方；罚没款只赔付受害租户或销毁（不进 carry 基数）；加高水位线与多期 clawback；<code>ν</code> 下限写入规则。</li>
+            <li><strong>B7（漏质押解绑期约束）：</strong>作弊后若能在检测窗口结束前撤走质押则 IC 失效 → <strong>v0.2 修复：</strong>强制规定质押解绑期 <code>≥ 检测延迟 L + 申诉期</code>，且后验信誉 <code>V(T)</code> 严禁用于下调 <code>S</code> 或 <code>ν</code>。</li>
+          </ul>
+        </div>
+
+        <div class="sub-panel">
+          <div class="sub-title">
+            <span>SPEC 已知边界（诚实声明 · 未建模或待实测项）</span>
+            <span class="tag tag-warn">Known Boundaries</span>
+          </div>
+          <ul class="boundary-list">
+            <li><strong>参数未实测：</strong>全部公式均为理论机制推导；L1/L3 的漂移率 <code>λ</code>、核验成本 <code>κ</code>、真实物理履约供给均未实测，三层商业可行性当前属于<strong>待检验假设</strong>。</li>
+            <li><strong>策略型故障率选择：</strong>作弊者可内生选择最优故障率 <code>f</code>（需对所有 <code>f</code> 满足 <code>S ≥ sup_f nΔc(f) / (δ^L·D_α(f))</code>，要求 <code>Δc(f)/f</code> 有界）。</li>
+            <li><strong>供给者–租户骗赔合谋：</strong>当单次赔付额 &gt; 罚没质押 <code>S</code> 时，供给者与假租户自导「履约失败」骗取保险赔付有利可图。</li>
+            <li><strong>刷单抬升 n 与 V(T)：</strong>攻击者可通过自买自卖刷单（单次成本仅 <code>τ·p</code>）人为做大调用量 <code>n</code> 与清白历史 <code>V(T)</code>，故 <code>V(T)</code> 绝不可用于减免质押。</li>
+            <li><strong>供给者–验证者合谋：</strong>独立核验方若被收买会击穿分权假设，需多方异构 C-Gate 多数决与交叉审计。</li>
+            <li><strong>C-Gate 自适应 Holdout 泄漏：</strong>多次自适应查询会通过 Blum–Hardt ladder 机制泄漏反例库信息，需严格执行查询限速、Thresholdout 加噪与反例动态轮换。</li>
+            <li><strong>基座模型共模故障：</strong>上游大模型版本更新或 API 故障会导致 C 类承保出现高度正相关的尾部集中赔付（不能仅用正态或独立 VaR 估算担保池 <code>B</code>）。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* =========================================================================
+       * 1. Pure Functions exported on window.CRE (Exact Specification Formulas)
+       * ========================================================================= */
+
+      // distill({P,K,Kinc,lambda,r,N,L}) -> {lhs:(r*K+lambda*Kinc)/N+L, distilled: lhs<P}
+      function distill({ P, K, Kinc, lambda, r, N, L }) {
+        const lhs = (r * K + lambda * Kinc) / N + L;
+        return { lhs, distilled: lhs < P };
+      }
+
+      // leaseCost(E,{pi,gamma,B}) = pi*E + a*E*E, a = gamma*pi/(2*B)
+      function leaseCost(E, { pi, gamma, B }) {
+        const a = (gamma * pi) / (2 * B);
+        return pi * E + a * E * E;
+      }
+
+      // aggPenalty(k,e,{pi,gamma,B}) = leaseCost(k*e)-k*leaseCost(e) (= a*e^2*k*(k-1))
+      function aggPenalty(k, e, { pi, gamma, B }) {
+        return leaseCost(k * e, { pi, gamma, B }) - k * leaseCost(e, { pi, gamma, B });
+      }
+
+      // sybil(m,E,{pi,gamma,B,S0,rho}) -> {savings: a*E^2*(1-1/m), cost:(m-1)*S0*rho, profitable: savings>cost}
+      function sybil(m, E, { pi, gamma, B, S0, rho }) {
+        const a = (gamma * pi) / (2 * B);
+        const savings = a * E * E * (1 - 1 / m);
+        const cost = (m - 1) * S0 * rho;
+        return { savings, cost, profitable: savings > cost };
+      }
+
+      // s0Min(Emax,{pi,gamma,B,rho}) = gamma*pi*Emax^2/(4*B*rho)
+      function s0Min(Emax, { pi, gamma, B, rho }) {
+        return (gamma * pi * Emax * Emax) / (4 * B * rho);
+      }
+
+      // resaleProfit({k,pResale,pv,h,opex}) = k*pResale - (k/h)*pv - opex
+      function resaleProfit({ k, pResale, pv, h, opex = 0 }) {
+        return k * pResale - (k / h) * pv - opex;
+      }
+
+      // detectProb(nu,f,n) = 1-(1-nu*f)^n
+      function detectProb(nu, f, n) {
+        return 1 - Math.pow(1 - nu * f, n);
+      }
+
+      // sStar(nu,{n,dc,f,delta,Lag}) = n*dc/(Math.pow(delta,Lag)*detectProb(nu,f,n))
+      function sStar(nu, { n, dc, f, delta = 1, Lag = 0 }) {
+        return (n * dc) / (Math.pow(delta, Lag) * detectProb(nu, f, n));
+      }
+
+      // friction(nu,P) where P={kappa,kappaM,rho,n,dc,f,delta,Lag,alphaW}: kappaM + kappa*nu + (rho+alphaW)*sStar(nu,P)/n
+      function friction(nu, P) {
+        const { kappa, kappaM = 0, rho, n, alphaW = 0 } = P;
+        return kappaM + kappa * nu + ((rho + alphaW) * sStar(nu, P)) / n;
+      }
+
+      // nuStarClosed(P) = min(1, sqrt(rho*dc/(n*kappa*f))); also report validity flag n*nu*f < 0.1 and closed F* = kappaM + 2*sqrt(kappa*rho*dc/(n*f))
+      function nuStarClosed(P) {
+        const { kappa, kappaM = 0, rho, n, dc, f, delta = 1, Lag = 0 } = P;
+        // R2-fix N3: discount factor δ^L enters S*, hence ν* and F* carry 1/δ^L.
+        const dL = Math.pow(delta, Lag);
+        const nuStar = Math.min(1, Math.sqrt((rho * dc) / (n * kappa * f * dL)));
+        const nNuF = n * nuStar * f;
+        const valid = nNuF < 0.1;
+        const fStar = kappaM + 2 * Math.sqrt((kappa * rho * dc) / (n * f * dL));
+        return {
+          nuStar,
+          nu: nuStar,
+          argmin: nuStar,
+          valid,
+          isValid: valid,
+          nNuF,
+          fStar,
+          FStar: fStar,
+          closedF: fStar,
+          valueOf() {
+            return nuStar;
+          }
+        };
+      }
+
+      // nuStarNumeric(P): log-spaced grid of 400 points on [1e-5,1], return argmin friction and min value
+      function nuStarNumeric(P) {
+        const GRID_POINTS = 400;
+        let bestNu = 1e-5;
+        let minVal = Infinity;
+        for (let i = 0; i < GRID_POINTS; i++) {
+          const nu = Math.pow(10, -5 + (5 * i) / (GRID_POINTS - 1));
+          const val = friction(nu, P);
+          if (val < minVal) {
+            minVal = val;
+            bestNu = nu;
+          }
+        }
+        return {
+          nuStar: bestNu,
+          nu: bestNu,
+          argmin: bestNu,
+          fStar: minVal,
+          FStar: minVal,
+          minF: minVal,
+          min: minVal,
+          value: minVal,
+          valueOf() {
+            return bestNu;
+          }
+        };
+      }
+
+      // posteriorV(T,{theta0,nu,f,fH,n}) = theta0*(1-nu*fH)^(nT) / (theta0*(1-nu*fH)^(nT) + (1-theta0)*(1-nu*f)^(nT))
+      function posteriorV(T, { theta0, nu, f, fH = 0, n }) {
+        const nT = n * T;
+        const termH = theta0 * Math.pow(1 - nu * fH, nT);
+        const termL = (1 - theta0) * Math.pow(1 - nu * f, nT);
+        const denom = termH + termL;
+        return denom === 0 ? 0 : termH / denom;
+      }
+
+      window.CRE = {
+        distill,
+        leaseCost,
+        aggPenalty,
+        sybil,
+        s0Min,
+        resaleProfit,
+        detectProb,
+        sStar,
+        friction,
+        nuStarClosed,
+        nuStarNumeric,
+        posteriorV
+      };
+
+      /* =========================================================================
+       * 2. Helpers: Input Binding, Formatting & Deterministic Seeded PRNG
+       * ========================================================================= */
+
+      function fmt(num, digits = 2) {
+        if (!Number.isFinite(num)) return "∞";
+        if (Math.abs(num) >= 1e6 || (Math.abs(num) > 0 && Math.abs(num) < 1e-3)) {
+          return num.toExponential(2);
+        }
+        return num.toFixed(digits);
+      }
+
+      // Mulberry32 deterministic PRNG
+      function mulberry32(seed) {
+        let a = seed >>> 0;
+        return function () {
+          a |= 0;
+          a = (a + 0x6d2b79f5) | 0;
+          let t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      function bindPair(id, onChange) {
+        const numEl = document.getElementById(id);
+        const rangeEl = document.getElementById(id + "-range");
+        if (!numEl) return;
+        numEl.addEventListener("input", () => {
+          if (rangeEl) rangeEl.value = numEl.value;
+          onChange();
+        });
+        if (rangeEl) {
+          rangeEl.addEventListener("input", () => {
+            numEl.value = rangeEl.value;
+            onChange();
+          });
+        }
+      }
+
+      function val(id) {
+        const el = document.getElementById(id);
+        const v = parseFloat(el ? el.value : "0");
+        return Number.isFinite(v) ? v : 0;
+      }
+
+      /* =========================================================================
+       * 3. Section 1 (#calc-distill) Update & SVG Plot
+       * ========================================================================= */
+
+      function updateDistill() {
+        const params = {
+          P: Math.max(0.0001, val("d-P")),
+          K: Math.max(0, val("d-K")),
+          Kinc: Math.max(0, val("d-Kinc")),
+          lambda: Math.max(0, val("d-lambda")),
+          r: Math.max(0, val("d-r")),
+          N: Math.max(1, val("d-N")),
+          L: Math.max(0, val("d-L"))
+        };
+
+        const res = distill(params);
+        const singleUser = (params.r + params.lambda) * params.K + params.L;
+        const numerator = params.r * params.K + params.lambda * params.Kinc;
+        const marginP = params.P - params.L;
+        const nStar = marginP > 0 ? numerator / marginP : Infinity;
+
+        document.getElementById("d-out-lhs").textContent = fmt(res.lhs, 2);
+        document.getElementById("d-out-p").textContent = fmt(params.P, 2);
+        document.getElementById("d-out-nstar").textContent =
+          marginP <= 0 ? "∞ (L ≥ P)" : fmt(nStar, 1);
+        document.getElementById("d-out-single").textContent = fmt(singleUser, 2);
+
+        const vBanner = document.getElementById("distill-verdict");
+        const vText = document.getElementById("distill-verdict-text");
+        const vSub = document.getElementById("distill-verdict-sub");
+
+        if (res.distilled) {
+          vBanner.className = "verdict-banner verdict-danger";
+          vText.textContent = "必被蒸馏（白嫖/转售蒸馏占优：LHS < P）";
+          vSub.textContent = `LHS (${fmt(res.lhs, 2)}) < P (${fmt(params.P, 2)})`;
+        } else {
+          vBanner.className = "verdict-banner verdict-ok";
+          vText.textContent = "可租（正版租借占优：LHS ≥ P）";
+          vSub.textContent = `LHS (${fmt(res.lhs, 2)}) ≥ P (${fmt(params.P, 2)})`;
+        }
+
+        renderDistillPlot(params, res, nStar);
+      }
+
+      function renderDistillPlot(params, res, nStar) {
+        const svg = document.getElementById("svg-distill");
+        const W = 560, H = 220;
+        const padL = 54, padR = 22, padT = 22, padB = 34;
+        const pw = W - padL - padR;
+        const ph = H - padT - padB;
+
+        // N on log10 scale from 1 (10^0) to 1e6 (10^6)
+        const pts = [];
+        const M = 120;
+        let maxY = Math.max(params.P * 1.6, res.lhs * 1.25, params.L + 10);
+        const lhsAt1 = (params.r * params.K + params.lambda * params.Kinc) + params.L;
+        maxY = Math.max(maxY, Math.min(lhsAt1, params.P * 4));
+
+        for (let i = 0; i <= M; i++) {
+          const logN = (6 * i) / M;
+          const nVal = Math.pow(10, logN);
+          const yVal = distill({ ...params, N: nVal }).lhs;
+          pts.push({ logN, yVal });
+        }
+
+        const xOfLogN = (logN) => padL + (logN / 6) * pw;
+        const yOfVal = (v) => padT + ph - (Math.min(maxY, Math.max(0, v)) / maxY) * ph;
+
+        const pathD = pts
+          .map((pt, idx) => `${idx === 0 ? "M" : "L"}${xOfLogN(pt.logN).toFixed(1)},${yOfVal(pt.yVal).toFixed(1)}`)
+          .join(" ");
+
+        const yP = yOfVal(params.P);
+        const yL = yOfVal(params.L);
+
+        const curLogN = Math.min(6, Math.max(0, Math.log10(params.N)));
+        const curX = xOfLogN(curLogN);
+        const curY = yOfVal(res.lhs);
+
+        let crossoverSvg = "";
+        if (Number.isFinite(nStar) && nStar >= 1 && nStar <= 1e6) {
+          const cx = xOfLogN(Math.log10(nStar));
+          crossoverSvg = `
+            <line x1="${cx.toFixed(1)}" y1="${padT}" x2="${cx.toFixed(1)}" y2="${padT + ph}" stroke="#fbbf24" stroke-width="1.3" stroke-dasharray="4,3" />
+            <circle cx="${cx.toFixed(1)}" cy="${yP.toFixed(1)}" r="4.5" fill="#fbbf24" />
+            <text x="${Math.min(W - 65, cx + 6).toFixed(1)}" y="${(padT + 13).toFixed(1)}" fill="#fbbf24" font-size="11" font-family="monospace">N*≈${fmt(nStar, 1)}</text>
+          `;
+        }
+
+        let ticksSvg = "";
+        for (let e = 0; e <= 6; e++) {
+          const tx = xOfLogN(e);
+          ticksSvg += `
+            <line x1="${tx.toFixed(1)}" y1="${padT}" x2="${tx.toFixed(1)}" y2="${padT + ph}" stroke="#1f2937" stroke-width="1" />
+            <text x="${tx.toFixed(1)}" y="${H - 10}" fill="#9ca3af" font-size="11" text-anchor="middle" font-family="monospace">10^${e}</text>
+          `;
+        }
+
+        svg.innerHTML = `
+          <rect x="${padL}" y="${padT}" width="${pw}" height="${ph}" fill="#0b0f17" stroke="#263248" />
+          ${ticksSvg}
+          <!-- Asymptote L -->
+          <line x1="${padL}" y1="${yL.toFixed(1)}" x2="${padL + pw}" y2="${yL.toFixed(1)}" stroke="#6b7280" stroke-width="1" stroke-dasharray="2,3" />
+          <text x="${padL + pw - 6}" y="${(yL - 4).toFixed(1)}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">渐近下限 L=${fmt(params.L, 1)}</text>
+          <!-- Price line P -->
+          <line x1="${padL}" y1="${yP.toFixed(1)}" x2="${padL + pw}" y2="${yP.toFixed(1)}" stroke="#f87171" stroke-width="1.6" stroke-dasharray="5,3" />
+          <text x="${padL + 6}" y="${Math.max(padT + 12, yP - 5).toFixed(1)}" fill="#f87171" font-size="11" font-weight="600" font-family="monospace">租金 P=${fmt(params.P, 1)}</text>
+          <!-- LHS Curve -->
+          <path d="${pathD}" fill="none" stroke="#38bdf8" stroke-width="2.3" />
+          ${crossoverSvg}
+          <!-- Current N Point -->
+          <circle cx="${curX.toFixed(1)}" cy="${curY.toFixed(1)}" r="5" fill="${res.distilled ? "#f87171" : "#34d399"}" stroke="#fff" stroke-width="1.5" />
+          <text x="${Math.min(W - 90, curX + 8).toFixed(1)}" y="${Math.max(padT + 14, curY - 6).toFixed(1)}" fill="#e5e7eb" font-size="11" font-family="monospace">当前 (N=${params.N}, LHS=${fmt(res.lhs, 1)})</text>
+          <!-- Axis Labels -->
+          <text x="${padL - 6}" y="${padT + 10}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">${fmt(maxY, 0)}</text>
+          <text x="${padL - 6}" y="${padT + ph}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">0</text>
+          <text x="${padL + pw / 2}" y="${H - 1}" fill="#6b7280" font-size="10.5" text-anchor="middle">下游摊销用户数 N (对数坐标 1 .. 10⁶)</text>
+        `;
+      }
+
+      /* =========================================================================
+       * 4. Section 2 (#calc-lease) Update & Sybil Table
+       * ========================================================================= */
+
+      function updateLease() {
+        const pi = Math.max(0.0001, val("l-pi"));
+        const gamma = Math.max(0.01, val("l-gamma"));
+        const B = Math.max(1, val("l-B"));
+        const E = Math.max(0, val("l-E"));
+        const Emax = Math.max(1, val("l-Emax"));
+        const k = Math.max(1, val("l-k"));
+        const e = Math.max(0, val("l-e"));
+        const m = Math.max(2, Math.round(val("l-m")));
+        const S0 = Math.max(0, val("l-S0"));
+        const rho = Math.max(0.0001, val("l-rho"));
+
+        const pResale = val("l-pResale");
+        const pv = val("l-pv");
+        const h = Math.max(1, val("l-h"));
+        const opex = Math.max(0, val("l-opex"));
+
+        const cE = leaseCost(E, { pi, gamma, B });
+        const agg = aggPenalty(k, e, { pi, gamma, B });
+        const minS0 = s0Min(Emax, { pi, gamma, B, rho });
+        const sybCur = sybil(m, E, { pi, gamma, B, S0, rho });
+        const netCur = sybCur.savings - sybCur.cost;
+
+        document.getElementById("l-out-ce").textContent = fmt(cE, 2);
+        document.getElementById("l-out-agg").textContent = fmt(agg, 2);
+        document.getElementById("l-out-s0min").textContent = fmt(minS0, 2);
+        document.getElementById("l-out-mnet").textContent = fmt(netCur, 2);
+
+        const s0Banner = document.getElementById("lease-s0-verdict");
+        const s0Text = document.getElementById("lease-s0-verdict-text");
+        const s0Sub = document.getElementById("lease-s0-verdict-sub");
+
+        if (S0 >= minS0) {
+          s0Banner.className = "verdict-banner verdict-ok";
+          s0Text.textContent = "防 Sybil 成立：当前准入质押 S₀ ≥ S₀_min（任意 m≥2 拆单均无利可图）";
+          s0Sub.textContent = `S₀ (${fmt(S0, 1)}) ≥ S₀_min (${fmt(minS0, 1)})`;
+        } else {
+          s0Banner.className = "verdict-banner verdict-danger";
+          s0Text.textContent = "Sybil 警告：当前 S₀ < S₀_min（在 E_max 敞口下拆单有利可图）";
+          s0Sub.textContent = `S₀ (${fmt(S0, 1)}) < S₀_min (${fmt(minS0, 1)})`;
+        }
+
+        // Populate m = 2..10 table
+        const tbody = document.getElementById("sybil-table-body");
+        let rowsHtml = "";
+        for (let mVal = 2; mVal <= 10; mVal++) {
+          const r = sybil(mVal, E, { pi, gamma, B, S0, rho });
+          const net = r.savings - r.cost;
+          const cls = r.profitable ? "row-profitable" : "row-safe";
+          const badge = r.profitable
+            ? `<span class="tag tag-die">有利可图 (拆单!)</span>`
+            : `<span class="tag tag-ok">亏损 (防住)</span>`;
+          rowsHtml += `
+            <tr class="${cls}">
+              <td class="mono">m = ${mVal}${mVal === m ? " ★" : ""}</td>
+              <td class="mono">${fmt(E / mVal, 1)}</td>
+              <td class="mono">${fmt(r.savings, 2)}</td>
+              <td class="mono">${fmt(r.cost, 2)}</td>
+              <td class="mono">${net >= 0 ? "+" : ""}${fmt(net, 2)}</td>
+              <td>${badge}</td>
+            </tr>
+          `;
+        }
+        tbody.innerHTML = rowsHtml;
+
+        // R_verified resale profit verdict
+        const rProfit = resaleProfit({ k, pResale, pv, h, opex });
+        const rBanner = document.getElementById("resale-verdict");
+        const rText = document.getElementById("resale-verdict-text");
+        const rSub = document.getElementById("resale-verdict-sub");
+
+        if (h <= 1.2) {
+          rBanner.className = "verdict-banner verdict-ok";
+          rText.textContent = `h ≈ ${fmt(h, 1)} → 增值分销（结果不可复用，二房东须按次付 p_v）`;
+        } else {
+          rBanner.className = rProfit > 0 ? "verdict-banner verdict-danger" : "verdict-banner verdict-warn";
+          rText.textContent = `h = ${fmt(h, 1)} ≫ 1 → 缓存套利（一次采购复用 ${fmt(h, 1)} 次，击穿线性计量）`;
+        }
+        rSub.textContent = `转售利润 = ${fmt(rProfit, 2)} (k=${k})`;
+      }
+
+      /* =========================================================================
+       * 5. Section 3 (#sim-canary) Update, Friction/Posterior Plots & ABM Sim
+       * ========================================================================= */
+
+      function updateCanary() {
+        const P = {
+          n: Math.max(1, Math.round(val("c-n"))),
+          nu: Math.min(1, Math.max(1e-5, val("c-nu"))),
+          f: Math.min(1, Math.max(0.001, val("c-f"))),
+          fH: Math.min(0.99, Math.max(0, val("c-fH"))),
+          dc: Math.max(0.01, val("c-dc")),
+          rho: Math.max(0.0001, val("c-rho")),
+          kappa: Math.max(0.01, val("c-kappa")),
+          kappaM: Math.max(0, val("c-kappaM")),
+          alphaW: Math.max(0, val("c-alphaW")),
+          delta: Math.min(1, Math.max(0.1, val("c-delta"))),
+          Lag: Math.max(0, Math.round(val("c-Lag"))),
+          theta0: Math.min(0.99, Math.max(0.01, val("c-theta0"))),
+          p: Math.max(0.1, val("c-p")),
+          cH: Math.max(0, val("c-cH")),
+          seed: Math.max(1, Math.round(val("c-seed")))
+        };
+
+        const D = detectProb(P.nu, P.f, P.n);
+        const exactS = sStar(P.nu, P);
+        const lowerBoundS = P.dc / (P.nu * P.f);
+        const numOpt = nuStarNumeric(P);
+        const closedOpt = nuStarClosed(P);
+
+        document.getElementById("c-out-D").textContent = fmt(D, 4);
+        document.getElementById("c-out-sstar").textContent = fmt(exactS, 2);
+        document.getElementById("c-out-sbound").textContent = fmt(lowerBoundS, 2);
+        document.getElementById("c-out-numopt").textContent =
+          `ν*=${fmt(numOpt.nuStar, 4)} / F*=${fmt(numOpt.minF, 2)}`;
+        document.getElementById("c-out-closedopt").textContent =
+          `闭式 ν*=${fmt(closedOpt.nuStar, 4)} / F*=${fmt(closedOpt.fStar, 2)}`;
+        document.getElementById("c-out-unbond").textContent = String(P.Lag + 1);
+
+        const flagEl = document.getElementById("c-closed-flag");
+        if (closedOpt.valid) {
+          flagEl.className = "tag tag-ok";
+          flagEl.textContent = `闭式有效 (n·ν*·f = ${fmt(closedOpt.nNuF, 3)} < 0.1)`;
+        } else {
+          flagEl.className = "tag tag-warn";
+          flagEl.textContent = `闭式失效 (n·ν*·f = ${fmt(closedOpt.nNuF, 2)} ≥ 0.1，进入大 n 下限区)`;
+        }
+
+        const honestMargin = P.p - P.cH;
+        const viable = honestMargin >= numOpt.minF;
+        const vBanner = document.getElementById("canary-viability-verdict");
+        const vText = document.getElementById("canary-viability-text");
+        const vSub = document.getElementById("canary-viability-sub");
+
+        if (viable) {
+          vBanner.className = "verdict-banner verdict-ok";
+          vText.textContent = "市场可行：诚实毛利 (p − c_H) ≥ 最小核验摩擦 min F(ν)";
+        } else {
+          vBanner.className = "verdict-banner verdict-danger";
+          vText.textContent = "反向柠檬化 / 市场不可行：p − c_H < min F(ν)（诚实方被核验与误罚税挤出）";
+        }
+        vSub.textContent = `p−c_H = ${fmt(honestMargin, 2)} vs min F = ${fmt(numOpt.minF, 2)} (当前 F(ν)=${fmt(friction(P.nu, P), 2)})`;
+
+        renderFrictionPlot(P, numOpt, closedOpt);
+        renderPosteriorPlot(P);
+        runAndRenderABM(P, exactS);
+      }
+
+      function renderFrictionPlot(P, numOpt, closedOpt) {
+        const svg = document.getElementById("svg-friction");
+        const W = 580, H = 225;
+        const padL = 56, padR = 22, padT = 22, padB = 34;
+        const pw = W - padL - padR;
+        const ph = H - padT - padB;
+
+        const pts = [];
+        const N_GRID = 200;
+        for (let i = 0; i < N_GRID; i++) {
+          const logNu = -5 + (5 * i) / (N_GRID - 1);
+          const nu = Math.pow(10, logNu);
+          const fVal = friction(nu, P);
+          pts.push({ logNu, nu, fVal });
+        }
+
+        const margin = Math.max(0, P.p - P.cH);
+        const maxDisplayY = Math.max(numOpt.minF * 3.2, closedOpt.fStar * 2.2, margin * 1.6, 5);
+
+        const xOfLogNu = (logNu) => padL + ((logNu + 5) / 5) * pw;
+        const yOfF = (v) => padT + ph - (Math.min(maxDisplayY, Math.max(0, v)) / maxDisplayY) * ph;
+
+        const pathD = pts
+          .map((pt, idx) => `${idx === 0 ? "M" : "L"}${xOfLogNu(pt.logNu).toFixed(1)},${yOfF(pt.fVal).toFixed(1)}`)
+          .join(" ");
+
+        const xNum = xOfLogNu(Math.log10(numOpt.nuStar));
+        const yNum = yOfF(numOpt.minF);
+
+        const xClosed = xOfLogNu(Math.log10(Math.max(1e-5, closedOpt.nuStar)));
+        const yClosed = yOfF(closedOpt.fStar);
+
+        const xCur = xOfLogNu(Math.log10(Math.max(1e-5, P.nu)));
+        const yCur = yOfF(friction(P.nu, P));
+
+        const yMargin = yOfF(margin);
+
+        let ticksSvg = "";
+        for (let e = -5; e <= 0; e++) {
+          const tx = xOfLogNu(e);
+          ticksSvg += `
+            <line x1="${tx.toFixed(1)}" y1="${padT}" x2="${tx.toFixed(1)}" y2="${padT + ph}" stroke="#1f2937" stroke-width="1" />
+            <text x="${tx.toFixed(1)}" y="${H - 10}" fill="#9ca3af" font-size="11" text-anchor="middle" font-family="monospace">10^${e}</text>
+          `;
+        }
+
+        svg.innerHTML = `
+          <rect x="${padL}" y="${padT}" width="${pw}" height="${ph}" fill="#0b0f17" stroke="#263248" />
+          ${ticksSvg}
+          <!-- Honest margin line p - cH -->
+          <line x1="${padL}" y1="${yMargin.toFixed(1)}" x2="${padL + pw}" y2="${yMargin.toFixed(1)}" stroke="#34d399" stroke-width="1.5" stroke-dasharray="5,3" />
+          <text x="${padL + 6}" y="${Math.max(padT + 12, yMargin - 5).toFixed(1)}" fill="#34d399" font-size="10.5" font-family="monospace">诚实毛利上限 p−c_H=${fmt(margin, 2)}</text>
+
+          <!-- Friction curve -->
+          <path d="${pathD}" fill="none" stroke="#38bdf8" stroke-width="2.2" />
+
+          <!-- Closed-form marker -->
+          <circle cx="${xClosed.toFixed(1)}" cy="${yClosed.toFixed(1)}" r="4.5" fill="#fbbf24" stroke="#0b0f17" stroke-width="1.2" />
+          <text x="${Math.min(W - 115, xClosed + 6).toFixed(1)}" y="${Math.max(padT + 14, yClosed - 6).toFixed(1)}" fill="#fbbf24" font-size="10.5" font-family="monospace">闭式(${fmt(closedOpt.nuStar, 3)}, ${fmt(closedOpt.fStar, 1)})</text>
+
+          <!-- Numeric optimum marker -->
+          <circle cx="${xNum.toFixed(1)}" cy="${yNum.toFixed(1)}" r="5" fill="#34d399" stroke="#fff" stroke-width="1.4" />
+          <text x="${Math.min(W - 125, xNum + 6).toFixed(1)}" y="${Math.min(padT + ph - 6, yNum + 14).toFixed(1)}" fill="#34d399" font-size="10.5" font-weight="600" font-family="monospace">数值最优(${fmt(numOpt.nuStar, 3)}, ${fmt(numOpt.minF, 1)})</text>
+
+          <!-- Current nu marker -->
+          <circle cx="${xCur.toFixed(1)}" cy="${yCur.toFixed(1)}" r="4.5" fill="#a78bfa" stroke="#fff" stroke-width="1.2" />
+
+          <!-- Y Axis labels -->
+          <text x="${padL - 6}" y="${padT + 10}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">${fmt(maxDisplayY, 1)}</text>
+          <text x="${padL - 6}" y="${padT + ph}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">0</text>
+          <text x="${padL + pw / 2}" y="${H - 1}" fill="#6b7280" font-size="10.5" text-anchor="middle">金丝雀抽检率 ν (对数坐标 10⁻⁵ .. 1)</text>
+        `;
+      }
+
+      function renderPosteriorPlot(P) {
+        const svg = document.getElementById("svg-posterior");
+        const W = 580, H = 185;
+        const padL = 56, padR = 22, padT = 18, padB = 30;
+        const pw = W - padL - padR;
+        const ph = H - padT - padB;
+
+        const pts = [];
+        for (let T = 0; T <= 50; T++) {
+          const v = posteriorV(T, P);
+          pts.push({ T, v });
+        }
+
+        const xOfT = (T) => padL + (T / 50) * pw;
+        const yOfV = (v) => padT + ph - Math.min(1, Math.max(0, v)) * ph;
+
+        const pathD = pts
+          .map((pt, idx) => `${idx === 0 ? "M" : "L"}${xOfT(pt.T).toFixed(1)},${yOfV(pt.v).toFixed(1)}`)
+          .join(" ");
+
+        let gridSvg = "";
+        for (let t = 0; t <= 50; t += 10) {
+          const tx = xOfT(t);
+          gridSvg += `
+            <line x1="${tx.toFixed(1)}" y1="${padT}" x2="${tx.toFixed(1)}" y2="${padT + ph}" stroke="#1f2937" stroke-width="1" />
+            <text x="${tx.toFixed(1)}" y="${H - 8}" fill="#9ca3af" font-size="10.5" text-anchor="middle" font-family="monospace">T=${t}</text>
+          `;
+        }
+
+        const v50 = pts[50].v;
+
+        svg.innerHTML = `
+          <rect x="${padL}" y="${padT}" width="${pw}" height="${ph}" fill="#0b0f17" stroke="#263248" />
+          ${gridSvg}
+          <line x1="${padL}" y1="${yOfV(P.theta0).toFixed(1)}" x2="${padL + pw}" y2="${yOfV(P.theta0).toFixed(1)}" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" />
+          <path d="${pathD}" fill="none" stroke="#a78bfa" stroke-width="2.3" />
+          <circle cx="${xOfT(0).toFixed(1)}" cy="${yOfV(P.theta0).toFixed(1)}" r="4" fill="#a78bfa" />
+          <circle cx="${xOfT(50).toFixed(1)}" cy="${yOfV(v50).toFixed(1)}" r="4.5" fill="#a78bfa" stroke="#fff" stroke-width="1.2" />
+          <text x="${padL + 8}" y="${padT + 14}" fill="#ddd6fe" font-size="11" font-family="monospace">V(0)=θ₀=${fmt(P.theta0, 2)} → V(50)=${fmt(v50, 3)}（仅作展示，严禁下调 S 或 ν）</text>
+          <text x="${padL - 6}" y="${padT + 10}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">1.0</text>
+          <text x="${padL - 6}" y="${padT + ph}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">0.0</text>
+        `;
+      }
+
+      /* =========================================================================
+       * Deterministic Agent-Based Market Simulation (200 providers, 40 periods)
+       *
+       * Rules (simple & documented):
+       * - Initial pool: N_PROV = 200 providers, initial high-quality count = round(200 * theta0).
+       * - Cheating low-quality unit cost c_L = max(0, c_H - dc).
+       * - Trajectory (a) 无机制 (S = 0, nu = 0):
+       *   Buyers cannot distinguish H from L before purchase and offer pooled price
+       *   p_pool(t) = theta_a(t) * p + (1 - theta_a(t)) * c_L.
+       *   When p_pool(t) < c_H, each H provider exits with probability min(0.85, 0.20 + (c_H - p_pool) / p),
+       *   and opportunistic L entrants replace part of the pool -> classic Akerlof lemonization.
+       * - Trajectory (b) 有机制 (Stake S = exact S*(nu), canary rate nu, slashing + false positive alphaW):
+       *   Each period, for each active provider:
+       *   - Each L provider is caught & slashed (removed) with probability D = detectProb(nu, f, n).
+       *     Since S = S*(nu), expected cheating surplus is non-positive, deterring new L entry.
+       *   - Each H provider suffers false-positive slashing with probability alphaW.
+       *   - Honest net payoff per call is (p - c_H) - friction(nu, P).
+       *     If net payoff >= 0, honest newcomers replenish slashed slots;
+       *     if net payoff < 0 ("reverse lemonization"), H providers exit each period.
+       * ========================================================================= */
+      function runAndRenderABM(P, exactS) {
+        const N_PROV = 200;
+        const PERIODS = 40;
+        const rngA = mulberry32(P.seed);
+        const rngB = mulberry32(P.seed + 10007);
+
+        document.getElementById("sim-seed-badge").textContent =
+          `确定性模拟 · 种子 ${P.seed} · 非实测`;
+
+        const initH = Math.round(N_PROV * P.theta0);
+        const cL = Math.max(0, P.cH - P.dc);
+        const D = detectProb(P.nu, P.f, P.n);
+        const curFriction = friction(P.nu, P);
+        const honestNet = (P.p - P.cH) - curFriction;
+
+        // State (a): No mechanism
+        let hA = initH;
+        let lA = N_PROV - initH;
+        const seriesA = [hA / (hA + lA)];
+
+        // State (b): With mechanism
+        let hB = initH;
+        let lB = N_PROV - initH;
+        const seriesB = [hB / (hB + lB)];
+
+        for (let t = 1; t <= PERIODS; t++) {
+          // --- Step (a) 无机制 ---
+          const totalA = Math.max(1, hA + lA);
+          const thetaA = hA / totalA;
+          const pooledPrice = thetaA * P.p + (1 - thetaA) * cL;
+
+          if (pooledPrice < P.cH) {
+            const exitProb = Math.min(0.85, 0.18 + (P.cH - pooledPrice) / Math.max(1, P.p));
+            let hSurvivors = 0;
+            for (let i = 0; i < hA; i++) {
+              if (rngA() >= exitProb) hSurvivors++;
+            }
+            const exited = hA - hSurvivors;
+            hA = hSurvivors;
+            // Low-quality entrants flood in when no stake/canary barrier exists
+            lA += Math.max(1, Math.round(exited * (0.7 + 0.4 * rngA())));
+          } else {
+            // Even if pooledPrice >= c_H initially, zero-barrier attracts L entrants
+            lA += Math.round(3 + 4 * rngA());
+          }
+          seriesA.push(hA / Math.max(1, hA + lA));
+
+          // --- Step (b) 有机制 ---
+          // 1. Canary detection slashes cheating L providers with prob D
+          let lSurvB = 0;
+          for (let i = 0; i < lB; i++) {
+            if (rngB() >= D) lSurvB++;
+          }
+          lB = lSurvB;
+
+          // 2. Honest providers face false-positive slashing with prob alphaW
+          let hSurvB = 0;
+          for (let i = 0; i < hB; i++) {
+            if (rngB() >= P.alphaW) hSurvB++;
+          }
+          hB = hSurvB;
+
+          // 3. Entry / Exit based on honest viability (p - c_H >= F(nu))
+          if (honestNet >= 0) {
+            // Viable for H: honest providers replenish capacity up toward N_PROV
+            const openSlots = Math.max(0, N_PROV - (hB + lB));
+            let hEntrants = 0;
+            for (let s = 0; s < openSlots; s++) {
+              if (rngB() < 0.65) hEntrants++;
+            }
+            hB += hEntrants;
+          } else {
+            // Reverse lemonization: friction + false-positive tax squeezes H out
+            const squeezeProb = Math.min(0.75, 0.15 + Math.abs(honestNet) / Math.max(1, P.p));
+            let hAfterSqueeze = 0;
+            for (let i = 0; i < hB; i++) {
+              if (rngB() >= squeezeProb) hAfterSqueeze++;
+            }
+            hB = hAfterSqueeze;
+          }
+
+          const totalB = hB + lB;
+          seriesB.push(totalB > 0 ? hB / totalB : 0);
+        }
+
+        // Render ABM SVG
+        const svg = document.getElementById("svg-abm");
+        const W = 580, H = 215;
+        const padL = 56, padR = 22, padT = 22, padB = 32;
+        const pw = W - padL - padR;
+        const ph = H - padT - padB;
+
+        const xOfT = (t) => padL + (t / PERIODS) * pw;
+        const yOfShare = (s) => padT + ph - Math.min(1, Math.max(0, s)) * ph;
+
+        const pathA = seriesA
+          .map((s, idx) => `${idx === 0 ? "M" : "L"}${xOfT(idx).toFixed(1)},${yOfShare(s).toFixed(1)}`)
+          .join(" ");
+        const pathB = seriesB
+          .map((s, idx) => `${idx === 0 ? "M" : "L"}${xOfT(idx).toFixed(1)},${yOfShare(s).toFixed(1)}`)
+          .join(" ");
+
+        let gridSvg = "";
+        for (let t = 0; t <= PERIODS; t += 10) {
+          const tx = xOfT(t);
+          gridSvg += `
+            <line x1="${tx.toFixed(1)}" y1="${padT}" x2="${tx.toFixed(1)}" y2="${padT + ph}" stroke="#1f2937" stroke-width="1" />
+            <text x="${tx.toFixed(1)}" y="${H - 8}" fill="#9ca3af" font-size="10.5" text-anchor="middle" font-family="monospace">t=${t}</text>
+          `;
+        }
+
+        const endA = seriesA[PERIODS];
+        const endB = seriesB[PERIODS];
+
+        svg.innerHTML = `
+          <rect x="${padL}" y="${padT}" width="${pw}" height="${ph}" fill="#0b0f17" stroke="#263248" />
+          ${gridSvg}
+          <!-- Trajectory (a) No mechanism -->
+          <path d="${pathA}" fill="none" stroke="#f87171" stroke-width="2.2" stroke-dasharray="5,3" />
+          <circle cx="${xOfT(PERIODS).toFixed(1)}" cy="${yOfShare(endA).toFixed(1)}" r="4" fill="#f87171" />
+
+          <!-- Trajectory (b) With mechanism -->
+          <path d="${pathB}" fill="none" stroke="#34d399" stroke-width="2.4" />
+          <circle cx="${xOfT(PERIODS).toFixed(1)}" cy="${yOfShare(endB).toFixed(1)}" r="4.5" fill="#34d399" stroke="#fff" stroke-width="1.2" />
+
+          <!-- Legend -->
+          <rect x="${padL + 10}" y="${padT + 8}" width="335" height="38" rx="4" fill="rgba(17,24,39,0.88)" stroke="#263248" />
+          <line x1="${padL + 18}" y1="${padT + 20}" x2="${padL + 40}" y2="${padT + 20}" stroke="#f87171" stroke-width="2.2" stroke-dasharray="4,2" />
+          <text x="${padL + 46}" y="${padT + 24}" fill="#fca5a5" font-size="11" font-family="monospace">(a) 无机制 (S=0, ν=0) 期末 θ₄₀=${(endA * 100).toFixed(1)}%</text>
+          <line x1="${padL + 18}" y1="${padT + 36}" x2="${padL + 40}" y2="${padT + 36}" stroke="#34d399" stroke-width="2.4" />
+          <text x="${padL + 46}" y="${padT + 40}" fill="#6ee7b7" font-size="11" font-family="monospace">(b) 有机制 (S=S*, ν=${fmt(P.nu, 3)}) 期末 θ₄₀=${(endB * 100).toFixed(1)}%</text>
+
+          <text x="${padL - 6}" y="${padT + 10}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">100%</text>
+          <text x="${padL - 6}" y="${padT + ph}" fill="#9ca3af" font-size="10.5" text-anchor="end" font-family="monospace">0%</text>
+        `;
+
+        const noteEl = document.getElementById("abm-summary-note");
+        noteEl.innerHTML =
+          `<strong>确定性模拟对比（种子 ${P.seed} · 初始高质量占比 ${(P.theta0 * 100).toFixed(0)}%）：</strong>` +
+          `(a) 无机制下买方按均值出价，高质量供给者被挤出，第 40 期高质量占比跌至 <code>${(endA * 100).toFixed(1)}%</code>（柠檬化）；` +
+          `(b) 有机制（质押 <code>S*=${fmt(exactS, 1)}</code>，每期检出率 <code>D=${(D * 100).toFixed(1)}%</code>，误罚率 <code>α_w=${(P.alphaW * 100).toFixed(2)}%</code>）下，` +
+          (honestNet >= 0
+            ? `作弊方被持续罚没出清，第 40 期高质量占比升至 <code>${(endB * 100).toFixed(1)}%</code>。`
+            : `因 <code>p − c_H &lt; F(ν)</code>，诚实方被核验与误罚税挤出（反向柠檬化），期末高质量存留仅 <code>${hB}</code> 家。`);
+      }
+
+      /* =========================================================================
+       * 6. Initialize Event Listeners & First Render
+       * ========================================================================= */
+
+      ["d-P", "d-K", "d-Kinc", "d-lambda", "d-r", "d-N", "d-L"].forEach((id) =>
+        bindPair(id, updateDistill)
+      );
+
+      [
+        "l-pi", "l-gamma", "l-B", "l-E", "l-Emax",
+        "l-k", "l-e", "l-m", "l-S0", "l-rho",
+        "l-pResale", "l-pv", "l-h", "l-opex"
+      ].forEach((id) => bindPair(id, updateLease));
+
+      [
+        "c-n", "c-nu", "c-f", "c-fH", "c-dc",
+        "c-rho", "c-kappa", "c-kappaM", "c-alphaW",
+        "c-delta", "c-Lag", "c-theta0", "c-p", "c-cH", "c-seed"
+      ].forEach((id) => bindPair(id, updateCanary));
+
+      updateDistill();
+      updateLease();
+      updateCanary();
+    })();
+  </script>
+</body>
+</html>
